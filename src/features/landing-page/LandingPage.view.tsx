@@ -5,19 +5,17 @@ import SocialProof from "./components/SocialProof";
 import WhyUs from "./components/WhyUs";
 import CallToAction from "./components/CallToAction";
 import FAQs from "./components/FAQs";
-import { AuthLayout } from "@/components/layouts/Auth-layout";
 
 const LandingPage = () => {
   return (
     <section>
-      <AuthLayout />
-      {/* <Hero />
+      <Hero />
       <ProductDemoShow />
       <Solution />
       <SocialProof />
       <WhyUs />
       <CallToAction />
-      <FAQs /> */}
+      <FAQs />
     </section>
   );
 };
