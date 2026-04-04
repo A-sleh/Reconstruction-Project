@@ -34,9 +34,9 @@ export const AuthLayout: React.FC<IAuthLayout> = ({ children }) => {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4 bg-secondary-hover-two">
-      <div className="flex w-full max-w-5xl overflow-hidden rounded-2xl bg-card shadow-xl  p-8 bg-white ">
+      <div className="flex w-full max-w-5xl overflow-hidden rounded-2xl bg-card shadow-xl p-8 bg-white ">
         {/* Left: Decorative */}
-        <div className="hidden w-1/2 md:block h-112.5 ">
+        <div className="hidden w-3/4 md:block h-112.5 ">
           <div className="relative flex h-full items-center justify-center p-8 rounded-lg overflow-hidden ">
             <img
               key={currentImage}

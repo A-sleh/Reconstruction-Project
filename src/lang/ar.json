@@ -1,5 +1,12 @@
 {
-    "home" : {
-        "title": " عنوان للأختبار"
+    "login": {
+        "title": "تسجيل الدخول",
+        "description": "لوريم إيبسوم دولور سيت أميت، كونسيكتيتور أديبيسينغ إليت، سيد ديام نونومي nibh euismod tincidunt.",
+        "emailPlaceholder": "بريدك الإلكتروني",
+        "passwordPlaceholder": "كلمة المرور",
+        "forgotPassword": "نسيت كلمة المرور؟",
+        "loginButton": "تسجيل الدخول",
+        "noAccount": "ليس لديك حساب؟",
+        "register": "إنشاء حساب"
     }
 }

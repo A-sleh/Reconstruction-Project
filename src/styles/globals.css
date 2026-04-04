@@ -1,7 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #002623;
+  --color-background: hsl(0 0% 96%);
+  --color-foreground: hsl(220 20% 20%);
+
+  --color-primary: hsl(160 50% 45%);
+  --color-primary-foreground: hsl(0 0% 100%);
+
+  --color-muted: hsl(220 10% 92%);
+  --color-muted-foreground: hsl(220 10% 50%);
+
   --color-primary-hover: #054239;
   --color-primary-hover-two: #428177;
 
@@ -26,7 +34,7 @@
 
 @keyframes fade-in {
   from {
-    opacity: 0;
+    opacity: 0.5;
   }
   to {
     opacity: 1;

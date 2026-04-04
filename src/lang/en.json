@@ -1,5 +1,12 @@
 {
-    "home" : {
-        "title": "This title for test"
+    "login": {
+        "title": "Login Account",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+        "emailPlaceholder": "Your email",
+        "passwordPlaceholder": "Email password",
+        "forgotPassword": "Forgot your password?",
+        "loginButton": "Login Account",
+        "noAccount": "Don't Have an Account?",
+        "register": "Register"
     }
 }

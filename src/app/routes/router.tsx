@@ -1,13 +1,24 @@
+import { lazy, Suspense } from "react";
 import { paths } from "@/config/paths";
 import { RouteObject } from "react-router";
-import { Login } from "@/features/Auth/login-page/Login.view";
-import LandingPage from "@/features/landing-page/LandingPage.view";
-import { AuthLayout } from "@/components/layouts/Auth-layout";
+
+// Auth pages
+const Login = lazy(() => import("@/features/Auth/Login.view"));
+const Register = lazy(() => import("@/features/Auth/Register.view"));
+
+// Landing page
+const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"));
+
+const LoadingFallback = () => <div>Loading...</div>;
 
 const router: RouteObject[] = [
   {
     path: "/",
-    element: <LandingPage />,
+    element: (
+      <Suspense fallback={<LoadingFallback />}>
+        <LandingPage />
+      </Suspense>
+    ),
   },
   {
     path: "auth",
@@ -15,17 +26,17 @@ const router: RouteObject[] = [
       {
         path: paths.auth.login.path,
         element: (
-          <AuthLayout>
+          <Suspense fallback={<LoadingFallback />}>
             <Login />
-          </AuthLayout>
+          </Suspense>
         ),
       },
       {
         path: paths.auth.register.path,
         element: (
-          <AuthLayout>
-            <Login />
-          </AuthLayout>
+          <Suspense fallback={<LoadingFallback />}>
+            <Register />
+          </Suspense>
         ),
       },
     ],
