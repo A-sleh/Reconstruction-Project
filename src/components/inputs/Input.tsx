@@ -1,7 +1,9 @@
 import React, { useId } from "react";
 import DisplayInputErrors from "../shared/Display-input-errors";
+
 import { FiEye } from "react-icons/fi";
 import { AiOutlineMail } from "react-icons/ai";
+import { FaRegUser } from "react-icons/fa";
 
 type InputProps = {
   type: string;
@@ -23,6 +25,8 @@ function selectIcon(type: string) {
         return <FiEye />;
     case "email":
         return <AiOutlineMail />
+    case "text":
+        return <FaRegUser />
     default:
       return null;
   }

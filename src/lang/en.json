@@ -1,12 +1,22 @@
 {
     "login": {
         "title": "Login Account",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt.",
+        "description": "Enter your credentials to access your personal account",
         "emailPlaceholder": "Your email",
         "passwordPlaceholder": "Email password",
         "forgotPassword": "Forgot your password?",
         "loginButton": "Login Account",
         "noAccount": "Don't Have an Account?",
         "register": "Register"
+    },
+    "register": {
+        "title": "Create Account",
+        "description": "Create a new account to enjoy our services",
+        "namePlaceholder": "Your name",
+        "emailPlaceholder": "Your email",
+        "passwordPlaceholder": "Create password",
+        "registerButton": "Next and continue",
+        "haveAccount": "Already Have an Account?",
+        "login": "login"
     }
 }

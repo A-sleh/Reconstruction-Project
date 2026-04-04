@@ -1,12 +1,22 @@
 {
     "login": {
         "title": "تسجيل الدخول",
-        "description": "لوريم إيبسوم دولور سيت أميت، كونسيكتيتور أديبيسينغ إليت، سيد ديام نونومي nibh euismod tincidunt.",
+        "description": "أدخل بياناتك للوصول إلى حسابك الشخصي",
         "emailPlaceholder": "بريدك الإلكتروني",
         "passwordPlaceholder": "كلمة المرور",
         "forgotPassword": "نسيت كلمة المرور؟",
         "loginButton": "تسجيل الدخول",
         "noAccount": "ليس لديك حساب؟",
         "register": "إنشاء حساب"
+    },
+    "register": {
+        "title": "إنشاء حساب",
+        "description": "أنشئ حساباً جديداً للاستمتاع بخدماتنا",
+        "namePlaceholder": "اسمك",
+        "emailPlaceholder": "بريدك الإلكتروني",
+        "passwordPlaceholder": "إنشاء كلمة مرور",
+        "registerButton": "التالي ومتابعة",
+        "haveAccount": "لديك حساب بالفعل؟",
+        "login": "تسجيل الدخول"
     }
 }

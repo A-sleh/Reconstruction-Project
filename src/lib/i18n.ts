@@ -12,11 +12,10 @@ const resources = {
   },
 };
 
-const RTL_LANGUAGES = ['ar'];
-
-const setDocumentDirection = (language: string) => {
-  const direction = RTL_LANGUAGES.includes(language) ? 'rtl' : 'ltr';
+const updateDirection = (lng: string) => {
+  const direction = lng === 'ar' ? 'rtl' : 'ltr';
   document.documentElement.dir = direction;
+  document.documentElement.lang = lng;
 };
 
 i18n
@@ -31,11 +30,9 @@ i18n
   });
 
 // Set initial direction
-setDocumentDirection(i18n.language);
+updateDirection(i18n.language);
 
 // Listen for language changes
-i18n.on('languageChanged', (lng) => {
-  setDocumentDirection(lng);
-});
+i18n.on('languageChanged', updateDirection);
 
 export default i18n;
