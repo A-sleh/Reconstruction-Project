@@ -1,3 +1,5 @@
+
+import "@/styles/globals.css";
 import { Toaster } from "sonner";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

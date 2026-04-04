@@ -1,26 +1,8 @@
-// import { lazy } from "react";
-// import { paths } from "@/config/paths";
-// import { RouteObject } from "react-router-dom";
-// import LandingPage from "@/features/landing-page/LandingPage.view.tsx";
-
-// // const LandingPage = lazy(
-// //   () => import("@/features/landing-page/LandingPage.view.tsx")
-// // );
-
-// const router: RouteObject[] = [
-//   {
-//     path: '/',
-//     element: <LandingPage />
-
-//   },
-// ];
-
-// export default router;
-
-// import { paths } from "@/config/paths";
+import { paths } from "@/config/paths";
+import { RouteObject } from "react-router";
 import { Login } from "@/features/Auth/login-page/Login.view";
 import LandingPage from "@/features/landing-page/LandingPage.view";
-import { RouteObject } from "react-router";
+import { AuthLayout } from "@/components/layouts/Auth-layout";
 
 const router: RouteObject[] = [
   {
@@ -31,8 +13,20 @@ const router: RouteObject[] = [
     path: "auth",
     children: [
       {
-        path: "login",
-        element: <Login />,
+        path: paths.auth.login.path,
+        element: (
+          <AuthLayout>
+            <Login />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: paths.auth.register.path,
+        element: (
+          <AuthLayout>
+            <Login />
+          </AuthLayout>
+        ),
       },
     ],
   },
