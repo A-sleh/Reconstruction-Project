@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+--color-primary : #002623 , 
+--color-primary-hover: #054239,
+--color-primary-hover-two: #428177,
+
+
+--color-secondary: #988561,
+--color-secondary-hover : #b9a779,
+--color-secondary-hover-two : #edebe0,
+
+
+--color-primary-dark: #161616,
+--color-primary-dark-hover : #2d2a3b,
+--color-primary-dark-hover-two : #ffffff,
+
+--radius-sm: 0.125rem,
+--radius-md: 0.25rem,
+--radius-lg: 0.5rem,
+
+--leading-sm: 1.25,
+--leading-md: 1.5,  
+--leading-lg: 1.75,
+
+
+
+}
