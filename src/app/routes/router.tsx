@@ -4,7 +4,7 @@ import { RouteObject } from "react-router";
 
 // Auth pages
 const Login = lazy(() => import("@/features/Auth/Login.view"));
-const Register = lazy(() => import("@/features/Auth/Register.view"));
+const ServiceProviderRegister = lazy(() => import("@/features/Auth/Register-Resource-Provider.view"));
 
 // Landing page
 const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"));
@@ -32,10 +32,10 @@ const router: RouteObject[] = [
         ),
       },
       {
-        path: paths.auth.register.path,
+        path: paths.auth.register.asRecourseProvider.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <Register />
+            <ServiceProviderRegister />
           </Suspense>
         ),
       },
