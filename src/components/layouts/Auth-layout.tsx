@@ -1,5 +1,6 @@
 import { assets } from "@/assets/assets";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type IAuthLayout = {
   children: React.ReactNode;
@@ -19,7 +20,8 @@ export const AuthLayout: React.FC<IAuthLayout> = ({
   title,
   subTitle,
 }) => {
-  const { locale } = useTransition();
+  const { i18n } = useTranslation();
+  const locale = i18n.language;
   const [currentImage, setCurrentImage] =
     useState<imageOptionPaths>("authImage1");
 
@@ -46,7 +48,7 @@ export const AuthLayout: React.FC<IAuthLayout> = ({
         <div className="hidden w-120.5 md:block h-112.5">
           <div className="relative flex h-full items-center justify-center p-8 rounded-lg overflow-hidden ">
             <div
-              className={`absolute top-3 ${locale !== "ar" ? "right-8" : "left-8"} z-5`}
+              className={`absolute top-3 ${locale == "ar" ? "right-8" : "left-8"} z-5`}
             >
               <h1 className="text-3xl font-bold text-white">{title}</h1>
               <p className="mt-2 text-sm text-white/80">{subTitle}</p>
