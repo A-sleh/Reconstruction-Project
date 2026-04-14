@@ -1,8 +1,10 @@
 import { assets } from "@/assets/assets";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 type IAuthLayout = {
   children: React.ReactNode;
+  title: string;
+  subTitle: string;
 };
 
 type imageOptionPaths =
@@ -12,7 +14,12 @@ type imageOptionPaths =
   | "authImage4"
   | "authImage5";
 
-export const AuthLayout: React.FC<IAuthLayout> = ({ children }) => {
+export const AuthLayout: React.FC<IAuthLayout> = ({
+  children,
+  title,
+  subTitle,
+}) => {
+  const { locale } = useTransition();
   const [currentImage, setCurrentImage] =
     useState<imageOptionPaths>("authImage1");
 
@@ -33,11 +40,19 @@ export const AuthLayout: React.FC<IAuthLayout> = ({ children }) => {
   }, [currentImage]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4 md:p-0 bg-secondary-hover-two">
-      <div className="flex w-full overflow-hidden rounded-2xl md:rounded-none shadow-xl p-8 bg-white justify-center">
+    <div className="flex min-h-screen items-center justify-center p-2 md:p-0 bg-secondary-hover-two">
+      <div className="flex w-full overflow-hidden rounded-2xl md:rounded-none shadow-xl bg-white justify-center items-center">
         {/* Left: Decorative */}
         <div className="hidden w-120.5 md:block h-112.5">
           <div className="relative flex h-full items-center justify-center p-8 rounded-lg overflow-hidden ">
+            <div
+              className={`absolute top-3 ${locale !== "ar" ? "right-8" : "left-8"} z-5`}
+            >
+              <h1 className="text-3xl font-bold text-white">{title}</h1>
+              <p className="mt-2 text-sm text-white/80">{subTitle}</p>
+            </div>
+            <div className="absolute h-40 right-0 top-0 left-0 bg-linear-to-b from-primary to-transparent z-2"></div>
+            <div className="absolute bottom-0 right-0 top-0 left-0 bg-black opacity-30 z-1"></div>
             <img
               key={currentImage}
               src={assets[currentImage]}
