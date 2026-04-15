@@ -35,6 +35,9 @@
     "companyLocationPlaceholder": "Latitude, Longitude",
     "companyAddressLabel": "Company address",
     "companyAddressPlaceholder": "Enter your company address",
+    "companyLocationModalDescription": "Pick your company location from the map to fill the GPS coordinates.",
+    "openMapLocationButton": "Select location on map",
+    "selectLocationButton": "Use selected location",
     "personalInformationLabel": "Personale information",
     "companyInformationLabel": "Company information"
   },

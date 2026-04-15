@@ -33,7 +33,12 @@
     "companyNameLabel": "اسم الشركة",
     "companyNamePlaceholder": "أدخل اسم الشركة",
     "companyLocationLabel": "موقع الشركة GPS",
+    "companyLocationPlaceholder": "خط العرض، خط الطول",
     "companyAddressLabel": "عنوان الشركة",
+    "companyAddressPlaceholder": "أدخل عنوان الشركة",
+    "companyLocationModalDescription": "اختر موقع شركتك من الخريطة لملء إحداثيات GPS.",
+    "openMapLocationButton": "حدد الموقع من الخريطة",
+    "selectLocationButton": "استخدام الموقع المحدد",
     "personalInformationLabel": "المعلومات الشخصية",
     "companyInformationLabel": "معلومات الشركة"
 
