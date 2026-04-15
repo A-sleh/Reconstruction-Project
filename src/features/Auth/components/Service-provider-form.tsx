@@ -1,11 +1,6 @@
-import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { AiOutlineEnvironment } from "react-icons/ai";
 import Input from "@/components/inputs/Input";
-import Model from "@/components/model/Model";
-import GoogleMapPicker from "@/components/GoogleMapPicker";
-import { LatLng, parseCoordinates } from "@/utils/helpers";
 import { PickCoordsFromMap } from "@/components/model/PickCoordsFromMap.model";
 
 const ServiceProviderForm = () => {
