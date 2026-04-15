@@ -6,7 +6,7 @@ import Loader from "@/components/shared/Loader";
 
 // Auth pages
 const Login = lazy(() => import("@/features/Auth/Login.view"));
-const ServiceProviderRegister = lazy(() => import("@/features/Auth/Register-Resource-Provider.view"));
+const ServiceProviderRegister = lazy(() => import("@/features/Auth/ResourceProvider"));
 // Landing page
 const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"));
 

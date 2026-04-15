@@ -1,8 +1,95 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("../assets/fonts/Noto_Kufi_Arabic/static/NotoKufiArabic-Thin.ttf")
+    format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("../assets/fonts/Noto_Kufi_Arabic/static/NotoKufiArabic-ExtraLight.ttf")
+    format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("../assets/fonts/Noto_Kufi_Arabic/static/NotoKufiArabic-Light.ttf")
+    format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("../assets/fonts/Noto_Kufi_Arabic/static/NotoKufiArabic-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("../assets/fonts/Noto_Kufi_Arabic/static/NotoKufiArabic-Medium.ttf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("../assets/fonts/Noto_Kufi_Arabic/static/NotoKufiArabic-SemiBold.ttf")
+    format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("../assets/fonts/Noto_Kufi_Arabic/static/NotoKufiArabic-Bold.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("../assets/fonts/Noto_Kufi_Arabic/static/NotoKufiArabic-ExtraBold.ttf")
+    format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("../assets/fonts/Noto_Kufi_Arabic/static/NotoKufiArabic-Black.ttf")
+    format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 body {
   scroll-behavior: smooth;
+  font-family:
+    "Noto Kufi Arabic",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 @theme {
@@ -34,15 +121,19 @@ body {
   --leading-md: 1.5;
   --leading-lg: 1.75;
 
-  --animate-fade-in: fade-in 1.5s ease-in-out;
+  --animate-fade-in: fade-in 2.5s ease-in-out;
 }
 
 @keyframes fade-in {
-  from {
-    opacity: 0.5;
+  0% {
+    transform: scale(1.1);
   }
-  to {
-    opacity: 1;
+  50% {
+    transform: scale(1);
+
+  }
+  100% {
+    transform: scale(1.1);
   }
 }
 
