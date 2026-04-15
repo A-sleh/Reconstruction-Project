@@ -42,30 +42,38 @@ export const AuthLayout: React.FC<IAuthLayout> = ({
   }, [currentImage]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-2 md:p-0 bg-secondary-hover-two">
-      <div className="flex w-full overflow-hidden rounded-2xl md:rounded-none shadow-xl bg-white justify-center items-center">
+    <div className="flex min-h-screen items-center justify-center p-3 md:p-0  ">
+      <div className="flex flex-col md:flex-row overflow-hidden rounded-2xl -none shadow-[0_0_15px_0_rgba(0,0,0,0.3)] bg-white justify-center items-center">
         {/* Left: Decorative */}
-        <div className="hidden w-120.5 md:block h-112.5">
-          <div className="relative flex h-full items-center justify-center p-8 rounded-lg overflow-hidden ">
-            <div
-              className={`absolute top-3 ${locale == "ar" ? "right-8" : "left-8"} z-5`}
-            >
-              <h1 className="text-3xl font-bold text-white">{title}</h1>
-              <p className="mt-2 text-sm text-white/80">{subTitle}</p>
+        <div className=" bg-primary py-20 px-10 hidden md:flex shadow-lg rounded-l-2xl">
+          <div className="hidden w-120.5 md:block h-112.5 bg-primary">
+            <div className="relative flex h-full items-center justify-center p-8 rounded-lg overflow-hidden ">
+              <div
+                className={`absolute top-3 ${locale == "ar" ? "right-8" : "left-8"} z-5`}
+              >
+                <h1 className="text-3xl font-bold text-white">{title}</h1>
+                <p className="mt-2 text-sm text-white/80">{subTitle}</p>
+              </div>
+              <div className="absolute h-40 right-0 top-0 left-0 bg-linear-to-b from-primary to-transparent z-2"></div>
+              <div className="absolute bottom-0 right-0 top-0 left-0 bg-black opacity-30 z-1"></div>
+              <img
+                key={currentImage}
+                src={assets[currentImage]}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover animate-fade-in "
+              />
             </div>
-            <div className="absolute h-40 right-0 top-0 left-0 bg-linear-to-b from-primary to-transparent z-2"></div>
-            <div className="absolute bottom-0 right-0 top-0 left-0 bg-black opacity-30 z-1"></div>
-            <img
-              key={currentImage}
-              src={assets[currentImage]}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover animate-fade-in "
-            />
           </div>
+        </div>
+        <div
+          className="flex md:hidden flex-col p-3 text-center mb-0 w-full bg-primary text-white "
+        >
+          <h1 className="text-lg font-bold ">{title}</h1>
+          <p className="mt-2 text-sm ">{subTitle}</p>
         </div>
 
         {/* Right: Form */}
-        <div className="p-4 md:p-8 w-full md:w-auto">{children}</div>
+        <div className="p-4 pt-0 md:p-8 w-full md:w-auto ">{children}</div>
       </div>
     </div>
   );
