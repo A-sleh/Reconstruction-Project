@@ -2,14 +2,16 @@ import { lazy, Suspense } from "react";
 import { paths } from "@/config/paths";
 import { RouteObject } from "react-router";
 
+import Loader from "@/components/shared/Loader";
+
 // Auth pages
 const Login = lazy(() => import("@/features/Auth/Login.view"));
 const ServiceProviderRegister = lazy(() => import("@/features/Auth/Register-Resource-Provider.view"));
-
 // Landing page
 const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"));
 
-const LoadingFallback = () => <div>Loading...</div>;
+// Fallback component for lazy loading
+const LoadingFallback = () => <Loader />;
 
 const router: RouteObject[] = [
   {
