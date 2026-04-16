@@ -6,9 +6,21 @@ import Loader from "@/components/shared/Loader";
 
 // Auth pages
 const Login = lazy(() => import("@/features/Auth/Login.view"));
-const ServiceProviderRegister = lazy(() => import("@/features/Auth/ResourceProvider"));
+const ProvidorRegisteration = lazy(() => import("@/features/Auth/ProvidorRegisteration.view"));
+const EngineerRegisteration = lazy(() => import("@/features/Auth/EngineerRegisteration.view"));
+const InvestorRegisteration = lazy(() => import("@/features/Auth/InvestorRegisteration.view"));
+
 // Landing page
 const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"));
+
+// Service Porvider importing pages
+
+// Resource Provider importing pages
+
+// Investor importing pages
+
+// Engineers importing pages
+
 
 // Fallback component for lazy loading
 const LoadingFallback = () => <Loader />;
@@ -34,10 +46,26 @@ const router: RouteObject[] = [
         ),
       },
       {
-        path: paths.auth.register.asRecourseProvider.path,
+        path: paths.auth.register.asProvider.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <ServiceProviderRegister />
+            <ProvidorRegisteration />
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.auth.register.asInvestor.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <InvestorRegisteration />
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.auth.register.asEngineer.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <EngineerRegisteration />
           </Suspense>
         ),
       },

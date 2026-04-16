@@ -1,257 +1,297 @@
 {
-  "login": {
-    "title": "Login Account",
-    "description": "Enter your credentials to access your personal account",
-    "emailPlaceholder": "Your email",
-    "passwordPlaceholder": "Email password",
-    "forgotPassword": "Forgot your password?",
-    "loginButton": "Login Account",
-    "noAccount": "Don't Have an Account?",
-    "register": "Register"
-  },
-  "register": {
-    "title": "Create Account",
-    "description": "Create a new account to enjoy our services",
-    "name": "Your name",
-    "lastName": "Last name",
-    "emailPlaceholder": "Your email",
-    "nationalNumberPlaceholder": "national number",
-    "passwordPlaceholder": "Create password",
-    "registerButton": "Next and continue",
-    "nextButton": "Next",
-    "submitButton": "Submit",
-    "backButton": "Back",
-    "cancel": "Cancel",
-    "close": "Close",
-    "haveAccount": "Already Have an Account?",
-    "login": "login",
-    "serviceProviderDescription": "Add your service provider details to complete registration.",
-
-    "licenseLabel": "License",
-    "licensePlaceholder": "Enter your service license",
-    "companyNameLabel": "Company name",
-    "companyNamePlaceholder": "Enter your company name",
-    "companyLocationLabel": "Company GPS location",
-    "companyLocationPlaceholder": "Latitude, Longitude",
-    "companyAddressLabel": "Company address",
-    "companyAddressPlaceholder": "Enter your company address",
-    "companyLocationModalDescription": "Pick your company location from the map to fill the GPS coordinates.",
-    "openMapLocationButton": "Select location on map",
-    "selectLocationButton": "Use selected location",
-    "personalInformationLabel": "Personale information",
-    "companyInformationLabel": "Company information"
-  },
-  "validation": {
-    "baseRegisterForm": {
-      "name_required": "Name is required",
-      "last_name_required": "Last name is required",
-      "invalid_email": "Enter a valid email",
-      "password_too_short": "Password must be at least {{min}} characters",
-      "national_number_required": "National number must be at least 10 characters"
+  "auth": {
+    "login": {
+      "title": "Login Account",
+      "description": "Enter your credentials to access your personal account",
+      "emailPlaceholder": "Your email",
+      "passwordPlaceholder": "Email password",
+      "forgotPassword": "Forgot your password?",
+      "loginButton": "Login Account",
+      "noAccount": "Don't Have an Account?",
+      "register": "Register"
     },
-    "resourceProvider": {
-      "license_required": "Service license is required",
-      "company_name_required": "Company name is required",
-      "company_location_required": "Company location is required",
-      "company_address_required": "Company address is required",
-      "service_provider_description_required": "Service provider description is required"
-    }
-  },
-  "nav": {
-    "brand": "Reconstruction",
-    "home": "Home",
-    "features": "Features",
-    "solutions": "Solutions",
-    "testimonials": "Testimonials",
-    "whyUs": "Why Us",
-    "getStarted": "Get Started",
-    "faq": "FAQ"
-  },
-  "hero": {
-    "badge": "The smarter reconstruction platform",
-    "headlines": [
-      "From idea to reality: Your comprehensive partner in reconstruction",
-      "Build, invest, reconstruct the future. One platform uniting all parties",
-      "Together we rebuild what war destroyed. Let's restore hope to our lives",
-      "Digital reconstruction platform. A new dimension for closer collaboration"
-    ],
-    "description": "A platform that unifies investors, landowners, engineers, and service providers in a single system that supports you every step of the reconstruction journey.",
-    "cta": "Get Started",
-    "alt": "Reconstruction project",
-    "featured": "Featured Project",
-    "support": "24/7 support",
-    "overlayTitle": "Integrated project management solutions",
-    "overlayDescription": "An interactive dashboard to monitor progress, allocate budgets, and track execution with full transparency.",
-    "stats": {
-      "projects": {
-        "value": "1,200+",
-        "label": "Trusted Projects"
+
+    "register": {
+      "title": "Create Account",
+      "description": "Create a new account to enjoy our services",
+      "nextButton": "Next",
+      "submitButton": "Submit",
+      "backButton": "Back",
+      "cancel": "Cancel",
+      "close": "Close",
+      "haveAccount": "Already have an account?",
+      "login": "Login",
+
+      "validation": {
+        "email_required": "Email is required",
+        "invalid_email": "Enter a valid email",
+        "password_required": "Password is required",
+        "password_too_short": "Password must be at least 6 characters"
       },
-      "partners": {
-        "value": "25+",
-        "label": "Trusted Partners"
+
+      "generalInformation": {
+        "name": "Your name",
+        "lastName": "Last name",
+        "nationalNumberPlaceholder": "National number",
+        "emailPlaceholder": "Your email",
+        "passwordPlaceholder": "Create password",
+        "registerButton": "Next and continue",
+        "validation": {
+          "name_required": "Name is required",
+          "last_name_required": "Last name is required",
+          "invalid_email": "Enter your email",
+          "password_too_short": "Password must be at least 6 characters",
+          "national_number_required": "Enter the national number"
+        }
       },
-      "satisfaction": {
-        "value": "99%",
-        "label": "Customer Satisfaction"
+      "providor": {
+        "licenseLabel": "License",
+        "licensePlaceholder": "Enter your service license",
+        "companyNameLabel": "Company name",
+        "companyNamePlaceholder": "Enter your company name",
+        "companyLocationLabel": "Company GPS location",
+        "companyLocationPlaceholder": "Latitude, Longitude",
+        "companyAddressLabel": "Company address",
+        "companyAddressPlaceholder": "Enter your company address",
+        "companyLocationModalDescription": "Pick your company location from the map to fill the GPS coordinates.",
+        "openMapLocationButton": "Select location on map",
+        "companyInformationLabel": "Company information",
+        "selectLocationButton": "Use selected location",
+        "personalInformationLabel": "Personal information",
+        "ProviderDescription": "Add your service provider details to complete registration.",
+        "validation": {
+          "license_required": "Service license is required",
+          "company_name_required": "Company name is required",
+          "company_location_required": "Company location is required",
+          "company_address_required": "Company address is required",
+          "service_provider_description_required": "Service provider description is required"
+        }
+      },
+
+      "engineer": {
+        "engineerInformationLabel": "Engineer information",
+        "specialtiyLabel": "Specialty",
+        "specialtiyPlaceholder": "Enter your engineering specialty",
+        "syndicateIdLabel": "Syndicate ID",
+        "syndicateIdPlaceholder": "Enter your syndicate ID",
+        "validation": {
+          "specialtiy": "Specialty must be at least 10 characters",
+          "syndicate_id": "Syndicate ID must be at least 12 characters"
+        }
+      },
+      "investor": {
+        "investorInformationLabel": "Investor Information",
+        "commercialRegistration": "Commercial Registration",
+        "commercialRegistrationPlaceholder": "Enter commercial registration",
+        "imageRecordPlaceholder": "Enter image record",
+        "imageRecord": "Image record",
+        "uploadImageTitle": "Upload a clear copy of your registration",
+        "uploadImageHelp": "PNG, JPG, SVG or GIF - up to 5MB",
+        "removeImage": "Remove image",
+        "validation": {
+          "commercial_registration_required": "Commercial registration is required",
+          "image_record": "Investment document image is required"
+        }
       }
     }
   },
-  "solution": {
-    "title": "Our Solutions",
-    "subtitle": "Our platform provides comprehensive solutions for all parties involved in reconstruction",
-    "investorsTitle": "For Investors",
-    "investorSolutions": [
-      {
-        "title": "Trusted Real Estate Investment Platform",
-        "description": "We connect you directly with carefully studied reconstruction projects with high economic viability, complete information about landowners and expected timelines"
-      },
-      {
-        "title": "Certified Professional Network",
-        "description": "All engineers and workshops on our platform have real ratings and reviews from previous investors, ensuring execution quality and protecting your investment"
-      },
-      {
-        "title": "Direct Connection with Serious Investors",
-        "description": "Don't leave your land unused. Our platform brings you real investors with capital and willingness to execute, with multiple partnership options that suit your circumstances"
-      },
-      {
-        "title": "Unified Collaborative Workspace",
-        "description": "Project management, documents, communications, and payments in one place, ensuring transparency, organizing workflow, and saving time and effort for everyone"
-      },
-      {
-        "title": "Logistics Safety Network",
-        "description": "Our system connects you with several reliable suppliers and provides immediate alternative options, reducing downtime risks and maintaining your project timeline"
+  "landingPage": {
+    "nav": {
+      "brand": "Reconstruction",
+      "home": "Home",
+      "features": "Features",
+      "solutions": "Solutions",
+      "testimonials": "Testimonials",
+      "whyUs": "Why Us",
+      "getStarted": "Get Started",
+      "faq": "FAQ"
+    },
+    "hero": {
+      "badge": "The smarter reconstruction platform",
+      "headlines": [
+        "From idea to reality: Your comprehensive partner in reconstruction",
+        "Build, invest, reconstruct the future. One platform uniting all parties",
+        "Together we rebuild what war destroyed. Let's restore hope to our lives",
+        "Digital reconstruction platform. A new dimension for closer collaboration"
+      ],
+      "description": "A platform that unifies investors, landowners, engineers, and service providers in a single system that supports you every step of the reconstruction journey.",
+      "cta": "Get Started",
+      "alt": "Reconstruction project",
+      "featured": "Featured Project",
+      "support": "24/7 support",
+      "overlayTitle": "Integrated project management solutions",
+      "overlayDescription": "An interactive dashboard to monitor progress, allocate budgets, and track execution with full transparency.",
+      "stats": {
+        "projects": {
+          "value": "1,200+",
+          "label": "Trusted Projects"
+        },
+        "partners": {
+          "value": "25+",
+          "label": "Trusted Partners"
+        },
+        "satisfaction": {
+          "value": "99%",
+          "label": "Customer Satisfaction"
+        }
       }
-    ],
-    "engineersTitle": "For Engineers",
-    "engineerSolutions": [
-      {
-        "title": "Permanent Job Offers Channel",
-        "description": "Join our platform to reach a wide range of serious reconstruction projects, upload your profile so clients find you directly"
-      }
-    ],
-    "resourcesTitle": "For Resources and Services",
-    "resourceSolutions": [
-      {
-        "title": "Direct Window to Emerging Reconstruction Projects",
-        "description": "Deliver your products and services directly to investors, landowners, and contractors at the moment they start planning their projects"
-      },
-      {
-        "title": "Smart Delivery System",
-        "description": "Display your resources to geographically and qualitatively suitable projects automatically, ensuring you reach only serious customers and saving sales team time"
-      }
-    ]
-  },
-  "productDemo": {
-    "title": "Platform Features",
-    "subtitle": "Discover the tools and features that make our platform the best choice for reconstruction",
-    "features": [
-      {
-        "title": "Section to manage all your ongoing projects",
-        "description": "Track all your projects in one place with advanced management tools to monitor progress, budgets, and timelines",
-        "image": "landingPageImage_projectManagment"
-      },
-      {
-        "title": "Smart search section for lands and buildings open for investment",
-        "description": "Search for suitable investment opportunities using smart filters to find available lands and buildings for investment in specific areas",
-        "image": "landingPageImage_buildingSearching"
-      },
-      {
-        "title": "Quick access to stakeholders (services and resources) in addition to engineers",
-        "description": "Connect directly with service providers, resources, and professional engineers through our trusted platform",
-        "image": "landingPageImage_structuralEngineer"
-      },
-      {
-        "title": "Comprehensive reports on the construction process",
-        "description": "Get detailed and updated reports on project progress with performance indicators and financial analysis",
-        "image": "landingPageImage_reporting"
-      }
-    ],
-    "tryNow": "Try Now"
-  },
-  "socialProof": {
-    "title": "Customer Testimonials",
-    "subtitle": "Discover how our platform helped customers achieve their reconstruction goals",
-    "testimonials": [
-      {
-        "text": "Thanks to this platform, I found an investor for my project in just one week after 6 months of searching",
-        "author": "Ahmed the Investor",
-        "role": "Land Owner"
-      },
-      {
-        "text": "I invested in 3 projects through the platform and achieved a return of 30% within two years",
-        "author": "Fatima the Investor",
-        "role": "Investor"
-      },
-      {
-        "text": "My income increased by 40% after joining the platform and getting continuous new projects",
-        "author": "Mohammed the Engineer",
-        "role": "Architect"
-      },
-      {
-        "text": "My land was neglected for 3 years due to lack of funding. Within two weeks through the platform, I found an investor and we started the project. Today I have a residential building that generates monthly income for me",
-        "author": "Sara the Owner",
-        "role": "Land Owner"
-      },
-      {
-        "text": "I was afraid to invest in reconstruction areas due to lack of transparency. The platform provided me with a technical team that follows the project and provides periodic reports. I invested in two projects and achieved excellent returns",
-        "author": "Ali the Investor",
-        "role": "Investor"
-      },
-      {
-        "text": "As a contractor, I found in the platform a great opportunity to communicate with project owners and suppliers. My business increased by 50% in the past year",
-        "author": "Khaled the Contractor",
-        "role": "Building Contractor"
-      }
-    ],
-    "join": "Join thousands of satisfied customers",
-    "cta": "Start Your Journey Today"
-  },
-  "whyUs": {
-    "title": "Why Choose Us?",
-    "subtitle": "We excel in commitment to quality and innovation in everything we offer to our customers",
-    "reasons": [
-      {
-        "icon": "🔒",
-        "title": "Trust & Security",
-        "description": "Trusted platform with advanced security system that protects your data and transactions"
-      },
-      {
-        "icon": "⚡",
-        "title": "Speed & Efficiency",
-        "description": "Save your time and effort through our smart tools that simplify processes"
-      },
-      {
-        "icon": "🤝",
-        "title": "Strategic Partnership",
-        "description": "We build long-term partnerships with our clients to ensure the success of their projects"
-      },
-      {
-        "icon": "📈",
-        "title": "Sustainable Growth",
-        "description": "We help you achieve sustainable growth through carefully studied investment opportunities"
-      },
-      {
-        "icon": "🌟",
-        "title": "Service Excellence",
-        "description": "Specialized technical support team that helps you at every step of your journey"
-      },
-      {
-        "icon": "🎯",
-        "title": "Precision & Transparency",
-        "description": "Accurate and transparent information that ensures informed decision making"
-      }
-    ],
-    "joinTitle": "Join Us Today",
-    "joinDescription": "Start your reconstruction journey with the most trusted platform in the region",
-    "register": "Register Now"
-  },
-  "callToAction": {
-    "title": "Start Your Reconstruction Journey Today",
-    "description": "Join thousands of investors, engineers, and contractors who are rebuilding Syria together. Our platform is ready to help you achieve your dreams.",
-    "createAccount": "Create Free Account",
-    "contactUs": "Contact Us",
-    "needHelp": "Need Help?",
-    "support": "Our support team is available 24/7 to help you at every step"
+    },
+    "solution": {
+      "title": "Our Solutions",
+      "subtitle": "Our platform provides comprehensive solutions for all parties involved in reconstruction",
+      "investorsTitle": "For Investors",
+      "investorSolutions": [
+        {
+          "title": "Trusted Real Estate Investment Platform",
+          "description": "We connect you directly with carefully studied reconstruction projects with high economic viability, complete information about landowners and expected timelines"
+        },
+        {
+          "title": "Certified Professional Network",
+          "description": "All engineers and workshops on our platform have real ratings and reviews from previous investors, ensuring execution quality and protecting your investment"
+        },
+        {
+          "title": "Direct Connection with Serious Investors",
+          "description": "Don't leave your land unused. Our platform brings you real investors with capital and willingness to execute, with multiple partnership options that suit your circumstances"
+        },
+        {
+          "title": "Unified Collaborative Workspace",
+          "description": "Project management, documents, communications, and payments in one place, ensuring transparency, organizing workflow, and saving time and effort for everyone"
+        },
+        {
+          "title": "Logistics Safety Network",
+          "description": "Our system connects you with several reliable suppliers and provides immediate alternative options, reducing downtime risks and maintaining your project timeline"
+        }
+      ],
+      "engineersTitle": "For Engineers",
+      "engineerSolutions": [
+        {
+          "title": "Permanent Job Offers Channel",
+          "description": "Join our platform to reach a wide range of serious reconstruction projects, upload your profile so clients find you directly"
+        }
+      ],
+      "resourcesTitle": "For Resources and Services",
+      "resourceSolutions": [
+        {
+          "title": "Direct Window to Emerging Reconstruction Projects",
+          "description": "Deliver your products and services directly to investors, landowners, and contractors at the moment they start planning their projects"
+        },
+        {
+          "title": "Smart Delivery System",
+          "description": "Display your resources to geographically and qualitatively suitable projects automatically, ensuring you reach only serious customers and saving sales team time"
+        }
+      ]
+    },
+    "productDemo": {
+      "title": "Platform Features",
+      "subtitle": "Discover the tools and features that make our platform the best choice for reconstruction",
+      "features": [
+        {
+          "title": "Section to manage all your ongoing projects",
+          "description": "Track all your projects in one place with advanced management tools to monitor progress, budgets, and timelines",
+          "image": "landingPageImage_projectManagment"
+        },
+        {
+          "title": "Smart search section for lands and buildings open for investment",
+          "description": "Search for suitable investment opportunities using smart filters to find available lands and buildings for investment in specific areas",
+          "image": "landingPageImage_buildingSearching"
+        },
+        {
+          "title": "Quick access to stakeholders (services and resources) in addition to engineers",
+          "description": "Connect directly with service providers, resources, and professional engineers through our trusted platform",
+          "image": "landingPageImage_structuralEngineer"
+        },
+        {
+          "title": "Comprehensive reports on the construction process",
+          "description": "Get detailed and updated reports on project progress with performance indicators and financial analysis",
+          "image": "landingPageImage_reporting"
+        }
+      ],
+      "tryNow": "Try Now"
+    },
+    "socialProof": {
+      "title": "Customer Testimonials",
+      "subtitle": "Discover how our platform helped customers achieve their reconstruction goals",
+      "testimonials": [
+        {
+          "text": "Thanks to this platform, I found an investor for my project in just one week after 6 months of searching",
+          "author": "Ahmed the Investor",
+          "role": "Land Owner"
+        },
+        {
+          "text": "I invested in 3 projects through the platform and achieved a return of 30% within two years",
+          "author": "Fatima the Investor",
+          "role": "Investor"
+        },
+        {
+          "text": "My income increased by 40% after joining the platform and getting continuous new projects",
+          "author": "Mohammed the Engineer",
+          "role": "Architect"
+        },
+        {
+          "text": "My land was neglected for 3 years due to lack of funding. Within two weeks through the platform, I found an investor and we started the project. Today I have a residential building that generates monthly income for me",
+          "author": "Sara the Owner",
+          "role": "Land Owner"
+        },
+        {
+          "text": "I was afraid to invest in reconstruction areas due to lack of transparency. The platform provided me with a technical team that follows the project and provides periodic reports. I invested in two projects and achieved excellent returns",
+          "author": "Ali the Investor",
+          "role": "Investor"
+        },
+        {
+          "text": "As a contractor, I found in the platform a great opportunity to communicate with project owners and suppliers. My business increased by 50% in the past year",
+          "author": "Khaled the Contractor",
+          "role": "Building Contractor"
+        }
+      ],
+      "join": "Join thousands of satisfied customers",
+      "cta": "Start Your Journey Today"
+    },
+    "whyUs": {
+      "title": "Why Choose Us?",
+      "subtitle": "We excel in commitment to quality and innovation in everything we offer to our customers",
+      "reasons": [
+        {
+          "icon": "🔒",
+          "title": "Trust & Security",
+          "description": "Trusted platform with advanced security system that protects your data and transactions"
+        },
+        {
+          "icon": "⚡",
+          "title": "Speed & Efficiency",
+          "description": "Save your time and effort through our smart tools that simplify processes"
+        },
+        {
+          "icon": "🤝",
+          "title": "Strategic Partnership",
+          "description": "We build long-term partnerships with our clients to ensure the success of their projects"
+        },
+        {
+          "icon": "📈",
+          "title": "Sustainable Growth",
+          "description": "We help you achieve sustainable growth through carefully studied investment opportunities"
+        },
+        {
+          "icon": "🌟",
+          "title": "Service Excellence",
+          "description": "Specialized technical support team that helps you at every step of your journey"
+        },
+        {
+          "icon": "🎯",
+          "title": "Precision & Transparency",
+          "description": "Accurate and transparent information that ensures informed decision making"
+        }
+      ],
+      "joinTitle": "Join Us Today",
+      "joinDescription": "Start your reconstruction journey with the most trusted platform in the region",
+      "register": "Register Now"
+    },
+    "callToAction": {
+      "title": "Start Your Reconstruction Journey Today",
+      "description": "Join thousands of investors, engineers, and contractors who are rebuilding Syria together. Our platform is ready to help you achieve your dreams.",
+      "createAccount": "Create Free Account",
+      "contactUs": "Contact Us",
+      "needHelp": "Need Help?",
+      "support": "Our support team is available 24/7 to help you at every step"
+    }
   }
 }

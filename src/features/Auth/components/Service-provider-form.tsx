@@ -18,8 +18,8 @@ const ServiceProviderForm = () => {
     <div className="space-y-3 mt-3">
       <Input
         type="text"
-        label={t("register.licenseLabel")}
-        placeholder={t("register.licensePlaceholder")}
+        label={t("auth.register.providor.licenseLabel")}
+        placeholder={t("auth.register.providor.licensePlaceholder")}
         required={true}
         fieldName="license"
         errors={errors}
@@ -27,8 +27,8 @@ const ServiceProviderForm = () => {
       />
       <Input
         type="text"
-        label={t("register.companyNameLabel")}
-        placeholder={t("register.companyNamePlaceholder")}
+        label={t("auth.register.providor.companyNameLabel")}
+        placeholder={t("auth.register.providor.companyNamePlaceholder")}
         required={true}
         fieldName="companyName"
         errors={errors}
@@ -37,8 +37,8 @@ const ServiceProviderForm = () => {
 
       <Input
         type="text"
-        label={t("register.companyAddressLabel")}
-        placeholder={t("register.companyAddressPlaceholder")}
+        label={t("auth.register.providor.companyAddressLabel")}
+        placeholder={t("auth.register.providor.companyAddressPlaceholder")}
         required={true}
         fieldName="companyAddress"
         errors={errors}
@@ -50,8 +50,8 @@ const ServiceProviderForm = () => {
             <Input
               type="text"
               readOnly={true}
-              label={t("register.companyLocationLabel")}
-              placeholder={t("register.companyLocationPlaceholder")}
+              label={t("auth.register.providor.companyLocationLabel")}
+              placeholder={t("auth.register.providor.companyLocationPlaceholder")}
               required={true}
               fieldName="companyLocation"
               errors={errors}

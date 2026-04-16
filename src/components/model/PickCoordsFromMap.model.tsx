@@ -36,7 +36,7 @@ export const PickCoordsFromMap: React.FC<IPickCoordsFromMap> = ({
       <Model.Open opens="company-location-modal">
         <button
           type="button"
-          title={t("register.openMapLocationButton")}
+          title={t("auth.register.providor.openMapLocationButton")}
           className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card text-primary transition hover:bg-primary/10"
         >
           <AiOutlineEnvironment size={20} />
@@ -51,10 +51,10 @@ export const PickCoordsFromMap: React.FC<IPickCoordsFromMap> = ({
           <div className="flex items-center justify-between gap-4">
             <div>
               <h2 className="text-lg font-semibold">
-                {t("register.companyLocationLabel")}
+                {t("auth.register.providor.companyLocationLabel")}
               </h2>
               <p className="text-sm text-muted-foreground">
-                {t("register.companyLocationModalDescription")}
+                {t("auth.register.providor.companyLocationModalDescription")}
               </p>
             </div>
           </div>
@@ -82,14 +82,14 @@ export const PickCoordsFromMap: React.FC<IPickCoordsFromMap> = ({
               }}
               className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary/90"
             >
-              {t("register.selectLocationButton")}
+              {t("auth.register.providor.selectLocationButton")}
             </button>
             <Model.Close>
               <button
                 type="button"
                 className="inline-flex items-center justify-center rounded-lg border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-red-400 hover:text-white"
               >
-                {t("register.cancel")}
+                {t("auth.register.cancel")}
               </button>
             </Model.Close>
           </div>

@@ -1,10 +1,24 @@
 export const paths = {
   auth: {
     register: {
-      asRecourseProvider: {
-        path: "/auth/register/service-provider",
+      asProvider: {
+        path: "/auth/register/provider",
         getHref: (redirectTo?: string | null | undefined) =>
-          `/auth/register/service-provider${
+          `/auth/register/provider${
+            redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""
+          }`,
+      },
+      asInvestor: {
+        path: "/auth/register/investor",
+        getHref: (redirectTo?: string | null | undefined) =>
+          `/auth/register/investor${
+            redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""
+          }`,
+      },
+      asEngineer: {
+        path: "/auth/register/engineer",
+        getHref: (redirectTo?: string | null | undefined) =>
+          `/auth/register/engineer${
             redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""
           }`,
       },
