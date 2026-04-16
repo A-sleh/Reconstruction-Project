@@ -9,29 +9,25 @@ const LoginForm = () => {
 
   return (
     <div className="flex w-full md:min-w-150 flex-col justify-center px-4 md:px-8">
-      <h1 className="text-3xl font-bold text-foreground">{t("login.title")}</h1>
-      <p className="mt-2 text-sm text-muted-foreground">
-        {t("login.description")}
-      </p>
 
       <form className="mt-8 space-y-4" onSubmit={(e) => e.preventDefault()}>
-        <Input type="email" placeholder={t("login.emailPlaceholder")} />
-        <Input type="password" placeholder={t("login.passwordPlaceholder")} />
+        <Input type="email" label={t("auth.login.emailPlaceholder")} placeholder={t("auth.login.emailPlaceholder")} />
+        <Input type="password" label={t("auth.login.passwordPlaceholder")} placeholder={t("auth.login.passwordPlaceholder")} />
         <Link
           to={"/forgot-password"}
           className="text-sm hover:text-primary hover:underline transition-all"
         >
-          {t("login.forgotPassword")}
+          {t("auth.login.forgotPassword")}
         </Link>
-        <Button className="mt-5">{t("login.loginButton")}</Button>
+        <Button className="mt-5">{t("auth.login.loginButton")}</Button>
       </form>
       <p className="mt-8 mx-auto text-sm text-muted-foreground">
-        {t("login.noAccount")}
+        {t("auth.login.noAccount")}
         <Link
-          to={paths.auth.register.path}
+          to={paths.auth.register.asProvider.path}
           className="ml-1 text-primary hover:text-primary-hover hover:underline transition-all"
         >
-          {t("login.register")}
+          {t("auth.login.register")}
         </Link>
       </p>
     </div>
