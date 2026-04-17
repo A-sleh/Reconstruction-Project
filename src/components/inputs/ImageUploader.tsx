@@ -115,7 +115,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
             onClick={handleRemove}
             className="absolute -top-2 -right-2 rounded-full bg-red-500 px-3 py-1 text-[11px] font-semibold text-white shadow-sm"
           >
-            {t("register.investor.removeImage")}
+            {t("auth.register.investor.removeImage")}
           </button>
         )}
       </div>

@@ -8,6 +8,8 @@ import BaseRegisterInputs from "./components/Base-register-inputs";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
 import InvestorForm from "./components/Investor-form";
+import { Link } from "react-router";
+import { paths } from "@/config/paths";
 
 const InvestorRegisteration = () => {
   const { t, i18n } = useTranslation();
@@ -36,8 +38,20 @@ const InvestorRegisteration = () => {
         schemas={[baseRegistrationSchema, InvestorRegisterationSchema]}
         subForms={[<BaseRegisterInputs />, <InvestorForm />]}
         finalSubmitHandler={handlSubmitForm}
-        stepsLabel={[t("auth.register.providor.personalInformationLabel"),t("auth.register.investor.investorInformationLabel")]}
+        stepsLabel={[
+          t("auth.register.providor.personalInformationLabel"),
+          t("auth.register.investor.investorInformationLabel"),
+        ]}
       />
+      <p className="mt-8 mx-auto text-sm text-muted-foreground text-center">
+        {t("auth.register.haveAccount")}
+        <Link
+          to={paths.auth.login.path}
+          className="ml-1 text-primary hover:text-primary-hover hover:underline transition-all"
+        >
+          {t("auth.register.login")}
+        </Link>
+      </p>
     </AuthLayout>
   );
 };

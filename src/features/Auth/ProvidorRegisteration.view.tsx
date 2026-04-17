@@ -8,6 +8,8 @@ import ServiceProviderForm from "./components/Service-provider-form";
 import BaseRegisterInputs from "./components/Base-register-inputs";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
+import { paths } from "@/config/paths";
+import { Link } from "react-router";
 
 const ProviderRegisteration = () => {
   const { t, i18n } = useTranslation();
@@ -36,8 +38,20 @@ const ProviderRegisteration = () => {
         schemas={[baseRegistrationSchema, serviceProviderSchema]}
         subForms={[<BaseRegisterInputs />, <ServiceProviderForm />]}
         finalSubmitHandler={handlSubmitForm}
-        stepsLabel={[t("auth.register.providor.personalInformationLabel"),t("auth.register.providor.companyInformationLabel")]}
+        stepsLabel={[
+          t("auth.register.providor.personalInformationLabel"),
+          t("auth.register.providor.companyInformationLabel"),
+        ]}
       />
+      <p className="mt-8 mx-auto text-sm text-muted-foreground text-center">
+        {t("auth.register.haveAccount")}
+        <Link
+          to={paths.auth.login.path}
+          className="ml-1 text-primary hover:text-primary-hover hover:underline transition-all"
+        >
+          {t("auth.register.login")}
+        </Link>
+      </p>
     </AuthLayout>
   );
 };

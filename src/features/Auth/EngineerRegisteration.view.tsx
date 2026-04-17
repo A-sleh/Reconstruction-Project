@@ -5,6 +5,8 @@ import BaseRegisterInputs from "./components/Base-register-inputs";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
 import EngineerForm from "./components/Engineer-form";
+import { Link } from "react-router";
+import { paths } from "@/config/paths";
 
 const EngineerRegisteration = () => {
   const { t, i18n } = useTranslation();
@@ -35,6 +37,15 @@ const EngineerRegisteration = () => {
         finalSubmitHandler={handlSubmitForm}
         stepsLabel={[t("auth.register.providor.personalInformationLabel"),t("auth.register.engineer.engineerInformationLabel")]}
       />
+       <p className="mt-8 mx-auto text-sm text-muted-foreground text-center">
+        {t("auth.register.haveAccount")}
+        <Link
+          to={paths.auth.login.path}
+          className="ml-1 text-primary hover:text-primary-hover hover:underline transition-all"
+        >
+          {t("auth.register.login")}
+        </Link>
+      </p>
     </AuthLayout>
   );
 };
