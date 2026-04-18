@@ -1,6 +1,6 @@
 "use client";
-import Hero from "./components/Hero";
 import Solution from "./components/Solution";
+import Hero from "./components/Hero";
 import ProductDemoShow from "./components/ProductDemoShow";
 import SocialProof from "./components/SocialProof";
 import WhyUs from "./components/WhyUs";
@@ -11,7 +11,7 @@ import Nav from "./components/Nav";
 
 const LandingPage = () => {
   return (
-    <section>
+    <section className="overflow-hidden">
       <Nav />
       <Hero />
       <ProductDemoShow />

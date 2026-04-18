@@ -65,7 +65,7 @@ const CallToAction = () => {
           <AnimatedButton>
             <Button
               variant="outline"
-              className="px-8 py-4 text-lg  font-semibold"
+              className="px-8 py-4 text-lg font-semibold text-white border-white"
             >
               {t("landingPage.callToAction.contactUs")}
             </Button>

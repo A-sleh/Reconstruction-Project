@@ -33,16 +33,16 @@ const WhyUs = () => {
           {reasons.map((reason, index) => (
             <StaggerItem
               key={index}
-              className="relative group bg-white rounded-2xl shadow-lg hover:shadow-[0_0_5px_rgba(0,0,0,0.2)] transition-all duration-300 overflow-hidden border border-gray-100"
+              className="relative group bg-white rounded-2xl shadow-lg hover:shadow-[0_0_5px_rgba(0,0,0,0.2)] active:shadow-[0_0_12px_rgba(0,0,0,0.25)] active:scale-[1.01] transition-all duration-300 overflow-hidden border border-gray-100"
             >
               {/* Image Section */}
               <div className="relative overflow-hidden">
                 <img
                   src={reason.image}
                   alt={reason.title}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105 group-active:scale-105"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300"></div>
               </div>
 
               {/* Content Section */}

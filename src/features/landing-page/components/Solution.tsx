@@ -69,7 +69,7 @@ const Solution = () => {
             {investorSolutions.map((solution, index) => (
               <StaggerItem
                 key={index}
-                className="rounded-md border border-gray-400 p-3 flex-1 min-w-100"
+                className="rounded-md border border-gray-400 p-3 md:flex-1 md:min-w-100"
               >
                 <div className="rounded-md hover:bg-gray-300/50 p-3 transition-all group">
                   <h4 className="text-xl font-semibold mb-5 group-hover:text-primary">

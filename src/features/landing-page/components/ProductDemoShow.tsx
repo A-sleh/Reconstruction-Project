@@ -44,7 +44,7 @@ const ProductDemoShow = () => {
                 transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-3xl font-bold text-primary">
+                <h3 className="text-2xl md:text-3xl font-bold text-primary">
                   {feature.title}
                 </h3>
                 {/* Image */}
@@ -58,12 +58,12 @@ const ProductDemoShow = () => {
                   <motion.img
                     // @ts-ignore
                     src={assets[feature.image]}
-                    className="bg-gray-200 rounded-lg h-80 flex items-center justify-center"
+                    className="bg-gray-200 rounded-lg h-80 flex items-center justify-center object-cover"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   />
                 </motion.div>
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="md:text-lg text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
                 <Link to={paths.auth.login.getHref()}>
@@ -75,7 +75,7 @@ const ProductDemoShow = () => {
 
               {/* Image */}
               <motion.div
-                className="flex-1 hidden md:block"
+                className="flex-1 hidden md:block object-cover"
                 initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 + 0.5 }}

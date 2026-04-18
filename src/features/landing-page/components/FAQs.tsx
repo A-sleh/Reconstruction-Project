@@ -75,11 +75,11 @@ const FAQs = () => {
           {faqs.map((faq, index) => (
             <StaggerItem key={index} className="bg-white rounded-lg shadow-md">
               <motion.button
-                className="w-full text-left p-6 focus:outline-none "
+                className={`w-full p-6 px-4 focus:outline-none ${i18n.language === 'ar' ? " text-right" : " text-left"}`}
                 onClick={() => toggleFAQ(index)}
                 whileHover={{ backgroundColor: "rgba(59, 130, 246, 0.05)" }}
               >
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center gap-2">
                   <h3 className="text-lg font-semibold text-primary pr-4">
                     {faq.question}
                   </h3>
