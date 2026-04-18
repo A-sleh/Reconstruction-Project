@@ -7,14 +7,13 @@ import WhyUs from "./components/WhyUs";
 import CallToAction from "./components/CallToAction";
 import FAQs from "./components/FAQs";
 import Nav from "./components/Nav";
-import Loader from "@/components/shared/Loader";
+
 
 const LandingPage = () => {
   return (
-    <section className="scroll-smooth">
+    <section>
       <Nav />
       <Hero />
-      <Loader />
       <ProductDemoShow />
       <Solution />
       <SocialProof />

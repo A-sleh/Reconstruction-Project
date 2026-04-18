@@ -5,6 +5,7 @@ import { AnimatePresence } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { ScrollFadeIn, StaggerContainer, StaggerItem, ExpandCollapse, AnimatedButton } from "@/components/animations";
 import { motion } from "motion/react";
+import { FaPlus } from "react-icons/fa6";
 
 const FAQs = () => {
   const { i18n } = useTranslation();
@@ -74,7 +75,7 @@ const FAQs = () => {
           {faqs.map((faq, index) => (
             <StaggerItem key={index} className="bg-white rounded-lg shadow-md">
               <motion.button
-                className="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+                className="w-full text-left p-6 focus:outline-none "
                 onClick={() => toggleFAQ(index)}
                 whileHover={{ backgroundColor: "rgba(59, 130, 246, 0.05)" }}
               >
@@ -83,10 +84,10 @@ const FAQs = () => {
                     {faq.question}
                   </h3>
                   <motion.span
-                    animate={{ rotate: openIndex === index ? 180 : 0 }}
+                    animate={{ rotate: openIndex === index ? 135 : 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    ▼
+                    <FaPlus size={20} />
                   </motion.span>
                 </div>
               </motion.button>

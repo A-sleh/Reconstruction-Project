@@ -35,4 +35,29 @@ export const paths = {
     path: "/",
     getHref: () => "/",
   },
+  app: {
+    home: {},
+    resourceProvidor: {
+      progile: {
+        path: "/app/resource-providor/profile",
+        getHref: () => `/app/resource-providor/profile`,
+      },
+      orders: {
+        path: "/app/resource-providor/order",
+        getHref: () => `/app/resource-providor/order`,
+      },
+      orderDetails: {
+        path: "/app/resource-providor/order/:orderId",
+        getHref: (orderId: number) => `/app/resource-providor/order/${orderId}`,
+      },
+      services: {
+        path: "/app/resource-providor/services",
+        getHref: () => `/app/resource-providor/services`,
+      },
+    },
+    serviceProvidor: {},
+    investor:{},
+    engineer: {},
+
+  },
 } as const;

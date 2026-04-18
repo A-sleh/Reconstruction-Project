@@ -95,6 +95,50 @@
       }
     }
   },
+  "serviceProvider": {
+    "services": {
+      "sectionTitle": "خدمات الشركة",
+      "title": "إدارة موارد شركتك",
+      "subtitle": "أضف تفاصيل الشركة، وصف كتالوج الموارد، وأدِر الأسعار والوحدات في مكان واحد.",
+      "description": "حافظ على ملف شركتك والموارد المتاحة محدثة للمستثمرين والمقاولين.",
+      "companyInfoTitle": "تفاصيل الشركة",
+      "companyInfoSubtitle": "قم بتحديث عنوان الشركة، الموقع، الوصف، ونظرة عامة على الموارد.",
+      "companyTitleLabel": "عنوان الشركة",
+      "companyTitlePlaceholder": "أدخل عنوان الشركة",
+      "locationLabel": "الموقع",
+      "locationPlaceholder": "أدخل موقع الشركة",
+      "addressLabel": "العنوان",
+      "addressPlaceholder": "أدخل عنوان الشركة",
+      "descriptionLabel": "وصف الشركة",
+      "descriptionPlaceholder": "صف شركتك وقدرات الموارد",
+      "resourceOverviewLabel": "ما تحتويه الشركة من موارد",
+      "resourceOverviewPlaceholder": "الخلاصة عن الموارد التي تقدمها الشركة",
+      "saveCompanyButton": "حفظ تفاصيل الشركة",
+      "manageResourcesTitle": "كتالوج الموارد",
+      "manageResourcesSubtitle": "أضف وادِر الموارد المتاحة مع تفاصيل السعر والوحدة.",
+      "resourceNameLabel": "اسم المورد",
+      "resourceNamePlaceholder": "أدخل اسم المورد",
+      "resourceCategoryLabel": "الفئة",
+      "resourceCategoryPlaceholder": "أدخل فئة المورد",
+      "resourceUnitLabel": "الوحدة",
+      "resourceUnitPlaceholder": "أدخل وحدة القياس",
+      "resourcePriceLabel": "سعر الوحدة",
+      "resourcePricePlaceholder": "أدخل السعر",
+      "resourceDescriptionLabel": "وصف المورد",
+      "resourceDescriptionPlaceholder": "وصف هذا المورد",
+      "addResourceButton": "إضافة مورد",
+      "currentResourcesTitle": "الموارد الحالية",
+      "currentResourcesSubtitle": "حرر العناصر الموجودة أو احذف الموارد غير المتاحة.",
+      "resourcesCount": "موارد",
+      "removeResourceButton": "حذف",
+      "companyUpdatedMessage": "تم حفظ تفاصيل الشركة بنجاح.",
+      "resourceAddedMessage": "تم إضافة المورد بنجاح.",
+      "resourceRemovedMessage": "تم حذف المورد.",
+      "validation": {
+        "resourceNameRequired": "اسم المورد مطلوب"
+      }
+    }
+  },
   "landingPage": {
     "nav": {
       "brand": "إعادة الإعمار",
@@ -104,16 +148,12 @@
       "testimonials": "آراء العملاء",
       "whyUs": "لماذا نحن",
       "getStarted": "ابدأ الآن",
-      "faq": "الأسئلة"
+      "faq": "الأسئلة",
+      "login": "انضم إلينا"
     },
     "hero": {
       "badge": "المنصة الأذكى لإعادة الإعمار",
-      "headlines": [
-        "من فكؤة الى واقع : شريكك الشامل في إعادة الإعمار",
-        "ابني، استثمر، أعد إعمار المستقبل. منصة واحدة تجمع جميع الأطراف",
-        "معاً نعيد بناء ما دمرته الحرب. لنعيد الأمل إلى حياتنا",
-        "منصة إعادة الإعمار الرقمية. بُعد جديد لتعاون أوثق"
-      ],
+      "headlines": "ابني، استثمر، أعد إعمار المستقبل. منصة واحدة تجمع جميع الأطراف",
       "description": "منصة توحد المستثمرين، أصحاب الأراضي، المهندسين، ومزودي الخدمات في نظام واحد يدعمك خطوة بخطوة في إعادة الإعمار.",
       "cta": "ابدأ الآن",
       "alt": "مشروع إعادة إعمار",
@@ -140,6 +180,7 @@
       "title": "الحلول المقدمة",
       "subtitle": "منصتنا توفر حلول شاملة لجميع الأطراف المعنية بإعادة الإعمار",
       "investorsTitle": "للمستثمرين",
+      "investorSolutionsButton": "سجل كمستثمر وابدأ رحلتك",
       "investorSolutions": [
         {
           "title": "منصة موثوقة للاستثمار العقاري",
@@ -163,12 +204,20 @@
         }
       ],
       "engineersTitle": "للمهندسين",
-      "engineerSolutions": [
-        {
-          "title": "قناة دائمة لعروض العمل",
-          "description": "انضم إلى منصتنا لتصل إلى مجموعة واسعة من مشاريع إعادة الإعمار الجادة، وارفع ملفك الشخصي ليجدك العملاء مباشرة"
-        }
-      ],
+      "serviceProvidorTitle": "مقدمي الخدمات",
+      "serviceProvidor": "تواصل مع المستثمرين وقدم خدماتك المهنية لمشاريع إعادة الإعمار. أبرز خبرتك ونمِ أعمالك.",
+      "serviceProvidorCategory": "الخدمات المهنية",
+      "serviceProvidorMainTitle": "انضم كمقدم خدمة",
+      "engineerCategory": "الخدمات الهندسية",
+      "engineerMainTitle": "انضم كمهندس",
+      "resourceProvidorTitle": "مقدمي الموارد",
+      "resourceProvidor": "قدم المواد والمعدات والموارد المطلوبة لمشاريع إعادة الإعمار. تواصل مع المقاولين والمستثمرين المعتمدين مباشرة.",
+      "resourceProvidorCategory": "الموارد والمواد",
+      "resourceProvidorMainTitle": "انضم كمقدم موارد",
+      "engineerSolutions": {
+        "title": "قناة دائمة لعروض العمل",
+        "description": "انضم إلى منصتنا لتصل إلى مجموعة واسعة من مشاريع إعادة الإعمار الجادة، وارفع ملفك الشخصي ليجدك العملاء مباشرة"
+      },
       "resourcesTitle": "للموارد والخدمات",
       "resourceSolutions": [
         {
@@ -215,32 +264,44 @@
         {
           "text": "بفضل هذه المنصة, وجدت مستثمرا لمشروعي في أسبوع فقط بعد 6 أشهر من البحث",
           "author": "أحمد المستثمر",
-          "role": "صاحب أرض"
+          "role": "صاحب أرض",
+          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-03-15"
         },
         {
           "text": "استثمرت في ٣ مشاريع عبر المنصة وحققت عائداً بلغ ٣٠٪ خلال عامين",
           "author": "فاطمة الاستثمارية",
-          "role": "مستثمرة"
+          "role": "مستثمرة",
+          "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-02-28"
         },
         {
           "text": "زاد دخلي بنسبة ٤٠٪ بعد انضمامي للمنصة وحصولي على مشاريع جديدة مستمرة",
           "author": "محمد المهندس",
-          "role": "مهندس معماري"
+          "role": "مهندس معماري",
+          "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-01-20"
         },
         {
           "text": "أرضي كانت مهملة منذ ٣ سنوات بسبب نقص التمويل. خلال أسبوعين عبر المنصة، وجدت مستثمراً وبدأنا المشروع. اليوم أصبح لدي عمارة سكنية تدر علي دخلاً شهرياً",
           "author": "سارة المالكة",
-          "role": "صاحبة أرض"
+          "role": "صاحبة أرض",
+          "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-03-08"
         },
         {
           "text": "كنت أخشى الاستثمار في مناطق الإعمار بسبب نقص الشفافية. المنصة وفرت لي فريقاً فنياً يتابع المشروع ويقدم تقارير دورية. استثمرت في مشروعين وحققت عائداً ممتازاً",
           "author": "علي المستثمر",
-          "role": "مستثمر"
+          "role": "مستثمر",
+          "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-02-14"
         },
         {
           "text": "كمقاول، وجدت في المنصة فرصة رائعة للتواصل مع أصحاب المشاريع والموردين. زادت أعمالي بنسبة ٥٠٪ خلال السنة الماضية",
           "author": "خالد المقاول",
-          "role": "مقاول بناء"
+          "role": "مقاول بناء",
+          "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-01-30"
         }
       ],
       "join": "انضم إلى آلاف العملاء الراضين",
@@ -251,32 +312,32 @@
       "subtitle": "نحن نتميز بالالتزام بالجودة والابتكار في كل ما نقدمه لعملائنا",
       "reasons": [
         {
-          "icon": "🔒",
+          "image": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center",
           "title": "الثقة والأمان",
           "description": "منصة موثوقة مع نظام أمان متقدم يحمي بياناتك ومعاملاتك"
         },
         {
-          "icon": "⚡",
+          "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=center",
           "title": "السرعة والكفاءة",
           "description": "وفر وقتك وجهدك من خلال أدواتنا الذكية التي تبسط العمليات"
         },
         {
-          "icon": "🤝",
+          "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop&crop=center",
           "title": "الشراكة الاستراتيجية",
           "description": "نبني شراكات طويلة الأمد مع عملائنا لضمان نجاح مشاريعهم"
         },
         {
-          "icon": "📈",
+          "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center",
           "title": "النمو المستدام",
           "description": "نساعدك في تحقيق نمو مستدام من خلال فرص استثمارية مدروسة"
         },
         {
-          "icon": "🌟",
+          "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop&crop=center",
           "title": "التميز في الخدمة",
           "description": "فريق دعم فني متخصص يساعدك في كل خطوة من رحلتك"
         },
         {
-          "icon": "🎯",
+          "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=center",
           "title": "الدقة والشفافية",
           "description": "معلومات دقيقة وشفافة تضمن اتخاذ قرارات مستنيرة"
         }
@@ -293,5 +354,71 @@
       "needHelp": "هل تحتاج مساعدة؟",
       "support": "فريق الدعم متاح 24/7 لمساعدتك في كل خطوة"
     }
+  },
+  "profile": {
+    "sectionTitle": "الملف الشخصي",
+    "title": "معلومات الحساب",
+    "description": "راجع تفاصيل ملفك الشخصي وقم بتحديثها أدناه. سيشاهد المستخدمون الآخرون نسخة للعرض فقط.",
+    "editableStatusOwner": "الملف قابل للتعديل",
+    "editableStatusViewer": "عرض فقط",
+    "profileImageAlt": "صورة الملف الشخصي",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "nationalNumberLabel": "الرقم الوطني",
+    "phone": "رقم الجوال",
+    "saveButton": "حفظ التغييرات",
+    "readOnlyNotice": "هذا الملف للعرض فقط لأنك تشاهد ملف مستخدم آخر.",
+    "updatedMessage": "تم تحديث الملف الشخصي بنجاح."
+  },
+  "orders": {
+    "section": "الطلبات",
+    "title": "تفاصيل آخر طلب",
+    "subtitle": "عرض بيانات صاحب الطلب، قائمة العناصر، وتفاصيل التكلفة بالكامل في ملخص طلب متجاوب.",
+    "downloadButton": "تحميل الفاتورة",
+    "newOrderButton": "إنشاء طلب جديد",
+    "orderCardTitle": "نظرة عامة على الطلب",
+    "orderCodeLabel": "كود الطلب",
+    "orderDateLabel": "تاريخ الطلب",
+    "orderItemsLabel": "عناصر الطلب",
+    "totalItems": "إجمالي العناصر",
+    "totalQuantity": "إجمالي الكمية",
+    "totalPrice": "الإجمالي",
+    "itemsTitle": "عناصر الطلب",
+    "itemsSubtitle": "تشمل كل عنصر الاسم والكمية وسعر الوحدة.",
+    "itemName": "المنتج",
+    "itemAmount": "الكمية",
+    "itemPrice": "سعر الوحدة",
+    "itemTotal": "الإجمالي",
+    "ownerInfoTitle": "معلومات صاحب الطلب",
+    "ownerNameLabel": "اسم صاحب الطلب",
+    "ownerEmailLabel": "البريد الإلكتروني",
+    "ownerPhoneLabel": "الهاتف",
+    "ownerNationalNumberLabel": "الرقم الوطني",
+    "summaryTitle": "ملخص الطلب",
+    "contactOwnerButton": "التواصل مع صاحب الطلب",
+    "messageOwnerButton": "إرسال رسالة",
+    "status": {
+      "confirmed": "مؤكد",
+      "pending": "قيد الانتظار",
+      "inProgress": "قيد التنفيذ"
+    },
+    "listTitle": "طلبات العملاء",
+    "listSubtitle": "قم بإدارة الطلبات الجديدة من المستثمرين، عرض التفاصيل، واتخاذ الإجراءات بسرعة.",
+    "openOrders": "الطلبات المفتوحة",
+    "openOrdersSubtitle": "شاهد جميع الطلبات الحالية من المستثمرين وقم بإدارتها من مكان واحد.",
+    "ordersCount": "طلبات",
+    "orderCode": "كود الطلب",
+    "owner": "المستثمر",
+    "items": "العناصر",
+    "total": "الإجمالي",
+    "date": "التاريخ",
+    "statusLabel": "الحالة",
+    "actions": "الإجراءات",
+    "viewDetails": "عرض",
+    "accept": "قبول",
+    "contact": "تواصل",
+    "selectionText": "تم تنفيذ الإجراء: {{selection}}"
   }
 }

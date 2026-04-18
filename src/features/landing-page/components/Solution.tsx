@@ -6,17 +6,40 @@ import {
   StaggerItem,
 } from "@/components/animations";
 import JoinUsCard from "./JoinUsCard";
+import { paths } from "@/config/paths";
+import { Link } from "react-router-dom";
 
 const Solution = () => {
   const { t } = useTranslation();
 
-  const investorSolutions = t("solution.investorSolutions", {
-    returnObjects: true,
-  }) as Array<{ title: string; description: string }>;
-  const engineerSolutions = t("solution.engineerSolutions", {
-    returnObjects: true,
-  }) as Array<{ title: string; description: string }>;
-  const resourceSolutions = t("solution.resourceSolutions", {
+  const userSolutions = [
+    {
+      title: t("landingPage.solution.serviceProvidorTitle"),
+      description: t("landingPage.solution.serviceProvidor"),
+      imageIndex: "landingPageImage_jop_service",
+      category: t("landingPage.solution.serviceProvidorCategory"),
+      mainTitle: t("landingPage.solution.serviceProvidorMainTitle"),
+      link: paths.auth.register.asProvider.path,
+    },
+    {
+      title: t("landingPage.solution.engineerSolutions.title"),
+      description: t("landingPage.solution.engineerSolutions.description"),
+      imageIndex: "landingPageImage_jop_engineer",
+      category: t("landingPage.solution.engineerCategory"),
+      mainTitle: t("landingPage.solution.engineerMainTitle"),
+      link: paths.auth.register.asEngineer.path,
+    },
+    {
+      title: t("landingPage.solution.resourceProvidorTitle"),
+      description: t("landingPage.solution.resourceProvidor"),
+      imageIndex: "landingPageImage_jop_resource",
+      category: t("landingPage.solution.resourceProvidorCategory"),
+      mainTitle: t("landingPage.solution.resourceProvidorMainTitle"),
+      link: paths.auth.register.asProvider.path,
+    },
+  ];
+
+  const investorSolutions = t("landingPage.solution.investorSolutions", {
     returnObjects: true,
   }) as Array<{ title: string; description: string }>;
 
@@ -26,10 +49,10 @@ const Solution = () => {
         <ScrollFadeIn>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-primary mb-4">
-              {t("solution.title")}
+              {t("landingPage.solution.title")}
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              {t("solution.subtitle")}
+              {t("landingPage.solution.subtitle")}
             </p>
           </div>
         </ScrollFadeIn>
@@ -42,11 +65,6 @@ const Solution = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <ScrollFadeIn delay={0.3} className="mb-8">
-            <h3 className="text-3xl font-semibold text-primary text-center">
-              {t("solution.investorsTitle")}
-            </h3>
-          </ScrollFadeIn>
           <StaggerContainer className="flex flex-wrap gap-8">
             {investorSolutions.map((solution, index) => (
               <StaggerItem
@@ -64,6 +82,11 @@ const Solution = () => {
               </StaggerItem>
             ))}
           </StaggerContainer>
+          <Link to={paths.auth.register.asInvestor.path}>
+            <button className="bg-primary text-white py-2 px-4 rounded-md hover:opacity-90 w-full my-3 transition">
+              {t("landingPage.solution.investorSolutionsButton")}
+            </button>
+          </Link>
         </motion.div>
 
         {/* For Engineers */}
@@ -74,50 +97,11 @@ const Solution = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <ScrollFadeIn delay={0.5} className="mb-8">
-            <h3 className="text-3xl font-semibold text-primary text-center">
-              {t("solution.engineersTitle")}
-            </h3>
-          </ScrollFadeIn>
-          <div className="grid md:grid-cols-1 max-w-4xl mx-auto gap-8">
-            {engineerSolutions.map((solution, index) => (
-              <JoinUsCard
-                description={solution.description}
-                title={solution.title}
-                imageIndex="landingPageImage_jop_engineer"
-              />
+          <div className="grid md:grid-cols-3  mx-auto gap-8">
+            {userSolutions.map((solution, index) => (
+              <JoinUsCard key={index} {...solution} />
             ))}
           </div>
-        </motion.div>
-
-
-        {/* For Resources and Services */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <ScrollFadeIn delay={0.7} className="mb-8">
-            <h3 className="text-3xl font-semibold text-primary text-center">
-              {t("solution.resourcesTitle")}
-            </h3>
-          </ScrollFadeIn>
-          <StaggerContainer className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {resourceSolutions.map((solution, index) => (
-              <StaggerItem
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <h4 className="text-xl font-semibold text-primary mb-3">
-                  {solution.title}
-                </h4>
-                <p className="text-gray-600 leading-relaxed">
-                  {solution.description}
-                </p>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
         </motion.div>
       </div>
     </section>

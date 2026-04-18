@@ -20,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
 }) => {
   const baseClasses =
-    "w-full rounded-full py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 cursor-pointer";
+    "w-full rounded-full py-2 md:py-3 text-[12px] md:text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 cursor-pointer";
 
   const variantClasses = {
     solid: "bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed",

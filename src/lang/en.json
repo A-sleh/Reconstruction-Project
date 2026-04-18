@@ -95,6 +95,50 @@
       }
     }
   },
+  "serviceProvider": {
+    "services": {
+      "sectionTitle": "Company services",
+      "title": "Manage your company resources",
+      "subtitle": "Add company details, describe your resource catalog, and manage unit pricing in one place.",
+      "description": "Keep your company profile and available services up to date for investors and contractors.",
+      "companyInfoTitle": "Company details",
+      "companyInfoSubtitle": "Update your company title, address, location, and service overview.",
+      "companyTitleLabel": "Company title",
+      "companyTitlePlaceholder": "Enter your company title",
+      "locationLabel": "Location",
+      "locationPlaceholder": "Enter company location",
+      "addressLabel": "Address",
+      "addressPlaceholder": "Enter company address",
+      "descriptionLabel": "Company description",
+      "descriptionPlaceholder": "Describe your company and resource capabilities",
+      "resourceOverviewLabel": "What resources you provide",
+      "resourceOverviewPlaceholder": "Summarize the kinds of resources your company contains",
+      "saveCompanyButton": "Save company details",
+      "manageResourcesTitle": "Resource catalog",
+      "manageResourcesSubtitle": "Add and manage your available resources with unit and pricing details.",
+      "resourceNameLabel": "Resource name",
+      "resourceNamePlaceholder": "Enter resource name",
+      "resourceCategoryLabel": "Category",
+      "resourceCategoryPlaceholder": "Enter resource category",
+      "resourceUnitLabel": "Unit",
+      "resourceUnitPlaceholder": "Enter measurement unit",
+      "resourcePriceLabel": "Price per unit",
+      "resourcePricePlaceholder": "Enter price",
+      "resourceDescriptionLabel": "Resource description",
+      "resourceDescriptionPlaceholder": "Describe this resource",
+      "addResourceButton": "Add resource",
+      "currentResourcesTitle": "Current resources",
+      "currentResourcesSubtitle": "Edit existing items or remove resources that are no longer available.",
+      "resourcesCount": "resources",
+      "removeResourceButton": "Remove",
+      "companyUpdatedMessage": "Company details saved successfully.",
+      "resourceAddedMessage": "Resource added successfully.",
+      "resourceRemovedMessage": "Resource removed.",
+      "validation": {
+        "resourceNameRequired": "Resource name is required"
+      }
+    }
+  },
   "landingPage": {
     "nav": {
       "brand": "Reconstruction",
@@ -104,16 +148,12 @@
       "testimonials": "Testimonials",
       "whyUs": "Why Us",
       "getStarted": "Get Started",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "login": "Join Us"
     },
     "hero": {
       "badge": "The smarter reconstruction platform",
-      "headlines": [
-        "From idea to reality: Your comprehensive partner in reconstruction",
-        "Build, invest, reconstruct the future. One platform uniting all parties",
-        "Together we rebuild what war destroyed. Let's restore hope to our lives",
-        "Digital reconstruction platform. A new dimension for closer collaboration"
-      ],
+      "headlines": "Build, invest, reconstruct the future. One platform uniting all parties",
       "description": "A platform that unifies investors, landowners, engineers, and service providers in a single system that supports you every step of the reconstruction journey.",
       "cta": "Get Started",
       "alt": "Reconstruction project",
@@ -139,6 +179,8 @@
     "solution": {
       "title": "Our Solutions",
       "subtitle": "Our platform provides comprehensive solutions for all parties involved in reconstruction",
+      "investorSolutionsButton": "Sign up as an investor and start your journey",
+
       "investorsTitle": "For Investors",
       "investorSolutions": [
         {
@@ -163,6 +205,16 @@
         }
       ],
       "engineersTitle": "For Engineers",
+      "serviceProvidorTitle": "Service Providers",
+      "serviceProvidor": "Connect with investors and provide your professional services for reconstruction projects. Showcase your expertise and grow your business.",
+      "serviceProvidorCategory": "Professional Services",
+      "serviceProvidorMainTitle": "Join as Service Provider",
+      "engineerCategory": "Engineering Services",
+      "engineerMainTitle": "Join as Engineer",
+      "resourceProvidorTitle": "Resource Providers",
+      "resourceProvidor": "Supply materials, equipment, and resources needed for reconstruction projects. Reach verified contractors and investors directly.",
+      "resourceProvidorCategory": "Resources & Materials",
+      "resourceProvidorMainTitle": "Join as Resource Provider",
       "engineerSolutions": [
         {
           "title": "Permanent Job Offers Channel",
@@ -215,32 +267,44 @@
         {
           "text": "Thanks to this platform, I found an investor for my project in just one week after 6 months of searching",
           "author": "Ahmed the Investor",
-          "role": "Land Owner"
+          "role": "Land Owner",
+          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-03-15"
         },
         {
           "text": "I invested in 3 projects through the platform and achieved a return of 30% within two years",
           "author": "Fatima the Investor",
-          "role": "Investor"
+          "role": "Investor",
+          "image": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-02-28"
         },
         {
           "text": "My income increased by 40% after joining the platform and getting continuous new projects",
           "author": "Mohammed the Engineer",
-          "role": "Architect"
+          "role": "Architect",
+          "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-01-20"
         },
         {
           "text": "My land was neglected for 3 years due to lack of funding. Within two weeks through the platform, I found an investor and we started the project. Today I have a residential building that generates monthly income for me",
           "author": "Sara the Owner",
-          "role": "Land Owner"
+          "role": "Land Owner",
+          "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-03-08"
         },
         {
           "text": "I was afraid to invest in reconstruction areas due to lack of transparency. The platform provided me with a technical team that follows the project and provides periodic reports. I invested in two projects and achieved excellent returns",
           "author": "Ali the Investor",
-          "role": "Investor"
+          "role": "Investor",
+          "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-02-14"
         },
         {
           "text": "As a contractor, I found in the platform a great opportunity to communicate with project owners and suppliers. My business increased by 50% in the past year",
           "author": "Khaled the Contractor",
-          "role": "Building Contractor"
+          "role": "Building Contractor",
+          "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
+          "date": "2024-01-30"
         }
       ],
       "join": "Join thousands of satisfied customers",
@@ -251,32 +315,32 @@
       "subtitle": "We excel in commitment to quality and innovation in everything we offer to our customers",
       "reasons": [
         {
-          "icon": "🔒",
+          "image": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center",
           "title": "Trust & Security",
           "description": "Trusted platform with advanced security system that protects your data and transactions"
         },
         {
-          "icon": "⚡",
+          "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=center",
           "title": "Speed & Efficiency",
           "description": "Save your time and effort through our smart tools that simplify processes"
         },
         {
-          "icon": "🤝",
+          "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop&crop=center",
           "title": "Strategic Partnership",
           "description": "We build long-term partnerships with our clients to ensure the success of their projects"
         },
         {
-          "icon": "📈",
+          "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center",
           "title": "Sustainable Growth",
           "description": "We help you achieve sustainable growth through carefully studied investment opportunities"
         },
         {
-          "icon": "🌟",
+          "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop&crop=center",
           "title": "Service Excellence",
           "description": "Specialized technical support team that helps you at every step of your journey"
         },
         {
-          "icon": "🎯",
+          "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=center",
           "title": "Precision & Transparency",
           "description": "Accurate and transparent information that ensures informed decision making"
         }
@@ -293,5 +357,71 @@
       "needHelp": "Need Help?",
       "support": "Our support team is available 24/7 to help you at every step"
     }
+  },
+  "profile": {
+    "sectionTitle": "Profile",
+    "title": "Account Information",
+    "description": "Review your profile details and update them below. Other users will see a read-only version.",
+    "editableStatusOwner": "Editable profile",
+    "editableStatusViewer": "Read-only view",
+    "profileImageAlt": "Profile photo",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "password": "Password",
+    "nationalNumberLabel": "National number",
+    "phone": "Phone number",
+    "saveButton": "Save changes",
+    "readOnlyNotice": "This profile is read-only because you are viewing another user.",
+    "updatedMessage": "Profile updated successfully."
+  },
+  "orders": {
+    "section": "Orders",
+    "title": "Latest order details",
+    "subtitle": "View the order owner information, item list, and full cost breakdown in a responsive order summary.",
+    "downloadButton": "Download invoice",
+    "newOrderButton": "Create new order",
+    "orderCardTitle": "Order overview",
+    "orderCodeLabel": "Order code",
+    "orderDateLabel": "Order date",
+    "orderItemsLabel": "Line items",
+    "totalItems": "Total items",
+    "totalQuantity": "Total quantity",
+    "totalPrice": "Total price",
+    "itemsTitle": "Order items",
+    "itemsSubtitle": "Each item includes name, quantity, and unit price.",
+    "itemName": "Item",
+    "itemAmount": "Qty",
+    "itemPrice": "Unit price",
+    "itemTotal": "Total",
+    "ownerInfoTitle": "Order owner",
+    "ownerNameLabel": "Owner name",
+    "ownerEmailLabel": "Owner email",
+    "ownerPhoneLabel": "Owner phone",
+    "ownerNationalNumberLabel": "National number",
+    "summaryTitle": "Order summary",
+    "contactOwnerButton": "Contact owner",
+    "messageOwnerButton": "Message owner",
+    "status": {
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "inProgress": "In progress"
+    },
+    "listTitle": "Order requests",
+    "listSubtitle": "Manage new orders from investors, view details, and take action quickly.",
+    "openOrders": "Open orders",
+    "openOrdersSubtitle": "See all current investor orders and manage them from one list.",
+    "ordersCount": "orders",
+    "orderCode": "Order code",
+    "owner": "Investor",
+    "items": "Items",
+    "total": "Total",
+    "date": "Date",
+    "statusLabel": "Status",
+    "actions": "Actions",
+    "viewDetails": "Details",
+    "accept": "Accept",
+    "contact": "Contact",
+    "selectionText": "Action applied: {{selection}}"
   }
 }

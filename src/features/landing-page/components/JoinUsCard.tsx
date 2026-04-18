@@ -19,10 +19,10 @@ const JoinUsCard: React.FC<JoinUsCardProps> = ({
   link,
 }) => {
   return (
-    <div className="group relative rounded-xl overflow-hidden border border-gray-300 h-full bg-white transition-all duration-300 cursor-pointer">
-      {/* Image Wrapper */}
+    <div className="group relative rounded-xl overflow-hidden border border-gray-300  bg-white transition-all duration-300 cursor-pointer h-fit">
       <div className="relative w-full h-72 overflow-hidden bg-linear-to-br from-gray-100 to-gray-200 ">
         <img
+          //@ts-ignore
           src={assets[imageIndex]}
           alt={title}
           className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 group-hover:brightness-50"
@@ -33,7 +33,7 @@ const JoinUsCard: React.FC<JoinUsCardProps> = ({
       </div>
 
       {/* Content Container */}
-      <div className="p-5 flex flex-col ">
+      <div className="m-4 mx-2 p-2 rounded-lg flex flex-col group-hover:bg-gray-300/20 transition">
         {/* Title */}
         <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-gray-800 transition-colors duration-300">
           {title}

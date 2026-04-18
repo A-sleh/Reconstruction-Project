@@ -3,6 +3,7 @@ import { paths } from "@/config/paths";
 import { RouteObject } from "react-router";
 
 import Loader from "@/components/shared/Loader";
+import ApplicationLayout from "@/components/layouts/Main-layout";
 
 // Auth pages
 const Login = lazy(() => import("@/features/Auth/Login.view"));
@@ -13,10 +14,13 @@ const InvestorRegisteration = lazy(() => import("@/features/Auth/InvestorRegiste
 // Landing page
 const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"));
 
-// Service Porvider importing pages
-
 // Resource Provider importing pages
+const ResourceProvidorServices = lazy(() => import("@/features/service-providor/services/Resource-providor-services"));
+const ResourceProvidorOrders = lazy(() => import("@/features/service-providor/orders/Resource-providor-orders"));
+const ResourceProvidorProfile = lazy(() => import("@/features/service-providor/profile/Resource-providor-profile"));
+const ResourceProvidorOrderDetails = lazy(() => import("@/features/service-providor/order-details/Resource-providor-order-details"));
 
+// Service Porvider importing pages
 // Investor importing pages
 
 // Engineers importing pages
@@ -71,6 +75,48 @@ const router: RouteObject[] = [
       },
     ],
   },
+  {
+    path: "app",
+    element: <ApplicationLayout />,
+    children: [
+      // Resource Providor routes
+      {
+        path: paths.app.resourceProvidor.services.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ResourceProvidorServices />
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.resourceProvidor.orders.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ResourceProvidorOrders />
+          </Suspense>
+        ),
+        
+      },
+      {
+        path: paths.app.resourceProvidor.orderDetails.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ResourceProvidorOrderDetails />
+          </Suspense>
+        ),
+        
+      },
+      {
+        path: paths.app.resourceProvidor.progile.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ResourceProvidorProfile />
+          </Suspense>
+        ),
+      }
+    ],
+
+  }
 ];
 
 export default router;

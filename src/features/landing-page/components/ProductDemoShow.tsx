@@ -2,11 +2,15 @@ import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { ScrollFadeIn, AnimatedButton } from "@/components/animations";
 import { assets } from "@/assets/assets";
+import { Link } from "react-router-dom";
+import { paths } from "@/config/paths";
 
 const ProductDemoShow = () => {
   const { t } = useTranslation();
 
-  const features = t('productDemo.features', { returnObjects: true }) as Array<{ title: string; description: string; image: string }>;
+  const features = t("landingPage.productDemo.features", {
+    returnObjects: true,
+  }) as Array<{ title: string; description: string; image: string }>;
 
   return (
     <section id="features" className="scroll-mt-24 py-20 bg-white">
@@ -14,10 +18,10 @@ const ProductDemoShow = () => {
         <ScrollFadeIn>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-primary mb-4">
-              {t('productDemo.title')}
+              {t("landingPage.productDemo.title")}
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              {t('productDemo.subtitle')}
+              {t("landingPage.productDemo.subtitle")}
             </p>
           </div>
         </ScrollFadeIn>
@@ -43,17 +47,35 @@ const ProductDemoShow = () => {
                 <h3 className="text-3xl font-bold text-primary">
                   {feature.title}
                 </h3>
+                {/* Image */}
+                <motion.div
+                  className="flex-1 md:hidden"
+                  initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.2 + 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <motion.img
+                    // @ts-ignore
+                    src={assets[feature.image]}
+                    className="bg-gray-200 rounded-lg h-80 flex items-center justify-center"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.div>
                 <p className="text-lg text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
-                <AnimatedButton className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-hover transition-colors">
-                  {t('productDemo.tryNow')}
-                </AnimatedButton>
+                <Link to={paths.auth.login.getHref()}>
+                  <AnimatedButton className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-hover transition-colors">
+                    {t("landingPage.productDemo.tryNow")}
+                  </AnimatedButton>
+                </Link>
               </motion.div>
 
               {/* Image */}
               <motion.div
-                className="flex-1"
+                className="flex-1 hidden md:block"
                 initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 + 0.5 }}

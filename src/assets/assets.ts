@@ -34,4 +34,6 @@ export const assets = {
   landingPageImage_jop_engineer,
   landingPageImage_jop_service,
   landingPageImage_jop_resource,
+
+  
 };
