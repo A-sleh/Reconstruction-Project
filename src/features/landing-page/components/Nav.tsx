@@ -42,7 +42,7 @@ const Nav = () => {
     setActiveSection(section.id);
     setIsMobileMenuOpen(false); // Close mobile menu on link click
     window.scrollTo({
-      top: (document.getElementById(`${section.id}`) as HTMLElement)?.getBoundingClientRect()?.top,
+      top: (document.getElementById(`${section.id}`) as HTMLElement)?.getBoundingClientRect()?.top + window.scrollY - 80, // Adjust for fixed nav height
       behavior: "smooth"
     })
   };
