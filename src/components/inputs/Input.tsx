@@ -53,7 +53,7 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div className={`w-full ${className}`}>
-      <div className="flex flex-col gap-1 text-right relative">
+      <div className="flex flex-col gap-1 relative">
         {label && (
           <label
             htmlFor={inputId}
@@ -65,7 +65,7 @@ const Input: React.FC<InputProps> = ({
         {loadInitialValue ? (
           <div className="h-8 bg-gray-200 animate-pulse rounded-sm" />
         ) : (
-          <div className="flex items-center gap-3 rounded-lg border border-border bg-card px-2  md:px-4 py-1 md:py-3  has-focus-within:border-primary transition-all">
+          <div className="flex items-center gap-3 rounded-lg border border-border px-2  md:px-4 py-1 md:py-3  has-focus-within:border-primary transition-all">
             <input
               id={inputId}
               type={type}
@@ -73,7 +73,7 @@ const Input: React.FC<InputProps> = ({
               onChange={(e) => setValue?.(e.target.value)}
               placeholder={placeholder}
               disabled={disabled}
-              className="flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+              className=" bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
               {...props}
             />
             {selectIcon(iconType)}

@@ -11,10 +11,13 @@ const BaseRegisterInputs = () => {
   } = useFormContext<BaseRegistrationValues>();
 
   return (
-    <div className="space-y-3 mt-3">
-      <div className="flex flex-col md:flex-row gap-2">
+    <div className="space-y-3 mt-3 ">
+      <div
+        className="flex flex-col md:flex-row gap-2 "
+      >
         <Input
           type="text"
+          iconType="user"
           required={true}
           label={t("auth.register.generalInformation.name")}
           placeholder={t("auth.register.generalInformation.name")}
@@ -54,7 +57,9 @@ const BaseRegisterInputs = () => {
         type="text"
         required={true}
         label={t("auth.register.generalInformation.nationalNumberPlaceholder")}
-        placeholder={t("auth.register.generalInformation.nationalNumberPlaceholder")}
+        placeholder={t(
+          "auth.register.generalInformation.nationalNumberPlaceholder",
+        )}
         fieldName="NationalNumber"
         errors={errors ?? null}
         {...register("NationalNumber")}

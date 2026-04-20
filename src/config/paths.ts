@@ -36,7 +36,10 @@ export const paths = {
     getHref: () => "/",
   },
   app: {
-    home: {},
+    home: {
+      path: "/app/home",
+      getHref: () => `/app/home`,
+    },
     resourceProvidor: {
       progile: {
         path: "/app/resource-providor/profile",
@@ -56,8 +59,7 @@ export const paths = {
       },
     },
     serviceProvidor: {},
-    investor:{},
+    investor: {},
     engineer: {},
-
   },
 } as const;

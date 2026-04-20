@@ -10,8 +10,6 @@ export default function DisplayInputErrors({
   errors,
   fieldName,
 }: IDisplayInputErrorsProps) {
-  // console.log(errors,fieldName)
-  
   if (errors) {
     return (
       <ErrorMessage
@@ -21,7 +19,6 @@ export default function DisplayInputErrors({
           return (
             messages &&
             Object.entries(messages).map(([type, message]) => {
-              console.log(messages);
               return (
                 <p className="text-red-500 mt-2 text-[12px] text-nowrap" key={type}>
                   {message}

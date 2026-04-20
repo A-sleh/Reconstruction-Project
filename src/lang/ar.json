@@ -420,5 +420,8 @@
     "accept": "قبول",
     "contact": "تواصل",
     "selectionText": "تم تنفيذ الإجراء: {{selection}}"
+  },
+  "home": {
+    "no-notifications-messages": "لا توجد إشعارات جديدة"
   }
 }

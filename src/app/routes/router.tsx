@@ -11,6 +11,9 @@ const ProvidorRegisteration = lazy(() => import("@/features/Auth/ProvidorRegiste
 const EngineerRegisteration = lazy(() => import("@/features/Auth/EngineerRegisteration.view"));
 const InvestorRegisteration = lazy(() => import("@/features/Auth/InvestorRegisteration.view"));
 
+// Shared pages 
+const HomePage = lazy(() => import("@/features/home/Home.view"));
+
 // Landing page
 const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"));
 
@@ -79,6 +82,15 @@ const router: RouteObject[] = [
     path: "app",
     element: <ApplicationLayout />,
     children: [
+      // Home page route
+      {
+        path: paths.app.home.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <HomePage />
+          </Suspense>
+        ),
+      },
       // Resource Providor routes
       {
         path: paths.app.resourceProvidor.services.path,
