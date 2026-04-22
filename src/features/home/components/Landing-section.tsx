@@ -65,7 +65,7 @@ const landing: ILandingCard[] = [
 const LandingSection = () => {
   const { t } = useTranslation();
   return (
-    <div className="shadow-[0_0_0_100px_white]">
+    <div className="">
       <SectionHeader
         link={window.location.pathname}
         title={t("home.commonLandingTitle")}
