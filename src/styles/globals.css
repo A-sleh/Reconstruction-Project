@@ -122,6 +122,7 @@ body {
   --leading-lg: 1.75;
 
   --animate-fade-in: fade-in 2.5s ease-in-out;
+  --animate-infinit-loop: infinit-loop 16s ease-in-out infinite;
 }
 
 @keyframes fade-in {
@@ -130,10 +131,27 @@ body {
   }
   50% {
     transform: scale(1);
-
   }
   100% {
     transform: scale(1.1);
+  }
+}
+
+@keyframes infinit-loop {
+  0%,22% {
+    transform: translateX(300%);
+  }
+  25%,47% {
+    transform: translateX(200%);
+  }
+  50%,72% {
+    transform: translateX(100%);
+  }
+  75%,96% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(300%);
   }
 }
 

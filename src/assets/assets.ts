@@ -17,6 +17,12 @@ import landingPageImage_jop_engineer from "./images/landing_page/job_for_enginee
 import landingPageImage_jop_service from "./images/landing_page/job_for_service_provider.webp";
 import landingPageImage_jop_resource from "./images/landing_page/resource_provider_section.webp";
 
+// Home page
+import homePage_hero_building from "./images/home/New-Featured-Image-1200-x-675-2.webp";
+import homePage_hero_engineer from "./images/home/oil-and-gas-promo-1920x880_1200-x-675.webp";
+import homePage_hero_resource from "./images/home/Gem-Headline-Photo-1200-x-675-px.png";
+import homePage_hero_service from "./images/home/80-M-Final-Exterior_2000x1125px.webp";
+
 export const assets = {
   logo: syrianIcon,
   // auth
@@ -34,6 +40,9 @@ export const assets = {
   landingPageImage_jop_engineer,
   landingPageImage_jop_service,
   landingPageImage_jop_resource,
-
-  
+  // Home page
+  homePage_hero_building,
+  homePage_hero_engineer,
+  homePage_hero_resource,
+  homePage_hero_service,
 };

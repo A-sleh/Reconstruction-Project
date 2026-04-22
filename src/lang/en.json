@@ -425,6 +425,10 @@
     "selectionText": "Action applied: {{selection}}"
   },
   "home": {
-    "no-notifications-messages": "No new notifications"
+    "no-notifications-messages": "No new notifications",
+    "seeMore": "See more",
+    "seeDetails": "See details",
+    "investor": "Investor",
+    "commonLandingTitle": "Common landing"
   }
 }

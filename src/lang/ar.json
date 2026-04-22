@@ -422,6 +422,10 @@
     "selectionText": "تم تنفيذ الإجراء: {{selection}}"
   },
   "home": {
-    "no-notifications-messages": "لا توجد إشعارات جديدة"
+    "no-notifications-messages": "لا توجد إشعارات جديدة",
+    "seeMore": "رؤية المزيد",
+    "investor": "المستثمر",
+    "seeDetails": "رؤية التفاصيل",
+    "commonLandingTitle": "عقارات للأستثمار"
   }
 }
