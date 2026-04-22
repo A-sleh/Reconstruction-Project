@@ -2,13 +2,22 @@ export interface IInvestor {
   avatar: string;
   name: string;
   description: string;
+  role: string;
 }
 
-const InvestorCard: React.FC<IInvestor> = ({ name, avatar, description }) => {
+const InvestorCard: React.FC<IInvestor> = ({
+  name,
+  avatar,
+  description,
+  role,
+}) => {
   return (
     <div className="relative rounded-md group overflow-hidden">
-      <div className="absolute inset-0 z-1 bg-linear-to-b from-white to-50% to-transparent"></div>
-      <h3 className="absolute font-bold top-2 right-2 z-2">{name}</h3>
+      <div className="absolute inset-0 z-1 bg-linear-to-b from-white to-80% to-transparent w-[60%] blur-sm"></div>
+      <div className="absolute  top-2 right-2 z-2">
+        <h3 className="font-bold ">{name}</h3>
+        <h5 className="text-gray-600 text-sm">{role}</h5>
+      </div>
       <img
         src={avatar}
         alt={`investor-${name}`}

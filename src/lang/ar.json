@@ -425,9 +425,14 @@
     "no-notifications-messages": "لا توجد إشعارات جديدة",
     "seeMore": "رؤية المزيد",
     "investor": "المستثمر",
+    "engineers": "أشهر المهندسين",
     "seeDetails": "رؤية التفاصيل",
     "commonLandingTitle": "عقارات للأستثمار",
-    "websitInvestores": "اشهر المستثمرين"
+    "websitInvestores": "اشهر المستثمرين",
+    "opnedProjectTitle": "أكبر المشاريع المفتوحة",
 
+    "totalEngineersTitle": "المهندسين",
+    "projectBudgetTitle": "الميزانية",
+    "projectDate": "تاريخ البدء"
   }
 }

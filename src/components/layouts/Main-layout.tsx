@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import { useTranslation } from "react-i18next";
 import Navbar from "@/components/common/Navbar";
+import Foooter from "../common/Foooter";
 
 const ApplicationLayout = () => {
   const { i18n } = useTranslation();
@@ -23,6 +24,7 @@ const ApplicationLayout = () => {
       <main className="mx-auto max-w-360 px-4 py-6">
         <Outlet />
       </main>
+      <Foooter />
     </div>
   );
 };

@@ -429,7 +429,14 @@
     "seeMore": "See more",
     "seeDetails": "See details",
     "investor": "Investor",
+    "engineers": "Engineers",
+
     "commonLandingTitle": "Common landing",
-    "websitInvestores": "Best investores"
+    "websitInvestores": "Best investores",
+    "opnedProjectTitle": "The biggest opened project",
+
+    "totalEngineersTitle": "Engineers",
+    "projectBudgetTitle": "Budget",
+    "projectDate": "Date"
   }
 }

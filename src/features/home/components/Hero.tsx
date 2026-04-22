@@ -1,4 +1,5 @@
 import { assets } from "@/assets/assets";
+import { ScrollFadeIn } from "@/components/animations";
 
 
 const Hero = () => {
