@@ -41,21 +41,21 @@ export const paths = {
       getHref: () => `/app/home`,
     },
     resourceProvidor: {
-      progile: {
+      profile: {
         path: "/app/resource-providor/profile",
         getHref: () => `/app/resource-providor/profile`,
       },
-      orders: {
-        path: "/app/resource-providor/order",
-        getHref: () => `/app/resource-providor/order`,
+      siteResources: {
+        path: "/app/resource-providor/site-resources",
+        getHref: () => `/app/resource-providor/site-resources`,
       },
       orderDetails: {
         path: "/app/resource-providor/order/:orderId",
         getHref: (orderId: number) => `/app/resource-providor/order/${orderId}`,
       },
-      services: {
-        path: "/app/resource-providor/services",
-        getHref: () => `/app/resource-providor/services`,
+      workSites: {
+        path: "/app/resource-providor/work-sites",
+        getHref: () => `/app/resource-providor/work-sites`,
       },
     },
     serviceProvidor: {},

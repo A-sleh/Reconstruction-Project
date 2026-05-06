@@ -2,7 +2,7 @@ import { AiOutlineEnvironment } from "react-icons/ai";
 import Model from "./Model";
 import { useTranslation } from "react-i18next";
 import GoogleMapPicker from "../GoogleMapPicker";
-import { LatLng, parseCoordinates } from "@/utils/helpers";
+import { LatLng, parseCoordinates } from "@/lib/helpers";
 import { useEffect, useState } from "react";
 
 interface IPickCoordsFromMap {

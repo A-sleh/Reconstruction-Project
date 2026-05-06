@@ -26,20 +26,15 @@ const roleLinks: Record<
 > = {
   resourceProvidor: [
     {
-      label: "Profile",
-      href: paths.app.resourceProvidor.progile.path,
+      label: "site resource",
+      href: paths.app.resourceProvidor.siteResources.path,
       icon: <CgProfile size={18} />,
     },
     {
-      label: "Services",
-      href: paths.app.resourceProvidor.services.path,
+      label: "work Sites",
+      href: paths.app.resourceProvidor.workSites.path,
       icon: <MdOutlineDesignServices size={18} />,
-    },
-    {
-      label: "Orders",
-      href: paths.app.resourceProvidor.orders.path,
-      icon: <TbReportSearch size={18} />,
-    },
+    }
   ],
   investor: [
     { label: "Dashboard", href: "/app/investor/dashboard" },

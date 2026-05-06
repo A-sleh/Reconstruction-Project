@@ -18,10 +18,8 @@ const HomePage = lazy(() => import("@/features/home/Home.view"));
 const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"));
 
 // Resource Provider importing pages
-const ResourceProvidorServices = lazy(() => import("@/features/service-providor/services/Resource-providor-services"));
-const ResourceProvidorOrders = lazy(() => import("@/features/service-providor/orders/Resource-providor-orders"));
-const ResourceProvidorProfile = lazy(() => import("@/features/service-providor/profile/Resource-providor-profile"));
-const ResourceProvidorOrderDetails = lazy(() => import("@/features/service-providor/order-details/Resource-providor-order-details"));
+const ResourceProvidorWorkSites = lazy(() => import("@/pages/resource-providor/WorkSites.view"));
+const ResourceProvidorSiteResources = lazy(() => import("@/pages/resource-providor/SiteResources.view"));
 
 // Service Porvider importing pages
 // Investor importing pages
@@ -93,38 +91,21 @@ const router: RouteObject[] = [
       },
       // Resource Providor routes
       {
-        path: paths.app.resourceProvidor.services.path,
+        path: paths.app.resourceProvidor.workSites.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <ResourceProvidorServices />
+            <ResourceProvidorWorkSites />
           </Suspense>
         ),
       },
       {
-        path: paths.app.resourceProvidor.orders.path,
+        path: paths.app.resourceProvidor.siteResources.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <ResourceProvidorOrders />
+            <ResourceProvidorSiteResources />
           </Suspense>
         ),
         
-      },
-      {
-        path: paths.app.resourceProvidor.orderDetails.path,
-        element: (
-          <Suspense fallback={<LoadingFallback />}>
-            <ResourceProvidorOrderDetails />
-          </Suspense>
-        ),
-        
-      },
-      {
-        path: paths.app.resourceProvidor.progile.path,
-        element: (
-          <Suspense fallback={<LoadingFallback />}>
-            <ResourceProvidorProfile />
-          </Suspense>
-        ),
       }
     ],
 
