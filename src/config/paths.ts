@@ -36,6 +36,7 @@ export const paths = {
     getHref: () => "/",
   },
   app: {
+    // Shared pathes
     home: {
       path: "/app/home",
       getHref: () => `/app/home`,
@@ -49,13 +50,21 @@ export const paths = {
         path: "/app/resource-providor/site-resources",
         getHref: () => `/app/resource-providor/site-resources`,
       },
+      orders: {
+        path: "/app/resource-providor/orders",
+        getHref: () => `/app/resource-providor/orders`,
+      },
       orderDetails: {
-        path: "/app/resource-providor/order/:orderId",
-        getHref: (orderId: number) => `/app/resource-providor/order/${orderId}`,
+        path: "/app/resource-providor/orders/:orderId",
+        getHref: (orderId: number) => `/app/resource-providor/orders/${orderId}`,
       },
       workSites: {
         path: "/app/resource-providor/work-sites",
         getHref: () => `/app/resource-providor/work-sites`,
+      },
+      workSite: {
+        path: "/app/resource-providor/work-sites/:id",
+        getHref: (workSiteId: number) => `/app/resource-providor/work-sites/${workSiteId}`,
       },
     },
     serviceProvidor: {},

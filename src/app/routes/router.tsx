@@ -20,12 +20,13 @@ const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"
 // Resource Provider importing pages
 const ResourceProvidorWorkSites = lazy(() => import("@/pages/resource-providor/WorkSites.view"));
 const ResourceProvidorSiteResources = lazy(() => import("@/pages/resource-providor/SiteResources.view"));
+const ResourceProvidorSite = lazy(() => import("@/pages/resource-providor/ResourceProvidorSite.view"));
+const ResourceProvidorOrders = lazy(() => import("@/pages/resource-providor/ResourceProvidorOrders.view"));
+const ResourceProvidorOrderDetails = lazy(() => import("@/pages/resource-providor/ResourceProvidorOrderDetails.view"));
 
 // Service Porvider importing pages
 // Investor importing pages
-
 // Engineers importing pages
-
 
 // Fallback component for lazy loading
 const LoadingFallback = () => <Loader />;
@@ -103,6 +104,33 @@ const router: RouteObject[] = [
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <ResourceProvidorSiteResources />
+          </Suspense>
+        ),
+        
+      },
+      {
+        path: paths.app.resourceProvidor.workSite.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ResourceProvidorSite />
+          </Suspense>
+        ),
+        
+      },
+      {
+        path: paths.app.resourceProvidor.orders.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ResourceProvidorOrders />
+          </Suspense>
+        ),
+        
+      },
+      {
+        path: paths.app.resourceProvidor.orderDetails.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ResourceProvidorOrderDetails />
           </Suspense>
         ),
         
