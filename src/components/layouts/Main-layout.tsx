@@ -13,7 +13,7 @@ const ApplicationLayout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-950">
+    <div className="min-h-screen bg-background text-slate-950">
       <Navbar
         userRole={userRole}
         userName="Sara"
@@ -21,7 +21,7 @@ const ApplicationLayout = () => {
         onLanguageChange={handleLanguageChange}
       />
 
-      <main className="mx-auto max-w-360 px-4 py-6">
+      <main className="mx-auto max-w-360" dir="rtl">
         <Outlet />
       </main>
       <Foooter />

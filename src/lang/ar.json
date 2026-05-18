@@ -95,6 +95,45 @@
       }
     }
   },
+  "resourceProvidor": {
+    "workSites": {
+      "sub-title": "لوحة تحكم العمليات المباشرة",
+      "title": "إدارة جميع مواقع العمل من مركز قيادة موحد.",
+      "description": "تتبع المواقع، وتخصيص الموارد، وحافظ على استمرارية حركة الفرق — مُصمم لعمليات البناء الحديثة.",
+      "activeSites": "المواقع النشطة",
+      "total-sites": "إجمالي المواقع",
+      "traked-resourrces": "الموارد المتتبعة",
+      "new-site": "موقع جديد",
+      "work-sites": "مواقع العمل",
+      "search-placeholder": "البحث في مواقع العمل...",
+      "no-sites": "لم يتم العثور على مواقع عمل.",
+      "add-site-heading": "إضافة موقع عمل",
+      "edit-site-heading": "تعديل موقع العمل",
+      "sub-heading-description": "حدد التفاصيل الأساسية لمشروع البناء هذا.",
+      "label-site-name": "اسم الموقع",
+      "placeholder-site-name": "مثال: برج الأفق",
+      "label-location": "الموقع الجغرافي",
+      "placeholder-location": "المدينة، الولاية/المنطقة",
+      "label-manager": "المدير المسؤول",
+      "placeholder-manager": "الاسم الكامل",
+      "label-status": "الحالة",
+      "label-start-date": "تاريخ البدء",
+      "label-progress": "نسبة الإنجاز (%)",
+      "btn-cancel": "إلغاء",
+      "btn-create": "إنشاء موقع",
+      "btn-save": "حفظ التغييرات",
+      "status-active": "نشط",
+      "status-on-hold": "موقوف مؤقتاً",
+      "status-completed": "مكتمل",
+      "validation-name-req": "اسم الموقع مطلوب",
+      "validation-date-req": "تاريخ البدء مطلوب",
+      "validation-progress-min": "لا يمكن أن تقل نسبة الإنجاز عن 0%",
+      "validation-progress-max": "لا يمكن أن تتجاوز نسبة الإنجاز 100%",
+      "delete-title": "هل أنت متأكد أنك تريد حذف هذا السجل؟ ",
+      "delete-description-prefix": "ملاحظة: سيتم نقل البيانات إلى سلة المهملات.",
+      "btn-delete-confirm": "حذف"
+    }
+  },
   "serviceProvider": {
     "services": {
       "sectionTitle": "خدمات الشركة",

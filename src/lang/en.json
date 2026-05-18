@@ -95,6 +95,45 @@
       }
     }
   },
+  "resourceProvidor": {
+    "workSites": {
+      "sub-title": "Live Operations Dashboard",
+      "title": "Manage every work site from a single command center.",
+      "description": "Track sites, allocate resources and keep crews moving — built for modern construction operations.",
+      "activeSites": "ActiveSites",
+      "total-sites": "Total Sites",
+      "traked-resourrces": "Traked Resourrces",
+      "new-site": "New site",
+      "work-sites": "Work Sites",
+      "search-placeholder": "Search work sites...",
+      "no-sites": "No work sites found.",
+      "add-site-heading": "Add Work Site",
+      "edit-site-heading": "Edit Work Site",
+      "sub-heading-description": "Set the core details for this construction project.",
+      "label-site-name": "Site Name",
+      "placeholder-site-name": "e.g. Horizon Tower",
+      "label-location": "Location",
+      "placeholder-location": "City, State",
+      "label-manager": "Manager",
+      "placeholder-manager": "Full name",
+      "label-status": "Status",
+      "label-start-date": "Start Date",
+      "label-progress": "Progress (%)",
+      "btn-cancel": "Cancel",
+      "btn-create": "Create Site",
+      "btn-save": "Save Changes",
+      "status-active": "Active",
+      "status-on-hold": "On Hold",
+      "status-completed": "Completed",
+      "validation-name-req": "Site name is required",
+      "validation-date-req": "Start date is required",
+      "validation-progress-min": "Progress cannot be less than 0%",
+      "validation-progress-max": "Progress cannot exceed 100%",
+      "delete-title": "Delete this work site?",
+      "delete-description-prefix": "This will permanently remove ",
+      "btn-delete-confirm": "Delete"
+    }
+  },
   "serviceProvider": {
     "services": {
       "sectionTitle": "Company services",

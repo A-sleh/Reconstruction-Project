@@ -73,7 +73,7 @@ const Input: React.FC<InputProps> = ({
               onChange={(e) => setValue?.(e.target.value)}
               placeholder={placeholder}
               disabled={disabled}
-              className=" bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+              className=" bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground w-full"
               {...props}
             />
             {selectIcon(iconType)}
