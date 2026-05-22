@@ -9,12 +9,20 @@
       "rememberMe": "Remember me",
       "loginButton": "Login Account",
       "noAccount": "Don't Have an Account?",
-      "register": "Register"
+      "register": "Register",
+      "toast": {
+        "success": "Logged in successfully",
+        "error": "Login failed"
+      }
     },
 
     "register": {
       "title": "Create Account",
       "description": "Create a new account to enjoy our services",
+      "toast": {
+        "success": "Registered successfully",
+        "error": "Registration failed"
+      },
       "nextButton": "Next",
       "submitButton": "Submit",
       "backButton": "Back",
@@ -92,6 +100,23 @@
         "validation": {
           "commercial_registration_required": "Commercial registration is required",
           "image_record": "Investment document image is required"
+        }
+      }
+      ,
+      "options": {
+        "title": "Choose registration type",
+        "subtitle": "Select the account type that best describes you to get started.",
+        "engineer": {
+          "title": "Engineer",
+          "subtitle": "Register as an engineer to offer professional services"
+        },
+        "investor": {
+          "title": "Investor",
+          "subtitle": "Register as an investor to find projects and opportunities"
+        },
+        "provider": {
+          "title": "Service Provider",
+          "subtitle": "Register your company to offer services and resources"
         }
       }
     }

@@ -28,6 +28,8 @@ interface IMultiStepFormProps<T> {
    * Receives the collected form data from React Hook Form.
    */
   finalSubmitHandler: (data: T) => void;
+
+  disabled: boolean;
 }
 
 /**
@@ -39,13 +41,9 @@ interface IMultiStepFormProps<T> {
 export const MultiStepForm: FC<IMultiStepFormProps<unknown>> = ({
   schemas,
   subForms,
-  
-  stepsLabel,
   finalSubmitHandler,
+  disabled
 }) => {
-  const {
-    i18n: { language },
-  } = useTranslation();
   const [step, setStep] = useState(0);
 
   const methods = useForm({
@@ -87,41 +85,26 @@ export const MultiStepForm: FC<IMultiStepFormProps<unknown>> = ({
 
   return (
     <div className="flex w-full md:min-w-150 flex-col justify-center px-4 md:px-8 ">
-      <div className="relative hidden md:grid gap-6 mb-6 w-[60%] mx-auto">
+      {/* <div className="absolute bottom-8 right-2 hidden md:grid gap-6 m-2 w-[40%] mx-auto">
         <div className="flex justify-between items-center gap-3 z-10">
           {stepsLabel.map((label, index) => {
             const isActive = index === step;
             const isCompleted = index < step;
 
             return (
-              <div key={index} className=" text-center">
-                <div
-                  className={`mx-auto mb-2 grid h-10 w-10 place-items-center rounded-full border-2 ${
-                    isActive
-                      ? "border-slate-900 bg-slate-900 text-white"
-                      : isCompleted
-                        ? "border-emerald-500 bg-emerald-500 text-white"
-                        : "border-slate-300 bg-slate-100 text-slate-500"
-                  }`}
-                >
-                  {index + 1}
-                </div>
-                <p className="text-[13px] w-10 text-center">{label}</p>
-              </div>
+              <div
+                className={`mx-auto h-2 w-full rounded-xl border  ${
+                  isActive
+                    ? "border-slate-900 bg-slate-900  text-white"
+                    : isCompleted
+                      ? "border-emerald-500 bg-emerald-500 text-white"
+                      : "bg-slate-100 border-black text-slate-500"
+                }`}
+              ></div>
             );
           })}
         </div>
-        <div className="absolute w-full top-[25%] -translate-y-[50%]">
-          <div className="relative h-1 overflow-hidden rounded-full bg-slate-200">
-            <div
-              className={`absolute inset-y-0 rounded-full bg-slate-900 transition-all duration-300 ease-out ${language == "ar" ? "right-0" : "left-0"} `}
-              style={{
-                width: `${(step / Math.max(schemas.length - 1, 1)) * 100}%`,
-              }}
-            />
-          </div>
-        </div>
-      </div>
+      </div> */}
 
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -134,7 +117,7 @@ export const MultiStepForm: FC<IMultiStepFormProps<unknown>> = ({
               </Button>
             )}
 
-            <Button type="submit" variant="solid">
+            <Button type="submit" variant="solid" disabled={disabled}>
               {isLastStep ? "إرسال البيانات" : "التالي"}
             </Button>
           </div>

@@ -16,16 +16,16 @@ export default function DisplayInputErrors({
         errors={errors}
         name={fieldName}
         render={({ messages }) => {
-          return (
-            messages &&
-            Object.entries(messages).map(([type, message]) => {
-              return (
-                <p className="text-red-500 mt-2 text-[12px] text-nowrap" key={type}>
-                  {message}
-                </p>
-              );
-            })
-          );
+          if (messages) {
+            return Object.entries(messages).map(([type, message]) => (
+              <p
+                className="text-red-500 mt-2 text-[10px] text-nowrap"
+                key={type}
+              >
+                {message}
+              </p>
+            ));
+          }
         }}
       />
     );

@@ -1,5 +1,5 @@
-import React, { useId, type InputHTMLAttributes } from "react";
-import { type FieldErrors } from "react-hook-form";
+import React, { useEffect, useId, useState, type InputHTMLAttributes } from "react";
+import { EmptyObject, type FieldErrors } from "react-hook-form";
 import DisplayInputErrors from "../shared/Display-input-errors";
 
 import { FaRegCircleUser } from "react-icons/fa6";
@@ -13,7 +13,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   required?: boolean;
   disabled?: boolean;
   loadInitialValue?: boolean;
-  errors?: FieldErrors | null;
+  errors?: FieldErrors | EmptyObject;
   className?: string;
   iconType?: "password" | "email" | "user" | "nationalNumber";
   setValue?: (value: string) => void;
@@ -50,6 +50,12 @@ const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   const inputId = useId();
+  const [invalid, setInvalid] = useState(false); // level up the validation from error message resolve which came from react hook form lib
+
+  useEffect(() => {
+    const hasError = Boolean(errors && fieldName && (errors as any)[fieldName]);
+    setInvalid(hasError);
+  }, [errors, fieldName]);
 
   return (
     <div className={`w-full ${className}`}>
@@ -57,7 +63,7 @@ const Input: React.FC<InputProps> = ({
         {label && (
           <label
             htmlFor={inputId}
-            className={`text-[13px] md:text-sm ${disabled ? "cursor-not-allowed opacity-70" : ""}`}
+            className={`text-[13px] md:text-sm ${disabled ? "cursor-not-allowed opacity-70" : ""} ${invalid &&"text-red-400"}`}
           >
             {required && <span className="text-red-600">*</span>} {label}
           </label>
@@ -65,7 +71,7 @@ const Input: React.FC<InputProps> = ({
         {loadInitialValue ? (
           <div className="h-8 bg-gray-200 animate-pulse rounded-sm" />
         ) : (
-          <div className="flex items-center gap-3 rounded-lg border border-border px-2  md:px-4 py-1 md:py-3  has-focus-within:border-primary transition-all">
+          <div className={`flex items-center gap-3 rounded-lg border border-border px-2  md:px-4 py-2 md:py-3  has-focus-within:border-primary transition-all ${invalid&&"border-red-400"}`}>
             <input
               id={inputId}
               type={type}
@@ -73,14 +79,14 @@ const Input: React.FC<InputProps> = ({
               onChange={(e) => setValue?.(e.target.value)}
               placeholder={placeholder}
               disabled={disabled}
-              className=" bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground w-full"
+              className={`bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground w-full`}
               {...props}
             />
             {selectIcon(iconType)}
           </div>
         )}
       </div>
-      <DisplayInputErrors errors={errors} fieldName={fieldName} />
+      <DisplayInputErrors errors={errors} fieldName={fieldName}  />
     </div>
   );
 };

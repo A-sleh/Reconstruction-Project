@@ -9,11 +9,19 @@
       "rememberMe": "تذكرني",
       "loginButton": "تسجيل الدخول",
       "noAccount": "ليس لديك حساب؟",
-      "register": "إنشاء حساب"
+      "register": "إنشاء حساب",
+      "toast": {
+        "success": "تم تسجيل الدخول بنجاح",
+        "error": "فشل تسجيل الدخول"
+      }
     },
     "register": {
       "title": "إنشاء حساب",
       "description": "أنشئ حساباً جديداً للاستمتاع بخدماتنا",
+      "toast": {
+        "success": "تم التسجيل بنجاح",
+        "error": "فشل التسجيل"
+      },
       "nextButton": "التالي",
       "submitButton": "إرسال",
       "backButton": "عودة",
@@ -92,6 +100,23 @@
         "validation": {
           "commercial_registration_required": "السجل التجاري مطلوب",
           "image_record": "الصورة المطلوبة لسجل الاستثمار مطلوبة"
+        }
+      }
+      ,
+      "options": {
+        "title": "اختر نوع التسجيل",
+        "subtitle": "حدد نوع الحساب الذي يصفك للبدء.",
+        "engineer": {
+          "title": "مهندس",
+          "subtitle": "سجل كمهندس لعرض خدماتك المهنية"
+        },
+        "investor": {
+          "title": "مستثمر",
+          "subtitle": "سجل كمستثمر للعثور على مشاريع وفرص"
+        },
+        "provider": {
+          "title": "مزود خدمة",
+          "subtitle": "سجل شركتك لتقديم الخدمات والموارد"
         }
       }
     }

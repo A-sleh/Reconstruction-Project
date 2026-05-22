@@ -1,6 +1,7 @@
 export const paths = {
   auth: {
     register: {
+      path: "/auth/register",
       asProvider: {
         path: "/auth/register/provider",
         getHref: (redirectTo?: string | null | undefined) =>
@@ -46,10 +47,6 @@ export const paths = {
         path: "/app/resource-providor/profile",
         getHref: () => `/app/resource-providor/profile`,
       },
-      siteResources: {
-        path: "/app/resource-providor/site-resources",
-        getHref: () => `/app/resource-providor/site-resources`,
-      },
       orders: {
         path: "/app/resource-providor/orders",
         getHref: () => `/app/resource-providor/orders`,
@@ -64,7 +61,7 @@ export const paths = {
       },
       workSite: {
         path: "/app/resource-providor/work-sites/:id",
-        getHref: (workSiteId: number) => `/app/resource-providor/work-sites/${workSiteId}`,
+        getHref: (workSiteId: number| string) => `/app/resource-providor/work-sites/${workSiteId}`,
       },
     },
     serviceProvidor: {},

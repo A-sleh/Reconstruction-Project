@@ -6,10 +6,11 @@ import Loader from "@/components/shared/Loader";
 import ApplicationLayout from "@/components/layouts/Main-layout";
 
 // Auth pages
-const Login = lazy(() => import("@/features/Auth/Login.view"));
-const ProvidorRegisteration = lazy(() => import("@/features/Auth/ProvidorRegisteration.view"));
-const EngineerRegisteration = lazy(() => import("@/features/Auth/EngineerRegisteration.view"));
-const InvestorRegisteration = lazy(() => import("@/features/Auth/InvestorRegisteration.view"));
+const Login = lazy(() => import("@/pages/authentication/Login.view"));
+const ProvidorRegisteration = lazy(() => import("@/pages/authentication/ProvidorRegisteration.view"));
+const EngineerRegisteration = lazy(() => import("@/pages/authentication/EngineerRegisteration.view"));
+const InvestorRegisteration = lazy(() => import("@/pages/authentication/InvestorRegisteration.view"));
+const RegisterOptions = lazy(() => import("@/pages/authentication/RegisterOptions.view"));
 
 // Shared pages 
 const HomePage = lazy(() => import("@/features/home/Home.view"));
@@ -20,7 +21,7 @@ const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"
 // Resource Provider importing pages
 const ResourceProvidorWorkSites = lazy(() => import("@/pages/resource-providor/WorkSites.view"));
 const ResourceProvidorSiteResources = lazy(() => import("@/pages/resource-providor/SiteResources.view"));
-const ResourceProvidorSite = lazy(() => import("@/pages/resource-providor/ResourceProvidorSite.view"));
+const ResourceProvidorSite = lazy(() => import("@/pages/resource-providor/SiteResources.view"));
 const ResourceProvidorOrders = lazy(() => import("@/pages/resource-providor/ResourceProvidorOrders.view"));
 const ResourceProvidorOrderDetails = lazy(() => import("@/pages/resource-providor/ResourceProvidorOrderDetails.view"));
 
@@ -48,6 +49,14 @@ const router: RouteObject[] = [
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <Login />
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.auth.register.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <RegisterOptions />
           </Suspense>
         ),
       },
@@ -100,7 +109,7 @@ const router: RouteObject[] = [
         ),
       },
       {
-        path: paths.app.resourceProvidor.siteResources.path,
+        path: paths.app.resourceProvidor.workSite.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <ResourceProvidorSiteResources />

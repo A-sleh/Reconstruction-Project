@@ -1,33 +1,24 @@
 import { AuthLayout } from "@/components/layouts/Auth-layout";
 import { MultiStepForm } from "@/components/common/MultiStepForm";
-import {
-  CreateBaseRegistrationSchema,
-  CreateResourceProviderSchema,
-} from "./api/create-account";
-import ServiceProviderForm from "./components/Service-provider-form";
-import BaseRegisterInputs from "./components/Base-register-inputs";
+import ServiceProviderForm from "@/features/Auth/components/Service-provider-form";
+import BaseRegisterInputs from "@/features/Auth/components/Base-register-inputs";
 import { useTranslation } from "react-i18next";
-import { useMemo } from "react";
+import {
+  BaseRegistrationSchema,
+  ResourceProviderSchema,
+  useProviderRegister,
+} from "@/features/Auth/api/create-account";
 import { paths } from "@/config/paths";
 import { Link } from "react-router";
 
 const ProviderRegisteration = () => {
-  const { t, i18n } = useTranslation();
-  const handlSubmitForm = () => {
-    // Call the api here
+  const { t } = useTranslation();
+  const { mutate: registerProvider, isPending } = useProviderRegister();
+
+  const handlSubmitForm = (data: any) => {
+    alert("here");
+    registerProvider(data as any);
   };
-
-  // Re-create schema when language changes
-  const baseRegistrationSchema = useMemo(
-    () => CreateBaseRegistrationSchema(t),
-    [t, i18n.language], // Re-run when language changes
-  );
-
-  // Re-create schema when language changes
-  const serviceProviderSchema = useMemo(
-    () => CreateResourceProviderSchema(t),
-    [t, i18n.language], // Re-run when language changes
-  );
 
   return (
     <AuthLayout
@@ -35,13 +26,14 @@ const ProviderRegisteration = () => {
       subTitle={t("auth.register.description")}
     >
       <MultiStepForm
-        schemas={[baseRegistrationSchema, serviceProviderSchema]}
+        schemas={[BaseRegistrationSchema, ResourceProviderSchema]}
         subForms={[<BaseRegisterInputs />, <ServiceProviderForm />]}
         finalSubmitHandler={handlSubmitForm}
         stepsLabel={[
           t("auth.register.providor.personalInformationLabel"),
           t("auth.register.providor.companyInformationLabel"),
         ]}
+        disabled={isPending}
       />
       <p className="mt-8 mx-auto text-sm text-muted-foreground text-center">
         {t("auth.register.haveAccount")}
