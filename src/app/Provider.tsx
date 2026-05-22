@@ -20,7 +20,7 @@ export default function AppProvider() {
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-      <Toaster />
+      <Toaster position="top-right" />
     </QueryClientProvider>
   );
 }

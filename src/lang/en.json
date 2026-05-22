@@ -6,6 +6,7 @@
       "emailPlaceholder": "Your email",
       "passwordPlaceholder": "Email password",
       "forgotPassword": "Forgot your password?",
+      "rememberMe": "Remember me",
       "loginButton": "Login Account",
       "noAccount": "Don't Have an Account?",
       "register": "Register"

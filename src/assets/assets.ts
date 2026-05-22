@@ -1,11 +1,7 @@
 import syrianIcon from "./icons/Syrian_logo_icon_gold.png";
 
 // Auth layout
-import auth_image_1 from "./images/auth/auth-investor.webp";
-import auth_image_2 from "./images/auth/auth-modern-building.webp";
-import auth_image_3 from "./images/auth/auth-resource-provider.webp";
-import auth_image_4 from "./images/auth/auth-service-provider.webp";
-import auth_image_5 from "./images/auth/sustainable-architecture-in-Syria-1170x669.webp";
+import auth_image_6 from "./images/auth/auth-modern-bulding.jpg";
 
 // Landing page
 import landingPageImage_reporting from "./images/landing_page/reporting.webp";
@@ -26,11 +22,7 @@ import homePage_hero_service from "./images/home/80-M-Final-Exterior_2000x1125px
 export const assets = {
   logo: syrianIcon,
   // auth
-  authImage1: auth_image_1,
-  authImage2: auth_image_2,
-  authImage3: auth_image_3,
-  authImage4: auth_image_4,
-  authImage5: auth_image_5,
+  authImage6: auth_image_6,
   // landing page
   landingPageImage_reporting,
   landingPageImage_projectManagment,
