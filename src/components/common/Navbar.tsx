@@ -27,7 +27,7 @@ const roleLinks: Record<
   resourceProvidor: [
     {
       label: "site resource",
-      href: paths.app.resourceProvidor.siteResources.path,
+      href: paths.app.resourceProvidor.workSite.path,
       icon: <CgProfile size={18} />,
     },
     {

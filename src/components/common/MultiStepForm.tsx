@@ -42,8 +42,10 @@ export const MultiStepForm: FC<IMultiStepFormProps<unknown>> = ({
   schemas,
   subForms,
   finalSubmitHandler,
-  disabled
+  disabled,
 }) => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language;
   const [step, setStep] = useState(0);
 
   const methods = useForm({
@@ -113,13 +115,18 @@ export const MultiStepForm: FC<IMultiStepFormProps<unknown>> = ({
           <div className="mt-6 flex items-center justify-between gap-4">
             {step > 0 && (
               <Button variant="outline" onClick={handleBack}>
-                السابق
+                {lang == "en" ? "Last step" : "السابق"}
               </Button>
             )}
-
-            <Button type="submit" variant="solid" disabled={disabled}>
-              {isLastStep ? "إرسال البيانات" : "التالي"}
-            </Button>
+            {lang == "en" ? (
+              <Button type="submit" variant="solid" disabled={disabled}>
+                {isLastStep ? "Send the data" : "Next"}
+              </Button>
+            ) : (
+              <Button type="submit" variant="solid" disabled={disabled}>
+                {isLastStep ? "إرسال البيانات" : "التالي"}
+              </Button>
+            )}
           </div>
         </form>
       </FormProvider>

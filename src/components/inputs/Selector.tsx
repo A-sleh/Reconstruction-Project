@@ -18,7 +18,7 @@ const Selector: React.FC<SelectorProps> = ({
   children,
 }) => {
   return (
-    <div className="flex flex-col gap-1 text-right w-full">
+    <div className="flex flex-col gap-1  w-full">
       {label && (
         <label htmlFor="input" className="text-sm">
           {required && <span className="text-red-600">*</span>} {label}
@@ -26,7 +26,6 @@ const Selector: React.FC<SelectorProps> = ({
       )}
 
       <select
-        dir="rtl"
         value={value}
         disabled={disabled}
         required={required}

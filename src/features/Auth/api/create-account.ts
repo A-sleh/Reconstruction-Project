@@ -9,17 +9,17 @@ import { errorToast, successToast } from "@/components/common/Toast";
 export const BaseRegistrationSchema = z.object({
   firstName: z
     .string()
-    .min(2, i18n.t("auth.register.validation.name_required")),
+    .min(2, i18n.t("auth.register.generalInformation.validation.name_required")),
   lastName: z
     .string()
-    .min(2, i18n.t("auth.register.validation.last_name_required")),
+    .min(2, i18n.t("auth.register.generalInformation.validation.last_name_required")),
   email: z.string().email(i18n.t("auth.register.validation.invalid_email")),
   password: z
     .string()
-    .min(6, i18n.t("auth.register.validation.password_too_short", { min: 6 })),
+    .min(6, i18n.t("auth.register.generalInformation.validation.password_too_short", { min: 6 })),
   NationalNumber: z
     .string()
-    .min(10, i18n.t("auth.register.validation.national_number_required")),
+    .min(10, i18n.t("auth.register.generalInformation.validation.national_number_required")),
 });
 export type BaseRegistrationValues = z.infer<typeof BaseRegistrationSchema>;
 export const intialBasicRegisterationValues: BaseRegistrationValues = {

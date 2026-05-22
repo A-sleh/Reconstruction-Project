@@ -59,7 +59,7 @@ export function SiteCard({ site, index, onEdit, onDelete }: Props) {
       </div>
 
       <Link
-        to={paths.app.resourceProvidor.workSite.getHref(Number(site.id))}
+        to={paths.app.resourceProvidor.workSite.getHref(site.id)}
         className="block h-full rounded-2xl border border-gray-300 bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
       >
         <div className="flex items-start justify-between gap-4">
