@@ -19,6 +19,11 @@ import homePage_hero_engineer from "./images/home/oil-and-gas-promo-1920x880_120
 import homePage_hero_resource from "./images/home/Gem-Headline-Photo-1200-x-675-px.png";
 import homePage_hero_service from "./images/home/80-M-Final-Exterior_2000x1125px.webp";
 
+
+// Icons 
+import SY_Icon from "./icons/SY.png";
+import USA_Icon from "./icons/USA.png";
+
 export const assets = {
   logo: syrianIcon,
   // auth
@@ -37,4 +42,7 @@ export const assets = {
   homePage_hero_engineer,
   homePage_hero_resource,
   homePage_hero_service,
+  // Icons
+  SYIcon: SY_Icon,
+  USAIcon: USA_Icon,
 };
