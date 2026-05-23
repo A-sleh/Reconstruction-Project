@@ -19,11 +19,13 @@ const HomePage = lazy(() => import("@/features/home/Home.view"));
 const LandingPage = lazy(() => import("@/features/landing-page/LandingPage.view"));
 
 // Resource Provider importing pages
-const ResourceProvidorWorkSites = lazy(() => import("@/pages/resource-providor/WorkSites.view"));
-const ResourceProvidorSiteResources = lazy(() => import("@/pages/resource-providor/SiteResources.view"));
-const ResourceProvidorSite = lazy(() => import("@/pages/resource-providor/SiteResources.view"));
-const ResourceProvidorOrders = lazy(() => import("@/pages/resource-providor/ResourceProvidorOrders.view"));
-const ResourceProvidorOrderDetails = lazy(() => import("@/pages/resource-providor/ResourceProvidorOrderDetails.view"));
+const ResourceProvidor_WorkSites = lazy(() => import("@/pages/resource-providor/WorkSites.view"));
+const ResourceProvidor_Site = lazy(() => import("@/pages/resource-providor/WorkSiteDetails"));
+const ResourceProvidor_Orders = lazy(() => import("@/pages/resource-providor/Orders.view"));
+const ResourceProvidor_OrderDetails = lazy(() => import("@/pages/resource-providor/OrderDetails.view"));
+const ResourceProvidor_Profile = lazy(() => import("@/pages/resource-providor/Profile.view"));
+const ResourceProvidor_Statistics = lazy(() => import("@/pages/resource-providor/Statistics.view"));
+
 
 // Service Porvider importing pages
 // Investor importing pages
@@ -104,7 +106,7 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.workSites.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <ResourceProvidorWorkSites />
+            <ResourceProvidor_WorkSites />
           </Suspense>
         ),
       },
@@ -112,16 +114,25 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.workSite.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <ResourceProvidorSiteResources />
+            <ResourceProvidor_Site />
           </Suspense>
         ),
         
       },
       {
-        path: paths.app.resourceProvidor.workSite.path,
+        path: paths.app.resourceProvidor.profile.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <ResourceProvidorSite />
+            <ResourceProvidor_Profile />
+          </Suspense>
+        ),
+        
+      },
+      {
+        path: paths.app.resourceProvidor.statistics.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ResourceProvidor_Statistics />
           </Suspense>
         ),
         
@@ -130,7 +141,7 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.orders.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <ResourceProvidorOrders />
+            <ResourceProvidor_Orders />
           </Suspense>
         ),
         
@@ -139,7 +150,7 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.orderDetails.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <ResourceProvidorOrderDetails />
+            <ResourceProvidor_OrderDetails />
           </Suspense>
         ),
         

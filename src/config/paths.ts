@@ -47,6 +47,10 @@ export const paths = {
         path: "/app/resource-providor/profile",
         getHref: () => `/app/resource-providor/profile`,
       },
+      statistics: {
+        path: "/app/resource-providor/statistics",
+        getHref: () => `/app/resource-providor/statistics`,
+      },
       orders: {
         path: "/app/resource-providor/orders",
         getHref: () => `/app/resource-providor/orders`,

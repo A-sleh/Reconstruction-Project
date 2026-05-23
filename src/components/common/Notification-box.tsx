@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IoIosNotificationsOutline } from "react-icons/io";
 
@@ -6,9 +6,19 @@ const NotificationBox = () => {
   const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [notifications, setNotifications] = useState<{ message: string }[]>([]);
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node))
+        setIsOpen(false);
+    };
+    window.addEventListener("click", onClick);
+    return () => window.removeEventListener("click", onClick);
+  }, []);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={ref}>
       <button
         onClick={() => setIsOpen((last) => !last)}
         className="hover:rotate-45 transition cursor-pointer"
@@ -19,7 +29,7 @@ const NotificationBox = () => {
       {isOpen && (
         <div
           className={`absolute mt-2 w-80 bg-white border border-slate-200 shadow-lg rounded-lg ${
-            i18n.language == "ar" ? "right-0 left-auto" : "left-0 right-auto"
+            i18n.language === "en" ? "right-0 left-auto" : "left-0 right-auto"
           }`}
         >
           {notifications.length == 0 ? (

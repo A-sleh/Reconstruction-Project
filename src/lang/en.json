@@ -423,7 +423,15 @@
       "support": "Our support team is available 24/7 to help you at every step"
     }
   },
-  "profile": {
+    "navbar": {
+      "home": "Home",
+      "siteResource": "Site Resource",
+      "workSites": "Work Sites",
+      "profile": "Profile",
+      "statistics": "Statistics",
+      "orders": "Orders"
+    },
+    "profile": {
     "sectionTitle": "Profile",
     "title": "Account Information",
     "description": "Review your profile details and update them below. Other users will see a read-only version.",
