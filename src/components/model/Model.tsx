@@ -46,7 +46,7 @@ function Window({
 
   return createPortal(
     <div className="flex justify-center items-center fixed inset-0 bg-[rgba(0,0,0,.4)] z-100">
-      <div className={`w-[90vw]  p-4 rounded-sm bg-white ${model_width}`}>
+      <div className={`w-[90vw]  p-4 rounded-lg bg-white ${model_width}`}>
         {children}
       </div>
     </div>,

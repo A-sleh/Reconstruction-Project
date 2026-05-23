@@ -101,8 +101,7 @@
           "commercial_registration_required": "السجل التجاري مطلوب",
           "image_record": "الصورة المطلوبة لسجل الاستثمار مطلوبة"
         }
-      }
-      ,
+      },
       "options": {
         "title": "اختر نوع التسجيل",
         "subtitle": "حدد نوع الحساب الذي يصفك للبدء.",
@@ -142,16 +141,29 @@
       "placeholder-location": "المدينة، الولاية/المنطقة",
       "label-manager": "المدير المسؤول",
       "placeholder-manager": "الاسم الكامل",
+      "label-address": "العنوان",
+      "placeholder-address": "الشارع، المبنى، المدينة",
       "label-status": "الحالة",
       "label-start-date": "تاريخ البدء",
       "label-progress": "نسبة الإنجاز (%)",
       "btn-cancel": "إلغاء",
       "btn-create": "إنشاء موقع",
+      "site-created": "تم إنشاء موقع العمل بنجاح.",
+      "create-error": "فشل في إنشاء موقع العمل.",
+      "site-updated": "تم تحديث موقع العمل بنجاح.",
+      "update-error": "فشل في تحديث موقع العمل.",
+      "site-deleted": "تم حذف موقع العمل.",
+      "delete-error": "فشل في حذف موقع العمل.",
       "btn-save": "حفظ التغييرات",
       "status-active": "نشط",
       "status-on-hold": "موقوف مؤقتاً",
       "status-completed": "مكتمل",
       "validation-name-req": "اسم الموقع مطلوب",
+      "validation-status-req": "الحالة مطلوبة",
+      "validation-status-invalid": "حالة غير صالحة",
+      "validation-location-req": "الموقع مطلوب",
+      "validation-address-req": "العنوان مطلوب",
+      "validation-manager-req": "اسم المدير مطلوب",
       "validation-date-req": "تاريخ البدء مطلوب",
       "validation-progress-min": "لا يمكن أن تقل نسبة الإنجاز عن 0%",
       "validation-progress-max": "لا يمكن أن تتجاوز نسبة الإنجاز 100%",
@@ -420,15 +432,15 @@
       "support": "فريق الدعم متاح 24/7 لمساعدتك في كل خطوة"
     }
   },
-    "navbar": {
-      "home": "الرئيسية",
+  "navbar": {
+    "home": "الرئيسية",
     "siteResource": "موارد الموقع",
     "workSites": "مواقع العمل",
     "profile": "الملف الشخصي",
     "statistics": "الإحصائيات",
     "orders": "الطلبات"
-    },
-    "profile": {
+  },
+  "profile": {
     "sectionTitle": "الملف الشخصي",
     "title": "معلومات الحساب",
     "description": "راجع تفاصيل ملفك الشخصي وقم بتحديثها أدناه. سيشاهد المستخدمون الآخرون نسخة للعرض فقط.",

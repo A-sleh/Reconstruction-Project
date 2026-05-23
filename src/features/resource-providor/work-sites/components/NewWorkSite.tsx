@@ -1,26 +1,31 @@
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Input from "@/components/inputs/Input";
 import Select from "@/components/inputs/Selector";
-import { SiteStatus, WorkSite } from "@/data/resource-providor/mockData";
 import Model from "@/components/model/Model";
 import { useTranslation } from "react-i18next";
 import { PickCoordsFromMap } from "@/components/model/PickCoordsFromMap.model";
-import { siteFormSchema, SiteFormValues } from "../api/create";
+import {
+  initialSiteValues,
+  siteFormSchema,
+  SiteFormValues,
+  useCreateWorkSite,
+  useUpdateWorkSite,
+} from "../api/actions";
+import { statuses, WorkSite, type SiteStatus } from "../api";
 
 interface Props {
   initial?: WorkSite | null;
   openButton?: React.ReactNode | null;
 }
 
-const statuses: SiteStatus[] = ["active", "on-hold", "completed"];
-
 export function NewWorkSite({ initial, openButton }: Props) {
   const { t } = useTranslation();
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
   // Initialize react-hook-form
   const {
@@ -32,14 +37,9 @@ export function NewWorkSite({ initial, openButton }: Props) {
     formState: { errors },
   } = useForm<SiteFormValues>({
     resolver: zodResolver(siteFormSchema),
-    defaultValues: {
-      name: "",
-      companyLocation: "",
-      manager: "",
-      status: "active",
-      startDate: new Date().toISOString().slice(0, 10),
-      progress: 0,
-    },
+    defaultValues: initialSiteValues,
+    criteriaMode: "all",
+    mode: "onSubmit",
   });
 
   // Watch the status value to keep the Radix Select component in sync
@@ -50,16 +50,39 @@ export function NewWorkSite({ initial, openButton }: Props) {
   useEffect(() => {
     reset({
       name: initial?.name ?? "",
-      companyLocation: initial?.location ?? "",
+      companyLocation: initial?.companyLocation ?? "",
       manager: initial?.manager ?? "",
+      address: initial?.address ?? "",
       status: initial?.status ?? "active",
-      startDate: initial?.startDate ?? new Date().toISOString().slice(0, 10),
-      progress: initial?.progress ?? 0,
     });
   }, [initial, reset]);
 
+  const { mutate: createWorkSite, isPending: isCreated } = useCreateWorkSite();
+  const { mutate: updateWorkSite, isPending: isUpdated } = useUpdateWorkSite();
+
   const onSubmit = (data: SiteFormValues) => {
-    console.log("Form submitted with data:", data);
+    if (initial) {
+      updateWorkSite(
+        { ...data, id: initial.id },
+        {
+          onSuccess: () => {
+            reset();
+            if (closeBtnRef.current) {
+              closeBtnRef.current.click();
+            }
+          },
+        },
+      );
+    } else {
+      createWorkSite(data, {
+        onSuccess: () => {
+          reset();
+          if (closeBtnRef.current) {
+            closeBtnRef.current.click();
+          }
+        },
+      });
+    }
   };
 
   return (
@@ -103,6 +126,7 @@ export function NewWorkSite({ initial, openButton }: Props) {
                 <button
                   type="button"
                   className="rounded-full p-2 text-muted-foreground transition-smooth hover:bg-muted hover:text-foreground"
+                  ref={closeBtnRef}
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -111,7 +135,7 @@ export function NewWorkSite({ initial, openButton }: Props) {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 p-6">
               {/* Site Name Field */}
-              <div className="space-y-2">
+              <div className="flex flex-col gap-3 md:flex-row">
                 <Input
                   label={t("resourceProvidor.workSites.label-site-name")}
                   id="site-name"
@@ -121,6 +145,16 @@ export function NewWorkSite({ initial, openButton }: Props) {
                   fieldName="name"
                   errors={errors}
                   {...register("name")}
+                />
+                <Input
+                  label={t("resourceProvidor.workSites.label-address")}
+                  id="address"
+                  placeholder={t(
+                    "resourceProvidor.workSites.placeholder-address",
+                  )}
+                  fieldName="address"
+                  errors={errors}
+                  {...register("address")}
                 />
               </div>
 
@@ -149,7 +183,7 @@ export function NewWorkSite({ initial, openButton }: Props) {
                   />
                 </span>
               </div>
-              <div className="space-y-2">
+              <div className="flex flex-col gap-3 md:flex-row">
                 <Input
                   label={t("resourceProvidor.workSites.label-manager")}
                   id="site-manager"
@@ -160,11 +194,7 @@ export function NewWorkSite({ initial, openButton }: Props) {
                   errors={errors}
                   {...register("manager")}
                 />
-              </div>
-
-              {/* Status, Start Date & Progress Fields */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2 relative z-100">
+                <div className="space-y-2 relative z-100 flex-1">
                   <Select
                     setValue={(v) =>
                       setValue("status", v as SiteStatus, {
@@ -186,17 +216,6 @@ export function NewWorkSite({ initial, openButton }: Props) {
                     </p>
                   )}
                 </div>
-
-                <div className="space-y-2">
-                  <Input
-                    label={t("resourceProvidor.workSites.label-start-date")}
-                    id="site-date"
-                    type="date"
-                    fieldName="startDate"
-                    errors={errors}
-                    {...register("startDate")}
-                  />
-                </div>
               </div>
 
               {/* Action Buttons */}
@@ -210,10 +229,12 @@ export function NewWorkSite({ initial, openButton }: Props) {
                     {t("resourceProvidor.workSites.btn-cancel")}
                   </Button>
                 </Model.Close>
-                <Button type="submit">
-                  {initial
-                    ? t("resourceProvidor.workSites.btn-save")
-                    : t("resourceProvidor.workSites.btn-create")}
+                <Button type="submit" disabled={isCreated || isUpdated}>
+                  {isCreated || isUpdated
+                    ? t("common.loading", "Saving...")
+                    : initial
+                      ? t("resourceProvidor.workSites.btn-save")
+                      : t("resourceProvidor.workSites.btn-create")}
                 </Button>
               </div>
             </form>

@@ -30,7 +30,7 @@ const Selector: React.FC<SelectorProps> = ({
         disabled={disabled}
         required={required}
         onChange={(e) => setValue(e.target.value)}
-        className="flex items-center gap-3 rounded-lg border border-border bg-card px-2  md:px-2 py-1 md:py-3  has-focus-within:border-primary transition-all"
+        className="flex items-center gap-3 rounded-lg border border-border bg-card px-2  md:px-2 py-1 md:py-1.5  has-focus-within:border-primary transition-all"
       >
         {children}
       </select>

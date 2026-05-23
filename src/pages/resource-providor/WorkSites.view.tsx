@@ -3,8 +3,8 @@ import WorkSitesSection from "@/features/resource-providor/work-sites/components
 
 const WorkSites = () => {
   return (
-    <div className="min-h-screen">
-      <section className="border-b border-gray-300 bg-linear-to-br from-background via-background to-muted/40">
+    <div className="min-h-screen w-full">
+      <section className="rounded-lg bg-white ">
         <WorkSiteHeader />
       </section>
       <WorkSitesSection />

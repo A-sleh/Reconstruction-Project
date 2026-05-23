@@ -1,21 +1,29 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin, Pencil, Trash2, User } from "lucide-react";
 import { Link } from "react-router-dom";
-import { WorkSite } from "@/data/resource-providor/mockData";
 import { StatusBadge } from "../../shared/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { paths } from "@/config/paths";
 import { NewWorkSite } from "./NewWorkSite";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
+import { useTranslation } from "react-i18next";
+import { WorkSite } from "../api";
+import { useDeleteWorkSite } from "../api/actions";
 
 interface Props {
   site: WorkSite;
   index: number;
-  onEdit: (site: WorkSite) => void;
-  onDelete: (site: WorkSite) => void;
 }
 
-export function SiteCard({ site, index, onEdit, onDelete }: Props) {
+export function SiteCard({ site, index }: Props) {
+  const { i18n } = useTranslation();
+  const langIsArabic = i18n.language === "ar";
+  const deleteMutation = useDeleteWorkSite();
+
+  const onDelete = (s: WorkSite) => {
+    deleteMutation.mutate(s.id);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -23,7 +31,10 @@ export function SiteCard({ site, index, onEdit, onDelete }: Props) {
       transition={{ duration: 0.4, delay: index * 0.05 }}
       className="group relative h-full bg-white overflow-hidden rounded-2xl"
     >
-      <div className="absolute left-4 top-4 z-10 flex gap-1 opacity-0 transition-smooth group-hover:opacity-100">
+      <div
+        className={`absolute  top-4 z-10 flex gap-1 opacity-0 transition-smooth group-hover:opacity-100
+        ${langIsArabic ? "left-4 right-auto" : "right-4 left-auto"}`}
+      >
         <NewWorkSite
           openButton={
             <Button
@@ -31,7 +42,6 @@ export function SiteCard({ site, index, onEdit, onDelete }: Props) {
               className="h-8 w-8 rounded-full shadow-md"
               onClick={(e) => {
                 e.preventDefault();
-                onEdit(site);
               }}
               aria-label="Edit site"
             >
@@ -48,9 +58,10 @@ export function SiteCard({ site, index, onEdit, onDelete }: Props) {
               className="h-8 w-8 rounded-full shadow-md hover:bg-destructive hover:text-destructive-foreground"
               onClick={(e) => {
                 e.preventDefault();
-                onDelete(site);
+                
               }}
               aria-label="Delete site"
+              disabled={deleteMutation.isPending}
             >
               <Trash2 className="h-3.5 w-3.5" />
             </Button>
@@ -77,7 +88,7 @@ export function SiteCard({ site, index, onEdit, onDelete }: Props) {
         <div className="mt-5 space-y-2 text-sm">
           <div className="flex items-center gap-2 text-muted-foreground">
             <MapPin className="h-4 w-4 text-accent" />
-            <span className="truncate">{site.location}</span>
+            <span className="truncate">{site.address}</span>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground">
             <User className="h-4 w-4 text-accent" />

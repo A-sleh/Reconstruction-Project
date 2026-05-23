@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 import { cn } from "@/lib/utils";
 
 const styles: Record<string, string> = {
@@ -22,7 +22,7 @@ const labels: Record<string, string> = {
 export function StatusBadge({ status }: { status: string }) {
   return (
     <Badge variant="outline" className={cn("rounded-full px-3 py-0.5 text-xs font-medium", styles[status])}>
-      <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-current opacity-70" />
+      <span className="mx-1 inline-block h-1.5 w-1.5 rounded-full bg-current opacity-70" />
       {labels[status] ?? status}
     </Badge>
   );

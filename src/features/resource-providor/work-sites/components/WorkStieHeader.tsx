@@ -1,23 +1,35 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useWorkSitesStatistics } from "@/features/resource-providor/work-sites/api/query";
 
 const WorkSiteHeader = () => {
   const { t } = useTranslation();
+  const { data: statsData, isLoading } = useWorkSitesStatistics();
+
   const stats = [
-    { label: t("resourceProvidor.workSites.activeSites"), value: 10 },
-    { label: t("resourceProvidor.workSites.total-sites"), value: 11 },
-    { label: t("resourceProvidor.workSites.traked-resourrces"), value: 20 },
+    {
+      label: t("resourceProvidor.workSites.activeSites"),
+      value: isLoading ? "—" : statsData?.activeWorkSites ?? 0,
+    },
+    {
+      label: t("resourceProvidor.workSites.total-sites"),
+      value: isLoading ? "—" : statsData?.totalWorkSites ?? 0,
+    },
+    {
+      label: t("resourceProvidor.workSites.traked-resourrces"),
+      value: isLoading ? "—" : statsData?.onHoldWorkSites ?? 0,
+    },
   ];
 
   return (
-    <div className="container px-5 py-12 lg:py-16">
+    <div className="w-full px-5 py-12 lg:py-16">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="max-w-3xl"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-gray-200  px-3 py-1 text-xs font-medium text-muted-foreground">
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary  px-3 py-1 text-xs font-medium text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
           {t("resourceProvidor.workSites.sub-title")}
         </div>
@@ -36,10 +48,10 @@ const WorkSiteHeader = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 + i * 0.08 }}
-            className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
+            className="rounded-xl border border-gray-200 text-white bg-primary p-4 shadow-sm"
           >
-            <p className="text-2xl font-bold text-primary">{s.value}</p>
-            <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
+            <p className="text-2xl font-bold">{s.value}</p>
+            <p className="text-xs  mt-1">{s.label}</p>
           </motion.div>
         ))}
       </div>
