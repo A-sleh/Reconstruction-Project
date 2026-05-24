@@ -256,6 +256,50 @@
       "delete-title": "Delete this work site?",
       "delete-description-prefix": "This will permanently remove ",
       "btn-delete-confirm": "Delete"
+    },
+    "investor-request": {
+      "investor-header": {
+        "badge": "Investor Operations",
+        "title": "Investor Requests",
+        "description": "Review, approve and fulfill resource requests from investors.",
+        "stats": {
+          "pending": "Pending",
+          "partial": "Partial",
+          "completed": "Completed",
+          "total": "Total"
+        }
+      },
+      "table": {
+        "columns": {
+          "investor": "Investor",
+          "date": "Request Date",
+          "status": "Status",
+          "resources": "Resources",
+          "actions": "Actions"
+        },
+        "actions": {
+          "approve": "Approve",
+          "approving": "Approving...",
+          "reject": "Reject",
+          "rejecting": "Rejecting..."
+        },
+        "empty": "No requests found."
+      },
+      "reject-modal": {
+        "title": "Reject Request",
+        "description_with_name": "Provide a reason for rejecting {{name}}'s request.",
+        "description_generic": "Provide a reason for rejecting this request.",
+        "label": "Reason for rejection",
+        "placeholder": "e.g. Insufficient inventory, scheduling conflict...",
+        "actions": {
+          "cancel": "Cancel",
+          "confirm": "Confirm Rejection"
+        }
+      },
+      "search": {
+        "placeholder": "Search by investor name...",
+        "count": "({{count}}) requests"
+      }
     }
   },
   "serviceProvider": {

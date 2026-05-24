@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
 
 const ModelContext = createContext<any>(null);
 
@@ -55,6 +56,8 @@ function Window({
 }
 
 const Model = ({ children }: { children: ReactNode }) => {
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language == "ar";
   const [openName, setOpenName] = useState<string>("");
   const close = () => setOpenName("");
   const open = setOpenName;
@@ -66,7 +69,11 @@ const Model = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <ModelContext.Provider value={value}>{children}</ModelContext.Provider>
+    <ModelContext.Provider value={value}>
+      <div dir={isArabic ? "rtl" : "ltr"}>
+        {children}
+      </div>
+    </ModelContext.Provider>
   );
 };
 

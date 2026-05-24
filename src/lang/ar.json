@@ -256,6 +256,50 @@
       "delete-title": "هل أنت متأكد أنك تريد حذف هذا السجل؟ ",
       "delete-description-prefix": "ملاحظة: سيتم نقل البيانات إلى سلة المهملات.",
       "btn-delete-confirm": "حذف"
+    },
+    "investor-request": {
+      "investor-header": {
+        "badge": "عمليات المستثمرين",
+        "title": "طلبات المستثمرين",
+        "description": "مراجعة واعتماد وتلبية طلبات الموارد المقدمة من المستثمرين.",
+        "stats": {
+          "pending": "قيد الانتظار",
+          "partial": "مكتمل جزئياً",
+          "completed": "مكتمل",
+          "total": "الإجمالي"
+        }
+      },
+      "table": {
+        "columns": {
+          "investor": "المستثمر",
+          "date": "تاريخ الطلب",
+          "status": "الحالة",
+          "resources": "الموارد",
+          "actions": "الإجراءات"
+        },
+        "actions": {
+          "approve": "اعتماد",
+          "approving": "جاري الاعتماد...",
+          "reject": "رفض",
+          "rejecting": "جاري الرفض..."
+        },
+        "empty": "لم يتم العثور على طلبات."
+      },
+      "reject-modal": {
+        "title": "رفض الطلب",
+        "description_with_name": "يرجى تقديم سبب لرفض طلب المستثمر: {{name}}.",
+        "description_generic": "يرجى تقديم سبب لرفض هذا الطلب.",
+        "label": "سبب الرفض",
+        "placeholder": "مثال: عدم توفر مخزون كافٍ، تضارب في المواعيد...",
+        "actions": {
+          "cancel": "إلغاء",
+          "confirm": "تأكيد الرفض"
+        }
+      },
+      "search": {
+        "placeholder": "البحث باسم المستثمر...",
+        "count": "({{count}}) طلبات"
+      }
     }
   },
   "serviceProvider": {

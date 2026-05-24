@@ -113,6 +113,15 @@ body {
   --color-primary-dark-hover: #2d2a3b;
   --color-primary-dark-hover-two: #ffffff;
 
+  --color-destructive: hsl(0 75% 50%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+
+  --color-success: hsl(145 60% 40%);
+  --color-success-foreground: hsl(0 0% 100%);
+
+  --color-warning: hsl(38 92% 50%);
+  --color-warning-foreground: hsl(215 30% 15%);
+
   --radius-sm: 0.125rem;
   --radius-md: 0.25rem;
   --radius-lg: 0.5rem;

@@ -4,7 +4,7 @@ import WorkSitesSection from "@/features/resource-providor/work-sites/components
 const WorkSites = () => {
   return (
     <div className="min-h-screen w-full">
-      <section className="rounded-lg bg-white ">
+      <section className="rounded-lg bg-white">
         <WorkSiteHeader />
       </section>
       <WorkSitesSection />
