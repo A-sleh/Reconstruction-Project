@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/Badge";
 import { cn } from "@/lib/utils";
-import { RequestStatus } from "../api";
+import { RequestStatus } from "../orders/api";
 
 const config: Record<RequestStatus, { label: string; cls: string }> = {
   pending: { label: "Pending", cls: "bg-warning/15 text-warning border-warning/30" },

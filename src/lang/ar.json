@@ -300,6 +300,64 @@
         "placeholder": "البحث باسم المستثمر...",
         "count": "({{count}}) طلبات"
       }
+    },
+    "investor-request-details": {
+      "requested_on": "تم الطلب في {{date}}",
+      "reason_label": "السبب: {{reason}}",
+      "not_found": "الطلب غير موجود.",
+      "back_to_requests": "العودة إلى الطلبات",
+      "tabs": {
+        "resources": "الموارد",
+        "financials": "الماليات",
+        "history": "السجل"
+      },
+      "delivery": {
+        "title": "تحديد كمكتمل التوصيل",
+        "description": "تم تسليم {{delivered}} من أصل {{total}} وحدة · تم إصدار فواتير بقيمة ${{invoiced}}"
+      },
+      "resources_table": {
+        "columns": {
+          "resource": "المورد",
+          "requested": "المطلوب",
+          "delivered": "المستلم",
+          "status": "الحالة"
+        },
+        "status_labels": {
+          "delivered": "تم التسليم",
+          "in_progress": "قيد التنفيذ"
+        }
+      },
+      "delivered-success": "تم تحديد الطلب كمكتمل التوصيل بنجاح.",
+      "delivered-error": "فشل تحديد الطلب كمكتمل التوصيل. يرجى المحاولة مرة أخرى.",
+      "financials": {
+        "invoice_box": {
+          "title": "الفواتير",
+          "total": "الإجمالي: ${{amount}}",
+          "columns": {
+            "number": "رقم الفاتورة",
+            "date": "التاريخ",
+            "amount": "المبلغ"
+          },
+          "empty": "لا توجد فواتير بعد."
+        },
+        "form": {
+          "title": "إضافة فاتورة",
+          "fields": {
+            "number": "رقم الفاتورة",
+            "amount": "المبلغ ($)",
+            "date": "التاريخ"
+          },
+          "submit": "تسجيل الفاتورة",
+          "validation": {
+            "required": "هذا الحقل مطلوب",
+            "positive_amount": "يجب أن يكون المبلغ أكبر من 0"
+          }
+        },
+        "create-invoice-success": "تم تسجيل الفاتورة وإضافتها بنجاح.",
+        "create-invoice-error": "فشل تسجيل الفاتورة. يرجى المحاولة مرة أخرى."
+      },
+      "update-quantity-success": "تم تحديث كميات الموارد بنجاح.",
+      "update-quantity-error": "فشل تحديث كميات الموارد. يرجى المحاولة مرة أخرى."
     }
   },
   "serviceProvider": {
@@ -649,5 +707,12 @@
     "totalEngineersTitle": "المهندسين",
     "projectBudgetTitle": "الميزانية",
     "projectDate": "تاريخ البدء"
+  },
+  "common": {
+    "banner": {
+      "message": "لديك تغييرات غير محفوظة على كميات الموارد.",
+      "cancel": "تجاهل",
+      "save": "حفظ التغييرات"
+    }
   }
 }

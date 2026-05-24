@@ -300,6 +300,64 @@
         "placeholder": "Search by investor name...",
         "count": "({{count}}) requests"
       }
+    },
+    "investor-request-details": {
+      "requested_on": "Requested {{date}}",
+      "reason_label": "Reason: {{reason}}",
+      "not_found": "Request not found.",
+      "back_to_requests": "Back to requests",
+      "tabs": {
+        "resources": "Resources",
+        "financials": "Financials",
+        "history": "History"
+      },
+      "delivery": {
+        "title": "Mark as Fully Delivered",
+        "description": "{{delivered}} of {{total}} units delivered · ${{invoiced}} invoiced"
+      },
+      "resources_table": {
+        "columns": {
+          "resource": "Resource",
+          "requested": "Requested",
+          "delivered": "Delivered",
+          "status": "Status"
+        },
+        "status_labels": {
+          "delivered": "Delivered",
+          "in_progress": "In progress"
+        }
+      },
+      "delivered-success": "Order has been marked as fully delivered successfully.",
+      "delivered-error": "Failed to mark the order as fully delivered. Please try again.",
+      "financials": {
+        "invoice_box": {
+          "title": "Invoices",
+          "total": "Total: ${{amount}}",
+          "columns": {
+            "number": "Invoice #",
+            "date": "Date",
+            "amount": "Amount"
+          },
+          "empty": "No invoices yet."
+        },
+        "form": {
+          "title": "Add Invoice",
+          "fields": {
+            "number": "Invoice Number",
+            "amount": "Amount ($)",
+            "date": "Date"
+          },
+          "submit": "Record Invoice",
+          "validation": {
+            "required": "This field is required",
+            "positive_amount": "Amount must be greater than 0"
+          }
+        },
+        "create-invoice-success": "Invoice has been recorded and added successfully.",
+        "create-invoice-error": "Failed to record the invoice. Please try again."
+      },
+      "update-quantity-success": "Resource quantities have been updated successfully.",
+      "update-quantity-error": "Failed to update resource quantities. Please try again."
     }
   },
   "serviceProvider": {
@@ -653,5 +711,12 @@
     "totalEngineersTitle": "Engineers",
     "projectBudgetTitle": "Budget",
     "projectDate": "Date"
+  },
+  "common": {
+    "banner": {
+      "message": "You have unsaved changes to resource quantities.",
+      "cancel": "Discard",
+      "save": "Save Changes"
+    }
   }
 }

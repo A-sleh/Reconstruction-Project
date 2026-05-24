@@ -57,7 +57,7 @@ export const paths = {
       },
       orderDetails: {
         path: "/app/resource-providor/orders/:orderId",
-        getHref: (orderId: number) => `/app/resource-providor/orders/${orderId}`,
+        getHref: (orderId: number | string) => `/app/resource-providor/orders/${orderId}`,
       },
       workSites: {
         path: "/app/resource-providor/work-sites",

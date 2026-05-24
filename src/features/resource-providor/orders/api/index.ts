@@ -19,7 +19,6 @@ export interface HistoryEntry {
   date: string;
   message: string;
 }
-
 export interface InvestorRequest {
   id: string;
   investor: string;
@@ -40,8 +39,8 @@ export interface InvestorRequestStat {
 }
 
 export type RejectPayload = {
-    reason: string
-}
+  reason: string;
+};
 
 export enum InvestorRequestController {
   InvestorRequest = "investo-request",

@@ -5,7 +5,7 @@ import { Check, CheckCircle2, Circle, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useInvestoryRequests } from "../api/query";
-import { RequestStatusBadge } from "./RequestStatusBadge";
+import { RequestStatusBadge } from "../../shared/RequestStatusBadge";
 import Loader from "@/components/shared/Loader";
 import {
   Table,
@@ -15,15 +15,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 import {
   useApproveInvestorRequest,
   useCancelInvestorRequest,
 } from "../api/actions";
 import { RejectModalContent } from "./RejectModalContent";
+import { paths } from "@/config/paths";
 
 const OrderTables = () => {
   const { t, i18n } = useTranslation();
+  const goto = useNavigate();
   const isArabic = i18n.language == "ar";
   const [query, setQuery] = useState("");
   const [currentModify, setCurrentModify] = useState<number | string | null>(
@@ -115,7 +117,9 @@ const OrderTables = () => {
               <TableRow
                 key={r.id}
                 className="cursor-pointer"
-                onClick={() => Navigate({ to: window.location.pathname })}
+                onClick={() =>
+                  goto(paths.app.resourceProvidor.orderDetails.getHref(r.id))
+                }
               >
                 <TableCell>
                   <div className="font-medium">{r.investor}</div>
