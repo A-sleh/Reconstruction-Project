@@ -125,6 +125,7 @@
       "sub-title": "لوحة تحكم العمليات المباشرة",
       "title": "إدارة جميع مواقع العمل من مركز قيادة موحد.",
       "description": "تتبع المواقع، وتخصيص الموارد، وحافظ على استمرارية حركة الفرق — مُصمم لعمليات البناء الحديثة.",
+      "all-work-sites": "جميع مواقع العمل",
       "activeSites": "المواقع النشطة",
       "total-sites": "إجمالي المواقع",
       "traked-resourrces": "الموارد المتتبعة",
@@ -132,6 +133,7 @@
       "work-sites": "مواقع العمل",
       "search-placeholder": "البحث في مواقع العمل...",
       "no-sites": "لم يتم العثور على مواقع عمل.",
+      "add-new-resource": "إضافة مورد جديد",
       "add-site-heading": "إضافة موقع عمل",
       "edit-site-heading": "تعديل موقع العمل",
       "sub-heading-description": "حدد التفاصيل الأساسية لمشروع البناء هذا.",
@@ -158,6 +160,90 @@
       "status-active": "نشط",
       "status-on-hold": "موقوف مؤقتاً",
       "status-completed": "مكتمل",
+      "add-resource-heading": "إضافة مورد جديد",
+      "edit-resource-heading": "تعديل مورد",
+      "stats": {
+        "total-resources": "إجمالي الموارد",
+        "categories": "الفئات",
+        "inventory-value": "قيمة المخزون",
+        "pending-orders": "الطلبات قيد الانتظار"
+      },
+      "site-not-found": "لم يتم العثور على الموقع.",
+      "back-to-sites": "العودة إلى المواقع",
+      "tabs": {
+        "inventory": "المخزون",
+        "inventory_count": "المخزون ({{count}})",
+        "orders_count": "طلبات معلقة ({{count}})"
+      },
+      "toast": {
+        "resource-updated": "تم تحديث المورد",
+        "resource-added": "تمت إضافة المورد",
+        "order-request-submitted": "تم تقديم طلب الشراء للموافقة من المدير",
+        "resource-deleted": "تم حذف {{name}}"
+      },
+      "orders": {
+        "no-orders": "لا توجد طلبات شراء لهذا الموقع.",
+        "proposed": "مقترح: {{category}}",
+        "requested_by": "تم الطلب بواسطة",
+        "reason": "السبب: {{reason}}",
+        "status": {
+          "pending": "قيد الانتظار",
+          "approved": "موافق",
+          "rejected": "مرفوض"
+        }
+      },
+      "filters": {
+        "all": "الكل"
+      },
+      "no-resources-match": "لا توجد موارد تتطابق مع مرشحاتك.",
+      "resource": {
+        "search-placeholder": "البحث في الموارد...",
+        "btn-create": "إنشاء مورد",
+        "resource-update": "تم تحديث المورد بنجاح",
+        "resource-created": "تم إنشاء المورد بنجاح",
+        "resource-request": "تم طلب المورد بنجاح",
+        "resource-error-update": "فشل تحديث المورد",
+        "resource-error-created": "فشل إنشاء المورد",
+        "resource-error-request": "فشل طلب المورد",
+        "preview": "معاينة",
+        "label-name": "الاسم",
+        "placeholder-name": "مثال: حديد تسليح #5",
+        "label-image": "رابط الصورة",
+        "placeholder-image": "https://...",
+        "label-description": "الوصف",
+        "placeholder-description": "المواصفات، الدرجة، الاستخدام المقصود...",
+        "label-unit-type": "نوع الوحدة",
+        "label-price-per-unit": "السعر للوحدة ($)",
+        "label-quantity": "الكمية",
+        "label-category": "الفئة",
+        "other-request": "أخرى (طلب فئة جديدة)",
+        "placeholder-proposed-category": "اسم الفئة المقترحة",
+        "label-availability": "التوفر",
+        "availability": {
+          "in-stock": "متوفر",
+          "low-stock": "كمية منخفضة",
+          "out-of-stock": "غير متوفر"
+        },
+        "no-matching-category": "لا توجد فئة مطابقة — سيؤدي ذلك إلى إنشاء طلب شراء للموافقة من المسؤول.",
+        "provide-details": "أدخل تفاصيل المنتج، سعر الوحدة، والفئة.",
+        "order-request-note-part1": "بما أن هذه الفئة غير موجودة بعد، تصبح عملية الإرسال",
+        "order-request-note-strong": "طلب شراء",
+        "order-request-note-part2": "يجب أن يوافق المسؤول عليه قبل أن يظهر في المخزون.",
+        "submit-order": "إرسال طلب شراء",
+        "add-resource": "إضافة مورد",
+        "card": {
+          "price_per_unit": "السعر / الوحدة",
+          "unit": "الوحدة",
+          "qty": "الكمية",
+          "total": "الإجمالي"
+        },
+        "validation": {
+          "name_required": "الاسم مطلوب",
+          "price_min": "يجب أن يكون السعر 0 أو أكثر",
+          "quantity_min": "يجب أن تكون الكمية 0 أو أكثر",
+          "customCategory_required": "اسم الفئة المقترحة مطلوب"
+        }
+      },
       "validation-name-req": "اسم الموقع مطلوب",
       "validation-status-req": "الحالة مطلوبة",
       "validation-status-invalid": "حالة غير صالحة",

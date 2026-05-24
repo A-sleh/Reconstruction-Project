@@ -101,8 +101,7 @@
           "commercial_registration_required": "Commercial registration is required",
           "image_record": "Investment document image is required"
         }
-      }
-      ,
+      },
       "options": {
         "title": "Choose registration type",
         "subtitle": "Select the account type that best describes you to get started.",
@@ -126,6 +125,7 @@
       "sub-title": "Live Operations Dashboard",
       "title": "Manage every work site from a single command center.",
       "description": "Track sites, allocate resources and keep crews moving — built for modern construction operations.",
+      "all-work-sites": "All Work Sites",
       "activeSites": "ActiveSites",
       "total-sites": "Total Sites",
       "traked-resourrces": "Traked Resourrces",
@@ -133,6 +133,7 @@
       "work-sites": "Work Sites",
       "search-placeholder": "Search work sites...",
       "no-sites": "No work sites found.",
+      "add-new-resource": "Add New Resource",
       "add-site-heading": "Add Work Site",
       "edit-site-heading": "Edit Work Site",
       "sub-heading-description": "Set the core details for this construction project.",
@@ -155,10 +156,94 @@
       "update-error": "Failed to update work site.",
       "site-deleted": "Work site deleted successfully.",
       "delete-error": "Failed to delete work site.",
+      "add-resource-heading": "Add New Resource",
+      "edit-resource-heading": "Edit Resource",
       "btn-save": "Save Changes",
       "status-active": "Active",
       "status-on-hold": "On Hold",
       "status-completed": "Completed",
+      "stats": {
+        "total-resources": "Total Resources",
+        "categories": "Categories",
+        "inventory-value": "Inventory Value",
+        "pending-orders": "Pending Orders"
+      },
+      "site-not-found": "Site not found.",
+      "back-to-sites": "Back to sites",
+      "tabs": {
+        "inventory": "Inventory",
+        "inventory_count": "Inventory ({{count}})",
+        "orders_count": "Order Requests ({{count}})"
+      },
+      "toast": {
+        "resource-updated": "Resource updated",
+        "resource-added": "Resource added",
+        "order-request-submitted": "Order request submitted for admin approval",
+        "resource-deleted": "{{name}} deleted"
+      },
+      "orders": {
+        "no-orders": "No order requests for this site.",
+        "proposed": "Proposed: {{category}}",
+        "requested_by": "Requested by",
+        "reason": "Reason: {{reason}}",
+        "status": {
+          "pending": "Pending",
+          "approved": "Approved",
+          "rejected": "Rejected"
+        }
+      },
+      "filters": {
+        "all": "All"
+      },
+      "no-resources-match": "No resources match your filters.",
+      "resource": {
+        "search-placeholder": "Search resources...",
+        "btn-create": "Create Resource",
+        "resource-update": "Resource updated successfully",
+        "resource-created": "Resource created successfully",
+        "resource-request": "Resource requested successfully",
+        "resource-error-update": "Failed to update resource",
+        "resource-error-created": "Failed to create resource",
+        "resource-error-request": "Failed to request resource",
+        "preview": "Preview",
+        "label-name": "Name",
+        "placeholder-name": "e.g. Steel Rebar #5",
+        "label-image": "Image URL",
+        "placeholder-image": "https://...",
+        "label-description": "Description",
+        "placeholder-description": "Specs, grade, intended use...",
+        "label-unit-type": "Unit Type",
+        "label-price-per-unit": "Price per Unit ($)",
+        "label-quantity": "Quantity",
+        "label-category": "Category",
+        "other-request": "Other (request new category)",
+        "placeholder-proposed-category": "Proposed category name",
+        "label-availability": "Availability",
+        "availability": {
+          "in-stock": "In Stock",
+          "low-stock": "Low Stock",
+          "out-of-stock": "Out of Stock"
+        },
+        "no-matching-category": "No matching category — this will create an order request for admin approval.",
+        "provide-details": "Provide product details, unit pricing, and category.",
+        "order-request-note-part1": "Since this category doesn't exist yet, your submission becomes an",
+        "order-request-note-strong": "order request",
+        "order-request-note-part2": "that an admin must approve before it appears in the inventory.",
+        "submit-order": "Submit Order Request",
+        "add-resource": "Add Resource",
+        "card": {
+          "price_per_unit": "Price / unit",
+          "unit": "Unit",
+          "qty": "Qty",
+          "total": "Total"
+        },
+        "validation": {
+          "name_required": "Name is required",
+          "price_min": "Price must be 0 or greater",
+          "quantity_min": "Quantity must be 0 or greater",
+          "customCategory_required": "Proposed category is required"
+        }
+      },
       "validation-name-req": "Site name is required",
       "validation-status-req": "Status is required",
       "validation-status-invalid": "Invalid status",
@@ -436,15 +521,15 @@
       "support": "Our support team is available 24/7 to help you at every step"
     }
   },
-    "navbar": {
-      "home": "Home",
-      "siteResource": "Site Resource",
-      "workSites": "Work Sites",
-      "profile": "Profile",
-      "statistics": "Statistics",
-      "orders": "Orders"
-    },
-    "profile": {
+  "navbar": {
+    "home": "Home",
+    "siteResource": "Site Resource",
+    "workSites": "Work Sites",
+    "profile": "Profile",
+    "statistics": "Statistics",
+    "orders": "Orders"
+  },
+  "profile": {
     "sectionTitle": "Profile",
     "title": "Account Information",
     "description": "Review your profile details and update them below. Other users will see a read-only version.",

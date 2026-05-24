@@ -63,7 +63,7 @@ const Input: React.FC<InputProps> = ({
         {label && (
           <label
             htmlFor={inputId}
-            className={`text-[13px] md:text-sm ${disabled ? "cursor-not-allowed opacity-70" : ""} ${invalid &&"text-red-400"}`}
+            className={`text-[13px] mb-0.5 md:text-sm ${disabled ? "cursor-not-allowed opacity-70" : ""} ${invalid &&"text-red-400"}`}
           >
             {required && <span className="text-red-600">*</span>} {label}
           </label>
@@ -71,7 +71,7 @@ const Input: React.FC<InputProps> = ({
         {loadInitialValue ? (
           <div className="h-8 bg-gray-200 animate-pulse rounded-sm" />
         ) : (
-          <div className={`flex items-center gap-3 rounded-lg border border-border px-2  md:px-4 py-2 md:py-3  has-focus-within:border-primary transition-all ${invalid&&"border-red-400"}`}>
+          <div className={`flex items-center  gap-3 rounded-lg border border-border px-2  md:px-4 py-2 md:py-3  has-focus-within:border-primary transition-all ${invalid&&"border-red-400"} border-gray-300 bg-gray-200/40`}>
             <input
               id={inputId}
               type={type}

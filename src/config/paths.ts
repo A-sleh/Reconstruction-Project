@@ -64,7 +64,7 @@ export const paths = {
         getHref: () => `/app/resource-providor/work-sites`,
       },
       workSite: {
-        path: "/app/resource-providor/work-sites/:id",
+        path: "/app/resource-providor/work-sites/:siteId",
         getHref: (workSiteId: number| string) => `/app/resource-providor/work-sites/${workSiteId}`,
       },
     },

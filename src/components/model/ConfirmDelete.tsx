@@ -8,9 +8,15 @@ interface ConfirmDeleteProps {
   openButton: React.ReactNode;
   onConfirm: () => void;
   item?: string;
+  isLoading?: boolean;
 }
 
-const ConfirmDelete = ({ onConfirm, item, openButton }: ConfirmDeleteProps) => {
+const ConfirmDelete = ({
+  isLoading = false,
+  onConfirm,
+  item,
+  openButton,
+}: ConfirmDeleteProps) => {
   const { t } = useTranslation();
 
   return (
@@ -26,7 +32,6 @@ const ConfirmDelete = ({ onConfirm, item, openButton }: ConfirmDeleteProps) => {
         >
           {/* Header Section */}
           <div className="mb-4 flex items-start gap-4">
-
             <div className="min-w-0">
               <h3 className="text-lg font-semibold text-foreground">
                 {t("resourceProvidor.workSites.delete-title", {
@@ -37,7 +42,9 @@ const ConfirmDelete = ({ onConfirm, item, openButton }: ConfirmDeleteProps) => {
                 {t("resourceProvidor.workSites.delete-description-prefix", {
                   defaultValue: "This will permanently remove ",
                 })}
-                <span className="font-semibold text-foreground">{item || ""}</span>
+                <span className="font-semibold text-foreground">
+                  {item || ""}
+                </span>
               </p>
             </div>
           </div>
@@ -45,6 +52,7 @@ const ConfirmDelete = ({ onConfirm, item, openButton }: ConfirmDeleteProps) => {
           {/* Footer Actions Section */}
           <div className="flex items-center gap-3 pt-4">
             <Button
+              disabled={isLoading}
               onClick={onConfirm}
               variant="destructive"
               className="flex items-center gap-2 text-sm px-4 py-2 shadow-sm bg-red-500 text-white hover:opacity-75 transition-all cursor-pointer"
@@ -56,10 +64,16 @@ const ConfirmDelete = ({ onConfirm, item, openButton }: ConfirmDeleteProps) => {
             </Button>
             {/* Model.Close intercepts the trigger to seamlessly clear the popup open state */}
             <Model.Close>
-              <Button type="button" variant="ghost" className="text-sm px-4 py-2 border border-primary hover:bg-primary hover:text-white transition-all cursor-pointer">
-                {t("resourceProvidor.workSites.btn-cancel", {
-                  defaultValue: "Cancel",
-                })}
+              <Button
+                type="button"
+                variant="ghost"
+                className="text-sm px-4 py-2 border border-primary hover:bg-primary hover:text-white transition-all cursor-pointer"
+              >
+                {isLoading
+                  ? t("common.loading", "Saving...")
+                  : t("resourceProvidor.workSites.btn-cancel", {
+                      defaultValue: "Cancel",
+                    })}
               </Button>
             </Model.Close>
           </div>

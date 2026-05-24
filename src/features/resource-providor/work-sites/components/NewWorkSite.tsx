@@ -133,7 +133,7 @@ export function NewWorkSite({ initial, openButton }: Props) {
               </Model.Close>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 p-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 p-6 overflow-auto max-h-130" style={{scrollbarWidth: 'none'}}>
               {/* Site Name Field */}
               <div className="flex flex-col gap-3 md:flex-row">
                 <Input

@@ -14,6 +14,7 @@ type ImageUploaderProps = {
   errors?: FieldErrors | null;
   fieldName?: string;
   className?: string;
+  value?: string | null;
 };
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({
@@ -25,11 +26,12 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   errors = null,
   fieldName = "",
   className = "",
+  value
 }) => {
   const { t } = useTranslation();
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(value ? value : null);
 
   useEffect(() => {
     return () => {
