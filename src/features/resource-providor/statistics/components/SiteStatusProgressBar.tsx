@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { TrendingUp } from "lucide-react";
+import { TrendingUp, Workflow } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface SiteStatusProgressBarProps {
@@ -13,7 +13,6 @@ interface SiteStatusProgressBarProps {
   totoalSites: number;
   avgProgress: number;
 }
-
 
 const SiteStatusProgressBar = ({
   siteStatus,
@@ -26,7 +25,8 @@ const SiteStatusProgressBar = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">
+        <CardTitle className="text-lg flex items-center gap-2">
+          <Workflow className="h-5 w-5 text-primary" />
           {t("resourceProvidor.statistics.siteStatus.title")}
         </CardTitle>
         <CardDescription>
@@ -43,12 +43,7 @@ const SiteStatusProgressBar = ({
             <div key={s.name}>
               <div className="flex items-center justify-between text-sm mb-1.5">
                 <span className="font-medium">
-                  {t(
-                    `resourceProvider.statistics.siteStatus.states.${s.name}`,
-                    {
-                      defaultValue: s.name,
-                    },
-                  )}
+                  {t(`resourceProvidor.statistics.siteStatus.states.${s.name}`)}
                 </span>
                 <span className="text-muted-foreground">
                   {isArabic ? `${pct}% · ${s.value}` : `${s.value} · ${pct}%`}
