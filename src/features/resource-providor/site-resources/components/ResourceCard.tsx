@@ -30,7 +30,7 @@ export default function ResourceCard({ resource }: Props) {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="group rounded-2xl  overflow-hidden shadow-sm hover:shadow-elegant transition-smooth flex flex-col"
+      className="group rounded-2xl  overflow-hidden bg-white shadow-sm hover:shadow-elegant transition-smooth flex flex-col"
     >
       <div className="relative aspect-[16/10] bg-muted overflow-hidden">
         <img

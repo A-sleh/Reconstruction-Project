@@ -32,7 +32,7 @@ export default function OrdersTab({ orders }: { orders: OrderRequest[] }) {
               layout
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col md:flex-row md:items-center gap-4 rounded-2xl border border-border bg-card p-4 relative overflow-hidden group"
+              className="flex flex-col md:flex-row md:items-center gap-4 rounded-2xl border border-gray-300 bg-white p-4 relative overflow-hidden group"
             >
               <img
                 src={o.image}

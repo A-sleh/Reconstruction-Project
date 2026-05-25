@@ -76,8 +76,8 @@ const InvestorRequestPieChart = ({
             </Pie>
             <Tooltip
               contentStyle={{
-                background: "hsl(var(--background))",
-                border: "1px solid hsl(var(--border))",
+                background: "white",
+                border: "1px solid gray",
                 borderRadius: 8,
                 textAlign: isArabic ? "right" : "left",
               }}
