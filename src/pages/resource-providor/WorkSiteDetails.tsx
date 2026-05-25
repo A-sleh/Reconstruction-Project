@@ -10,7 +10,6 @@ import {
   useResorceOrders,
   useResources,
 } from "@/features/resource-providor/site-resources/api/query";
-import { OrderRequest } from "@/data/resource-providor/mockData";
 import Loader from "@/components/shared/Loader";
 
 const WorkSiteDetails = () => {

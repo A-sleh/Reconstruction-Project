@@ -358,6 +358,56 @@
       },
       "update-quantity-success": "Resource quantities have been updated successfully.",
       "update-quantity-error": "Failed to update resource quantities. Please try again."
+    },
+    "statistics": {
+      "insights": "Insights",
+      "statistics": "Statistics",
+      "description": "Operational overview across sites, inventory, investor requests and provider performance.",
+      "liveData": "Live data",
+      "errorMessage": "Failed to fetch metrics from one or more services.",
+      "workSites": "Work Sites",
+      "avgProgress": "{{progress}}% avg. progress",
+      "inventoryValue": "Inventory Value",
+      "inventoryHint": "{{count}} resources · {{lowStock}} need restock",
+      "investorRequests": "Investor Requests",
+      "fulfilled": "{{rate}}% fulfilled",
+      "totalInvoiced": "Total Invoiced",
+      "pendingOrders": "{{count}} pending order requests",
+      "charts": {
+        "title": "Inventory Value by Site",
+        "description": "Top sites ranked by total resource value",
+        "pieChart": {
+          "title": "Request Status Distribution",
+          "description": "Breakdown of investor request states",
+          "statuses": {
+            "pending": "Pending",
+            "partial": "Partial",
+            "completed": "Completed",
+            "rejected": "Rejected"
+          }
+        }
+      },
+      "siteStatus": {
+        "title": "Site Status",
+        "description": "Current operational state",
+        "avgProgress": "Avg progress across all sites: ",
+        "states": {
+          "active": "Active",
+          "on-hold": "On Hold",
+          "completed": "Completed"
+        }
+      },
+      "inventoryCategory": {
+        "title": "Inventory by Category",
+        "description": "Value distribution across resource categories",
+        "noData": "No categorized resources yet.",
+        "categories": {
+          "Raw Materials": "Raw Materials",
+          "Equipment": "Equipment",
+          "Infrastructure": "Infrastructure",
+          "Energy & Power": "Energy & Power"
+        }
+      }
     }
   },
   "serviceProvider": {

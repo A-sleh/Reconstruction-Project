@@ -3,7 +3,6 @@ export type LatLng = {
   lng: number;
 };
 
-
 export const parseCoordinates = (value?: string): LatLng | null => {
   if (!value) return null;
   const parts = value.split(",").map((part) => part.trim());
@@ -17,4 +16,11 @@ export const parseCoordinates = (value?: string): LatLng | null => {
   }
 
   return null;
+};
+
+export const fmtCurrency = (value: number) => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(value);
 };

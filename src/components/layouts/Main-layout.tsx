@@ -24,7 +24,7 @@ const ApplicationLayout = () => {
       <main className="mt-10 mx-auto w-[95%]  md:max-w-380">
         <Outlet />
       </main>
-      <Foooter />
+      {/* <Foooter /> */}
     </div>
   );
 };

@@ -93,7 +93,7 @@ body {
 }
 
 @theme {
-  --color-background: hsl(0 0% 96%);
+  --color-background: hsl(0 20% 96%);
   --color-foreground: hsl(220 20% 20%);
 
   --color-primary: hsl(170.46deg 100% 19.54% / 89%);

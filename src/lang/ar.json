@@ -358,6 +358,56 @@
       },
       "update-quantity-success": "تم تحديث كميات الموارد بنجاح.",
       "update-quantity-error": "فشل تحديث كميات الموارد. يرجى المحاولة مرة أخرى."
+    },
+    "statistics": {
+      "insights": "رؤى",
+      "statistics": "الإحصائيات",
+      "description": "نظرة عامة تشغيلية تشمل المواقع، المخزون، طلبات المستثمرين، وأداء المزودين.",
+      "liveData": "بيانات مباشرة",
+      "errorMessage": "فشل في جلب المقاييس من خدمة واحدة أو أكثر.",
+      "workSites": "مواقع العمل",
+      "avgProgress": "متوسط التقدم {{progress}}%",
+      "inventoryValue": "قيمة المخزون",
+      "inventoryHint": "{{count}} من الموارد · {{lowStock}} بحاجة لإعادة تغذية",
+      "investorRequests": "طلبات المستثمرين",
+      "fulfilled": "تم تلبية {{rate}}%",
+      "totalInvoiced": "إجمالي المفوتر",
+      "pendingOrders": "{{count}} طلبات طلب معلقة",
+      "charts": {
+        "title": "قيمة المخزون حسب الموقع",
+        "description": "أعلى المواقع تصنيفاً بناءً على القيمة الإجمالية للموارد",
+        "pieChart": {
+          "title": "توزيع حالة الطلبات",
+          "description": "تحليل دقيق لحالات طلبات المستثمرين",
+          "statuses": {
+            "pending": "معلق",
+            "partial": "جزئي",
+            "completed": "مكتمل",
+            "rejected": "مرفوض"
+          }
+        }
+      },
+      "siteStatus": {
+        "title": "حالة الموقع",
+        "description": "الوضع التشغيلي الحالي",
+        "avgProgress": "متوسط التقدم عبر جميع المواقع: ",
+        "states": {
+          "active": "نشط",
+          "on-hold": "قيد الانتظار",
+          "completed": "مكتمل"
+        }
+      },
+      "inventoryCategory": {
+        "title": "المخزون حسب الفئة",
+        "description": "توزيع القيمة المالية عبر فئات الموارد المختلفة",
+        "noData": "لا توجد موارد مصنفة بعد.",
+        "categories": {
+          "Raw Materials": "المواد الخام",
+          "Equipment": "المعدات والأجهزة",
+          "Infrastructure": "البنية التحتية",
+          "Energy & Power": "الطاقة والكهرباء"
+        }
+      }
     }
   },
   "serviceProvider": {
