@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { RiHome9Line, RiShoppingBagLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineConstruction } from "react-icons/md";
-import { FiMapPin, FiBarChart2 } from "react-icons/fi";
+import { FiBarChart2 } from "react-icons/fi";
 
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { paths } from "@/config/paths";
@@ -12,15 +12,7 @@ import NotificationBox from "./Notification-box";
 import ToggleLanguage from "./Toggle-language";
 import { useTranslation } from "react-i18next";
 
-type UserRole = "resourceProvidor";
-interface NavbarProps {
-  userRole: UserRole;
-  userName?: string;
-  language?: "en" | "ar";
-  onLanguageChange?: () => void;
-}
-
-const Navbar = ({ userRole }: NavbarProps) => {
+const Navbar = () => {
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -84,9 +76,8 @@ const Navbar = ({ userRole }: NavbarProps) => {
           </button>
           <ToggleLanguage />
           <nav className="hidden mx-auto justify-center md:flex md:flex-wrap md:items-center md:gap-3">
-            {[...sharedLink,...links].map((link) => (
+            {[...sharedLink, ...links].map((link) => (
               <NavLink
-                end={true}
                 key={link.label}
                 to={link.href}
                 onClick={() => setMenuOpen(false)}

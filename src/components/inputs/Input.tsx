@@ -15,7 +15,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   loadInitialValue?: boolean;
   errors?: FieldErrors | EmptyObject;
   className?: string;
-  iconType?: "password" | "email" | "user" | "nationalNumber";
+  iconType?: "password" | "email" | "user" | "personalIdentifier";
   setValue?: (value: string) => void;
 };
 
@@ -27,7 +27,7 @@ function selectIcon(type: string) {
         return <AiOutlineMail />
     case "user":
         return <FaRegUser />
-    case "nationalNumber":
+    case "personalIdentifier":
         return <FaRegCircleUser />
     default:
       return null;

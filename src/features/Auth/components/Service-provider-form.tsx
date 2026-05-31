@@ -4,6 +4,8 @@ import Input from "@/components/inputs/Input";
 import { PickCoordsFromMap } from "@/components/model/PickCoordsFromMap.model";
 import ImageUploader from "@/components/inputs/ImageUploader";
 import Selector from "@/components/inputs/Selector";
+import { Label } from "@/components/ui/Label";
+import { workSiteTypes } from "../api/create-account";
 
 const ServiceProviderForm = () => {
   const { t } = useTranslation();
@@ -11,12 +13,19 @@ const ServiceProviderForm = () => {
     register,
     setValue,
     watch,
+    getValues,
     formState: { errors },
   } = useFormContext();
 
   const logoUrl = watch("logoUrl");
+  const providerRole = watch("providerRole");
   const companyLocationValue = watch("companyLocation");
   const workSiteType = watch("workSiteType");
+
+  const changeProviderRole = (type: "Resource" | "Service") => {
+    setValue("providerRole", type);
+  };
+
   const handleImageChange = (file: File | null) => {
     setValue("logoUrl", file?.name ?? "");
   };
@@ -42,29 +51,51 @@ const ServiceProviderForm = () => {
           errors={errors}
           {...register("companyName")}
         />
+        <div className="w-full flex gap-1 flex-col">
+          <Label className="text-[13px] mb-0.5 md:text-sm">
+            {t("auth.register.providor.registerType")}
+          </Label>
+          <div className="flex gap-2 items-center">
+            <span
+              onClick={() => changeProviderRole("Service")}
+              className={`px-2 py-1 flex-1 text-center min-h-11 rounded-md border border-primary font-semibold hover:bg-primary hover:text-white transition-all ${providerRole != "Resource" && "bg-primary text-white"}`}
+              style={{ lineHeight: "30px" }}
+            >
+              {t("auth.register.providor.serviceProviderBtn")}
+            </span>
+            <span
+              onClick={() => changeProviderRole("Resource")}
+              className={`px-2 py-1 flex-1 text-center min-h-11 rounded-md border border-primary font-semibold hover:bg-primary hover:text-white transition-all ${providerRole == "Resource" && "bg-primary text-white"}`}
+              style={{ lineHeight: "30px" }}
+            >
+              {t("auth.register.providor.resourceProviderBtn")}
+            </span>
+          </div>
+        </div>
       </div>
       <ImageUploader
-        label={t("auth.register.investor.imageRecord")}
+        label={t("auth.register.providor.companyLogo")}
         required={true}
         fileName={logoUrl}
         onFileChange={handleImageChange}
         errors={errors ?? null}
-        fieldName="photoUrl"
+        fieldName="logoUrl"
       />
       <div>
         <Selector
           label={t("auth.register.engineer.specialtiyLabel")}
           required={true}
           value={workSiteType}
-          setValue={(value) =>
-            setValue("providerRole", {
-              value,
-            })
-          }
+          setValue={(value: string) => {
+            console.log(value);
+            setValue("workSiteType", value);
+          }}
         >
-          {Array(5).map((item) => (
-            <option key={item.value} value={item.value}>
-              {item.value}
+          {workSiteTypes.map((item) => (
+            <option key={item} value={item.toString()}>
+              {t(
+                `auth.register.providor.workSitesCategories.${item.toLocaleLowerCase()}`,
+              )}
             </option>
           ))}
         </Selector>

@@ -2,19 +2,25 @@ import { useTranslation } from "react-i18next";
 import { useFormContext } from "react-hook-form";
 import type { BaseRegistrationValues } from "../api/create-account";
 import Input from "@/components/inputs/Input";
+import ImageUploader from "@/components/inputs/ImageUploader";
 
 const BaseRegisterInputs = () => {
   const { t } = useTranslation();
   const {
     register,
+    setValue,
+    watch,
     formState: { errors },
   } = useFormContext<BaseRegistrationValues>();
+  const imageOfPhoto = watch("photoUrl");
+
+  const handleImageChange = (file: File | null) => {
+    setValue("photoUrl", file?.name ?? "");
+  };
 
   return (
     <div className="space-y-3 mt-3 ">
-      <div
-        className="flex flex-col md:flex-row gap-2 "
-      >
+      <div className="flex flex-col md:flex-row gap-2 ">
         <Input
           type="text"
           iconType="user"
@@ -53,16 +59,41 @@ const BaseRegisterInputs = () => {
         errors={errors ?? null}
         {...register("password")}
       />
-      <Input
-        type="text"
+      <div className="flex gap-2">
+        <Input
+          type="text"
+          required={true}
+          label={t(
+            "auth.register.generalInformation.nationalNumberPlaceholder",
+          )}
+          placeholder={t(
+            "auth.register.generalInformation.nationalNumberPlaceholder",
+          )}
+          fieldName="personalIdentifier"
+          errors={errors ?? null}
+          {...register("personalIdentifier")}
+        />
+        <Input
+          type="text"
+          required={true}
+          label={t(
+            "auth.register.generalInformation.phone",
+          )}
+          placeholder={t(
+            "auth.register.generalInformation.phonePlaceHolder",
+          )}
+          fieldName="phone"
+          errors={errors ?? null}
+          {...register("phone")}
+        />
+      </div>
+      <ImageUploader
+        label={t("auth.register.generalInformation.profilePhoto")}
         required={true}
-        label={t("auth.register.generalInformation.nationalNumberPlaceholder")}
-        placeholder={t(
-          "auth.register.generalInformation.nationalNumberPlaceholder",
-        )}
-        fieldName="NationalNumber"
+        fileName={imageOfPhoto}
+        onFileChange={handleImageChange}
         errors={errors ?? null}
-        {...register("NationalNumber")}
+        fieldName="photoUrl"
       />
     </div>
   );

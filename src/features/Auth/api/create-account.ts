@@ -5,21 +5,54 @@ import useAuthStore from "@/stores/useAuthStore";
 import { useMutation } from "@tanstack/react-query";
 import { errorToast, successToast } from "@/components/common/Toast";
 
+export const workSiteTypes = [
+  "Office",
+  "Company",
+  "Factory",
+  "Warehouse",
+  "Quarry",
+  "Workshop",
+  "Other",
+];
+
 //? Baisc schema for user information
 export const BaseRegistrationSchema = z.object({
   firstName: z
     .string()
-    .min(2, i18n.t("auth.register.generalInformation.validation.name_required")),
+    .min(
+      2,
+      i18n.t("auth.register.generalInformation.validation.name_required"),
+    ),
   lastName: z
     .string()
-    .min(2, i18n.t("auth.register.generalInformation.validation.last_name_required")),
+    .min(
+      2,
+      i18n.t("auth.register.generalInformation.validation.last_name_required"),
+    ),
+  phone: z
+    .string()
+    .min(
+      1,
+      i18n.t(
+        "auth.register.generalInformation.validation.phone",
+      ),
+    ),
   email: z.string().email(i18n.t("auth.register.validation.invalid_email")),
-  password: z
+  password: z.string().min(
+    6,
+    i18n.t("auth.register.generalInformation.validation.password_too_short", {
+      min: 6,
+    }),
+  ),
+  personalIdentifier: z
     .string()
-    .min(6, i18n.t("auth.register.generalInformation.validation.password_too_short", { min: 6 })),
-  NationalNumber: z
-    .string()
-    .min(10, i18n.t("auth.register.generalInformation.validation.national_number_required")),
+    .min(
+      10,
+      i18n.t(
+        "auth.register.generalInformation.validation.national_number_required",
+      ),
+    ),
+  photoUrl: z.string(),
 });
 export type BaseRegistrationValues = z.infer<typeof BaseRegistrationSchema>;
 export const intialBasicRegisterationValues: BaseRegistrationValues = {
@@ -27,14 +60,16 @@ export const intialBasicRegisterationValues: BaseRegistrationValues = {
   lastName: "",
   email: "",
   password: "",
-  NationalNumber: "",
+  personalIdentifier: "",
 };
 
 //? Base schema for  provider registration
 export const ResourceProviderSchema = BaseRegistrationSchema.extend({
-  license: z
+  licenseOfService: z
     .string()
     .min(2, i18n.t("auth.register.providor.validation.license_required")),
+  providerRole: z.string().optional(),
+  workSiteType: z.string(),
   companyName: z
     .string()
     .min(2, i18n.t("auth.register.providor.validation.company_name_required")),
@@ -44,6 +79,7 @@ export const ResourceProviderSchema = BaseRegistrationSchema.extend({
       5,
       i18n.t("auth.register.providor.validation.company_location_required"),
     ),
+  logoUrl: z.string().optional(),
   companyAddress: z
     .string()
     .min(
@@ -55,10 +91,13 @@ export const ResourceProviderSchema = BaseRegistrationSchema.extend({
 export type ResourceProviderFormValues = z.infer<typeof ResourceProviderSchema>;
 export const intialProviderValues: ResourceProviderFormValues = {
   ...intialBasicRegisterationValues,
-  license: "",
+  licenseOfService: "",
   companyName: "",
   companyLocation: "",
   companyAddress: "",
+  workSiteType: "",
+  logoUrl: "",
+  providerRole: "Resource",
 };
 
 //? Basic shcema for invetor
@@ -98,9 +137,10 @@ export const intialEngineerValues: EngineerFormValues = {
   syndicateId: "",
 };
 
+
 // API calls
 enum AuthController {
-  ProviderRegister = "auth/register/provider",
+  ProviderRegister = "/Auth/ProviderSignUp",
   InvestorRegister = "auth/register/investor",
   EngineerRegister = "auth/register/engineer",
 }

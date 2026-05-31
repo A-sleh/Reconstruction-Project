@@ -8,7 +8,7 @@ type ProfileData = {
   lastName: string;
   email: string;
   password: string;
-  nationalNumber: string;
+  personalIdentifier: string;
   phone: string;
 };
 
@@ -94,7 +94,7 @@ const ResourceProvidorProfile = () => {
                 </p>
                 <p className="text-sm text-slate-500">{profile.email}</p>
                 <p className="text-sm text-slate-500">
-                  {t("profile.nationalNumberLabel")}: {profile.nationalNumber}
+                  {t("profile.nationalNumberLabel")}: {profile.personalIdentifier}
                 </p>
               </div>
             </div>
@@ -160,11 +160,11 @@ const ResourceProvidorProfile = () => {
               <Input
                 label={t("profile.nationalNumberLabel")}
                 type="text"
-                value={profile.nationalNumber}
-                setValue={(value) => handleInputChange("nationalNumber", value)}
+                value={profile.personalIdentifier}
+                setValue={(value) => handleInputChange("personalIdentifier", value)}
                 disabled={!isOwner}
                 placeholder={t("profile.nationalNumberLabel")}
-                iconType="nationalNumber"
+                iconType="personalIdentifier"
               />
               <Input
                 label={t("profile.phone")}

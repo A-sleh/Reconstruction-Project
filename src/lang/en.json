@@ -43,17 +43,21 @@
         "lastName": "Last name",
         "nationalNumberPlaceholder": "National number",
         "emailPlaceholder": "Your email",
+        "profilePhoto": "Profile photo",
         "passwordPlaceholder": "Create password",
-        "registerButton": "Next and continue",
+        "phone": "Phone number",
+        "phonePlaceHolder": "Enter phone number",
         "validation": {
           "name_required": "Name is required",
           "last_name_required": "Last name is required",
           "invalid_email": "Enter your email",
           "password_too_short": "Password must be at least 6 characters",
-          "national_number_required": "Enter the national number"
+          "national_number_required": "Enter the national number",
+          "phone": "Please, enter the phone number"
         }
       },
       "providor": {
+        "successRegisterModelInfo": "Your registered information has been successfully saved. Please enter your previous email and password to start using our services.",
         "licenseLabel": "License",
         "licensePlaceholder": "Enter your service license",
         "companyNameLabel": "Company name",
@@ -66,6 +70,19 @@
         "openMapLocationButton": "Select location on map",
         "companyInformationLabel": "Company information",
         "selectLocationButton": "Use selected location",
+        "companyLogo": "Company logo",
+        "workSitesCategories": {
+          "office": "Office",
+          "company": "Company",
+          "factory": "Factory",
+          "warehouse": "Warehouse",
+          "quarry": "Quarry",
+          "workshop": "Workshop",
+          "other": "Other"
+        },
+        "serviceProviderBtn": "Service provider",
+        "resourceProviderBtn": "Resource provider",
+        "registerType": "Register type",
         "personalInformationLabel": "Personal information",
         "ProviderDescription": "Add your service provider details to complete registration.",
         "validation": {
@@ -94,7 +111,7 @@
         "commercialRegistrationPlaceholder": "Enter commercial registration",
         "imageRecordPlaceholder": "Enter image record",
         "imageRecord": "Image record",
-        "uploadImageTitle": "Upload a clear copy of your registration",
+        "uploadImageTitle": "Upload a clear copy",
         "uploadImageHelp": "PNG, JPG, SVG or GIF - up to 5MB",
         "removeImage": "Remove image",
         "validation": {

@@ -1,25 +1,10 @@
 import { Outlet } from "react-router";
-import { useTranslation } from "react-i18next";
 import Navbar from "@/components/common/Navbar";
-import Foooter from "../common/Foooter";
 
 const ApplicationLayout = () => {
-  const { i18n } = useTranslation();
-  const language = i18n.language === "ar" ? "ar" : "en";
-  const userRole: "resourceProvidor" = "resourceProvidor";
-
-  const handleLanguageChange = () => {
-    i18n.changeLanguage(language === "en" ? "ar" : "en");
-  };
-
   return (
     <div className="min-h-screen bg-background text-slate-950">
-      <Navbar
-        userRole={userRole}
-        userName="Sara"
-        language={language}
-        onLanguageChange={handleLanguageChange}
-      />
+      <Navbar />
 
       <main className="mt-10 mx-auto w-[95%]  md:max-w-380">
         <Outlet />

@@ -9,15 +9,25 @@ import {
   useProviderRegister,
 } from "@/features/Auth/api/create-account";
 import { paths } from "@/config/paths";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { providerDTO } from "@/features/Auth/api/dtos";
 
 const ProviderRegisteration = () => {
   const { t } = useTranslation();
+  const goto = useNavigate();
   const { mutate: registerProvider, isPending } = useProviderRegister();
 
   const handlSubmitForm = (data: any) => {
-    alert("here");
-    registerProvider(data as any);
+    registerProvider(providerDTO(data) as any, {
+      onSuccess: (_) => {
+        goto(paths.auth.login.path, {
+          replace: true,
+          state: {
+            message: t("auth.register.providor.successRegisterModelInfo"),
+          },
+        });
+      },
+    });
   };
 
   return (

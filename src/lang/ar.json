@@ -44,16 +44,21 @@
         "nationalNumberPlaceholder": "الرقم الوطني",
         "emailPlaceholder": "بريدك الإلكتروني",
         "passwordPlaceholder": "إنشاء كلمة مرور",
+        "profilePhoto": "الصورة الشخصية",
         "registerButton": "التالي ومتابعة",
+        "phone": "رقم الهاتف",
+        "phonePlaceHolder": "أدخل رقم الهاتف",
         "validation": {
           "name_required": "الرجاء تحديد الاسم",
           "last_name_required": "الرجاء تحديد اسم العائلة",
           "invalid_email": "ادخل بريدك الألكتروني",
           "password_too_short": "كلمية المرور يجب ان تكون على الأقل 6 رموز",
-          "national_number_required": "أدخل الرقم  الوطني"
+          "national_number_required": "أدخل الرقم  الوطني",
+          "phone": "الرجاء إدخال رقم الجوال"
         }
       },
       "providor": {
+        "successRegisterModelInfo": "لقد تم حفظ المعلومات التي سجلت بها, قم بإدخال البريد السابق مع كلمة المرور للأستفادة من  خدماتنا",
         "licenseLabel": "الرخصة",
         "licensePlaceholder": "أدخل رخصة الخدمة",
         "companyNameLabel": "اسم الشركة",
@@ -66,6 +71,19 @@
         "openMapLocationButton": "حدد الموقع من الخريطة",
         "companyInformationLabel": "معلومات الشركة",
         "selectLocationButton": "استخدام الموقع المحدد",
+        "serviceProviderBtn": "مزود خدمات",
+        "resourceProviderBtn": "مزود موارد",
+        "companyLogo": "شعار الشركة",
+        "registerType": "نوع الأشتراك",
+        "workSitesCategories": {
+          "office": "مكتب",
+          "company": "شركة",
+          "factory": "مصنع",
+          "warehouse": "مستودع",
+          "quarry": "محجر",
+          "workshop": "ورشة عمل",
+          "other": "أخرى"
+        },
         "personalInformationLabel": "المعلومات الشخصية",
         "ProviderDescription": "أضف معلومات مزود الخدمة لإكمال التسجيل.",
         "validation": {
@@ -94,7 +112,7 @@
         "commercialRegistrationPlaceholder": "أدخل السجل التجاري",
         "imageRecordPlaceholder": "أدخل صورة السجل",
         "imageRecord": "صورة السجل",
-        "uploadImageTitle": "حمل نسخة واضحة من السجل",
+        "uploadImageTitle": "حمل نسخة واضحة ",
         "uploadImageHelp": "PNG، JPG، SVG أو GIF - حتى 5 ميغابايت",
         "removeImage": "إزالة الصورة",
         "validation": {

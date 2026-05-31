@@ -17,7 +17,7 @@ type Order = {
     name: string;
     email: string;
     phone: string;
-    nationalNumber: string;
+    personalIdentifier: string;
   };
   items: OrderItem[];
 };
@@ -35,7 +35,7 @@ const ResourceProvidorOrderDetails = () => {
         name: "Nizar Al-Hassan",
         email: "nizar.hassan@example.com",
         phone: "+966 50 987 6543",
-        nationalNumber: "98765432109876",
+        personalIdentifier: "98765432109876",
       },
       items: [
         { name: "Concrete blocks", amount: 120, price: 2100 },
@@ -141,7 +141,7 @@ const ResourceProvidorOrderDetails = () => {
               </div>
               <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
                 <p className="text-sm text-slate-500">{t("orders.ownerNationalNumberLabel")}</p>
-                <p className="mt-2 font-semibold text-slate-950">{order.owner.nationalNumber}</p>
+                <p className="mt-2 font-semibold text-slate-950">{order.owner.personalIdentifier}</p>
               </div>
             </div>
           </div>
