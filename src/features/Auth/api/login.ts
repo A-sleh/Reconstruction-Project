@@ -1,7 +1,7 @@
 import z from "zod";
 import i18n from "i18next";
 import ApiInstance from "@/config/api-instance";
-import useAuthStore from "@/stores/useAuthStore";
+import useAuthStore, { AuthState, ROLE, useAccessToken } from "@/stores/useAuthStore";
 import { useMutation } from "@tanstack/react-query";
 import { errorToast, successToast } from "@/components/common/Toast";
 
@@ -21,21 +21,35 @@ export const intialLoginValues: LoginValues = {
 };
 
 export const loginApi = async (payload: LoginValues) => {
-  const { data } = await ApiInstance.post("auth/login", payload);
+  const { data } = await ApiInstance.post<AuthState>(
+    "/Auth/Authenticate",
+    payload,
+  );
   return data;
 };
 
 export const useLoginMutation = () => {
-  const setAuth = useAuthStore((s) => s.setAuth);
+  const { setAuth, setUser } = useAuthStore((s) => s);
+  const { setAccessToken } = useAccessToken((s) => s);
+
   return useMutation({
     mutationFn: (payLoad: LoginValues) => loginApi(payLoad),
     mutationKey: ["login"],
-    onSuccess: (data: any) => {
+    onSuccess: (data) => {
       successToast(i18n.t("auth.login.toast.success"));
-      // store token/role/user in auth store
       try {
-        const { token = null, role = null, user = null } = data || {};
-        setAuth({ token, role, user });
+        const { accessToken = "", user = null } = data || {};
+
+        setAuth({
+          isAuthenticated: user != null,
+          role: user?.role as ROLE,
+        });
+
+        if (accessToken) {
+          setAccessToken({ accessToken });
+        }
+
+        setUser(user);
       } catch (e) {
         // ignore store errors
       }

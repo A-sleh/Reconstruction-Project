@@ -1,40 +1,114 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
-export interface UserProfile {
-  id?: string;
-  name?: string;
-  email?: string;
-  [key: string]: any;
+enum STORAGE_KEYS {
+  accessToken = "access-token",
+  refreshToken = "refresh-token",
+  auth = "auth-storage",
 }
 
-interface AuthState {
-  token: string | null;
-  role: string | null;
+export type ROLE = "Provider";
+export interface User {
+  firstName: string;
+  lastName: string;
+  photoURL: string;
+  role: ROLE;
+}
+
+export interface AuthState {
+  role: null | ROLE;
+  user: User | null;
+  accessToken: string;
+  refreshToken: string;
   isAuthenticated: boolean;
-  user: UserProfile | null;
-  setAuth: (payload: { token: string | null; role?: string | null; user?: UserProfile | null }) => void;
+  setAuth: (payload: { isAuthenticated: boolean; role: ROLE }) => void;
   clearAuth: () => void;
-  setUser: (user: UserProfile | null) => void;
+  setUser: (user: User | null) => void;
 }
+
+export const getAuth = (): null | AuthState => {
+  const authInfo = localStorage.getItem("access-token");
+  const auth = authInfo ? JSON.parse(authInfo).state : null;
+
+  return auth;
+};
+
+export const updateAccessToken = (newAccessToken: string) => {
+  const accessToken = getAccessToken()
+
+  if (accessToken) {
+    const newValue = { ...accessToken, state: { accessToken: newAccessToken } };
+    localStorage.setItem(STORAGE_KEYS.accessToken, JSON.stringify(newValue));
+  }
+};
+export const getAccessToken = () => {
+  const accessTokenStr = localStorage.getItem(STORAGE_KEYS.accessToken);
+  const accessToken = accessTokenStr ? JSON.parse(accessTokenStr) : null;
+
+  return accessToken;
+};
+
+export const getRefreshToken = () => {
+  const refreshTokenStr = localStorage.getItem(STORAGE_KEYS.refreshToken);
+  const refreshToken = refreshTokenStr ? JSON.parse(refreshTokenStr) : null;
+
+  return refreshToken;
+};
+
+export const clearTokens = () => {
+  localStorage.removeItem(STORAGE_KEYS.accessToken);
+  localStorage.removeItem(STORAGE_KEYS.refreshToken);
+};
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
-      token: null,
+      accessToken: "",
+      refreshToken: "",
       role: null,
-      isAuthenticated: false,
       user: null,
-      setAuth: ({ token, role = null, user = null }) =>
-        set({ token, role, user, isAuthenticated: !!token }),
-      clearAuth: () => set({ token: null, role: null, user: null, isAuthenticated: false }),
+      isAuthenticated: false,
+      setAuth: ({ isAuthenticated, role }) => set({ isAuthenticated, role }),
       setUser: (user) => set({ user }),
+      clearAuth: () =>
+        set({
+          isAuthenticated: false,
+          role: null,
+        }),
     }),
     {
-      name: "auth-storage", // localStorage key
-      partialize: (s) => ({ token: s.token, role: s.role, user: s.user, isAuthenticated: s.isAuthenticated }),
-    }
-  )
+      name: STORAGE_KEYS.auth, // localStorage key
+    },
+  ),
+);
+
+export const useAccessToken = create<{
+  accessToken: string;
+  setAccessToken: ({ accessToken }: { accessToken: string }) => void;
+}>()(
+  persist(
+    (set) => ({
+      accessToken: "",
+      setAccessToken: ({ accessToken }) => set({ accessToken }),
+    }),
+    { name: STORAGE_KEYS.accessToken },
+  ),
+);
+
+export const useRefreshToken = create<{
+  refreshToken: string;
+  setRefreshTokenToken: ({ refreshToken }: { refreshToken: string }) => void;
+}>()(
+  persist(
+    (set) => ({
+      refreshToken: "",
+      setRefreshTokenToken: ({ refreshToken }) => set({ refreshToken }),
+    }),
+    {
+      name: STORAGE_KEYS.refreshToken,
+      storage: createJSONStorage(() => sessionStorage),
+    },
+  ),
 );
 
 export default useAuthStore;

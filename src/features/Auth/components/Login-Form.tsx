@@ -1,5 +1,5 @@
 import { paths } from "@/config/paths";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { LoginSchema, LoginValues, useLoginMutation } from "../api/login";
 import { useForm } from "react-hook-form";
@@ -7,13 +7,31 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import Button from "@/components/inputs/Button";
 import Input from "@/components/inputs/Input";
+import { useRefreshToken } from "@/stores/useAuthStore";
 
 const LoginForm = () => {
   const { t } = useTranslation();
+  const goto = useNavigate();
+  const { setRefreshTokenToken } = useRefreshToken();
+  
   const { mutate: login, isPending } = useLoginMutation();
 
-  const onSubmit = (data: LoginValues) => {
-    login(data);
+  const onSubmit = (payload: LoginValues) => {
+    login(payload, {
+      onSuccess: (data) => {
+        const role = data.user?.role;
+        const refreshToken = data.refreshToken;
+
+        if (payload.remember && refreshToken) {
+          setRefreshTokenToken({ refreshToken });
+        }
+
+        switch (role) {
+          case "Provider":
+            goto(paths.app.resourceProvidor.profile.path);
+        }
+      },
+    });
   };
 
   const {
