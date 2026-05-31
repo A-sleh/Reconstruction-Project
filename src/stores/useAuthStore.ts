@@ -57,7 +57,7 @@ export const getRefreshToken = () => {
 
 export const clearTokens = () => {
   localStorage.removeItem(STORAGE_KEYS.accessToken);
-  localStorage.removeItem(STORAGE_KEYS.refreshToken);
+  sessionStorage.removeItem(STORAGE_KEYS.refreshToken);
 };
 
 export const useAuthStore = create<AuthState>()(

@@ -1,7 +1,12 @@
 import z from "zod";
 import i18n from "i18next";
 import ApiInstance from "@/config/api-instance";
-import useAuthStore, { AuthState, ROLE, useAccessToken } from "@/stores/useAuthStore";
+import useAuthStore, {
+  AuthState,
+  clearTokens,
+  ROLE,
+  useAccessToken,
+} from "@/stores/useAuthStore";
 import { useMutation } from "@tanstack/react-query";
 import { errorToast, successToast } from "@/components/common/Toast";
 
@@ -39,7 +44,7 @@ export const useLoginMutation = () => {
       successToast(i18n.t("auth.login.toast.success"));
       try {
         const { accessToken = "", user = null } = data || {};
-
+        clearTokens();
         setAuth({
           isAuthenticated: user != null,
           role: user?.role as ROLE,
