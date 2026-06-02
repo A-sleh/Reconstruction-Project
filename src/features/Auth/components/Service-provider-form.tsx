@@ -3,9 +3,8 @@ import { useTranslation } from "react-i18next";
 import Input from "@/components/inputs/Input";
 import { PickCoordsFromMap } from "@/components/model/PickCoordsFromMap.model";
 import ImageUploader from "@/components/inputs/ImageUploader";
-import Selector from "@/components/inputs/Selector";
 import { Label } from "@/components/ui/Label";
-import { workSiteTypes } from "../api/create-account";
+import WorkSiteType from "@/features/resource-providor/shared/WorkSiteType";
 
 const ServiceProviderForm = () => {
   const { t } = useTranslation();
@@ -13,13 +12,12 @@ const ServiceProviderForm = () => {
     register,
     setValue,
     watch,
-    getValues,
     formState: { errors },
   } = useFormContext();
 
   const logoUrl = watch("logoUrl");
   const providerRole = watch("providerRole");
-  const companyLocationValue = watch("companyLocation");
+  const companyLocationValue = watch("location");
   const workSiteType = watch("workSiteType");
 
   const changeProviderRole = (type: "Resource" | "Service") => {
@@ -82,23 +80,14 @@ const ServiceProviderForm = () => {
         fieldName="logoUrl"
       />
       <div>
-        <Selector
-          label={t("auth.register.engineer.specialtiyLabel")}
-          required={true}
-          value={workSiteType}
+        <WorkSiteType
+          asInput={true}
+          label={t("auth.register.providor.registerType")}
           setValue={(value: string) => {
-            console.log(value);
             setValue("workSiteType", value);
           }}
-        >
-          {workSiteTypes.map((item) => (
-            <option key={item} value={item.toString()}>
-              {t(
-                `auth.register.providor.workSitesCategories.${item.toLocaleLowerCase()}`,
-              )}
-            </option>
-          ))}
-        </Selector>
+          value={workSiteType}
+        />
       </div>
       <div className="flex flex-col md:flex-row gap-3">
         <Input
@@ -121,11 +110,11 @@ const ServiceProviderForm = () => {
                   "auth.register.providor.companyLocationPlaceholder",
                 )}
                 required={true}
-                fieldName="companyLocation"
+                fieldName="location"
                 errors={errors}
                 value={companyLocationValue}
-                setValue={(value) => setValue("companyLocation", value)}
-                {...register("companyLocation")}
+                setValue={(value) => setValue("location", value)}
+                {...register("location")}
               />
             </div>
             <span className="mt-7">

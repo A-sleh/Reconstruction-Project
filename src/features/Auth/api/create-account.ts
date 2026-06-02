@@ -5,16 +5,6 @@ import useAuthStore from "@/stores/useAuthStore";
 import { useMutation } from "@tanstack/react-query";
 import { errorToast, successToast } from "@/components/common/Toast";
 
-export const workSiteTypes = [
-  "Office",
-  "Company",
-  "Factory",
-  "Warehouse",
-  "Quarry",
-  "Workshop",
-  "Other",
-];
-
 //? Baisc schema for user information
 export const BaseRegistrationSchema = z.object({
   firstName: z
@@ -73,7 +63,7 @@ export const ResourceProviderSchema = BaseRegistrationSchema.extend({
   companyName: z
     .string()
     .min(2, i18n.t("auth.register.providor.validation.company_name_required")),
-  companyLocation: z
+  location: z
     .string()
     .min(
       5,
@@ -93,7 +83,7 @@ export const intialProviderValues: ResourceProviderFormValues = {
   ...intialBasicRegisterationValues,
   licenseOfService: "",
   companyName: "",
-  companyLocation: "",
+  location: "",
   companyAddress: "",
   workSiteType: "",
   logoUrl: "",
