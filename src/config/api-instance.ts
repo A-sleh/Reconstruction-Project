@@ -16,7 +16,7 @@ const ApiInstance = axios.create({
 ApiInstance.interceptors.request.use(
   (config) => {
     const locale = "ar";
-    const token = getAccessToken()?.accessToken;
+    const token = getAccessToken()?.state.accessToken;
 
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;

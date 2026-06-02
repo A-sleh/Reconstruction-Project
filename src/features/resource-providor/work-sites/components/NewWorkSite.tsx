@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Input from "@/components/inputs/Input";
-import Select from "@/components/inputs/Selector";
 import Model from "@/components/model/Model";
 import { useTranslation } from "react-i18next";
 import { PickCoordsFromMap } from "@/components/model/PickCoordsFromMap.model";
@@ -16,7 +15,9 @@ import {
   useCreateWorkSite,
   useUpdateWorkSite,
 } from "../api/actions";
-import { statuses, WorkSite, type SiteStatus } from "../api";
+import { WorkSite } from "../api";
+import ImageUploader from "@/components/inputs/ImageUploader";
+import WorkSiteType from "../../shared/WorkSiteType";
 
 interface Props {
   initial?: WorkSite | null;
@@ -43,19 +44,24 @@ export function NewWorkSite({ initial, openButton }: Props) {
   });
 
   // Watch the status value to keep the Radix Select component in sync
-  const currentStatus = watch("status");
-  const companyLocationValue = watch("companyLocation");
+  const logoUrl = watch("logoURL");
+  const companyLocationValue = watch("location");
+  const workSiteType = watch("workSiteType");
 
   // Sync initial/incoming data with the form fields whenever the modal opens
   useEffect(() => {
     reset({
       name: initial?.name ?? "",
-      companyLocation: initial?.companyLocation ?? "",
-      manager: initial?.manager ?? "",
+      workSiteType: initial?.workSiteType ?? "",
+      logoURL: initial?.logoURL ?? "",
+      location: initial?.location ?? "",
       address: initial?.address ?? "",
-      status: initial?.status ?? "active",
     });
   }, [initial, reset]);
+
+  const handleImageChange = (file: File | null) => {
+    setValue("logoURL", file?.name ?? "");
+  };
 
   const { mutate: createWorkSite, isPending: isCreated } = useCreateWorkSite();
   const { mutate: updateWorkSite, isPending: isUpdated } = useUpdateWorkSite();
@@ -84,7 +90,7 @@ export function NewWorkSite({ initial, openButton }: Props) {
       });
     }
   };
-
+  console.log(errors);
   return (
     <Model>
       <Model.Open opens="new-work-site">
@@ -133,7 +139,11 @@ export function NewWorkSite({ initial, openButton }: Props) {
               </Model.Close>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 p-6 overflow-auto max-h-130" style={{scrollbarWidth: 'none'}}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-5 p-6 overflow-auto max-h-130"
+              style={{ scrollbarWidth: "none" }}
+            >
               {/* Site Name Field */}
               <div className="flex flex-col gap-3 md:flex-row">
                 <Input
@@ -159,63 +169,51 @@ export function NewWorkSite({ initial, openButton }: Props) {
               </div>
 
               {/* Location & Manager Fields */}
-              <div className="flex gap-3">
-                <div className="flex-1">
-                  <Input
-                    type="text"
-                    readOnly={true}
-                    label={t("resourceProvidor.workSites.label-location")}
-                    placeholder={t(
-                      "resourceProvidor.workSites.placeholder-location",
-                    )}
-                    required={true}
-                    fieldName="companyLocation"
-                    errors={errors}
-                    value={companyLocationValue}
-                    setValue={(value) => setValue("companyLocation", value)}
-                    {...register("companyLocation")}
+              <div className="flex flex-col gap-3 md:flex-row">
+                <div className="flex gap-3 w-full">
+                  <div className="flex-1">
+                    <Input
+                      type="text"
+                      readOnly={true}
+                      label={t("resourceProvidor.workSites.label-location")}
+                      placeholder={t(
+                        "resourceProvidor.workSites.placeholder-location",
+                      )}
+                      required={true}
+                      fieldName="companyLoclocationation"
+                      errors={errors}
+                      value={companyLocationValue}
+                      setValue={(value) => setValue("location", value)}
+                      {...register("location")}
+                    />
+                  </div>
+                  <span className="mt-7">
+                    <PickCoordsFromMap
+                      setValue={setValue}
+                      value={companyLocationValue}
+                    />
+                  </span>
+                </div>
+                <div className="w-full">
+                  <WorkSiteType
+                    label={t("auth.register.providor.registerType")}
+                    setValue={(value: string) => {
+                      setValue("workSiteType", value);
+                    }}
+                    value={workSiteType}
+                    asInput={true}
                   />
                 </div>
-                <span className="mt-7">
-                  <PickCoordsFromMap
-                    setValue={setValue}
-                    value={companyLocationValue}
-                  />
-                </span>
               </div>
               <div className="flex flex-col gap-3 md:flex-row">
-                <Input
-                  label={t("resourceProvidor.workSites.label-manager")}
-                  id="site-manager"
-                  placeholder={t(
-                    "resourceProvidor.workSites.placeholder-manager",
-                  )}
-                  fieldName="manager"
-                  errors={errors}
-                  {...register("manager")}
+                <ImageUploader
+                  label={t("auth.register.providor.companyLogo")}
+                  required={true}
+                  fileName={logoUrl}
+                  onFileChange={handleImageChange}
+                  errors={errors ?? null}
+                  fieldName="logoURL"
                 />
-                <div className="space-y-2 relative z-100 flex-1">
-                  <Select
-                    setValue={(v) =>
-                      setValue("status", v as SiteStatus, {
-                        shouldValidate: true,
-                      })
-                    }
-                    value={currentStatus}
-                    label={t("resourceProvidor.workSites.label-status")}
-                  >
-                    {statuses.map((s) => (
-                      <option key={s} value={s}>
-                        {t(`resourceProvidor.workSites.status-${s}`)}
-                      </option>
-                    ))}
-                  </Select>
-                  {errors.status && (
-                    <p className="text-xs text-destructive font-medium">
-                      {errors.status.message}
-                    </p>
-                  )}
-                </div>
               </div>
 
               {/* Action Buttons */}

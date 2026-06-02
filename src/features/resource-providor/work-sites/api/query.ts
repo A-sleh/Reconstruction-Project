@@ -3,9 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS, SiteController, WorkSite, WorkSiteStatistics } from ".";
 
 
-export const fetchWorkSitesAPI = async (): Promise<WorkSite[]> => {
+export const fetchWorkSitesAPI = async (
+  filter?: string,
+): Promise<WorkSite[]> => {
   const { data } = await ApiInstance.get<WorkSite[]>(
     `/${SiteController.WorkSites}`,
+    {
+      params: filter ? { WorkSiteType: filter } : undefined,
+    },
   );
   return data;
 };
@@ -18,10 +23,10 @@ export const fetchWorkSitesStatisticsAPI =
     return data;
   };
 
-export const useWorkSites = () => {
+export const useWorkSites = (filter?: string) => {
   return useQuery<WorkSite[], unknown>({
-    queryKey: QUERY_KEYS.workSites(),
-    queryFn: fetchWorkSitesAPI,
+    queryKey: QUERY_KEYS.workSites(filter),
+    queryFn: () => fetchWorkSitesAPI(filter),
   });
 };
 

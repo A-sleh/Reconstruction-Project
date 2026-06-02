@@ -26,7 +26,7 @@ export const PickCoordsFromMap: React.FC<IPickCoordsFromMap> = ({
   const handleMapChange = (coords: LatLng) => {
     setSelectedLocation(coords);
     setValue(
-      "companyLocation",
+      "location",
       `${coords.lat.toFixed(6)}, ${coords.lng.toFixed(6)}`,
     );
   };
@@ -75,7 +75,7 @@ export const PickCoordsFromMap: React.FC<IPickCoordsFromMap> = ({
               onClick={() => {
                 if (selectedLocation) {
                   setValue(
-                    "companyLocation",
+                    "location",
                     `${selectedLocation.lat.toFixed(6)}, ${selectedLocation.lng.toFixed(6)}`,
                   );
                 }

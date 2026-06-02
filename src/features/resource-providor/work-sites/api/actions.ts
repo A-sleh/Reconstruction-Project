@@ -11,7 +11,7 @@ export const siteFormSchema = z.object({
     .string()
     .min(1, i18n.t("resourceProvidor.workSites.validation-name-req"))
     .trim(),
-  companyLocation: z
+  location: z
     .string()
     .min(1, i18n.t("resourceProvidor.workSites.validation-location-req"))
     .trim(),
@@ -19,29 +19,21 @@ export const siteFormSchema = z.object({
     .string()
     .min(1, i18n.t("resourceProvidor.workSites.validation-address-req"))
     .trim(),
-  manager: z
-    .string()
-    .min(1, i18n.t("resourceProvidor.workSites.validation-manager-req"))
-    .trim(),
-  status: z.enum(["active", "on-hold"] as const, {
-    required_error: i18n.t("resourceProvidor.workSites.validation-status-req"),
-    invalid_type_error: i18n.t(
-      "resourceProvidor.workSites.validation-status-invalid",
-    ),
-  }),
+  workSiteType: z.string(),
+  logoURL: z.string().optional(),
 });
 
 export type SiteFormValues = z.infer<typeof siteFormSchema>;
 export const initialSiteValues: SiteFormValues = {
   name: "",
-  companyLocation: "",
   address: "",
-  manager: "",
-  status: "active",
+  workSiteType: "",
+  logoURL: "",
+  location: "",
 };
 
 const updateWorkSiteApi = async (site: WorkSite): Promise<WorkSite> => {
-  console.log(site)
+  console.log(site);
   const { data } = await ApiInstance.put(
     `/${SiteController.WorkSites}/${site.id}`,
     site,
@@ -53,7 +45,7 @@ const createWorkSiteApi = async (
   payload: SiteFormValues,
 ): Promise<WorkSite> => {
   const { data } = await ApiInstance.post(
-    `/${SiteController.WorkSites}`,
+    `/${SiteController.WorkSiteCreate}`,
     payload,
   );
   return data;
@@ -74,7 +66,7 @@ export const useUpdateWorkSite = () => {
         i18n.t("resourceProvidor.workSites.site-updated", "Site updated"),
       );
       try {
-        queryClient.invalidateQueries(QUERY_KEYS.workSites());
+        // queryClient.invalidateQueries(QUERY_KEYS.workSites);
       } catch (e) {}
     },
     onError: (error: any) => {
@@ -101,7 +93,7 @@ export const useDeleteWorkSite = () => {
         i18n.t("resourceProvidor.workSites.site-deleted", "Site deleted"),
       );
       try {
-        queryClient.invalidateQueries(QUERY_KEYS.workSites());
+        // queryClient.invalidateQueries(QUERY_KEYS.workSites(undefined));
       } catch (e) {}
     },
     onError: (error: any) => {
@@ -128,7 +120,7 @@ export const useCreateWorkSite = () => {
         i18n.t("resourceProvidor.workSites.site-created", "Site created"),
       );
       try {
-        queryClient.invalidateQueries(QUERY_KEYS.workSites());
+        queryClient.invalidateQueries(QUERY_KEYS.workSites);
       } catch (e) {}
     },
     onError: (error: any) => {

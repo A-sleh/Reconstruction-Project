@@ -1,11 +1,11 @@
 export type SiteStatus = "active" | "on-hold";
 export interface WorkSite {
-  id: string;
+  id: number | string;
   name: string;
-  companyLocation: string;
+  location: string;
   address: string;
-  manager: string;
-  status: SiteStatus;
+  logoURL: string;
+  workSiteType: string;
 }
 export interface WorkSiteStatistics {
   totalWorkSites: number;
@@ -14,13 +14,14 @@ export interface WorkSiteStatistics {
 }
 
 export enum SiteController {
-  WorkSites = "workSites",
+  WorkSites = "Worksite/GetAll",
+  WorkSiteCreate = "Worksite/Create",
   WorkSitesStatistics = "workSites-statistics",
 }
 
 export const QUERY_KEYS = {
   resourceProvidor: ["resourceProvidor"],
-  workSites: () => ["resourceProvidor", "workSites"],
+  workSites: (filter?: string) => ["resourceProvidor", "workSites", filter ?? "all"],
   statistics: ["resourceProvidor", "statistics"],
 };
 

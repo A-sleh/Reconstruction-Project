@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, MapPin, Pencil, Trash2, User } from "lucide-react";
+import {
+  ArrowUpRight,
+  Landmark,
+  MapPin,
+  Pencil,
+  Trash2,
+  User,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { StatusBadge } from "../../shared/StatusBadge";
 import { Button } from "@/components/ui/button";
@@ -16,7 +23,7 @@ interface Props {
 }
 
 export function SiteCard({ site, index }: Props) {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const langIsArabic = i18n.language === "ar";
   const deleteMutation = useDeleteWorkSite();
 
@@ -58,7 +65,6 @@ export function SiteCard({ site, index }: Props) {
               className="h-8 w-8 rounded-full shadow-md hover:bg-destructive hover:text-destructive-foreground"
               onClick={(e) => {
                 e.preventDefault();
-                
               }}
               aria-label="Delete site"
               disabled={deleteMutation.isPending}
@@ -73,15 +79,25 @@ export function SiteCard({ site, index }: Props) {
         to={paths.app.resourceProvidor.workSite.getHref(site.id)}
         className="block h-full rounded-2xl border border-gray-300 bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
       >
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1 min-w-0">
-            <StatusBadge status={site.status} />
-            <h3 className="mt-3 text-lg font-semibold text-foreground group-hover:text-primary transition-smooth">
-              {site.name}
-            </h3>
-          </div>
+        <div className="flex items-center justify-between">
+          {/* //! TODO: replace the status with the real one from the API */}
+          <StatusBadge status={site.status || "active"} />
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted text-muted-foreground transition-smooth group-hover:gradient-accent group-hover:text-accent-foreground group-hover:opacity-0">
             <ArrowUpRight className="h-4 w-4" />
+          </div>
+        </div>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-end gap-4">
+            <img
+              src={site.logoURL}
+              alt={site.name}
+              className="h-8 w-8 rounded-full object-cover bg-black"
+            />
+            <div className="flex-1 min-w-0">
+              <h3 className="mt-3 text-lg font-semibold text-foreground group-hover:text-primary transition-smooth">
+                {site.name}
+              </h3>
+            </div>
           </div>
         </div>
 
@@ -91,8 +107,12 @@ export function SiteCard({ site, index }: Props) {
             <span className="truncate">{site.address}</span>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground">
-            <User className="h-4 w-4 text-accent" />
-            <span>{site.manager}</span>
+            <Landmark className="h-4 w-4 text-accent" />
+            <span>
+              {t(
+                `auth.register.providor.workSitesCategories.${site.workSiteType.toLowerCase()}`,
+              )}
+            </span>
           </div>
         </div>
       </Link>

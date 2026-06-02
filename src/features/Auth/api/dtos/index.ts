@@ -18,7 +18,7 @@ export const providerDTO = (
   const { providerRole } = provider;
   const {
     companyAddress,
-    companyLocation,
+    location,
     companyName,
     workSiteType,
     licenseOfService,
@@ -40,7 +40,7 @@ export const providerDTO = (
       workSite: {
         name: companyName,
         logoUrl: logoUrl,
-        location: companyLocation,
+        location,
         address: companyAddress,
         workSiteType: workSiteType,
       },
