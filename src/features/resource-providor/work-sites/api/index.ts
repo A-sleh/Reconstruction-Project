@@ -16,6 +16,8 @@ export interface WorkSiteStatistics {
 export enum SiteController {
   WorkSites = "Worksite/GetAll",
   WorkSiteCreate = "Worksite/Create",
+  WorkSiteUpdate = "Worksite/Update",
+  WorkSiteDelete = "Worksite/Delete",
   WorkSitesStatistics = "workSites-statistics",
 }
 

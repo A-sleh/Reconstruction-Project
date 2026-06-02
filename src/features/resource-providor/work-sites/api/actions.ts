@@ -33,9 +33,8 @@ export const initialSiteValues: SiteFormValues = {
 };
 
 const updateWorkSiteApi = async (site: WorkSite): Promise<WorkSite> => {
-  console.log(site);
   const { data } = await ApiInstance.put(
-    `/${SiteController.WorkSites}/${site.id}`,
+    `/${SiteController.WorkSiteUpdate}`,
     site,
   );
   return data;
@@ -52,7 +51,9 @@ const createWorkSiteApi = async (
 };
 
 const deleteWorkSiteApi = async (id: string | number): Promise<void> => {
-  await ApiInstance.delete(`/${SiteController.WorkSites}/${id}`);
+  await ApiInstance.delete(`/${SiteController.WorkSiteDelete}`, {
+    params: { WorkSiteId: id ?? 0 },
+  });
 };
 
 export const useUpdateWorkSite = () => {
@@ -66,7 +67,8 @@ export const useUpdateWorkSite = () => {
         i18n.t("resourceProvidor.workSites.site-updated", "Site updated"),
       );
       try {
-        // queryClient.invalidateQueries(QUERY_KEYS.workSites);
+        //@ts-ignore
+        queryClient.invalidateQueries(QUERY_KEYS.workSites);
       } catch (e) {}
     },
     onError: (error: any) => {
@@ -93,7 +95,8 @@ export const useDeleteWorkSite = () => {
         i18n.t("resourceProvidor.workSites.site-deleted", "Site deleted"),
       );
       try {
-        // queryClient.invalidateQueries(QUERY_KEYS.workSites(undefined));
+        //@ts-ignore
+        queryClient.invalidateQueries(QUERY_KEYS.workSites);
       } catch (e) {}
     },
     onError: (error: any) => {
@@ -120,6 +123,7 @@ export const useCreateWorkSite = () => {
         i18n.t("resourceProvidor.workSites.site-created", "Site created"),
       );
       try {
+        //@ts-ignore
         queryClient.invalidateQueries(QUERY_KEYS.workSites);
       } catch (e) {}
     },
