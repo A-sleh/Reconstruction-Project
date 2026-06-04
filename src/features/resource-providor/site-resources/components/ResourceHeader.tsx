@@ -74,18 +74,19 @@ export default function ResourceHeader({ site }: Props) {
             <h1 className="mt-2 text-3xl lg:text-4xl font-bold">{site.name}</h1>
             <p className="text-primary-foreground mt-1">{site.address}</p>
           </motion.div>
-          <ResourceModal
-            openButton={
-              <Button
-                variant="default"
-                size="lg"
-                className="self-start lg:self-auto bg-white text-primary hover:bg-white hover:opacity-70"
-              >
-                <Package className="h-4 w-4" />{" "}
-                {t("resourceProvidor.workSites.add-new-resource")}
-              </Button>
-            }
-          />
+          <Link
+            to={paths.app.resourceProvidor.newResources.getHref(site.id)}
+            className="self-start lg:self-auto"
+          >
+            <Button
+              variant="default"
+              size="lg"
+              className="bg-white text-primary hover:bg-white hover:opacity-70"
+            >
+              <Package className="h-4 w-4" />
+              {t("resourceProvidor.workSites.add-new-resource")}
+            </Button>
+          </Link>
         </div>
 
         <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-3xl">

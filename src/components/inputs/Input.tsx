@@ -1,4 +1,9 @@
-import React, { useEffect, useId, useState, type InputHTMLAttributes } from "react";
+import React, {
+  useEffect,
+  useId,
+  useState,
+  type InputHTMLAttributes,
+} from "react";
 import { EmptyObject, type FieldErrors } from "react-hook-form";
 import DisplayInputErrors from "../shared/Display-input-errors";
 
@@ -22,13 +27,13 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 function selectIcon(type: string) {
   switch (type) {
     case "password":
-        return <FiEye />;
+      return <FiEye />;
     case "email":
-        return <AiOutlineMail />
+      return <AiOutlineMail />;
     case "user":
-        return <FaRegUser />
+      return <FaRegUser />;
     case "personalIdentifier":
-        return <FaRegCircleUser />
+      return <FaRegCircleUser />;
     default:
       return null;
   }
@@ -46,7 +51,7 @@ const Input: React.FC<InputProps> = ({
   loadInitialValue = false,
   fieldName = "",
   errors = null,
-  iconType = '',
+  iconType = "",
   ...props
 }) => {
   const inputId = useId();
@@ -63,7 +68,7 @@ const Input: React.FC<InputProps> = ({
         {label && (
           <label
             htmlFor={inputId}
-            className={`text-[13px] mb-0.5 md:text-sm ${disabled ? "cursor-not-allowed opacity-70" : ""} ${invalid &&"text-red-400"}`}
+            className={`text-[13px] mb-0.5 md:text-sm ${disabled ? "cursor-not-allowed opacity-70" : ""} ${invalid ? "text-red-400" : ""}`}
           >
             {required && <span className="text-red-600">*</span>} {label}
           </label>
@@ -71,7 +76,9 @@ const Input: React.FC<InputProps> = ({
         {loadInitialValue ? (
           <div className="h-8 bg-gray-200 animate-pulse rounded-sm" />
         ) : (
-          <div className={`flex items-center  gap-3 rounded-lg border border-border px-2  md:px-4 py-2 md:py-3  has-focus-within:border-primary transition-all ${invalid&&"border-red-400"} border-gray-300 bg-gray-200/40`}>
+          <div
+            className={`flex items-center gap-3 rounded-lg border border-border px-2  md:px-4 py-2 md:py-3  has-focus-within:border-primary transition-all bg-gray-200/40 border-gray-300 ${invalid && "border-red-400 bg-red-400/20"}`}
+          >
             <input
               id={inputId}
               type={type}
@@ -86,7 +93,7 @@ const Input: React.FC<InputProps> = ({
           </div>
         )}
       </div>
-      <DisplayInputErrors errors={errors} fieldName={fieldName}  />
+      <DisplayInputErrors errors={errors} fieldName={fieldName} />
     </div>
   );
 };

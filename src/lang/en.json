@@ -233,6 +233,7 @@
         "label-price-per-unit": "Price per Unit ($)",
         "label-quantity": "Quantity",
         "label-category": "Category",
+        "label-resource-type": "Select resource type",
         "other-request": "Other (request new category)",
         "placeholder-proposed-category": "Proposed category name",
         "label-availability": "Availability",
@@ -248,6 +249,23 @@
         "order-request-note-part2": "that an admin must approve before it appears in the inventory.",
         "submit-order": "Submit Order Request",
         "add-resource": "Add Resource",
+        "add-another": "Add another",
+        "submit-resources": "Submit {{count}} resources",
+        "added-resources": "{{count}} resources added",
+        "select-to-edit": "Click an item to edit it before submitting.",
+        "no-added-resources": "No resources added yet. Use the form to add one.",
+        "uncategorized": "Uncategorized",
+        "dynamicSelector": {
+          "placeholder": "Select an item...",
+          "filterByCategory": "Filter by category",
+          "categories": "Categories",
+          "all": "All",
+          "categoryLabel": "Category:",
+          "searchPlaceholder": "Type to search...",
+          "noResults": "No matching results.",
+          "loadingMore": "Loading more..."
+        },
+        "remove-resource": "Remove",
         "card": {
           "price_per_unit": "Price / unit",
           "unit": "Unit",
@@ -256,9 +274,15 @@
         },
         "validation": {
           "name_required": "Name is required",
+          "price_required": "Price is required",
           "price_min": "Price must be 0 or greater",
           "quantity_min": "Quantity must be 0 or greater",
-          "customCategory_required": "Proposed category is required"
+          "customCategory_required": "Proposed category is required",
+          "unit_required": "Unit type is required",
+          "resource_type_required": "Resource type is required",
+          "image_required": "Image URL is required",
+          "description_required": "Description is required",
+          "availability_required": "Availability is required"
         }
       },
       "validation-name-req": "Site name is required",

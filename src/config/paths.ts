@@ -59,6 +59,10 @@ export const paths = {
         path: "/app/resource-providor/orders/:orderId",
         getHref: (orderId: number | string) => `/app/resource-providor/orders/${orderId}`,
       },
+      newResources: {
+        path: "/app/resource-providor/work-sites/:siteId/new-resources",
+        getHref: (siteId: number | string) => `/app/resource-providor/work-sites/${siteId}/new-resources`,
+      },
       workSites: {
         path: "/app/resource-providor/work-sites",
         getHref: () => `/app/resource-providor/work-sites`,

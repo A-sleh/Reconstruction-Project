@@ -1,12 +1,41 @@
 import ApiInstance from "@/config/api-instance";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import {
   QUERY_KEYS,
   WorkSiteResourcesController,
   SiteDetailsWithResources,
   WorkSiteResourcesStatistics,
   OrderRequest,
+  BankCategories,
 } from ".";
+import { Resources } from "i18next";
+
+const fetchResourceApi = async ({
+  CategoryId,
+  PageNumber = 1,
+  PageSize = 10,
+  Search,
+}: {
+  CategoryId: number;
+  Search: string;
+  PageSize: number;
+  PageNumber: number;
+}): Promise<Resources> => {
+  const { data } = await ApiInstance.get<Resources>(
+    `/${WorkSiteResourcesController.Resources}`,
+    {
+      params: { CategoryId, PageNumber, PageSize, Search },
+    },
+  );
+  return data;
+};
+
+const fetchResourceCategoriesAPI = async (): Promise<BankCategories> => {
+  const { data } = await ApiInstance.get<BankCategories>(
+    `/${WorkSiteResourcesController.BankCategories}`,
+  );
+  return data;
+};
 
 const fetchWorkSiteDetailsAPI = async (
   id: string | number,
@@ -50,5 +79,45 @@ export const useResourceStatistics = () => {
   return useQuery<WorkSiteResourcesStatistics, unknown>({
     queryKey: QUERY_KEYS.statistics,
     queryFn: fetchWorkSiteResourcesStatisticsAPI,
+  });
+};
+
+export const useBankCategories = () => {
+  return useQuery<BankCategories, unknown>({
+    queryKey: QUERY_KEYS.bankCategories,
+    queryFn: fetchResourceCategoriesAPI,
+  });
+};
+
+export const useResourcesInfinite = ({
+  search,
+  categoryId,
+}: {
+  search: string;
+  categoryId: number | "all";
+}) => {
+  return useInfiniteQuery<Resources, unknown>({
+    queryKey: [...QUERY_KEYS.resources, search, categoryId],
+
+    queryFn: async ({ pageParam = 1 }) => {
+      const parsedCategoryId =
+        categoryId === "all" ? undefined : (categoryId as number);
+
+      return await fetchResourceApi({
+        Search: search,
+        CategoryId: parsedCategoryId as number,
+        PageNumber: pageParam as number,
+        PageSize: 10,
+      });
+    },
+
+    initialPageParam: 1,
+
+    getNextPageParam: (lastPage) => {
+      if (lastPage.hasNextPage) {
+        return lastPage.pageNum + 1;
+      }
+      return undefined;
+    },
   });
 };

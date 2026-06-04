@@ -1,46 +1,77 @@
 import z from "zod";
 import i18n from "@/lib/i18n";
 import { errorToast, successToast } from "@/components/common/Toast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { MUTATION_KEYS, Resource, WorkSiteResourcesController } from ".";
+import { useMutation } from "@tanstack/react-query";
+import {
+  availabilities,
+  MUTATION_KEYS,
+  ResourcesPayload,
+  unitTypes,
+  WorkSiteResourcesController,
+} from ".";
 import ApiInstance from "@/config/api-instance";
 
 export const resourceSchema = z.object({
-  name: z
+  unit: z
     .string()
+    .nonempty(
+      i18n.t("resourceProvidor.workSites.resource.validation.unit_required"),
+    ),
+  resourceBankId: z
+    .number()
     .min(
       1,
       i18n.t(
-        "resourceProvidor.workSites.resource.validation.name_required",
-        "Name is required",
+        "resourceProvidor.workSites.resource.validation.resource_type_required",
       ),
     ),
-  description: z.string().optional(),
-  image: z.string().optional(),
-  unitType: z.string().optional(),
-  pricePerUnit: z.coerce.number().min(0),
-  quantity: z.coerce.number().min(0),
-  availability: z.string().optional(),
-  category: z.string().optional(),
-  customCategory: z.string().optional(),
+  resourceBank: z.any().optional(),
+  imageUrl: z
+    .string()
+    .nonempty(
+      i18n.t("resourceProvidor.workSites.resource.validation.image_required"),
+    ),
+  price: z.coerce
+    .number()
+    .refine((value) => !Number.isNaN(value), {
+      message: i18n.t(
+        "resourceProvidor.workSites.resource.validation.price_required",
+      ),
+    })
+    .min(1, i18n.t("resourceProvidor.workSites.resource.validation.price_min")),
+  description: z
+    .string()
+    .nonempty(
+      i18n.t(
+        "resourceProvidor.workSites.resource.validation.description_required",
+      ),
+    ),
+  availability: z
+    .string()
+    .nonempty(
+      i18n.t(
+        "resourceProvidor.workSites.resource.validation.availability_required",
+      ),
+    ),
+  file: z.file().optional(),
 });
 
-export type ResourceFormValues = z.infer<typeof resourceSchema>;
-export const defaultResourceValues: ResourceFormValues = {
-  name: "",
+export type Resource = z.infer<typeof resourceSchema>;
+export type ResourceFormValues = Resource & {
+  id?: string;
+};
+export const defaultResourceValues: Resource = {
+  availability: availabilities[0],
+  unit: unitTypes[0],
+  resourceBankId: 0,
   description: "",
-  image: "",
-  unitType: "piece",
-  pricePerUnit: 0,
-  quantity: 0,
-  availability: "in-stock",
-  category: "",
-  customCategory: "",
+  imageUrl: "",
+  price: 0,
 };
 
 const updateResourceApi = async (
   siteId: number | string,
-  payload: Omit<Resource,"availability">,
+  payload: ResourceFormValues,
 ): Promise<ResourceFormValues> => {
   const { data } = await ApiInstance.put(
     `/${WorkSiteResourcesController.WorkSite}/${siteId}/resources/${payload.id}`,
@@ -50,11 +81,10 @@ const updateResourceApi = async (
 };
 
 const createResourceApi = async (
-  siteId: number | string,
-  payload: ResourceFormValues,
-): Promise<ResourceFormValues> => {
+  payload: ResourcesPayload,
+): Promise<ResourcesPayload> => {
   const { data } = await ApiInstance.post(
-    `/${WorkSiteResourcesController.WorkSite}/${siteId}/resources`,
+    `/${WorkSiteResourcesController.AddResources}`,
     payload,
   );
   return data;
@@ -82,8 +112,10 @@ const deleteResourceApi = async (
 
 export const useUpdateResource = () => {
   return useMutation({
-    mutationFn: (params: { siteId: number | string, payload: Omit<Resource,"availability"> }) =>
-      updateResourceApi(params.siteId, params.payload),
+    mutationFn: (params: {
+      siteId: number | string;
+      payload: ResourceFormValues;
+    }) => updateResourceApi(params.siteId, params.payload),
     mutationKey: MUTATION_KEYS.resource.update(),
     onSuccess: (_: any) => {
       successToast(
@@ -130,10 +162,7 @@ export const useRequestToAddResource = () => {
 
 export const useCreateResource = () => {
   return useMutation({
-    mutationFn: (params: {
-      siteId: number | string;
-      payload: ResourceFormValues;
-    }) => createResourceApi(params.siteId, params.payload),
+    mutationFn: (payload: ResourcesPayload) => createResourceApi(payload),
     mutationKey: MUTATION_KEYS.resource.create(),
     onSuccess: (_: any) => {
       successToast(

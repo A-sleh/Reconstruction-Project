@@ -1,28 +1,36 @@
+import { Paginated } from "@/types";
 import { WorkSite } from "../../work-sites/api";
+import { Resource } from "./actions";
 
 export type OrderRequestStatus = "pending" | "approved" | "rejected";
 export type ResourceAvailability = "in-stock" | "low-stock" | "out-of-stock";
 export type UnitType =
-  | "kg"
-  | "ton"
-  | "m"
-  | "m²"
-  | "m³"
-  | "liter"
-  | "piece"
-  | "box"
-  | "hour";
+  | "Piece"
+  | "Box"
+  | "Bag"
+  | "Roll"
+  | "Kilogram"
+  | "Ton"
+  | "Liter"
+  | "Meter"
+  | "SquareMeter"
+  | "CubicMeter"
+  | "Hour"
+  | "Day";
 
 export const unitTypes: UnitType[] = [
-  "kg",
-  "ton",
-  "m",
-  "m²",
-  "m³",
-  "liter",
-  "piece",
-  "box",
-  "hour",
+  "Piece",
+  "Box",
+  "Bag",
+  "Roll",
+  "Kilogram",
+  "Ton",
+  "Liter",
+  "Meter",
+  "SquareMeter",
+  "CubicMeter",
+  "Hour",
+  "Day",
 ];
 export const availabilities: ResourceAvailability[] = [
   "in-stock",
@@ -40,17 +48,16 @@ export const initialCategories: string[] = [
   "Labor",
 ];
 
-export interface Resource {
-  id: string;
-  siteId: string | number;
+interface Category {
+  id: number;
+  name: string;
+}
+
+interface PureResource {
+  id: number;
   name: string;
   description: string;
-  image: string;
-  unitType: UnitType;
-  pricePerUnit: number;
-  category: string;
-  quantity: number;
-  availability: ResourceAvailability;
+  category: Category;
 }
 
 export interface OrderRequest {
@@ -80,16 +87,33 @@ export interface WorkSiteResourcesStatistics {
   pendingOrders: number;
 }
 
+export interface BankCategories {
+  categories: Category[];
+}
+
+export interface Resources extends Paginated<PureResource> {}
+
+export interface ResourcesPayload {
+  resources: Resource[];
+  workSiteId: number | string;
+}
+
 export enum WorkSiteResourcesController {
+  BankCategories = "Bank/GetBankCategories",
+  Resources = "Bank/GetResources",
+  AddResources = "Worksite/AddResources",
+
   WorkSite = "workSites",
   WorkSiteResourcesStatistics = "workSites-resources-statistics",
   OrderRequest = "orders",
 }
 
 export const QUERY_KEYS = {
-  resource: (id: any) => ["resourceProvidor", "workSite","resource", id],
+  resource: (id: any) => ["resourceProvidor", "workSite", "resource", id],
+  resources: ["resourceProvidor", "workSite", "resources"],
+  bankCategories: ["resourceProvidor", "resorces", "bank-categories"],
   statistics: ["resourceProvidor", "resorces", "statistics"],
-  orders: ["resourceProvidor", "resorces", "orders"]
+  orders: ["resourceProvidor", "resorces", "orders"],
 };
 
 export const MUTATION_KEYS = {

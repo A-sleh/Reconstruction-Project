@@ -237,6 +237,7 @@
         "other-request": "أخرى (طلب فئة جديدة)",
         "placeholder-proposed-category": "اسم الفئة المقترحة",
         "label-availability": "التوفر",
+        "label-resource-type": "حدد صنف المورد",
         "availability": {
           "in-stock": "متوفر",
           "low-stock": "كمية منخفضة",
@@ -249,6 +250,23 @@
         "order-request-note-part2": "يجب أن يوافق المسؤول عليه قبل أن يظهر في المخزون.",
         "submit-order": "إرسال طلب شراء",
         "add-resource": "إضافة مورد",
+        "add-another": "أضف موردًا آخر",
+        "submit-resources": "إرسال الموارد",
+        "added-resources": "تمت إضافة {{count}} مورد",
+        "select-to-edit": "انقر على عنصر لتحريره قبل الإرسال.",
+        "no-added-resources": "لم تُضف أي موارد بعد. استخدم النموذج لإضافة واحدة.",
+        "uncategorized": "غير مصنف",
+        "dynamicSelector": {
+          "placeholder": "اختر عنصراً...",
+          "filterByCategory": "تصفية حسب الصنف",
+          "categories": "الأصناف",
+          "all": "الكل",
+          "categoryLabel": "الصنف:",
+          "searchPlaceholder": "اكتب للبحث...",
+          "noResults": "لا توجد نتائج مطابقة.",
+          "loadingMore": "جاري تحميل المزيد..."
+        },
+        "remove-resource": "حذف",
         "card": {
           "price_per_unit": "السعر / الوحدة",
           "unit": "الوحدة",
@@ -257,9 +275,15 @@
         },
         "validation": {
           "name_required": "الاسم مطلوب",
+          "price_required": "السعر مطلوب",
           "price_min": "يجب أن يكون السعر 0 أو أكثر",
           "quantity_min": "يجب أن تكون الكمية 0 أو أكثر",
-          "customCategory_required": "اسم الفئة المقترحة مطلوب"
+          "customCategory_required": "اسم الفئة المقترحة مطلوب",
+          "unit_required": "نوع الوحدة مطلوب",
+          "resource_type_required": "نوع المورد مطلوب",
+          "image_required": "رابط الصورة مطلوب",
+          "description_required": "الوصف مطلوب",
+          "availability_required": "التوفر مطلوب"
         }
       },
       "validation-name-req": "اسم الموقع مطلوب",

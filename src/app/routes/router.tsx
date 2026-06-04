@@ -42,6 +42,9 @@ const ResourceProvidor_Orders = lazy(
 const ResourceProvidor_OrderDetails = lazy(
   () => import("@/pages/resource-providor/OrderDetails.view"),
 );
+const ResourceProvidor_NewResources = lazy(
+  () => import("@/pages/resource-providor/AddWorkSiteResources.view"),
+);
 const ResourceProvidor_Profile = lazy(
   () => import("@/pages/resource-providor/Profile.view"),
 );
@@ -180,6 +183,16 @@ const router: RouteObject[] = [
           <Suspense fallback={<LoadingFallback />}>
             <AuthGuard allowedRoles={["Provider"]}>
               <ResourceProvidor_OrderDetails />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.resourceProvidor.newResources.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Provider"]}>
+              <ResourceProvidor_NewResources />
             </AuthGuard>
           </Suspense>
         ),
