@@ -14,9 +14,11 @@ const InvestorForm = () => {
   } = useFormContext<InvestorFormValues>();
 
   const imageRecordValue = watch("imageRecord");
+  const imageLocalFile = watch("imageRecordFile");
 
   const handleImageChange = (file: File | null) => {
     setValue("imageRecord", file?.name ?? "");
+    setValue("imageRecordFile", file ?? undefined);
   };
 
   return (
@@ -25,7 +27,9 @@ const InvestorForm = () => {
         type="text"
         required={true}
         label={t("auth.register.investor.commercialRegistration")}
-        placeholder={t("auth.register.investor.commercialRegistrationPlaceholder")}
+        placeholder={t(
+          "auth.register.investor.commercialRegistrationPlaceholder",
+        )}
         fieldName="commercialRegistration"
         errors={errors ?? null}
         {...register("commercialRegistration")}
@@ -33,7 +37,7 @@ const InvestorForm = () => {
       <ImageUploader
         label={t("auth.register.investor.imageRecord")}
         required={true}
-        fileName={imageRecordValue}
+        value={imageLocalFile || imageRecordValue}
         onFileChange={handleImageChange}
         errors={errors ?? null}
         fieldName="imageRecord"

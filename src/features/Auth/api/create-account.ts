@@ -21,12 +21,7 @@ export const BaseRegistrationSchema = z.object({
     ),
   phone: z
     .string()
-    .min(
-      1,
-      i18n.t(
-        "auth.register.generalInformation.validation.phone",
-      ),
-    ),
+    .min(1, i18n.t("auth.register.generalInformation.validation.phone")),
   email: z.string().email(i18n.t("auth.register.validation.invalid_email")),
   password: z.string().min(
     6,
@@ -43,6 +38,7 @@ export const BaseRegistrationSchema = z.object({
       ),
     ),
   photoUrl: z.string(),
+  file: z.file().optional(),
 });
 export type BaseRegistrationValues = z.infer<typeof BaseRegistrationSchema>;
 export const intialBasicRegisterationValues: BaseRegistrationValues = {
@@ -51,6 +47,7 @@ export const intialBasicRegisterationValues: BaseRegistrationValues = {
   email: "",
   password: "",
   personalIdentifier: "",
+  file: undefined,
 };
 
 //? Base schema for  provider registration
@@ -70,6 +67,7 @@ export const ResourceProviderSchema = BaseRegistrationSchema.extend({
       i18n.t("auth.register.providor.validation.company_location_required"),
     ),
   logoUrl: z.string().optional(),
+  logoFile: z.file().optional(),
   companyAddress: z
     .string()
     .min(
@@ -103,6 +101,7 @@ export const InvestorSchema = BaseRegistrationSchema.extend({
   imageRecord: z
     .string()
     .min(2, i18n.t("auth.register.investor.validation.image_record")),
+  imageRecordFile: z.file().optional(),
 });
 export type InvestorFormValues = z.infer<typeof InvestorSchema>;
 export const intialInvestoreValues: InvestorFormValues = {
@@ -126,7 +125,6 @@ export const intialEngineerValues: EngineerFormValues = {
   specialtiy: "",
   syndicateId: "",
 };
-
 
 // API calls
 enum AuthController {

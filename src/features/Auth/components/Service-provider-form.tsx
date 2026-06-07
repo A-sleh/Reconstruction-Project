@@ -15,6 +15,7 @@ const ServiceProviderForm = () => {
     formState: { errors },
   } = useFormContext();
 
+  const imageLocalFile = watch("logoFile");
   const logoUrl = watch("logoUrl");
   const providerRole = watch("providerRole");
   const companyLocationValue = watch("location");
@@ -26,6 +27,7 @@ const ServiceProviderForm = () => {
 
   const handleImageChange = (file: File | null) => {
     setValue("logoUrl", file?.name ?? "");
+    setValue("logoFile", file ?? undefined);
   };
 
   return (
@@ -49,45 +51,6 @@ const ServiceProviderForm = () => {
           errors={errors}
           {...register("companyName")}
         />
-        <div className="w-full flex gap-1 flex-col">
-          <Label className="text-[13px] mb-0.5 md:text-sm">
-            {t("auth.register.providor.registerType")}
-          </Label>
-          <div className="flex gap-2 items-center">
-            <span
-              onClick={() => changeProviderRole("Service")}
-              className={`px-2 py-1 flex-1 text-center min-h-11 rounded-md border border-primary font-semibold hover:bg-primary hover:text-white transition-all ${providerRole != "Resource" && "bg-primary text-white"}`}
-              style={{ lineHeight: "30px" }}
-            >
-              {t("auth.register.providor.serviceProviderBtn")}
-            </span>
-            <span
-              onClick={() => changeProviderRole("Resource")}
-              className={`px-2 py-1 flex-1 text-center min-h-11 rounded-md border border-primary font-semibold hover:bg-primary hover:text-white transition-all ${providerRole == "Resource" && "bg-primary text-white"}`}
-              style={{ lineHeight: "30px" }}
-            >
-              {t("auth.register.providor.resourceProviderBtn")}
-            </span>
-          </div>
-        </div>
-      </div>
-      <ImageUploader
-        label={t("auth.register.providor.companyLogo")}
-        required={true}
-        fileName={logoUrl}
-        onFileChange={handleImageChange}
-        errors={errors ?? null}
-        fieldName="logoUrl"
-      />
-      <div>
-        <WorkSiteType
-          asInput={true}
-          label={t("auth.register.providor.registerType")}
-          setValue={(value: string) => {
-            setValue("workSiteType", value);
-          }}
-          value={workSiteType}
-        />
       </div>
       <div className="flex flex-col md:flex-row gap-3">
         <Input
@@ -99,7 +62,7 @@ const ServiceProviderForm = () => {
           errors={errors}
           {...register("companyAddress")}
         />
-        <div className="space-y-3">
+        <div className="space-y-3 w-full">
           <div className="flex gap-3">
             <div className="flex-1">
               <Input
@@ -126,6 +89,43 @@ const ServiceProviderForm = () => {
           </div>
         </div>
       </div>
+      <div className="flex flex-col md:flex-row gap-3">
+        <WorkSiteType
+          asInput={true}
+          label={t("auth.register.providor.registerType")}
+          setValue={(value: string) => {
+            setValue("workSiteType", value);
+          }}
+          value={workSiteType}
+        />
+        <div className="w-full flex gap-1 flex-col">
+          <div className="flex gap-2 items-center mt-auto">
+            <span
+              onClick={() => changeProviderRole("Service")}
+              className={`px-2 py-1 flex-1 text-center min-h-11 rounded-md border border-primary font-semibold hover:bg-primary hover:text-white transition-all ${providerRole != "Resource" && "bg-primary text-white"}`}
+              style={{ lineHeight: "30px" }}
+            >
+              {t("auth.register.providor.serviceProviderBtn")}
+            </span>
+            <span
+              onClick={() => changeProviderRole("Resource")}
+              className={`px-2 py-1 flex-1 text-center min-h-11 rounded-md border border-primary font-semibold hover:bg-primary hover:text-white transition-all ${providerRole == "Resource" && "bg-primary text-white"}`}
+              style={{ lineHeight: "30px" }}
+            >
+              {t("auth.register.providor.resourceProviderBtn")}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <ImageUploader
+        label={t("auth.register.providor.companyLogo")}
+        required={true}
+        value={imageLocalFile || logoUrl}
+        onFileChange={handleImageChange}
+        errors={errors ?? null}
+        fieldName="logoUrl"
+      />
     </div>
   );
 };

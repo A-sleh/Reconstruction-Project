@@ -13,9 +13,11 @@ const BaseRegisterInputs = () => {
     formState: { errors },
   } = useFormContext<BaseRegistrationValues>();
   const imageOfPhoto = watch("photoUrl");
+  const imageLocalFile = watch("file");
 
   const handleImageChange = (file: File | null) => {
     setValue("photoUrl", file?.name ?? "");
+    setValue("file", file ?? undefined);
   };
 
   return (
@@ -76,12 +78,8 @@ const BaseRegisterInputs = () => {
         <Input
           type="text"
           required={true}
-          label={t(
-            "auth.register.generalInformation.phone",
-          )}
-          placeholder={t(
-            "auth.register.generalInformation.phonePlaceHolder",
-          )}
+          label={t("auth.register.generalInformation.phone")}
+          placeholder={t("auth.register.generalInformation.phonePlaceHolder")}
           fieldName="phone"
           errors={errors ?? null}
           {...register("phone")}
@@ -90,7 +88,8 @@ const BaseRegisterInputs = () => {
       <ImageUploader
         label={t("auth.register.generalInformation.profilePhoto")}
         required={true}
-        fileName={imageOfPhoto}
+        fileName={"photoUrl"}
+        value={imageLocalFile || imageOfPhoto}
         onFileChange={handleImageChange}
         errors={errors ?? null}
         fieldName="photoUrl"
