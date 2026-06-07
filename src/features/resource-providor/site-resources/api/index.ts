@@ -101,6 +101,7 @@ export interface ResourcesPayload {
 export enum WorkSiteResourcesController {
   BankCategories = "Bank/GetBankCategories",
   Resources = "Bank/GetResources",
+  WorkSiteResources = "Worksite/GetResource",
   AddResources = "Worksite/AddResources",
 
   WorkSite = "workSites",

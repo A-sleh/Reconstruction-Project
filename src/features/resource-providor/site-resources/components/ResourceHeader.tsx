@@ -1,28 +1,24 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, Boxes, Clock, DollarSign, Package } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { StatusBadge } from "./StatusBadge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/config/paths";
-import { ResourceModal } from "./ResourceModel";
 import { useResourceStatistics } from "@/features/resource-providor/site-resources/api/query";
-import { type SiteDetailsWithResources } from "../api";
-
 interface StatItem {
   label: string;
   value: number | string;
   icon?: any;
 }
 
-interface Props {
-  site: SiteDetailsWithResources;
-}
-
-export default function ResourceHeader({ site }: Props) {
+export default function ResourceHeader() {
+  const { siteId } = useParams();
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language == "ar";
   const { data, isLoading } = useResourceStatistics();
+  const location = useLocation();
+  const { siteName, address, status, manager } = location.state;
 
   const stats: StatItem[] = [
     {
@@ -66,16 +62,17 @@ export default function ResourceHeader({ site }: Props) {
             transition={{ duration: 0.4 }}
           >
             <div className="flex items-center gap-3">
-              <StatusBadge status={site.status} />
+              <StatusBadge status={status || "active"} />
               <span className="text-sm text-primary-foreground">
-                {t("resourceProvidor.workSites.label-manager")} · {site.manager}
+                {t("resourceProvidor.workSites.label-manager")} ·{" "}
+                {manager || ""}
               </span>
             </div>
-            <h1 className="mt-2 text-3xl lg:text-4xl font-bold">{site.name}</h1>
-            <p className="text-primary-foreground mt-1">{site.address}</p>
+            <h1 className="mt-2 text-3xl lg:text-4xl font-bold">{siteName}</h1>
+            <p className="text-primary-foreground mt-1">{address}</p>
           </motion.div>
           <Link
-            to={paths.app.resourceProvidor.newResources.getHref(site.id)}
+            to={paths.app.resourceProvidor.newResources.getHref(Number(siteId))}
             className="self-start lg:self-auto"
           >
             <Button

@@ -9,15 +9,15 @@ const WorkSiteHeader = () => {
   const stats = [
     {
       label: t("resourceProvidor.workSites.activeSites"),
-      value: isLoading ? "—" : statsData?.activeWorkSites ?? 0,
+      value: isLoading ? "—" : (statsData?.activeWorkSites ?? 0),
     },
     {
       label: t("resourceProvidor.workSites.total-sites"),
-      value: isLoading ? "—" : statsData?.totalWorkSites ?? 0,
+      value: isLoading ? "—" : (statsData?.totalWorkSites ?? 0),
     },
     {
       label: t("resourceProvidor.workSites.traked-resourrces"),
-      value: isLoading ? "—" : statsData?.onHoldWorkSites ?? 0,
+      value: isLoading ? "—" : (statsData?.onHoldWorkSites ?? 0),
     },
   ];
 

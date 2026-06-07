@@ -10,6 +10,28 @@ import {
 } from ".";
 import { Resources } from "i18next";
 
+const fetchWorkSiteResourceApi = async ({
+  CategoryId,
+  PageNumber = 1,
+  PageSize = 10,
+  Search,
+  WorkSiteId,
+}: {
+  CategoryId: number;
+  Search: string;
+  PageSize: number;
+  PageNumber: number;
+  WorkSiteId: number | string;
+}): Promise<Resources> => {
+  const { data } = await ApiInstance.get<Resources>(
+    `/${WorkSiteResourcesController.WorkSiteResources}`,
+    {
+      params: { CategoryId, PageNumber, PageSize, Search, WorkSiteId },
+    },
+  );
+  return data;
+};
+
 const fetchResourceApi = async ({
   CategoryId,
   PageNumber = 1,
@@ -86,6 +108,42 @@ export const useBankCategories = () => {
   return useQuery<BankCategories, unknown>({
     queryKey: QUERY_KEYS.bankCategories,
     queryFn: fetchResourceCategoriesAPI,
+  });
+};
+
+export const useRWorkSiteResourcesInfinite = ({
+  search,
+  categoryId,
+  workSiteId,
+}: {
+  search: string;
+  workSiteId: number | string;
+  categoryId: number | "all";
+}) => {
+  return useInfiniteQuery<Resources, unknown>({
+    queryKey: [...QUERY_KEYS.resources, workSiteId, search, categoryId],
+
+    queryFn: async ({ pageParam = 1 }) => {
+      const parsedCategoryId =
+        categoryId === "all" ? undefined : (categoryId as number);
+
+      return await fetchWorkSiteResourceApi({
+        Search: search,
+        CategoryId: parsedCategoryId as number,
+        PageNumber: pageParam as number,
+        PageSize: 10,
+        WorkSiteId: workSiteId,
+      });
+    },
+
+    initialPageParam: 1,
+
+    getNextPageParam: (lastPage) => {
+      if (lastPage.hasNextPage) {
+        return lastPage.pageNum + 1;
+      }
+      return undefined;
+    },
   });
 };
 

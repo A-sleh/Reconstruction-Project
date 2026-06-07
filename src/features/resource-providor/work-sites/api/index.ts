@@ -6,6 +6,7 @@ export interface WorkSite {
   address: string;
   logoURL: string;
   workSiteType: string;
+  status: string;
 }
 export interface WorkSiteStatistics {
   totalWorkSites: number;
@@ -23,7 +24,11 @@ export enum SiteController {
 
 export const QUERY_KEYS = {
   resourceProvidor: ["resourceProvidor"],
-  workSites: (filter?: string) => ["resourceProvidor", "workSites", filter ?? "all"],
+  workSites: (filter?: string) => [
+    "resourceProvidor",
+    "workSites",
+    filter ?? "all",
+  ],
   statistics: ["resourceProvidor", "statistics"],
 };
 

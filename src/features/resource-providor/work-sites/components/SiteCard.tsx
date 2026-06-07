@@ -1,13 +1,6 @@
 import { motion } from "framer-motion";
-import {
-  ArrowUpRight,
-  Landmark,
-  MapPin,
-  Pencil,
-  Trash2,
-  User,
-} from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowUpRight, Landmark, MapPin, Pencil, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { StatusBadge } from "../../shared/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { paths } from "@/config/paths";
@@ -16,6 +9,7 @@ import ConfirmDelete from "@/components/model/ConfirmDelete";
 import { useTranslation } from "react-i18next";
 import { WorkSite } from "../api";
 import { useDeleteWorkSite } from "../api/actions";
+import useAuthStore, { User } from "@/stores/useAuthStore";
 
 interface Props {
   site: WorkSite;
@@ -24,8 +18,10 @@ interface Props {
 
 export function SiteCard({ site, index }: Props) {
   const { t, i18n } = useTranslation();
+  const goto = useNavigate();
   const langIsArabic = i18n.language === "ar";
   const deleteMutation = useDeleteWorkSite();
+  const { firstName, lastName } = useAuthStore((s) => s.user as User);
 
   const onDelete = (s: WorkSite) => {
     deleteMutation.mutate(s.id);
@@ -75,8 +71,17 @@ export function SiteCard({ site, index }: Props) {
         />
       </div>
 
-      <Link
-        to={paths.app.resourceProvidor.workSite.getHref(site.id)}
+      <button
+        onClick={() => {
+          goto(paths.app.resourceProvidor.workSite.getHref(site.id), {
+            state: {
+              siteName: site.name,
+              address: site.address,
+              status: site?.status || "active",
+              manager: `${firstName} ${lastName}`,
+            },
+          });
+        }}
         className="block h-full rounded-2xl border border-gray-300 bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
       >
         <div className="flex items-center justify-between">
@@ -115,7 +120,7 @@ export function SiteCard({ site, index }: Props) {
             </span>
           </div>
         </div>
-      </Link>
+      </button>
     </motion.div>
   );
 }
