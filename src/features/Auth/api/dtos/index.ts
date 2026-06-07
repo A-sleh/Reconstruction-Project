@@ -1,11 +1,10 @@
 import {
   BaseRegistrationValues,
+  InvestorFormValues,
   ResourceProviderFormValues,
 } from "../create-account";
 
-export const providerDTO = (
-  provider: BaseRegistrationValues & ResourceProviderFormValues,
-) => {
+const destructTheUser = (user: BaseRegistrationValues) => {
   const {
     email,
     firstName,
@@ -14,7 +13,21 @@ export const providerDTO = (
     photoUrl,
     personalIdentifier,
     phone,
-  } = provider;
+  } = user;
+  return {
+    email,
+    firstName,
+    lastName,
+    password,
+    photoUrl,
+    personalIdentifier,
+    phone,
+  };
+};
+
+export const providerDTO = (
+  provider: BaseRegistrationValues & ResourceProviderFormValues,
+) => {
   const { providerRole } = provider;
   const {
     companyAddress,
@@ -25,15 +38,7 @@ export const providerDTO = (
     logoUrl,
   } = provider;
   return {
-    user: {
-      email,
-      phone,
-      firstName,
-      lastName,
-      password,
-      photoUrl,
-      personalIdentifier,
-    },
+    user: destructTheUser(provider),
     provider: {
       licenseOfService,
       providerRole,
@@ -44,6 +49,18 @@ export const providerDTO = (
         address: companyAddress,
         workSiteType: workSiteType,
       },
+    },
+  };
+};
+
+export const investorDTO = (
+  investor: BaseRegistrationValues & InvestorFormValues,
+) => {
+  const { commercialRegistration } = investor;
+  return {
+    user: destructTheUser(investor),
+    investor: {
+      commercialRegisterId: commercialRegistration,
     },
   };
 };

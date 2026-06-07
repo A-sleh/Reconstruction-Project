@@ -24,6 +24,8 @@ const ProviderRegisteration = () => {
           replace: true,
           state: {
             message: t("auth.register.providor.successRegisterModelInfo"),
+            email: data.email,
+            password: data.password
           },
         });
       },

@@ -7,6 +7,7 @@ export interface WorkSite {
   logoURL: string;
   workSiteType: string;
   status: string;
+  isActive: boolean;
 }
 export interface WorkSiteStatistics {
   totalWorkSites: number;

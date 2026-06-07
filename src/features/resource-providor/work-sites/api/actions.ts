@@ -4,6 +4,7 @@ import ApiInstance from "@/config/api-instance";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { successToast, errorToast } from "@/components/common/Toast";
 import { WorkSite, QUERY_KEYS, SiteController, MUTATION_KEYS } from "./index";
+import { workSiteTypes } from "../../shared/WorkSiteType";
 
 // Define the validation schema with dynamic translation messages inside the component
 export const siteFormSchema = z.object({
@@ -21,13 +22,14 @@ export const siteFormSchema = z.object({
     .trim(),
   workSiteType: z.string(),
   logoURL: z.string().optional(),
+  file: z.file().optional(),
 });
 
 export type SiteFormValues = z.infer<typeof siteFormSchema>;
 export const initialSiteValues: SiteFormValues = {
   name: "",
   address: "",
-  workSiteType: "",
+  workSiteType: workSiteTypes[0],
   logoURL: "",
   location: "",
 };

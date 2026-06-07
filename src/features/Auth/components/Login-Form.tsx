@@ -1,5 +1,5 @@
 import { paths } from "@/config/paths";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { LoginSchema, LoginValues, useLoginMutation } from "../api/login";
 import { useForm } from "react-hook-form";
@@ -10,10 +10,12 @@ import Input from "@/components/inputs/Input";
 import { useRefreshToken } from "@/stores/useAuthStore";
 
 const LoginForm = () => {
-  const { t } = useTranslation();
   const goto = useNavigate();
+  const { t } = useTranslation();
   const { setRefreshTokenToken } = useRefreshToken();
-  
+  const location = useLocation();
+  const { email, password } = location.state;
+
   const { mutate: login, isPending } = useLoginMutation();
 
   const onSubmit = (payload: LoginValues) => {
@@ -40,6 +42,10 @@ const LoginForm = () => {
     handleSubmit,
   } = useForm({
     resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email,
+      password,
+    },
     criteriaMode: "all",
     mode: "onSubmit",
   });

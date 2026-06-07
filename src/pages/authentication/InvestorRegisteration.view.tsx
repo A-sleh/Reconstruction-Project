@@ -2,17 +2,34 @@ import { AuthLayout } from "@/components/layouts/Auth-layout";
 import { MultiStepForm } from "@/components/common/MultiStepForm";
 import BaseRegisterInputs from "@/features/Auth/components/Base-register-inputs";
 import { useTranslation } from "react-i18next";
-import { BaseRegistrationSchema, InvestorSchema, useInvestorRegister } from "@/features/Auth/api/create-account";
+import {
+  BaseRegistrationSchema,
+  InvestorSchema,
+  useInvestorRegister,
+} from "@/features/Auth/api/create-account";
 import InvestorForm from "@/features/Auth/components/Investor-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { paths } from "@/config/paths";
+import { investorDTO } from "@/features/Auth/api/dtos";
 
 const InvestorRegisteration = () => {
   const { t } = useTranslation();
+  const goto = useNavigate();
   const { mutate: registerInvestor, isPending } = useInvestorRegister();
 
   const handlSubmitForm = (data: any) => {
-    registerInvestor(data as any);
+    registerInvestor(investorDTO(data) as any, {
+      onSuccess: (_) => {
+        goto(paths.auth.login.path, {
+          replace: true,
+          state: {
+            message: t("auth.register.providor.successRegisterModelInfo"),
+            email: data.email,
+            password: data.password,
+          },
+        });
+      },
+    });
   };
 
   return (

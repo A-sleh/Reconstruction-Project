@@ -82,11 +82,10 @@ export function SiteCard({ site, index }: Props) {
             },
           });
         }}
-        className="block h-full rounded-2xl border border-gray-300 bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
+        className="block h-full w-full rounded-xl p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
       >
-        <div className="flex items-center justify-between">
-          {/* //! TODO: replace the status with the real one from the API */}
-          <StatusBadge status={site.status || "active"} />
+        <div className="flex items-center justify-between ">
+          <StatusBadge status={site.isActive ? "active" : "on-hold"} />
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted text-muted-foreground transition-smooth group-hover:gradient-accent group-hover:text-accent-foreground group-hover:opacity-0">
             <ArrowUpRight className="h-4 w-4" />
           </div>

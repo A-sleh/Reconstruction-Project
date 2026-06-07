@@ -129,7 +129,7 @@ export const intialEngineerValues: EngineerFormValues = {
 // API calls
 enum AuthController {
   ProviderRegister = "/Auth/ProviderSignUp",
-  InvestorRegister = "auth/register/investor",
+  InvestorRegister = "/Auth/InvestorSignUp",
   EngineerRegister = "auth/register/engineer",
 }
 

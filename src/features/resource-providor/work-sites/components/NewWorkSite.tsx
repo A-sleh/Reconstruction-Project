@@ -24,7 +24,7 @@ interface Props {
   openButton?: React.ReactNode | null;
 }
 
-export function NewWorkSite({ initial, openButton }: Props) {
+export function NewWorkSite({ initial = null, openButton }: Props) {
   const { t } = useTranslation();
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
@@ -44,23 +44,27 @@ export function NewWorkSite({ initial, openButton }: Props) {
   });
 
   // Watch the status value to keep the Radix Select component in sync
+  const logoFile = watch("file");
   const logoUrl = watch("logoURL");
   const companyLocationValue = watch("location");
   const workSiteType = watch("workSiteType");
+  const preventUpdateWorkSiteType = initial != null;
 
   // Sync initial/incoming data with the form fields whenever the modal opens
   useEffect(() => {
-    reset({
-      name: initial?.name ?? "",
-      workSiteType: initial?.workSiteType ?? "",
-      logoURL: initial?.logoURL ?? "",
-      location: initial?.location ?? "",
-      address: initial?.address ?? "",
-    });
+    if (initial)
+      reset({
+        name: initial?.name ?? "",
+        workSiteType: initial?.workSiteType ?? "",
+        logoURL: initial?.logoURL ?? "",
+        location: initial?.location ?? "",
+        address: initial?.address ?? "",
+      });
   }, [initial, reset]);
 
   const handleImageChange = (file: File | null) => {
     setValue("logoURL", file?.name ?? "");
+    setValue("file", file ?? undefined);
   };
 
   const { mutate: createWorkSite, isPending: isCreated } = useCreateWorkSite();
@@ -90,7 +94,7 @@ export function NewWorkSite({ initial, openButton }: Props) {
       });
     }
   };
-  console.log(errors);
+
   return (
     <Model>
       <Model.Open opens="new-work-site">
@@ -194,7 +198,7 @@ export function NewWorkSite({ initial, openButton }: Props) {
                     />
                   </span>
                 </div>
-                <div className="w-full">
+                <div className="w-full" hidden={preventUpdateWorkSiteType}>
                   <WorkSiteType
                     label={t("auth.register.providor.registerType")}
                     setValue={(value: string) => {
@@ -209,8 +213,8 @@ export function NewWorkSite({ initial, openButton }: Props) {
                 <ImageUploader
                   label={t("auth.register.providor.companyLogo")}
                   required={true}
-                  fileName={logoUrl}
                   onFileChange={handleImageChange}
+                  value={logoFile || logoUrl}
                   errors={errors ?? null}
                   fieldName="logoURL"
                 />
