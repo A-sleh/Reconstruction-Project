@@ -299,6 +299,60 @@
       "delete-description-prefix": "ملاحظة: سيتم نقل البيانات إلى سلة المهملات.",
       "btn-delete-confirm": "حذف"
     },
+    "profile": {
+      "tabs": {
+        "account": "حسابي",
+        "work": "معلومات العمل",
+        "settings": "الإعدادات"
+      },
+      "title": "الملف الشخصي لمقدم الخدمة",
+      "description": "قم بتحديث حسابك وإعداداتك للحفاظ على ملف المزود محدثًا.",
+      "account": {
+        "title": "معلومات الحساب",
+        "subtitle": "إليك تفاصيل حسابك الشخصي",
+        "firstName": "اسمك",
+        "firstNamePlaceholder": "أدخل اسمك",
+        "lastName": "الكنية",
+        "lastNamePlaceholder": "أدخل الكنية",
+        "email": "بريدك الإلكتروني",
+        "emailPlaceholder": "أدخل بريدك الإلكتروني",
+        "password": "كلمة المرور",
+        "passwordPlaceholder": "أدخل كلمة المرور",
+        "personalIdentifier": "الرقم الوطني",
+        "personalIdentifierPlaceholder": "أدخل الرقم الوطني",
+        "phone": "رقم الهاتف",
+        "phonePlaceholder": "أدخل رقم الهاتف",
+        "profilePhoto": "الصورة الشخصية"
+      },
+      "work": {
+        "title": "بيانات العمل والترخيص",
+        "subtitle": "أدخل معلومات الترخيص الخاصة بك",
+        "license": "الرخصة",
+        "licensePlaceholder": "أدخل رخصة الخدمة"
+      },
+      "settings": {
+        "title": "إعدادات الحساب",
+        "subtitle": "إدارة تفضيلات الإشعارات والحساب",
+        "notificationEmail": {
+          "title": "تلقي الإشعارات عبر البريد الإلكتروني",
+          "description": "احصل على تحديثات مهمة عبر بريدك الإلكتروني"
+        },
+        "instantNotifications": {
+          "title": "الإشعارات الفورية",
+          "description": "استلام التنبيهات داخل التطبيق"
+        },
+        "marketingMessages": {
+          "title": "رسائل تسويقية",
+          "description": "عروض ومستجدات من فريقنا"
+        },
+        "dangerZone": {
+          "title": "منطقة خطرة",
+          "description": "حذف الحساب سيؤدي إلى إزالة جميع بياناتك بشكل دائم ولا يمكن التراجع عن هذا الإجراء.",
+          "button": "حذف الحساب"
+        }
+      },
+      "saveChanges": "حفظ التغييرات"
+    },
     "investor-request": {
       "investor-header": {
         "badge": "عمليات المستثمرين",
