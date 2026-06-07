@@ -190,8 +190,8 @@
       "back-to-sites": "العودة إلى المواقع",
       "tabs": {
         "inventory": "المخزون",
-        "inventory_count": "المخزون ({{count}})",
-        "orders_count": "طلبات معلقة ({{count}})"
+        "inventory_count": "المخزون",
+        "orders_count": "طلبات معلقة"
       },
       "toast": {
         "resource-updated": "تم تحديث المورد",
@@ -801,6 +801,9 @@
     "projectDate": "تاريخ البدء"
   },
   "common": {
+    "logout": "تسجيل الخروج",
+    "logoutSuccess": "تم تسجيل الخروج بنجاح",
+    "logoutError": "فشل تسجيل الخروج",
     "banner": {
       "message": "لديك تغييرات غير محفوظة على كميات الموارد.",
       "cancel": "تجاهل",

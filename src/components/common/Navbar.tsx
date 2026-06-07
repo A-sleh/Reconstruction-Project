@@ -11,6 +11,7 @@ import { paths } from "@/config/paths";
 import NotificationBox from "./Notification-box";
 import ToggleLanguage from "./Toggle-language";
 import { useTranslation } from "react-i18next";
+import Avatar from "./Avatar";
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -51,11 +52,7 @@ const Navbar = () => {
     <header className="bg-white shadow-sm w-[95%] md:w-[98%] mx-auto rounded-lg sticky top-4 z-50">
       <div className="mx-auto flex gap-4 px-3 md:px-8 py-3 items-center justify-between flex-row-reverse">
         <div className="flex items-end flex-row-reverse gap-3">
-          <img
-            className="w-10 h-10 rounded-full object-contain"
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-            alt="user-avatar"
-          />
+          <Avatar />
           <span className="mx-2 flex items-end gap-1">
             <NotificationBox />
           </span>

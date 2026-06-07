@@ -189,8 +189,8 @@
       "back-to-sites": "Back to sites",
       "tabs": {
         "inventory": "Inventory",
-        "inventory_count": "Inventory ({{count}})",
-        "orders_count": "Order Requests ({{count}})"
+        "inventory_count": "Inventory",
+        "orders_count": "Order Requests"
       },
       "toast": {
         "resource-updated": "Resource updated",
@@ -804,6 +804,9 @@
     "projectDate": "Date"
   },
   "common": {
+    "logout": "Logout",
+    "logoutSuccess": "Logged out successfully",
+    "logoutError": "Logout failed",
     "banner": {
       "message": "You have unsaved changes to resource quantities.",
       "cancel": "Discard",
