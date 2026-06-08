@@ -75,8 +75,8 @@ export function SiteCard({ site, index }: Props) {
         onClick={() => {
           goto(paths.app.resourceProvidor.workSite.getHref(site.id), {
             state: {
-              siteName: site.name,
-              address: site.address,
+              siteName: site?.name,
+              address: site?.address,
               status: site?.status || "active",
               manager: `${firstName} ${lastName}`,
             },

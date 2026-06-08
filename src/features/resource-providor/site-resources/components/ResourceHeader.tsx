@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/config/paths";
 import { useResourceStatistics } from "@/features/resource-providor/site-resources/api/query";
+import useExchangeState from "@/hooks/useExchangeState";
 interface StatItem {
   label: string;
   value: number | string;
@@ -17,8 +18,17 @@ export default function ResourceHeader() {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language == "ar";
   const { data, isLoading } = useResourceStatistics();
-  const location = useLocation();
-  const { siteName, address, status, manager } = location.state;
+  const {
+    siteName = "",
+    address = "",
+    status = "",
+    manager = "",
+  } = useExchangeState<{
+    siteName: string;
+    address: string;
+    status: string;
+    manager: string;
+  }>();
 
   const stats: StatItem[] = [
     {
@@ -62,7 +72,9 @@ export default function ResourceHeader() {
             transition={{ duration: 0.4 }}
           >
             <div className="flex items-center gap-3">
-              <StatusBadge status={status || "active"} />
+              <div className="bg-white rounded-full">
+                <StatusBadge status={status ? "active" : "on-hold"} />
+              </div>
               <span className="text-sm text-primary-foreground">
                 {t("resourceProvidor.workSites.label-manager")} ·{" "}
                 {manager || ""}
