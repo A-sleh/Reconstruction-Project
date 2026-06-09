@@ -1,5 +1,5 @@
 import { paths } from "@/config/paths";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { LoginSchema, LoginValues, useLoginMutation } from "../api/login";
 import { useForm } from "react-hook-form";
@@ -8,13 +8,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@/components/inputs/Button";
 import Input from "@/components/inputs/Input";
 import { useRefreshToken } from "@/stores/useAuthStore";
+import useExchangeState from "@/hooks/useExchangeState";
 
 const LoginForm = () => {
   const goto = useNavigate();
   const { t } = useTranslation();
   const { setRefreshTokenToken } = useRefreshToken();
-  const location = useLocation();
-  const { email, password } = location.state;
+  const { email = "", password = "" } = useExchangeState<{
+    email: string;
+    password: string;
+  }>();
 
   const { mutate: login, isPending } = useLoginMutation();
 

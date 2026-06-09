@@ -167,10 +167,12 @@
       "label-start-date": "تاريخ البدء",
       "label-progress": "نسبة الإنجاز (%)",
       "btn-cancel": "إلغاء",
+      "btn-deactivate": "إلغاء تفعيل الموقع",
       "btn-create": "إنشاء موقع",
       "site-created": "تم إنشاء موقع العمل بنجاح.",
       "create-error": "فشل في إنشاء موقع العمل.",
       "site-updated": "تم تحديث موقع العمل بنجاح.",
+      "site-activation-updated": "تم تحديث حالة تفعيل موقع العمل بنجاح.",
       "update-error": "فشل في تحديث موقع العمل.",
       "site-deleted": "تم حذف موقع العمل.",
       "delete-error": "فشل في حذف موقع العمل.",
@@ -193,6 +195,9 @@
         "inventory_count": "المخزون",
         "orders_count": "طلبات معلقة"
       },
+      "actions": {
+        "load-more": "تحميل المزيد"
+      },
       "toast": {
         "resource-updated": "تم تحديث المورد",
         "resource-added": "تمت إضافة المورد",
@@ -211,6 +216,10 @@
         }
       },
       "filters": {
+        "open": "تصفية الفئات",
+        "categoryFilterTitle": "اختر الفئة",
+        "categoryFilterDescription": "حدد فئة لتضييق قائمة المخزون.",
+        "availableCategories": "فئة متاحة",
         "all": "الكل"
       },
       "no-resources-match": "لا توجد موارد تتطابق مع مرشحاتك.",
@@ -858,6 +867,7 @@
     "logout": "تسجيل الخروج",
     "logoutSuccess": "تم تسجيل الخروج بنجاح",
     "logoutError": "فشل تسجيل الخروج",
+    "loading": "جاري التحميل...",
     "banner": {
       "message": "لديك تغييرات غير محفوظة على كميات الموارد.",
       "cancel": "تجاهل",

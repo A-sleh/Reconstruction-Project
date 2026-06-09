@@ -128,9 +128,9 @@ export const intialEngineerValues: EngineerFormValues = {
 
 // API calls
 enum AuthController {
-  ProviderRegister = "/Auth/ProviderSignUp",
-  InvestorRegister = "/Auth/InvestorSignUp",
-  EngineerRegister = "auth/register/engineer",
+  ProviderRegister = "/auth/provider-sign-up",
+  InvestorRegister = "/auth/investor-sign-up",
+  EngineerRegister = "/auth/engineer-signUp",
 }
 
 const registerProviderApi = async (payload: ResourceProviderFormValues) => {

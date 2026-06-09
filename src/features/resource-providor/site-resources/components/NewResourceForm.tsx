@@ -6,18 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  ResourceAvailability,
-  UnitType,
-} from "@/data/resource-providor/mockData";
+import { UnitType } from "@/data/resource-providor/mockData";
 import { useTranslation } from "react-i18next";
 import {
   defaultResourceValues,
+  generateMockResourceValues,
   Resource,
   resourceSchema,
 } from "../api/actions";
 import ImageUploader from "@/components/inputs/ImageUploader";
-import { availabilities, unitTypes } from "../api";
+import { unitTypes } from "../api";
 import { DynamicAsyncSelector } from "./SmartDataGrid";
 
 interface Props {
@@ -46,18 +44,12 @@ export function NewResourceForm({ initial, onSubmit }: Props) {
   const unitType = watched.unit;
   const image = watched.imageUrl;
   const localImageFile = watched?.file;
-  const availability = watched.availability;
-  const resourceBank = watched.resourceBank;
-
-  
-
-  console.log(resourceBank,"<==== here");
 
   // Sync initial/incoming data with the form fields whenever the modal opens
   useEffect(() => {
     if (initial)
       reset({
-        availability: initial?.availability ?? "",
+        isAvailable: initial?.isAvailable ?? "",
         description: initial?.description ?? "",
         file: initial?.file,
         imageUrl: initial?.imageUrl ?? "",
@@ -71,6 +63,10 @@ export function NewResourceForm({ initial, onSubmit }: Props) {
   const handleImageChange = (file: File | null) => {
     setValue("imageUrl", file?.name ?? "");
     setValue("file", file ?? undefined);
+  };
+
+  const handleGenerateMockData = () => {
+    reset(generateMockResourceValues());
   };
 
   const handleFormSubmit = (values: Resource) => {
@@ -109,36 +105,14 @@ export function NewResourceForm({ initial, onSubmit }: Props) {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Select
-              label={t(
-                "resourceProvidor.workSites.resource.label-availability",
-              )}
-              fieldName="availability"
-              errors={errors}
-              value={availability}
-              setValue={(v) =>
-                setValue("availability", v as ResourceAvailability)
-              }
-            >
-              {availabilities.map((a) => (
-                <option key={a} value={a}>
-                  {t(`resourceProvidor.workSites.resource.availability.${a}`)}
-                </option>
-              ))}
-            </Select>
-          </div>
-
-          <DynamicAsyncSelector
-            placeholder="ابحث عن الإسمنت أو المواد هنا..."
-            value={watched.resourceBank}
-            onSelect={(selected) => {
-              setValue("resourceBankId", Number(selected?.id));
-              setValue("resourceBank", selected);
-            }}
-          />
-        </div>
+        <DynamicAsyncSelector
+          placeholder="ابحث عن الإسمنت أو المواد هنا..."
+          value={watched.resourceBank}
+          onSelect={(selected) => {
+            setValue("resourceBankId", Number(selected?.id));
+            setValue("resourceBank", selected);
+          }}
+        />
 
         {/* unit price & quanitty & unit type  */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -182,7 +156,18 @@ export function NewResourceForm({ initial, onSubmit }: Props) {
         />
 
         {/* Controlers buttons  */}
-        <div className="flex justify-end gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row justify-between gap-3 pt-2">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleGenerateMockData}
+          >
+            {t(
+              "resourceProvidor.workSites.resource.btn-generate-mock-data",
+              "Generate mock data",
+            )}
+          </Button>
+
           <Button type="submit">
             {initial
               ? t("resourceProvidor.workSites.btn-save")

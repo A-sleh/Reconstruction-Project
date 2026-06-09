@@ -56,10 +56,12 @@ interface Category {
 interface PureResource {
   id: number;
   name: string;
+  imageURL: string;
   description: string;
   category: Category;
+  price: number;
+  unit: UnitType;
 }
-
 export interface OrderRequest {
   id: string;
   siteId: string;
@@ -99,10 +101,11 @@ export interface ResourcesPayload {
 }
 
 export enum WorkSiteResourcesController {
-  BankCategories = "Bank/GetBankCategories",
-  Resources = "Bank/GetResources",
-  WorkSiteResources = "Worksite/GetResource",
-  AddResources = "Worksite/AddResources",
+  BankCategories = "bank/get-bank-categories",
+  Resources = "bank/get-resources",
+  WorkSiteResources = "worksite/get-resource",
+  AddResources = "worksite/add-resources",
+  delelteResource = "worksite/delete-item",
 
   WorkSite = "workSites",
   WorkSiteResourcesStatistics = "workSites-resources-statistics",

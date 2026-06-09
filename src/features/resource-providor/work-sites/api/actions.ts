@@ -3,7 +3,13 @@ import i18n from "i18next";
 import ApiInstance from "@/config/api-instance";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { successToast, errorToast } from "@/components/common/Toast";
-import { WorkSite, QUERY_KEYS, SiteController, MUTATION_KEYS } from "./index";
+import {
+  WorkSite,
+  QUERY_KEYS,
+  SiteController,
+  MUTATION_KEYS,
+  DeactivateWorkSite,
+} from "./index";
 import { workSiteTypes } from "../../shared/WorkSiteType";
 
 // Define the validation schema with dynamic translation messages inside the component
@@ -42,6 +48,24 @@ const updateWorkSiteApi = async (site: WorkSite): Promise<WorkSite> => {
   return data;
 };
 
+const changeWorkSiteActivationApi = async (
+  IsActive: boolean,
+  WorkSiteId: number,
+): Promise<void> => {
+  console.log(IsActive)
+  const { data } = await ApiInstance.patch(
+    `/${SiteController.deactivateWorkSite}`,
+    {},
+    {
+      params: {
+        WorkSiteId: WorkSiteId ?? 0,
+        IsActive,
+      },
+    },
+  );
+  return data;
+};
+
 const createWorkSiteApi = async (
   payload: SiteFormValues,
 ): Promise<WorkSite> => {
@@ -55,6 +79,38 @@ const createWorkSiteApi = async (
 const deleteWorkSiteApi = async (id: string | number): Promise<void> => {
   await ApiInstance.delete(`/${SiteController.WorkSiteDelete}`, {
     params: { WorkSiteId: id ?? 0 },
+  });
+};
+
+export const useDeactivateWorkSite = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (params: DeactivateWorkSite) =>
+      changeWorkSiteActivationApi(params.isActive, params.workSiteId),
+    mutationKey: MUTATION_KEYS.workSites.deactivate(),
+    onSuccess: (_: any) => {
+      successToast(
+        i18n.t(
+          "resourceProvidor.workSites.site-activation-updated",
+          "Work site activation updated successfully.",
+        ),
+      );
+      try {
+        //@ts-ignore
+        queryClient.invalidateQueries(QUERY_KEYS.workSites);
+      } catch (e) {}
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message =
+        serverMessage ||
+        i18n.t(
+          "resourceProvidor.workSites.update-error",
+          "Failed to update site",
+        );
+      errorToast(message);
+    },
   });
 };
 

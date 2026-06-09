@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Landmark, MapPin, Pencil, Trash2 } from "lucide-react";
+import { ArrowUpRight, Landmark, MapPin, Pencil, Power, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { StatusBadge } from "../../shared/StatusBadge";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import { NewWorkSite } from "./NewWorkSite";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import { useTranslation } from "react-i18next";
 import { WorkSite } from "../api";
-import { useDeleteWorkSite } from "../api/actions";
+import { useDeactivateWorkSite, useDeleteWorkSite } from "../api/actions";
 import useAuthStore, { User } from "@/stores/useAuthStore";
 
 interface Props {
@@ -21,6 +21,7 @@ export function SiteCard({ site, index }: Props) {
   const goto = useNavigate();
   const langIsArabic = i18n.language === "ar";
   const deleteMutation = useDeleteWorkSite();
+  const { mutate: deactivateWorkSite, isPending } = useDeactivateWorkSite();
   const { firstName, lastName } = useAuthStore((s) => s.user as User);
 
   const onDelete = (s: WorkSite) => {
@@ -46,13 +47,28 @@ export function SiteCard({ site, index }: Props) {
               onClick={(e) => {
                 e.preventDefault();
               }}
-              aria-label="Edit site"
+              aria-label={t("resourceProvidor.workSites.btn-edit", "Edit site")}
             >
               <Pencil className="h-3.5 w-3.5" />
             </Button>
           }
           initial={site}
         />
+        <Button
+          size="icon"
+          className="h-8 w-8 rounded-full shadow-md hover:bg-secondary hover:text-secondary-foreground"
+          onClick={(e) => {
+            e.preventDefault();
+            deactivateWorkSite({
+              isActive: !site.isActive,
+              workSiteId: Number(site.id),
+            });
+          }}
+          aria-label={t("resourceProvidor.workSites.btn-deactivate", "Deactivate site")}
+          disabled={isPending }
+        >
+          <Power className="h-3.5 w-3.5" />
+        </Button>
         <ConfirmDelete
           onConfirm={() => onDelete(site)}
           openButton={
@@ -62,7 +78,7 @@ export function SiteCard({ site, index }: Props) {
               onClick={(e) => {
                 e.preventDefault();
               }}
-              aria-label="Delete site"
+              aria-label={t("resourceProvidor.workSites.btn-delete", "Delete site")}
               disabled={deleteMutation.isPending}
             >
               <Trash2 className="h-3.5 w-3.5" />

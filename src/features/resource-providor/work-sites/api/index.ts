@@ -15,11 +15,17 @@ export interface WorkSiteStatistics {
   onHoldWorkSites: number;
 }
 
+export type DeactivateWorkSite = {
+  isActive: boolean;
+  workSiteId: number;
+};
+
 export enum SiteController {
-  WorkSites = "Worksite/GetAll",
-  WorkSiteCreate = "Worksite/Create",
-  WorkSiteUpdate = "Worksite/Update",
-  WorkSiteDelete = "Worksite/Delete",
+  WorkSites = "worksite/get-all",
+  WorkSiteCreate = "worksite/create",
+  WorkSiteUpdate = "worksite/update",
+  WorkSiteDelete = "worksite/delete",
+  deactivateWorkSite = "worksite/deactivate",
   WorkSitesStatistics = "workSites-statistics",
 }
 
@@ -38,6 +44,7 @@ export const MUTATION_KEYS = {
     create: () => ["resourceProvidor", "workSites", "create"],
     update: () => ["resourceProvidor", "workSites", "update"],
     delete: () => ["resourceProvidor", "workSites", "delete"],
+    deactivate: () => ["resourceProvidor", "workSites", "deactivate"],
   },
 };
 

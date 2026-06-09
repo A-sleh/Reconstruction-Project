@@ -166,10 +166,12 @@
       "label-start-date": "Start Date",
       "label-progress": "Progress (%)",
       "btn-cancel": "Cancel",
+      "btn-deactivate": "Deactivate site",
       "btn-create": "Create Site",
       "site-created": "Work site created successfully.",
       "create-error": "Failed to create work site.",
       "site-updated": "Work site updated successfully.",
+      "site-activation-updated": "Work site activation updated successfully.",
       "update-error": "Failed to update work site.",
       "site-deleted": "Work site deleted successfully.",
       "delete-error": "Failed to delete work site.",
@@ -192,6 +194,9 @@
         "inventory_count": "Inventory",
         "orders_count": "Order Requests"
       },
+      "actions": {
+        "load-more": "Load more"
+      },
       "toast": {
         "resource-updated": "Resource updated",
         "resource-added": "Resource added",
@@ -210,6 +215,10 @@
         }
       },
       "filters": {
+        "open": "Filter categories",
+        "categoryFilterTitle": "Choose a category",
+        "categoryFilterDescription": "Select a category to narrow the inventory list.",
+        "availableCategories": "categories available",
         "all": "All"
       },
       "no-resources-match": "No resources match your filters.",
@@ -861,6 +870,7 @@
     "logout": "Logout",
     "logoutSuccess": "Logged out successfully",
     "logoutError": "Logout failed",
+    "loading": "Loading...",
     "banner": {
       "message": "You have unsaved changes to resource quantities.",
       "cancel": "Discard",

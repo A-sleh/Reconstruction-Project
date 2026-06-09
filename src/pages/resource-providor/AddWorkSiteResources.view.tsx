@@ -168,7 +168,7 @@ const AddWorkSiteResources = () => {
                           {resource.resourceBank.name}
                           <span className="text-[10px] text-gray-600 p-1 px-2 rounded-full bg-gray-600/20">{resource.resourceBank.category.name}</span>
                         </p>
-                        <p className="font-semibold truncate text-gray-500 text-sm">
+                        <p className="font-semibold text-gray-500 text-sm w-100 truncate">
                           {resource.description}
                         </p>
                       </div>

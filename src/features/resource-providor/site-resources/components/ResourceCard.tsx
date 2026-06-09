@@ -19,7 +19,7 @@ export default function ResourceCard({ resource }: Props) {
   const { mutate: deleteResource } = useDeleteResource();
 
   function handleConfirmeDelete() {
-    deleteResource({ siteId: siteId, resourceId: Number(resource?.id) });
+    deleteResource(Number(resource?.id));
   }
 
   return (
@@ -38,23 +38,21 @@ export default function ResourceCard({ resource }: Props) {
           loading="lazy"
         />
         <div className="absolute top-3 left-3">
-          <Badge variant="secondary" className="bg-background/90 backdrop-blur">
-            {resource.resourceBank?.category}
-          </Badge>
+          <Badge variant="destructive">{resource?.category?.name}</Badge>
         </div>
         <div className="absolute top-3 right-3">
-          <StatusBadge status={resource.availability} />
+          <StatusBadge status={resource.isAvailable ? "active" : "on-hold"} />
         </div>
       </div>
       <div className="p-5 flex flex-col flex-1">
         <h3 className="font-semibold text-foreground line-clamp-1">
-          {resource.resourceBank.name}
+          {resource.resourceBank?.name}
         </h3>
         <p className="text-sm text-muted-foreground mt-1 line-clamp-2 min-h-10">
           {resource.description}
         </p>
 
-        <div className="mt-4 grid grid-cols-3 gap-3 text-sm border-t border-gray-300 pt-4">
+        <div className="mt-4 flex justify-around gap-3 text-sm border-t border-gray-300 pt-4">
           <div>
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
               {t(
@@ -71,11 +69,6 @@ export default function ResourceCard({ resource }: Props) {
               {t("resourceProvidor.workSites.resource.card.unit", "Unit")}
             </p>
             <p className="font-semibold tabular-nums">{resource.unit}</p>
-          </div>
-          <div>
-            <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
-              {t("resourceProvidor.workSites.resource.card.qty", "Qty")}
-            </p>
           </div>
         </div>
 

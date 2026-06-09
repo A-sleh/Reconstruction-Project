@@ -1,9 +1,9 @@
+import { faker } from "@faker-js/faker";
 import z from "zod";
 import i18n from "@/lib/i18n";
 import { errorToast, successToast } from "@/components/common/Toast";
 import { useMutation } from "@tanstack/react-query";
 import {
-  availabilities,
   MUTATION_KEYS,
   ResourcesPayload,
   unitTypes,
@@ -46,13 +46,7 @@ export const resourceSchema = z.object({
         "resourceProvidor.workSites.resource.validation.description_required",
       ),
     ),
-  availability: z
-    .string()
-    .nonempty(
-      i18n.t(
-        "resourceProvidor.workSites.resource.validation.availability_required",
-      ),
-    ),
+  isAvailable: z.boolean(),
   file: z.file().optional(),
 });
 
@@ -61,12 +55,36 @@ export type ResourceFormValues = Resource & {
   id?: string;
 };
 export const defaultResourceValues: Resource = {
-  availability: availabilities[0],
+  isAvailable: true,
   unit: unitTypes[0],
   resourceBankId: 0,
   description: "",
   imageUrl: "",
   price: 0,
+};
+
+export const generateMockResourceValues = (): Resource => {
+  const resourceBankId = faker.number.int({ min: 1, max: 9999 });
+  const unit = faker.helpers.arrayElement(unitTypes) ?? unitTypes[0];
+
+  return {
+    isAvailable: faker.datatype.boolean(),
+    unit,
+    resourceBankId,
+    resourceBank: {
+      id: resourceBankId,
+      name: faker.commerce.productName(),
+      category: faker.commerce.department(),
+      description: faker.commerce.productDescription(),
+    },
+    imageUrl: faker.image.urlLoremFlickr({
+      width: 400,
+      height: 300,
+      category: "industry",
+    }),
+    price: Number(faker.commerce.price({ min: 1, max: 5000, dec: 2 })),
+    description: faker.commerce.productDescription(),
+  };
 };
 
 const updateResourceApi = async (
@@ -102,12 +120,12 @@ const askeToAddResourceApi = async (
 };
 
 const deleteResourceApi = async (
-  siteId: string | number,
-  resourceId: string | number,
+  ResourceId: string | number,
 ): Promise<void> => {
-  await ApiInstance.delete(
-    `/${WorkSiteResourcesController.WorkSite}/${siteId}/resources/${resourceId}`,
-  );
+  console.log(WorkSiteResourcesController)
+  await ApiInstance.delete(`/${WorkSiteResourcesController.delelteResource}`, {
+    params: { Id: ResourceId, ItemType: "Resource" },
+  });
 };
 
 export const useUpdateResource = () => {
@@ -187,10 +205,7 @@ export const useCreateResource = () => {
 
 export const useDeleteResource = () => {
   return useMutation({
-    mutationFn: (params: {
-      siteId: string | number;
-      resourceId: string | number;
-    }) => deleteResourceApi(params.siteId, params.resourceId),
+    mutationFn: (ResourceId: string | number) => deleteResourceApi(ResourceId),
     mutationKey: MUTATION_KEYS.resource.delete(),
     onSuccess: () => {
       successToast(

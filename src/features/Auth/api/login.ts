@@ -27,7 +27,7 @@ export const intialLoginValues: LoginValues = {
 
 export const loginApi = async (payload: LoginValues) => {
   const { data } = await ApiInstance.post<AuthState>(
-    "/Auth/Authenticate",
+    "/auth/authenticate",
     payload,
   );
   return data;

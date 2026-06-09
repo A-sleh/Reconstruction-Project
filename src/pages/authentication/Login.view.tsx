@@ -1,20 +1,20 @@
 import { AuthLayout } from "@/components/layouts/Auth-layout";
-import LoginForm from "../../features/Auth/components/Login-Form";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router";
 import { Message } from "@/components/common/Message";
+
+import LoginForm from "../../features/Auth/components/Login-Form";
+import useExchangeState from "@/hooks/useExchangeState";
 
 const Login = () => {
   const { t } = useTranslation();
-  const location = useLocation();
-  const successMessage = location.state?.message;
+  const { message } = useExchangeState<{ message: string }>();
 
   return (
     <AuthLayout
       title={t("auth.login.title")}
       subTitle={t("auth.login.description")}
     >
-      {successMessage && <Message message={successMessage} type="info" />}
+      {message  && <Message message={message } type="info" />}
       <LoginForm />
     </AuthLayout>
   );
