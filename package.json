@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "create-feature": "node ./scripts/create-feature.mjs"
+    "create-feature": "node ./scripts/create-feature.mjs",
+    "init-api": "node ./scripts/generate-api.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
