@@ -124,23 +124,16 @@ export default ${upperFeature}_ROUTES;
   const typesContent = `// Types for the ${feature} feature\n`;
 
   // 3. Generate: [feature].api.ts
-  const apiContent = `
-    import ApiInstance from '@/config/api-instance';
-    import ${upperFeature}_ROUTES from './${feature}.routes';
+  const apiContent = `import ApiInstance from '@/config/api-instance';
+import ${upperFeature}_ROUTES from './${feature}.routes';
 
-    const ${feature}Api = {};
+const ${feature}Api = {};
 
-    export default ${feature}Api;
+export default ${feature}Api;
   `;
 
   // 4. Generate: [feature].queries.ts
-  const queriesContent = `
-    import ${feature}Api from './${feature}.api';
-
-    const ${feature}Queries = {};
-    
-    export default ${feature}Queries;
-  `;
+  const queriesContent = `import ${feature}Api from './${feature}.api';`;
 
   // Map files and write them to disk
   const filesToCreate = {
