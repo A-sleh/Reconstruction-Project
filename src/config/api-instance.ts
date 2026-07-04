@@ -40,7 +40,7 @@ ApiInstance.interceptors.response.use(
       try {
         const refreshToken = getRefreshToken(); // Retrieve the stored refresh token.
         // Make a request to your auth server to refresh the token.
-        const response = await axios.post("/Auth/Refresh", {
+        const response = await ApiInstance.post("auth/refresh", {
           refreshToken,
         });
         const { accessToken } = response.data;
