@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "create-feature": "node ./scripts/create-feature.mjs",
-    "init-api": "node ./scripts/generate-api.mjs"
+    "init-api": "node ./scripts/generate-api.mjs",
+    "api-method": "node ./scripts/generate-api-method.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

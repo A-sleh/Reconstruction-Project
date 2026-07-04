@@ -102,54 +102,360 @@ function extractMainVariables(routesFilePath, prefix) {
   return variables;
 }
 
-function parseSwaggerToInterface(interfaceName, swaggerStr) {
-  if (!swaggerStr || !swaggerStr.trim()) {
-    return `export interface I${interfaceName} {\n  // TODO: Define properties\n}`;
-  }
-  try {
-    const obj = JSON.parse(swaggerStr.trim());
-    let subInterfaces = [];
+/**
+ * ---------------------------------------------------------------------------
+ * Response-interface generation (rewritten)
+ * ---------------------------------------------------------------------------
+ * The previous implementation had two separate, divergent code paths (one for
+ * OpenAPI-style `{ type, properties }` schemas, one for raw example JSON), a
+ * fragile `isSwaggerSchema` heuristic that could misclassify input, and a
+ * `findSchema()` walker that returned `null` for very common real-world
+ * pastes (e.g. `{ "schema": { "$ref": "..." } }`, or a `responses.200...`
+ * envelope whose innermost node is only a `$ref`). Any of those cases used to
+ * silently fall through to a bare `// TODO` placeholder, i.e. an "empty"
+ * interface, with no indication of *why* nothing was generated.
+ *
+ * This version:
+ *  - accepts strict JSON, JS-object-literal syntax, AND common "almost JSON"
+ *    pastes (single quotes, unquoted keys, trailing commas, // comments)
+ *    via a tolerant multi-strategy parser;
+ *  - uses one recursive builder that understands both OpenAPI schema nodes
+ *    (`type`/`properties`/`items`/`allOf`/`$ref`) and plain example JSON,
+ *    so there's a single code path instead of two that can disagree;
+ *  - always produces a real interface when there is ANY usable object/array
+ *    data, and only falls back to a `// TODO` comment (with a clear reason)
+ *    when the input truly has nothing to build from (e.g. empty paste, or a
+ *    bare unresolved `$ref` with no properties alongside it).
+ */
 
-    function buildInterfaceBody(targetObj, currentIndent = "  ") {
-      let body = "";
-      for (const [key, value] of Object.entries(targetObj)) {
-        let type = typeof value;
-        if (value === null) {
-          type = "any";
-        } else if (Array.isArray(value)) {
-          if (value.length > 0) {
-            if (typeof value[0] === "object" && value[0] !== null) {
-              const subPascalName =
-                key.charAt(0).toUpperCase() + key.slice(1).replace(/s$/, "");
-              const childBody = buildInterfaceBody(value[0], "  ");
-              subInterfaces.push(
-                `export interface I${subPascalName} {\n${childBody}}`,
-              );
-              type = `I${subPascalName}[]`;
-            } else {
-              type = `${typeof value[0]}[]`;
-            }
-          } else {
-            type = "any[]";
-          }
-        } else if (type === "object") {
-          const subPascalName = key.charAt(0).toUpperCase() + key.slice(1);
-          const childBody = buildInterfaceBody(value, "  ");
-          subInterfaces.push(
-            `export interface I${subPascalName} {\n${childBody}}`,
-          );
-          type = `I${subPascalName}`;
-        }
-        body += `${currentIndent}${key}: ${type};\n`;
+function tryParseFlexibleJson(raw) {
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+
+  // 1. Strict JSON
+  try {
+    return JSON.parse(trimmed);
+  } catch (_) {
+    /* fall through */
+  }
+
+  // 2. JS object/array literal (unquoted keys, single quotes, trailing commas
+  //    are all valid JS syntax, just not valid JSON)
+  try {
+    return Function(`"use strict"; return (${trimmed});`)();
+  } catch (_) {
+    /* fall through */
+  }
+
+  // 3. Loose repair pass for near-JSON text (strip comments, normalize quotes,
+  //    quote bare keys, drop trailing commas) then retry JSON.parse
+  try {
+    const repaired = trimmed
+      .replace(/\/\/.*$/gm, "")
+      .replace(/\/\*[\s\S]*?\*\//g, "")
+      .replace(/'([^'\\]*(?:\\.[^'\\]*)*)'/g, (_m, p1) => `"${p1.replace(/"/g, '\\"')}"`)
+      .replace(/([{,]\s*)([A-Za-z_$][\w$]*)\s*:/g, '$1"$2":')
+      .replace(/,\s*([}\]])/g, "$1");
+    return JSON.parse(repaired);
+  } catch (_) {
+    /* fall through */
+  }
+
+  return null;
+}
+
+function looksLikeOpenApiSchema(node) {
+  return (
+    node &&
+    typeof node === "object" &&
+    !Array.isArray(node) &&
+    (typeof node.properties === "object" ||
+      node.type === "object" ||
+      node.type === "array" ||
+      Array.isArray(node.allOf) ||
+      typeof node.items === "object")
+  );
+}
+
+// Walks a Swagger/OpenAPI document fragment (paths, responses, content,
+// schema wrappers, etc.) looking for the innermost usable schema node.
+function findSchemaRoot(node, depth = 0) {
+  if (!node || typeof node !== "object" || Array.isArray(node) || depth > 12) {
+    return null;
+  }
+
+  if (looksLikeOpenApiSchema(node)) return node;
+
+  if (node.schema && typeof node.schema === "object") {
+    const found = findSchemaRoot(node.schema, depth + 1);
+    if (found) return found;
+  }
+
+  if (node.content && typeof node.content === "object") {
+    for (const val of Object.values(node.content)) {
+      const found = findSchemaRoot(val, depth + 1);
+      if (found) return found;
+    }
+  }
+
+  if (node.responses && typeof node.responses === "object") {
+    const preferredOrder = ["200", "201", "204", "default"];
+    const codes = Object.keys(node.responses).sort((a, b) => {
+      const ai = preferredOrder.indexOf(a);
+      const bi = preferredOrder.indexOf(b);
+      if (ai === -1 && bi === -1) return 0;
+      if (ai === -1) return 1;
+      if (bi === -1) return -1;
+      return ai - bi;
+    });
+    for (const code of codes) {
+      const found = findSchemaRoot(node.responses[code], depth + 1);
+      if (found) return found;
+    }
+  }
+
+  for (const method of ["get", "post", "put", "patch", "delete"]) {
+    if (node[method]) {
+      const found = findSchemaRoot(node[method], depth + 1);
+      if (found) return found;
+    }
+  }
+
+  for (const [key, val] of Object.entries(node)) {
+    if (["schema", "content", "responses", "get", "post", "put", "patch", "delete"].includes(key)) {
+      continue;
+    }
+    if (val && typeof val === "object") {
+      const found = findSchemaRoot(val, depth + 1);
+      if (found) return found;
+    }
+  }
+
+  return null;
+}
+
+// Builds one or more `export interface`/`export type` blocks from either an
+// OpenAPI schema node or a plain example-JSON value.
+function buildInterfacesFromNode(rootName, rootNode) {
+  const subInterfaces = [];
+  const usedNames = new Set();
+
+  function uniqueName(base) {
+    let name = base || "Item";
+    // Avoid a sub-interface reusing the exact same name as the root type
+    // (this happens for array-root responses, e.g. `I{Name}` as both the
+    // `export type I{Name} = I{Name}Item[]` wrapper and the item shape).
+    if (name === rootName) name = `${name}Item`;
+    let i = 2;
+    while (usedNames.has(name)) {
+      name = `${base}${i}`;
+      i += 1;
+    }
+    usedNames.add(name);
+    return name;
+  }
+
+  function pascalSingular(name) {
+    const pascal = (name || "Item").charAt(0).toUpperCase() + (name || "Item").slice(1);
+    return pascal.length > 1 && pascal.endsWith("s") ? pascal.slice(0, -1) : pascal;
+  }
+
+  function mergeAllOf(node) {
+    const refs = [];
+    let merged = { properties: {}, required: [] };
+    for (const branch of node.allOf || []) {
+      if (branch && branch.$ref) {
+        refs.push(`I${branch.$ref.split("/").pop()}`);
+        continue;
       }
-      return body;
+      if (branch && typeof branch === "object") {
+        if (branch.properties) {
+          merged.properties = { ...merged.properties, ...branch.properties };
+        }
+        if (Array.isArray(branch.required)) {
+          merged.required = [...merged.required, ...branch.required];
+        }
+      }
+    }
+    if (node.properties) {
+      merged.properties = { ...merged.properties, ...node.properties };
+    }
+    if (Array.isArray(node.required)) {
+      merged.required = [...merged.required, ...node.required];
+    }
+    return { refs, merged };
+  }
+
+  function resolveSchemaType(node, propName) {
+    if (!node || typeof node !== "object") return "any";
+
+    if (node.$ref) {
+      return `I${node.$ref.split("/").pop()}`;
     }
 
-    const mainBody = buildInterfaceBody(obj, "  ");
-    const mainInterface = `export interface I${interfaceName} {\n${mainBody}}`;
-    return [...subInterfaces, mainInterface].join("\n\n");
+    if (Array.isArray(node.allOf)) {
+      const { refs, merged } = mergeAllOf(node);
+      const subName = uniqueName(pascalSingular(propName));
+      const body = buildSchemaBody(merged.properties, merged.required);
+      if (refs.length > 0) {
+        subInterfaces.push(
+          `export type I${subName} = ${refs.join(" & ")}${body.trim() ? ` & {\n${body}}` : ""};`,
+        );
+      } else {
+        subInterfaces.push(`export interface I${subName} {\n${body}}`);
+      }
+      return `I${subName}`;
+    }
+
+    if (node.type === "array") {
+      const itemType = resolveSchemaType(node.items, propName);
+      return `${itemType}[]`;
+    }
+
+    if (node.type === "object" || (node.properties && typeof node.properties === "object")) {
+      const subName = uniqueName(pascalSingular(propName));
+      const body = buildSchemaBody(node.properties || {}, node.required || []);
+      subInterfaces.push(`export interface I${subName} {\n${body}}`);
+      return `I${subName}`;
+    }
+
+    if (Array.isArray(node.enum)) {
+      return node.enum.map((v) => (typeof v === "string" ? `"${v}"` : v)).join(" | ") || "any";
+    }
+
+    switch (node.type) {
+      case "string":
+        return "string";
+      case "integer":
+      case "number":
+        return "number";
+      case "boolean":
+        return "boolean";
+      default:
+        return "any";
+    }
+  }
+
+  function buildSchemaBody(properties, required, indent = "  ") {
+    let body = "";
+    const req = Array.isArray(required) ? required : [];
+    for (const [key, val] of Object.entries(properties || {})) {
+      const typeStr = resolveSchemaType(val, key);
+      const optional = !req.includes(key);
+      body += `${indent}${key}${optional ? "?" : ""}: ${typeStr};\n`;
+    }
+    return body;
+  }
+
+  function resolveExampleType(value, propName) {
+    if (value === null || value === undefined) return "any";
+    if (Array.isArray(value)) {
+      if (value.length === 0) return "any[]";
+      const first = value[0];
+      if (first && typeof first === "object" && !Array.isArray(first)) {
+        const subName = uniqueName(pascalSingular(propName));
+        subInterfaces.push(`export interface I${subName} {\n${buildExampleBody(first)}}`);
+        return `I${subName}[]`;
+      }
+      return `${typeof first}[]`;
+    }
+    if (typeof value === "object") {
+      const subName = uniqueName(pascalSingular(propName));
+      subInterfaces.push(`export interface I${subName} {\n${buildExampleBody(value)}}`);
+      return `I${subName}`;
+    }
+    return typeof value; // "string" | "number" | "boolean"
+  }
+
+  function buildExampleBody(obj, indent = "  ") {
+    let body = "";
+    for (const [key, val] of Object.entries(obj)) {
+      const typeStr = resolveExampleType(val, key);
+      body += `${indent}${key}: ${typeStr};\n`;
+    }
+    return body;
+  }
+
+  // --- OpenAPI-style schema node ---
+  if (looksLikeOpenApiSchema(rootNode)) {
+    if (Array.isArray(rootNode.allOf)) {
+      const { refs, merged } = mergeAllOf(rootNode);
+      const body = buildSchemaBody(merged.properties, merged.required);
+      const main =
+        refs.length > 0
+          ? `export type I${rootName} = ${refs.join(" & ")}${body.trim() ? ` & {\n${body}}` : ""};`
+          : `export interface I${rootName} {\n${body}}`;
+      return [...subInterfaces, main].join("\n\n");
+    }
+    if (rootNode.type === "array" && rootNode.items) {
+      const itemType = resolveSchemaType(rootNode.items, rootName);
+      return [...subInterfaces, `export type I${rootName} = ${itemType}[];`].join("\n\n");
+    }
+    const body = buildSchemaBody(rootNode.properties || {}, rootNode.required || []);
+    return [...subInterfaces, `export interface I${rootName} {\n${body}}`].join("\n\n");
+  }
+
+  // --- Plain example JSON ---
+  if (Array.isArray(rootNode)) {
+    if (rootNode.length === 0) {
+      return `export type I${rootName} = any[];`;
+    }
+    const itemType = resolveExampleType(rootNode[0], rootName);
+    return [...subInterfaces, `export type I${rootName} = ${itemType}[];`].join("\n\n");
+  }
+  if (rootNode && typeof rootNode === "object") {
+    const body = buildExampleBody(rootNode);
+    return [...subInterfaces, `export interface I${rootName} {\n${body}}`].join("\n\n");
+  }
+
+  return `export interface I${rootName} {\n  // TODO: Define properties\n}`;
+}
+
+function parseSwaggerToInterface(interfaceName, swaggerStr) {
+  if (!swaggerStr || !swaggerStr.trim()) {
+    return `export interface I${interfaceName} {\n  // TODO: Define properties (no schema was pasted)\n}`;
+  }
+
+  const parsed = tryParseFlexibleJson(swaggerStr);
+  if (parsed === null) {
+    return (
+      `export interface I${interfaceName} {\n` +
+      `  // TODO: Could not parse the pasted content as JSON.\n` +
+      `  // Paste a valid JSON object (Swagger "Example Value" tab output, or a\n` +
+      `  // resolved schema with "properties"), not the pseudo-code "Schema" view.\n` +
+      `}`
+    );
+  }
+
+  // A bare, unresolved $ref with nothing else useful alongside it can't be
+  // turned into real fields — say so explicitly instead of emitting a
+  // meaningless `{ $ref: string }` interface.
+  if (
+    parsed &&
+    typeof parsed === "object" &&
+    !Array.isArray(parsed) &&
+    Object.keys(parsed).length === 1 &&
+    typeof parsed.$ref === "string"
+  ) {
+    return (
+      `export interface I${interfaceName} {\n` +
+      `  // TODO: Unresolved reference "${parsed.$ref}".\n` +
+      `  // Paste the referenced schema's own "properties" block instead.\n` +
+      `}`
+    );
+  }
+
+  const root = Array.isArray(parsed) ? parsed : findSchemaRoot(parsed) || parsed;
+
+  try {
+    return buildInterfacesFromNode(interfaceName, root);
   } catch (e) {
-    return `export interface I${interfaceName} {\n  // TODO: Check manual fallback layout\n}`;
+    return (
+      `export interface I${interfaceName} {\n` +
+      `  // TODO: Failed to generate interface automatically (${e.message}).\n` +
+      `  // Please define properties manually.\n` +
+      `}`
+    );
   }
 }
 
@@ -165,7 +471,6 @@ function addRouteToFile(
     : "";
   const routesObjName = `${featureName.toUpperCase()}_ROUTES`;
 
-  // 1. حقن المتغيرات الرئيسية الجديدة في أعلى الملف دون تكرارها
   if (newVariableBlock) {
     const varName = newVariableBlock
       .split("=")[0]
@@ -182,15 +487,12 @@ function addRouteToFile(
   const match = content.match(routesObjRegex);
   let routesMap = new Map();
 
-  // 2. قراءة ذكية وآمنة للمسارات الحالية سطر بسطر (تتجنب الفشل بسبب التعليقات والعناوين)
   if (match) {
     const innerContent = match[1];
-    // تقسيم النص بناءً على السطور أو الفواصل
     const lines = innerContent.split(/\r?\n|,/);
 
     lines.forEach((line) => {
       const trimmedLine = line.trim();
-      // تخطي السطور الفارغة أو السطور التي تبدأ بتعليقات مجموعات العمل
       if (!trimmedLine || trimmedLine.startsWith("//")) return;
 
       const index = trimmedLine.indexOf(":");
@@ -198,7 +500,6 @@ function addRouteToFile(
         const key = trimmedLine.substring(0, index).trim();
         let value = trimmedLine.substring(index + 1).trim();
 
-        // إزالة الفاصلة الزائدة في نهاية السطر إن وجدت لتخزين نظيف
         if (value.endsWith(",")) {
           value = value.slice(0, -1).trim();
         }
@@ -208,10 +509,8 @@ function addRouteToFile(
     });
   }
 
-  // 3. إضافة المسار الجديد (أو تحديثه إذا كان له نفس الإسم تماماً) لضمان عدم الحذف أو التكرار
   routesMap.set(routeKey, finalRouteValue);
 
-  // 4. تصنيف وفرز المجموعات البرمجية أبجدياً
   const groups = {
     GET: [],
     POST: [],
@@ -232,7 +531,6 @@ function addRouteToFile(
 
   Object.keys(groups).forEach((method) => groups[method].sort());
 
-  // 5. بناء هيكل المجموعات النصي من جديد مع الحفاظ على التنسيق النظيف للـ Clean Code
   let generatedInner = "";
   if (groups.GET.length > 0)
     generatedInner += `  // ========================= GET ROUTES =========================\n${groups.GET.join("\n")}\n\n`;
@@ -250,7 +548,6 @@ function addRouteToFile(
   generatedInner = generatedInner.trimEnd();
   const freshRoutesBlock = `const ${routesObjName} = {\n${generatedInner}\n};`;
 
-  // 6. استبدال الكتلة القديمة بالكتلة الجديدة الكاملة المدمجة
   if (match) {
     content = content.replace(routesObjRegex, freshRoutesBlock);
   } else {
@@ -260,8 +557,7 @@ function addRouteToFile(
   return content;
 }
 
-function addInterfaceToFile(filePath, generatedInterface) {
-  let content = fs.readFileSync(filePath, "utf8");
+function addInterfaceToFile(content, generatedInterface) {
   content = `${content.trim()}\n\n${generatedInterface}`;
   return content;
 }
@@ -270,7 +566,7 @@ function addApiMethodToFile(
   filePath,
   apiPayloadStructure,
   featureName,
-  rawInterfaceName,
+  typesToImport,
   combinedActionFuncName,
   httpMethod,
   isPaginated,
@@ -284,29 +580,31 @@ function addApiMethodToFile(
   }
 
   const typesImportRegex = new RegExp(
-    `import\\s+\\{([\\s\\S]*?)\\}\\s+from\\s+['"]\\.\\/${featureName}\\.types['"]\\s*;?`,
+    `import\\s+\\{([^{}]+?)\\}\\s+from\\s+['"]\\.\\/${featureName}\\.types['"]\\s*;?`,
   );
   const importsMatch = content.match(typesImportRegex);
   
-  // FIXED: Added absolute paths, quotes, and symbols to blacklisted tokens
   const blacklistedTokens = ["from", "import", "Paginated", "@/types", '"@/types"', "'@/types'", ""];
+  const neededTypes = (typesToImport || []).filter(Boolean);
 
   if (importsMatch) {
     const cleanImports = importsMatch[1]
       .replace(/[\{\};,]/g, " ")
       .split(/\s+/)
-      .map((item) => item.trim().replace(/['"]/g, "")) // FIXED: Strips internal quotation marks if they leaked in
-      .filter((item) => !blacklistedTokens.includes(item) && !item.includes("@") && !item.includes("/")); // FIXED: Extra defense against paths
+      .map((item) => item.trim().replace(/['"]/g, ""))
+      .filter((item) => !blacklistedTokens.includes(item) && !item.includes("@") && !item.includes("/"));
 
-    if (!cleanImports.includes(rawInterfaceName)) {
-      cleanImports.push(rawInterfaceName);
-    }
+    neededTypes.forEach((t) => {
+      if (!cleanImports.includes(t)) {
+        cleanImports.push(t);
+      }
+    });
     cleanImports.sort();
 
     const formattedImportBlock = `import {\n  ${cleanImports.join(",\n  ")},\n} from "./${typesFileName}";`;
     content = content.replace(typesImportRegex, formattedImportBlock);
-  } else {
-    content = `import {\n  ${rawInterfaceName},\n} from "./${typesFileName}";\n${content}`;
+  } else if (neededTypes.length > 0) {
+    content = `import {\n  ${neededTypes.sort().join(",\n  ")},\n} from "./${typesFileName}";\n${content}`;
   }
 
   if (content.includes(`const ${combinedActionFuncName}`)) {
@@ -319,7 +617,7 @@ function addApiMethodToFile(
     POST: "// ========================= POST METHODS ========================\n",
     PUT: "// ========================= PUT METHODS =========================\n",
     PATCH: "// ========================= PATCH METHODS =======================\n",
-    DELETE: "// ========================= DELETE METHODS ======================\n", // Fixed typo "k METHODS"
+    DELETE: "// ========================= DELETE METHODS ======================\n",
   };
 
   const targetComment = sectionComments[httpMethod] || sectionComments.GET;
@@ -403,7 +701,6 @@ function addApiMethodToFile(
     content = `${fileBeforeApiObj}\n\nconst ${apiObjName} = {\n${reorderedInnerObject},\n};\n\n${fileAfterApiObj}\n`;
   }
 
-  // FIXED: Check ensuring we only add the global Paginated import if it's not present
   if (isPaginated && !/import\s+\{\s*Paginated\s*\}\s+from\s+['"]@\/types['"]/.test(content)) {
     content = `import { Paginated } from "@/types";\n${content}`;
   }
@@ -411,15 +708,11 @@ function addApiMethodToFile(
   return content;
 }
 
-/**
- * Senior Refactor: Handles segregation of Query/InfiniteQuery and Mutation hooks.
- * Injects the RAW Response type (e.g. IWorksitesResponse) securely into the file imports.
- */
 function addQueryToFile(
   filePath,
   hookTemplateStructure,
   hookName,
-  responseInterfaceName,
+  typesToImport,
   featureName,
   isMutation = false,
   isPaginated = false,
@@ -431,35 +724,13 @@ function addQueryToFile(
   const queriesObjName = `${featureName}Queries`;
   const typesFileName = `${featureName}.types`;
 
-  // ==========================================
-  // الخطوة 0: المُنظف التلقائي الصارم (Hard Auto-Cleaner)
-  // يكتشف ويحذف أي أسطر مشوهة تحتوي على مسارات ملفات أو كلمات مفتاحية داخل الأقواس
-  // ==========================================
-  if (
-    content.includes(`"./${featureName}.types"`) ||
-    content.includes("import,")
-  ) {
-    // تنظيف السطور المشوهة تماماً وإعادتها لحالة مستقرة
-    content = content.replace(
-      /import\s+\{[\s\S]*?\}\s+from\s+['"]@tanstack\/react-query['"]\s*;?/g,
-      "",
-    );
-    content = content.replace(
-      /import\s+\{[\s\S]*?\}\s+from\s+['"]\.\/.*?\.types['"]\s*;?/g,
-      "",
-    );
-  }
-
-  // ==========================================
-  // الخطوة 1: إدارة استيرادات React Query الحقيقية من مكتبتها الرسمية
-  // ==========================================
   let neededHook = isMutation ? "useMutation" : "useQuery";
   if (!isMutation && isPaginated) {
     neededHook = "useInfiniteQuery";
   }
 
   const reactQueryImportRegex =
-    /import\s+\{([\s\S]*?)\}\s+from\s+['"]@tanstack\/react-query['"]\s*;?/;
+    /import\s+\{([^{}]+?)\}\s+from\s+['"]@tanstack\/react-query['"]\s*;?/;
   const rqMatch = content.match(reactQueryImportRegex);
 
   if (rqMatch) {
@@ -471,7 +742,6 @@ function addQueryToFile(
     if (!currentRqImports.includes(neededHook)) {
       currentRqImports.push(neededHook);
     }
-    // تصفية صارمة: الاحتفاظ بالخطافات الحقيقية فقط ومنع تسرب المسارات أو كلمة import
     const cleanRq = currentRqImports.filter(
       (i) =>
         (i.startsWith("use") ||
@@ -489,25 +759,15 @@ function addQueryToFile(
     content = `import { ${neededHook} } from "@tanstack/react-query";\n${content}`;
   }
 
-  // ==========================================
-  // الخطوة 2: إدارة استيراد ملف الـ API الخاص بالـ Feature
-  // ==========================================
   if (!content.includes(`import ${apiName}`)) {
     content = `import ${apiName} from "./${featureName}.api";\n${content}`;
   }
 
-  // ==========================================
-  // الخطوة 3: إدارة استيراد الـ Response Interfaces (قاعدتك الجديدة)
-  // نقوم بالاستيراد فقط وحصراً إذا كانت العملية ليست Mutation (أي GET) وكانت Paginated
-  // ==========================================
-  const shouldImportType = !isMutation && isPaginated;
-
   const typesImportRegex = new RegExp(
-    `import\\s+\\{([\\s\\S]*?)\\}\\s+from\\s+['"]\\.\\/${featureName}\\.types['"]\\s*;?`,
+    `import\\s+\\{([^{}]+?)\\}\\s+from\\s+['"]\\.\\/${featureName}\\.types['"]\\s*;?`,
   );
   const importsMatch = content.match(typesImportRegex);
 
-  // قائمة حظر حديدية تمنع الكلمات المفتاحية والمسارات والخطافات من دخول ملف الـ types
   const blacklistedTokens = [
     "from",
     "import",
@@ -520,62 +780,38 @@ function addQueryToFile(
     "",
   ];
 
-  if (shouldImportType && responseInterfaceName) {
-    if (importsMatch) {
-      const cleanImports = importsMatch[1]
-        .replace(/[\{\};,]/g, " ")
-        .split(/\s+/)
-        .map((item) => item.trim())
-        .filter(
-          (item) =>
-            !blacklistedTokens.includes(item) &&
-            !item.startsWith("@") &&
-            !item.startsWith(".") &&
-            !item.includes("/"),
-        );
+  const neededTypes = (typesToImport || []).filter(Boolean);
 
-      if (!cleanImports.includes(responseInterfaceName)) {
-        cleanImports.push(responseInterfaceName);
+  if (importsMatch) {
+    const cleanImports = importsMatch[1]
+      .replace(/[\{\};,]/g, " ")
+      .split(/\s+/)
+      .map((item) => item.trim())
+      .filter(
+        (item) =>
+          !blacklistedTokens.includes(item) &&
+          !item.startsWith("@") &&
+          !item.startsWith(".") &&
+          !item.includes("/"),
+      );
+
+    neededTypes.forEach((t) => {
+      if (!cleanImports.includes(t)) {
+        cleanImports.push(t);
       }
-      cleanImports.sort();
+    });
+    cleanImports.sort();
 
-      const formattedImportBlock = `import {\n  ${cleanImports.join(",\n  ")},\n} from "./${typesFileName}";`;
-      content = content.replace(typesImportRegex, formattedImportBlock);
-    } else {
-      content = `import {\n  ${responseInterfaceName},\n} from "./${typesFileName}";\n${content}`;
-    }
-  } else {
-    // إذا كانت العملية Mutation أو ليست مقسمة لصفحات، نقوم فقط بتنظيف التيبس القديمة الموجودة مسبقاً (إن وجدت) لضمان عدم بقاء أسطر فارغة
-    if (importsMatch) {
-      const cleanImports = importsMatch[1]
-        .replace(/[\{\};,]/g, " ")
-        .split(/\s+/)
-        .map((item) => item.trim())
-        .filter(
-          (item) =>
-            !blacklistedTokens.includes(item) &&
-            !item.startsWith("@") &&
-            !item.startsWith(".") &&
-            !item.includes("/"),
-        );
-
-      if (cleanImports.length > 0) {
-        const formattedImportBlock = `import {\n  ${cleanImports.join(",\n  ")},\n} from "./${typesFileName}";`;
-        content = content.replace(typesImportRegex, formattedImportBlock);
-      } else {
-        content = content.replace(typesImportRegex, ""); // مسح البلوك تماماً لو أصبح فارغاً
-      }
-    }
+    const formattedImportBlock = `import {\n  ${cleanImports.join(",\n  ")},\n} from "./${typesFileName}";`;
+    content = content.replace(typesImportRegex, formattedImportBlock);
+  } else if (neededTypes.length > 0) {
+    content = `import {\n  ${neededTypes.sort().join(",\n  ")},\n} from "./${typesFileName}";\n${content}`;
   }
 
-  // تنظيف الأسطر الفارغة المتكررة الناتجة عن عمليات المسح في أعلى الملف
   content = content.replace(/^\s*[\r\n]/gm, "\n").trim();
 
   if (content.includes(`export const ${hookName}`)) return content;
 
-  // ==========================================
-  // الخطوة 4: فرز وحقن الـ Hook الجديد تحت القسم المخصص له
-  // ==========================================
   const queryCommentSection =
     "// ========================= QUERIES & INFINITE HOOKS =========================\n";
   const mutationCommentSection =
@@ -607,9 +843,6 @@ function addQueryToFile(
     fileBeforeObj = `${fileBeforeObj}\n\n${targetHeader}${hookTemplateStructure}\n`;
   }
 
-  // ==========================================
-  // الخطوة 5: تحديث كائن التصدير (Export Object) وترتيبه أبجدياً
-  // ==========================================
   let explicitKeys = [];
   if (queriesObjMatch) {
     explicitKeys = queriesObjMatch[2]
@@ -873,17 +1106,28 @@ async function main() {
         let fieldsZodString = "";
         schemaFields.forEach((f) => {
           let zodTypeStr = "z.string()";
-          if (f.type === "number") zodTypeStr = "z.coerce.number()";
-          if (f.type === "boolean") zodTypeStr = "z.boolean()";
-          if (f.type === "date") zodTypeStr = "z.string()";
+          const msg = baseTranslationPath
+            ? `i18n.t(\`${baseTranslationPath}.validation.${f.name}_required\`)`
+            : `"${f.name} is required"`;
 
-          if (f.required) {
-            const msg = baseTranslationPath
-              ? `i18n.t(\`${baseTranslationPath}.validation.${f.name}_required\`)\n`
-              : `"${f.name} is required"`;
-            zodTypeStr += `.min(1, { message: ${msg} })`;
+          if (f.type === "number") {
+            if (f.required) {
+              zodTypeStr = `z.coerce.number().min(1, { message: ${msg} })`;
+            } else {
+              zodTypeStr = `z.coerce.number().optional()`;
+            }
+          } else if (f.type === "boolean") {
+            if (f.required) {
+              zodTypeStr = `z.boolean({ required_error: ${msg} })`;
+            } else {
+              zodTypeStr = `z.boolean().optional()`;
+            }
           } else {
-            zodTypeStr += ".optional()";
+            if (f.required) {
+              zodTypeStr = `z.string().min(1, { message: ${msg} })`;
+            } else {
+              zodTypeStr = `z.string().optional()`;
+            }
           }
           fieldsZodString += `  ${f.name}: ${zodTypeStr},\n`;
         });
@@ -926,7 +1170,11 @@ async function main() {
         optional: isOptional,
       });
     }
-    queryParams = queryParams.sort((a, b) => a.optional - b.optional);
+    // Required query params first, optional ones last (stable within each group)
+    queryParams = queryParams.sort((a, b) => {
+      if (a.optional === b.optional) return 0;
+      return a.optional ? 1 : -1;
+    });
 
     const isPaginated =
       (await askQuestion("\nIs the response data paginated? (y/N): "))
@@ -940,9 +1188,18 @@ async function main() {
 
     console.log("\nStep 5: Process Server Response Contract Schema Data...");
     console.log(
-      "Paste the JSON response schema block from Swagger, then press Enter:",
+      "Paste the JSON response schema block from Swagger.\n" +
+      "👉 When finished, type 'done' on a new line and press Enter:"
     );
-    const swaggerPayload = await askQuestion("> ");
+    let swaggerLines = [];
+    while (true) {
+      const line = await askQuestion("> ");
+      if (line.trim().toLowerCase() === "done" || line.trim() === "EOF") {
+        break;
+      }
+      swaggerLines.push(line);
+    }
+    const swaggerPayload = swaggerLines.join("\n");
     rl.close();
 
     const responseInterfaceName = `I${actionNamePascal}Response`;
@@ -967,29 +1224,52 @@ async function main() {
     // B. Update Types File
     let typesContent = fs.readFileSync(typesFilePath, "utf8");
     if (zodSchemaCode) {
-      if (!typesContent.includes('import z from "zod";'))
-        typesContent = `import z from "zod";\nimport i18n from "@/lib/i18n";\n${typesContent}`;
+      let importsBlock = "";
+      if (!typesContent.includes('import z from "zod";')) {
+        importsBlock += `import z from "zod";\n`;
+      }
+      if (!typesContent.includes('import i18n from "@/lib/i18n";')) {
+        importsBlock += `import i18n from "@/lib/i18n";\n`;
+      }
+      if (importsBlock) {
+        typesContent = `${importsBlock}${typesContent.trim()}\n`;
+      }
       typesContent = `${typesContent.trim()}\n\n${zodSchemaCode}`;
     }
-    typesContent = addInterfaceToFile(typesFilePath, generatedInterface);
+    typesContent = addInterfaceToFile(typesContent, generatedInterface);
     fs.writeFileSync(typesFilePath, typesContent, "utf8");
 
     // C. Update API File
-    let apiSignatureParams = [];
-    if (queryParams.length > 0) {
-      const sigString = queryParams
-        .map((p) => {
-          if (isPaginated && p.key === "PageNumber") return `PageNumber = 1`;
-          if (isPaginated && p.key === "PageSize") return `PageSize = 10`;
-          return `${p.key}${p.optional ? "?" : ""}: ${p.type}`;
-        })
-        .join(", ");
-      apiSignatureParams.push(sigString);
-    }
+    // NOTE: TypeScript requires all required parameters to come before any
+    // optional / default-valued ones. Query params can be optional while
+    // `payload` is always required, so we can't just concatenate
+    // "queryParams string" + "payload" blindly (that used to put a required
+    // `payload` AFTER optional query params, which is invalid TS). Instead we
+    // build individual {str, optional} entries and sort required-first while
+    // preserving relative order within each group (stable sort).
+    const signatureEntries = [];
     if (hasPayload) {
-      apiSignatureParams.push(`payload: ${finalFormValuesTypeName}`);
+      signatureEntries.push({
+        str: `payload: ${finalFormValuesTypeName}`,
+        optional: false,
+      });
     }
-    const finalSignature = apiSignatureParams.join(", ");
+    queryParams.forEach((p) => {
+      let str;
+      if (isPaginated && p.key === "PageNumber") str = `PageNumber = 1`;
+      else if (isPaginated && p.key === "PageSize") str = `PageSize = 10`;
+      else str = `${p.key}${p.optional ? "?" : ""}: ${p.type}`;
+      // Default-valued params (PageNumber/PageSize) behave like optional
+      // params for ordering purposes too.
+      signatureEntries.push({ str, optional: p.optional });
+    });
+
+    signatureEntries.sort((a, b) => {
+      if (a.optional === b.optional) return 0;
+      return a.optional ? 1 : -1;
+    });
+
+    const finalSignature = signatureEntries.map((e) => e.str).join(", ");
 
     const paramMappingBody = queryParams
       .map((p) => `\t\t\t\t${p.key}: ${p.key},`)
@@ -1017,11 +1297,16 @@ async function main() {
       `\`/\${${routeConstName}.${routeKey}}\`${finalArgsStr});\n` +
       `  return data;\n};`;
 
+    const apiTypesToImport = [responseInterfaceName];
+    if (hasPayload) {
+      apiTypesToImport.push(finalFormValuesTypeName);
+    }
+
     let apiContent = addApiMethodToFile(
       apiFilePath,
       apiPayloadStructure,
       featureName,
-      hasPayload ? finalFormValuesTypeName : responseInterfaceName,
+      apiTypesToImport,
       combinedActionFuncName,
       httpMethod,
       isPaginated,
@@ -1034,29 +1319,51 @@ async function main() {
     );
     let hookTemplateStructure = "";
     let hookName = "";
+    const queryTypesToImport = [];
 
     if (isMutationMethod) {
       hookName = `use${actionNamePascal}Mutation`;
+      
+      let mutationFnParams = "()";
+      let apiCallArgs = "";
+      
+      if (queryParams.length > 0 || hasPayload) {
+        if (queryParams.length === 0 && hasPayload) {
+          mutationFnParams = `payload: ${finalFormValuesTypeName}`;
+          apiCallArgs = "payload";
+        } else if (queryParams.length === 1 && !hasPayload) {
+          const p = queryParams[0];
+          mutationFnParams = `${p.key}: ${p.type}`;
+          apiCallArgs = p.key;
+        } else {
+          const typeFields = queryParams.map((p) => `${p.key}${p.optional ? "?" : ""}: ${p.type}`);
+          if (hasPayload) {
+            typeFields.push(`payload: ${finalFormValuesTypeName}`);
+          }
+          mutationFnParams = `params: {\n      ${typeFields.join(";\n      ")}\n    }`;
+          
+          const argFields = queryParams.map((p) => `params.${p.key}`);
+          if (hasPayload) {
+            argFields.push("params.payload");
+          }
+          apiCallArgs = argFields.join(", ");
+        }
+      }
+
+      if (hasPayload) {
+        queryTypesToImport.push(finalFormValuesTypeName);
+      }
+
       hookTemplateStructure =
         `export const ${hookName} = () => {\n` +
         `  return useMutation({\n` +
-        `    mutationFn: (${finalSignature ? `params: ${finalSignature.includes(",") || queryParams.length > 0 ? `{ ${queryParams.map((p) => p.key.replace(/ = \d+/, "")).join(", ") + (hasPayload ? ", payload: " + finalFormValuesTypeName : "")} }` : "payload: " + finalFormValuesTypeName}` : "()"}) => ${featureName}Api.${
-          combinedActionFuncName
-            .replace(/^(create|post|get|update|delete|patch)/i, (m) =>
-              m.toLowerCase(),
-            )
-            .charAt(0)
-            .toLowerCase() +
-          combinedActionFuncName
-            .replace(/^(create|post|get|update|delete|patch)/i, (m) =>
-              m.toLowerCase(),
-            )
-            .slice(1)
-        }(${finalSignature ? (finalSignature.includes(",") || queryParams.length > 0 ? queryParams.map((p) => `params.${p.key.replace(/ = \d+/, "")}`).join(", ") + (hasPayload ? ", params.payload" : "") : "payload") : ""}),\n` +
+        `    mutationFn: (${mutationFnParams}) =>\n` +
+        `      ${featureName}Api.${combinedActionFuncName}(${apiCallArgs}),\n` +
         `  });\n};`;
     } else if (isPaginated) {
-      // GENERATE ADVANCED INFINITE QUERY HOOK (Binds RAW response type into the Generic)
       hookName = `use${actionNamePascal}InfiniteQuery`;
+      queryTypesToImport.push(responseInterfaceName);
+      
       const customQueryParams = queryParams.filter(
         (p) => p.key !== "PageNumber" && p.key !== "PageSize",
       );
@@ -1095,7 +1402,6 @@ async function main() {
         `    },\n` +
         `  });\n};`;
     } else {
-      // REGULAR USE QUERY HOOK
       hookName = `use${actionNamePascal}Query`;
       const functionSignatureParams = queryParams
         .map((p) => `${p.key}${p.optional ? "?" : ""}: ${p.type}`)
@@ -1118,7 +1424,7 @@ async function main() {
       queriesFilePath,
       hookTemplateStructure,
       hookName,
-      responseInterfaceName,
+      queryTypesToImport,
       featureName,
       isMutationMethod,
       isPaginated,
