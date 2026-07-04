@@ -49,7 +49,7 @@ export const getAccessToken = () => {
 };
 
 export const getRefreshToken = () => {
-  const refreshTokenStr = localStorage.getItem(STORAGE_KEYS.refreshToken);
+  const refreshTokenStr = sessionStorage.getItem(STORAGE_KEYS.refreshToken);
   const refreshToken = refreshTokenStr ? JSON.parse(refreshTokenStr) : null;
 
   return refreshToken;
