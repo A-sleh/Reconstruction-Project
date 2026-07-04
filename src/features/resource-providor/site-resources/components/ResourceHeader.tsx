@@ -5,7 +5,7 @@ import { StatusBadge } from "./StatusBadge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/config/paths";
-import { useResourceStatistics } from "@/features/resource-providor/site-resources/api/query";
+import { useResourceStatistics } from "@/features/resource-providor/site-resources/api/queries";
 import useExchangeState from "@/hooks/useExchangeState";
 interface StatItem {
   label: string;

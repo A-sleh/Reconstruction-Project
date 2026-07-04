@@ -7,6 +7,10 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { useWorkSites } from "@/features/resource-providor/work-sites/api/query";
 import WorkSiteType from "../../shared/WorkSiteType";
+import { WorkSiteCardSkeleton } from "./skeletons/WorkSiteCardSkeleton";
+
+
+const SKELETON_CARDS_NUMBER = 6;
 
 const WorkSitesSection = () => {
   const { t } = useTranslation();
@@ -79,11 +83,10 @@ const WorkSitesSection = () => {
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {isLoading && (
-          <div className="col-span-3 text-center py-8">
-            {t("common.loading", "Loading...")}
-          </div>
-        )}
+        {isLoading &&
+          Array.from({ length: SKELETON_CARDS_NUMBER }, (_, idx) => (
+            <WorkSiteCardSkeleton key={idx} />
+          ))}
 
         {!isLoading && isError && (
           <div className="col-span-3 text-center py-8 text-red-500">

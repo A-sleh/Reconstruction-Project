@@ -3,7 +3,7 @@ import { Package, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import { useRWorkSiteResourcesInfinite } from "../api/query";
+import { useRWorkSiteResourcesInfinite } from "../api/queries";
 import { useParams } from "react-router";
 
 import ResourceCard from "./ResourceCard";
@@ -16,7 +16,7 @@ export default function InventoryTab() {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language == "ar";
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [debouncedSearch, setDebouncedSearch] =
     useQueryStringState<string>("search");
 

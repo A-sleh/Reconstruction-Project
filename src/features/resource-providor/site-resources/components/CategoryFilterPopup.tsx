@@ -1,7 +1,7 @@
 import { Filter, X } from "lucide-react";
 import Model from "@/components/model/Model";
 import useQueryStringState from "@/hooks/useQueryStringState";
-import { useBankCategories } from "../api/query";
+import { useBankCategories } from "../api/queries";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
@@ -16,15 +16,15 @@ const CategoryFilterPopup = ({
   const { t } = useTranslation();
   const closeRef = useRef<null | HTMLButtonElement>(null);
   const [selectedCategory, setSelectedCategory] = useQueryStringState<
-    number | "all"
-  >("ResourceCategoryId", "all");
+    number | undefined
+  >("ResourceCategoryId", undefined);
   const { data: categoriesData } = useBankCategories();
   const categories = Array.isArray(categoriesData)
     ? categoriesData
     : categoriesData?.categories || [];
 
   const handleCategoryChange = (value: any) => {
-      closeRef.current?.click();
+    closeRef.current?.click();
     setSelectedCategory(value);
     onSelect(value);
   };
@@ -87,9 +87,9 @@ const CategoryFilterPopup = ({
             style={{ scrollbarWidth: "none" }}
           >
             <button
-              onClick={() => handleCategoryChange("all")}
+              onClick={() => handleCategoryChange(undefined)}
               className={`w-full text-center px-3 py-2 rounded-lg text-sm font-medium border border-gray-300 transition-all ${
-                selectedCategory === "all"
+                selectedCategory
                   ? "bg-primary text-primary-foreground border-primary"
                   : "bg-card border-border text-muted-foreground hover:text-foreground"
               }`}

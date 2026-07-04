@@ -124,12 +124,10 @@ export const useRWorkSiteResourcesInfinite = ({
     queryKey: [...QUERY_KEYS.resources, workSiteId, search, categoryId],
 
     queryFn: async ({ pageParam = 1 }) => {
-      const parsedCategoryId =
-        categoryId === "all" ? undefined : (categoryId as number);
-
+      
       return await fetchWorkSiteResourceApi({
         Search: search,
-        CategoryId: parsedCategoryId as number,
+        CategoryId: categoryId as number,
         PageNumber: pageParam as number,
         PageSize: 10,
         WorkSiteId: workSiteId,

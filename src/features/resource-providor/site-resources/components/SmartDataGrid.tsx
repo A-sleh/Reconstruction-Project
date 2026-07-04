@@ -17,7 +17,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/Badge";
-import { useBankCategories, useResourcesInfinite } from "../api/query";
+import { useBankCategories, useResourcesInfinite } from "../api/queries";
 import { Label } from "@/components/ui/Label";
 
 export interface OptionItem {
