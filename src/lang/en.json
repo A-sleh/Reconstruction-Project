@@ -183,10 +183,12 @@
       "status-on-hold": "On Hold",
       "status-completed": "Completed",
       "stats": {
-        "total-resources": "Total Resources",
-        "categories": "Categories",
-        "inventory-value": "Inventory Value",
-        "pending-orders": "Pending Orders"
+        "total-ordered": "Total Ordered",
+        "fulfill-count": "Fulfilled Orders",
+        "fulfill-rate": "Fulfillment Rate",
+        "amount-invoiced": "Amount Invoiced",
+        "quantity-invoiced": "Quantity Invoiced",
+        "amount-total": "Total Amount"
       },
       "site-not-found": "Site not found.",
       "back-to-sites": "Back to sites",

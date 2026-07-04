@@ -1,43 +1,22 @@
 import { Input } from "@/components/ui/input";
 import { Building2, Search } from "lucide-react";
 import { SiteCard } from "./SiteCard";
-import { useEffect, useMemo, useState } from "react";
+import {  useMemo } from "react";
 import { NewWorkSite } from "./NewWorkSite";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router-dom";
 import { useWorkSites } from "@/features/resource-providor/work-sites/api/query";
 import WorkSiteType from "../../shared/WorkSiteType";
 import { WorkSiteCardSkeleton } from "./skeletons/WorkSiteCardSkeleton";
-
+import useQueryStringState from "@/hooks/useQueryStringState";
 
 const SKELETON_CARDS_NUMBER = 6;
 
 const WorkSitesSection = () => {
   const { t } = useTranslation();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const initialFilter = searchParams.get("filter") ?? "";
-  const [filter, setFilter] = useState(initialFilter);
-  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useQueryStringState<string>("filter");
+  const [query, setQuery] = useQueryStringState<string>("query", "");
   const { data: fetchedSites, isLoading, isError } = useWorkSites(filter);
   const sites = fetchedSites;
-
-  useEffect(() => {
-    const urlFilter = searchParams.get("filter") ?? "";
-    if (urlFilter !== filter) {
-      setFilter(urlFilter);
-    }
-  }, [searchParams, filter]);
-
-  const handleFilterChange = (value: string) => {
-    const nextParams = new URLSearchParams(searchParams);
-    if (value) {
-      nextParams.set("filter", value);
-    } else {
-      nextParams.delete("filter");
-    }
-    setSearchParams(nextParams, { replace: true });
-    setFilter(value);
-  };
 
   const filtered = useMemo(
     () =>
@@ -72,11 +51,7 @@ const WorkSitesSection = () => {
             />
           </div>
           <div>
-            <WorkSiteType
-              setValue={handleFilterChange}
-              value={filter}
-              asInput={false}
-            />
+            <WorkSiteType setValue={setFilter} value={filter} asInput={false} />
           </div>
           <NewWorkSite />
         </div>

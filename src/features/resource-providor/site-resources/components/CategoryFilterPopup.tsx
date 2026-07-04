@@ -87,7 +87,7 @@ const CategoryFilterPopup = ({
             style={{ scrollbarWidth: "none" }}
           >
             <button
-              onClick={() => handleCategoryChange(undefined)}
+              onClick={() => handleCategoryChange("all")}
               className={`w-full text-center px-3 py-2 rounded-lg text-sm font-medium border border-gray-300 transition-all ${
                 selectedCategory
                   ? "bg-primary text-primary-foreground border-primary"

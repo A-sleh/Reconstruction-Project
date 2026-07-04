@@ -16,7 +16,9 @@ export default function InventoryTab() {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language == "ar";
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState<number | "all">(
+    "all",
+  );
   const [debouncedSearch, setDebouncedSearch] =
     useQueryStringState<string>("search");
 
@@ -31,7 +33,7 @@ export default function InventoryTab() {
     hasNextPage,
     isFetchingNextPage,
   } = useRWorkSiteResourcesInfinite({
-    categoryId: Number(selectedCategory),
+    categoryId: selectedCategory,
     search: debouncedSearch,
     workSiteId: Number(siteId),
   });

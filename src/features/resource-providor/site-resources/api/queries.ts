@@ -8,7 +8,7 @@ import {
   OrderRequest,
   BankCategories,
 } from ".";
-import { Resources } from "."; 
+import { Resources } from ".";
 
 const fetchWorkSiteResourceApi = async ({
   CategoryId,
@@ -17,7 +17,7 @@ const fetchWorkSiteResourceApi = async ({
   Search,
   WorkSiteId,
 }: {
-  CategoryId: number;
+  CategoryId: number | undefined;
   Search: string;
   PageSize: number;
   PageNumber: number;
@@ -26,7 +26,13 @@ const fetchWorkSiteResourceApi = async ({
   const { data } = await ApiInstance.get<Resources>(
     `/${WorkSiteResourcesController.WorkSiteResources}`,
     {
-      params: { ResourceCategoryId: CategoryId, PageNumber, PageSize, Search, WorkSiteId },
+      params: {
+        ResourceCategoryId: CategoryId,
+        PageNumber,
+        PageSize,
+        Search,
+        WorkSiteId,
+      },
     },
   );
   return data;
@@ -46,7 +52,7 @@ const fetchResourceApi = async ({
   const { data } = await ApiInstance.get<Resources>(
     `/${WorkSiteResourcesController.Resources}`,
     {
-      params: { ResourceCategoryId:CategoryId, PageNumber, PageSize, Search },
+      params: { ResourceCategoryId: CategoryId, PageNumber, PageSize, Search },
     },
   );
   return data;
@@ -124,10 +130,9 @@ export const useRWorkSiteResourcesInfinite = ({
     queryKey: [...QUERY_KEYS.resources, workSiteId, search, categoryId],
 
     queryFn: async ({ pageParam = 1 }) => {
-      
       return await fetchWorkSiteResourceApi({
         Search: search,
-        CategoryId: categoryId as number,
+        CategoryId: categoryId === "all" ? undefined : (categoryId as number),
         PageNumber: pageParam as number,
         PageSize: 10,
         WorkSiteId: workSiteId,

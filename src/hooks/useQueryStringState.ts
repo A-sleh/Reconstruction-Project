@@ -15,7 +15,10 @@ function useQueryStringState<T>(key: string, defaultKey?: any) {
       nextParams.delete(key);
     }
     setSearchParams(nextParams, { replace: true });
-    setState(value as T);
+    if(typeof value === "number" && isNaN(value)) {
+      setState(undefined as T);
+    }else 
+      setState(value as T);
   };
 
   return [state, updateQueryString] as const;

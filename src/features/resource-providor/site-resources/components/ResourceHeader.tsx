@@ -1,6 +1,15 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Boxes, Clock, DollarSign, Package } from "lucide-react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  DollarSign,
+  Package,
+  PackageCheck,
+  Percent,
+  ReceiptText,
+  ShoppingCart,
+} from "lucide-react";
+import { Link, useParams } from "react-router-dom";
 import { StatusBadge } from "./StatusBadge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
@@ -32,24 +41,34 @@ export default function ResourceHeader() {
 
   const stats: StatItem[] = [
     {
-      label: "resourceProvidor.workSites.stats.total-resources",
-      value: isLoading ? "--" : (data?.totalResources ?? 0),
-      icon: Package,
+      label: "resourceProvidor.workSites.stats.total-ordered",
+      value: isLoading ? "--" : (data?.totalOrdered ?? 0),
+      icon: ShoppingCart,
     },
     {
-      label: "resourceProvidor.workSites.stats.categories",
-      value: isLoading ? "--" : (data?.categories ?? 0),
-      icon: Boxes,
+      label: "resourceProvidor.workSites.stats.fulfill-count",
+      value: isLoading ? "--" : (data?.fulfillCount ?? 0),
+      icon: CheckCircle2,
     },
     {
-      label: "resourceProvidor.workSites.stats.inventory-value",
-      value: isLoading ? "--" : (data?.inventoryValue ?? 0),
+      label: "resourceProvidor.workSites.stats.fulfill-rate",
+      value: isLoading ? "--" : `${data?.fulfillRate ?? 0}%`,
+      icon: Percent,
+    },
+    {
+      label: "resourceProvidor.workSites.stats.amount-invoiced",
+      value: isLoading ? "--" : (data?.amountInvoiced ?? 0),
+      icon: ReceiptText,
+    },
+    {
+      label: "resourceProvidor.workSites.stats.quantity-invoiced",
+      value: isLoading ? "--" : (data?.quantityInvoiced ?? 0),
+      icon: PackageCheck,
+    },
+    {
+      label: "resourceProvidor.workSites.stats.amount-total",
+      value: isLoading ? "--" : (data?.amountTotal ?? 0),
       icon: DollarSign,
-    },
-    {
-      label: "resourceProvidor.workSites.stats.pending-orders",
-      value: isLoading ? "--" : (data?.pendingOrders ?? 0),
-      icon: Clock,
     },
   ];
   return (
@@ -98,7 +117,7 @@ export default function ResourceHeader() {
           </Link>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-3xl">
+        <div className="mt-8 grid grid-cols-2 lg:grid-cols-6 gap-4 max-w-5xl">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}

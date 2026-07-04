@@ -184,10 +184,12 @@
       "add-resource-heading": "إضافة مورد جديد",
       "edit-resource-heading": "تعديل مورد",
       "stats": {
-        "total-resources": "إجمالي الموارد",
-        "categories": "الفئات",
-        "inventory-value": "قيمة المخزون",
-        "pending-orders": "الطلبات قيد الانتظار"
+        "total-ordered": "إجمالي الطلبات",
+        "fulfill-count": "الطلبات المنفذة",
+        "fulfill-rate": "معدل الإكمال",
+        "amount-invoiced": "المبلغ المفوتر",
+        "quantity-invoiced": "الكمية المفوترة",
+        "amount-total": "إجمالي المبلغ"
       },
       "site-not-found": "لم يتم العثور على الموقع.",
       "back-to-sites": "العودة إلى المواقع",

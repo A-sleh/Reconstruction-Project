@@ -123,7 +123,7 @@ const AddWorkSiteResources = () => {
 
       <div className="flex flex-col md:flex-row gap-8">
         {/* Added resources  */}
-        <aside className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm flex-1">
+        <aside className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm w-[30%] ">
           <div className="mb-4 flex items-center justify-between gap-3">
             <div>
               <h2 className="text-lg font-semibold mb-2">
@@ -168,7 +168,7 @@ const AddWorkSiteResources = () => {
                           {resource.resourceBank.name}
                           <span className="text-[10px] text-gray-600 p-1 px-2 rounded-full bg-gray-600/20">{resource.resourceBank.category.name}</span>
                         </p>
-                        <p className="font-semibold text-gray-500 text-sm w-100 truncate">
+                        <p className="font-semibold text-gray-500 text-sm w-60 truncate">
                           {resource.description}
                         </p>
                       </div>
@@ -202,7 +202,7 @@ const AddWorkSiteResources = () => {
           </div>
         </aside>
 
-        <div className="flex-2 w-full">
+        <div className="w-[70%] ">
           <NewResourceForm
             key={selectedResource?.id ?? "new-resource-form"}
             initial={selectedResource}

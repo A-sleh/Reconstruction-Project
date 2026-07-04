@@ -83,10 +83,12 @@ export interface SiteDetailsWithResources extends WorkSite {
 }
 
 export interface WorkSiteResourcesStatistics {
-  totalResources: number;
-  categories: number;
-  inventoryValue: number;
-  pendingOrders: number;
+  amountInvoiced: number;
+  quantityInvoiced: number;
+  amountTotal: number;
+  totalOrdered: number;
+  fulfillRate: number;
+  fulfillCount: number;
 }
 
 export interface BankCategories {
@@ -106,9 +108,9 @@ export enum WorkSiteResourcesController {
   WorkSiteResources = "worksite/get-resource",
   AddResources = "worksite/add-resources",
   delelteResource = "worksite/delete-item",
+  WorkSiteResourcesStatistics = "worksite/order-statistic",
 
   WorkSite = "workSites",
-  WorkSiteResourcesStatistics = "workSites-resources-statistics",
   OrderRequest = "orders",
 }
 
