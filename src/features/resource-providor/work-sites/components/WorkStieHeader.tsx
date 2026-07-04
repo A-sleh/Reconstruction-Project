@@ -8,16 +8,23 @@ const WorkSiteHeader = () => {
 
   const stats = [
     {
-      label: t("resourceProvidor.workSites.activeSites"),
-      value: isLoading ? "—" : (statsData?.activeWorkSites ?? 0),
+      label: t("resourceProvidor.workSites.total-sites"),
+      value: isLoading ? "—" : (statsData?.workSitesCount ?? 0),
     },
     {
-      label: t("resourceProvidor.workSites.total-sites"),
-      value: isLoading ? "—" : (statsData?.totalWorkSites ?? 0),
+      label: t("resourceProvidor.workSites.activeSites"),
+      value: isLoading
+        ? "—"
+        : (statsData?.workSitesCount ?? 0) -
+          (statsData?.inactiveWorkSitesCount ?? 0),
+    },
+    {
+      label: t("resourceProvidor.workSites.inactiveSites"),
+      value: isLoading ? "—" : (statsData?.inactiveWorkSitesCount ?? 0),
     },
     {
       label: t("resourceProvidor.workSites.traked-resourrces"),
-      value: isLoading ? "—" : (statsData?.onHoldWorkSites ?? 0),
+      value: isLoading ? "—" : (statsData?.itemsCategoryCount ?? 0),
     },
   ];
 
@@ -41,7 +48,7 @@ const WorkSiteHeader = () => {
         </p>
       </motion.div>
 
-      <div className="mt-10 grid grid-cols-3 gap-4 max-w-2xl">
+      <div className="mt-10 grid grid-cols-4 gap-4 max-w-2xl">
         {stats.map((s, i) => (
           <motion.div
             key={s.label}

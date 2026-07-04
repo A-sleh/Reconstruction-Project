@@ -99,6 +99,8 @@ export const useDeactivateWorkSite = () => {
       try {
         //@ts-ignore
         queryClient.invalidateQueries(QUERY_KEYS.workSites);
+        //@ts-ignore
+        queryClient.invalidateQueries(QUERY_KEYS.statistics);
       } catch (e) {}
     },
     onError: (error: any) => {

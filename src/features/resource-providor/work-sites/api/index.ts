@@ -10,9 +10,10 @@ export interface WorkSite {
   isActive: boolean;
 }
 export interface WorkSiteStatistics {
-  totalWorkSites: number;
-  activeWorkSites: number;
-  onHoldWorkSites: number;
+  workSitesCount: number;
+  inactiveWorkSitesCount: number;
+  itemsCategoryCount: number;
+  itemsCount: number;
 }
 
 export type DeactivateWorkSite = {
@@ -26,7 +27,7 @@ export enum SiteController {
   WorkSiteUpdate = "worksite/update",
   WorkSiteDelete = "worksite/delete",
   deactivateWorkSite = "worksite/deactivate",
-  WorkSitesStatistics = "workSites-statistics",
+  WorkSitesStatistics = "worksite/get-summary-cards",
 }
 
 export const QUERY_KEYS = {
