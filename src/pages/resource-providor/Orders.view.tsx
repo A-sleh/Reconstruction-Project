@@ -18,7 +18,7 @@ export default function Orders() {
           onToggle={() => setSidebarOpen((v) => !v)}
         />
         <main className="flex-1 min-w-0">
-          <section className="container mx-2">
+          <section className="container mx-4">
             <OrderHeader
               setSidebarOpen={setSidebarOpen}
               sidebarOpen={sidebarOpen}

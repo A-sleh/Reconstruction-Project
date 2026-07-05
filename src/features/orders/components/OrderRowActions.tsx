@@ -21,7 +21,7 @@ interface Props {
 }
 
 export function OrderRowActions({ order, onApprove, onShowItems }: Props) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isPending = order.status === "PendingApproval";
 
   return (
@@ -37,7 +37,7 @@ export function OrderRowActions({ order, onApprove, onShowItems }: Props) {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-52 animate-in fade-in-0 zoom-in-95 slide-in-from-top-1 duration-150"
+        className="w-52 animate-in fade-in-0 zoom-in-95 slide-in-from-top-1 duration-150 bg-white border-gray-300"
       >
         <DropdownMenuLabel className="text-xs text-muted-foreground">
           {order.ownerName}
@@ -45,18 +45,19 @@ export function OrderRowActions({ order, onApprove, onShowItems }: Props) {
         <DropdownMenuSeparator />
 
         {isPending ? (
-          <>
+          <div dir={i18n.language == "ar" ? "rtl" : "ltr"}>
             <DropdownMenuItem
               onClick={onApprove}
-              className="text-emerald-600 focus:text-emerald-600"
+              className="text-emerald-600 focus:text-emerald-600 hover:bg-gray-300/30 flex gap-2 "
             >
-              <Check className="h-4 w-4" /> {t("orders.rowActions.approveOrder")}
+              <Check className="h-4 w-4" />{" "}
+              {t("orders.rowActions.approveOrder")}
             </DropdownMenuItem>
-
             <RejectOrderModal
               openButton={
                 <DropdownMenuItem
-                  className="text-destructive focus:text-destructive"
+                  onSelect={(e) => e.preventDefault()}
+                  className="text-destructive focus:text-destructive hover:bg-gray-300/30 flex gap-2"
                 >
                   <X className="h-4 w-4" /> {t("orders.rowActions.rejectOrder")}
                 </DropdownMenuItem>
@@ -66,24 +67,37 @@ export function OrderRowActions({ order, onApprove, onShowItems }: Props) {
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem onClick={onShowItems}>
-              <ListChecks className="h-4 w-4" /> {t("orders.rowActions.showOrderItems")}
+            <DropdownMenuItem
+              onSelect={(e) => e.preventDefault()}
+              onClick={onShowItems}
+              className="hover:bg-gray-300/30 flex gap-2"
+            >
+              <ListChecks className="h-4 w-4" />{" "}
+              {t("orders.rowActions.showOrderItems")}
             </DropdownMenuItem>
-          </>
+          </div>
         ) : (
           <>
             <AddPaymentModal
               openButton={
-                <DropdownMenuItem>
-                  <Wallet className="h-4 w-4" /> {t("orders.rowActions.addPayment")}
+                <DropdownMenuItem
+                  onSelect={(e) => e.preventDefault()}
+                  className="hover:bg-gray-300/30 flex gap-2"
+                >
+                  <Wallet className="h-4 w-4" />{" "}
+                  {t("orders.rowActions.addPayment")}
                 </DropdownMenuItem>
               }
               orderId={order.id}
             />
             <OrderDetailsModal
               openButton={
-                <DropdownMenuItem>
-                  <Eye className="h-4 w-4" /> {t("orders.rowActions.viewDetails")}
+                <DropdownMenuItem
+                  onSelect={(e) => e.preventDefault()}
+                  className="hover:bg-gray-300/30 flex gap-2"
+                >
+                  <Eye className="h-4 w-4" />{" "}
+                  {t("orders.rowActions.viewDetails")}
                 </DropdownMenuItem>
               }
               orderId={order.id}

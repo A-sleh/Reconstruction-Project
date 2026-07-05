@@ -1,12 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
-import { Check, CheckCircle2, Circle, Search, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useInvestoryRequests } from "../api/query";
-import { RequestStatusBadge } from "../../shared/RequestStatusBadge";
-import Loader from "@/components/shared/Loader";
+import { useOrdersInfinite } from "../api/query";
 import {
   Table,
   TableBody,
@@ -15,213 +9,186 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useNavigate } from "react-router";
-import {
-  useApproveInvestorRequest,
-  useCancelInvestorRequest,
-} from "../api/actions";
-import { RejectModalContent } from "./RejectModalContent";
-import { paths } from "@/config/paths";
+import { Progress } from "@/components/ui/progress";
+import { useApproveOrder } from "../api/actions";
+import { GetOrderAllFilters, Order } from "../api/types";
+import { OrderItemsDrawer } from "./OrderItemsDrawer";
+import { Skeleton } from "@/components/ui/Skeleton";
+import { OrderRowActions } from "./OrderRowActions";
+import { OrderStatusBadge } from "./OrderStatusBadge";
+import { MOCK_ORDERS } from "../data/mockOrders";
 
-const OrderTables = () => {
-  const { t, i18n } = useTranslation();
-  const goto = useNavigate();
-  const isArabic = i18n.language == "ar";
-  const [query, setQuery] = useState("");
-  const [currentModify, setCurrentModify] = useState<number | string | null>(
-    null,
-  );
-  const { data: requests, isPending } = useInvestoryRequests();
-  const filtered = useMemo(
-    () =>
-      requests?.filter((r) =>
-        r.investor.toLowerCase().includes(query.toLowerCase()),
-      ),
-    [requests, query],
-  );
-  const { mutate: approve, isPending: isAproved } = useApproveInvestorRequest();
-  const { mutate: cancel, isPending: isCanceld } = useCancelInvestorRequest();
+const OrderTables = ({ filters }: { filters: GetOrderAllFilters }) => {
+  const { t } = useTranslation();
+  const [itemsFor, setItemsFor] = useState<number | null>(null);
 
-  const handleApprove = (id: number | string) => {
-    setCurrentModify(id);
-    approve(id, {
-      onSettled: () => {
-        setCurrentModify(null);
+  const approve = useApproveOrder();
+
+  // Use mock data instead of API call
+  const isLoading = false;
+  const isFetchingNextPage = false;
+  const hasNextPage = false;
+  const fetchNextPage = () => {};
+
+  const rows: Order[] = useMemo(
+    () => MOCK_ORDERS,
+    [],
+  );
+
+  // const total = data?.pages[0]?.totalRows ?? 0;
+
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
       },
-    });
-  };
-  const handleCancel = (id: number | string, reason: string) => {
-    setCurrentModify(id);
-    cancel(
-      { id, payload: { reason } },
-      {
-        onSettled: () => {
-          setCurrentModify(null);
-        },
-      },
+      { rootMargin: "200px" },
     );
-  };
-
-  if (isPending) return <Loader />;
+    io.observe(el);
+    return () => io.disconnect();
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <div
-      className="mt-8 rounded-xl border border-gray-300 bg-white shadow-sm"
-      dir={isArabic ? "rtl" : "ltr"}
-    >
-      <div className="flex items-center justify-between gap-4 p-4 border-b border-gray-300">
-        <div className="relative">
-          <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={t(
-              "resourceProvidor.investor-request.search.placeholder",
-            )}
-            className="pr-9 w-full bg-white"
-          />
-        </div>
-        <p className="text-sm text-muted-foreground">
-          {t("resourceProvidor.investor-request.search.count", {
-            count: filtered?.length ?? 0,
-          })}
-        </p>
-      </div>
-
-      <Table>
-        <TableHeader>
-          <TableRow className={isArabic ? "text-right" : "text-left"}>
-            <TableHead>
-              {t(`resourceProvidor.investor-request.table.columns.investor`)}
-            </TableHead>
-            <TableHead>
-              {t(`resourceProvidor.investor-request.table.columns.date`)}
-            </TableHead>
-            <TableHead>
-              {t(`resourceProvidor.investor-request.table.columns.status`)}
-            </TableHead>
-            <TableHead className="">
-              {t(`resourceProvidor.investor-request.table.columns.resources`)}
-            </TableHead>
-            <TableHead className="text-center">
-              {t(`resourceProvidor.investor-request.table.columns.actions`)}
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filtered?.map((r) => {
-            const total = r.resources.reduce((s, x) => s + x.quantity, 0);
-            const delivered = r.resources.reduce((s, x) => s + x.delivered, 0);
-            const fullyDelivered = total > 0 && delivered >= total;
-            return (
-              <TableRow
-                key={r.id}
-                className="cursor-pointer"
-                onClick={() =>
-                  goto(paths.app.resourceProvidor.orderDetails.getHref(r.id))
-                }
-              >
-                <TableCell>
-                  <div className="font-medium">{r.investor}</div>
-                  <div className="text-xs text-muted-foreground">{r.email}</div>
-                </TableCell>
-                <TableCell className="text-muted-foreground ">
-                  {new Date(r.requestDate).toLocaleDateString()}
-                </TableCell>
-                <TableCell>
-                  <RequestStatusBadge status={r.status} />
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center  gap-2">
-                    {fullyDelivered ? (
-                      <CheckCircle2 className="h-5 w-5 text-success" />
-                    ) : (
-                      <Circle className="h-5 w-5 text-muted-foreground" />
-                    )}
-                    <span className="text-xs text-muted-foreground">
-                      {delivered}/{total}
-                    </span>
-                  </div>
-                </TableCell>
-                <TableCell
-                  className="text-center"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="inline-flex gap-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-success/40 text-success hover:bg-success/10 hover:text-success rounded-xl"
-                      disabled={
-                        r.status === "completed" ||
-                        (currentModify === r.id && isAproved)
-                      }
-                      onClick={() => handleApprove(r.id)}
-                    >
-                      {currentModify === r.id && isAproved ? (
-                        <>
-                          <span className="h-4 w-4 mr-1 animate-spin rounded-full border-2 border-success border-t-transparent" />
-                          {t(
-                            `resourceProvidor.investor-request.table.actions.approve`,
-                          )}
-                        </>
-                      ) : (
-                        <>
-                          <Check className="h-4 w-4 mr-1" />
-                          {t(
-                            `resourceProvidor.investor-request.table.actions.approve`,
-                          )}
-                        </>
-                      )}
-                    </Button>
-                    <RejectModalContent
-                      investorName={r.investor}
-                      onConfirm={(reason: string) => handleCancel(r.id, reason)}
-                      openButton={
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="border-destructive/40 text-destructive hover:bg-destructive/10 hover:text-destructive rounded-xl"
-                          disabled={
-                            r.status === "rejected" ||
-                            (currentModify === r.id && isCanceld)
-                          }
-                        >
-                          {currentModify === r.id && isCanceld ? (
-                            <>
-                              <span className="h-4 w-4 mr-1 animate-spin rounded-full border-2 border-destructive border-t-transparent" />
-                              {t(
-                                `resourceProvidor.investor-request.table.actions.rejecting`,
-                              )}
-                            </>
-                          ) : (
-                            <>
-                              <X className="h-4 w-4 mr-1" />
-                              {t(
-                                `resourceProvidor.investor-request.table.actions.reject`,
-                              )}
-                            </>
-                          )}
-                        </Button>
-                      }
-                    />
-                  </div>
-                </TableCell>
+    <div className="space-y-4 w-full">
+      <div className="mt-6 rounded-xl border border-gray-300 bg-white shadow-sm overflow-hidden">
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>{t("orders.table.columns.investor")}</TableHead>
+                <TableHead className="text-right">
+                  {t("orders.totalPrice")}
+                </TableHead>
+                <TableHead className="text-right">
+                  {t("orders.addPaymentModal.labels.amount")}
+                </TableHead>
+                <TableHead className="text-right">
+                  {t("orders.orderDetailsModal.fields.netTotal")}
+                </TableHead>
+                <TableHead className="w-40">
+                  {t("orders.orderDetailsModal.fields.fulfillRate")}
+                </TableHead>
+                <TableHead>
+                  {t("orders.orderDetailsModal.fields.status")}
+                </TableHead>
+                <TableHead>
+                  {t("orders.orderDetailsModal.labels.requested")}
+                </TableHead>
+                <TableHead>{t("orders.addPaymentModal.labels.date")}</TableHead>
+                <TableHead className="text-right">
+                  {t("orders.table.columns.actions")}
+                </TableHead>
               </TableRow>
-            );
-          })}
-          {filtered?.length === 0 && (
-            <TableRow>
-              <TableCell
-                colSpan={5}
-                className="text-center py-12 text-muted-foreground"
-              >
-                {t(`resourceProvidor.investor-request.table.empty`)}
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+            </TableHeader>
+            <TableBody>
+              {isLoading &&
+                Array.from({ length: 8 }).map((_, i) => (
+                  <TableRow key={`sk-${i}`}>
+                    {Array.from({ length: 9 }).map((__, j) => (
+                      <TableCell key={j}>
+                        <Skeleton className="h-4 w-full" />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+
+              {!isLoading && rows.length === 0 && (
+                <TableRow>
+                  <TableCell
+                    colSpan={9}
+                    className="text-center py-16 text-muted-foreground"
+                  >
+                    {t("orders.table.empty")}
+                  </TableCell>
+                </TableRow>
+              )}
+
+              {rows.map((r) => (
+                <TableRow
+                  key={r.id}
+                  className="hover:bg-muted/40 transition-colors"
+                >
+                  <TableCell>
+                    <div className="font-medium">{r.ownerName}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {t("orders.table.columns.investor")} #{r.ownerId}
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-right tabular-nums">
+                    $
+                    {r.totalPrice.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </TableCell>
+                  <TableCell className="text-right tabular-nums">
+                    $
+                    {r.totalDiscountValue.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </TableCell>
+                  <TableCell className="text-right font-semibold tabular-nums">
+                    $
+                    {r.netTotal.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Progress value={r.fulfillRate} className="h-1.5" />
+                      <span className="text-xs text-muted-foreground tabular-nums w-8 text-right">
+                        {r.fulfillRate}%
+                      </span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <OrderStatusBadge status={r.status} />
+                  </TableCell>
+                  <TableCell className="text-xs text-muted-foreground">
+                    {new Date(r.requestedAt).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell className="text-xs text-muted-foreground">
+                    {new Date(r.updatedAt).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <OrderRowActions
+                      order={r}
+                      onShowItems={() => setItemsFor(r.id)}
+                      onApprove={() => approve.mutate({ OrderId: r.id })}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+
+              {isFetchingNextPage &&
+                Array.from({ length: 3 }).map((_, i) => (
+                  <TableRow key={`nx-${i}`}>
+                    {Array.from({ length: 9 }).map((__, j) => (
+                      <TableCell key={j}>
+                        <Skeleton className="h-4 w-full" />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </div>
+
+        <div ref={sentinelRef} className="h-8" />
+        {!hasNextPage && rows.length > 0 && (
+          <p className="text-center text-xs text-muted-foreground py-4">
+            {t("orders.listSubtitle")}
+          </p>
+        )}
+      </div>
+      <OrderItemsDrawer orderId={itemsFor} onClose={() => setItemsFor(null)} />
     </div>
   );
 };

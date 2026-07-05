@@ -898,7 +898,8 @@
         "fulfillRate": "Fulfill Rate",
         "totalPrice": "Total Price",
         "discount": "Discount",
-        "netTotal": "Net Total"
+        "netTotal": "Net Total",
+        "status": "Status"
       },
       "labels": {
         "orderId": "Order ID:",

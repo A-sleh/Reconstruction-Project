@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 import Input from "@/components/inputs/Input";
 import { Label } from "@/components/ui/Label";
-import { Checkbox } from "@/components/ui/Checkbox";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 
 import {

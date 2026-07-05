@@ -896,7 +896,9 @@
         "fulfillRate": "معدل التلبية",
         "totalPrice": "السعر الإجمالي",
         "discount": "الخصم",
-        "netTotal": "المجموع الصافي"
+        "netTotal": "المجموع الصافي",
+        "status": "الحالة",
+        "status": "الحالة",
       },
       "labels": {
         "orderId": "رقم الطلب:",

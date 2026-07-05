@@ -146,6 +146,7 @@ body {
     hsl(170.46deg 100% 19.54%) 60%,
     hsl(136.23deg 100% 89.53%) 140%
   );
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --animate-fade-in: fade-in 2.5s ease-in-out;
   --animate-infinit-loop: infinit-loop 16s ease-in-out infinite;
 }
