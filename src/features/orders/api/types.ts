@@ -1,0 +1,116 @@
+import { Paginated } from "@/types";
+
+// ============================================================================
+// 1. Shared Types & Enums
+// ============================================================================
+export type OrderStatus = 
+  | "PendingApproval" 
+  | "Preparing" 
+  | "Cancelled" 
+  | "Suspended" 
+  | "Completed";
+
+// ============================================================================
+// 2. Core Entities (Main Models)
+// ============================================================================
+export interface Order {
+  id: number;
+  ownerId: number;
+  ownerName: string;
+  totalPrice: number;
+  totalDiscountValue: number;
+  netTotal: number;
+  fulfillRate: number;
+  requestedAt: string;
+  updatedAt: string;
+  status: OrderStatus; // Consider changing this to RequestStatus if applicable!
+}
+
+export interface OrderDetails extends Order {
+  items: OrderItem[];
+  orderReceiveInvoices: OrderReceiveInvoice[];
+}
+
+// ============================================================================
+// 3. Child & Sub-Entities (Nested Relationships)
+// ============================================================================
+export interface OrderItem {
+  itemId: number;
+  itemName: string;
+  category: string;
+  quantity: number;
+  unit: string;
+  price: number;
+  fulfilledQuantity: number;
+  fulfillRate: number;
+  totalAmount: number;
+  latestUpdateAt: string;
+  itemStatus: string;
+}
+
+export interface OrderReceiveInvoice {
+  receiveDate: string;
+  isApprovedByCustomer: boolean;
+  receiveInvoiceItems: ReceiveInvoiceItem[];
+}
+
+export interface ReceiveInvoiceItem {
+  name: string;
+  category: string;
+  quantity: number;
+}
+
+// ============================================================================
+// 4. API Response Wrappers
+// ============================================================================
+export interface OrdersResponse extends Paginated<OrderItem> {}
+
+export interface OrderDetailsResponse {
+  orderDetails: OrderDetails;
+}
+
+export interface OrderItemsResponse {
+  orderItems: OrderItem[];
+}
+
+// ============================================================================
+// GET /api/order/get-by-id
+// ============================================================================
+export interface OrderByIdParams {
+  OrderId: number; // integer ($int64)
+}
+
+// ============================================================================
+// GET /api/order/get-all
+// ============================================================================
+export interface GetOrderAllFilters {
+  WorkSiteId?: number;          // integer ($int64)
+  From?: string | Date;         // string ($date-time)
+  To?: string | Date;           // string ($date-time)
+  Status?: OrderStatus;         // string (Union literal helper above)
+  SearchByOwner?: string;       // string
+  PageNumber?: number;          // integer ($int32)
+  PageSize?: number;            // integer ($int32)
+}
+
+// ============================================================================
+// POST /api/order/add-payment
+// ============================================================================
+export interface AddPaymentRequestBody {
+  orderId: number;
+  amount: number;
+  paymentDate: string | Date; // Expects an ISO date-time string
+}
+
+// ============================================================================
+// POST /api/order/add-receive-invoice
+// ============================================================================
+export interface OrderItemReceive {
+  orderItemId: number;
+  quantity: number;
+}
+
+export interface AddReceiveInvoiceRequestBody {
+  receivedDate: string | Date; // Expects an ISO date-time string
+  orderItemReceives: OrderItemReceive[];
+}
