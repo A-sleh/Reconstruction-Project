@@ -951,6 +951,7 @@
   },
   "common": {
     "logout": "Logout",
+    "error": "Some thing went wrong",
     "logoutSuccess": "Logged out successfully",
     "logoutError": "Logout failed",
     "loading": "Loading...",
