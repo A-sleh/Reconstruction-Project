@@ -8,7 +8,7 @@ interface Props {
   openButton?: React.ReactNode | null;
   title?: string;
   subTitle?: string;
-  children?: (closeModel: () => void) => React.ReactNode | React.ReactNode;
+  children?: ((closeModel: () => void) => React.ReactNode )| React.ReactNode;
 }
 
 export default function PopuupLayout({

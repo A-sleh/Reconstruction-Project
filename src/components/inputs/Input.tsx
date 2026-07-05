@@ -1,4 +1,4 @@
-import React, {
+  import React, {
   useEffect,
   useId,
   useState,
@@ -68,7 +68,7 @@ const Input: React.FC<InputProps> = ({
         {label && (
           <label
             htmlFor={inputId}
-            className={`text-[13px] mb-0.5 md:text-sm ${disabled ? "cursor-not-allowed opacity-70" : ""} ${invalid ? "text-red-400" : ""}`}
+            className={`text-[11px] text-muted-foreground mb-0.5 md:text-sm ${disabled ? "cursor-not-allowed opacity-70" : ""} ${invalid ? "text-red-400" : ""}`}
           >
             {required && <span className="text-red-600">*</span>} {label}
           </label>
