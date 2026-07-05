@@ -1,8 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { Building2, Search } from "lucide-react";
 import { SiteCard } from "./SiteCard";
-import {  useMemo } from "react";
-import { NewWorkSite } from "./NewWorkSite";
+import { useMemo } from "react";
+import { WorkSiteFormModel } from "./WorkSiteFormModel";
 import { useTranslation } from "react-i18next";
 import { useWorkSites } from "@/features/resource-providor/work-sites/api/query";
 import WorkSiteType from "../../shared/WorkSiteType";
@@ -53,7 +53,7 @@ const WorkSitesSection = () => {
           <div>
             <WorkSiteType setValue={setFilter} value={filter} asInput={false} />
           </div>
-          <NewWorkSite />
+          <WorkSiteFormModel openKey="new-work-site" />
         </div>
       </div>
 

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { StatusBadge } from "../../shared/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { paths } from "@/config/paths";
-import { NewWorkSite } from "./NewWorkSite";
+import { WorkSiteFormModel } from "./WorkSiteFormModel";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import { useTranslation } from "react-i18next";
 import { WorkSite } from "../api";
@@ -39,7 +39,8 @@ export function SiteCard({ site, index }: Props) {
         className={`absolute  top-4 z-10 flex gap-1 opacity-0 transition-smooth group-hover:opacity-100
         ${langIsArabic ? "left-4 right-auto" : "right-4 left-auto"}`}
       >
-        <NewWorkSite
+        <WorkSiteFormModel
+          openKey={`edit-work-site-${site.id}`}
           openButton={
             <Button
               size="icon"

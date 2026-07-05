@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 interface IPickCoordsFromMap {
   value: string;
-  setValue: (key: string, value: any) => void;
+  setValue: any;
 }
 
 export const PickCoordsFromMap: React.FC<IPickCoordsFromMap> = ({
@@ -25,10 +25,7 @@ export const PickCoordsFromMap: React.FC<IPickCoordsFromMap> = ({
 
   const handleMapChange = (coords: LatLng) => {
     setSelectedLocation(coords);
-    setValue(
-      "location",
-      `${coords.lat.toFixed(6)}, ${coords.lng.toFixed(6)}`,
-    );
+    setValue("location", `${coords.lat.toFixed(6)}, ${coords.lng.toFixed(6)}`);
   };
 
   return (
