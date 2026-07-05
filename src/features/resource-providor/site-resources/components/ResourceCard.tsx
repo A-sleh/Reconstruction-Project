@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/Badge";
 import { StatusBadge } from "./StatusBadge";
@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 
 import { Resource, useDeleteResource } from "../api/actions";
 import { useParams } from "react-router";
+import ModifyResourceModel from "./ModifyResourceModel";
 
 interface Props {
   resource: Resource;
@@ -86,6 +87,25 @@ export default function ResourceCard({ resource }: Props) {
                   <Trash2 className="h-4 w-4" />
                 </Button>
               }
+            />
+            <ModifyResourceModel
+              openButton={
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="h-8 w-8 text-muted-foreground hover:text-sky-300"
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                  aria-label={t(
+                    "resourceProvidor.workSites.btn-edit",
+                    "Edit site",
+                  )}
+                >
+                  <Pencil className="h-3.5 w-3.5" />
+                </Button>
+              }
+              initial={resource}
             />
           </div>
         </div>

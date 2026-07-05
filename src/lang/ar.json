@@ -229,6 +229,9 @@
       "resource": {
         "search-placeholder": "البحث في الموارد...",
         "btn-create": "إنشاء مورد",
+        "isAvailable-label": "المورد متاح",
+        "edit-resource-heading": "تعديل معلومات المورد",
+        "sub-heading-edit-description": "قم بتعديل المعلومات الاساسية للمورد",
         "resource-update": "تم تحديث المورد بنجاح",
         "resource-created": "تم إنشاء المورد بنجاح",
         "resource-request": "تم طلب المورد بنجاح",

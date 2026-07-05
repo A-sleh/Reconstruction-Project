@@ -228,6 +228,9 @@
       "resource": {
         "search-placeholder": "Search resources...",
         "btn-create": "Create Resource",
+        "isAvailable-label": "Is available",
+        "edit-resource-heading": "Update resource details",
+        "sub-heading-edit-description": "Modify the details of each type",
         "resource-update": "Resource updated successfully",
         "resource-created": "Resource created successfully",
         "resource-request": "Resource requested successfully",

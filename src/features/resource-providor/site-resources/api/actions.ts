@@ -12,6 +12,7 @@ import {
 import ApiInstance from "@/config/api-instance";
 
 export const resourceSchema = z.object({
+  id: z.string().nullable().optional(),
   unit: z
     .string()
     .nonempty(
@@ -24,7 +25,9 @@ export const resourceSchema = z.object({
       i18n.t(
         "resourceProvidor.workSites.resource.validation.resource_type_required",
       ),
-    ),
+    )
+    .nullable()
+    .optional(),
   resourceBank: z.any().optional(),
   imageUrl: z
     .string()
@@ -46,8 +49,9 @@ export const resourceSchema = z.object({
         "resourceProvidor.workSites.resource.validation.description_required",
       ),
     ),
-  isAvailable: z.boolean(),
+  isAvailable: z.boolean().nullable().optional(),
   file: z.file().optional(),
+  workSiteId: z.string().nullable().optional(),
 });
 
 export type Resource = z.infer<typeof resourceSchema>;
@@ -55,12 +59,14 @@ export type ResourceFormValues = Resource & {
   id?: string;
 };
 export const defaultResourceValues: Resource = {
+  id: null,
   isAvailable: true,
   unit: unitTypes[0],
   resourceBankId: 0,
   description: "",
   imageUrl: "",
   price: 0,
+  workSiteId: null,
 };
 
 export const generateMockResourceValues = (): Resource => {
@@ -88,11 +94,10 @@ export const generateMockResourceValues = (): Resource => {
 };
 
 const updateResourceApi = async (
-  siteId: number | string,
   payload: ResourceFormValues,
 ): Promise<ResourceFormValues> => {
   const { data } = await ApiInstance.put(
-    `/${WorkSiteResourcesController.WorkSite}/${siteId}/resources/${payload.id}`,
+    `/${WorkSiteResourcesController.updateWorkSite}`,
     payload,
   );
   return data;
@@ -122,7 +127,7 @@ const askeToAddResourceApi = async (
 const deleteResourceApi = async (
   ResourceId: string | number,
 ): Promise<void> => {
-  console.log(WorkSiteResourcesController)
+  console.log(WorkSiteResourcesController);
   await ApiInstance.delete(`/${WorkSiteResourcesController.delelteResource}`, {
     params: { Id: ResourceId, ItemType: "Resource" },
   });
@@ -130,10 +135,7 @@ const deleteResourceApi = async (
 
 export const useUpdateResource = () => {
   return useMutation({
-    mutationFn: (params: {
-      siteId: number | string;
-      payload: ResourceFormValues;
-    }) => updateResourceApi(params.siteId, params.payload),
+    mutationFn: (payload: ResourceFormValues) => updateResourceApi(payload),
     mutationKey: MUTATION_KEYS.resource.update(),
     onSuccess: (_: any) => {
       successToast(

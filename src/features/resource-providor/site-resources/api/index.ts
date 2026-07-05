@@ -109,8 +109,8 @@ export enum WorkSiteResourcesController {
   AddResources = "worksite/add-resources",
   delelteResource = "worksite/delete-item",
   WorkSiteResourcesStatistics = "worksite/order-statistic",
+  updateWorkSite = "worksite/update-resource",
 
-  WorkSite = "workSites",
   OrderRequest = "orders",
 }
 

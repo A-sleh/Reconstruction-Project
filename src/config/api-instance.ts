@@ -38,7 +38,7 @@ ApiInstance.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true; // Mark the request as retried to avoid infinite loops.
       try {
-        const refreshToken = getRefreshToken(); // Retrieve the stored refresh token.
+        const refreshToken = getRefreshToken()?.state?.refreshToken; // Retrieve the stored refresh token.
         // Make a request to your auth server to refresh the token.
         const response = await ApiInstance.post("auth/refresh", {
           refreshToken,
