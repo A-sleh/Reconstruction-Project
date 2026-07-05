@@ -853,7 +853,84 @@
     "viewDetails": "عرض",
     "accept": "قبول",
     "contact": "تواصل",
-    "selectionText": "تم تنفيذ الإجراء: {{selection}}"
+    "selectionText": "تم تنفيذ الإجراء: {{selection}}",
+    "table": {
+      "columns": {
+        "investor": "المستثمر",
+        "date": "تاريخ الطلب",
+        "status": "الحالة",
+        "resources": "الموارد",
+        "actions": "الإجراءات"
+      },
+      "actions": {
+        "approve": "اعتماد",
+        "approving": "جاري الاعتماد...",
+        "reject": "رفض",
+        "rejecting": "جاري الرفض..."
+      },
+      "empty": "لم يتم العثور على طلبات."
+    },
+    "search": {
+      "placeholder": "البحث باسم المستثمر...",
+      "count": "({{count}}) طلبات"
+    },
+    "addPaymentModal": {
+      "title": "إضافة دفعة",
+      "labels": {
+        "amount": "المبلغ",
+        "date": "التاريخ"
+      },
+      "validation": {
+        "amountInvalid": "يرجى إدخال مبلغ صحيح أكبر من 0.",
+        "dateInvalid": "يرجى تحديد تاريخ دفع صحيح."
+      },
+      "buttons": {
+        "save": "حفظ الدفعة",
+        "saving": "جاري الحفظ..."
+      }
+    },
+    "orderDetailsModal": {
+      "title": "تفاصيل الطلب",
+      "subtitle": "المعلومات الكاملة لـ",
+      "fields": {
+        "fulfillRate": "معدل التلبية",
+        "totalPrice": "السعر الإجمالي",
+        "discount": "الخصم",
+        "netTotal": "المجموع الصافي"
+      },
+      "labels": {
+        "orderId": "رقم الطلب:",
+        "requested": "تم الطلب:"
+      }
+    },
+    "orderItemsDrawer": {
+      "title": "عناصر الطلب",
+      "description": "عناصر السطر لـ",
+      "empty": "لا توجد عناصر."
+    },
+    "filters": {
+      "title": "المرشحات",
+      "resetButton": "إعادة تعيين",
+      "showButton": "إظهار المرشحات",
+      "hideButton": "إخفاء المرشحات",
+      "search": {
+        "label": "البحث",
+        "placeholder": "اسم المالك، البريد الإلكتروني، المعرف..."
+      },
+      "status": {
+        "label": "الحالة",
+        "PendingApproval": "قيد الموافقة",
+        "Preparing": "قيد التحضير",
+        "Cancelled": "ملغى",
+        "Suspended": "معلق",
+        "Completed": "مكتمل"
+      },
+      "dateRange": {
+        "label": "نطاق التاريخ",
+        "from": "من",
+        "to": "إلى"
+      }
+    }
   },
   "home": {
     "no-notifications-messages": "لا توجد إشعارات جديدة",

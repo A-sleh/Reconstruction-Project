@@ -855,7 +855,84 @@
     "viewDetails": "Details",
     "accept": "Accept",
     "contact": "Contact",
-    "selectionText": "Action applied: {{selection}}"
+    "selectionText": "Action applied: {{selection}}",
+    "table": {
+      "columns": {
+        "investor": "Investor",
+        "date": "Request Date",
+        "status": "Status",
+        "resources": "Resources",
+        "actions": "Actions"
+      },
+      "actions": {
+        "approve": "Approve",
+        "approving": "Approving...",
+        "reject": "Reject",
+        "rejecting": "Rejecting..."
+      },
+      "empty": "No requests found."
+    },
+    "search": {
+      "placeholder": "Search by investor name...",
+      "count": "({{count}}) requests"
+    },
+    "addPaymentModal": {
+      "title": "Add Payment",
+      "labels": {
+        "amount": "Amount",
+        "date": "Date"
+      },
+      "validation": {
+        "amountInvalid": "Please enter a valid amount greater than 0.",
+        "dateInvalid": "Please select a valid payment date."
+      },
+      "buttons": {
+        "save": "Save Payment",
+        "saving": "Saving..."
+      }
+    },
+    "orderDetailsModal": {
+      "title": "Order Details",
+      "subtitle": "Full information for",
+      "fields": {
+        "fulfillRate": "Fulfill Rate",
+        "totalPrice": "Total Price",
+        "discount": "Discount",
+        "netTotal": "Net Total"
+      },
+      "labels": {
+        "orderId": "Order ID:",
+        "requested": "Requested:"
+      }
+    },
+    "orderItemsDrawer": {
+      "title": "Order Items",
+      "description": "Line items for",
+      "empty": "No line items."
+    },
+    "filters": {
+      "title": "Filters",
+      "resetButton": "Reset",
+      "showButton": "Show Filters",
+      "hideButton": "Hide Filters",
+      "search": {
+        "label": "Search",
+        "placeholder": "Owner name, email, id..."
+      },
+      "status": {
+        "label": "Status",
+        "PendingApproval": "Pending Approval",
+        "Preparing": "Preparing",
+        "Cancelled": "Cancelled",
+        "Suspended": "Suspended",
+        "Completed": "Completed"
+      },
+      "dateRange": {
+        "label": "Date range",
+        "from": "From",
+        "to": "To"
+      }
+    }
   },
   "home": {
     "no-notifications-messages": "No new notifications",
