@@ -1,8 +1,6 @@
 import { useState, FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import Input from "@/components/inputs/Input";
-
-import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/button";
 import { useAddPayment } from "../api/actions";
 import PopuupLayout from "@/components/layouts/Popup-layout";
@@ -10,7 +8,7 @@ import { errorToast } from "@/components/common/Toast";
 
 interface Props {
   orderId: number | null;
-  onClose: () => void;
+  openButton: React.ReactNode;
 }
 
 interface ValidationErrors {
@@ -18,7 +16,7 @@ interface ValidationErrors {
   date?: string;
 }
 
-export function AddPaymentModal({ orderId, onClose }: Props) {
+export function AddPaymentModal({ orderId, openButton }: Props) {
   const { t } = useTranslation();
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [amount, setAmount] = useState("");
@@ -64,7 +62,6 @@ export function AddPaymentModal({ orderId, onClose }: Props) {
           setAmount("");
           setErrors({});
           closeModle();
-          onClose();
         },
       },
     );
@@ -74,7 +71,7 @@ export function AddPaymentModal({ orderId, onClose }: Props) {
     <PopuupLayout
       openKey="add-new-payment"
       title={t("orders.addPaymentModal.title")}
-      openButton={<Button>cli</Button>}
+      openButton={openButton}
       children={(close) => {
         return (
           <form onSubmit={(e) => handleSubmit(e, close)} className="space-y-4">

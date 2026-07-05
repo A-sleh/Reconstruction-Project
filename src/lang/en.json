@@ -932,6 +932,13 @@
         "from": "From",
         "to": "To"
       }
+    },
+    "rowActions": {
+      "approveOrder": "Approve Order",
+      "rejectOrder": "Reject Order",
+      "showOrderItems": "Show Order Items",
+      "addPayment": "Add Payment",
+      "viewDetails": "View Details"
     }
   },
   "home": {

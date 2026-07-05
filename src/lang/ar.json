@@ -930,6 +930,13 @@
         "from": "من",
         "to": "إلى"
       }
+    },
+    "rowActions": {
+      "approveOrder": "الموافقة على الطلب",
+      "rejectOrder": "رفض الطلب",
+      "showOrderItems": "عرض عناصر الطلب",
+      "addPayment": "إضافة دفعة",
+      "viewDetails": "عرض التفاصيل"
     }
   },
   "home": {

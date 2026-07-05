@@ -3,25 +3,16 @@ import { useTranslation } from "react-i18next";
 import { OrderStatusBadge } from "./OrderStatusBadge";
 import { useOrderDetails } from "../api/query";
 import PopuupLayout from "@/components/layouts/Popup-layout";
-import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
-
 interface Props {
   orderId: number | null;
-  onClose: () => void;
+  openButton: React.ReactNode;
 }
 
-export function OrderDetailsModal({ orderId, onClose }: Props) {
+export function OrderDetailsModal({ orderId, openButton }: Props) {
   const { t } = useTranslation();
   const { data, isLoading } = useOrderDetails({
     OrderId: Number(orderId),
   });
-
-  useEffect(() => {
-    return () => {
-      onClose();
-    };
-  }, [orderId]);
 
   return (
     <PopuupLayout
@@ -81,11 +72,7 @@ export function OrderDetailsModal({ orderId, onClose }: Props) {
           </div>
         )
       }
-      openButton={
-        <Button variant="outline" size="sm">
-          {t("orders.orderDetailsModal.labels.viewDetails")}
-        </Button>
-      }
+      openButton={openButton}
     />
   );
 }

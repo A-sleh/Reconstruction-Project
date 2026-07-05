@@ -8,10 +8,10 @@ import { useRejectOrder } from "../api/actions";
 
 interface RejectModalProps {
   orderId: number | null;
-  onClose: () => void;
+  openButton: React.ReactNode;
 }
 
-export function RejectOrderModal({ onClose, orderId }: RejectModalProps) {
+export function RejectOrderModal({ openButton, orderId }: RejectModalProps) {
   const { t } = useTranslation();
   const [reason, setReason] = useState("");
   const OPEN_KEY = "reject-invector-request" + orderId;
@@ -22,19 +22,11 @@ export function RejectOrderModal({ onClose, orderId }: RejectModalProps) {
       reject.mutate(
         { OrderId: Number(orderId), reason },
         {
-          onSuccess: () => {
-            onClose();
-          },
+          onSuccess: () => {},
         },
       );
     }
   };
-
-  useEffect(() => {
-    return () => {
-      onClose();
-    };
-  }, [orderId]);
 
   return (
     <PopuupLayout
@@ -50,11 +42,7 @@ export function RejectOrderModal({ onClose, orderId }: RejectModalProps) {
               `resourceProvidor.investor-request.reject-modal.description_generic`,
             )
       }
-      openButton={
-        <Button variant="outline" size="sm">
-          {t("orders.orderDetailsModal.labels.viewDetails")}
-        </Button>
-      }
+      openButton={openButton}
       children={
         <div>
           {/* Main Body Input fields area */}
