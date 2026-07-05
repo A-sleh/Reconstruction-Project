@@ -3,12 +3,20 @@ import { Paginated } from "@/types";
 // ============================================================================
 // 1. Shared Types & Enums
 // ============================================================================
-export type OrderStatus = 
-  | "PendingApproval" 
-  | "Preparing" 
-  | "Cancelled" 
-  | "Suspended" 
+export type OrderStatus =
+  | "PendingApproval"
+  | "Preparing"
+  | "Cancelled"
+  | "Suspended"
   | "Completed";
+
+export const ORDER_STATUSES: OrderStatus[] = [
+  "PendingApproval",
+  "Preparing",
+  "Cancelled",
+  "Suspended",
+  "Completed",
+];
 
 // ============================================================================
 // 2. Core Entities (Main Models)
@@ -63,7 +71,7 @@ export interface ReceiveInvoiceItem {
 // ============================================================================
 // 4. API Response Wrappers
 // ============================================================================
-export interface OrdersResponse extends Paginated<OrderItem> {}
+export interface OrdersResponse extends Paginated<Order> {}
 
 export interface OrderDetailsResponse {
   orderDetails: OrderDetails;
@@ -84,13 +92,13 @@ export interface OrderByIdParams {
 // GET /api/order/get-all
 // ============================================================================
 export interface GetOrderAllFilters {
-  WorkSiteId?: number;          // integer ($int64)
-  From?: string | Date;         // string ($date-time)
-  To?: string | Date;           // string ($date-time)
-  Status?: OrderStatus;         // string (Union literal helper above)
-  SearchByOwner?: string;       // string
-  PageNumber?: number;          // integer ($int32)
-  PageSize?: number;            // integer ($int32)
+  WorkSiteId?: number; // integer ($int64)
+  From?: Date; // string ($date-time)
+  To?: Date; // string ($date-time)
+  Status?: OrderStatus; // string (Union literal helper above)
+  SearchByOwner?: string; // string
+  PageNumber?: number; // integer ($int32)
+  PageSize?: number; // integer ($int32)
 }
 
 // ============================================================================
