@@ -8,7 +8,7 @@ interface Props {
   openButton?: React.ReactNode | null;
   title?: string;
   subTitle?: string;
-  children?: ((closeModel: () => void) => React.ReactNode )| React.ReactNode;
+  children?: ((closeModel: () => void) => React.ReactNode) | React.ReactNode;
 }
 
 export default function PopuupLayout({
@@ -45,7 +45,7 @@ export default function PopuupLayout({
             onClick={(e) => e.stopPropagation()}
             className="w-full max-w-2xl rounded-2xl border border-gray-300 bg-white shadow-elegant"
           >
-            <div className="flex items-center justify-between border-b border-border p-6">
+            <div className="flex items-center justify-between border-b border-gray-300 p-6">
               <div hidden={withOutHeader}>
                 <h2 hidden={!title} className="text-xl font-semibold">
                   {title}
@@ -67,9 +67,11 @@ export default function PopuupLayout({
                 </button>
               </Model.Close>
             </div>
-            {typeof children == "function"
-              ? children(handleCloseModal)
-              : children}
+            <div className="p-6">
+              {typeof children == "function"
+                ? children(handleCloseModal)
+                : children}
+            </div>
           </motion.div>
         </motion.div>
       </Model.Window>

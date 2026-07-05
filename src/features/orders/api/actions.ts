@@ -20,10 +20,15 @@ const approveOrder = async ({ OrderId }: OrderByIdParams) => {
   return data;
 };
 
-const rejectOrder = async ({ OrderId }: OrderByIdParams) => {
+const rejectOrder = async ({
+  OrderId,
+  reason,
+}: OrderByIdParams & { reason: string }) => {
   const { data } = await ApiInstance.post(
     `/${InvestorRequestController.RejectOrder}`,
-    {},
+    {
+      reason,
+    },
     { params: { orderId: OrderId } },
   );
   return data;
