@@ -897,8 +897,7 @@
         "totalPrice": "السعر الإجمالي",
         "discount": "الخصم",
         "netTotal": "المجموع الصافي",
-        "status": "الحالة",
-        "status": "الحالة",
+        "status": "الحالة"
       },
       "labels": {
         "orderId": "رقم الطلب:",
