@@ -443,6 +443,18 @@
       },
       "delivered-success": "تم تحديد الطلب كمكتمل التوصيل بنجاح.",
       "delivered-error": "فشل تحديد الطلب كمكتمل التوصيل. يرجى المحاولة مرة أخرى.",
+      "history_section": {
+        "empty": "لا توجد سجلات استلام بعد.",
+        "items_received": "تم استلام صنف {{count}}",
+        "items_received_plural": "تم استلام {{count}} أصناف",
+        "approved": "تمت الموافقة",
+        "pending": "قيد الانتظار",
+        "columns": {
+          "name": "الاسم",
+          "category": "الفئة",
+          "qty": "الكمية"
+        }
+      },
       "financials": {
         "invoice_box": {
           "title": "الفواتير",

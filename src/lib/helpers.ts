@@ -24,3 +24,19 @@ export const fmtCurrency = (value: number) => {
     currency: "USD",
   }).format(value);
 };
+
+export const formatDate = (
+  date: Date | string,
+  isArabic = false,
+  options?: Intl.DateTimeFormatOptions,
+) => {
+  const d = typeof date === "string" ? new Date(date) : date;
+  const locale = isArabic ? "ar-SA" : "en-US";
+  return d.toLocaleDateString(locale, {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    ...options,
+  });
+};

@@ -442,6 +442,18 @@
       },
       "delivered-success": "Order has been marked as fully delivered successfully.",
       "delivered-error": "Failed to mark the order as fully delivered. Please try again.",
+      "history_section": {
+        "empty": "No receive records yet.",
+        "items_received": "{{count}} item received",
+        "items_received_plural": "{{count}} items received",
+        "approved": "Approved",
+        "pending": "Pending",
+        "columns": {
+          "name": "Name",
+          "category": "Category",
+          "qty": "Qty"
+        }
+      },
       "financials": {
         "invoice_box": {
           "title": "Invoices",
