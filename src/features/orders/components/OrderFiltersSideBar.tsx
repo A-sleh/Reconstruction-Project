@@ -12,6 +12,8 @@ import {
   GetOrderAllFilters,
 } from "@/features/orders/api/types";
 import { cn } from "@/lib/utils";
+import Selector from "@/components/inputs/Selector";
+import { useWorkSites } from "@/features/resource-providor/work-sites/api/query";
 
 interface Props {
   filters: GetOrderAllFilters;
@@ -28,6 +30,7 @@ export function OrdersFilterSidebar({
 }: Props) {
   const { t } = useTranslation();
   const reset = () => onChange({});
+  const { data: workSites = [], isPending: workSitesPending } = useWorkSites();
 
   const activeCount =
     (filters.SearchByOwner ? 1 : 0) +
@@ -75,6 +78,24 @@ export function OrdersFilterSidebar({
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
+          <Selector
+            label={t("orders.filters.workSite")}
+            value={filters.WorkSiteId}
+            setValue={(e) =>
+              onChange({
+                ...filters,
+                WorkSiteId: e.target.value || undefined,
+              })
+            }
+            className="w-full text-sm font-medium bg-white border-none focus:outline-none"
+          >
+            {workSites.map((ws) => (
+              <option key={ws.id} value={ws.id} className="">
+                {ws.name}
+              </option>
+            ))}
+          </Selector>
+
           <div className="space-y-2">
             <Input
               label={t("orders.filters.search.label")}
@@ -128,7 +149,7 @@ export function OrdersFilterSidebar({
                 <Input
                   type="date"
                   label={t("orders.filters.dateRange.from")}
-                  value={filters?.From?.toISOString().slice(0, 10)  ?? ""}
+                  value={filters?.From?.toISOString().slice(0, 10) ?? ""}
                   onChange={(e) =>
                     onChange({
                       ...filters,

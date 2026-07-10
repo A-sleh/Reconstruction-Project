@@ -929,6 +929,7 @@
     },
     "filters": {
       "title": "Filters",
+      "workSite": "Work site",
       "resetButton": "Reset",
       "showButton": "Show Filters",
       "hideButton": "Hide Filters",

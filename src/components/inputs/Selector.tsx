@@ -40,7 +40,7 @@ const Selector: React.FC<SelectorProps> = ({
       {label && (
         <label
           htmlFor={inputId}
-          className={`text-sm ${invalid ? "text-red-400" : ""}`}
+          className={`text-[11px] text-muted-foreground mb-0.5 md:text-sm ${invalid ? "text-red-400" : ""}`}
         >
           {required && <span className="text-red-600">*</span>} {label}
         </label>
@@ -52,7 +52,7 @@ const Selector: React.FC<SelectorProps> = ({
         disabled={disabled}
         required={required}
         onChange={(e) => setValue(e.target.value)}
-        className={`flex items-center gap-3 mt-1 rounded-lg border bg-card px-2 md:px-2 py-1 md:py-1.5 has-focus-within:border-primary transition-all border-gray-300 ${
+        className={`flex items-center gap-3 rounded-lg border border-border  md:px-2 py-2 md:py-2 text-black-500  has-focus-within:border-primary transition-all bg-gray-200/40 border-gray-300 ${
           asInput
             ? "bg-gray-200/40"
             : "bg-white md:py-0 rounded-md"

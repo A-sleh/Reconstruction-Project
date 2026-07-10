@@ -927,6 +927,7 @@
     },
     "filters": {
       "title": "المرشحات",
+      "workSite": "موقع العمل",
       "resetButton": "إعادة تعيين",
       "showButton": "إظهار المرشحات",
       "hideButton": "إخفاء المرشحات",
