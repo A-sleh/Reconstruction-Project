@@ -3,6 +3,7 @@ import {
   OrderDetails,
   OrderDetailsResponse,
   OrderItem,
+  OrderPayment,
   OrderReceiveInvoice,
 } from "../api/types";
 
@@ -207,11 +208,18 @@ export const MOCK_RECEIVE_INVOICES: OrderReceiveInvoice[] = [
   },
 ];
 
+// Mock Order Payments
+export const MOCK_ORDER_PAYMENTS: OrderPayment[] = [
+  { amount: 5000, paymentDate: "2026-07-01T10:00:00Z" },
+  { amount: 3000, paymentDate: "2026-07-05T14:30:00Z" },
+];
+
 // Mock Order Details
 export const MOCK_ORDER_DETAILS: OrderDetails[] = MOCK_ORDERS.map((order, index) => ({
   ...order,
   items: MOCK_ORDER_ITEMS.slice(0, 2 + (index % 2)),
-  orderReceiveInvoices: MOCK_RECEIVE_INVOICES.slice(0, index % 4),
+  orderReceiveInvoices: MOCK_RECEIVE_INVOICES,
+  orderPayments: MOCK_ORDER_PAYMENTS,
 }));
 
 export const MOCK_ORDER_DETAILS_RESPONSE: OrderDetailsResponse = {

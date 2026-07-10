@@ -45,6 +45,7 @@ export interface Order {
 export interface OrderDetails extends Order {
   items: OrderItem[];
   orderReceiveInvoices: OrderReceiveInvoice[];
+  orderPayments: OrderPayment[];
 }
 
 // ============================================================================
@@ -74,6 +75,11 @@ export interface ReceiveInvoiceItem {
   name: string;
   category: string;
   quantity: number;
+}
+
+export interface OrderPayment {
+  amount: number;
+  paymentDate: string;
 }
 
 // ============================================================================
