@@ -136,3 +136,44 @@ export interface AddReceiveInvoiceRequestBody {
   receivedDate: string | Date; // Expects an ISO date-time string
   orderItemReceives: OrderItemReceive[];
 }
+
+
+// ============================================================================
+// POST /api/order/approve-order-item-cancellation
+// ============================================================================
+export interface ApproveOrderItemCancellationRequestBody {
+  orderItemId: number;
+  note: string;
+}
+
+// ============================================================================
+// POST /api/order/mark-as-received
+// ============================================================================
+export interface MarkAsReceivedRequestBody {
+  orderId: number;
+  receiveDate: string | Date; // Expects an ISO date-time string
+}
+
+// ============================================================================
+// POST /api/order/cancel-order
+// ============================================================================
+export interface CancelOrderRequestBody {
+  orderId: number;
+  note: string;
+}
+
+// ============================================================================
+// POST /api/order/cancel-order-item
+// ============================================================================
+export interface CancelOrderItemRequestBody {
+  orderItemId: number;
+  note: string;
+}
+
+// ============================================================================
+// POST /api/order/approve-order-cancellation
+// ============================================================================
+export interface ApproveOrderCancellationRequestBody {
+  orderId: number;
+  note: string;
+}

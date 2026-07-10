@@ -4,6 +4,11 @@ import { InvestorRequestController, QUERY_KEYS, MUTATION_KEYS } from ".";
 import {
   AddPaymentRequestBody,
   AddReceiveInvoiceRequestBody,
+  ApproveOrderCancellationRequestBody,
+  ApproveOrderItemCancellationRequestBody,
+  CancelOrderItemRequestBody,
+  CancelOrderRequestBody,
+  MarkAsReceivedRequestBody,
   OrderByIdParams,
 } from "./types";
 
@@ -45,6 +50,50 @@ const addAddPayment = async (payload: AddPaymentRequestBody) => {
 const addReceiveInvoice = async (payload: AddReceiveInvoiceRequestBody) => {
   const { data } = await ApiInstance.post(
     `/${InvestorRequestController.AddReceiveInvoice}`,
+    payload,
+  );
+  return data;
+};
+
+const approveOrderItemCancellation = async (
+  payload: ApproveOrderItemCancellationRequestBody,
+) => {
+  const { data } = await ApiInstance.post(
+    `/${InvestorRequestController.ApproveOrderItemCancellation}`,
+    payload,
+  );
+  return data;
+};
+
+const markAsReceived = async (payload: MarkAsReceivedRequestBody) => {
+  const { data } = await ApiInstance.post(
+    `/${InvestorRequestController.MarkAsReceived}`,
+    payload,
+  );
+  return data;
+};
+
+const cancelOrder = async (payload: CancelOrderRequestBody) => {
+  const { data } = await ApiInstance.post(
+    `/${InvestorRequestController.CancelOrder}`,
+    payload,
+  );
+  return data;
+};
+
+const cancelOrderItem = async (payload: CancelOrderItemRequestBody) => {
+  const { data } = await ApiInstance.post(
+    `/${InvestorRequestController.CancelOrderItem}`,
+    payload,
+  );
+  return data;
+};
+
+const approveOrderCancellation = async (
+  payload: ApproveOrderCancellationRequestBody,
+) => {
+  const { data } = await ApiInstance.post(
+    `/${InvestorRequestController.ApproveOrderCancellation}`,
     payload,
   );
   return data;
@@ -112,6 +161,66 @@ export const useAddReceiveInvoice = () => {
   return useMutation({
     mutationKey: MUTATION_KEYS.orders.addReceiveInvoice(),
     mutationFn: addReceiveInvoice,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+    },
+  });
+};
+
+export const useApproveOrderItemCancellation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.orders.approveOrderItemCancellation(),
+    mutationFn: approveOrderItemCancellation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+    },
+  });
+};
+
+export const useMarkAsReceived = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.orders.markAsReceived(),
+    mutationFn: markAsReceived,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+    },
+  });
+};
+
+export const useCancelOrder = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.orders.cancelOrder(),
+    mutationFn: cancelOrder,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+    },
+  });
+};
+
+export const useCancelOrderItem = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.orders.cancelOrderItem(),
+    mutationFn: cancelOrderItem,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+    },
+  });
+};
+
+export const useApproveOrderCancellation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.orders.approveOrderCancellation(),
+    mutationFn: approveOrderCancellation,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
     },

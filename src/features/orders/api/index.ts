@@ -10,6 +10,11 @@ export enum InvestorRequestController {
   RejectOrder = `${BASE_ORDER_ROUTE}/reject`,
   AddPayment = `${BASE_ORDER_ROUTE}/add-payment`,
   AddReceiveInvoice = `${BASE_ORDER_ROUTE}/add-receive-invoice`,
+  ApproveOrderItemCancellation = `${BASE_ORDER_ROUTE}/approve-order-item-cancellation`,
+  MarkAsReceived = `${BASE_ORDER_ROUTE}/mark-as-received`,
+  CancelOrder = `${BASE_ORDER_ROUTE}/cancel-order`,
+  CancelOrderItem = `${BASE_ORDER_ROUTE}/cancel-order-item`,
+  ApproveOrderCancellation = `${BASE_ORDER_ROUTE}/approve-order-cancellation`,
 }
 
 // 2. Query Key Factory Pattern
@@ -32,5 +37,10 @@ export const MUTATION_KEYS = {
     reject: () => ["orders", "reject"],
     addPayment: () => ["orders", "add-payment"],
     addReceiveInvoice: () => ["orders", "add-receive-invoice"],
+    approveOrderItemCancellation: () => ["orders", "approve-item-cancellation"],
+    markAsReceived: () => ["orders", "mark-received"],
+    cancelOrder: () => ["orders", "cancel-order"],
+    cancelOrderItem: () => ["orders", "cancel-item"],
+    approveOrderCancellation: () => ["orders", "approve-order-cancellation"],
   },
 };
