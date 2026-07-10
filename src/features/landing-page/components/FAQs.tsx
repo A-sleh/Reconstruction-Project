@@ -2,10 +2,17 @@
 
 import { useState } from "react";
 import { AnimatePresence } from "motion/react";
-import { useTranslation } from "react-i18next";
-import { ScrollFadeIn, StaggerContainer, StaggerItem, ExpandCollapse, AnimatedButton } from "@/components/animations";
 import { motion } from "motion/react";
-import { FaPlus } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
+import { Plus } from "lucide-react";
+import {
+  ScrollFadeIn,
+  StaggerContainer,
+  StaggerItem,
+  ExpandCollapse,
+} from "@/components/animations";
+import Button from "@/components/inputs/Button";
+import { Link } from "react-router-dom";
 
 const FAQs = () => {
   const { i18n } = useTranslation();
@@ -55,14 +62,14 @@ const FAQs = () => {
   };
 
   return (
-    <section id="faq" className="scroll-mt-24 py-20 bg-gray-50">
+    <section id="faq" className="bg-canvas-elevated scroll-mt-24 py-24">
       <div className="max-w-4xl mx-auto px-4">
         <ScrollFadeIn>
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-primary mb-4">
+            <h2 className="text-display-lg font-bold text-ink-primary text-center mb-4">
               {i18n.language === 'ar' ? "الأسئلة الشائعة" : "Frequently Asked Questions"}
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-body text-ink-secondary">
               {i18n.language === 'ar'
                 ? "إجابات على الأسئلة الأكثر شيوعاً حول منصتنا"
                 : "Answers to the most common questions about our platform"
@@ -71,31 +78,29 @@ const FAQs = () => {
           </div>
         </ScrollFadeIn>
 
-        <StaggerContainer className="space-y-4">
+        <StaggerContainer className="space-y-3 max-w-3xl mx-auto">
           {faqs.map((faq, index) => (
-            <StaggerItem key={index} className="bg-white rounded-lg shadow-md">
+            <StaggerItem key={index} className="bg-canvas-base border border-canvas-border rounded-md overflow-hidden">
               <motion.button
-                className={`w-full p-6 px-4 focus:outline-none ${i18n.language === 'ar' ? " text-right" : " text-left"}`}
+                className="w-full p-6 flex justify-between items-center gap-3 text-left"
                 onClick={() => toggleFAQ(index)}
-                whileHover={{ backgroundColor: "rgba(59, 130, 246, 0.05)" }}
               >
-                <div className="flex justify-between items-center gap-2">
-                  <h3 className="text-lg font-semibold text-primary pr-4">
-                    {faq.question}
-                  </h3>
-                  <motion.span
-                    animate={{ rotate: openIndex === index ? 135 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <FaPlus size={20} />
-                  </motion.span>
-                </div>
+                <h3 className="text-subtitle font-medium text-ink-primary">
+                  {faq.question}
+                </h3>
+                <motion.span
+                  className="shrink-0"
+                  animate={{ rotate: openIndex === index ? 45 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Plus className="w-5 h-5 text-ink-primary" />
+                </motion.span>
               </motion.button>
               <AnimatePresence>
                 {openIndex === index && (
                   <ExpandCollapse isOpen={true}>
                     <div className="px-6 pb-6">
-                      <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                      <p className="text-body text-ink-secondary leading-relaxed">{faq.answer}</p>
                     </div>
                   </ExpandCollapse>
                 )}
@@ -105,15 +110,17 @@ const FAQs = () => {
         </StaggerContainer>
 
         <ScrollFadeIn delay={0.8} className="text-center mt-12">
-          <p className="text-lg text-gray-600 mb-4">
+          <p className="text-body text-ink-secondary mb-4">
             {i18n.language === 'ar'
               ? "لم تجد إجابة لسؤالك؟"
               : "Didn't find an answer to your question?"
             }
           </p>
-          <AnimatedButton className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-hover transition-colors">
-            {i18n.language === 'ar' ? "تواصل مع الدعم" : "Contact Support"}
-          </AnimatedButton>
+          <Link to="#contact">
+            <Button variant="outline" className="border-canvas-border text-ink-primary">
+              {i18n.language === 'ar' ? "تواصل مع الدعم" : "Contact Support"}
+            </Button>
+          </Link>
         </ScrollFadeIn>
       </div>
     </section>

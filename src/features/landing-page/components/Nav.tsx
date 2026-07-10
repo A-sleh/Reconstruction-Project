@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Menu, X } from "lucide-react";
 import { assets } from "@/assets/assets";
 import { Link } from "react-router";
 import { paths } from "@/config/paths";
@@ -16,63 +17,52 @@ const Nav = () => {
   const sections: ISectionStructur[] = useMemo(
     () => [
       { id: "hero", label: t("landingPage.nav.home") },
-      {
-        id: "features",
-        label: t("landingPage.nav.features"),
-      },
-      {
-        id: "solutions",
-        label: t("landingPage.nav.solutions"),
-      },
-      {
-        id: "testimonials",
-        label: t("landingPage.nav.testimonials"),
-      },
+      { id: "features", label: t("landingPage.nav.features") },
+      { id: "solutions", label: t("landingPage.nav.solutions") },
+      { id: "testimonials", label: t("landingPage.nav.testimonials") },
       { id: "why-us", label: t("landingPage.nav.whyUs") },
-      {
-        id: "call-to-action",
-        label: t("landingPage.nav.getStarted"),
-      },
+      { id: "call-to-action", label: t("landingPage.nav.getStarted") },
       { id: "faq", label: t("landingPage.nav.faq") },
     ],
-    [t, activeSection],
+    [t],
   );
 
   const handlNavLinkClicked = (section: ISectionStructur) => {
     setActiveSection(section.id);
-    setIsMobileMenuOpen(false); // Close mobile menu on link click
+    setIsMobileMenuOpen(false);
     window.scrollTo({
-      top: (document.getElementById(`${section.id}`) as HTMLElement)?.getBoundingClientRect()?.top + window.scrollY - 80, // Adjust for fixed nav height
-      behavior: "smooth"
-    })
+      top:
+        (document.getElementById(`${section.id}`) as HTMLElement)?.getBoundingClientRect()?.top +
+        window.scrollY -
+        80,
+      behavior: "smooth",
+    });
   };
 
   return (
-    <>
-    <div className="fixed top-6 left-[5%] z-40 transition-all duration-500 w-[90%]  bg-white/25  before:absolute before:inset-0 before:-z-10 before:backdrop-blur-lg border-b border-gray-200/50 before:rounded-3xl rounded-3xl ">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+    <div className="fixed top-6 left-1/2 z-40 w-11/12 max-w-5xl -translate-x-1/2">
+      <div className="flex items-center justify-between gap-2 px-2 py-1.5 rounded-pill bg-canvas-elevated border border-canvas-border shadow-ambient">
         <div className="flex items-center gap-3">
           <img
             src={assets.logo}
             alt="Syrian Reconstruction Logo"
-            className="h-10 w-10 rounded-full shadow-sm"
+            className="h-10 w-10 rounded-full"
           />
-          <span className="text-lg font-bold text-gray-800 hidden sm:block">
+          <span className="hidden sm:block text-body font-semibold text-ink-primary">
             {t("landingPage.nav.brand")}
           </span>
         </div>
-        
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+
+        <nav className="hidden md:flex items-center gap-1">
           {sections.map((section) => (
             <button
               key={section.id}
               onClick={() => handlNavLinkClicked(section)}
               aria-current={activeSection === section.id ? "page" : undefined}
-              className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 rounded-2xl cursor-pointer ${
+              className={`relative px-3 py-2 text-body-sm font-medium rounded-pill transition-colors duration-[120ms] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/40 ${
                 activeSection === section.id
-                  ? "bg-primary-hover-two text-white"
-                  : "text-black hover:bg-white"
+                  ? "bg-canvas-overlay text-ink-primary"
+                  : "bg-transparent text-ink-secondary hover:bg-canvas-overlay/60 hover:text-ink-primary"
               }`}
             >
               {section.label}
@@ -80,48 +70,45 @@ const Nav = () => {
           ))}
         </nav>
 
-        {/* Mobile Hamburger Menu */}
-        <div className="md:hidden flex items-center gap-4">
+        <div className="md:hidden flex items-center gap-2">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-lg hover:bg-white/50 transition-colors"
-            aria-label="Toggle mobile menu"
+            className="flex items-center justify-center h-10 w-10 rounded-pill text-ink-secondary hover:bg-canvas-overlay/60 hover:text-ink-primary transition-colors duration-[120ms] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/40"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            <div className="w-6 h-6 flex flex-col justify-center items-center">
-              <span className={`block w-5 h-0.5 bg-gray-800 transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1'}`}></span>
-              <span className={`block w-5 h-0.5 bg-gray-800 transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-              <span className={`block w-5 h-0.5 bg-gray-800 transition-transform duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-1'}`}></span>
-            </div>
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
 
-        <Link to={paths.auth.login.path} className="hidden  sm:block bg-secondary-hover  text-white hover:opacity-70  px-5 py-1 rounded-2xl transition">
+        <Link
+          to={paths.auth.login.getHref()}
+          className="hidden sm:inline-flex items-center justify-center gap-2 h-10 px-4 rounded-pill text-body-sm font-medium bg-ink-primary text-ink-inverse transition-colors duration-[120ms] hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas-elevated"
+        >
           {t("landingPage.nav.login")}
         </Link>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 mt-2 bg-white/25  backdrop-blur-xl border-b border-gray-200/50 rounded-3xl ">
-          <nav className="flex flex-col py-4 pb-0 overflow-hidden">
+        <div className="md:hidden absolute top-full left-0 right-0 mt-2 rounded-md bg-canvas-overlay backdrop-blur-sm border border-canvas-border shadow-raised">
+          <nav className="flex flex-col py-2">
             {sections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => handlNavLinkClicked(section)}
                 aria-current={activeSection === section.id ? "page" : undefined}
-                className={`px-6 py-3  text-sm font-medium transition-colors duration-300 cursor-pointer text-center m-2 rounded-xl ${
+                className={`mx-2 px-4 py-3 text-body-sm font-medium rounded-pill transition-colors duration-[120ms] cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/40 ${
                   activeSection === section.id
-                    ? "bg-primary-hover-two text-white"
-                    : "text-black hover:bg-gray-100"
+                    ? "bg-canvas-elevated text-ink-primary"
+                    : "bg-transparent text-ink-secondary hover:bg-canvas-overlay/60 hover:text-ink-primary"
                 }`}
               >
                 {section.label}
               </button>
             ))}
-            <div className="border-t border-gray-200/50 mt-2 pt-2">
-              <Link 
-                to={paths.auth.login.path} 
-                className="block px-6 py-3 text-sm font-medium bg-black text-white hover:bg-gray-800 transition-colors rounded-b-2xl text-center"
+            <div className="border-t border-canvas-border mx-2 mt-2 pt-2">
+              <Link
+                to={paths.auth.login.getHref()}
+                className="mx-2 flex items-center justify-center gap-2 h-10 px-4 rounded-pill text-body-sm font-medium bg-ink-primary text-ink-inverse transition-colors duration-[120ms] hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/40"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {t("landingPage.nav.login")}
@@ -131,8 +118,6 @@ const Nav = () => {
         </div>
       )}
     </div>
-    </>
-
   );
 };
 

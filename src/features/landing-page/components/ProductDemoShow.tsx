@@ -1,7 +1,8 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { ScrollFadeIn, AnimatedButton } from "@/components/animations";
-import { assets } from "@/assets/assets";
+import { ScrollFadeIn } from "@/components/animations";
+import { ProductScene } from "@/components/3d";
+import Button from "@/components/inputs/Button";
 import { Link } from "react-router-dom";
 import { paths } from "@/config/paths";
 
@@ -10,17 +11,17 @@ const ProductDemoShow = () => {
 
   const features = t("landingPage.productDemo.features", {
     returnObjects: true,
-  }) as Array<{ title: string; description: string; image: string }>;
+  }) as Array<{ title: string; description: string }>;
 
   return (
-    <section id="features" className="scroll-mt-24 py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
+    <section id="features" className="scroll-mt-24 py-24 bg-canvas-base">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollFadeIn>
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-primary mb-4">
+            <h2 className="text-display-lg font-bold text-ink-primary">
               {t("landingPage.productDemo.title")}
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-body text-ink-secondary max-w-3xl mx-auto mt-4">
               {t("landingPage.productDemo.subtitle")}
             </p>
           </div>
@@ -36,7 +37,6 @@ const ProductDemoShow = () => {
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
             >
-              {/* Content */}
               <motion.div
                 className="flex-1 space-y-6"
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
@@ -44,50 +44,27 @@ const ProductDemoShow = () => {
                 transition={{ duration: 0.8, delay: index * 0.2 + 0.3 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-2xl md:text-3xl font-bold text-primary">
+                <h3 className="text-title font-semibold text-ink-primary">
                   {feature.title}
                 </h3>
-                {/* Image */}
-                <motion.div
-                  className="flex-1 md:hidden"
-                  initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 + 0.5 }}
-                  viewport={{ once: true }}
-                >
-                  <motion.img
-                    // @ts-ignore
-                    src={assets[feature.image]}
-                    className="bg-gray-200 rounded-lg h-80 flex items-center justify-center object-cover"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.div>
-                <p className="md:text-lg text-gray-600 leading-relaxed">
+                <p className="text-body text-ink-secondary leading-relaxed">
                   {feature.description}
                 </p>
                 <Link to={paths.auth.login.getHref()}>
-                  <AnimatedButton className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-hover transition-colors">
+                  <Button variant="outline">
                     {t("landingPage.productDemo.tryNow")}
-                  </AnimatedButton>
+                  </Button>
                 </Link>
               </motion.div>
 
-              {/* Image */}
               <motion.div
-                className="flex-1 hidden md:block object-cover"
+                className="flex-1 w-full"
                 initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 + 0.5 }}
                 viewport={{ once: true }}
               >
-                <motion.img
-                  // @ts-ignore
-                  src={assets[feature.image]}
-                  className="bg-gray-200 rounded-lg h-80 flex items-center justify-center"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                />
+                <ProductScene variant={index % 2 === 0 ? "chart" : "graph"} />
               </motion.div>
             </motion.div>
           ))}

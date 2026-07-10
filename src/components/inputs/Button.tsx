@@ -1,6 +1,6 @@
 import React from "react";
 
-type ButtonVariant = "solid" | "outline" | "secondary";
+type ButtonVariant = "solid" | "outline" | "secondary" | "primary";
 
 type ButtonProps = {
   variant?: ButtonVariant;
@@ -20,12 +20,13 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
 }) => {
   const baseClasses =
-    "w-full rounded-full py-2 md:py-3 text-[12px] md:text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 cursor-pointer";
+    "inline-flex items-center justify-center gap-2 h-10 px-6 text-body font-medium transition-colors duration-[120ms] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas-base cursor-pointer";
 
   const variantClasses = {
-    solid: "bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed",
-    outline: "border border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed",
-    secondary: "bg-secondary-hover text-white hover:bg-secondary disabled:opacity-50 disabled:cursor-not-allowed",
+    solid: "bg-primary text-primary-foreground hover:opacity-90 rounded-full disabled:opacity-50 disabled:cursor-not-allowed",
+    outline: "border border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground rounded-full disabled:opacity-50 disabled:cursor-not-allowed",
+    secondary: "bg-secondary-hover text-white hover:bg-secondary rounded-full disabled:opacity-50 disabled:cursor-not-allowed",
+    primary: "bg-brand-primary text-brand-primary-ink rounded-pill shadow-ambient hover:bg-[#C4EB2E] disabled:bg-canvas-overlay disabled:text-ink-tertiary disabled:cursor-not-allowed",
   };
 
   return (
