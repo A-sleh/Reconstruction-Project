@@ -29,14 +29,12 @@ const OrderDetailsHeader = ({ orderDetails }: OrderDetailsHeaderProps) => {
     >
       <div>
         <h1 className="text-3xl font-bold">{orderDetails.ownerName}</h1>
-        <p className="text-white">
+        <p className="text-white mb-2">
           {t(`resourceProvidor.investor-request-details.requested_on`, {
             date: formattedDate,
           })}
         </p>
-        <div className="mt-3 flex items-center gap-2 bg-white p-2 w-fit rounded-3xl">
-          <OrderStatusBadge status={orderDetails.status} />
-        </div>
+        <OrderStatusBadge status={orderDetails.status} />
       </div>
       <div
         className="flex items-center gap-2"
