@@ -1,50 +1,23 @@
 import { motion } from "motion/react";
-import { RequestStatusBadge } from "../../shared/RequestStatusBadge";
+import { OrderStatusBadge } from "@/features/orders/components/OrderStatusBadge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { Check, X } from "lucide-react";
-import { RejectModalContent } from "../../orders/components/RejectModalContent";
-import {
-  useApproveInvestorRequest,
-  useCancelInvestorRequest,
-} from "../../orders/api/actions";
-import { RequestStatus } from "../../orders/api";
-import { useNavigate } from "react-router";
-import { paths } from "@/config/paths";
-
+import { RejectOrderModal } from "@/features/orders/components/RejectOrderModal";
+import { useApproveOrder } from "@/features/orders/api/actions";
+import { OrderDetails } from "@/features/orders/api/types";
 interface OrderDetailsHeaderProps {
-  requestDetails: {
-    id: string;
-    investor: string;
-    email: string;
-    requestDate: string;
-    status: RequestStatus;
-    rejectionReason?: string;
-  };
+  orderDetails: OrderDetails;
 }
 
-const OrderDetailsHeader = ({ requestDetails }: OrderDetailsHeaderProps) => {
-  const goto = useNavigate();
+const OrderDetailsHeader = ({ orderDetails }: OrderDetailsHeaderProps) => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language == "ar";
-  const { mutate: approve, isPending: isAproved } = useApproveInvestorRequest();
-  const { mutate: cancel, isPending: isCanceld } = useCancelInvestorRequest();
-  const formattedDate = new Date(
-    requestDetails.requestDate,
-  ).toLocaleDateString();
+  const { mutate: approve, isPending: isAproved } = useApproveOrder();
+  const formattedDate = new Date(orderDetails.requestedAt).toLocaleDateString();
 
-  const handleApprove = (id: number | string) => {
-    approve(id);
-  };
-  const handleCancel = (id: number | string, reason: string) => {
-    cancel(
-      { id, payload: { reason } },
-      {
-        onSuccess: () => {
-          goto(paths.app.resourceProvidor.orders.path);
-        },
-      },
-    );
+  const handleApprove = (id: number) => {
+    approve({ OrderId: Number(id) });
   };
 
   return (
@@ -55,69 +28,42 @@ const OrderDetailsHeader = ({ requestDetails }: OrderDetailsHeaderProps) => {
       dir={isArabic ? "rtl" : "ltr"}
     >
       <div>
-        <h1 className="text-3xl font-bold">{requestDetails.investor}</h1>
+        <h1 className="text-3xl font-bold">{orderDetails.ownerName}</h1>
         <p className="text-white">
-          {requestDetails.email} ·{" "}
           {t(`resourceProvidor.investor-request-details.requested_on`, {
             date: formattedDate,
           })}
         </p>
         <div className="mt-3 flex items-center gap-2 bg-white p-2 w-fit rounded-3xl">
-          <RequestStatusBadge status={requestDetails.status} />
-          {requestDetails.rejectionReason && (
-            <span className="text-xs text-destructive">
-              {t(`resourceProvidor.investor-request-details.reason_label`, {
-                reason: requestDetails.rejectionReason,
-              })}
-            </span>
-          )}
+          <OrderStatusBadge status={orderDetails.status} />
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div
+        className="flex items-center gap-2"
+        hidden={orderDetails.status != "PendingApproval"}
+      >
         <Button
           size="sm"
           variant="outline"
-          className="border-success/40 text-success hover:opacity-80 rounded-xl"
-          disabled={requestDetails.status === "completed" || isAproved}
-          onClick={() => handleApprove(requestDetails.id)}
+          isLoading={isAproved}
+          className="border-success/40 text-success hover:opacity-80 rounded-xl hover:text-green-300 hover:bg-white"
+          disabled={orderDetails.status === "Completed" || isAproved}
+          onClick={() => handleApprove(orderDetails.id)}
         >
-          {isAproved ? (
-            <>
-              <span className="h-4 w-4 mr-1 animate-spin rounded-full border-2 border-success border-t-transparent" />
-              {t(`resourceProvidor.investor-request.table.actions.approve`)}
-            </>
-          ) : (
-            <>
-              <Check className="h-4 w-4 mr-1" />
-              {t(`resourceProvidor.investor-request.table.actions.approve`)}
-            </>
-          )}
+          <Check className="h-4 w-4 mr-1" />
+          {t(`resourceProvidor.investor-request.table.actions.approve`)}
         </Button>
-        <RejectModalContent
-          investorName={requestDetails.investor}
-          onConfirm={(reason: string) =>
-            handleCancel(requestDetails.id, reason)
-          }
+        <RejectOrderModal
+          orderId={orderDetails.id}
           openButton={
             <Button
               size="sm"
               variant="outline"
-              className="border-destructive/40 text-destructive hover:opacity-80 rounded-xl"
-              disabled={requestDetails.status === "rejected" || isCanceld}
+              className="border-destructive/40 text-destructive hover:opacity-80 rounded-xl hover:bg-white hover:text-red-400"
+              disabled={orderDetails.status === "Cancelled"}
             >
-              {isCanceld ? (
-                <>
-                  <span className="h-4 w-4 mr-1 animate-spin rounded-full border-2 border-destructive border-t-transparent" />
-                  {t(
-                    `resourceProvidor.investor-request.table.actions.rejecting`,
-                  )}
-                </>
-              ) : (
-                <>
-                  <X className="h-4 w-4 mr-1" />
-                  {t(`resourceProvidor.investor-request.table.actions.reject`)}
-                </>
-              )}
+              <X className="h-4 w-4 mr-1" />
+              {t(`resourceProvidor.investor-request.table.actions.reject`)}
             </Button>
           }
         />
