@@ -429,7 +429,10 @@
       "resources_table": {
         "columns": {
           "resource": "المورد",
+          "unit_price": "سعر الوحدة",
+          "total": "الإجمالي",
           "requested": "المطلوب",
+          "fulfillment": "التنفيذ",
           "delivered": "المستلم",
           "status": "الحالة"
         },
@@ -445,9 +448,10 @@
           "title": "الفواتير",
           "total": "الإجمالي: ${{amount}}",
           "columns": {
-            "number": "رقم الفاتورة",
             "date": "التاريخ",
-            "amount": "المبلغ"
+            "item": "الصنف",
+            "category": "الفئة",
+            "quantity": "الكمية"
           },
           "empty": "لا توجد فواتير بعد."
         },

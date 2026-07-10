@@ -428,7 +428,10 @@
       "resources_table": {
         "columns": {
           "resource": "Resource",
+          "unit_price": "Unit Price",
+          "total": "Total",
           "requested": "Requested",
+          "fulfillment": "Fulfillment",
           "delivered": "Delivered",
           "status": "Status"
         },
@@ -444,9 +447,10 @@
           "title": "Invoices",
           "total": "Total: ${{amount}}",
           "columns": {
-            "number": "Invoice #",
             "date": "Date",
-            "amount": "Amount"
+            "item": "Item",
+            "category": "Category",
+            "quantity": "Quantity"
           },
           "empty": "No invoices yet."
         },

@@ -1,4 +1,10 @@
-import { Order, OrderDetails, OrderItem } from "../api/types";
+import {
+  Order,
+  OrderDetails,
+  OrderDetailsResponse,
+  OrderItem,
+  OrderReceiveInvoice,
+} from "../api/types";
 
 // Mock Order Items
 export const MOCK_ORDER_ITEMS: OrderItem[] = [
@@ -13,7 +19,7 @@ export const MOCK_ORDER_ITEMS: OrderItem[] = [
     fulfillRate: 90,
     totalAmount: 6250,
     latestUpdateAt: "2026-07-04T10:30:00Z",
-    itemStatus: "Partial",
+    itemStatus: "Preparing",
   },
   {
     itemId: 2,
@@ -39,7 +45,7 @@ export const MOCK_ORDER_ITEMS: OrderItem[] = [
     fulfillRate: 50,
     totalAmount: 12500,
     latestUpdateAt: "2026-07-02T09:45:00Z",
-    itemStatus: "In Progress",
+    itemStatus: "Preparing",
   },
 ];
 
@@ -167,12 +173,50 @@ export const MOCK_ORDERS: Order[] = [
   },
 ];
 
+// Mock Order Receive Invoices
+export const MOCK_RECEIVE_INVOICES: OrderReceiveInvoice[] = [
+  {
+    receiveDate: "2026-06-20T09:00:00Z",
+    isApprovedByCustomer: true,
+    receiveInvoiceItems: [
+      { name: "Steel Reinforcement Bars", category: "Construction Materials", quantity: 250 },
+      { name: "Concrete Mix", category: "Construction Materials", quantity: 100 },
+    ],
+  },
+  {
+    receiveDate: "2026-06-28T14:30:00Z",
+    isApprovedByCustomer: true,
+    receiveInvoiceItems: [
+      { name: "Steel Reinforcement Bars", category: "Construction Materials", quantity: 200 },
+    ],
+  },
+  {
+    receiveDate: "2026-07-02T11:15:00Z",
+    isApprovedByCustomer: false,
+    receiveInvoiceItems: [
+      { name: "Ceramic Tiles", category: "Finishing Materials", quantity: 1500 },
+      { name: "Concrete Mix", category: "Construction Materials", quantity: 50 },
+    ],
+  },
+  {
+    receiveDate: "2026-07-05T08:45:00Z",
+    isApprovedByCustomer: false,
+    receiveInvoiceItems: [
+      { name: "Ceramic Tiles", category: "Finishing Materials", quantity: 1000 },
+    ],
+  },
+];
+
 // Mock Order Details
 export const MOCK_ORDER_DETAILS: OrderDetails[] = MOCK_ORDERS.map((order, index) => ({
   ...order,
   items: MOCK_ORDER_ITEMS.slice(0, 2 + (index % 2)),
-  orderReceiveInvoices: [],
+  orderReceiveInvoices: MOCK_RECEIVE_INVOICES.slice(0, index % 4),
 }));
+
+export const MOCK_ORDER_DETAILS_RESPONSE: OrderDetailsResponse = {
+  orderDetails: MOCK_ORDER_DETAILS[0],
+};
 
 // Generate paginated mock data
 export function generateMockOrdersPage(pageNumber: number = 1, pageSize: number = 10) {

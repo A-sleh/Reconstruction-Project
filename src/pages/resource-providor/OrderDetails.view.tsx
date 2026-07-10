@@ -1,29 +1,26 @@
 import { ArrowLeft, ClipboardList, History, Receipt } from "lucide-react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { paths } from "@/config/paths";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { useFetchRequestDetails } from "@/features/resource-providor/order-details/api/query";
+import { MOCK_ORDER_DETAILS_RESPONSE } from "@/features/orders/data/mockOrders";
 import OrderDetailsHeader from "@/features/resource-providor/order-details/components/OrderDetailsHeader";
 import MarkFullyDelivered from "@/features/resource-providor/order-details/components/MarkFullyDelivered";
 import ResourcesTable from "@/features/resource-providor/order-details/components/ResourcesTable";
 import FinancialSection from "@/features/resource-providor/order-details/components/FinancialSection";
 import HistorySection from "@/features/resource-providor/order-details/components/HistorySection";
-import Loader from "@/components/shared/Loader";
 
 export default function OrderDetails() {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const { orderId = "" } = useParams();
-  const { data: request, isPending } = useFetchRequestDetails(orderId);
   const isArabic = i18n.language === "ar";
 
-  if (isPending) return <Loader />;
+  const orderDetails = MOCK_ORDER_DETAILS_RESPONSE.orderDetails;
 
-  if (!request) {
+  if (!orderDetails) {
     return (
       <div
         className="min-h-screen bg-background"
@@ -39,10 +36,10 @@ export default function OrderDetails() {
     );
   }
 
-  const total = request.resources.reduce((s, x) => s + x.quantity, 0);
-  const delivered = request.resources.reduce((s, x) => s + x.delivered, 0);
+  const total = orderDetails.items.reduce((s, x) => s + x.quantity, 0);
+  const delivered = orderDetails.items.reduce((s, x) => s + x.fulfilledQuantity, 0);
   const fullyDelivered = total > 0 && delivered >= total;
-  const totalInvoiced = request.invoices.reduce((s, x) => s + x.amount, 0);
+  const totalInvoiced = orderDetails.netTotal;
 
   return (
     <div className="min-h-screen bg-background" dir={isArabic ? "rtl" : "ltr"}>
@@ -58,15 +55,15 @@ export default function OrderDetails() {
               />
               {t(`resourceProvidor.investor-request-details.back_to_requests`)}
             </Link>
-            <OrderDetailsHeader requestDetails={request} />
+            <OrderDetailsHeader orderDetails={orderDetails} />
           </div>
         </section>
 
         <MarkFullyDelivered
           delivered={delivered}
           fullyDelivered={fullyDelivered}
-          id={request?.id}
-          status={request.status}
+          id={orderDetails.id}
+          status={orderDetails.status}
           total={total}
           totalInvoiced={totalInvoiced}
         />
@@ -90,18 +87,18 @@ export default function OrderDetails() {
           </TabsList>
 
           <TabsContent value="resources">
-            <ResourcesTable resources={request.resources} />
+            <ResourcesTable items={orderDetails.items} />
           </TabsContent>
 
           <TabsContent value="financials">
             <FinancialSection
-              invoices={request.invoices}
+              invoices={orderDetails.orderReceiveInvoices}
               totalInvoiced={totalInvoiced}
             />
           </TabsContent>
 
           <TabsContent value="history">
-            <HistorySection history={request.history} />
+            <HistorySection invoices={orderDetails.orderReceiveInvoices} />
           </TabsContent>
         </Tabs>
       </section>
