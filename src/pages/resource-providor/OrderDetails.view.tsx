@@ -92,8 +92,8 @@ export default function OrderDetails() {
 
           <TabsContent value="financials">
             <FinancialSection
-              invoices={orderDetails.orderReceiveInvoices}
-              totalInvoiced={totalInvoiced}
+              payments={orderDetails.orderPayments}
+              totalPaid={totalInvoiced}
             />
           </TabsContent>
 

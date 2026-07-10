@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { FileText, Plus } from "lucide-react";
+import z from "zod";
+import i18n from "@/lib/i18n";
 
 import {
   TableBody,
@@ -13,46 +15,65 @@ import {
 } from "@/components/ui/table";
 import Input from "@/components/inputs/Input";
 import { Button } from "@/components/ui/button";
-import { Invoice } from "../../orders/api";
-import {
-  initialInvoiceFormValues,
-  InvoiceFormValues,
-  InvoiceSchema,
-  useCreateInvoice,
-} from "../api/actions";
 import { useParams } from "react-router";
+import { formatDate } from "@/lib/helpers";
+import { OrderPayment } from "@/features/orders/api/types";
+import { useAddPayment } from "@/features/orders/api/actions";
+
+const PaymentSchema = z.object({
+  amount: z.coerce.number().positive({
+    message: i18n.t(
+      "resourceProvidor.investor-request-details.financials.form.validation.positive_amount",
+    ),
+  }),
+  paymentDate: z.string().min(1, {
+    message: i18n.t(
+      "resourceProvidor.investor-request-details.financials.form.validation.required",
+    ),
+  }),
+});
+
+type PaymentFormValues = z.infer<typeof PaymentSchema>;
+
+const initialPaymentFormValues: PaymentFormValues = {
+  amount: 0,
+  paymentDate: new Date().toISOString().split("T")[0],
+};
 
 interface FinancialSectionProps {
-  invoices: Invoice[];
-  totalInvoiced: number;
+  payments: OrderPayment[];
+  totalPaid: number;
 }
 
 const FinancialSection = ({
-  invoices,
-  totalInvoiced,
+  payments,
+  totalPaid,
 }: FinancialSectionProps) => {
   const { orderId = "" } = useParams();
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
-  const { mutate: createInvoice, isPending } = useCreateInvoice();
+  const { mutate: addPayment, isPending } = useAddPayment();
 
-  // Initialize React Hook Form with Zod validation resolver baseline
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<InvoiceFormValues>({
-    resolver: zodResolver(InvoiceSchema),
-    defaultValues: initialInvoiceFormValues,
+  } = useForm<PaymentFormValues>({
+    resolver: zodResolver(PaymentSchema),
+    defaultValues: initialPaymentFormValues,
   });
 
-  const onSubmit = (data: InvoiceFormValues) => {
-    createInvoice(
-      { orderId, payload: data },
+  const onSubmit = (data: PaymentFormValues) => {
+    addPayment(
+      {
+        orderId: Number(orderId),
+        amount: data.amount,
+        paymentDate: data.paymentDate,
+      },
       {
         onSuccess: () => {
-          reset(initialInvoiceFormValues);
+          reset(initialPaymentFormValues);
         },
       },
     );
@@ -76,7 +97,7 @@ const FinancialSection = ({
             {t(
               `resourceProvidor.investor-request-details.financials.invoice_box.total`,
               {
-                amount: totalInvoiced.toLocaleString(),
+                amount: totalPaid.toLocaleString(),
               },
             )}
           </p>
@@ -86,43 +107,36 @@ const FinancialSection = ({
             <TableRow className={isArabic ? "text-right" : "text-left"}>
               <TableHead className={isArabic ? "text-right" : "text-left"}>
                 {t(
-                  `resourceProvidor.investor-request-details.financials.invoice_box.columns.number`,
-                )}
-              </TableHead>
-              <TableHead className={isArabic ? "text-right" : "text-left"}>
-                {t(
                   `resourceProvidor.investor-request-details.financials.invoice_box.columns.date`,
                 )}
               </TableHead>
               <TableHead className={isArabic ? "text-left" : "text-right"}>
                 {t(
-                  `resourceProvidor.investor-request-details.financials.invoice_box.columns.amount`,
+                  `resourceProvidor.investor-request-details.financials.invoice_box.columns.quantity`,
                 )}
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {invoices.map((i) => (
-              <TableRow key={i.id}>
+            {payments.map((payment, idx) => (
+              <TableRow key={idx}>
                 <TableCell
                   className={`font-medium ${isArabic ? "text-right" : "text-left"}`}
                 >
-                  {i.number}
+                  {formatDate(payment.paymentDate, isArabic)}
                 </TableCell>
-                <TableCell className="text-muted-foreground">
-                  {new Date(i.date).toLocaleDateString()}
-                </TableCell>
-                <TableCell
-                  className={`font-semibold ${isArabic ? "text-left" : "text-right"}`}
-                >
-                  ${i.amount.toLocaleString()}
-                </TableCell>
-              </TableRow>
-            ))}
-            {invoices.length === 0 && (
+                  <TableCell
+                    className={`font-semibold ${isArabic ? "text-left" : "text-right"}`}
+                  >
+                    {payment.amount}
+                  </TableCell>
+                </TableRow>
+              ))
+            }
+            {payments.length === 0 && (
               <TableRow>
                 <TableCell
-                  colSpan={3}
+                  colSpan={4}
                   className="text-center py-8 text-muted-foreground"
                 >
                   {t(
@@ -147,17 +161,6 @@ const FinancialSection = ({
 
         <Input
           label={t(
-            `resourceProvidor.investor-request-details.financials.form.fields.number`,
-          )}
-          placeholder="INV-1234"
-          disabled={isPending}
-          {...register("number")}
-          fieldName="number"
-          errors={errors}
-        />
-
-        <Input
-          label={t(
             `resourceProvidor.investor-request-details.financials.form.fields.amount`,
           )}
           type="number"
@@ -176,8 +179,8 @@ const FinancialSection = ({
           )}
           type="date"
           disabled={isPending}
-          {...register("date")}
-          fieldName="date"
+          {...register("paymentDate")}
+          fieldName="paymentDate"
           errors={errors}
         />
 
