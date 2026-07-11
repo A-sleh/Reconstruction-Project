@@ -17,7 +17,7 @@ import {
   useUpdateResource,
 } from "../api/actions";
 import ImageUploader from "@/components/inputs/ImageUploader";
-import { unitTypes } from "../api";
+import { unitTypes } from "../api/types"; 
 import { DynamicAsyncSelector } from "./SmartDataGrid";
 import { Switch } from "@/components/ui/switch";
 

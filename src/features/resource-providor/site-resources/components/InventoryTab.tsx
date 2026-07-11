@@ -1,13 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import {
-  Search,
-  Pencil,
-  Trash2,
-  ChevronDown,
-  Filter,
-  MoreVertical,
-} from "lucide-react";
+import { Search, Pencil, Trash2, MoreVertical } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -30,10 +23,10 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
-import { Resource } from "../api/actions";
-import { PureResource } from "../api";
 import ModifyResourceModel from "./ModifyResourceModel";
 import CategoryFilterPopup from "./CategoryFilterPopup";
+import { PureResource } from "../api/types";
+import { useDeleteWorksiteItem } from "../api/actions";
 
 interface InventoryTabProps {
   siteId?: string;
@@ -45,6 +38,8 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
   const { siteId: paramSiteId } = useParams();
   const effectiveSiteId = siteId || paramSiteId;
   const { t, i18n } = useTranslation();
+  const { mutate: deleteWorkSiteItem, isPending: isDeleting } =
+    useDeleteWorksiteItem();
   const isArabic = i18n.language == "ar";
   const [categoryId, setCategoryId] = useState<number | "all">("all");
 
@@ -245,8 +240,12 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                             <DropdownMenuSeparator />
                             <ConfirmDelete
                               item={resource?.name}
+                              isLoading={isDeleting}
                               onConfirm={() =>
-                                console.log("delete", resource.id)
+                                deleteWorkSiteItem({
+                                  Id: resource.id,
+                                  ItemType: "Resource",
+                                })
                               }
                               openButton={
                                 <DropdownMenuItem

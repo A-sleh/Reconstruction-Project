@@ -2,14 +2,14 @@ import { faker } from "@faker-js/faker";
 import z from "zod";
 import i18n from "@/lib/i18n";
 import { errorToast, successToast } from "@/components/common/Toast";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   MUTATION_KEYS,
-  ResourcesPayload,
-  unitTypes,
+  QUERY_KEYS,
   WorkSiteResourcesController,
 } from ".";
 import ApiInstance from "@/config/api-instance";
+import { DeleteWorksiteItemParams, ResourcesPayload, unitTypes } from "./types";
 
 export const resourceSchema = z.object({
   id: z.string().nullable().optional(),
@@ -113,24 +113,20 @@ const createResourceApi = async (
   return data;
 };
 
-const askeToAddResourceApi = async (
-  siteId: number | string,
-  payload: ResourceFormValues,
-): Promise<ResourceFormValues> => {
-  const { data } = await ApiInstance.post(
-    `/${WorkSiteResourcesController.WorkSite}/${siteId}/resources/request`,
-    payload,
+const deleteWorksiteItem = async ({
+  Id,
+  ItemType,
+}: DeleteWorksiteItemParams) => {
+  const { data } = await ApiInstance.delete(
+    `/${WorkSiteResourcesController.delelteResource}`,
+    {
+      params: {
+        id: Id,
+        itemType: ItemType,
+      },
+    },
   );
   return data;
-};
-
-const deleteResourceApi = async (
-  ResourceId: string | number,
-): Promise<void> => {
-  console.log(WorkSiteResourcesController);
-  await ApiInstance.delete(`/${WorkSiteResourcesController.delelteResource}`, {
-    params: { Id: ResourceId, ItemType: "Resource" },
-  });
 };
 
 export const useUpdateResource = () => {
@@ -147,34 +143,6 @@ export const useUpdateResource = () => {
       const message =
         serverMessage ||
         i18n.t("resourceProvidor.workSites.resource.resource-error-update");
-      errorToast(message);
-    },
-  });
-};
-
-export const useRequestToAddResource = () => {
-  return useMutation({
-    mutationFn: (params: {
-      siteId: number | string;
-      payload: ResourceFormValues;
-    }) => askeToAddResourceApi(params.siteId, params.payload),
-    mutationKey: MUTATION_KEYS.resource.create(),
-    onSuccess: (_: any) => {
-      successToast(
-        i18n.t(
-          "resourceProvidor.workSites.resource.resource-request",
-          "Site created",
-        ),
-      );
-    },
-    onError: (error: any) => {
-      const serverMessage = error?.response?.data?.message || error?.message;
-      const message =
-        serverMessage ||
-        i18n.t(
-          "resourceProvidor.workSites.resource.resource-error-request",
-          "Failed to request resource",
-        );
       errorToast(message);
     },
   });
@@ -205,27 +173,13 @@ export const useCreateResource = () => {
   });
 };
 
-export const useDeleteResource = () => {
+export const useDeleteWorksiteItem = () => {
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (ResourceId: string | number) => deleteResourceApi(ResourceId),
     mutationKey: MUTATION_KEYS.resource.delete(),
+    mutationFn: deleteWorksiteItem,
     onSuccess: () => {
-      successToast(
-        i18n.t(
-          "resourceProvidor.workSites.resource.resource-deleted",
-          "Site deleted",
-        ),
-      );
-    },
-    onError: (error: any) => {
-      const serverMessage = error?.response?.data?.message || error?.message;
-      const message =
-        serverMessage ||
-        i18n.t(
-          "resourceProvidor.workSites.resource.resource-error-deleted",
-          "Failed to delete site",
-        );
-      errorToast(message);
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.deltee });
     },
   });
 };

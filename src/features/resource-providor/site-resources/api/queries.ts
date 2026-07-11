@@ -3,12 +3,8 @@ import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import {
   QUERY_KEYS,
   WorkSiteResourcesController,
-  SiteDetailsWithResources,
-  WorkSiteResourcesStatistics,
-  OrderRequest,
-  BankCategories,
 } from ".";
-import { Resources } from ".";
+import { BankCategories, OrderRequest, Resources, SiteDetailsWithResources, WorkSiteResourcesStatistics } from "./types";
 
 const fetchWorkSiteResourceApi = async ({
   CategoryId,
@@ -65,14 +61,6 @@ const fetchResourceCategoriesAPI = async (): Promise<BankCategories> => {
   return data;
 };
 
-const fetchWorkSiteDetailsAPI = async (
-  id: string | number,
-): Promise<SiteDetailsWithResources> => {
-  const { data } = await ApiInstance.get<SiteDetailsWithResources>(
-    `/${WorkSiteResourcesController.WorkSite}/${id}`,
-  );
-  return data;
-};
 
 const fetchOrderResourceRequestApi = async (): Promise<OrderRequest[]> => {
   const { data } = await ApiInstance.get<OrderRequest[]>(
@@ -96,12 +84,6 @@ export const useResorceOrders = () => {
   });
 };
 
-export const useResources = (id: any) => {
-  return useQuery<SiteDetailsWithResources, unknown>({
-    queryKey: QUERY_KEYS.resource(id),
-    queryFn: () => fetchWorkSiteDetailsAPI(id),
-  });
-};
 
 export const useResourceStatistics = () => {
   return useQuery<WorkSiteResourcesStatistics, unknown>({
