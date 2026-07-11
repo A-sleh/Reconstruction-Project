@@ -281,46 +281,46 @@
           "loadingMore": "Loading more..."
         },
         "remove-resource": "Remove",
-"card": {
-        "price_per_unit": "Price / unit",
-        "unit": "Unit",
-        "qty": "Qty",
-        "total": "Total"
-      },
-      "table": {
-        "image": "Image",
-        "name": "Name",
-        "category": "Category",
-        "status": "Status",
-        "price": "Price",
-        "unit": "Unit",
-        "actions": "Actions"
-      },
-      "actions": {
-        "view": "View",
-        "edit": "Edit",
-        "delete": "Delete"
-      },
-      "table": {
-        "image": "Image",
-        "name": "Name",
-        "category": "Category",
-        "status": "Status",
-        "price": "Price",
-        "unit": "Unit",
-        "actions": "Actions"
-      },
-      "filter": "Filter",
-      "detail": {
-        "title": "Resource Details",
-        "category": "Category",
-        "status": "Status",
-        "price": "Price",
-        "unit": "Unit",
-        "description": "Description",
-        "resource_bank": "Resource Bank"
-      },
-      "validation": {
+        "card": {
+          "price_per_unit": "Price / unit",
+          "unit": "Unit",
+          "qty": "Qty",
+          "total": "Total"
+        },
+        "table": {
+          "image": "Image",
+          "name": "Name",
+          "category": "Category",
+          "status": "Status",
+          "price": "Price",
+          "unit": "Unit",
+          "actions": "Actions"
+        },
+        "actions": {
+          "view": "View",
+          "edit": "Edit",
+          "delete": "Delete"
+        },
+        "table": {
+          "image": "Image",
+          "name": "Name",
+          "category": "Category",
+          "status": "Status",
+          "price": "Price",
+          "unit": "Unit",
+          "actions": "Actions"
+        },
+        "filter": "Filter",
+        "detail": {
+          "title": "Resource Details",
+          "category": "Category",
+          "status": "Status",
+          "price": "Price",
+          "unit": "Unit",
+          "description": "Description",
+          "resource_bank": "Resource Bank"
+        },
+        "validation": {
           "name_required": "Name is required",
           "price_required": "Price is required",
           "price_min": "Price must be 0 or greater",
@@ -437,6 +437,17 @@
         "actions": {
           "cancel": "Cancel",
           "confirm": "Confirm Rejection"
+        }
+      },
+      "cancel-modal": {
+        "title": "Cancel Order",
+        "description_with_name": "Provide a reason for cancelling order {{name}}.",
+        "description_generic": "Provide a reason for cancelling this order.",
+        "label": "Reason for cancellation",
+        "placeholder": "e.g. Changed requirements, no longer needed...",
+        "actions": {
+          "cancel": "Close",
+          "confirm": "Confirm Cancellation"
         }
       },
       "search": {
@@ -917,6 +928,7 @@
         "approve": "Approve",
         "approving": "Approving...",
         "reject": "Reject",
+        "cancel": " Cancel the order",
         "rejecting": "Rejecting..."
       },
       "empty": "No requests found."

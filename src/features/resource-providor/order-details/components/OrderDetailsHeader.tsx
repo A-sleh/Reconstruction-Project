@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { Check, X } from "lucide-react";
 import { RejectOrderModal } from "@/features/orders/components/RejectOrderModal";
-import { useApproveOrder } from "@/features/orders/api/actions";
+import { useApproveOrder, useCancelOrder } from "@/features/orders/api/actions";
 import { OrderDetails } from "@/features/orders/api/types";
 interface OrderDetailsHeaderProps {
   orderDetails: OrderDetails;
@@ -36,11 +36,9 @@ const OrderDetailsHeader = ({ orderDetails }: OrderDetailsHeaderProps) => {
         </p>
         <OrderStatusBadge status={orderDetails.status} />
       </div>
-      <div
-        className="flex items-center gap-2"
-        hidden={orderDetails.status != "PendingApproval"}
-      >
+      <div className="flex items-center gap-2">
         <Button
+          hidden={orderDetails.status != "PendingApproval"}
           size="sm"
           variant="outline"
           isLoading={isAproved}
@@ -55,6 +53,7 @@ const OrderDetailsHeader = ({ orderDetails }: OrderDetailsHeaderProps) => {
           orderId={orderDetails.id}
           openButton={
             <Button
+              hidden={orderDetails.status != "PendingApproval"}
               size="sm"
               variant="outline"
               className="border-destructive/40 text-destructive hover:opacity-80 rounded-xl hover:bg-white hover:text-red-400"
@@ -64,6 +63,23 @@ const OrderDetailsHeader = ({ orderDetails }: OrderDetailsHeaderProps) => {
               {t(`resourceProvidor.investor-request.table.actions.reject`)}
             </Button>
           }
+          actionType="reject"
+        />
+        <RejectOrderModal
+          orderId={orderDetails.id}
+          openButton={
+            <Button
+              hidden={orderDetails.status != "Preparing"}
+              size="sm"
+              variant="outline"
+              className="border-destructive/40 text-destructive hover:opacity-80 rounded-xl hover:bg-white hover:text-red-400"
+              disabled={orderDetails.status === "Cancelled"}
+            >
+              <X className="h-4 w-4 mr-1" />
+              {t(`resourceProvidor.investor-request.table.actions.cancel`)}
+            </Button>
+          }
+          actionType="cancel"
         />
       </div>
     </motion.div>

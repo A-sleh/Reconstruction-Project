@@ -282,37 +282,37 @@
           "loadingMore": "جاري تحميل المزيد..."
         },
         "remove-resource": "حذف",
-"card": {
-        "price_per_unit": "السعر / الوحدة",
-        "unit": "الوحدة",
-        "qty": "الكمية",
-        "total": "الإجمالي"
-      },
-      "table": {
-        "image": "الصورة",
-        "name": "الاسم",
-        "category": "الفئة",
-        "status": "الحالة",
-        "price": "السعر",
-        "unit": "الوحدة",
-        "actions": "الإجراءات"
-      },
-      "actions": {
-        "view": "عرض",
-        "edit": "تعديل",
-        "delete": "حذف"
-      },
-      "detail": {
-        "title": "تفاصيل المورد",
-        "category": "الفئة",
-        "status": "الحالة",
-        "price": "السعر",
-        "unit": "الوحدة",
-        "description": "الوصف",
-        "resource_bank": "بنك الموارد"
-      },
-      "filter": "تصفية",
-      "validation": {
+        "card": {
+          "price_per_unit": "السعر / الوحدة",
+          "unit": "الوحدة",
+          "qty": "الكمية",
+          "total": "الإجمالي"
+        },
+        "table": {
+          "image": "الصورة",
+          "name": "الاسم",
+          "category": "الفئة",
+          "status": "الحالة",
+          "price": "السعر",
+          "unit": "الوحدة",
+          "actions": "الإجراءات"
+        },
+        "actions": {
+          "view": "عرض",
+          "edit": "تعديل",
+          "delete": "حذف"
+        },
+        "detail": {
+          "title": "تفاصيل المورد",
+          "category": "الفئة",
+          "status": "الحالة",
+          "price": "السعر",
+          "unit": "الوحدة",
+          "description": "الوصف",
+          "resource_bank": "بنك الموارد"
+        },
+        "filter": "تصفية",
+        "validation": {
           "name_required": "الاسم مطلوب",
           "price_required": "السعر مطلوب",
           "price_min": "يجب أن يكون السعر 0 أو أكثر",
@@ -416,6 +416,7 @@
           "approve": "اعتماد",
           "approving": "جاري الاعتماد...",
           "reject": "رفض",
+          "cancel": "إلغاء الطلب",
           "rejecting": "جاري الرفض..."
         },
         "empty": "لم يتم العثور على طلبات."
@@ -429,6 +430,17 @@
         "actions": {
           "cancel": "إلغاء",
           "confirm": "تأكيد الرفض"
+        }
+      },
+      "cancel-modal": {
+        "title": "إلغاء الطلب",
+        "description_with_name": "يرجى تقديم سبب لإلغاء الطلب رقم {{name}}.",
+        "description_generic": "يرجى تقديم سبب لإلغاء هذا الطلب.",
+        "label": "سبب الإلغاء",
+        "placeholder": "مثال: تغيير المتطلبات، لم يعد مطلوبًا...",
+        "actions": {
+          "cancel": "إغلاق",
+          "confirm": "تأكيد الإلغاء"
         }
       },
       "search": {
