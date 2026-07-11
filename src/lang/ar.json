@@ -302,16 +302,6 @@
         "edit": "تعديل",
         "delete": "حذف"
       },
-      "table": {
-        "image": "الصورة",
-        "name": "الاسم",
-        "category": "الفئة",
-        "status": "الحالة",
-        "price": "السعر",
-        "unit": "الوحدة",
-        "actions": "الإجراءات"
-      },
-      "filter": "تصفية",
       "detail": {
         "title": "تفاصيل المورد",
         "category": "الفئة",
@@ -321,6 +311,7 @@
         "description": "الوصف",
         "resource_bank": "بنك الموارد"
       },
+      "filter": "تصفية",
       "validation": {
           "name_required": "الاسم مطلوب",
           "price_required": "السعر مطلوب",
