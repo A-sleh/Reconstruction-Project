@@ -3,7 +3,7 @@ import { Paginated } from "@/types";
 // ============================================================================
 // Shared Enums & Types
 // ============================================================================
-export type BankItemStatus = "Pending" | string; // Extend this union as more statuses are added
+export type BankItemStatus = "Pending" | "Rejected" | "Resolved" | "Accepted";
 
 // ============================================================================
 // Core Entities
@@ -28,15 +28,7 @@ export interface BankItemRequest {
 // ============================================================================
 // API Response Wrappers
 // ============================================================================
-export interface BankItemRequestsResponse {
-  data: BankItemRequest[];
-  pageNum: number;
-  pageSize: number;
-  hasNextPage: boolean;
-  totalRows: number;
-  isSucceeded: boolean;
-  message: string;
-}
+export interface BankItemRequestsResponse extends Paginated<BankItemRequest> {}
 
 // ============================================================================
 // Request Filters & Payload Interfaces
@@ -44,7 +36,8 @@ export interface BankItemRequestsResponse {
 export interface GetBankItemFilters {
   PageNumber?: number;
   PageSize?: number;
-  // Add any query parameters required by the API route here
+  Search?: string;
+  Status?: BankItemStatus;
 }
 
 export interface ResolveRequestParams {
