@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "motion/react";
-import { Package, Pencil } from "lucide-react";
+import { Package, Pencil, XCircle, CheckCircle } from "lucide-react";
 import {
   TableBody,
   TableCell,
@@ -13,9 +13,9 @@ import {
 import { OrderItem, OrderItemReceive } from "@/features/orders/api/types";
 import ConfrimChanges from "@/components/common/ConfrimChanges";
 import Progress from "@/components/common/Progress";
-import { useParams } from "react-router";
 import { OrderStatusBadge } from "@/features/orders/components/OrderStatusBadge";
-import { useAddReceiveInvoice } from "@/features/orders/api/actions";
+import { useAddReceiveInvoice, useApproveOrderItemCancellation } from "@/features/orders/api/actions";
+import { CancelOrderItemModal } from "./CancelOrderItemModal";
 
 interface ResourcesTableProps {
   items: OrderItem[];
@@ -25,6 +25,7 @@ const ResourcesTable = ({ items }: ResourcesTableProps) => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
   const { mutate: updateItemsQuantity, isPending } = useAddReceiveInvoice();
+  const { mutate: approveCancellation, isPending: isApproving } = useApproveOrderItemCancellation();
 
   const [localChanges, setLocalChanges] = useState<Record<number, number>>({});
   const hasChanges = Object.keys(localChanges).length > 0;
@@ -129,6 +130,11 @@ const ResourcesTable = ({ items }: ResourcesTableProps) => {
                   `resourceProvidor.investor-request-details.resources_table.columns.status`,
                 )}
               </TableHead>
+              <TableHead className="text-center font-semibold text-gray-600 text-xs uppercase tracking-wider">
+                {t(
+                  `resourceProvidor.investor-request-details.actions.actions`,
+                )}
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -139,6 +145,13 @@ const ResourcesTable = ({ items }: ResourcesTableProps) => {
                   : r.fulfilledQuantity;
               const done = currentDelivered >= r.quantity;
               const isEditing = localChanges[r.itemId] !== undefined;
+              const isCancelledByClient = r.itemStatus === "CancelledByClient";
+              const isCancelledByProvider = r.itemStatus === "CancelledByProvider";
+              const isRejected = r.itemStatus === "Rejected";
+              const isCancelled = isRejected || isCancelledByClient || isCancelledByProvider || r.itemStatus === "Cancelled";
+              const isPendingCancellation = r.itemStatus === "PendingToApproveCancellation";
+              const isPreparing = r.itemStatus === "Preparing";
+              const isCompleted = r.itemStatus === "Completed";
 
               return (
                 <motion.tr
@@ -148,7 +161,7 @@ const ResourcesTable = ({ items }: ResourcesTableProps) => {
                   transition={{ delay: idx * 0.04, duration: 0.3 }}
                   className={`border-b border-gray-100 transition-colors hover:bg-gray-50/50 ${
                     isEditing ? "bg-amber-50/40" : ""
-                  }`}
+                  } ${isCancelled ? "bg-red-50/30 opacity-60" : ""} ${isPendingCancellation ? "bg-amber-50/30 opacity-70" : ""}`}
                 >
                   {/* Item Name + Category */}
                   <TableCell
@@ -215,14 +228,16 @@ const ResourcesTable = ({ items }: ResourcesTableProps) => {
                             r.quantity,
                           )
                         }
-                        disabled={isPending}
+                        disabled={isPending || isCancelled || isPendingCancellation}
                         className={`w-20 text-center text-sm font-semibold tabular-nums rounded-lg border-2 px-3 py-1.5 outline-none transition-all duration-200 ${
-                          isEditing
-                            ? "border-amber-400 bg-amber-50 text-amber-700 shadow-[0_0_0_3px_rgba(251,191,36,0.1)]"
-                            : "border-gray-200 bg-white text-gray-900 hover:border-gray-300 focus:border-primary focus:shadow-[0_0_0_3px_rgba(170.46,100%,19.54%,0.1)]"
-                        } ${isPending ? "opacity-50 cursor-not-allowed" : "cursor-text"}`}
+                          isCancelled || isPendingCancellation
+                            ? "border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed"
+                            : isEditing
+                              ? "border-amber-400 bg-amber-50 text-amber-700 shadow-[0_0_0_3px_rgba(251,191,36,0.1)]"
+                              : "border-gray-200 bg-white text-gray-900 hover:border-gray-300 focus:border-primary focus:shadow-[0_0_0_3px_rgba(170.46,100%,19.54%,0.1)]"
+                        } ${isPending ? "opacity-50 cursor-not-allowed" : isCancelled || isPendingCancellation ? "" : "cursor-text"}`}
                       />
-                      {!isEditing && (
+                      {!isEditing && !isCancelled && !isPendingCancellation && (
                         <Pencil className="absolute -right-1 -top-1 h-3 w-3 text-gray-300 pointer-events-none" />
                       )}
                     </div>
@@ -233,6 +248,55 @@ const ResourcesTable = ({ items }: ResourcesTableProps) => {
                     className={`${isArabic ? "text-left" : "text-right"}`}
                   >
                     <OrderStatusBadge status={r.itemStatus} />
+                  </TableCell>
+
+                  <TableCell className="text-center">
+                    {isCancelledByClient ? (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-red-500">
+                        {t(`resourceProvidor.investor-request-details.actions.cancelled_by_client`)}
+                      </span>
+                    ) : isCancelledByProvider ? (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-rose-500">
+                        {t(`resourceProvidor.investor-request-details.actions.cancelled_by_provider`)}
+                      </span>
+                    ) : isPendingCancellation ? (
+                      <button
+                        onClick={() => approveCancellation({ orderItemId: r.itemId, note: "" })}
+                        disabled={isApproving}
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 hover:text-emerald-700 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <CheckCircle className="h-4 w-4" />
+                        {isApproving
+                          ? t(`resourceProvidor.investor-request-details.actions.cancelling`)
+                          : t(`resourceProvidor.investor-request-details.actions.approve_cancellation`)}
+                      </button>
+                    ) : isCompleted ? (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600">
+                        <CheckCircle className="h-4 w-4" />
+                        {t(`resourceProvidor.investor-request-details.actions.completed`)}
+                      </span>
+                    ) : isRejected ? (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-destructive">
+                        {t(`resourceProvidor.investor-request-details.actions.rejected`)}
+                      </span>
+                    ) : isPreparing ? (
+                      <CancelOrderItemModal
+                        orderItemId={r.itemId}
+                        itemName={r.itemName}
+                        openButton={
+                          <button
+                            className="inline-flex items-center gap-1.5 text-xs font-medium text-red-500 hover:text-red-700 transition-colors cursor-pointer"
+                          >
+                            <XCircle className="h-4 w-4" />
+                            {t(`resourceProvidor.investor-request-details.actions.cancel`)}
+                          </button>
+                        }
+                      />
+                    ) : isCancelled ? (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-red-500">
+                        {t(`resourceProvidor.investor-request-details.actions.cancelled`)}
+                      </span>
+                    ) : null}
                   </TableCell>
                 </motion.tr>
               );

@@ -497,6 +497,7 @@
         "cancelled_by_client": "Cancelled by client",
         "cancelled_by_provider": "Cancelled by provider",
         "pending_cancellation_approval": "Pending cancellation approval",
+        "cancelled": "Cancelled",
         "completed": "Completed",
         "rejected": "Rejected",
         "approve_cancellation": "Approve"

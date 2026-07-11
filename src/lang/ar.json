@@ -492,6 +492,7 @@
         "cancelled_by_client": "تم الإلغاء بواسطة العميل",
         "cancelled_by_provider": "تم الإلغاء بواسطة مقدم الخدمة",
         "pending_cancellation_approval": "في انتظار الموافقة على الإلغاء",
+        "cancelled": "ملغاة",
         "completed": "مكتمل",
         "rejected": "مرفوض",
         "approve_cancellation": "موافقة"
