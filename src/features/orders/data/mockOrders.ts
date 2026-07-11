@@ -20,7 +20,7 @@ export const MOCK_ORDER_ITEMS: OrderItem[] = [
     fulfillRate: 90,
     totalAmount: 6250,
     latestUpdateAt: "2026-07-04T10:30:00Z",
-    itemStatus: "Preparing",
+    itemStatus: "PendingToApproveCancellation",
   },
   {
     itemId: 2,
@@ -127,7 +127,7 @@ export const MOCK_ORDERS: Order[] = [
     fulfillRate: 80,
     requestedAt: "2026-06-15T08:00:00Z",
     updatedAt: "2026-07-04T14:30:00Z",
-    status: "Preparing",
+    status: "PendingToApproveCancellation",
   },
   {
     id: 2,

@@ -300,7 +300,13 @@
         "actions": {
           "view": "عرض",
           "edit": "تعديل",
-          "delete": "حذف"
+          "delete": "حذف",
+          "approve_cancellation": "الموافقة على الإلغاء",
+          "cancelling": "جاري الإلغاء...",
+          "cancelled_by_client": "تم الإلغاء من العميل",
+          "cancelled_by_provider": "تم الإلغاء من المزود",
+          "completed": "مكتمل",
+          "rejected": "مرفوض"
         },
         "detail": {
           "title": "تفاصيل المورد",
@@ -416,6 +422,8 @@
           "approve": "اعتماد",
           "approving": "جاري الاعتماد...",
           "reject": "رفض",
+          "completed": "مكتمل",
+          "rejected": "مرفوض",
           "cancel": "إلغاء الطلب",
           "rejecting": "جاري الرفض..."
         },
@@ -475,6 +483,29 @@
         "status_labels": {
           "delivered": "تم التسليم",
           "in_progress": "قيد التنفيذ"
+        }
+      },
+      "actions": {
+        "actions": "الإجراءات",
+        "cancel": "إلغاء العنصر",
+        "cancelling": "جاري الإلغاء...",
+        "cancelled_by_client": "تم الإلغاء بواسطة العميل",
+        "cancelled_by_provider": "تم الإلغاء بواسطة مقدم الخدمة",
+        "pending_cancellation_approval": "في انتظار الموافقة على الإلغاء",
+        "completed": "مكتمل",
+        "rejected": "مرفوض",
+        "approve_cancellation": "موافقة"
+      },
+      "cancel_order_message": "طلب العميل إلغاء هذا الطلب. يرجى المراجعة والموافقة على طلب الإلغاء أو رفضه.",
+      "cancel-item-modal": {
+        "title": "إلغاء عنصر الطلب",
+        "description_with_name": "يرجى تقديم سبب لإلغاء العنصر رقم {{name}}.",
+        "description_generic": "يرجى تقديم سبب لإلغاء هذا العنصر.",
+        "label": "سبب الإلغاء",
+        "placeholder": "مثال: لم يعد مطلوبًا، تضارب في المواعيد...",
+        "actions": {
+          "cancel": "إغلاق",
+          "confirm": "تأكيد الإلغاء"
         }
       },
       "delivered-success": "تم تحديد الطلب كمكتمل التوصيل بنجاح.",

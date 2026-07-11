@@ -7,6 +7,7 @@ export type OrderStatus =
   | "PendingApproval"
   | "Preparing"
   | "Cancelled"
+  | "PendingToApproveCancellation"
   | "Suspended"
   | "Completed";
   

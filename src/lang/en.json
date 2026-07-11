@@ -299,7 +299,13 @@
         "actions": {
           "view": "View",
           "edit": "Edit",
-          "delete": "Delete"
+          "delete": "Delete",
+          "approve_cancellation": "Approve Cancellation",
+          "cancelling": "Cancelling...",
+          "cancelled_by_client": "Cancelled by Client",
+          "cancelled_by_provider": "Cancelled by Provider",
+          "completed": "Completed",
+          "rejected": "Rejected"
         },
         "table": {
           "image": "Image",
@@ -482,6 +488,29 @@
         "status_labels": {
           "delivered": "Delivered",
           "in_progress": "In progress"
+        }
+      },
+      "actions": {
+        "actions": "Actions",
+        "cancel": "Cancel Item",
+        "cancelling": "Cancelling...",
+        "cancelled_by_client": "Cancelled by client",
+        "cancelled_by_provider": "Cancelled by provider",
+        "pending_cancellation_approval": "Pending cancellation approval",
+        "completed": "Completed",
+        "rejected": "Rejected",
+        "approve_cancellation": "Approve"
+      },
+      "cancel_order_message": "The client has requested to cancel this order. Please review and approve or reject the cancellation request.",
+      "cancel-item-modal": {
+        "title": "Cancel Order Item",
+        "description_with_name": "Provide a reason for cancelling item {{name}}.",
+        "description_generic": "Provide a reason for cancelling this item.",
+        "label": "Reason for cancellation",
+        "placeholder": "e.g. No longer needed, scheduling conflict...",
+        "actions": {
+          "cancel": "Close",
+          "confirm": "Confirm Cancellation"
         }
       },
       "delivered-success": "Order has been marked as fully delivered successfully.",

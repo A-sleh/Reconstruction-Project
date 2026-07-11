@@ -2,9 +2,9 @@ import { motion } from "motion/react";
 import { OrderStatusBadge } from "@/features/orders/components/OrderStatusBadge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
-import { Check, X } from "lucide-react";
+import { Check, CheckCircle, X } from "lucide-react";
 import { RejectOrderModal } from "@/features/orders/components/RejectOrderModal";
-import { useApproveOrder } from "@/features/orders/api/actions";
+import { useApproveOrder, useApproveOrderCancellation } from "@/features/orders/api/actions";
 import { OrderDetails } from "@/features/orders/api/types";
 interface OrderDetailsHeaderProps {
   orderDetails: OrderDetails;
@@ -14,6 +14,7 @@ const OrderDetailsHeader = ({ orderDetails }: OrderDetailsHeaderProps) => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language == "ar";
   const { mutate: approve, isPending: isAproved } = useApproveOrder();
+  const { mutate: approveCancellation, isPending: isApprovingCancellation } = useApproveOrderCancellation();
   const formattedDate = new Date(orderDetails.requestedAt).toLocaleDateString();
 
   const handleApprove = (id: number) => {
@@ -81,6 +82,22 @@ const OrderDetailsHeader = ({ orderDetails }: OrderDetailsHeaderProps) => {
           }
           actionType="cancel"
         />
+        <div hidden={orderDetails.status != "PendingToApproveCancellation"} className="flex flex-col items-end gap-2">
+          <p className="text-sm text-amber-300">
+            {t(`resourceProvidor.investor-request-details.cancel_order_message`)}
+          </p>
+          <Button
+            size="sm"
+            variant="outline"
+            isLoading={isApprovingCancellation}
+            className="border-success/40 text-success hover:opacity-80 rounded-xl hover:text-green-300 hover:bg-white"
+            disabled={isApprovingCancellation}
+            onClick={() => approveCancellation({ orderId: orderDetails.id, note: "" })}
+          >
+            <CheckCircle className="h-4 w-4 mr-1" />
+            {t(`resourceProvidor.investor-request-details.actions.approve_cancellation`)}
+          </Button>
+        </div>
       </div>
     </motion.div>
   );
