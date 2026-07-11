@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { Check, X } from "lucide-react";
 import { RejectOrderModal } from "@/features/orders/components/RejectOrderModal";
-import { useApproveOrder, useCancelOrder } from "@/features/orders/api/actions";
+import { useApproveOrder } from "@/features/orders/api/actions";
 import { OrderDetails } from "@/features/orders/api/types";
 interface OrderDetailsHeaderProps {
   orderDetails: OrderDetails;
