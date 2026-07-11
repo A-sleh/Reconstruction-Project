@@ -215,6 +215,42 @@
           "pending": "Pending",
           "approved": "Approved",
           "rejected": "Rejected"
+        },
+        "table": {
+          "columns": {
+            "item": "Item",
+            "description": "Description",
+            "category": "Category",
+            "provider": "Provider",
+            "provider_note": "Provider Note",
+            "admin_note": "Admin Note",
+            "status": "Status"
+          },
+          "empty": "No requests found.",
+          "load_more": "Load more",
+          "loading_more": "Loading..."
+        },
+        "filters": {
+          "search_placeholder": "Search by item name...",
+          "status_placeholder": "All statuses",
+          "all": "All"
+        },
+        "create_order": "Create Resource Order",
+        "request-modal": {
+          "title": "Request New Resource",
+          "description": "Submit a new resource item to the bank for admin approval.",
+          "item_name": "Item Name",
+          "item_name_placeholder": "e.g. Steel Beam Type A",
+          "item_description": "Description",
+          "item_description_placeholder": "Describe the resource item...",
+          "category": "Category",
+          "category_placeholder": "Select a category",
+          "note": "Note",
+          "note_placeholder": "Any additional notes for the admin...",
+          "submit": "Submit Request",
+          "submitting": "Submitting...",
+          "success": "Resource request submitted successfully",
+          "error": "Failed to submit resource request"
         }
       },
       "filters": {

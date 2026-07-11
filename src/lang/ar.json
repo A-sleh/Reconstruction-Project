@@ -208,14 +208,50 @@
         "resource-deleted": "تم حذف {{name}}"
       },
       "orders": {
-        "no-orders": "لا توجد طلبات شراء لهذا الموقع.",
+        "no-orders": "لا توجد طلبات لهذا الموقع.",
         "proposed": "مقترح: {{category}}",
-        "requested_by": "تم الطلب بواسطة",
+        "requested_by": "طلب بواسطة",
         "reason": "السبب: {{reason}}",
         "status": {
           "pending": "قيد الانتظار",
-          "approved": "موافق",
+          "approved": "تمت الموافقة",
           "rejected": "مرفوض"
+        },
+        "table": {
+          "columns": {
+            "item": "العنصر",
+            "description": "الوصف",
+            "category": "الفئة",
+            "provider": "مقدم الخدمة",
+            "provider_note": "ملاحظة مقدم الخدمة",
+            "admin_note": "ملاحظة المدير",
+            "status": "الحالة"
+          },
+          "empty": "لم يتم العثور على طلبات.",
+          "load_more": "تحميل المزيد",
+          "loading_more": "جاري التحميل..."
+        },
+        "filters": {
+          "search_placeholder": "بحث باسم العنصر...",
+          "status_placeholder": "جميع الحالات",
+          "all": "الكل"
+        },
+        "create_order": "إنشاء طلب مورد",
+        "request-modal": {
+          "title": "طلب مورد جديد",
+          "description": "قم بإرسال عنصر مورد جديد إلى البنك للموافقة عليه من الإدارة.",
+          "item_name": "اسم العنصر",
+          "item_name_placeholder": "مثال: حديد تمديد نوع أ",
+          "item_description": "الوصف",
+          "item_description_placeholder": "صف عنصر المورد...",
+          "category": "الفئة",
+          "category_placeholder": "اختر فئة",
+          "note": "ملاحظة",
+          "note_placeholder": "أي ملاحظات إضافية للمدير...",
+          "submit": "إرسال الطلب",
+          "submitting": "جاري الإرسال...",
+          "success": "تم إرسال طلب المورد بنجاح",
+          "error": "فشل في إرسال طلب المورد"
         }
       },
       "filters": {

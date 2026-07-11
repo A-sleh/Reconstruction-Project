@@ -31,7 +31,7 @@ const WorkSiteDetails = () => {
             <InventoryTab />
           </TabsContent>
           <TabsContent value="orders" className="mt-6">
-            <OrdersTab orders={[]} />
+            <OrdersTab />
           </TabsContent>
         </Tabs>
       </section>

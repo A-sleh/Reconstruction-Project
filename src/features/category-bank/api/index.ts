@@ -1,7 +1,7 @@
 const BASE_BANK_ITEM_ROUTE = "bank-item";
 
 export enum BankItemController {
-  GetAllRequests = `${BASE_BANK_ITEM_ROUTE}`, // Maps to your GET endpoint
+  GetAllRequests = `${BASE_BANK_ITEM_ROUTE}/get-requests`, // Maps to your GET endpoint
   ResolveRequest = `${BASE_BANK_ITEM_ROUTE}/resolve-request`,
   RejectRequest = `${BASE_BANK_ITEM_ROUTE}/reject-request`,
   ApproveRequest = `${BASE_BANK_ITEM_ROUTE}/approve-request`,
