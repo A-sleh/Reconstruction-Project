@@ -168,6 +168,8 @@
       "label-start-date": "تاريخ البدء",
       "label-progress": "نسبة الإنجاز (%)",
       "btn-cancel": "إلغاء",
+      "btn-edit": "تعديل",
+      "btn-delete": "حذف",
       "btn-deactivate": "إلغاء تفعيل الموقع",
       "btn-create": "إنشاء موقع",
       "site-created": "تم إنشاء موقع العمل بنجاح.",

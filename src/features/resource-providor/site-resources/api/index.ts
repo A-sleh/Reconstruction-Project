@@ -53,13 +53,14 @@ interface Category {
   name: string;
 }
 
-interface PureResource {
+export interface PureResource {
   id: number;
   name: string;
   imageURL: string;
   description: string;
   category: Category;
   price: number;
+  isAvailable: boolean;
   unit: UnitType;
 }
 export interface OrderRequest {

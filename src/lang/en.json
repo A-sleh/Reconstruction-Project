@@ -167,6 +167,8 @@
       "label-start-date": "Start Date",
       "label-progress": "Progress (%)",
       "btn-cancel": "Cancel",
+      "btn-edit": "Edit",
+      "btn-delete": "Delete",
       "btn-deactivate": "Deactivate site",
       "btn-create": "Create Site",
       "site-created": "Work site created successfully.",

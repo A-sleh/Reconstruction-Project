@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
 import React, { useRef } from "react";
 import { NewResourceForm } from "./NewResourceForm";
-import { Resource } from "../api/actions";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
+import { PureResource } from "../api";
 
 interface Props {
-  initial?: Resource | null;
+  initial?: PureResource | null;
   openButton?: React.ReactNode | null;
 }
 
