@@ -5,7 +5,7 @@ import React, { useRef } from "react";
 import { NewResourceForm } from "./NewResourceForm";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
-import { PureResource } from "../api";
+import { PureResource } from "../api/types"; 
 
 interface Props {
   initial?: PureResource | null;

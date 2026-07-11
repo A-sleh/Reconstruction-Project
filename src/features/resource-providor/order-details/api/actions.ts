@@ -49,7 +49,7 @@ const createInvoiceApi = async (
 
 const updateResourceItemQuantity = async (
   orderId: string | number,
-  payload: Record<string, number>,
+  payload: { date: string; items: Record<string, number> },
 ) => {
   const { data } = await ApiInstance.put(
     `/${InvestorRequestDetailsController.InvestorRequestOrders}/orders/${orderId}`,
@@ -95,7 +95,7 @@ export const useUpdateOrderItemsQuantity = () => {
   return useMutation({
     mutationFn: (params: {
       orderId: number | string;
-      payload: Record<string, number>;
+      payload: { date: string; items: Record<string, number> };
     }) => updateResourceItemQuantity(params.orderId, params.payload),
     mutationKey: MUTATION_KEYS.investorRequestDetails.updateQuantity(),
     onSuccess: (_: any) => {

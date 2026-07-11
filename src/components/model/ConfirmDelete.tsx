@@ -18,11 +18,16 @@ const ConfirmDelete = ({
   openButton,
 }: ConfirmDeleteProps) => {
   const { t } = useTranslation();
+  const openKey = "delete-work-site" + item;
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    onConfirm();
+  };
 
   return (
     <Model>
-      <Model.Open opens="delete-work-site">{openButton}</Model.Open>
-      <Model.Window name="delete-work-site" model_width="max-w-md">
+      <Model.Open opens={openKey}>{openButton}</Model.Open>
+      <Model.Window name={openKey} model_width="max-w-md">
         <motion.div
           initial={{ opacity: 0, scale: 0.98, y: 8 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -53,14 +58,21 @@ const ConfirmDelete = ({
           <div className="flex items-center gap-3 pt-4">
             <Button
               disabled={isLoading}
-              onClick={onConfirm}
+              onClick={onSubmit}
+              type="button"
               variant="destructive"
               className="flex items-center gap-2 text-sm px-4 py-2 shadow-sm bg-red-500 text-white hover:opacity-75 transition-all cursor-pointer"
             >
-              <Trash2 className="h-4 w-4 opacity-90" />
-              {t("resourceProvidor.workSites.btn-delete-confirm", {
-                defaultValue: "Delete site",
-              })}
+              {isLoading ? (
+                t("common.loading", "Saving...")
+              ) : (
+                <>
+                  <Trash2 className="h-4 w-4 opacity-90" />
+                  {t("resourceProvidor.workSites.btn-delete-confirm", {
+                    defaultValue: "Delete site",
+                  })}
+                </>
+              )}
             </Button>
             {/* Model.Close intercepts the trigger to seamlessly clear the popup open state */}
             <Model.Close>
@@ -69,11 +81,9 @@ const ConfirmDelete = ({
                 variant="ghost"
                 className="text-sm px-4 py-2 border border-primary hover:bg-primary hover:text-white transition-all cursor-pointer"
               >
-                {isLoading
-                  ? t("common.loading", "Saving...")
-                  : t("resourceProvidor.workSites.btn-cancel", {
-                      defaultValue: "Cancel",
-                    })}
+                {t("resourceProvidor.workSites.btn-cancel", {
+                  defaultValue: "Cancel",
+                })}
               </Button>
             </Model.Close>
           </div>
