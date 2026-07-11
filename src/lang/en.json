@@ -281,13 +281,46 @@
           "loadingMore": "Loading more..."
         },
         "remove-resource": "Remove",
-        "card": {
-          "price_per_unit": "Price / unit",
-          "unit": "Unit",
-          "qty": "Qty",
-          "total": "Total"
-        },
-        "validation": {
+"card": {
+        "price_per_unit": "Price / unit",
+        "unit": "Unit",
+        "qty": "Qty",
+        "total": "Total"
+      },
+      "table": {
+        "image": "Image",
+        "name": "Name",
+        "category": "Category",
+        "status": "Status",
+        "price": "Price",
+        "unit": "Unit",
+        "actions": "Actions"
+      },
+      "actions": {
+        "view": "View",
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "table": {
+        "image": "Image",
+        "name": "Name",
+        "category": "Category",
+        "status": "Status",
+        "price": "Price",
+        "unit": "Unit",
+        "actions": "Actions"
+      },
+      "filter": "Filter",
+      "detail": {
+        "title": "Resource Details",
+        "category": "Category",
+        "status": "Status",
+        "price": "Price",
+        "unit": "Unit",
+        "description": "Description",
+        "resource_bank": "Resource Bank"
+      },
+      "validation": {
           "name_required": "Name is required",
           "price_required": "Price is required",
           "price_min": "Price must be 0 or greater",
@@ -957,6 +990,26 @@
       "showOrderItems": "Show Order Items",
       "addPayment": "Add Payment",
       "viewDetails": "View Details"
+    },
+    "toast": {
+      "approveOrderSuccess": "Order approved successfully",
+      "approveOrderError": "Failed to approve order",
+      "rejectOrderSuccess": "Order rejected",
+      "rejectOrderError": "Failed to reject order",
+      "addPaymentSuccess": "Payment recorded successfully",
+      "addPaymentError": "Failed to record payment",
+      "addReceiveInvoiceSuccess": "Invoice received successfully",
+      "addReceiveInvoiceError": "Failed to receive invoice",
+      "approveOrderItemCancellationSuccess": "Order item cancellation approved",
+      "approveOrderItemCancellationError": "Failed to approve order item cancellation",
+      "markAsReceivedSuccess": "Marked as received successfully",
+      "markAsReceivedError": "Failed to mark as received",
+      "cancelOrderSuccess": "Order cancelled successfully",
+      "cancelOrderError": "Failed to cancel order",
+      "cancelOrderItemSuccess": "Order item cancelled successfully",
+      "cancelOrderItemError": "Failed to cancel order item",
+      "approveOrderCancellationSuccess": "Order cancellation approved",
+      "approveOrderCancellationError": "Failed to approve order cancellation"
     }
   },
   "home": {

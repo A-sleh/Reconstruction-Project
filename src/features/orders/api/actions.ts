@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
+import { successToast, errorToast } from "@/components/common/Toast";
+import i18n from "i18next";
 import { InvestorRequestController, QUERY_KEYS, MUTATION_KEYS } from ".";
 import {
   AddPaymentRequestBody,
@@ -118,6 +120,12 @@ export const useApproveOrder = () => {
 
       // If you implement a specific detail cache later, you can invalidate it like this:
       // queryClient.invalidateQueries({ queryKey: [...QUERY_KEYS.orders.detail(), variables.OrderId] });
+      successToast(i18n.t("orders.toast.approveOrderSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message = serverMessage || i18n.t("orders.toast.approveOrderError");
+      errorToast(message);
     },
   });
 };
@@ -133,6 +141,12 @@ export const useRejectOrder = () => {
     mutationFn: rejectOrder,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.rejectOrderSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message = serverMessage || i18n.t("orders.toast.rejectOrderError");
+      errorToast(message);
     },
   });
 };
@@ -148,6 +162,12 @@ export const useAddPayment = () => {
     mutationFn: addAddPayment,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.addPaymentSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message = serverMessage || i18n.t("orders.toast.addPaymentError");
+      errorToast(message);
     },
   });
 };
@@ -163,6 +183,12 @@ export const useAddReceiveInvoice = () => {
     mutationFn: addReceiveInvoice,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.addReceiveInvoiceSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message = serverMessage || i18n.t("orders.toast.addReceiveInvoiceError");
+      errorToast(message);
     },
   });
 };
@@ -175,6 +201,12 @@ export const useApproveOrderItemCancellation = () => {
     mutationFn: approveOrderItemCancellation,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.approveOrderItemCancellationSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message = serverMessage || i18n.t("orders.toast.approveOrderItemCancellationError");
+      errorToast(message);
     },
   });
 };
@@ -187,6 +219,12 @@ export const useMarkAsReceived = () => {
     mutationFn: markAsReceived,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.markAsReceivedSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message = serverMessage || i18n.t("orders.toast.markAsReceivedError");
+      errorToast(message);
     },
   });
 };
@@ -199,6 +237,12 @@ export const useCancelOrder = () => {
     mutationFn: cancelOrder,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.cancelOrderSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message = serverMessage || i18n.t("orders.toast.cancelOrderError");
+      errorToast(message);
     },
   });
 };
@@ -211,6 +255,12 @@ export const useCancelOrderItem = () => {
     mutationFn: cancelOrderItem,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.cancelOrderItemSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message = serverMessage || i18n.t("orders.toast.cancelOrderItemError");
+      errorToast(message);
     },
   });
 };
@@ -223,6 +273,12 @@ export const useApproveOrderCancellation = () => {
     mutationFn: approveOrderCancellation,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.approveOrderCancellationSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message = serverMessage || i18n.t("orders.toast.approveOrderCancellationError");
+      errorToast(message);
     },
   });
 };

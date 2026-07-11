@@ -282,13 +282,46 @@
           "loadingMore": "جاري تحميل المزيد..."
         },
         "remove-resource": "حذف",
-        "card": {
-          "price_per_unit": "السعر / الوحدة",
-          "unit": "الوحدة",
-          "qty": "الكمية",
-          "total": "الإجمالي"
-        },
-        "validation": {
+"card": {
+        "price_per_unit": "السعر / الوحدة",
+        "unit": "الوحدة",
+        "qty": "الكمية",
+        "total": "الإجمالي"
+      },
+      "table": {
+        "image": "الصورة",
+        "name": "الاسم",
+        "category": "الفئة",
+        "status": "الحالة",
+        "price": "السعر",
+        "unit": "الوحدة",
+        "actions": "الإجراءات"
+      },
+      "actions": {
+        "view": "عرض",
+        "edit": "تعديل",
+        "delete": "حذف"
+      },
+      "table": {
+        "image": "الصورة",
+        "name": "الاسم",
+        "category": "الفئة",
+        "status": "الحالة",
+        "price": "السعر",
+        "unit": "الوحدة",
+        "actions": "الإجراءات"
+      },
+      "filter": "تصفية",
+      "detail": {
+        "title": "تفاصيل المورد",
+        "category": "الفئة",
+        "status": "الحالة",
+        "price": "السعر",
+        "unit": "الوحدة",
+        "description": "الوصف",
+        "resource_bank": "بنك الموارد"
+      },
+      "validation": {
           "name_required": "الاسم مطلوب",
           "price_required": "السعر مطلوب",
           "price_min": "يجب أن يكون السعر 0 أو أكثر",
@@ -955,6 +988,26 @@
       "showOrderItems": "عرض عناصر الطلب",
       "addPayment": "إضافة دفعة",
       "viewDetails": "عرض التفاصيل"
+    },
+    "toast": {
+      "approveOrderSuccess": "تم اعتماد الطلب بنجاح",
+      "approveOrderError": "فشل في اعتماد الطلب",
+      "rejectOrderSuccess": "تم رفض الطلب",
+      "rejectOrderError": "فشل في رفض الطلب",
+      "addPaymentSuccess": "تم تسجيل الدفعة بنجاح",
+      "addPaymentError": "فشل في تسجيل الدفعة",
+      "addReceiveInvoiceSuccess": "تم استلام الفاتورة بنجاح",
+      "addReceiveInvoiceError": "فشل في استلام الفاتورة",
+      "approveOrderItemCancellationSuccess": "تم اعتماد إلغاء عنصر الطلب",
+      "approveOrderItemCancellationError": "فشل في اعتماد إلغاء عنصر الطلب",
+      "markAsReceivedSuccess": "تم التسليم بنجاح",
+      "markAsReceivedError": "فشل في التسليم",
+      "cancelOrderSuccess": "تم إلغاء الطلب بنجاح",
+      "cancelOrderError": "فشل في إلغاء الطلب",
+      "cancelOrderItemSuccess": "تم إلغاء عنصر الطلب بنجاح",
+      "cancelOrderItemError": "فشل في إلغاء عنصر الطلب",
+      "approveOrderCancellationSuccess": "تم اعتماد إلغاء الطلب",
+      "approveOrderCancellationError": "فشل في اعتماد إلغاء الطلب"
     }
   },
   "home": {
