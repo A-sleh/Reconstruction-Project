@@ -146,12 +146,12 @@ const ResourcesTable = ({ items }: ResourcesTableProps) => {
               const done = currentDelivered >= r.quantity;
               const isEditing = localChanges[r.itemId] !== undefined;
               const isCancelledByClient = r.itemStatus === "CancelledByClient";
+              const isCompleted = r.itemStatus === "Completed";
               const isCancelledByProvider = r.itemStatus === "CancelledByProvider";
               const isRejected = r.itemStatus === "Rejected";
-              const isCancelled = isRejected || isCancelledByClient || isCancelledByProvider || r.itemStatus === "Cancelled";
+              const isCancelled =  isCompleted || isRejected || isCancelledByClient || isCancelledByProvider || r.itemStatus === "Cancelled";
               const isPendingCancellation = r.itemStatus === "PendingToApproveCancellation";
               const isPreparing = r.itemStatus === "Preparing";
-              const isCompleted = r.itemStatus === "Completed";
 
               return (
                 <motion.tr
