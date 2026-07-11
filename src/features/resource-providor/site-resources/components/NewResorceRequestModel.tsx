@@ -137,8 +137,8 @@ export function NewResorceRequestModel({
                 "resourceProvidor.workSites.orders.request-modal.category",
               )}
               value={categoryId}
-              setValue={(e) =>
-                setCategoryId(e.target.value ? Number(e.target.value) : "")
+              setValue={(value) =>
+                setCategoryId(value ? Number(value) : "")
               }
             >
               <option value="">

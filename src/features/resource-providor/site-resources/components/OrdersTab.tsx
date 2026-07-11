@@ -170,7 +170,7 @@ export default function OrdersTab() {
         <Table>
           <TableHeader>
             <TableRow className="border-b border-gray-200 bg-gray-50/80 hover:bg-gray-50/80">
-              <TableHead className="p-3 font-medium text-gray-500 text-xs uppercase tracking-wider">
+              <TableHead className="p-3 font-medium text-gray-500 text-xs uppercase tracking-wider ">
                 {t("resourceProvidor.workSites.orders.table.columns.item")}
               </TableHead>
               <TableHead className="p-3 font-medium text-gray-500 text-xs uppercase tracking-wider">
