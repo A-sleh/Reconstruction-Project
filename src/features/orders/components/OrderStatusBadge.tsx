@@ -43,6 +43,11 @@ const styles: Record<AllStatuses, { bg: string; text: string; dot: string }> = {
     text: "text-red-700",
     dot: "bg-red-500",
   },
+  PendingToApproveCancellation: {
+    bg: "bg-purple-50",
+    text: "text-purple-700",
+    dot: "bg-purple-500",
+  },
 };
 
 export function OrderStatusBadge({ status }: { status: AllStatuses }) {

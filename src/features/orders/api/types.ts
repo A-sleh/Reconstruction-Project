@@ -15,7 +15,9 @@ export type OrderItemStatus =
   | "Preparing"
   | "CancelledByClient"
   | "CancelledByProvider"
+  | "PendingToApproveCancellation"
   | "Completed"
+  | "Cancelled"
   | "Rejected";
 
 export const ORDER_STATUSES: OrderStatus[] = [
@@ -62,7 +64,7 @@ export interface OrderItem {
   fulfillRate: number;
   totalAmount: number;
   latestUpdateAt: string;
-  itemStatus: OrderStatus;
+  itemStatus: OrderItemStatus;
 }
 
 export interface OrderReceiveInvoice {
