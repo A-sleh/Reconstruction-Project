@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { MOCK_ORDER_DETAILS_RESPONSE } from "@/features/orders/data/mockOrders";
-import OrderDetailsHeader from "@/features/resource-providor/order-details/components/OrderDetailsHeader";
-import MarkFullyDelivered from "@/features/resource-providor/order-details/components/MarkFullyDelivered";
-import ResourcesTable from "@/features/resource-providor/order-details/components/ResourcesTable";
-import FinancialSection from "@/features/resource-providor/order-details/components/FinancialSection";
-import HistorySection from "@/features/resource-providor/order-details/components/HistorySection";
+import OrderDetailsHeader from "@/features/orders/components/OrderDetailsHeader"; 
+import MarkFullyDelivered from "@/features/orders/components/MarkFullyDelivered"; 
+import ResourcesTable from "@/features/orders/components/ResourcesTable"; 
+import FinancialSection from "@/features/orders/components/FinancialSection"; 
+import HistorySection from "@/features/orders/components/HistorySection"; 
 
 export default function OrderDetails() {
   const navigate = useNavigate();
