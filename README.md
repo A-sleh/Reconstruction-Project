@@ -1,132 +1,171 @@
-## The main colors which i will use it in my project: 
+# Reconstruction Platform
 
-## primary : #002623 , 
-## primary-hover: #054239,
-## primary-hover-two: #428177,
+A comprehensive digital platform connecting investors, landowners, engineers, service providers, and resource suppliers for post-war reconstruction projects. The platform streamlines the entire reconstruction lifecycle — from land discovery and investment to project execution and resource management.
 
+## Table of Contents
 
-# secondary: #988561,
-# secondary-hover : #b9a779,
-# secondary-hover-two : #edebe0,
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Internationalization](#internationalization)
+- [Design System](#design-system)
+- [License](#license)
 
+## Overview
 
-## primary-dark: #161616,
-## primary-dark-hover : #2d2a3b,
-## primary-dark-hover-two : #ffffff,
+Reconstruction is a multi-role marketplace designed to accelerate post-war rebuilding by uniting all stakeholders on a single platform. Investors discover vetted reconstruction projects, landowners list properties, engineers find work, and service/resource providers offer their capabilities — all with transparent project tracking and financial management.
 
+## Features
 
-## Landing page section description: 
+### For Investors
+- Browse and search available lands and buildings for investment
+- Track project progress, budgets, and timelines in real time
+- Request and manage resource orders from verified providers
+- View detailed financial reports and invoices
 
-## 1. Hero section: ( almost Done [])
-### Headline + subheadline: [
-    1- من فكؤة الى واقع : شريكك الشامل في إعادة الإعملر
-    2- ابني, استثمر, ,أعد إعمار المستقبل. منصة واحدة تجمع جميع الأطراف
-    3- معا, نعيد بناء ما دمرته الحرب. لنعيد الأمل الى حياتنا
-    4- نمصة إعادة الإعمار الرقمية. بُعد جديد لتعاون أوثق
-] 
-### Call To Action: Will be subscribt to our service
-### support image: Will be full screnn with some side images ( should discript the purpose of our websit like [encurse to rebuild our city and opent the opertunity to enggeinering and employ to find work easily and impressive the out investor to come in to syria and invest in it useing our platform])
+### For Landowners
+- List properties for sale with location mapping and ownership verification
+- Connect with serious investors through a trusted marketplace
 
-## #################################################################
+### For Engineers
+- Access a dedicated workspace for assigned construction projects
+- Manage site-specific tasks, permissions, and progress reports
 
-## 2. solustion section :
-### for investor: 
-    title: منصة موثوقة للاستثمار العقاري
-     نوصلك مباشرة بمشاريع إعادة إعمار مدروسة وذات جدوى اقتصادية عالية، مع معلومات كاملة عن أصحاب الأراضي والجدول الزمني المتوقع
+### For Service & Resource Providers
+- Manage work sites, inventory, and resource catalogs
+- Handle investor requests with approval workflows
+- Track orders, invoices, and delivery status
+- View operational statistics and performance insights
 
-      title: شبكة محترفين معتمدة.
-       جميع المهندسين وورش العمل على منصتنا تمتلك تصنيفات ومراجعات حقيقية من مستثمرين سابقين، مما يضمن لك جودة التنفيذ ويحمي استثمارك
+### Shared
+- Role-based authentication and onboarding (investor, engineer, service provider, resource provider)
+- Full Arabic and English internationalization (RTL support)
+- Interactive landing page with testimonials and feature showcase
+- Responsive design across all device sizes
 
-       title: ربط مباشر مع مستثمرين جادين.
-        لا تترك أرضك بدون استغلال.
-        منصتنا تجلب لك مستثمرين حقيقيين يملكون رأس المال والرغبة في التنفيذ، مع خيارات شراكة متعددة تناسب ظروفك
+## Tech Stack
 
-        title : مساحة عمل تعاونية موحدة. إدارة المشروع،
-         والمستندات، والمراسلات، والمدفوعات في مكان واحد، مما يضمن الشفافية وينظم سير العمل ويوفر الوقت والجهد على الجميع.
+| Layer | Technology |
+|---|---|
+| Framework | React 19 |
+| Build Tool | Vite 7 |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| UI Components | shadcn/ui (Radix Primitives) |
+| State Management | Zustand |
+| Server State | TanStack React Query |
+| Routing | React Router v7 |
+| Forms | React Hook Form + Zod |
+| HTTP Client | Axios |
+| i18n | i18next + react-i18next |
+| Icons | Lucide React |
+| Animations | Framer Motion |
+| Charts | Recharts |
+| 3D | Three.js (React Three Fiber) |
+| PDF Generation | React PDF Renderer |
 
-            title: شبكة أمان لوجستية.
-             نظامنا يربطك بعدة موردين موثوقين، ويوفر خيارات بديلة فورية، مما يقلل من مخاطر التوقف ويحافظ على الجدول الزمني لمشروعك.
-### For engginers: 
-    title: قناة دائمة لعروض العمل.
-    انضم إلى منصتنا لتصل إلى مجموعة واسعة من مشاريع إعادة الإعمار الجادة، وارفع ملفك الشخصي ليجدك العملاء مباشرة.
+## Project Structure
 
-### For resource and service:
+```
+src/
+├── app/                    # App entry, providers, and route definitions
+├── assets/                 # Static assets (fonts, images)
+├── components/
+│   ├── 3d/                 # Three.js 3D components
+│   ├── animations/         # Framer Motion animation wrappers
+│   ├── common/             # Shared components (Navbar, Progress, Toggle)
+│   ├── inputs/             # Form input components (ImageUploader, etc.)
+│   ├── layouts/            # Page layout wrappers
+│   ├── model/              # 3D model components
+│   ├── shared/             # Cross-feature shared UI
+│   └── ui/                 # shadcn/ui primitives (Button, Card, Table, etc.)
+├── config/                 # App configuration
+├── constant/               # Constants and enums
+├── data/                   # Mock data and fixtures
+├── features/
+│   ├── Auth/               # Authentication (login, register, role selection)
+│   ├── category-bank/      # Resource category management
+│   ├── home/               # Dashboard home page
+│   ├── investor/           # Investor-facing views
+│   ├── landing-page/       # Public marketing landing page
+│   ├── orders/             # Order management and workflows
+│   ├── resource-providor/  # Resource provider (work sites, inventory, stats, requests)
+│   └── service-providor/   # Service provider (company services, orders)
+├── hooks/                  # Custom React hooks
+├── lang/                   # Shared translation files (navbar, profile, common)
+├── lib/                    # Utilities, i18n config, API instance
+├── pages/                  # Route-level page components
+├── services/               # API service layer
+├── stores/                 # Zustand state stores
+├── styles/                 # Global CSS and Tailwind theme
+└── types/                  # TypeScript type definitions
+```
 
-         title: نافذة مباشرة لمشاريع إعادة الإعمار الناشئة.
-          وصل منتجاتك وخدماتك مباشرة إلى المستثمرين، أصحاب الأراضي، والمقاولين في اللحظة التي يبدأون فيها التخطيط لمشاريعهم.
+## Getting Started
 
-          
-           title: نظام توصيل ذكي.
-            اعرض مواردك للمشاريع المناسبة جغرافيا ونوعيا تلقائياً، مما يضمن وصولك للعملاء الجادين فقط ويوفر وقت فريق المبيعات.
+### Prerequisites
 
+- Node.js 18+ and npm/yarn/pnpm
 
+### Installation
 
-## #################################################################
+```bash
+# Clone the repository
+git clone <repository-url>
+cd reconstruction
 
-## 3. Product demo showcase:
----------                        
-        |                                          title of the section from demo product section
- image  | ------------------------------------- O  Description about this section ...  
-        |                                       |
----------                                       |
-                                                |          ---------
-title of the section from demo product section  |          |
-Description about this section ...              O ---------| image
-                                                |          |
-                                                |          ---------
-                                                |
+# Install dependencies
+npm install
 
-## 1. قسم لإدارة جميع مشاريعك القائمة
-## 2. قسم البحث الذكي عن الأراضي والمباني المفتوحة للإستثمار
-## 3. وصول سريع الى اصحاب المصالح ( خدمات وموارد ) بالإضافة الى المهندسين
-## 4. تقارير شامله حول سير العملية الإنشائية 
+# Start the development server
+npm run dev
+```
 
-## #################################################################
+The app will be available at `http://localhost:5173`.
 
-## 4. Social proof: 
-### In this section i will put the customer opinion:
-## I want to add six testimonial comes from real persones : 
-## 1. بفضل هذه المنصة, وجدت مستثمرا لمشروعي في أسبوع فقط بعد 6 أشهر من البحث 
+## Available Scripts
 
-## 2. استثمرت في ٣ مشاريع عبر المنصة وحققت عائداً بلغ ٣٠٪ خلال عامين 
+| Command | Description |
+|---|---|
+| `npm run dev` | Start Vite development server |
+| `npm run build` | Production build |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | Run ESLint |
+| `npm run create-feature` | Scaffold a new feature module |
+| `npm run init-api` | Generate API service boilerplate |
+| `npm run api-method` | Generate a new API method |
 
-## 3.زاد دخلي بنسبة ٤٠٪ بعد انضمامي للمنصة وحصولي على مشاريع جديدة مستمرة 
+## Internationalization
 
-## 4. أرضي كانت مهملة منذ ٣ سنوات بسبب lack of التمويل. خلال أسبوعين عبر المنصة، 
-##  وجدت مستثمراً وبدأنا المشروع. اليوم أصبح لدي عمارة سكنية تدر علي دخلاً شهرياً
+The project supports Arabic (default) and English with full RTL/LTR layout switching. Translations are split by feature:
 
-## 5. كنت أخشى الاستثمار في مناطق الإعمار due to lack of الشفافية. 
-## المنصة وفرت لي فريقاً فنياً يتابع المشروع ويقدم تقارير دورية. 
-## استثمرت في مشروعين وحققت عائداً ممتازاً
+```
+src/
+├── lang/                           # Shared keys (navbar, profile, common)
+├── features/Auth/i18n/             # Auth translations
+├── features/resource-providor/i18n/# Resource provider translations
+├── features/service-providor/i18n/ # Service provider translations
+├── features/landing-page/i18n/     # Landing page translations
+├── features/orders/i18n/           # Orders translations
+└── features/home/i18n/             # Home dashboard translations
+```
 
-## 6. بعد الحرب، كانت فرص العمل قليلة. انضممت للمنصة وبدأت أحصل على مشاريع متنوعة. 
-## زاد دخلي بنسبة ٦٠٪ وكونت شبكة علاقات مع مستثمرين ومقاولين من مختلف المحافظات
+All feature translation files are merged into a single `translation` namespace at startup via `src/lib/i18n.ts`, so existing `t('key.path')` calls remain unchanged.
 
+## Design System
 
-## #################################################################
+The design system is documented in [`DESIGN.md`](./DESIGN.md) and covers:
 
-## 5. Why us section: 
-## I will put side image with title and description:
-## title: لمنصة الأولى التي توحد جهود الجميع... من أصحاب الأراضي إلى أصحاب الورش
-## The  options : 
-١. سوق عقاري متكامل للمستثمرين وأصحاب الأراضي
-"منصة موحدة تربط أصحاب الأراضي بالمستثمرين والمطورين، مع أدوات تقييم ذكية تحدد القيمة السوقية الدقيقة وتوفر تحليلات الجدوى الاقتصادية لمشاريع التطوير العقاري."
+- **Color tokens** — Canvas, ink, brand, and semantic color scales
+- **Typography** — Locked typographic scale with defined sizes and weights
+- **Spacing** — 4px grid rhythm for all margins, padding, and gaps
+- **Component specs** — State matrices for buttons, inputs, badges, and cards
+- **Responsive layout** — Breakpoint definitions and dense-data layout rules
+- **Accessibility** — WCAG AA/AAA contrast requirements, focus visibility, touch targets
 
-٢. نظام متابعة مشاريع للمهندسين والمطورين
-"إدارة مركزية لمشاريع البناء والتطوير مع متابعة حية لمراحل التنفيذ، وتقارير أداء فورية، وتكامل مع جميع الأطراف المعنية لضمان الانسيابية في تنفيذ المشاريع."
+## License
 
-٣. دليل موثوق لأصحاب الورش والخدمات
-"شبكة معتمدة من مقاولي البناء والورش المتخصصة وموفدي الخدمات، مع نظام تصنيف ومراجعات حقيقية تضمن الجودة والموثوقية في اختيار مقدمي الخدمات."
-
-٤. أتمتة العمليات الإدارية والمالية
-"نظام متكامل لإدارة العقود والمستحقات والمتابعة المالية، مع إشعارات تلقائية للمراحل الحرجة وتقارير مالية مفصلة توفر الوقت والجهد وتقلل الأخطاء."
-
-٥. بيانات سوقية وتحليلات ذكية
-"منصة تحليلية متقدمة تقدم رؤى حية عن سوق العقارات والبناء، مع مؤشرات الأسعار، اتجاهات الطلب، وتقارير استثمارية تساعد في اتخاذ القرارات المدروسة."
-
-٦. تواصل وتنسيق مركزي
-"بيئة تعاونية موحدة تجمع جميع الأطراف (أصحاب الأراضي، المستثمرين، المهندسين، المقاولين) مع إدارة وثائق مركزة ونظام مراسلات فورية لضمان التنسيق الأمثل."
-
-هذه النقاط تركز على المزايا الأساسية التي تخدم جميع الأطراف في منظومة التطوير العقاري والإنشائي بشكل عملي ومباشر.
-
-
+Private — All rights reserved.
