@@ -52,8 +52,24 @@ const ResourceProvidor_Statistics = lazy(
   () => import("@/pages/resource-providor/Statistics.view"),
 );
 
-// Service Porvider importing pages
 // Investor importing pages
+const Invesort_Buildings_lands = lazy(
+  () => import("@/pages/investor/InvestorLandsAndBuildings.view"),
+);
+const Invesort_Market_Place = lazy(
+  () => import("@/pages/investor/MarketPlace.view"),
+);
+const Invesort_Property_Details = lazy(
+  () => import("@/pages/investor/PropertyDetails.view"),
+);
+const Project_List_Property = lazy(
+  () => import("@/pages/project/ListProperty.view"),
+);
+const Project_Work_Site = lazy(
+  () => import("@/pages/project/ProjectWorkSite.view"),
+);
+
+// Service Porvider importing pages
 // Engineers importing pages
 
 // Fallback component for lazy loading
@@ -193,6 +209,66 @@ const router: RouteObject[] = [
           <Suspense fallback={<LoadingFallback />}>
             <AuthGuard allowedRoles={["Provider"]}>
               <ResourceProvidor_NewResources />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.investor.hisLandsAndBuildings.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Investor"]}>
+              <Invesort_Buildings_lands />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.investor.marketOfLandsBuildings.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Investor"]}>
+              <Invesort_Market_Place />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.investor.propertyVerfication.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Investor"]}>
+              <Project_List_Property />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.investor.landBuildingDetails.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Investor"]}>
+              <Invesort_Property_Details />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.projects.ListProperty.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Investor"]}>
+              <Project_List_Property />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.projects.projectWorkSite.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Investor"]}>
+              <Project_Work_Site />
             </AuthGuard>
           </Suspense>
         ),

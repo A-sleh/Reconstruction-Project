@@ -34,6 +34,10 @@ const LoginForm = () => {
         switch (role) {
           case "Provider":
             goto(paths.app.resourceProvidor.profile.path);
+            break;
+          case "Investor":
+            goto(paths.app.investor.hisLandsAndBuildings.path);
+            break;
         }
       },
     });

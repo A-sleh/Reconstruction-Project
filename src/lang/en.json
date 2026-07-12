@@ -917,7 +917,12 @@
     "workSites": "Work Sites",
     "profile": "Profile",
     "statistics": "Statistics",
-    "orders": "Orders"
+    "orders": "Orders",
+    "hisLands": "My Lands & Buildings",
+    "market": "Market",
+    "propertyVerification": "Property Verification",
+    "listProperty": "List Property",
+    "projectWorkSite": "Project Work Site"
   },
   "profile": {
     "sectionTitle": "Profile",

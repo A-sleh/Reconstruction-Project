@@ -909,7 +909,12 @@
     "workSites": "مواقع العمل",
     "profile": "الملف الشخصي",
     "statistics": "الإحصائيات",
-    "orders": "الطلبات"
+    "orders": "الطلبات",
+    "hisLands": "أراضي ومباني",
+    "market": "السوق",
+    "propertyVerification": "تحقق من الملكية",
+    "listProperty": "إدراج العقار",
+    "projectWorkSite": "موقع عمل المشروع"
   },
   "profile": {
     "sectionTitle": "الملف الشخصي",

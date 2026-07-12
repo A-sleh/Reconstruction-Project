@@ -7,7 +7,7 @@ enum STORAGE_KEYS {
   auth = "auth-storage",
 }
 
-export type ROLE = "Provider";
+export type ROLE = "Provider" | "Investor";
 export interface User {
   firstName: string;
   lastName: string;
