@@ -1,3 +1,5 @@
+import ListProperty from "@/pages/project/ListProperty.view";
+
 export const paths = {
   auth: {
     register: {
@@ -57,11 +59,13 @@ export const paths = {
       },
       orderDetails: {
         path: "/app/resource-providor/orders/:orderId",
-        getHref: (orderId: number | string) => `/app/resource-providor/orders/${orderId}`,
+        getHref: (orderId: number | string) =>
+          `/app/resource-providor/orders/${orderId}`,
       },
       newResources: {
         path: "/app/resource-providor/work-sites/:siteId/new-resources",
-        getHref: (siteId: number | string) => `/app/resource-providor/work-sites/${siteId}/new-resources`,
+        getHref: (siteId: number | string) =>
+          `/app/resource-providor/work-sites/${siteId}/new-resources`,
       },
       workSites: {
         path: "/app/resource-providor/work-sites",
@@ -69,11 +73,39 @@ export const paths = {
       },
       workSite: {
         path: "/app/resource-providor/work-sites/:siteId",
-        getHref: (workSiteId: number| string) => `/app/resource-providor/work-sites/${workSiteId}`,
+        getHref: (workSiteId: number | string) =>
+          `/app/resource-providor/work-sites/${workSiteId}`,
       },
     },
     serviceProvidor: {},
-    investor: {},
+    investor: {
+      hisLandsAndBuildings: {
+        path: "/app/investor/own-lands-and-building",
+        getHref: () => `/app/investor/own-lands-and-building`,
+      },
+      propertyVerfication: {
+        path: "/app/investor/land-building-verfication",
+        getHref: () => `/app/investor/land-building-verfication`,
+      },
+      marketOfLandsBuildings: {
+        path: "/app/investor/market-buildings-lands",
+        getHref: () => `/app/investor/market-buildings-lands`,
+      },
+      landBuildingDetails: {
+        path: "/app/investor/market-buildings-lands/:id",
+        getHref: (id: number) => `/app/investor/market-buildings-lands/${id}`,
+      },
+    },
     engineer: {},
+    projects: {
+      projectWorkSite: {
+        path: "/app/project/work-site/:id",
+        getHref: (id: number) => `/app/project/work-site/${id}`,
+      },
+      ListProperty: {
+        path: "/app/project/list-property",
+        getHref: () => `/app/project/list-property`,
+      },
+    },
   },
 } as const;

@@ -1,0 +1,507 @@
+{
+  "resourceProvidor": {
+    "workSites": {
+      "sub-title": "لوحة تحكم العمليات المباشرة",
+      "title": "إدارة جميع مواقع العمل من مركز قيادة موحد.",
+      "description": "تتبع المواقع، وتخصيص الموارد، وحافظ على استمرارية حركة الفرق — مُصمم لعمليات البناء الحديثة.",
+      "all-work-sites": "جميع مواقع العمل",
+      "activeSites": "المواقع النشطة",
+      "inactiveSites": "المواقع غير النشطة",
+      "total-sites": "إجمالي المواقع",
+      "traked-resourrces": "الموارد المتتبعة",
+      "new-site": "موقع جديد",
+      "work-sites": "مواقع العمل",
+      "search-placeholder": "البحث في مواقع العمل...",
+      "no-sites": "لم يتم العثور على مواقع عمل.",
+      "add-new-resource": "إضافة مورد جديد",
+      "add-site-heading": "إضافة موقع عمل",
+      "edit-site-heading": "تعديل موقع العمل",
+      "sub-heading-description": "حدد التفاصيل الأساسية لمشروع البناء هذا.",
+      "label-site-name": "اسم الموقع",
+      "placeholder-site-name": "مثال: برج الأفق",
+      "label-location": "الموقع الجغرافي",
+      "placeholder-location": "المدينة، الولاية/المنطقة",
+      "label-manager": "المدير المسؤول",
+      "placeholder-manager": "الاسم الكامل",
+      "label-address": "العنوان",
+      "placeholder-address": "الشارع، المبنى، المدينة",
+      "label-status": "الحالة",
+      "label-start-date": "تاريخ البدء",
+      "label-progress": "نسبة الإنجاز (%)",
+      "btn-cancel": "إلغاء",
+      "btn-edit": "تعديل",
+      "btn-delete": "حذف",
+      "btn-deactivate": "إلغاء تفعيل الموقع",
+      "btn-create": "إنشاء موقع",
+      "site-created": "تم إنشاء موقع العمل بنجاح.",
+      "create-error": "فشل في إنشاء موقع العمل.",
+      "site-updated": "تم تحديث موقع العمل بنجاح.",
+      "site-activation-updated": "تم تحديث حالة تفعيل موقع العمل بنجاح.",
+      "update-error": "فشل في تحديث موقع العمل.",
+      "site-deleted": "تم حذف موقع العمل.",
+      "delete-error": "فشل في حذف موقع العمل.",
+      "btn-save": "حفظ التغييرات",
+      "status-active": "نشط",
+      "status-on-hold": "موقوف مؤقتاً",
+      "status-completed": "مكتمل",
+      "add-resource-heading": "إضافة مورد جديد",
+      "edit-resource-heading": "تعديل مورد",
+      "stats": {
+        "total-ordered": "إجمالي الطلبات",
+        "fulfill-count": "الطلبات المنفذة",
+        "fulfill-rate": "معدل الإكمال",
+        "amount-invoiced": "المبلغ المفوتر",
+        "quantity-invoiced": "الكمية المفوترة",
+        "amount-total": "إجمالي المبلغ"
+      },
+      "site-not-found": "لم يتم العثور على الموقع.",
+      "back-to-sites": "العودة إلى المواقع",
+      "tabs": {
+        "inventory": "المخزون",
+        "inventory_count": "المخزون",
+        "orders_count": "طلبات معلقة"
+      },
+      "actions": {
+        "load-more": "تحميل المزيد"
+      },
+      "toast": {
+        "resource-updated": "تم تحديث المورد",
+        "resource-added": "تمت إضافة المورد",
+        "order-request-submitted": "تم تقديم طلب الشراء للموافقة من المدير",
+        "resource-deleted": "تم حذف {{name}}"
+      },
+      "orders": {
+        "no-orders": "لا توجد طلبات لهذا الموقع.",
+        "proposed": "مقترح: {{category}}",
+        "requested_by": "طلب بواسطة",
+        "reason": "السبب: {{reason}}",
+        "status": {
+          "pending": "قيد الانتظار",
+          "approved": "تمت الموافقة",
+          "rejected": "مرفوض"
+        },
+        "table": {
+          "columns": {
+            "item": "العنصر",
+            "description": "الوصف",
+            "category": "الفئة",
+            "provider": "مقدم الخدمة",
+            "provider_note": "ملاحظة مقدم الخدمة",
+            "admin_note": "ملاحظة المدير",
+            "status": "الحالة"
+          },
+          "empty": "لم يتم العثور على طلبات.",
+          "load_more": "تحميل المزيد",
+          "loading_more": "جاري التحميل..."
+        },
+        "filters": {
+          "search_placeholder": "بحث باسم العنصر...",
+          "status_placeholder": "جميع الحالات",
+          "all": "الكل"
+        },
+        "create_order": "إنشاء طلب مورد",
+        "request-modal": {
+          "title": "طلب مورد جديد",
+          "description": "قم بإرسال عنصر مورد جديد إلى البنك للموافقة عليه من الإدارة.",
+          "item_name": "اسم العنصر",
+          "item_name_placeholder": "مثال: حديد تمديد نوع أ",
+          "item_description": "الوصف",
+          "item_description_placeholder": "صف عنصر المورد...",
+          "category": "الفئة",
+          "category_placeholder": "اختر فئة",
+          "note": "ملاحظة",
+          "note_placeholder": "أي ملاحظات إضافية للمدير...",
+          "submit": "إرسال الطلب",
+          "submitting": "جاري الإرسال...",
+          "success": "تم إرسال طلب المورد بنجاح",
+          "error": "فشل في إرسال طلب المورد"
+        }
+      },
+      "filters": {
+        "open": "تصفية الفئات",
+        "categoryFilterTitle": "اختر الفئة",
+        "categoryFilterDescription": "حدد فئة لتضييق قائمة المخزون.",
+        "availableCategories": "فئة متاحة",
+        "all": "الكل"
+      },
+      "no-resources-match": "لا توجد موارد تتطابق مع مرشحاتك.",
+      "resource": {
+        "search-placeholder": "البحث في الموارد...",
+        "btn-create": "إنشاء مورد",
+        "isAvailable-label": "المورد متاح",
+        "edit-resource-heading": "تعديل معلومات المورد",
+        "sub-heading-edit-description": "قم بتعديل المعلومات الاساسية للمورد",
+        "resource-update": "تم تحديث المورد بنجاح",
+        "resource-created": "تم إنشاء المورد بنجاح",
+        "resource-request": "تم طلب المورد بنجاح",
+        "resource-error-update": "فشل تحديث المورد",
+        "resource-error-created": "فشل إنشاء المورد",
+        "resource-error-request": "فشل طلب المورد",
+        "preview": "معاينة",
+        "label-name": "الاسم",
+        "placeholder-name": "مثال: حديد تسليح #5",
+        "label-image": "رابط الصورة",
+        "placeholder-image": "https://...",
+        "label-description": "الوصف",
+        "placeholder-description": "المواصفات، الدرجة، الاستخدام المقصود...",
+        "label-unit-type": "نوع الوحدة",
+        "label-price-per-unit": "السعر للوحدة ($)",
+        "label-quantity": "الكمية",
+        "label-category": "الفئة",
+        "other-request": "أخرى (طلب فئة جديدة)",
+        "placeholder-proposed-category": "اسم الفئة المقترحة",
+        "label-availability": "التوفر",
+        "label-resource-type": "حدد صنف المورد",
+        "availability": {
+          "in-stock": "متوفر",
+          "low-stock": "كمية منخفضة",
+          "out-of-stock": "غير متوفر"
+        },
+        "no-matching-category": "لا توجد فئة مطابقة — سيؤدي ذلك إلى إنشاء طلب شراء للموافقة من المسؤول.",
+        "provide-details": "أدخل تفاصيل المنتج، سعر الوحدة، والفئة.",
+        "order-request-note-part1": "بما أن هذه الفئة غير موجودة بعد، تصبح عملية الإرسال",
+        "order-request-note-strong": "طلب شراء",
+        "order-request-note-part2": "يجب أن يوافق المسؤول عليه قبل أن يظهر في المخزون.",
+        "submit-order": "إرسال طلب شراء",
+        "add-resource": "إضافة مورد",
+        "add-another": "أضف موردًا آخر",
+        "submit-resources": "إرسال الموارد",
+        "added-resources": "تمت إضافة {{count}} مورد",
+        "select-to-edit": "انقر على عنصر لتحريره قبل الإرسال.",
+        "no-added-resources": "لم تُضف أي موارد بعد. استخدم النموذج لإضافة واحدة.",
+        "uncategorized": "غير مصنف",
+        "dynamicSelector": {
+          "placeholder": "اختر عنصراً...",
+          "filterByCategory": "تصفية حسب الصنف",
+          "categories": "الأصناف",
+          "all": "الكل",
+          "categoryLabel": "الصنف:",
+          "searchPlaceholder": "اكتب للبحث...",
+          "noResults": "لا توجد نتائج مطابقة.",
+          "loadingMore": "جاري تحميل المزيد..."
+        },
+        "remove-resource": "حذف",
+        "card": {
+          "price_per_unit": "السعر / الوحدة",
+          "unit": "الوحدة",
+          "qty": "الكمية",
+          "total": "الإجمالي"
+        },
+        "table": {
+          "image": "الصورة",
+          "name": "الاسم",
+          "category": "الفئة",
+          "status": "الحالة",
+          "price": "السعر",
+          "unit": "الوحدة",
+          "actions": "الإجراءات"
+        },
+        "actions": {
+          "view": "عرض",
+          "edit": "تعديل",
+          "delete": "حذف",
+          "approve_cancellation": "الموافقة على الإلغاء",
+          "cancelling": "جاري الإلغاء...",
+          "cancelled_by_client": "تم الإلغاء من العميل",
+          "cancelled_by_provider": "تم الإلغاء من المزود",
+          "completed": "مكتمل",
+          "rejected": "مرفوض"
+        },
+        "detail": {
+          "title": "تفاصيل المورد",
+          "category": "الفئة",
+          "status": "الحالة",
+          "price": "السعر",
+          "unit": "الوحدة",
+          "description": "الوصف",
+          "resource_bank": "بنك الموارد"
+        },
+        "filter": "تصفية",
+        "validation": {
+          "name_required": "الاسم مطلوب",
+          "price_required": "السعر مطلوب",
+          "price_min": "يجب أن يكون السعر 0 أو أكثر",
+          "quantity_min": "يجب أن تكون الكمية 0 أو أكثر",
+          "customCategory_required": "اسم الفئة المقترحة مطلوب",
+          "unit_required": "نوع الوحدة مطلوب",
+          "resource_type_required": "نوع المورد مطلوب",
+          "image_required": "رابط الصورة مطلوب",
+          "description_required": "الوصف مطلوب",
+          "availability_required": "التوفر مطلوب"
+        }
+      },
+      "validation-name-req": "اسم الموقع مطلوب",
+      "validation-status-req": "الحالة مطلوبة",
+      "validation-status-invalid": "حالة غير صالحة",
+      "validation-location-req": "الموقع مطلوب",
+      "validation-address-req": "العنوان مطلوب",
+      "validation-manager-req": "اسم المدير مطلوب",
+      "validation-date-req": "تاريخ البدء مطلوب",
+      "validation-progress-min": "لا يمكن أن تقل نسبة الإنجاز عن 0%",
+      "validation-progress-max": "لا يمكن أن تتجاوز نسبة الإنجاز 100%",
+      "delete-title": "هل أنت متأكد أنك تريد حذف هذا السجل؟ ",
+      "delete-description-prefix": "ملاحظة: سيتم نقل البيانات إلى سلة المهملات.",
+      "btn-delete-confirm": "حذف"
+    },
+    "profile": {
+      "tabs": {
+        "account": "حسابي",
+        "work": "معلومات العمل",
+        "settings": "الإعدادات"
+      },
+      "title": "الملف الشخصي لمقدم الخدمة",
+      "description": "قم بتحديث حسابك وإعداداتك للحفاظ على ملف المزود محدثًا.",
+      "account": {
+        "title": "معلومات الحساب",
+        "subtitle": "إليك تفاصيل حسابك الشخصي",
+        "firstName": "اسمك",
+        "firstNamePlaceholder": "أدخل اسمك",
+        "lastName": "الكنية",
+        "lastNamePlaceholder": "أدخل الكنية",
+        "email": "بريدك الإلكتروني",
+        "emailPlaceholder": "أدخل بريدك الإلكتروني",
+        "password": "كلمة المرور",
+        "passwordPlaceholder": "أدخل كلمة المرور",
+        "personalIdentifier": "الرقم الوطني",
+        "personalIdentifierPlaceholder": "أدخل الرقم الوطني",
+        "phone": "رقم الهاتف",
+        "phonePlaceholder": "أدخل رقم الهاتف",
+        "profilePhoto": "الصورة الشخصية"
+      },
+      "work": {
+        "title": "بيانات العمل والترخيص",
+        "subtitle": "أدخل معلومات الترخيص الخاصة بك",
+        "license": "الرخصة",
+        "licensePlaceholder": "أدخل رخصة الخدمة"
+      },
+      "settings": {
+        "title": "إعدادات الحساب",
+        "subtitle": "إدارة تفضيلات الإشعارات والحساب",
+        "notificationEmail": {
+          "title": "تلقي الإشعارات عبر البريد الإلكتروني",
+          "description": "احصل على تحديثات مهمة عبر بريدك الإلكتروني"
+        },
+        "instantNotifications": {
+          "title": "الإشعارات الفورية",
+          "description": "استلام التنبيهات داخل التطبيق"
+        },
+        "marketingMessages": {
+          "title": "رسائل تسويقية",
+          "description": "عروض ومستجدات من فريقنا"
+        },
+        "dangerZone": {
+          "title": "منطقة خطرة",
+          "description": "حذف الحساب سيؤدي إلى إزالة جميع بياناتك بشكل دائم ولا يمكن التراجع عن هذا الإجراء.",
+          "button": "حذف الحساب"
+        }
+      },
+      "saveChanges": "حفظ التغييرات"
+    },
+    "investor-request": {
+      "investor-header": {
+        "badge": "عمليات المستثمرين",
+        "title": "طلبات المستثمرين",
+        "description": "مراجعة واعتماد وتلبية طلبات الموارد المقدمة من المستثمرين.",
+        "stats": {
+          "pending": "قيد الانتظار",
+          "partial": "مكتمل جزئياً",
+          "completed": "مكتمل",
+          "total": "الإجمالي"
+        }
+      },
+      "table": {
+        "columns": {
+          "investor": "المستثمر",
+          "date": "تاريخ الطلب",
+          "status": "الحالة",
+          "resources": "الموارد",
+          "actions": "الإجراءات"
+        },
+        "actions": {
+          "approve": "اعتماد",
+          "approving": "جاري الاعتماد...",
+          "reject": "رفض",
+          "completed": "مكتمل",
+          "rejected": "مرفوض",
+          "cancel": "إلغاء الطلب",
+          "rejecting": "جاري الرفض..."
+        },
+        "empty": "لم يتم العثور على طلبات."
+      },
+      "reject-modal": {
+        "title": "رفض الطلب",
+        "description_with_name": "يرجى تقديم سبب لرفض طلب المستثمر: {{name}}.",
+        "description_generic": "يرجى تقديم سبب لرفض هذا الطلب.",
+        "label": "سبب الرفض",
+        "placeholder": "مثال: عدم توفر مخزون كافٍ، تضارب في المواعيد...",
+        "actions": {
+          "cancel": "إلغاء",
+          "confirm": "تأكيد الرفض"
+        }
+      },
+      "cancel-modal": {
+        "title": "إلغاء الطلب",
+        "description_with_name": "يرجى تقديم سبب لإلغاء الطلب رقم {{name}}.",
+        "description_generic": "يرجى تقديم سبب لإلغاء هذا الطلب.",
+        "label": "سبب الإلغاء",
+        "placeholder": "مثال: تغيير المتطلبات، لم يعد مطلوبًا...",
+        "actions": {
+          "cancel": "إغلاق",
+          "confirm": "تأكيد الإلغاء"
+        }
+      },
+      "search": {
+        "placeholder": "البحث باسم المستثمر...",
+        "count": "({{count}}) طلبات"
+      }
+    },
+    "investor-request-details": {
+      "requested_on": "تم الطلب في {{date}}",
+      "reason_label": "السبب: {{reason}}",
+      "not_found": "الطلب غير موجود.",
+      "back_to_requests": "العودة إلى الطلبات",
+      "tabs": {
+        "resources": "الموارد",
+        "financials": "الماليات",
+        "history": "السجل"
+      },
+      "delivery": {
+        "title": "تحديد كمكتمل التوصيل",
+        "description": "تم تسليم {{delivered}} من أصل {{total}} وحدة · تم إصدار فواتير بقيمة ${{invoiced}}"
+      },
+      "resources_table": {
+        "columns": {
+          "resource": "المورد",
+          "unit_price": "سعر الوحدة",
+          "total": "الإجمالي",
+          "requested": "المطلوب",
+          "fulfillment": "التنفيذ",
+          "delivered": "المستلم",
+          "status": "الحالة"
+        },
+        "status_labels": {
+          "delivered": "تم التسليم",
+          "in_progress": "قيد التنفيذ"
+        }
+      },
+      "actions": {
+        "actions": "الإجراءات",
+        "cancel": "إلغاء العنصر",
+        "cancelling": "جاري الإلغاء...",
+        "cancelled_by_client": "تم الإلغاء بواسطة العميل",
+        "cancelled_by_provider": "تم الإلغاء بواسطة مقدم الخدمة",
+        "pending_cancellation_approval": "في انتظار الموافقة على الإلغاء",
+        "cancelled": "ملغاة",
+        "completed": "مكتمل",
+        "rejected": "مرفوض",
+        "approve_cancellation": "موافقة"
+      },
+      "cancel_order_message": "طلب العميل إلغاء هذا الطلب. يرجى المراجعة والموافقة على طلب الإلغاء أو رفضه.",
+      "cancel-item-modal": {
+        "title": "إلغاء عنصر الطلب",
+        "description_with_name": "يرجى تقديم سبب لإلغاء العنصر رقم {{name}}.",
+        "description_generic": "يرجى تقديم سبب لإلغاء هذا العنصر.",
+        "label": "سبب الإلغاء",
+        "placeholder": "مثال: لم يعد مطلوبًا، تضارب في المواعيد...",
+        "actions": {
+          "cancel": "إغلاق",
+          "confirm": "تأكيد الإلغاء"
+        }
+      },
+      "delivered-success": "تم تحديد الطلب كمكتمل التوصيل بنجاح.",
+      "delivered-error": "فشل تحديد الطلب كمكتمل التوصيل. يرجى المحاولة مرة أخرى.",
+      "history_section": {
+        "empty": "لا توجد سجلات استلام بعد.",
+        "items_received": "تم استلام صنف {{count}}",
+        "items_received_plural": "تم استلام {{count}} أصناف",
+        "approved": "تمت الموافقة",
+        "pending": "قيد الانتظار",
+        "columns": {
+          "name": "الاسم",
+          "category": "الفئة",
+          "qty": "الكمية"
+        }
+      },
+      "financials": {
+        "invoice_box": {
+          "title": "الفواتير",
+          "total": "الإجمالي: ${{amount}}",
+          "columns": {
+            "date": "التاريخ",
+            "item": "الصنف",
+            "category": "الفئة",
+            "quantity": "الكمية"
+          },
+          "empty": "لا توجد فواتير بعد."
+        },
+        "form": {
+          "title": "إضافة فاتورة",
+          "fields": {
+            "number": "رقم الفاتورة",
+            "amount": "المبلغ ($)",
+            "date": "التاريخ"
+          },
+          "submit": "تسجيل الفاتورة",
+          "validation": {
+            "required": "هذا الحقل مطلوب",
+            "positive_amount": "يجب أن يكون المبلغ أكبر من 0"
+          }
+        },
+        "create-invoice-success": "تم تسجيل الفاتورة وإضافتها بنجاح.",
+        "create-invoice-error": "فشل تسجيل الفاتورة. يرجى المحاولة مرة أخرى."
+      },
+      "update-quantity-success": "تم تحديث كميات الموارد بنجاح.",
+      "update-quantity-error": "فشل تحديث كميات الموارد. يرجى المحاولة مرة أخرى."
+    },
+    "statistics": {
+      "insights": "رؤى",
+      "statistics": "الإحصائيات",
+      "description": "نظرة عامة تشغيلية تشمل المواقع، المخزون، طلبات المستثمرين، وأداء المزودين.",
+      "liveData": "بيانات مباشرة",
+      "errorMessage": "فشل في جلب المقاييس من خدمة واحدة أو أكثر.",
+      "workSites": "مواقع العمل",
+      "avgProgress": "متوسط التقدم {{progress}}%",
+      "inventoryValue": "قيمة المخزون",
+      "inventoryHint": "{{count}} من الموارد · {{lowStock}} بحاجة لإعادة تغذية",
+      "investorRequests": "طلبات المستثمرين",
+      "fulfilled": "تم تلبية {{rate}}%",
+      "totalInvoiced": "إجمالي المفوتر",
+      "pendingOrders": "{{count}} طلبات طلب معلقة",
+      "charts": {
+        "title": "قيمة المخزون حسب الموقع",
+        "description": "أعلى المواقع تصنيفاً بناءً على القيمة الإجمالية للموارد",
+        "pieChart": {
+          "title": "توزيع حالة الطلبات",
+          "description": "تحليل دقيق لحالات طلبات المستثمرين",
+          "statuses": {
+            "pending": "معلق",
+            "partial": "جزئي",
+            "completed": "مكتمل",
+            "rejected": "مرفوض"
+          }
+        }
+      },
+      "siteStatus": {
+        "title": "حالة الموقع",
+        "description": "الوضع التشغيلي الحالي",
+        "avgProgress": "متوسط التقدم عبر جميع المواقع: ",
+        "states": {
+          "active": "نشط",
+          "on-hold": "قيد الانتظار",
+          "completed": "مكتمل"
+        }
+      },
+      "inventoryCategory": {
+        "title": "المخزون حسب الفئة",
+        "description": "توزيع القيمة المالية عبر فئات الموارد المختلفة",
+        "noData": "لا توجد موارد مصنفة بعد.",
+        "categories": {
+          "Raw Materials": "المواد الخام",
+          "Equipment": "المعدات والأجهزة",
+          "Infrastructure": "البنية التحتية",
+          "Energy & Power": "الطاقة والكهرباء"
+        }
+      }
+    }
+  }
+}

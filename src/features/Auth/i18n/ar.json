@@ -1,0 +1,138 @@
+{
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "description": "أدخل بياناتك للوصول إلى حسابك الشخصي",
+      "emailPlaceholder": "بريدك الإلكتروني",
+      "passwordPlaceholder": "كلمة المرور",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "rememberMe": "تذكرني",
+      "loginButton": "تسجيل الدخول",
+      "noAccount": "ليس لديك حساب؟",
+      "register": "إنشاء حساب",
+      "toast": {
+        "success": "تم تسجيل الدخول بنجاح",
+        "error": "فشل تسجيل الدخول"
+      }
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "description": "أنشئ حساباً جديداً للاستمتاع بخدماتنا",
+      "toast": {
+        "success": "تم التسجيل بنجاح",
+        "error": "فشل التسجيل"
+      },
+      "nextButton": "التالي",
+      "submitButton": "إرسال",
+      "backButton": "عودة",
+      "cancel": "إلغاء",
+      "close": "إغلاق",
+      "haveAccount": "لديك حساب بالفعل؟",
+      "login": "تسجيل الدخول",
+      "validation": {
+        "name_required": "الرجاء تحديد الاسم",
+        "last_name_required": "الرجاء تحديد اسم العائلة",
+        "invalid_email": "ادخل بريدك الألكتروني",
+        "password_too_short": "كلمية المرور يجب ان تكون على الأقل 6 رموز",
+        "national_number_required": "أدخل الرقم  الوطني"
+      },
+      "generalInformation": {
+        "name": "اسمك",
+        "lastName": "الكنية",
+        "nationalNumberPlaceholder": "الرقم الوطني",
+        "emailPlaceholder": "بريدك الإلكتروني",
+        "passwordPlaceholder": "إنشاء كلمة مرور",
+        "profilePhoto": "الصورة الشخصية",
+        "registerButton": "التالي ومتابعة",
+        "phone": "رقم الهاتف",
+        "phonePlaceHolder": "أدخل رقم الهاتف",
+        "validation": {
+          "name_required": "الرجاء تحديد الاسم",
+          "last_name_required": "الرجاء تحديد اسم العائلة",
+          "invalid_email": "ادخل بريدك الألكتروني",
+          "password_too_short": "كلمية المرور يجب ان تكون على الأقل 6 رموز",
+          "national_number_required": "أدخل الرقم  الوطني",
+          "phone": "الرجاء إدخال رقم الجوال"
+        }
+      },
+      "providor": {
+        "successRegisterModelInfo": "لقد تم حفظ المعلومات التي سجلت بها, قم بإدخال البريد السابق مع كلمة المرور للأستفادة من  خدماتنا",
+        "licenseLabel": "الرخصة",
+        "licensePlaceholder": "أدخل رخصة الخدمة",
+        "companyNameLabel": "اسم الشركة",
+        "companyNamePlaceholder": "أدخل اسم الشركة",
+        "companyLocationLabel": "موقع الشركة GPS",
+        "companyLocationPlaceholder": "خط العرض، خط الطول",
+        "companyAddressLabel": "عنوان الشركة",
+        "companyAddressPlaceholder": "أدخل عنوان الشركة",
+        "companyLocationModalDescription": "اختر موقع شركتك من الخريطة لملء إحداثيات GPS.",
+        "openMapLocationButton": "حدد الموقع من الخريطة",
+        "companyInformationLabel": "معلومات الشركة",
+        "selectLocationButton": "استخدام الموقع المحدد",
+        "serviceProviderBtn": "مزود خدمات",
+        "resourceProviderBtn": "مزود موارد",
+        "companyLogo": "شعار الشركة",
+        "registerType": "نوع الأشتراك",
+        "workSitesCategories": {
+          "office": "مكتب",
+          "company": "شركة",
+          "factory": "مصنع",
+          "warehouse": "مستودع",
+          "quarry": "محجر",
+          "workshop": "ورشة عمل",
+          "other": "أخرى"
+        },
+        "personalInformationLabel": "المعلومات الشخصية",
+        "ProviderDescription": "أضف معلومات مزود الخدمة لإكمال التسجيل.",
+        "validation": {
+          "license_required": "الرجاء إدخال الرخصة",
+          "company_name_required": "الرجاء إدخال اسم الشركة",
+          "company_location_required": "الرجاء إدخال موقع الشركة",
+          "company_address_required": "الرجاء إدخال عنوان الشركة",
+          "service_provider_description_required": "الرجاء إدخال وصف مزود الخدمة"
+        }
+      },
+      "engineer": {
+        "engineerInformationLabel": "معلومات المهندس",
+        "specialtiyLabel": "التخصص",
+        "specialtiyPlaceholder": "أدخل تخصصك الهندسي",
+        "syndicateIdLabel": "معرف النقابة",
+        "syndicateIdPlaceholder": "أدخل معرف النقابة الخاص بك",
+        "validation": {
+          "specialtiy": "يجب أن يكون التخصص 10 أحرف على الأقل",
+          "syndicate_id": "يجب أن يكون رقم النقابة 12 حرفًا على الأقل"
+        }
+      },
+      "investor": {
+        "investorInformationLabel": "معلومات المستثمر",
+        "commercialRegistration": "السجل التجاري",
+        "commercialRegistrationPlaceholder": "أدخل السجل التجاري",
+        "imageRecordPlaceholder": "أدخل صورة السجل",
+        "imageRecord": "صورة السجل",
+        "uploadImageTitle": "حمل نسخة واضحة ",
+        "uploadImageHelp": "PNG، JPG، SVG أو GIF - حتى 5 ميغابايت",
+        "removeImage": "إزالة الصورة",
+        "validation": {
+          "commercial_registration_required": "السجل التجاري مطلوب",
+          "image_record": "الصورة المطلوبة لسجل الاستثمار مطلوبة"
+        }
+      },
+      "options": {
+        "title": "اختر نوع التسجيل",
+        "subtitle": "حدد نوع الحساب الذي يصفك للبدء.",
+        "engineer": {
+          "title": "مهندس",
+          "subtitle": "سجل كمهندس لعرض خدماتك المهنية"
+        },
+        "investor": {
+          "title": "مستثمر",
+          "subtitle": "سجل كمستثمر للعثور على مشاريع وفرص"
+        },
+        "provider": {
+          "title": "مزود خدمة",
+          "subtitle": "سجل شركتك لتقديم الخدمات والموارد"
+        }
+      }
+    }
+  }
+}

@@ -96,16 +96,28 @@ body {
   --color-background: hsl(0 20% 96%);
   --color-foreground: hsl(220 20% 20%);
 
+  --color-card: #ffffff;
+  --color-card-foreground: hsl(220 20% 20%);
+
+  --color-border: hsl(220 10% 85%);
+
   --color-primary: hsl(170.46deg 100% 19.54% / 89%);
   --color-primary-foreground: hsl(0 0% 100%);
 
   --color-muted: hsl(220 10% 92%);
   --color-muted-foreground: hsl(220 10% 50%);
 
+  --color-emerald: hsl(160 84% 39%);
+  --color-emerald-soft: hsl(160 84% 95%);
+
+  --color-slate: hsl(215 25% 27%);
+
+  --color-gold: hsl(38 92% 50%);
+
   --color-primary-hover: #054239;
   --color-primary-hover-two: #428177;
 
-  --color-secondary: #988561;
+  --color-secondary: white;
   --color-secondary-hover: #b9a779;
   --color-secondary-hover-two: #edebe07e;
 
@@ -130,15 +142,24 @@ body {
   --leading-md: 1.5;
   --leading-lg: 1.75;
 
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-accent: 0 0 0 3px hsl(160 84% 39% / 0.15);
+
   --gradient-primary: linear-gradient(
     135deg,
-    hsl(var(--primary)) 0%,
-    hsl(var(--primary-glow)) 100%
+    hsl(170.46deg 100% 19.54% / 89%) 0%,
+    hsl(170.46deg 100% 35%) 100%
+  );
+  --gradient-emerald: linear-gradient(
+    135deg,
+    hsl(160 84% 39%) 0%,
+    hsl(160 84% 29%) 100%
   );
   --gradient-accent: linear-gradient(
     135deg,
-    hsl(var(--accent)) 0%,
-    hsl(var(--accent-glow)) 100%
+    hsl(160 84% 39%) 0%,
+    hsl(170.46deg 100% 25%) 100%
   );
   --gradient-hero: linear-gradient(
     135deg,
@@ -189,8 +210,17 @@ body {
   .gradient-primary {
     background: var(--gradient-primary);
   }
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
   .gradient-accent {
     background: var(--gradient-accent);
+  }
+  .bg-gradient-accent {
+    background: var(--gradient-accent);
+  }
+  .bg-gradient-emerald {
+    background: var(--gradient-emerald);
   }
   .gradient-hero {
     background: var(--gradient-hero);
