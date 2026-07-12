@@ -12,6 +12,9 @@ import landingPageImage_modernBuilding from "./images/landing_page/modern_buildi
 import landingPageImage_jop_engineer from "./images/landing_page/job_for_engineers.webp";
 import landingPageImage_jop_service from "./images/landing_page/job_for_service_provider.webp";
 import landingPageImage_jop_resource from "./images/landing_page/resource_provider_section.webp";
+import landingPageImage_investorPlatform from "./images/landing_page/investor_platform.jpg";
+import landingPageImage_investorReliable from "./images/landing_page/investor_reliable.jpg";
+import landingPageImage_investorNetwork from "./images/landing_page/investor_network.jpg";
 
 // Home page
 import homePage_hero_building from "./images/home/New-Featured-Image-1200-x-675-2.webp";
@@ -37,6 +40,9 @@ export const assets = {
   landingPageImage_jop_engineer,
   landingPageImage_jop_service,
   landingPageImage_jop_resource,
+  landingPageImage_investorPlatform,
+  landingPageImage_investorReliable,
+  landingPageImage_investorNetwork,
   // Home page
   homePage_hero_building,
   homePage_hero_engineer,

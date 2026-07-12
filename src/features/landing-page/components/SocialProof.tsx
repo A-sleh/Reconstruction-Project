@@ -5,6 +5,7 @@ import { Star, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { paths } from "@/config/paths";
 import Button from "@/components/inputs/Button";
+import { formatDate } from "@/lib/helpers";
 
 const SocialProof = () => {
   const { t } = useTranslation();
@@ -19,18 +20,9 @@ const SocialProof = () => {
     date: string;
   }>;
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
   return (
-    <section id="testimonials" className="bg-canvas-base scroll-mt-24 py-24">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" className=" scroll-mt-24  py-24 ">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 ">
         <ScrollFadeIn>
           <div className="text-center mb-16">
             <h2 className="text-display-lg font-bold text-ink-primary">
@@ -45,7 +37,7 @@ const SocialProof = () => {
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
             <StaggerItem key={index}>
-              <TiltCard className="bg-canvas-elevated border border-canvas-border rounded-md p-6">
+              <TiltCard className="bg-canvas-elevated border border-gray-300 rounded-md p-6">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="relative shrink-0">
                     <img
@@ -77,7 +69,7 @@ const SocialProof = () => {
                     </p>
                   </div>
                 </div>
-                <blockquote className="text-body text-ink-secondary leading-relaxed relative">
+                <blockquote className="text-body text-ink-secondary leading-relaxed text-gray-500 line-clamp-2  relative">
                   <span
                     className="absolute -top-1 -left-1 text-title text-ink-tertiary leading-none"
                     aria-hidden="true"
@@ -96,7 +88,7 @@ const SocialProof = () => {
             {t("landingPage.socialProof.join")}
           </h3>
           <Link to={paths.auth.login.path}>
-            <Button variant="primary">
+            <Button variant="primary" className="bg-primary text-white rounded-tl-2xl rounded-br-2xl hover:bg-primary hover:opacity-65">
               {t("landingPage.socialProof.cta")}
             </Button>
           </Link>

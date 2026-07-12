@@ -19,7 +19,6 @@ export default function Profile() {
     { key: "settings", label: t("resourceProvidor.profile.tabs.settings"), icon: Settings },
   ];
 
-
   return (
     <div>
       <Header />

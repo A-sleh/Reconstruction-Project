@@ -13,7 +13,7 @@ const WhyUs = () => {
   }) as Array<{ image: string; title: string; description: string }>;
 
   return (
-    <section id="why-us" className="bg-canvas-elevated scroll-mt-24 py-24">
+    <section id="why-us" className="bg-canvas-elevated scroll-mt-24 py-24 bg-gray-300/10">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollFadeIn>
           <div className="text-center mb-16">
@@ -29,7 +29,7 @@ const WhyUs = () => {
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reasons.map((reason, index) => (
             <StaggerItem key={index}>
-              <TiltCard className="group bg-canvas-base border border-canvas-border rounded-md overflow-hidden hover:border-brand-primary/30 transition-colors duration-200">
+              <TiltCard className="group bg-canvas-base border border-gray-300 rounded-md overflow-hidden hover:border-brand-primary/30 transition-colors duration-200 bg-white">
                 <img
                   src={reason.image}
                   alt={reason.title}
@@ -48,8 +48,8 @@ const WhyUs = () => {
           ))}
         </StaggerContainer>
 
-        <ScrollFadeIn delay={0.8} className="mt-16">
-          <div className="bg-canvas-overlay border border-canvas-border rounded-md p-8 max-w-3xl mx-auto text-center">
+        <ScrollFadeIn delay={0.8} className="mt-16" >
+          <div className="bg-white border border-gray-300 rounded-md p-8 max-w-3xl mx-auto text-center">
             <h3 className="text-title font-semibold text-ink-primary mb-4">
               {t("landingPage.whyUs.joinTitle")}
             </h3>
@@ -57,9 +57,9 @@ const WhyUs = () => {
               {t("landingPage.whyUs.joinDescription")}
             </p>
             <Link to={paths.auth.login.path}>
-              <Button variant="primary">
-                {t("landingPage.whyUs.register")}
-              </Button>
+            <Button variant="primary" className="bg-primary text-white rounded-tl-2xl rounded-br-2xl hover:bg-primary hover:opacity-65">
+              {t("landingPage.socialProof.cta")}
+            </Button>
             </Link>
           </div>
         </ScrollFadeIn>

@@ -48,7 +48,7 @@ export const initialCategories: string[] = [
   "Labor",
 ];
 
-interface Category {
+export interface Category {
   id: number;
   name: string;
 }

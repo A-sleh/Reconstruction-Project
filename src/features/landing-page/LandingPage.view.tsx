@@ -8,6 +8,7 @@ const SocialProof = lazy(() => import("./components/SocialProof"));
 const WhyUs = lazy(() => import("./components/WhyUs"));
 const CallToAction = lazy(() => import("./components/CallToAction"));
 const FAQs = lazy(() => import("./components/FAQs"));
+const Footer = lazy(() => import("./components/Footer"));
 
 const SectionFallback = () => (
   <div className="h-96 w-full bg-canvas-elevated animate-pulse" />
@@ -35,6 +36,9 @@ const LandingPage = () => {
       </Suspense>
       <Suspense fallback={<SectionFallback />}>
         <FAQs />
+      </Suspense>
+      <Suspense fallback={<SectionFallback />}>
+        <Footer />
       </Suspense>
     </section>
   );
