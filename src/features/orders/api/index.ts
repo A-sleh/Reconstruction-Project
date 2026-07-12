@@ -15,6 +15,7 @@ export enum InvestorRequestController {
   CancelOrder = `${BASE_ORDER_ROUTE}/cancel-order`,
   CancelOrderItem = `${BASE_ORDER_ROUTE}/cancel-order-item`,
   ApproveOrderCancellation = `${BASE_ORDER_ROUTE}/approve-order-cancellation`,
+  InvestorRequestDetails = "investo-request",
 }
 
 // 2. Query Key Factory Pattern
@@ -42,5 +43,6 @@ export const MUTATION_KEYS = {
     cancelOrder: () => ["orders", "cancel-order"],
     cancelOrderItem: () => ["orders", "cancel-item"],
     approveOrderCancellation: () => ["orders", "approve-order-cancellation"],
+    fullyDelivered: () => ["orders", "investor", "requests","full-delivered"],
   },
 };

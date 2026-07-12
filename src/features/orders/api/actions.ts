@@ -101,6 +101,14 @@ const approveOrderCancellation = async (
   return data;
 };
 
+const markFullyDeliveredApi = async (id: string | number) => {
+  const { data } = await ApiInstance.post(
+    `/${InvestorRequestController.InvestorRequestDetails}/${id}/make-full-delivered`,
+  );
+  return data;
+};
+
+
 // ==========================================
 // 2. Custom Mutation Hooks
 // ==========================================
@@ -278,6 +286,25 @@ export const useApproveOrderCancellation = () => {
     onError: (error: any) => {
       const serverMessage = error?.response?.data?.message || error?.message;
       const message = serverMessage || i18n.t("orders.toast.approveOrderCancellationError");
+      errorToast(message);
+    },
+  });
+};
+
+export const useMarkOrderFullyDelivered = () => {
+  return useMutation({
+    mutationFn: (id: number | string) => markFullyDeliveredApi(id),
+    mutationKey: MUTATION_KEYS.orders.fullyDelivered(),
+    onSuccess: (_: any) => {
+      successToast(
+        i18n.t("resourceProvidor.investor-request-details.delivered-success"),
+      );
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message =
+        serverMessage ||
+        i18n.t("resourceProvidor.investor-request-details.delivered-error");
       errorToast(message);
     },
   });

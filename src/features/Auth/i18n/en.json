@@ -1,0 +1,136 @@
+{
+  "auth": {
+    "login": {
+      "title": "Login Account",
+      "description": "Enter your credentials to access your personal account",
+      "emailPlaceholder": "Your email",
+      "passwordPlaceholder": "Email password",
+      "forgotPassword": "Forgot your password?",
+      "rememberMe": "Remember me",
+      "loginButton": "Login Account",
+      "noAccount": "Don't Have an Account?",
+      "register": "Register",
+      "toast": {
+        "success": "Logged in successfully",
+        "error": "Login failed"
+      }
+    },
+    "register": {
+      "title": "Create Account",
+      "description": "Create a new account to enjoy our services",
+      "toast": {
+        "success": "Registered successfully",
+        "error": "Registration failed"
+      },
+      "nextButton": "Next",
+      "submitButton": "Submit",
+      "backButton": "Back",
+      "cancel": "Cancel",
+      "close": "Close",
+      "haveAccount": "Already have an account?",
+      "login": "Login",
+      "validation": {
+        "email_required": "Email is required",
+        "invalid_email": "Enter a valid email",
+        "password_required": "Password is required",
+        "password_too_short": "Password must be at least 6 characters"
+      },
+      "generalInformation": {
+        "name": "Your name",
+        "lastName": "Last name",
+        "nationalNumberPlaceholder": "National number",
+        "emailPlaceholder": "Your email",
+        "profilePhoto": "Profile photo",
+        "passwordPlaceholder": "Create password",
+        "phone": "Phone number",
+        "phonePlaceHolder": "Enter phone number",
+        "validation": {
+          "name_required": "Name is required",
+          "last_name_required": "Last name is required",
+          "invalid_email": "Enter your email",
+          "password_too_short": "Password must be at least 6 characters",
+          "national_number_required": "Enter the national number",
+          "phone": "Please, enter the phone number"
+        }
+      },
+      "providor": {
+        "successRegisterModelInfo": "Your registered information has been successfully saved. Please enter your previous email and password to start using our services.",
+        "licenseLabel": "License",
+        "licensePlaceholder": "Enter your service license",
+        "companyNameLabel": "Company name",
+        "companyNamePlaceholder": "Enter your company name",
+        "companyLocationLabel": "Company GPS location",
+        "companyLocationPlaceholder": "Latitude, Longitude",
+        "companyAddressLabel": "Company address",
+        "companyAddressPlaceholder": "Enter your company address",
+        "companyLocationModalDescription": "Pick your company location from the map to fill the GPS coordinates.",
+        "openMapLocationButton": "Select location on map",
+        "companyInformationLabel": "Company information",
+        "selectLocationButton": "Use selected location",
+        "companyLogo": "Company logo",
+        "workSitesCategories": {
+          "office": "Office",
+          "company": "Company",
+          "factory": "Factory",
+          "warehouse": "Warehouse",
+          "quarry": "Quarry",
+          "workshop": "Workshop",
+          "other": "Other"
+        },
+        "serviceProviderBtn": "Service provider",
+        "resourceProviderBtn": "Resource provider",
+        "registerType": "Register type",
+        "personalInformationLabel": "Personal information",
+        "ProviderDescription": "Add your service provider details to complete registration.",
+        "validation": {
+          "license_required": "Service license is required",
+          "company_name_required": "Company name is required",
+          "company_location_required": "Company location is required",
+          "company_address_required": "Company address is required",
+          "service_provider_description_required": "Service provider description is required"
+        }
+      },
+      "engineer": {
+        "engineerInformationLabel": "Engineer information",
+        "specialtiyLabel": "Specialty",
+        "specialtiyPlaceholder": "Enter your engineering specialty",
+        "syndicateIdLabel": "Syndicate ID",
+        "syndicateIdPlaceholder": "Enter your syndicate ID",
+        "validation": {
+          "specialtiy": "Specialty must be at least 10 characters",
+          "syndicate_id": "Syndicate ID must be at least 12 characters"
+        }
+      },
+      "investor": {
+        "investorInformationLabel": "Investor Information",
+        "commercialRegistration": "Commercial Registration",
+        "commercialRegistrationPlaceholder": "Enter commercial registration",
+        "imageRecordPlaceholder": "Enter image record",
+        "imageRecord": "Image record",
+        "uploadImageTitle": "Upload a clear copy",
+        "uploadImageHelp": "PNG, JPG, SVG or GIF - up to 5MB",
+        "removeImage": "Remove image",
+        "validation": {
+          "commercial_registration_required": "Commercial registration is required",
+          "image_record": "Investment document image is required"
+        }
+      },
+      "options": {
+        "title": "Choose registration type",
+        "subtitle": "Select the account type that best describes you to get started.",
+        "engineer": {
+          "title": "Engineer",
+          "subtitle": "Register as an engineer to offer professional services"
+        },
+        "investor": {
+          "title": "Investor",
+          "subtitle": "Register as an investor to find projects and opportunities"
+        },
+        "provider": {
+          "title": "Service Provider",
+          "subtitle": "Register your company to offer services and resources"
+        }
+      }
+    }
+  }
+}

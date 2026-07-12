@@ -1,0 +1,158 @@
+{
+  "orders": {
+    "section": "Orders",
+    "title": "Latest order details",
+    "subtitle": "View the order owner information, item list, and full cost breakdown in a responsive order summary.",
+    "downloadButton": "Download invoice",
+    "newOrderButton": "Create new order",
+    "orderCardTitle": "Order overview",
+    "orderCodeLabel": "Order code",
+    "orderDateLabel": "Order date",
+    "orderItemsLabel": "Line items",
+    "totalItems": "Total items",
+    "totalQuantity": "Total quantity",
+    "totalPrice": "Total price",
+    "itemsTitle": "Order items",
+    "itemsSubtitle": "Each item includes name, quantity, and unit price.",
+    "itemName": "Item",
+    "itemAmount": "Qty",
+    "itemPrice": "Unit price",
+    "itemTotal": "Total",
+    "ownerInfoTitle": "Order owner",
+    "ownerNameLabel": "Owner name",
+    "ownerEmailLabel": "Owner email",
+    "ownerPhoneLabel": "Owner phone",
+    "ownerNationalNumberLabel": "National number",
+    "summaryTitle": "Order summary",
+    "contactOwnerButton": "Contact owner",
+    "messageOwnerButton": "Message owner",
+    "status": {
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "inProgress": "In progress"
+    },
+    "listTitle": "Order requests",
+    "listSubtitle": "Manage new orders from investors, view details, and take action quickly.",
+    "openOrders": "Open orders",
+    "openOrdersSubtitle": "See all current investor orders and manage them from one list.",
+    "ordersCount": "orders",
+    "orderCode": "Order code",
+    "owner": "Investor",
+    "items": "Items",
+    "total": "Total",
+    "date": "Date",
+    "statusLabel": "Status",
+    "actions": "Actions",
+    "viewDetails": "Details",
+    "accept": "Accept",
+    "contact": "Contact",
+    "selectionText": "Action applied: {{selection}}",
+    "table": {
+      "columns": {
+        "investor": "Investor",
+        "date": "Request Date",
+        "status": "Status",
+        "resources": "Resources",
+        "actions": "Actions"
+      },
+      "actions": {
+        "approve": "Approve",
+        "approving": "Approving...",
+        "reject": "Reject",
+        "cancel": " Cancel the order",
+        "rejecting": "Rejecting..."
+      },
+      "empty": "No requests found."
+    },
+    "search": {
+      "placeholder": "Search by investor name...",
+      "count": "({{count}}) requests"
+    },
+    "addPaymentModal": {
+      "title": "Add Payment",
+      "labels": {
+        "amount": "Amount",
+        "date": "Date"
+      },
+      "validation": {
+        "amountInvalid": "Please enter a valid amount greater than 0.",
+        "dateInvalid": "Please select a valid payment date."
+      },
+      "buttons": {
+        "save": "Save Payment",
+        "saving": "Saving..."
+      }
+    },
+    "orderDetailsModal": {
+      "title": "Order Details",
+      "subtitle": "Full information for",
+      "fields": {
+        "fulfillRate": "Fulfill Rate",
+        "totalPrice": "Total Price",
+        "discount": "Discount",
+        "netTotal": "Net Total",
+        "status": "Status"
+      },
+      "labels": {
+        "orderId": "Order ID:",
+        "requested": "Requested:"
+      }
+    },
+    "orderItemsDrawer": {
+      "title": "Order Items",
+      "description": "Line items for",
+      "empty": "No line items."
+    },
+    "filters": {
+      "title": "Filters",
+      "workSite": "Work site",
+      "resetButton": "Reset",
+      "showButton": "Show Filters",
+      "hideButton": "Hide Filters",
+      "search": {
+        "label": "Search",
+        "placeholder": "Owner name, email, id..."
+      },
+      "status": {
+        "label": "Status",
+        "PendingApproval": "Pending Approval",
+        "Preparing": "Preparing",
+        "Cancelled": "Cancelled",
+        "Suspended": "Suspended",
+        "Completed": "Completed"
+      },
+      "dateRange": {
+        "label": "Date range",
+        "from": "From",
+        "to": "To"
+      }
+    },
+    "rowActions": {
+      "approveOrder": "Approve Order",
+      "rejectOrder": "Reject Order",
+      "showOrderItems": "Show Order Items",
+      "addPayment": "Add Payment",
+      "viewDetails": "View Details"
+    },
+    "toast": {
+      "approveOrderSuccess": "Order approved successfully",
+      "approveOrderError": "Failed to approve order",
+      "rejectOrderSuccess": "Order rejected",
+      "rejectOrderError": "Failed to reject order",
+      "addPaymentSuccess": "Payment recorded successfully",
+      "addPaymentError": "Failed to record payment",
+      "addReceiveInvoiceSuccess": "Invoice received successfully",
+      "addReceiveInvoiceError": "Failed to receive invoice",
+      "approveOrderItemCancellationSuccess": "Order item cancellation approved",
+      "approveOrderItemCancellationError": "Failed to approve order item cancellation",
+      "markAsReceivedSuccess": "Marked as received successfully",
+      "markAsReceivedError": "Failed to mark as received",
+      "cancelOrderSuccess": "Order cancelled successfully",
+      "cancelOrderError": "Failed to cancel order",
+      "cancelOrderItemSuccess": "Order item cancelled successfully",
+      "cancelOrderItemError": "Failed to cancel order item",
+      "approveOrderCancellationSuccess": "Order cancellation approved",
+      "approveOrderCancellationError": "Failed to approve order cancellation"
+    }
+  }
+}

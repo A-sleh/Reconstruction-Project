@@ -1,9 +1,19 @@
 import { ReactNode, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { RiHome9Line, RiShoppingBagLine } from "react-icons/ri";
+import {
+  RiHome9Line,
+  RiShoppingBagLine,
+  RiBuilding2Line,
+  RiStore2Line,
+  RiListUnordered,
+} from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
-import { MdOutlineConstruction } from "react-icons/md";
+import {
+  MdOutlineConstruction,
+  MdOutlineVerified,
+  MdDomain,
+} from "react-icons/md";
 import { FiBarChart2 } from "react-icons/fi";
 
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
@@ -12,32 +22,61 @@ import NotificationBox from "./Notification-box";
 import ToggleLanguage from "./Toggle-language";
 import { useTranslation } from "react-i18next";
 import Avatar from "./Avatar";
+import { ROLE, useAuthStore } from "@/stores/useAuthStore";
 
 const Navbar = () => {
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const role = useAuthStore((s) => s.role);
 
-  const links: Array<{ label: string; href: string; icon: ReactNode }> = [
+  const links: Array<{
+    label: string;
+    href: string;
+    icon: ReactNode;
+    role: ROLE[];
+  }> = [
     {
       label: t("navbar.workSites"),
       href: paths.app.resourceProvidor.workSites.path,
       icon: <MdOutlineConstruction size={18} />,
+      role: ["Provider"],
     },
     {
       label: t("navbar.profile"),
       href: paths.app.resourceProvidor.profile.path,
       icon: <CgProfile size={18} />,
+      role: ["Provider"],
     },
     {
       label: t("navbar.statistics"),
       href: paths.app.resourceProvidor.statistics.path,
       icon: <FiBarChart2 size={18} />,
+      role: ["Provider"],
     },
     {
       label: t("navbar.orders"),
       href: paths.app.resourceProvidor.orders.path,
       icon: <RiShoppingBagLine size={18} />,
+      role: ["Provider"],
     },
+    {
+      label: t("navbar.hisLands"),
+      href: paths.app.investor.hisLandsAndBuildings.path,
+      icon: <RiBuilding2Line size={18} />,
+      role: ["Investor"],
+    },
+    {
+      label: t("navbar.market"),
+      href: paths.app.investor.marketOfLandsBuildings.path,
+      icon: <RiStore2Line size={18} />,
+      role: ["Investor"],
+    },
+    {
+      label: t("navbar.listProperty"),
+      href: paths.app.investor.propertyVerfication.path,
+      icon: <RiListUnordered size={18} />,
+      role: ["Investor"],
+    }
   ];
 
   const sharedLink: Array<{ label: string; href: string; icon: ReactNode }> = [
@@ -47,6 +86,8 @@ const Navbar = () => {
       icon: <RiHome9Line size={18} />,
     },
   ];
+
+  const filteredLinks = role ? links.filter((link) => link.role.includes(role)) : [];
 
   return (
     <header className="bg-white shadow-sm w-[95%] md:w-[98%] mx-auto rounded-lg sticky top-4 z-50">
@@ -73,7 +114,7 @@ const Navbar = () => {
           </button>
           <ToggleLanguage />
           <nav className="hidden mx-auto justify-center md:flex md:flex-wrap md:items-center md:gap-3">
-            {[...sharedLink, ...links].map((link) => (
+            {[...sharedLink, ...filteredLinks].map((link) => (
               <NavLink
                 key={link.label}
                 to={link.href}
@@ -91,7 +132,7 @@ const Navbar = () => {
       </div>
       {menuOpen && (
         <nav className="flex md:hidden mx-auto justify-center flex-col gap-2 md:items-center md:gap-3">
-          {[...links, ...sharedLink].map((link) => (
+          {[...filteredLinks, ...sharedLink].map((link) => (
             <NavLink
               end={true}
               key={link.label}
