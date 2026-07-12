@@ -1,0 +1,157 @@
+{
+  "orders": {
+    "section": "الطلبات",
+    "title": "تفاصيل آخر طلب",
+    "subtitle": "عرض بيانات صاحب الطلب، قائمة العناصر، وتفاصيل التكلفة بالكامل في ملخص طلب متجاوب.",
+    "downloadButton": "تحميل الفاتورة",
+    "newOrderButton": "إنشاء طلب جديد",
+    "orderCardTitle": "نظرة عامة على الطلب",
+    "orderCodeLabel": "كود الطلب",
+    "orderDateLabel": "تاريخ الطلب",
+    "orderItemsLabel": "عناصر الطلب",
+    "totalItems": "إجمالي العناصر",
+    "totalQuantity": "إجمالي الكمية",
+    "totalPrice": "الإجمالي",
+    "itemsTitle": "عناصر الطلب",
+    "itemsSubtitle": "تشمل كل عنصر الاسم والكمية وسعر الوحدة.",
+    "itemName": "المنتج",
+    "itemAmount": "الكمية",
+    "itemPrice": "سعر الوحدة",
+    "itemTotal": "الإجمالي",
+    "ownerInfoTitle": "معلومات صاحب الطلب",
+    "ownerNameLabel": "اسم صاحب الطلب",
+    "ownerEmailLabel": "البريد الإلكتروني",
+    "ownerPhoneLabel": "الهاتف",
+    "ownerNationalNumberLabel": "الرقم الوطني",
+    "summaryTitle": "ملخص الطلب",
+    "contactOwnerButton": "التواصل مع صاحب الطلب",
+    "messageOwnerButton": "إرسال رسالة",
+    "status": {
+      "confirmed": "مؤكد",
+      "pending": "قيد الانتظار",
+      "inProgress": "قيد التنفيذ"
+    },
+    "listTitle": "طلبات العملاء",
+    "listSubtitle": "قم بإدارة الطلبات الجديدة من المستثمرين، عرض التفاصيل، واتخاذ الإجراءات بسرعة.",
+    "openOrders": "الطلبات المفتوحة",
+    "openOrdersSubtitle": "شاهد جميع الطلبات الحالية من المستثمرين وقم بإدارتها من مكان واحد.",
+    "ordersCount": "طلبات",
+    "orderCode": "كود الطلب",
+    "owner": "المستثمر",
+    "items": "العناصر",
+    "total": "الإجمالي",
+    "date": "التاريخ",
+    "statusLabel": "الحالة",
+    "actions": "الإجراءات",
+    "viewDetails": "عرض",
+    "accept": "قبول",
+    "contact": "تواصل",
+    "selectionText": "تم تنفيذ الإجراء: {{selection}}",
+    "table": {
+      "columns": {
+        "investor": "المستثمر",
+        "date": "تاريخ الطلب",
+        "status": "الحالة",
+        "resources": "الموارد",
+        "actions": "الإجراءات"
+      },
+      "actions": {
+        "approve": "اعتماد",
+        "approving": "جاري الاعتماد...",
+        "reject": "رفض",
+        "rejecting": "جاري الرفض..."
+      },
+      "empty": "لم يتم العثور على طلبات."
+    },
+    "search": {
+      "placeholder": "البحث باسم المستثمر...",
+      "count": "({{count}}) طلبات"
+    },
+    "addPaymentModal": {
+      "title": "إضافة دفعة",
+      "labels": {
+        "amount": "المبلغ",
+        "date": "التاريخ"
+      },
+      "validation": {
+        "amountInvalid": "يرجى إدخال مبلغ صحيح أكبر من 0.",
+        "dateInvalid": "يرجى تحديد تاريخ دفع صحيح."
+      },
+      "buttons": {
+        "save": "حفظ الدفعة",
+        "saving": "جاري الحفظ..."
+      }
+    },
+    "orderDetailsModal": {
+      "title": "تفاصيل الطلب",
+      "subtitle": "المعلومات الكاملة لـ",
+      "fields": {
+        "fulfillRate": "معدل التلبية",
+        "totalPrice": "السعر الإجمالي",
+        "discount": "الخصم",
+        "netTotal": "المجموع الصافي",
+        "status": "الحالة"
+      },
+      "labels": {
+        "orderId": "رقم الطلب:",
+        "requested": "تم الطلب:"
+      }
+    },
+    "orderItemsDrawer": {
+      "title": "عناصر الطلب",
+      "description": "عناصر السطر لـ",
+      "empty": "لا توجد عناصر."
+    },
+    "filters": {
+      "title": "المرشحات",
+      "workSite": "موقع العمل",
+      "resetButton": "إعادة تعيين",
+      "showButton": "إظهار المرشحات",
+      "hideButton": "إخفاء المرشحات",
+      "search": {
+        "label": "البحث",
+        "placeholder": "اسم المالك، البريد الإلكتروني، المعرف..."
+      },
+      "status": {
+        "label": "الحالة",
+        "PendingApproval": "قيد الموافقة",
+        "Preparing": "قيد التحضير",
+        "Cancelled": "ملغى",
+        "Suspended": "معلق",
+        "Completed": "مكتمل"
+      },
+      "dateRange": {
+        "label": "نطاق التاريخ",
+        "from": "من",
+        "to": "إلى"
+      }
+    },
+    "rowActions": {
+      "approveOrder": "الموافقة على الطلب",
+      "rejectOrder": "رفض الطلب",
+      "showOrderItems": "عرض عناصر الطلب",
+      "addPayment": "إضافة دفعة",
+      "viewDetails": "عرض التفاصيل"
+    },
+    "toast": {
+      "approveOrderSuccess": "تم اعتماد الطلب بنجاح",
+      "approveOrderError": "فشل في اعتماد الطلب",
+      "rejectOrderSuccess": "تم رفض الطلب",
+      "rejectOrderError": "فشل في رفض الطلب",
+      "addPaymentSuccess": "تم تسجيل الدفعة بنجاح",
+      "addPaymentError": "فشل في تسجيل الدفعة",
+      "addReceiveInvoiceSuccess": "تم استلام الفاتورة بنجاح",
+      "addReceiveInvoiceError": "فشل في استلام الفاتورة",
+      "approveOrderItemCancellationSuccess": "تم اعتماد إلغاء عنصر الطلب",
+      "approveOrderItemCancellationError": "فشل في اعتماد إلغاء عنصر الطلب",
+      "markAsReceivedSuccess": "تم التسليم بنجاح",
+      "markAsReceivedError": "فشل في التسليم",
+      "cancelOrderSuccess": "تم إلغاء الطلب بنجاح",
+      "cancelOrderError": "فشل في إلغاء الطلب",
+      "cancelOrderItemSuccess": "تم إلغاء عنصر الطلب بنجاح",
+      "cancelOrderItemError": "فشل في إلغاء عنصر الطلب",
+      "approveOrderCancellationSuccess": "تم اعتماد إلغاء الطلب",
+      "approveOrderCancellationError": "فشل في اعتماد إلغاء الطلب"
+    }
+  }
+}

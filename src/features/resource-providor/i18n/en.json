@@ -1,0 +1,504 @@
+{
+  "resourceProvidor": {
+    "workSites": {
+      "sub-title": "Live Operations Dashboard",
+      "title": "Manage every work site from a single command center.",
+      "description": "Track sites, allocate resources and keep crews moving — built for modern construction operations.",
+      "all-work-sites": "All Work Sites",
+      "activeSites": "Active Sites",
+      "inactiveSites": "Inactive Sites",
+      "total-sites": "Total Sites",
+      "traked-resourrces": "Tracked Resources",
+      "new-site": "New site",
+      "work-sites": "Work Sites",
+      "search-placeholder": "Search work sites...",
+      "no-sites": "No work sites found.",
+      "add-new-resource": "Add New Resource",
+      "add-site-heading": "Add Work Site",
+      "edit-site-heading": "Edit Work Site",
+      "sub-heading-description": "Set the core details for this construction project.",
+      "label-site-name": "Site Name",
+      "placeholder-site-name": "e.g. Horizon Tower",
+      "label-location": "Location",
+      "placeholder-location": "City, State",
+      "label-manager": "Manager",
+      "placeholder-manager": "Full name",
+      "label-address": "Address",
+      "placeholder-address": "Street, building, city",
+      "label-status": "Status",
+      "label-start-date": "Start Date",
+      "label-progress": "Progress (%)",
+      "btn-cancel": "Cancel",
+      "btn-edit": "Edit",
+      "btn-delete": "Delete",
+      "btn-deactivate": "Deactivate site",
+      "btn-create": "Create Site",
+      "site-created": "Work site created successfully.",
+      "create-error": "Failed to create work site.",
+      "site-updated": "Work site updated successfully.",
+      "site-activation-updated": "Work site activation updated successfully.",
+      "update-error": "Failed to update work site.",
+      "site-deleted": "Work site deleted successfully.",
+      "delete-error": "Failed to delete work site.",
+      "add-resource-heading": "Add New Resource",
+      "edit-resource-heading": "Edit Resource",
+      "btn-save": "Save Changes",
+      "status-active": "Active",
+      "status-on-hold": "On Hold",
+      "status-completed": "Completed",
+      "stats": {
+        "total-ordered": "Total Ordered",
+        "fulfill-count": "Fulfilled Orders",
+        "fulfill-rate": "Fulfillment Rate",
+        "amount-invoiced": "Amount Invoiced",
+        "quantity-invoiced": "Quantity Invoiced",
+        "amount-total": "Total Amount"
+      },
+      "site-not-found": "Site not found.",
+      "back-to-sites": "Back to sites",
+      "tabs": {
+        "inventory": "Inventory",
+        "inventory_count": "Inventory",
+        "orders_count": "Order Requests"
+      },
+      "actions": {
+        "load-more": "Load more"
+      },
+      "toast": {
+        "resource-updated": "Resource updated",
+        "resource-added": "Resource added",
+        "order-request-submitted": "Order request submitted for admin approval",
+        "resource-deleted": "{{name}} deleted"
+      },
+      "orders": {
+        "no-orders": "No order requests for this site.",
+        "proposed": "Proposed: {{category}}",
+        "requested_by": "Requested by",
+        "reason": "Reason: {{reason}}",
+        "status": {
+          "pending": "Pending",
+          "approved": "Approved",
+          "rejected": "Rejected"
+        },
+        "table": {
+          "columns": {
+            "item": "Item",
+            "description": "Description",
+            "category": "Category",
+            "provider": "Provider",
+            "provider_note": "Provider Note",
+            "admin_note": "Admin Note",
+            "status": "Status"
+          },
+          "empty": "No requests found.",
+          "load_more": "Load more",
+          "loading_more": "Loading..."
+        },
+        "filters": {
+          "search_placeholder": "Search by item name...",
+          "status_placeholder": "All statuses",
+          "all": "All"
+        },
+        "create_order": "Create Resource Order",
+        "request-modal": {
+          "title": "Request New Resource",
+          "description": "Submit a new resource item to the bank for admin approval.",
+          "item_name": "Item Name",
+          "item_name_placeholder": "e.g. Steel Beam Type A",
+          "item_description": "Description",
+          "item_description_placeholder": "Describe the resource item...",
+          "category": "Category",
+          "category_placeholder": "Select a category",
+          "note": "Note",
+          "note_placeholder": "Any additional notes for the admin...",
+          "submit": "Submit Request",
+          "submitting": "Submitting...",
+          "success": "Resource request submitted successfully",
+          "error": "Failed to submit resource request"
+        }
+      },
+      "filters": {
+        "open": "Filter categories",
+        "categoryFilterTitle": "Choose a category",
+        "categoryFilterDescription": "Select a category to narrow the inventory list.",
+        "availableCategories": "categories available",
+        "all": "All"
+      },
+      "no-resources-match": "No resources match your filters.",
+      "resource": {
+        "search-placeholder": "Search resources...",
+        "btn-create": "Create Resource",
+        "isAvailable-label": "Is available",
+        "edit-resource-heading": "Update resource details",
+        "sub-heading-edit-description": "Modify the details of each type",
+        "resource-update": "Resource updated successfully",
+        "resource-created": "Resource created successfully",
+        "resource-request": "Resource requested successfully",
+        "resource-error-update": "Failed to update resource",
+        "resource-error-created": "Failed to create resource",
+        "resource-error-request": "Failed to request resource",
+        "preview": "Preview",
+        "label-name": "Name",
+        "placeholder-name": "e.g. Steel Rebar #5",
+        "label-image": "Image URL",
+        "placeholder-image": "https://...",
+        "label-description": "Description",
+        "placeholder-description": "Specs, grade, intended use...",
+        "label-unit-type": "Unit Type",
+        "label-price-per-unit": "Price per Unit ($)",
+        "label-quantity": "Quantity",
+        "label-category": "Category",
+        "label-resource-type": "Select resource type",
+        "other-request": "Other (request new category)",
+        "placeholder-proposed-category": "Proposed category name",
+        "label-availability": "Availability",
+        "availability": {
+          "in-stock": "In Stock",
+          "low-stock": "Low Stock",
+          "out-of-stock": "Out of Stock"
+        },
+        "no-matching-category": "No matching category — this will create an order request for admin approval.",
+        "provide-details": "Provide product details, unit pricing, and category.",
+        "order-request-note-part1": "Since this category doesn't exist yet, your submission becomes an",
+        "order-request-note-strong": "order request",
+        "order-request-note-part2": "that an admin must approve before it appears in the inventory.",
+        "submit-order": "Submit Order Request",
+        "add-resource": "Add Resource",
+        "add-another": "Add another",
+        "submit-resources": "Submit {{count}} resources",
+        "added-resources": "{{count}} resources added",
+        "select-to-edit": "Click an item to edit it before submitting.",
+        "no-added-resources": "No resources added yet. Use the form to add one.",
+        "uncategorized": "Uncategorized",
+        "dynamicSelector": {
+          "placeholder": "Select an item...",
+          "filterByCategory": "Filter by category",
+          "categories": "Categories",
+          "all": "All",
+          "categoryLabel": "Category:",
+          "searchPlaceholder": "Type to search...",
+          "noResults": "No matching results.",
+          "loadingMore": "Loading more..."
+        },
+        "remove-resource": "Remove",
+        "card": {
+          "price_per_unit": "Price / unit",
+          "unit": "Unit",
+          "qty": "Qty",
+          "total": "Total"
+        },
+        "table": {
+          "image": "Image",
+          "name": "Name",
+          "category": "Category",
+          "status": "Status",
+          "price": "Price",
+          "unit": "Unit",
+          "actions": "Actions"
+        },
+        "actions": {
+          "view": "View",
+          "edit": "Edit",
+          "delete": "Delete",
+          "approve_cancellation": "Approve Cancellation",
+          "cancelling": "Cancelling...",
+          "cancelled_by_client": "Cancelled by Client",
+          "cancelled_by_provider": "Cancelled by Provider",
+          "completed": "Completed",
+          "rejected": "Rejected"
+        },
+        "filter": "Filter",
+        "detail": {
+          "title": "Resource Details",
+          "category": "Category",
+          "status": "Status",
+          "price": "Price",
+          "unit": "Unit",
+          "description": "Description",
+          "resource_bank": "Resource Bank"
+        },
+        "validation": {
+          "name_required": "Name is required",
+          "price_required": "Price is required",
+          "price_min": "Price must be 0 or greater",
+          "quantity_min": "Quantity must be 0 or greater",
+          "customCategory_required": "Proposed category is required",
+          "unit_required": "Unit type is required",
+          "resource_type_required": "Resource type is required",
+          "image_required": "Image URL is required",
+          "description_required": "Description is required",
+          "availability_required": "Availability is required"
+        }
+      },
+      "validation-name-req": "Site name is required",
+      "validation-status-req": "Status is required",
+      "validation-status-invalid": "Invalid status",
+      "validation-location-req": "Location is required",
+      "validation-address-req": "Address is required",
+      "validation-manager-req": "Manager is required",
+      "validation-date-req": "Start date is required",
+      "validation-progress-min": "Progress cannot be less than 0%",
+      "validation-progress-max": "Progress cannot exceed 100%",
+      "delete-title": "Delete this work site?",
+      "delete-description-prefix": "This will permanently remove ",
+      "btn-delete-confirm": "Delete"
+    },
+    "profile": {
+      "tabs": {
+        "account": "My Account",
+        "work": "Work Info",
+        "settings": "Settings"
+      },
+      "title": "Provider Profile",
+      "description": "Update your account and settings to keep your provider profile current.",
+      "account": {
+        "title": "Account Information",
+        "subtitle": "Here are your personal account details",
+        "firstName": "Your Name",
+        "firstNamePlaceholder": "Enter your name",
+        "lastName": "Last Name",
+        "lastNamePlaceholder": "Enter your last name",
+        "email": "Email Address",
+        "emailPlaceholder": "Enter your email",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "personalIdentifier": "National ID",
+        "personalIdentifierPlaceholder": "Enter your national ID",
+        "phone": "Phone Number",
+        "phonePlaceholder": "Enter your phone number",
+        "profilePhoto": "Profile Photo"
+      },
+      "work": {
+        "title": "Work and License Details",
+        "subtitle": "Enter your license information",
+        "license": "License",
+        "licensePlaceholder": "Enter service license"
+      },
+      "settings": {
+        "title": "Account Settings",
+        "subtitle": "Manage notification and account preferences",
+        "notificationEmail": {
+          "title": "Receive email notifications",
+          "description": "Get important updates sent to your email"
+        },
+        "instantNotifications": {
+          "title": "Instant notifications",
+          "description": "Receive alerts inside the app"
+        },
+        "marketingMessages": {
+          "title": "Marketing messages",
+          "description": "Offers and updates from our team"
+        },
+        "dangerZone": {
+          "title": "Danger Zone",
+          "description": "Deleting your account will permanently remove all your data and cannot be undone.",
+          "button": "Delete Account"
+        }
+      },
+      "saveChanges": "Save Changes"
+    },
+    "investor-request": {
+      "investor-header": {
+        "badge": "Investor Operations",
+        "title": "Investor Requests",
+        "description": "Review, approve and fulfill resource requests from investors.",
+        "stats": {
+          "pending": "Pending",
+          "partial": "Partial",
+          "completed": "Completed",
+          "total": "Total"
+        }
+      },
+      "table": {
+        "columns": {
+          "investor": "Investor",
+          "date": "Request Date",
+          "status": "Status",
+          "resources": "Resources",
+          "actions": "Actions"
+        },
+        "actions": {
+          "approve": "Approve",
+          "approving": "Approving...",
+          "reject": "Reject",
+          "rejecting": "Rejecting..."
+        },
+        "empty": "No requests found."
+      },
+      "reject-modal": {
+        "title": "Reject Request",
+        "description_with_name": "Provide a reason for rejecting {{name}}'s request.",
+        "description_generic": "Provide a reason for rejecting this request.",
+        "label": "Reason for rejection",
+        "placeholder": "e.g. Insufficient inventory, scheduling conflict...",
+        "actions": {
+          "cancel": "Cancel",
+          "confirm": "Confirm Rejection"
+        }
+      },
+      "cancel-modal": {
+        "title": "Cancel Order",
+        "description_with_name": "Provide a reason for cancelling order {{name}}.",
+        "description_generic": "Provide a reason for cancelling this order.",
+        "label": "Reason for cancellation",
+        "placeholder": "e.g. Changed requirements, no longer needed...",
+        "actions": {
+          "cancel": "Close",
+          "confirm": "Confirm Cancellation"
+        }
+      },
+      "search": {
+        "placeholder": "Search by investor name...",
+        "count": "({{count}}) requests"
+      }
+    },
+    "investor-request-details": {
+      "requested_on": "Requested {{date}}",
+      "reason_label": "Reason: {{reason}}",
+      "not_found": "Request not found.",
+      "back_to_requests": "Back to requests",
+      "tabs": {
+        "resources": "Resources",
+        "financials": "Financials",
+        "history": "History"
+      },
+      "delivery": {
+        "title": "Mark as Fully Delivered",
+        "description": "{{delivered}} of {{total}} units delivered · ${{invoiced}} invoiced"
+      },
+      "resources_table": {
+        "columns": {
+          "resource": "Resource",
+          "unit_price": "Unit Price",
+          "total": "Total",
+          "requested": "Requested",
+          "fulfillment": "Fulfillment",
+          "delivered": "Delivered",
+          "status": "Status"
+        },
+        "status_labels": {
+          "delivered": "Delivered",
+          "in_progress": "In progress"
+        }
+      },
+      "actions": {
+        "actions": "Actions",
+        "cancel": "Cancel Item",
+        "cancelling": "Cancelling...",
+        "cancelled_by_client": "Cancelled by client",
+        "cancelled_by_provider": "Cancelled by provider",
+        "pending_cancellation_approval": "Pending cancellation approval",
+        "cancelled": "Cancelled",
+        "completed": "Completed",
+        "rejected": "Rejected",
+        "approve_cancellation": "Approve"
+      },
+      "cancel_order_message": "The client has requested to cancel this order. Please review and approve or reject the cancellation request.",
+      "cancel-item-modal": {
+        "title": "Cancel Order Item",
+        "description_with_name": "Provide a reason for cancelling item {{name}}.",
+        "description_generic": "Provide a reason for cancelling this item.",
+        "label": "Reason for cancellation",
+        "placeholder": "e.g. No longer needed, scheduling conflict...",
+        "actions": {
+          "cancel": "Close",
+          "confirm": "Confirm Cancellation"
+        }
+      },
+      "delivered-success": "Order has been marked as fully delivered successfully.",
+      "delivered-error": "Failed to mark the order as fully delivered. Please try again.",
+      "history_section": {
+        "empty": "No receive records yet.",
+        "items_received": "{{count}} item received",
+        "items_received_plural": "{{count}} items received",
+        "approved": "Approved",
+        "pending": "Pending",
+        "columns": {
+          "name": "Name",
+          "category": "Category",
+          "qty": "Qty"
+        }
+      },
+      "financials": {
+        "invoice_box": {
+          "title": "Invoices",
+          "total": "Total: ${{amount}}",
+          "columns": {
+            "date": "Date",
+            "item": "Item",
+            "category": "Category",
+            "quantity": "Quantity"
+          },
+          "empty": "No invoices yet."
+        },
+        "form": {
+          "title": "Add Invoice",
+          "fields": {
+            "number": "Invoice Number",
+            "amount": "Amount ($)",
+            "date": "Date"
+          },
+          "submit": "Record Invoice",
+          "validation": {
+            "required": "This field is required",
+            "positive_amount": "Amount must be greater than 0"
+          }
+        },
+        "create-invoice-success": "Invoice has been recorded and added successfully.",
+        "create-invoice-error": "Failed to record the invoice. Please try again."
+      },
+      "update-quantity-success": "Resource quantities have been updated successfully.",
+      "update-quantity-error": "Failed to update resource quantities. Please try again."
+    },
+    "statistics": {
+      "insights": "Insights",
+      "statistics": "Statistics",
+      "description": "Operational overview across sites, inventory, investor requests and provider performance.",
+      "liveData": "Live data",
+      "errorMessage": "Failed to fetch metrics from one or more services.",
+      "workSites": "Work Sites",
+      "avgProgress": "{{progress}}% avg. progress",
+      "inventoryValue": "Inventory Value",
+      "inventoryHint": "{{count}} resources · {{lowStock}} need restock",
+      "investorRequests": "Investor Requests",
+      "fulfilled": "{{rate}}% fulfilled",
+      "totalInvoiced": "Total Invoiced",
+      "pendingOrders": "{{count}} pending order requests",
+      "charts": {
+        "title": "Inventory Value by Site",
+        "description": "Top sites ranked by total resource value",
+        "pieChart": {
+          "title": "Request Status Distribution",
+          "description": "Breakdown of investor request states",
+          "statuses": {
+            "pending": "Pending",
+            "partial": "Partial",
+            "completed": "Completed",
+            "rejected": "Rejected"
+          }
+        }
+      },
+      "siteStatus": {
+        "title": "Site Status",
+        "description": "Current operational state",
+        "avgProgress": "Avg progress across all sites: ",
+        "states": {
+          "active": "Active",
+          "on-hold": "On Hold",
+          "completed": "Completed"
+        }
+      },
+      "inventoryCategory": {
+        "title": "Inventory by Category",
+        "description": "Value distribution across resource categories",
+        "noData": "No categorized resources yet.",
+        "categories": {
+          "Raw Materials": "Raw Materials",
+          "Equipment": "Equipment",
+          "Infrastructure": "Infrastructure",
+          "Energy & Power": "Energy & Power"
+        }
+      }
+    }
+  }
+}
