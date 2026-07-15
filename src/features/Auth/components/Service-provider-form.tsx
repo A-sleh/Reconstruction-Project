@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Input from "@/components/inputs/Input";
 import { PickCoordsFromMap } from "@/components/model/PickCoordsFromMap.model";
 import ImageUploader from "@/components/inputs/ImageUploader";
-import WorkSiteType from "@/features/resource-providor/shared/WorkSiteType";
+import WorkSiteType from "@/features/work-sites/components/WorkSiteType"; 
 
 const ServiceProviderForm = () => {
   const { t } = useTranslation();
