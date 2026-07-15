@@ -79,6 +79,9 @@ const ServiceProvidor_Orders = lazy(
 const ServiceProvidor_OrderDetails = lazy(
   () => import("@/pages/service-providor/OrderDetails.view"),
 );
+const ServiceProvidor_Profile = lazy(
+  () => import("@/pages/service-providor/Profile.view"),
+);
 
 // Engineers importing pages
 
@@ -250,6 +253,16 @@ const router: RouteObject[] = [
           <Suspense fallback={<LoadingFallback />}>
             <AuthGuard allowedRoles={["Provider"]}>
               <ServiceProvidor_OrderDetails />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.serviceProvidor.profile.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Provider"]}>
+              <ServiceProvidor_Profile />
             </AuthGuard>
           </Suspense>
         ),

@@ -10,22 +10,22 @@ export default function SettingsTab() {
   return (
     <div>
       <SectionHeader
-        title={t("resourceProvidor.profile.settings.title")}
-        subtitle={t("resourceProvidor.profile.settings.subtitle")}
+        title={t("profile.settings.title")}
+        subtitle={t("profile.settings.subtitle")}
       />
       <div className="space-y-4">
         <ToggleRow
-          title={t("resourceProvidor.profile.settings.notificationEmail.title")}
-          desc={t("resourceProvidor.profile.settings.notificationEmail.description")}
+          title={t("profile.settings.notificationEmail.title")}
+          desc={t("profile.settings.notificationEmail.description")}
           defaultChecked
         />
         <ToggleRow
-          title={t("resourceProvidor.profile.settings.instantNotifications.title")}
-          desc={t("resourceProvidor.profile.settings.instantNotifications.description")}
+          title={t("profile.settings.instantNotifications.title")}
+          desc={t("profile.settings.instantNotifications.description")}
         />
         <ToggleRow
-          title={t("resourceProvidor.profile.settings.marketingMessages.title")}
-          desc={t("resourceProvidor.profile.settings.marketingMessages.description")}
+          title={t("profile.settings.marketingMessages.title")}
+          desc={t("profile.settings.marketingMessages.description")}
         />
       </div>
 
@@ -36,13 +36,13 @@ export default function SettingsTab() {
           </div>
           <div className="flex-1">
             <h3 className="text-base font-bold text-destructive">
-              {t("resourceProvidor.profile.settings.dangerZone.title")}
+              {t("profile.settings.dangerZone.title")}
             </h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              {t("resourceProvidor.profile.settings.dangerZone.description")}
+              {t("profile.settings.dangerZone.description")}
             </p>
             <Button variant="destructive" className="mt-4">
-              {t("resourceProvidor.profile.settings.dangerZone.button")}
+              {t("profile.settings.dangerZone.button")}
             </Button>
           </div>
         </div>

@@ -18,21 +18,21 @@ export default function WorkTab() {
   return (
     <div>
       <SectionHeader
-        title={t("resourceProvidor.profile.work.title")}
-        subtitle={t("resourceProvidor.profile.work.subtitle")}
+        title={t("profile.work.title")}
+        subtitle={t("profile.work.subtitle")}
       />
       <form className="space-y-6 max-w-xl" onSubmit={(e) => e.preventDefault()}>
         <Input
           type="text"
-          label={t("resourceProvidor.profile.work.license")}
+          label={t("profile.work.license")}
           required={true}
-          placeholder={t("resourceProvidor.profile.work.licensePlaceholder")}
+          placeholder={t("profile.work.licensePlaceholder")}
           fieldName="license"
           errors={errors ?? null}
           {...register("license", { required: true })}
         />
         <Button type="submit" size="lg">
-          {t("resourceProvidor.profile.saveChanges")}
+          {t("profile.saveChanges")}
         </Button>
       </form>
     </div>

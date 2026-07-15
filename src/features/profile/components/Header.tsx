@@ -2,7 +2,7 @@ import { t } from "i18next";
 import { motion } from "motion/react";
 
 const Header = () => {
-  const prefix = "resourceProvidor.profile";
+  const prefix = "profile";
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}

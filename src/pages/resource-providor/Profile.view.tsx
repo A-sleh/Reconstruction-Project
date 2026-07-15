@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { User, BriefcaseBusiness, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Header from "@/features/resource-providor/profile/components/Header";
-import AccountTab from "@/features/resource-providor/profile/components/AccountTab";
-import WorkTab from "@/features/resource-providor/profile/components/WorkTab";
-import SettingsTab from "@/features/resource-providor/profile/components/SettingsTab";
+
+import Header from "@/features/profile/components/Header";
+import AccountTab from "@/features/profile/components/AccountTab";
+import WorkTab from "@/features/profile/components/WorkTab";
+import SettingsTab from "@/features/profile/components/SettingsTab";
 
 type TabKey = "account" | "work" | "settings";
 
@@ -14,9 +15,9 @@ export default function Profile() {
   const [active, setActive] = useState<TabKey>("account");
 
   const tabs: { key: TabKey; label: string; icon: typeof User }[] = [
-    { key: "account", label: t("resourceProvidor.profile.tabs.account"), icon: User },
-    { key: "work", label: t("resourceProvidor.profile.tabs.work"), icon: BriefcaseBusiness },
-    { key: "settings", label: t("resourceProvidor.profile.tabs.settings"), icon: Settings },
+    { key: "account", label: t("profile.tabs.account"), icon: User },
+    { key: "work", label: t("profile.tabs.work"), icon: BriefcaseBusiness },
+    { key: "settings", label: t("profile.tabs.settings"), icon: Settings },
   ];
 
   return (

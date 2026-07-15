@@ -33,31 +33,31 @@ export default function AccountTab() {
   return (
     <div>
       <SectionHeader
-        title={t("resourceProvidor.profile.account.title")}
-        subtitle={t("resourceProvidor.profile.account.subtitle")}
+        title={t("profile.account.title")}
+        subtitle={t("profile.account.subtitle")}
       />
       <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
         <div className="grid gap-5 md:grid-cols-2">
           <Input
             type="text"
-            label={t("resourceProvidor.profile.account.firstName")}
-            placeholder={t("resourceProvidor.profile.account.firstNamePlaceholder")}
+            label={t("profile.account.firstName")}
+            placeholder={t("profile.account.firstNamePlaceholder")}
             fieldName="firstName"
             errors={errors ?? null}
             {...register("firstName")}
           />
           <Input
             type="text"
-            label={t("resourceProvidor.profile.account.lastName")}
-            placeholder={t("resourceProvidor.profile.account.lastNamePlaceholder")}
+            label={t("profile.account.lastName")}
+            placeholder={t("profile.account.lastNamePlaceholder")}
             fieldName="lastName"
             errors={errors ?? null}
             {...register("lastName")}
           />
           <Input
             type="email"
-            label={t("resourceProvidor.profile.account.email")}
-            placeholder={t("resourceProvidor.profile.account.emailPlaceholder")}
+            label={t("profile.account.email")}
+            placeholder={t("profile.account.emailPlaceholder")}
             fieldName="email"
             errors={errors ?? null}
             iconType="email"
@@ -65,8 +65,8 @@ export default function AccountTab() {
           />
           <Input
             type="password"
-            label={t("resourceProvidor.profile.account.password")}
-            placeholder={t("resourceProvidor.profile.account.passwordPlaceholder")}
+            label={t("profile.account.password")}
+            placeholder={t("profile.account.passwordPlaceholder")}
             fieldName="password"
             errors={errors ?? null}
             iconType="password"
@@ -74,8 +74,8 @@ export default function AccountTab() {
           />
           <Input
             type="text"
-            label={t("resourceProvidor.profile.account.personalIdentifier")}
-            placeholder={t("resourceProvidor.profile.account.personalIdentifierPlaceholder")}
+            label={t("profile.account.personalIdentifier")}
+            placeholder={t("profile.account.personalIdentifierPlaceholder")}
             fieldName="personalIdentifier"
             errors={errors ?? null}
             iconType="personalIdentifier"
@@ -83,8 +83,8 @@ export default function AccountTab() {
           />
           <Input
             type="tel"
-            label={t("resourceProvidor.profile.account.phone")}
-            placeholder={t("resourceProvidor.profile.account.phonePlaceholder")}
+            label={t("profile.account.phone")}
+            placeholder={t("profile.account.phonePlaceholder")}
             fieldName="phone"
             errors={errors ?? null}
             {...register("phone")}
@@ -92,7 +92,7 @@ export default function AccountTab() {
         </div>
 
         <ImageUploader
-          label={t("resourceProvidor.profile.account.profilePhoto")}
+          label={t("profile.account.profilePhoto")}
           required={false}
           fileName={imageOfPhoto}
           onFileChange={handleImageChange}
@@ -102,7 +102,7 @@ export default function AccountTab() {
 
         <div className="flex justify-start pt-2">
           <Button type="submit" size="lg">
-            {t("resourceProvidor.profile.saveChanges")}
+            {t("profile.saveChanges")}
           </Button>
         </div>
       </form>

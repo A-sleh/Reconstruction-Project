@@ -1,0 +1,56 @@
+{
+  "profile": {
+    "tabs": {
+      "account": "My Account",
+      "work": "Work Info",
+      "settings": "Settings"
+    },
+    "title": "Provider Profile",
+    "description": "Update your account and settings to keep your provider profile current.",
+    "account": {
+      "title": "Account Information",
+      "subtitle": "Here are your personal account details",
+      "firstName": "Your Name",
+      "firstNamePlaceholder": "Enter your name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Enter your last name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "personalIdentifier": "National ID",
+      "personalIdentifierPlaceholder": "Enter your national ID",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Enter your phone number",
+      "profilePhoto": "Profile Photo"
+    },
+    "work": {
+      "title": "Work and License Details",
+      "subtitle": "Enter your license information",
+      "license": "License",
+      "licensePlaceholder": "Enter service license"
+    },
+    "settings": {
+      "title": "Account Settings",
+      "subtitle": "Manage notification and account preferences",
+      "notificationEmail": {
+        "title": "Receive email notifications",
+        "description": "Get important updates sent to your email"
+      },
+      "instantNotifications": {
+        "title": "Instant notifications",
+        "description": "Receive alerts inside the app"
+      },
+      "marketingMessages": {
+        "title": "Marketing messages",
+        "description": "Offers and updates from our team"
+      },
+      "dangerZone": {
+        "title": "Danger Zone",
+        "description": "Deleting your account will permanently remove all your data and cannot be undone.",
+        "button": "Delete Account"
+      }
+    },
+    "saveChanges": "Save Changes"
+  }
+}
