@@ -3,8 +3,10 @@ import { OrdersFilterSidebar } from "@/features/orders/components/OrderFiltersSi
 import { GetOrderAllFilters } from "@/features/orders/api/types";
 import OrderHeader from "@/features/orders/components/OrderHeader";
 import OrderTable from "@/features/orders/components/OrderTables";
+import { useTranslation } from "react-i18next";
 
 export default function Orders() {
+  const { t } = useTranslation();
   const [filters, setFilters] = useState<GetOrderAllFilters>({});
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -20,6 +22,7 @@ export default function Orders() {
         <main className="flex-1 min-w-0">
           <section className="container mx-4">
             <OrderHeader
+              description={t("orders.headerDescriptionForServiceProvider")}
               setSidebarOpen={setSidebarOpen}
               sidebarOpen={sidebarOpen}
             />

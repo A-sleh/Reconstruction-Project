@@ -41,7 +41,7 @@ export function OrdersFilterSidebar({
   return (
     <aside
       className={cn(
-        "shrink-0  border-gray-300 bg-white transition-all duration-300 ease-out overflow-hidden sticky top-16 self-start",
+        "shrink-0  border-gray-300 bg-white transition-all duration-300 ease-out overflow-hidden sticky top-16 self-start rounded-md",
         open ? "w-72" : "w-0",
       )}
       style={{ maxHeight: "calc(100vh - 4rem)" }}

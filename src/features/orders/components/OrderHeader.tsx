@@ -7,9 +7,13 @@ import { useTranslation } from "react-i18next";
 const OrderHeader = ({
   sidebarOpen,
   setSidebarOpen,
+  description,
+  title,
 }: {
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  title?: string;
+  description?: string;
 }) => {
   const { t } = useTranslation();
   // const { data: stat, isPending } = useInvestoryRequestsStat();
@@ -47,10 +51,10 @@ const OrderHeader = ({
           <Inbox className="h-3 w-3" /> {t(`${prefix}.badge`)}
         </div>
         <h1 className="mt-3 text-3xl lg:text-4xl font-bold">
-          {t(`${prefix}.title`)}
+          {title || t(`${prefix}.title`)}
         </h1>
         <p className="mt-1 text-muted-foreground">
-          {t(`${prefix}.description`)}
+          {description || t(`${prefix}.description`)}
         </p>
       </div>
       <div className="flex flex-col gap-2">
@@ -67,12 +71,11 @@ const OrderHeader = ({
             </div>
           ))}
         </div>
-        <Button
-          variant="outline"
-          onClick={() => setSidebarOpen((v) => !v)}
-        >
+        <Button variant="outline" onClick={() => setSidebarOpen((v) => !v)}>
           <Filter className="h-4 w-4" />
-          {sidebarOpen ? t("orders.filters.hideButton") : t("orders.filters.showButton")}
+          {sidebarOpen
+            ? t("orders.filters.hideButton")
+            : t("orders.filters.showButton")}
         </Button>
       </div>
     </motion.div>

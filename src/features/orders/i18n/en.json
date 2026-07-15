@@ -1,5 +1,6 @@
 {
   "orders": {
+    "headerDescriptionForServiceProvider": "Review, approve and fulfill resource requests from investors.",
     "section": "Orders",
     "title": "Latest order details",
     "subtitle": "View the order owner information, item list, and full cost breakdown in a responsive order summary.",
