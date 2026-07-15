@@ -73,6 +73,12 @@ const Project_Work_Site = lazy(
 const ServiceProvidor_WorkSites = lazy(
   () => import("@/pages/service-providor/WorkSites.view"),
 );
+const ServiceProvidor_Orders = lazy(
+  () => import("@/pages/service-providor/Orders.view"),
+);
+const ServiceProvidor_OrderDetails = lazy(
+  () => import("@/pages/service-providor/OrderDetails.view"),
+);
 
 // Engineers importing pages
 
@@ -224,6 +230,26 @@ const router: RouteObject[] = [
           <Suspense fallback={<LoadingFallback />}>
             <AuthGuard allowedRoles={["Provider"]}>
               <ServiceProvidor_WorkSites />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.serviceProvidor.orders.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Provider"]}>
+              <ServiceProvidor_Orders />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.serviceProvidor.orderDetails.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Provider"]}>
+              <ServiceProvidor_OrderDetails />
             </AuthGuard>
           </Suspense>
         ),

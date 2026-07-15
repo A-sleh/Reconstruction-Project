@@ -82,6 +82,15 @@ export const paths = {
         path: "/app/service-providor/work-sites",
         getHref: () => `/app/service/work-sites`,
       },
+      orders: {
+        path: "/app/service-providor/orders",
+        getHref: () => `/app/service-providor/orders`,
+      },
+      orderDetails: {
+        path: "/app/service-providor/orders/:orderId",
+        getHref: (orderId: number | string) =>
+          `/app/service-providor/orders/${orderId}`,
+      },
     },
     investor: {
       hisLandsAndBuildings: {
