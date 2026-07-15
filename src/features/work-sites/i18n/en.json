@@ -240,6 +240,7 @@
     "validation-progress-max": "Progress cannot exceed 100%",
     "delete-title": "Delete this work site?",
     "delete-description-prefix": "This will permanently remove ",
-    "btn-delete-confirm": "Delete"
+    "btn-delete-confirm": "Delete",
+    "viewOnMap": "View on Map"
   }
 }

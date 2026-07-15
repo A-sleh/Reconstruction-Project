@@ -1,16 +1,25 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Landmark, MapPin, Pencil, Power, Trash2 } from "lucide-react";
+import {
+  ArrowUpRight,
+  Landmark,
+  MapPin,
+  Pencil,
+  Power,
+  Trash2,
+  Map,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import useAuthStore, { User } from "@/stores/useAuthStore";
-import { StatusBadge } from "./StatusBadge"; 
+import { StatusBadge } from "./StatusBadge";
 import { Button } from "@/components/ui/button";
 import { paths } from "@/config/paths";
 import { WorkSiteFormModel } from "./WorkSiteFormModel";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
-import { WorkSite } from "../api/types"; 
+import { WorkSite } from "../api/types";
 import { useDeactivateWorkSite, useDeleteWorkSite } from "../api/actions";
+import { openInGoogleMaps } from "@/lib/helpers";
 
 interface Props {
   site: WorkSite;
@@ -67,7 +76,7 @@ export function SiteCard({ site, index }: Props) {
             });
           }}
           aria-label={t("workSites.btn-deactivate", "Deactivate site")}
-          disabled={isPending }
+          disabled={isPending}
         >
           <Power className="h-3.5 w-3.5" />
         </Button>
@@ -104,8 +113,10 @@ export function SiteCard({ site, index }: Props) {
       >
         <div className="flex items-center justify-between ">
           <StatusBadge status={site.isActive ? "active" : "on-hold"} />
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted text-muted-foreground transition-smooth group-hover:gradient-accent group-hover:text-accent-foreground group-hover:opacity-0">
-            <ArrowUpRight className="h-4 w-4" />
+          <div className="flex items-center gap-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted text-muted-foreground transition-smooth group-hover:gradient-accent group-hover:text-accent-foreground group-hover:opacity-0">
+              <ArrowUpRight className="h-4 w-4" />
+            </div>
           </div>
         </div>
         <div className="flex items-start justify-between gap-4">
@@ -128,13 +139,27 @@ export function SiteCard({ site, index }: Props) {
             <MapPin className="h-4 w-4 text-accent" />
             <span className="truncate">{site.address}</span>
           </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Landmark className="h-4 w-4 text-accent" />
-            <span>
-              {t(
-                `auth.register.providor.workSitesCategories.${site.workSiteType.toLowerCase()}`,
-              )}
-            </span>
+          <div className="flex justify-between items-end">
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Landmark className="h-4 w-4 text-accent" />
+              <span>
+                {t(
+                  `auth.register.providor.workSitesCategories.${site.workSiteType.toLowerCase()}`,
+                )}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openInGoogleMaps(site.location);
+              }}
+              className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-smooth hover:bg-primary hover:text-white"
+            >
+              <Map className="h-3.5 w-3.5" />
+              {t("workSites.viewOnMap", "View on Map")}
+            </button>
           </div>
         </div>
       </button>

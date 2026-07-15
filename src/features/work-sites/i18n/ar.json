@@ -240,6 +240,7 @@
     "validation-progress-max": "لا يمكن أن تتجاوز نسبة الإنجاز 100%",
     "delete-title": "هل أنت متأكد أنك تريد حذف هذا السجل؟ ",
     "delete-description-prefix": "ملاحظة: سيتم نقل البيانات إلى سلة المهملات.",
-    "btn-delete-confirm": "حذف"
+    "btn-delete-confirm": "حذف",
+    "viewOnMap": "عرض على الخريطة"
   }
 }

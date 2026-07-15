@@ -18,6 +18,18 @@ export const parseCoordinates = (value?: string): LatLng | null => {
   return null;
 };
 
+export const openInGoogleMaps = (location?: string) => {
+  const coords = parseCoordinates(location);
+  if (coords) {
+    window.open(
+      `https://www.google.com/maps?q=${coords.lat},${coords.lng}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  }
+};
+
+
 export const fmtCurrency = (value: number) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
