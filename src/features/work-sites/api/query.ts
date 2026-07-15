@@ -1,7 +1,7 @@
+import { SiteController, WorkSite, WorkSiteStatistics } from "./types";
 import ApiInstance from "@/config/api-instance";
 import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS, SiteController, WorkSite, WorkSiteStatistics } from ".";
-
+import { QUERY_KEYS } from ".";
 
 export const fetchWorkSitesAPI = async (
   filter?: string,

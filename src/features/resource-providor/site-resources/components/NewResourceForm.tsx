@@ -117,9 +117,9 @@ export function NewResourceForm({
         {/* resource description  */}
         <div className="space-y-4">
           <Textarea
-            label={t("resourceProvidor.workSites.resource.label-description")}
+            label={t("workSites.resource.label-description")}
             placeholder={t(
-              "resourceProvidor.workSites.resource.placeholder-description",
+              "workSites.resource.placeholder-description",
             )}
             rows={3}
             fieldName="description"
@@ -143,7 +143,7 @@ export function NewResourceForm({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2 flex-1">
             <Select
-              label={t("resourceProvidor.workSites.resource.label-unit-type")}
+              label={t("workSites.resource.label-unit-type")}
               fieldName="unit"
               errors={errors}
               value={unitType}
@@ -158,7 +158,7 @@ export function NewResourceForm({
           </div>
           <Input
             label={t(
-              "resourceProvidor.workSites.resource.label-price-per-unit",
+              "workSites.resource.label-price-per-unit",
             )}
             id="price"
             type="number"
@@ -171,7 +171,7 @@ export function NewResourceForm({
           />
           <div className="space-y-2 flex flex-col gap-2">
             <label className={`text-sm`}>
-              {t("resourceProvidor.workSites.resource.isAvailable-label")}
+              {t("workSites.resource.isAvailable-label")}
             </label>
             <Switch
               checked={isAvailable as boolean}
@@ -183,7 +183,7 @@ export function NewResourceForm({
         </div>
 
         <ImageUploader
-          label={t("resourceProvidor.workSites.resource.label-image")}
+          label={t("workSites.resource.label-image")}
           required={true}
           fileName={"imageUrl"}
           value={localImageFile || image}
@@ -200,15 +200,15 @@ export function NewResourceForm({
             onClick={handleGenerateMockData}
           >
             {t(
-              "resourceProvidor.workSites.resource.btn-generate-mock-data",
+              "workSites.resource.btn-generate-mock-data",
               "Generate mock data",
             )}
           </Button>
 
           <Button isLoading={resouceIsUpdated} type="submit">
             {initial
-              ? t("resourceProvidor.workSites.btn-save")
-              : t("resourceProvidor.workSites.resource.btn-create")}
+              ? t("workSites.btn-save")
+              : t("workSites.resource.btn-create")}
           </Button>
         </div>
       </form>

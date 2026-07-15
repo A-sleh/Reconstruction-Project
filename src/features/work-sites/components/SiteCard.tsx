@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Landmark, MapPin, Pencil, Power, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { StatusBadge } from "../../shared/StatusBadge";
+import { useTranslation } from "react-i18next";
+
+import useAuthStore, { User } from "@/stores/useAuthStore";
+import { StatusBadge } from "./StatusBadge"; 
 import { Button } from "@/components/ui/button";
 import { paths } from "@/config/paths";
 import { WorkSiteFormModel } from "./WorkSiteFormModel";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
-import { useTranslation } from "react-i18next";
-import { WorkSite } from "../api";
+import { WorkSite } from "../api/types"; 
 import { useDeactivateWorkSite, useDeleteWorkSite } from "../api/actions";
-import useAuthStore, { User } from "@/stores/useAuthStore";
 
 interface Props {
   site: WorkSite;
@@ -17,8 +18,8 @@ interface Props {
 }
 
 export function SiteCard({ site, index }: Props) {
-  const { t, i18n } = useTranslation();
   const goto = useNavigate();
+  const { t, i18n } = useTranslation();
   const langIsArabic = i18n.language === "ar";
   const deleteMutation = useDeleteWorkSite();
   const { mutate: deactivateWorkSite, isPending } = useDeactivateWorkSite();
@@ -48,7 +49,7 @@ export function SiteCard({ site, index }: Props) {
               onClick={(e) => {
                 e.preventDefault();
               }}
-              aria-label={t("resourceProvidor.workSites.btn-edit", "Edit site")}
+              aria-label={t("workSites.btn-edit", "Edit site")}
             >
               <Pencil className="h-3.5 w-3.5" />
             </Button>
@@ -65,7 +66,7 @@ export function SiteCard({ site, index }: Props) {
               workSiteId: Number(site.id),
             });
           }}
-          aria-label={t("resourceProvidor.workSites.btn-deactivate", "Deactivate site")}
+          aria-label={t("workSites.btn-deactivate", "Deactivate site")}
           disabled={isPending }
         >
           <Power className="h-3.5 w-3.5" />
@@ -79,7 +80,7 @@ export function SiteCard({ site, index }: Props) {
               onClick={(e) => {
                 e.preventDefault();
               }}
-              aria-label={t("resourceProvidor.workSites.btn-delete", "Delete site")}
+              aria-label={t("workSites.btn-delete", "Delete site")}
               disabled={deleteMutation.isPending}
             >
               <Trash2 className="h-3.5 w-3.5" />

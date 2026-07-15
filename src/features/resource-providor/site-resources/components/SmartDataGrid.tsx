@@ -44,7 +44,7 @@ export function DynamicAsyncSelector({
   const placeholderText =
     placeholder ||
     t(
-      "resourceProvidor.workSites.resource.dynamicSelector.placeholder",
+      "workSites.resource.dynamicSelector.placeholder",
       "Select an item...",
     );
   const [open, setOpen] = useState(false);
@@ -130,7 +130,7 @@ export function DynamicAsyncSelector({
       <PopoverTrigger asChild>
         <div>
           <Label className="">
-            {t("resourceProvidor.workSites.resource.label-resource-type")}
+            {t("workSites.resource.label-resource-type")}
           </Label>
 
           <Button
@@ -163,7 +163,7 @@ export function DynamicAsyncSelector({
             <div className="p-2.5 border-b border-gray-400 flex items-center justify-between bg-gray-100/50">
               <span className="text-xs font-bold text-gray-700">
                 {t(
-                  "resourceProvidor.workSites.resource.dynamicSelector.filterByCategory",
+                  "workSites.resource.dynamicSelector.filterByCategory",
                   "Filter by category",
                 )}
               </span>
@@ -199,7 +199,7 @@ export function DynamicAsyncSelector({
                     }}
                   >
                     {t(
-                      "resourceProvidor.workSites.resource.dynamicSelector.all",
+                      "workSites.resource.dynamicSelector.all",
                       "All",
                     )}
                   </button>
@@ -248,7 +248,7 @@ export function DynamicAsyncSelector({
                 ) : (
                   <span className="text-xs font-medium text-gray-800">
                     {t(
-                      "resourceProvidor.workSites.resource.dynamicSelector.all",
+                      "workSites.resource.dynamicSelector.all",
                       "All",
                     )}
                   </span>
@@ -267,7 +267,7 @@ export function DynamicAsyncSelector({
                 >
                   <Filter className="h-3 w-3" />
                   {t(
-                    "resourceProvidor.workSites.resource.dynamicSelector.categories",
+                    "workSites.resource.dynamicSelector.categories",
                     "Categories",
                   )}
                 </Button>
@@ -280,7 +280,7 @@ export function DynamicAsyncSelector({
               <input
                 className="flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground"
                 placeholder={t(
-                  "resourceProvidor.workSites.resource.dynamicSelector.searchPlaceholder",
+                  "workSites.resource.dynamicSelector.searchPlaceholder",
                   "Type to search...",
                 )}
                 value={search}
@@ -296,7 +296,7 @@ export function DynamicAsyncSelector({
               {items.length === 0 && !isFetching && (
                 <div className="py-6 text-center text-sm text-muted-foreground">
                   {t(
-                    "resourceProvidor.workSites.resource.dynamicSelector.noResults",
+                    "workSites.resource.dynamicSelector.noResults",
                     "No matching results.",
                   )}
                 </div>
@@ -342,7 +342,7 @@ export function DynamicAsyncSelector({
                 <div className="flex items-center justify-center py-2 text-xs text-muted-foreground gap-2">
                   <Loader2 className="h-3 w-3 animate-spin" />
                   {t(
-                    "resourceProvidor.workSites.resource.dynamicSelector.loadingMore",
+                    "workSites.resource.dynamicSelector.loadingMore",
                     "Loading more...",
                   )}
                 </div>

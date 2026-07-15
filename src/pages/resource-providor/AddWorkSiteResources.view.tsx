@@ -89,10 +89,10 @@ const AddWorkSiteResources = () => {
       >
         <div>
           <h1 className="text-2xl font-semibold mb-2">
-            {t("resourceProvidor.workSites.add-resource-heading")}
+            {t("workSites.add-resource-heading")}
           </h1>
           <p className="text-sm text-white">
-            {t("resourceProvidor.workSites.resource.provide-details")}
+            {t("workSites.resource.provide-details")}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -102,7 +102,7 @@ const AddWorkSiteResources = () => {
             disabled={!selected?.id}
           >
             {t(
-              "resourceProvidor.workSites.resource.add-another",
+              "workSites.resource.add-another",
               "Add another",
             )}
           </Button>
@@ -114,7 +114,7 @@ const AddWorkSiteResources = () => {
           >
             {isSubmitting
               ? t("common.loading", "Saving...")
-              : t("resourceProvidor.workSites.resource.submit-resources", {
+              : t("workSites.resource.submit-resources", {
                   count: resources.length,
                 })}
           </Button>
@@ -127,13 +127,13 @@ const AddWorkSiteResources = () => {
           <div className="mb-4 flex items-center justify-between gap-3">
             <div>
               <h2 className="text-lg font-semibold mb-2">
-                {t("resourceProvidor.workSites.resource.added-resources", {
+                {t("workSites.resource.added-resources", {
                   count: resources.length,
                 })}
               </h2>
               <p className="text-sm text-muted-foreground">
                 {t(
-                  "resourceProvidor.workSites.resource.select-to-edit",
+                  "workSites.resource.select-to-edit",
                   "Click an item to edit it before submitting.",
                 )}
               </p>
@@ -144,7 +144,7 @@ const AddWorkSiteResources = () => {
             {resources.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-gray-300 p-5 text-sm text-muted-foreground">
                 {t(
-                  "resourceProvidor.workSites.resource.no-added-resources",
+                  "workSites.resource.no-added-resources",
                   "No resources added yet. Use the form to add one.",
                 )}
               </div>
@@ -175,7 +175,7 @@ const AddWorkSiteResources = () => {
                       <div className="flex items-center gap-2">
                         <span className="text-sm text-muted-foreground whitespace-nowrap">
                           {t(
-                            "resourceProvidor.workSites.resource.card.price_per_unit",
+                            "workSites.resource.card.price_per_unit",
                           )}
                           : {resource.price.toFixed(2)} {resource.unit}
                         </span>
@@ -189,7 +189,7 @@ const AddWorkSiteResources = () => {
                       }}
                       className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 bg-white text-muted-foreground transition hover:border-destructive hover:text-destructive"
                       aria-label={t(
-                        "resourceProvidor.workSites.resource.remove-resource",
+                        "workSites.resource.remove-resource",
                         "Remove",
                       )}
                     >
@@ -209,8 +209,8 @@ const AddWorkSiteResources = () => {
             onSubmit={handleResourceSubmit}
             submitLabel={
               selectedResource
-                ? t("resourceProvidor.workSites.btn-save")
-                : t("resourceProvidor.workSites.resource.btn-create")
+                ? t("workSites.btn-save")
+                : t("workSites.resource.btn-create")
             }
           />
         </div>

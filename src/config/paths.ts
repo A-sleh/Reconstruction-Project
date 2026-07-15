@@ -77,7 +77,12 @@ export const paths = {
           `/app/resource-providor/work-sites/${workSiteId}`,
       },
     },
-    serviceProvidor: {},
+    serviceProvidor: {
+      workSites: {
+        path: "/app/service-providor/work-sites",
+        getHref: () => `/app/service/work-sites`,
+      },
+    },
     investor: {
       hisLandsAndBuildings: {
         path: "/app/investor/own-lands-and-building",

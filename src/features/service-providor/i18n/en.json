@@ -1,5 +1,8 @@
 {
   "serviceProvider": {
+    "workSite": {
+      "workSitesDescOfHeader": "Track sites, allocate services and keep crews moving — built for modern construction operations."
+    },
     "services": {
       "sectionTitle": "Company services",
       "title": "Manage your company resources",

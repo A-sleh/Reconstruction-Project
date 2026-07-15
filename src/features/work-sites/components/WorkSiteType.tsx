@@ -31,7 +31,7 @@ const WorkSiteType: React.FC<WorkSiteTypeProps> = ({
   return (
     <Selector label={label} required={false} value={value} setValue={setValue} asInput={asInput}>
       {!asInput && (
-        <option value="">{t("resourceProvidor.workSites.filters.all")}</option>
+        <option value="">{t("workSites.filters.all")}</option>
       )}
       {workSiteTypesFinal.map((item) => (
         <option key={item} value={item.toString()}>

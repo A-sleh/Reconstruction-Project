@@ -23,7 +23,7 @@ const ModifyResourceModel: React.FC<Props> = ({ initial, openButton }) => {
         {openButton || (
           <Button className="shrink-0">
             <Plus className="h-4 w-4" />
-            {t("resourceProvidor.workSites.new-site")}
+            {t("workSites.new-site")}
           </Button>
         )}
       </Model.Open>
@@ -31,11 +31,11 @@ const ModifyResourceModel: React.FC<Props> = ({ initial, openButton }) => {
         <div className="flex justify-between items-start my-3">
           <div>
             <h2 className="text-xl font-semibold">
-              {t("resourceProvidor.workSites.resource.edit-resource-heading")}
+              {t("workSites.resource.edit-resource-heading")}
             </h2>
             <p className="text-sm text-muted-foreground mt-0.5">
               {t(
-                "resourceProvidor.workSites.resource.sub-heading-edit-description",
+                "workSites.resource.sub-heading-edit-description",
               )}
             </p>
           </div>

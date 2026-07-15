@@ -104,7 +104,7 @@ export default function OrdersTab() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={t(
-                "resourceProvidor.workSites.orders.filters.search_placeholder",
+                "workSites.orders.filters.search_placeholder",
               )}
               className="pl-9 bg-white border-gray-200"
             />
@@ -120,17 +120,17 @@ export default function OrdersTab() {
             >
               <option value="">
                 {t(
-                  "resourceProvidor.workSites.orders.filters.status_placeholder",
+                  "workSites.orders.filters.status_placeholder",
                 )}
               </option>
               <option value="Pending">
-                {t("resourceProvidor.workSites.orders.status.pending")}
+                {t("workSites.orders.status.pending")}
               </option>
               <option value="Accepted">
-                {t("resourceProvidor.workSites.orders.status.approved")}
+                {t("workSites.orders.status.approved")}
               </option>
               <option value="Rejected">
-                {t("resourceProvidor.workSites.orders.status.rejected")}
+                {t("workSites.orders.status.rejected")}
               </option>
               <option value="Resolved">Resolved</option>
             </select>
@@ -159,7 +159,7 @@ export default function OrdersTab() {
               className="bg-primary text-white hover:opacity-90 rounded-lg"
             >
               <Plus className="h-4 w-4 mr-1.5" />
-              {t("resourceProvidor.workSites.orders.create_order")}
+              {t("workSites.orders.create_order")}
             </Button>
           }
         />
@@ -171,21 +171,21 @@ export default function OrdersTab() {
           <TableHeader>
             <TableRow className="border-b border-gray-200 bg-gray-50/80 hover:bg-gray-50/80">
               <TableHead className="p-3 font-medium text-gray-500 text-xs uppercase tracking-wider ">
-                {t("resourceProvidor.workSites.orders.table.columns.item")}
+                {t("workSites.orders.table.columns.item")}
               </TableHead>
               <TableHead className="p-3 font-medium text-gray-500 text-xs uppercase tracking-wider">
-                {t("resourceProvidor.workSites.orders.table.columns.category")}
+                {t("workSites.orders.table.columns.category")}
               </TableHead>
               <TableHead className="p-3 font-medium text-gray-500 text-xs uppercase tracking-wider">
-                {t("resourceProvidor.workSites.orders.table.columns.provider")}
+                {t("workSites.orders.table.columns.provider")}
               </TableHead>
               <TableHead className="p-3 font-medium text-gray-500 text-xs uppercase tracking-wider">
                 {t(
-                  "resourceProvidor.workSites.orders.table.columns.admin_note",
+                  "workSites.orders.table.columns.admin_note",
                 )}
               </TableHead>
               <TableHead className="p-3 font-medium text-gray-500 text-xs uppercase tracking-wider text-center">
-                {t("resourceProvidor.workSites.orders.table.columns.status")}
+                {t("workSites.orders.table.columns.status")}
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -228,7 +228,7 @@ export default function OrdersTab() {
                   <div className="py-16 text-center">
                     <Inbox className="h-10 w-10 mx-auto mb-3 text-gray-300" />
                     <p className="text-sm text-gray-500 font-medium">
-                      {t("resourceProvidor.workSites.orders.table.empty")}
+                      {t("workSites.orders.table.empty")}
                     </p>
                   </div>
                 </TableCell>
@@ -312,10 +312,10 @@ export default function OrdersTab() {
               {isFetchingNextPage ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  {t("resourceProvidor.workSites.orders.table.loading_more")}
+                  {t("workSites.orders.table.loading_more")}
                 </>
               ) : (
-                t("resourceProvidor.workSites.orders.table.load_more")
+                t("workSites.orders.table.load_more")
               )}
             </button>
           </div>

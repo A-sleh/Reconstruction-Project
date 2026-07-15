@@ -70,6 +70,10 @@ const Project_Work_Site = lazy(
 );
 
 // Service Porvider importing pages
+const ServiceProvidor_WorkSites = lazy(
+  () => import("@/pages/service-providor/WorkSites.view"),
+);
+
 // Engineers importing pages
 
 // Fallback component for lazy loading
@@ -213,6 +217,19 @@ const router: RouteObject[] = [
           </Suspense>
         ),
       },
+      // Service provider
+      {
+        path: paths.app.serviceProvidor.workSites.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Provider"]}>
+              <ServiceProvidor_WorkSites />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+
+      // Investor
       {
         path: paths.app.investor.hisLandsAndBuildings.path,
         element: (

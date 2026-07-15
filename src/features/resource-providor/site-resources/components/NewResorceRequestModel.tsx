@@ -45,7 +45,7 @@ export function NewResorceRequestModel({
       {
         onSuccess: () => {
           successToast(
-            t("resourceProvidor.workSites.orders.request-modal.success"),
+            t("workSites.orders.request-modal.success"),
           );
           setItemName("");
           setDescription("");
@@ -58,7 +58,7 @@ export function NewResorceRequestModel({
             error?.response?.data?.message || error?.message;
           errorToast(
             serverMessage ||
-              t("resourceProvidor.workSites.orders.request-modal.error"),
+              t("workSites.orders.request-modal.error"),
           );
         },
       },
@@ -73,11 +73,11 @@ export function NewResorceRequestModel({
           <div className="flex justify-between items-start mb-5">
             <div>
               <h2 className="text-xl font-semibold text-gray-900">
-                {t("resourceProvidor.workSites.orders.request-modal.title")}
+                {t("workSites.orders.request-modal.title")}
               </h2>
               <p className="text-sm text-gray-500 mt-0.5">
                 {t(
-                  "resourceProvidor.workSites.orders.request-modal.description",
+                  "workSites.orders.request-modal.description",
                 )}
               </p>
             </div>
@@ -97,13 +97,13 @@ export function NewResorceRequestModel({
             <div className="space-y-1.5">
               <Input
                 label={t(
-                  "resourceProvidor.workSites.orders.request-modal.item_name",
+                  "workSites.orders.request-modal.item_name",
                 )}
                 id="item-name"
                 value={itemName}
                 onChange={(e) => setItemName(e.target.value)}
                 placeholder={t(
-                  "resourceProvidor.workSites.orders.request-modal.item_name_placeholder",
+                  "workSites.orders.request-modal.item_name_placeholder",
                 )}
                 className="border-gray-200"
               />
@@ -116,7 +116,7 @@ export function NewResorceRequestModel({
                 className="text-sm font-medium text-gray-700"
               >
                 {t(
-                  "resourceProvidor.workSites.orders.request-modal.item_description",
+                  "workSites.orders.request-modal.item_description",
                 )}
               </Label>
               <Textarea
@@ -124,7 +124,7 @@ export function NewResorceRequestModel({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder={t(
-                  "resourceProvidor.workSites.orders.request-modal.item_description_placeholder",
+                  "workSites.orders.request-modal.item_description_placeholder",
                 )}
                 rows={3}
                 className="border-gray-200 resize-none"
@@ -134,14 +134,14 @@ export function NewResorceRequestModel({
             {/* Category */}
             <Selector
               label={t(
-                "resourceProvidor.workSites.orders.request-modal.category",
+                "workSites.orders.request-modal.category",
               )}
               value={categoryId}
               setValue={(value) => setCategoryId(value ? Number(value) : "")}
             >
               <option value="">
                 {t(
-                  "resourceProvidor.workSites.orders.request-modal.category_placeholder",
+                  "workSites.orders.request-modal.category_placeholder",
                 )}
               </option>
               {categories.map((cat) => (
@@ -157,14 +157,14 @@ export function NewResorceRequestModel({
                 htmlFor="note"
                 className="text-sm font-medium text-gray-700"
               >
-                {t("resourceProvidor.workSites.orders.request-modal.note")}
+                {t("workSites.orders.request-modal.note")}
               </Label>
               <Textarea
                 id="note"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 placeholder={t(
-                  "resourceProvidor.workSites.orders.request-modal.note_placeholder",
+                  "workSites.orders.request-modal.note_placeholder",
                 )}
                 rows={2}
                 className="border-gray-200 resize-none"
@@ -192,7 +192,7 @@ export function NewResorceRequestModel({
               onClick={handleSubmit}
               className="bg-primary text-white hover:opacity-90"
             >
-              {t("resourceProvidor.workSites.orders.request-modal.submit")}
+              {t("workSites.orders.request-modal.submit")}
             </Button>
           </div>
         </div>

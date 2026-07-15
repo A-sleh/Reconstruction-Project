@@ -41,32 +41,32 @@ export default function ResourceHeader() {
 
   const stats: StatItem[] = [
     {
-      label: "resourceProvidor.workSites.stats.total-ordered",
+      label: "workSites.stats.total-ordered",
       value: isLoading ? "--" : (data?.totalOrdered ?? 0),
       icon: ShoppingCart,
     },
     {
-      label: "resourceProvidor.workSites.stats.fulfill-count",
+      label: "workSites.stats.fulfill-count",
       value: isLoading ? "--" : (data?.fulfillCount ?? 0),
       icon: CheckCircle2,
     },
     {
-      label: "resourceProvidor.workSites.stats.fulfill-rate",
+      label: "workSites.stats.fulfill-rate",
       value: isLoading ? "--" : `${data?.fulfillRate ?? 0}%`,
       icon: Percent,
     },
     {
-      label: "resourceProvidor.workSites.stats.amount-invoiced",
+      label: "workSites.stats.amount-invoiced",
       value: isLoading ? "--" : (data?.amountInvoiced ?? 0),
       icon: ReceiptText,
     },
     {
-      label: "resourceProvidor.workSites.stats.quantity-invoiced",
+      label: "workSites.stats.quantity-invoiced",
       value: isLoading ? "--" : (data?.quantityInvoiced ?? 0),
       icon: PackageCheck,
     },
     {
-      label: "resourceProvidor.workSites.stats.amount-total",
+      label: "workSites.stats.amount-total",
       value: isLoading ? "--" : (data?.amountTotal ?? 0),
       icon: DollarSign,
     },
@@ -81,7 +81,7 @@ export default function ResourceHeader() {
           }`}
         >
           <ArrowLeft className="h-4 w-4" />
-          {t("resourceProvidor.workSites.all-work-sites")}
+          {t("workSites.all-work-sites")}
         </Link>
 
         <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -95,7 +95,7 @@ export default function ResourceHeader() {
                 <StatusBadge status={status ? "active" : "on-hold"} />
               </div>
               <span className="text-sm text-primary-foreground">
-                {t("resourceProvidor.workSites.label-manager")} ·{" "}
+                {t("workSites.label-manager")} ·{" "}
                 {manager || ""}
               </span>
             </div>
@@ -112,7 +112,7 @@ export default function ResourceHeader() {
               className="bg-white text-primary hover:bg-white hover:opacity-70"
             >
               <Package className="h-4 w-4" />
-              {t("resourceProvidor.workSites.add-new-resource")}
+              {t("workSites.add-new-resource")}
             </Button>
           </Link>
         </div>

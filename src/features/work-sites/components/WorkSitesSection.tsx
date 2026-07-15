@@ -4,8 +4,8 @@ import { SiteCard } from "./SiteCard";
 import { useMemo } from "react";
 import { WorkSiteFormModel } from "./WorkSiteFormModel";
 import { useTranslation } from "react-i18next";
-import { useWorkSites } from "@/features/resource-providor/work-sites/api/query";
-import WorkSiteType from "../../shared/WorkSiteType";
+import { useWorkSites } from "@/features/work-sites/api/query";
+import WorkSiteType from "@/features/work-sites/components/WorkSiteType";
 import { WorkSiteCardSkeleton } from "./skeletons/WorkSiteCardSkeleton";
 import useQueryStringState from "@/hooks/useQueryStringState";
 
@@ -34,7 +34,7 @@ const WorkSitesSection = () => {
         <div className="flex items-center gap-2">
           <Building2 className="h-5 w-5 text-primary" />
           <h2 className="text-xl font-semibold">
-            {t("resourceProvidor.workSites.work-sites")}
+            {t("workSites.work-sites")}
           </h2>
           <span className="text-sm text-muted-foreground">
             ({filtered?.length})
@@ -46,7 +46,7 @@ const WorkSitesSection = () => {
             <Input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder={t("resourceProvidor.workSites.search-placeholder")}
+              placeholder={t("workSites.search-placeholder")}
               className="pr-9 w-full bg-white"
             />
           </div>
@@ -78,7 +78,7 @@ const WorkSitesSection = () => {
 
       {!isLoading && filtered?.length === 0 && (
         <div className="text-center py-20 text-muted-foreground">
-          {t("resourceProvidor.workSites.no-sites")}
+          {t("workSites.no-sites")}
         </div>
       )}
     </section>

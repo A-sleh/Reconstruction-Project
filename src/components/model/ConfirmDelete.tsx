@@ -39,12 +39,12 @@ const ConfirmDelete = ({
           <div className="mb-4 flex items-start gap-4">
             <div className="min-w-0">
               <h3 className="text-lg font-semibold text-foreground">
-                {t("resourceProvidor.workSites.delete-title", {
+                {t("workSites.delete-title", {
                   defaultValue: "Delete this work site?",
                 })}
               </h3>
               <p className="text-sm text-muted-foreground mt-1 truncate">
-                {t("resourceProvidor.workSites.delete-description-prefix", {
+                {t("workSites.delete-description-prefix", {
                   defaultValue: "This will permanently remove ",
                 })}
                 <span className="font-semibold text-foreground">
@@ -68,7 +68,7 @@ const ConfirmDelete = ({
               ) : (
                 <>
                   <Trash2 className="h-4 w-4 opacity-90" />
-                  {t("resourceProvidor.workSites.btn-delete-confirm", {
+                  {t("workSites.btn-delete-confirm", {
                     defaultValue: "Delete site",
                   })}
                 </>
@@ -81,7 +81,7 @@ const ConfirmDelete = ({
                 variant="ghost"
                 className="text-sm px-4 py-2 border border-primary hover:bg-primary hover:text-white transition-all cursor-pointer"
               >
-                {t("resourceProvidor.workSites.btn-cancel", {
+                {t("workSites.btn-cancel", {
                   defaultValue: "Cancel",
                 })}
               </Button>

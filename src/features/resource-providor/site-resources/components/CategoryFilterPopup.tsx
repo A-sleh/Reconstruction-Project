@@ -37,7 +37,7 @@ const CategoryFilterPopup = ({
           variant="outline"
           className="h-10 w-10 p-0 bg-white border-gray-300"
           aria-label={t(
-            "resourceProvidor.workSites.filters.open",
+            "workSites.filters.open",
             "Filter categories",
           )}
         >
@@ -51,20 +51,20 @@ const CategoryFilterPopup = ({
             <div className="min-w-0">
               <h2 className="text-lg font-semibold text-foreground">
                 {t(
-                  "resourceProvidor.workSites.filters.categoryFilterTitle",
+                  "workSites.filters.categoryFilterTitle",
                   "Choose a category",
                 )}
               </h2>
               <p className="text-sm text-muted-foreground mt-1">
                 {t(
-                  "resourceProvidor.workSites.filters.categoryFilterDescription",
+                  "workSites.filters.categoryFilterDescription",
                   "Select a category to narrow the inventory list.",
                 )}
               </p>
               <span className="text-xs text-muted-foreground mt-2 block">
                 {categories.length}{" "}
                 {t(
-                  "resourceProvidor.workSites.filters.availableCategories",
+                  "workSites.filters.availableCategories",
                   "categories available",
                 )}
               </span>
@@ -94,7 +94,7 @@ const CategoryFilterPopup = ({
                   : "bg-card border-border text-muted-foreground hover:text-foreground"
               }`}
             >
-              {t("resourceProvidor.workSites.filters.all")}
+              {t("workSites.filters.all")}
             </button>
 
             {categories.map((category) => (
@@ -119,7 +119,7 @@ const CategoryFilterPopup = ({
                 variant="ghost"
                 className="bg-red-400 text-white hover:opacity-80"
               >
-                {t("resourceProvidor.workSites.btn-cancel", "Cancel")}
+                {t("workSites.btn-cancel", "Cancel")}
               </Button>
             </Model.Close>
           </div>

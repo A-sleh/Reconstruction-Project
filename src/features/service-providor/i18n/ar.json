@@ -1,5 +1,8 @@
 {
   "serviceProvider": {
+    "workSite": {
+      "workSitesDescOfHeader": "تتبع المواقع، وتخصيص الخدمات، وحافظ على استمرارية حركة الفرق — مُصمم لعمليات البناء الحديثة."
+    },
     "services": {
       "sectionTitle": "خدمات الشركة",
       "title": "إدارة موارد شركتك",

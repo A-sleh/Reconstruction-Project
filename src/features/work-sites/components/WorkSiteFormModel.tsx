@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, X } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Input from "@/components/inputs/Input";
 import Model from "@/components/model/Model";
@@ -15,9 +14,9 @@ import {
   useCreateWorkSite,
   useUpdateWorkSite,
 } from "../api/actions";
-import { WorkSite } from "../api";
+import { WorkSite } from "../api/types";
 import ImageUploader from "@/components/inputs/ImageUploader";
-import WorkSiteType from "../../shared/WorkSiteType";
+import WorkSiteType from "@/features/work-sites/components/WorkSiteType";
 import PopuupLayout from "@/components/layouts/Popup-layout";
 
 interface Props {
@@ -102,15 +101,15 @@ export function WorkSiteFormModel({
       openKey={openKey}
       title={
         initial
-          ? t("resourceProvidor.workSites.edit-site-heading")
-          : t("resourceProvidor.workSites.add-site-heading")
+          ? t("workSites.edit-site-heading")
+          : t("workSites.add-site-heading")
       }
-      subTitle={t("resourceProvidor.workSites.sub-heading-description")}
+      subTitle={t("workSites.sub-heading-description")}
       openButton={
         openButton || (
           <Button className="shrink-0">
             <Plus className="h-4 w-4" />
-            {t("resourceProvidor.workSites.new-site")}
+            {t("workSites.new-site")}
           </Button>
         )
       }
@@ -123,19 +122,19 @@ export function WorkSiteFormModel({
           {/* Site Name Field */}
           <div className="flex flex-col gap-3 md:flex-row">
             <Input
-              label={t("resourceProvidor.workSites.label-site-name")}
+              label={t("workSites.label-site-name")}
               id="site-name"
               placeholder={t(
-                "resourceProvidor.workSites.placeholder-site-name",
+                "workSites.placeholder-site-name",
               )}
               fieldName="name"
               errors={errors}
               {...register("name")}
             />
             <Input
-              label={t("resourceProvidor.workSites.label-address")}
+              label={t("workSites.label-address")}
               id="address"
-              placeholder={t("resourceProvidor.workSites.placeholder-address")}
+              placeholder={t("workSites.placeholder-address")}
               fieldName="address"
               errors={errors}
               {...register("address")}
@@ -149,9 +148,9 @@ export function WorkSiteFormModel({
                 <Input
                   type="text"
                   readOnly={true}
-                  label={t("resourceProvidor.workSites.label-location")}
+                  label={t("workSites.label-location")}
                   placeholder={t(
-                    "resourceProvidor.workSites.placeholder-location",
+                    "workSites.placeholder-location",
                   )}
                   required={true}
                   fieldName="companyLoclocationation"
@@ -198,15 +197,15 @@ export function WorkSiteFormModel({
                 variant="outline"
                 className="bg-red-400 text-white hover:opacity-80 transition-all"
               >
-                {t("resourceProvidor.workSites.btn-cancel")}
+                {t("workSites.btn-cancel")}
               </Button>
             </Model.Close>
             <Button type="submit" disabled={isCreated || isUpdated}>
               {isCreated || isUpdated
                 ? t("common.loading", "Saving...")
                 : initial
-                  ? t("resourceProvidor.workSites.btn-save")
-                  : t("resourceProvidor.workSites.btn-create")}
+                  ? t("workSites.btn-save")
+                  : t("workSites.btn-create")}
             </Button>
           </div>
         </form>

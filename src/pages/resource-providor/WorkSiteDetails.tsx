@@ -20,10 +20,10 @@ const WorkSiteDetails = () => {
         >
           <TabsList dir={isArabic ? "rtl" : "ltr"}>
             <TabsTrigger value="inventory">
-              {t("resourceProvidor.workSites.tabs.inventory_count")}
+              {t("workSites.tabs.inventory_count")}
             </TabsTrigger>
             <TabsTrigger value="orders">
-              {t("resourceProvidor.workSites.tabs.orders_count")}
+              {t("workSites.tabs.orders_count")}
             </TabsTrigger>
           </TabsList>
 

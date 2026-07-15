@@ -13,7 +13,7 @@ import {
 } from "@/features/orders/api/types";
 import { cn } from "@/lib/utils";
 import Selector from "@/components/inputs/Selector";
-import { useWorkSites } from "@/features/resource-providor/work-sites/api/query";
+import { useWorkSites } from "@/features/work-sites/api/query";
 
 interface Props {
   filters: GetOrderAllFilters;

@@ -1,31 +1,35 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useWorkSitesStatistics } from "@/features/resource-providor/work-sites/api/query";
+import { useWorkSitesStatistics } from "@/features/work-sites/api/query";
 
-const WorkSiteHeader = () => {
+interface IWorkSiteHeader {
+  title?: string;
+  description?: string;
+}
+
+const WorkSiteHeader: React.FC<IWorkSiteHeader> = ({
+  description = "",
+  title = "",
+}) => {
   const { t } = useTranslation();
   const { data: statsData, isLoading } = useWorkSitesStatistics();
 
   const stats = [
     {
-      label: t("resourceProvidor.workSites.total-sites"),
+      label: t("workSites.total-sites"),
       value: isLoading ? "—" : (statsData?.workSitesCount ?? 0),
     },
     {
-      label: t("resourceProvidor.workSites.activeSites"),
+      label: t("workSites.activeSites"),
       value: isLoading
         ? "—"
         : (statsData?.workSitesCount ?? 0) -
           (statsData?.inactiveWorkSitesCount ?? 0),
     },
     {
-      label: t("resourceProvidor.workSites.inactiveSites"),
+      label: t("workSites.inactiveSites"),
       value: isLoading ? "—" : (statsData?.inactiveWorkSitesCount ?? 0),
-    },
-    {
-      label: t("resourceProvidor.workSites.traked-resourrces"),
-      value: isLoading ? "—" : (statsData?.itemsCategoryCount ?? 0),
-    },
+    }
   ];
 
   return (
@@ -38,13 +42,13 @@ const WorkSiteHeader = () => {
       >
         <div className="inline-flex items-center gap-2 rounded-full border border-primary  px-3 py-1 text-xs font-medium text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-          {t("resourceProvidor.workSites.sub-title")}
+          {t("workSites.sub-title")}
         </div>
         <h1 className="mt-4 text-4xl lg:text-5xl font-bold leading-tight">
-          {t("resourceProvidor.workSites.title")}
+          {title || t("workSites.title")}
         </h1>
         <p className="mt-3 text-base lg:text-lg text-muted-foreground">
-          {t("resourceProvidor.workSites.description")}
+          {description || t("workSites.description")}
         </p>
       </motion.div>
 

@@ -16,14 +16,14 @@ export const resourceSchema = z.object({
   unit: z
     .string()
     .nonempty(
-      i18n.t("resourceProvidor.workSites.resource.validation.unit_required"),
+      i18n.t("workSites.resource.validation.unit_required"),
     ),
   resourceBankId: z
     .number()
     .min(
       1,
       i18n.t(
-        "resourceProvidor.workSites.resource.validation.resource_type_required",
+        "workSites.resource.validation.resource_type_required",
       ),
     )
     .nullable()
@@ -32,21 +32,21 @@ export const resourceSchema = z.object({
   imageUrl: z
     .string()
     .nonempty(
-      i18n.t("resourceProvidor.workSites.resource.validation.image_required"),
+      i18n.t("workSites.resource.validation.image_required"),
     ),
   price: z.coerce
     .number()
     .refine((value) => !Number.isNaN(value), {
       message: i18n.t(
-        "resourceProvidor.workSites.resource.validation.price_required",
+        "workSites.resource.validation.price_required",
       ),
     })
-    .min(1, i18n.t("resourceProvidor.workSites.resource.validation.price_min")),
+    .min(1, i18n.t("workSites.resource.validation.price_min")),
   description: z
     .string()
     .nonempty(
       i18n.t(
-        "resourceProvidor.workSites.resource.validation.description_required",
+        "workSites.resource.validation.description_required",
       ),
     ),
   isAvailable: z.boolean().nullable().optional(),
@@ -135,14 +135,14 @@ export const useUpdateResource = () => {
     mutationKey: MUTATION_KEYS.resource.update(),
     onSuccess: (_: any) => {
       successToast(
-        i18n.t("resourceProvidor.workSites.resource.resource-update"),
+        i18n.t("workSites.resource.resource-update"),
       );
     },
     onError: (error: any) => {
       const serverMessage = error?.response?.data?.message || error?.message;
       const message =
         serverMessage ||
-        i18n.t("resourceProvidor.workSites.resource.resource-error-update");
+        i18n.t("workSites.resource.resource-error-update");
       errorToast(message);
     },
   });
@@ -155,7 +155,7 @@ export const useCreateResource = () => {
     onSuccess: (_: any) => {
       successToast(
         i18n.t(
-          "resourceProvidor.workSites.resource.resource-created",
+          "workSites.resource.resource-created",
           "Site created",
         ),
       );
@@ -165,7 +165,7 @@ export const useCreateResource = () => {
       const message =
         serverMessage ||
         i18n.t(
-          "resourceProvidor.workSites.resource.resource-error-created",
+          "workSites.resource.resource-error-created",
           "Failed to create site",
         );
       errorToast(message);

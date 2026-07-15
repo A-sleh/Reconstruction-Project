@@ -69,7 +69,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
           <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder={t(
-              "resourceProvidor.workSites.resource.search-placeholder",
+              "workSites.resource.search-placeholder",
             )}
             className="pr-9 w-full bg-transparent"
           />
@@ -98,7 +98,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
               />
             </svg>
           </div>
-          <p>{t("resourceProvidor.workSites.no-resources-match")}</p>
+          <p>{t("workSites.no-resources-match")}</p>
         </div>
       ) : (
         <div className="rounded-xl border border-gray-200 bg-white overflow-hidden">
@@ -106,25 +106,25 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
             <TableHeader>
               <TableRow className="border-b border-gray-200 bg-gray-50">
                 <TableHead className="p-3 font-medium text-gray-500 w-24">
-                  {t("resourceProvidor.workSites.resource.table.image")}
+                  {t("workSites.resource.table.image")}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500">
-                  {t("resourceProvidor.workSites.resource.table.name")}
+                  {t("workSites.resource.table.name")}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500">
-                  {t("resourceProvidor.workSites.resource.table.category")}
+                  {t("workSites.resource.table.category")}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500">
-                  {t("resourceProvidor.workSites.resource.table.status")}
+                  {t("workSites.resource.table.status")}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500">
-                  {t("resourceProvidor.workSites.resource.table.price")}
+                  {t("workSites.resource.table.price")}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500">
-                  {t("resourceProvidor.workSites.resource.table.unit")}
+                  {t("workSites.resource.table.unit")}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500 text-center w-48">
-                  {t("resourceProvidor.workSites.resource.table.actions")}
+                  {t("workSites.resource.table.actions")}
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -228,7 +228,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                                 >
                                   <Pencil className="h-4 w-4" />
                                   {t(
-                                    "resourceProvidor.workSites.btn-edit",
+                                    "workSites.btn-edit",
                                     "Edit",
                                   )}
                                 </DropdownMenuItem>
@@ -254,7 +254,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                                 >
                                   <Trash2 className="h-4 w-4" />
                                   {t(
-                                    "resourceProvidor.workSites.btn-delete",
+                                    "workSites.btn-delete",
                                     "Delete",
                                   )}
                                 </DropdownMenuItem>
@@ -279,7 +279,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
             isLoading={isFetchingNextPage}
             className="inline-flex items-center justify-center rounded-full border border-primary bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {t("resourceProvidor.workSites.actions.load-more", "Load more")}
+            {t("workSites.actions.load-more", "Load more")}
           </Button>
         </div>
       )}

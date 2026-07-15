@@ -3,28 +3,23 @@ import i18n from "i18next";
 import ApiInstance from "@/config/api-instance";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { successToast, errorToast } from "@/components/common/Toast";
-import {
-  WorkSite,
-  QUERY_KEYS,
-  SiteController,
-  MUTATION_KEYS,
-  DeactivateWorkSite,
-} from "./index";
-import { workSiteTypes } from "../../shared/WorkSiteType";
+import { QUERY_KEYS, MUTATION_KEYS } from "./index";
+import { WorkSite, SiteController, DeactivateWorkSite } from "./types";
+import { workSiteTypes } from "@/features/work-sites/components/WorkSiteType";
 
 // Define the validation schema with dynamic translation messages inside the component
 export const siteFormSchema = z.object({
   name: z
     .string()
-    .min(1, i18n.t("resourceProvidor.workSites.validation-name-req"))
+    .min(1, i18n.t("workSites.validation-name-req"))
     .trim(),
   location: z
     .string()
-    .min(1, i18n.t("resourceProvidor.workSites.validation-location-req"))
+    .min(1, i18n.t("workSites.validation-location-req"))
     .trim(),
   address: z
     .string()
-    .min(1, i18n.t("resourceProvidor.workSites.validation-address-req"))
+    .min(1, i18n.t("workSites.validation-address-req"))
     .trim(),
   workSiteType: z.string(),
   logoURL: z.string().optional(),
@@ -52,7 +47,7 @@ const changeWorkSiteActivationApi = async (
   IsActive: boolean,
   WorkSiteId: number,
 ): Promise<void> => {
-  console.log(IsActive)
+  console.log(IsActive);
   const { data } = await ApiInstance.patch(
     `/${SiteController.deactivateWorkSite}`,
     {},
@@ -92,7 +87,7 @@ export const useDeactivateWorkSite = () => {
     onSuccess: (_: any) => {
       successToast(
         i18n.t(
-          "resourceProvidor.workSites.site-activation-updated",
+          "workSites.site-activation-updated",
           "Work site activation updated successfully.",
         ),
       );
@@ -108,7 +103,7 @@ export const useDeactivateWorkSite = () => {
       const message =
         serverMessage ||
         i18n.t(
-          "resourceProvidor.workSites.update-error",
+          "workSites.update-error",
           "Failed to update site",
         );
       errorToast(message);
@@ -124,7 +119,7 @@ export const useUpdateWorkSite = () => {
     mutationKey: MUTATION_KEYS.workSites.update(),
     onSuccess: (_: any) => {
       successToast(
-        i18n.t("resourceProvidor.workSites.site-updated", "Site updated"),
+        i18n.t("workSites.site-updated", "Site updated"),
       );
       try {
         //@ts-ignore
@@ -136,7 +131,7 @@ export const useUpdateWorkSite = () => {
       const message =
         serverMessage ||
         i18n.t(
-          "resourceProvidor.workSites.update-error",
+          "workSites.update-error",
           "Failed to update site",
         );
       errorToast(message);
@@ -152,7 +147,7 @@ export const useDeleteWorkSite = () => {
     mutationKey: MUTATION_KEYS.workSites.delete(),
     onSuccess: () => {
       successToast(
-        i18n.t("resourceProvidor.workSites.site-deleted", "Site deleted"),
+        i18n.t("workSites.site-deleted", "Site deleted"),
       );
       try {
         //@ts-ignore
@@ -164,7 +159,7 @@ export const useDeleteWorkSite = () => {
       const message =
         serverMessage ||
         i18n.t(
-          "resourceProvidor.workSites.delete-error",
+          "workSites.delete-error",
           "Failed to delete site",
         );
       errorToast(message);
@@ -180,7 +175,7 @@ export const useCreateWorkSite = () => {
     mutationKey: MUTATION_KEYS.workSites.create(),
     onSuccess: (_: any) => {
       successToast(
-        i18n.t("resourceProvidor.workSites.site-created", "Site created"),
+        i18n.t("workSites.site-created", "Site created"),
       );
       try {
         //@ts-ignore
@@ -192,7 +187,7 @@ export const useCreateWorkSite = () => {
       const message =
         serverMessage ||
         i18n.t(
-          "resourceProvidor.workSites.create-error",
+          "workSites.create-error",
           "Failed to create site",
         );
       errorToast(message);
