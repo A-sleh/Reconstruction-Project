@@ -2,8 +2,11 @@ import useAuthStore, { clearTokens } from "@/stores/useAuthStore";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { errorToast, successToast } from "./Toast";
+import { useNavigate } from "react-router";
+import { paths } from "@/config/paths";
 
 const Avatar = () => {
+  const goto = useNavigate();
   const { i18n, t } = useTranslation();
   const { clearAuth } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +24,9 @@ const Avatar = () => {
   const logout = async () => {
     try {
       await clearAuth();
+      await clearTokens();
       successToast(t("common.logoutSuccess"));
+      goto(paths.auth.login.getHref(), { replace: true });
     } catch (e) {
       errorToast(t("common.logoutError"));
     }
