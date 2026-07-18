@@ -1,0 +1,57 @@
+{
+  "categoryBank": {
+    "tabs": {
+      "pendingRequests": "الطلبات المعلقة",
+      "allCategories": "جميع الفئات",
+      "allCategoriesPlaceholder": "عرض جميع الفئات قادم قريباً."
+    },
+    "kpi": {
+      "totalCategories": "إجمالي الفئات",
+      "totalCategoriesHint": "جميع الفئات المسجلة",
+      "pendingRequests": "الطلبات المعلقة",
+      "pendingRequestsHint": "بانتظار التأكيد",
+      "totalResources": "إجمالي الموارد",
+      "totalResourcesHint": "عناصر الموارد في البنك",
+      "serviceCategories": "فئات الخدمات",
+      "serviceCategoriesHint": "فئات نوع الخدمة"
+    },
+    "table": {
+      "owner": "المالك",
+      "category": "الفئة",
+      "date": "التاريخ",
+      "actions": "الإجراءات",
+      "reject": "رفض",
+      "approve": "موافقة",
+      "empty": "لم يتم العثور على طلبات معلقة.",
+      "total": "{{count}} طلب إجمالاً",
+      "searchPlaceholder": "بحث في الطلبات...",
+      "filterByType": "تصفية حسب النوع",
+      "allTypes": "جميع الأنواع",
+      "resource": "مورد",
+      "service": "خدمة",
+      "fromDate": "من تاريخ",
+      "toDate": "إلى تاريخ",
+      "toSeparator": "إلى"
+    },
+    "rejectModal": {
+      "title": "رفض الطلب",
+      "description": "أدخل سبب رفض طلب الفئة هذا.",
+      "label": "سبب الرفض",
+      "placeholder": "أدخل سبب الرفض...",
+      "actions": {
+        "confirm": "رفض"
+      }
+    },
+    "approveModal": {
+      "title": "موافقة وتعيين فئة",
+      "description": "قم بتعيين هذا الطلب إلى فئة موجودة.",
+      "assignedLabel": "الفئة المعينة",
+      "searchLabel": "بحث في الفئات",
+      "searchPlaceholder": "بحث باسم الفئة...",
+      "noResults": "لم يتم العثور على فئات مطابقة.",
+      "actions": {
+        "confirm": "موافقة وتعيين"
+      }
+    }
+  }
+}

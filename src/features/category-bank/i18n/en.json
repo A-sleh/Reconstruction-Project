@@ -1,0 +1,57 @@
+{
+  "categoryBank": {
+    "tabs": {
+      "pendingRequests": "Pending Requests",
+      "allCategories": "All Categories",
+      "allCategoriesPlaceholder": "All categories view coming soon."
+    },
+    "kpi": {
+      "totalCategories": "Total Categories",
+      "totalCategoriesHint": "All registered categories",
+      "pendingRequests": "Pending Requests",
+      "pendingRequestsHint": "Awaiting confirmation",
+      "totalResources": "Total Resources",
+      "totalResourcesHint": "Resource items in bank",
+      "serviceCategories": "Service Categories",
+      "serviceCategoriesHint": "Service-type categories"
+    },
+    "table": {
+      "owner": "Owner",
+      "category": "Category",
+      "date": "Date",
+      "actions": "Actions",
+      "reject": "Reject",
+      "approve": "Approve",
+      "empty": "No pending requests found.",
+      "total": "{{count}} requests total",
+      "searchPlaceholder": "Search requests...",
+      "filterByType": "Filter by type",
+      "allTypes": "All Types",
+      "resource": "Resource",
+      "service": "Service",
+      "fromDate": "From date",
+      "toDate": "To date",
+      "toSeparator": "to"
+    },
+    "rejectModal": {
+      "title": "Reject Request",
+      "description": "Provide a reason for rejecting this category request.",
+      "label": "Rejection Reason",
+      "placeholder": "Enter the reason for rejection...",
+      "actions": {
+        "confirm": "Reject"
+      }
+    },
+    "approveModal": {
+      "title": "Approve & Assign Category",
+      "description": "Assign this request to an existing category.",
+      "assignedLabel": "Assigned Category",
+      "searchLabel": "Search Categories",
+      "searchPlaceholder": "Search by category name...",
+      "noResults": "No matching categories found.",
+      "actions": {
+        "confirm": "Approve & Assign"
+      }
+    }
+  }
+}
