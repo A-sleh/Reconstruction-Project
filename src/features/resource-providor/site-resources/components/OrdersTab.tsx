@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Search, Loader2, Inbox, Plus } from "lucide-react";
+import EmptyState from "@/components/common/EmptyState";
 import {
   Table,
   TableBody,
@@ -225,12 +226,10 @@ export default function OrdersTab() {
             {!isLoading && items.length === 0 && (
               <TableRow>
                 <TableCell colSpan={5} className="p-0">
-                  <div className="py-16 text-center">
-                    <Inbox className="h-10 w-10 mx-auto mb-3 text-gray-300" />
-                    <p className="text-sm text-gray-500 font-medium">
-                      {t("workSites.orders.table.empty")}
-                    </p>
-                  </div>
+                  <EmptyState
+                    icon={Inbox}
+                    message={t("workSites.orders.table.empty")}
+                  />
                 </TableCell>
               </TableRow>
             )}
