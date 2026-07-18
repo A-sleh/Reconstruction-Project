@@ -33,7 +33,7 @@ const ConfirmDelete = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.98, y: 8 }}
           transition={{ duration: 0.18, ease: "easeOut" }}
-          className="p-6 rounded-2xl bg-white"
+          className="p-2 rounded-2xl bg-white"
         >
           {/* Header Section */}
           <div className="mb-4 flex items-start gap-4">

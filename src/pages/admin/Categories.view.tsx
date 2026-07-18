@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BankCategoryKPISection from "@/features/category-bank/components/BankCategoryKPISection";
 import PendingApprovableRequests from "@/features/category-bank/components/PendingAprovableRequests";
+import SystemCategories from "@/features/category-bank/components/SystemCateogries";
 
 const Categories = () => {
   const { t, i18n } = useTranslation();
@@ -35,9 +36,7 @@ const Categories = () => {
             <PendingApprovableRequests />
           </TabsContent>
           <TabsContent value="all" className="mt-6">
-            <div className="text-center py-16 text-muted-foreground">
-              {t("categoryBank.tabs.allCategoriesPlaceholder")}
-            </div>
+            <SystemCategories />
           </TabsContent>
         </Tabs>
       </section>

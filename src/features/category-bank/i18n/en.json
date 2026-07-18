@@ -24,14 +24,28 @@
       "approve": "Approve",
       "empty": "No pending requests found.",
       "total": "{{count}} requests total",
+      "searchLabel": "Search",
       "searchPlaceholder": "Search requests...",
+      "typeLabel": "Type",
+      "dateRangeLabel": "Date Range",
       "filterByType": "Filter by type",
       "allTypes": "All Types",
       "resource": "Resource",
       "service": "Service",
       "fromDate": "From date",
       "toDate": "To date",
-      "toSeparator": "to"
+      "toSeparator": "to",
+      "type": "Type",
+      "tags": "Tags",
+      "noTags": "—",
+      "usageCount": "Usage",
+      "addCategory": "Add Category",
+      "edit": "Edit",
+      "delete": "Delete",
+      "viewDetails": "View Details",
+      "manageTags": "Manage Tags",
+      "totalCategories": "{{count}} categories total",
+      "searchCategoriesPlaceholder": "Search categories..."
     },
     "rejectModal": {
       "title": "Reject Request",
@@ -51,6 +65,36 @@
       "noResults": "No matching categories found.",
       "actions": {
         "confirm": "Approve & Assign"
+      }
+    },
+    "addModal": {
+      "title": "Add New Category",
+      "description": "Create a new category in the system.",
+      "nameLabel": "Category Name",
+      "namePlaceholder": "Enter category name...",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Enter category description...",
+      "typeLabel": "Type",
+      "actions": {
+        "confirm": "Add Category"
+      }
+    },
+    "detailsModal": {
+      "title": "Category Details",
+      "name": "Name",
+      "description": "Description",
+      "type": "Type",
+      "usageCount": "Usage Count",
+      "createdAt": "Created At",
+      "tags": "Tags",
+      "noTags": "No tags"
+    },
+    "tagsModal": {
+      "title": "Manage Tags",
+      "placeholder": "Enter new tag...",
+      "noTags": "No tags added yet.",
+      "actions": {
+        "confirm": "Save Tags"
       }
     }
   }

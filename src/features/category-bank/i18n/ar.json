@@ -24,14 +24,28 @@
       "approve": "موافقة",
       "empty": "لم يتم العثور على طلبات معلقة.",
       "total": "{{count}} طلب إجمالاً",
+      "searchLabel": "بحث",
       "searchPlaceholder": "بحث في الطلبات...",
+      "typeLabel": "النوع",
+      "dateRangeLabel": "نطاق التاريخ",
       "filterByType": "تصفية حسب النوع",
       "allTypes": "جميع الأنواع",
       "resource": "مورد",
       "service": "خدمة",
       "fromDate": "من تاريخ",
       "toDate": "إلى تاريخ",
-      "toSeparator": "إلى"
+      "toSeparator": "إلى",
+      "type": "النوع",
+      "tags": "الوسوم",
+      "noTags": "—",
+      "usageCount": "الاستخدام",
+      "addCategory": "إضافة فئة",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "viewDetails": "عرض التفاصيل",
+      "manageTags": "إدارة الوسوم",
+      "totalCategories": "{{count}} فئة إجمالاً",
+      "searchCategoriesPlaceholder": "بحث في الفئات..."
     },
     "rejectModal": {
       "title": "رفض الطلب",
@@ -51,6 +65,36 @@
       "noResults": "لم يتم العثور على فئات مطابقة.",
       "actions": {
         "confirm": "موافقة وتعيين"
+      }
+    },
+    "addModal": {
+      "title": "إضافة فئة جديدة",
+      "description": "إنشاء فئة جديدة في النظام.",
+      "nameLabel": "اسم الفئة",
+      "namePlaceholder": "أدخل اسم الفئة...",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "أدخل وصف الفئة...",
+      "typeLabel": "النوع",
+      "actions": {
+        "confirm": "إضافة الفئة"
+      }
+    },
+    "detailsModal": {
+      "title": "تفاصيل الفئة",
+      "name": "الاسم",
+      "description": "الوصف",
+      "type": "النوع",
+      "usageCount": "عدد الاستخدام",
+      "createdAt": "تاريخ الإنشاء",
+      "tags": "الوسوم",
+      "noTags": "لا توجد وسوم"
+    },
+    "tagsModal": {
+      "title": "إدارة الوسوم",
+      "placeholder": "أدخل وسم جديد...",
+      "noTags": "لم تُضف أي وسوم بعد.",
+      "actions": {
+        "confirm": "حفظ الوسوم"
       }
     }
   }
