@@ -1,4 +1,4 @@
-import KpiCard from "./KpiCard";
+import KpiCard from "@/components/shared/KpiCard";
 import { Boxes, Building2, DollarSign, Inbox } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useResourceProvidorStat } from "../api/query";

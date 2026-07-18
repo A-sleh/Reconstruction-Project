@@ -1,0 +1,14 @@
+{
+  "systemUsers": {
+    "kpi": {
+      "investors": "المستثمرون",
+      "investorsHint": "حسابات المستثمرين المسجلة",
+      "resourceProviders": "مورو الموارد",
+      "resourceProvidersHint": "حسابات موردي الموارد المسجلة",
+      "serviceProviders": "مورو الخدمات",
+      "serviceProvidersHint": "حسابات مزودي الخدمات المسجلة",
+      "engineers": "المهندسون",
+      "engineersHint": "حسابات المهندسين المسجلة"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "systemUsers": {
+    "kpi": {
+      "investors": "Investors",
+      "investorsHint": "Registered investor accounts",
+      "resourceProviders": "Resource Providers",
+      "resourceProvidersHint": "Registered resource provider accounts",
+      "serviceProviders": "Service Providers",
+      "serviceProvidersHint": "Registered service provider accounts",
+      "engineers": "Engineers",
+      "engineersHint": "Registered engineer accounts"
+    }
+  }
+}
