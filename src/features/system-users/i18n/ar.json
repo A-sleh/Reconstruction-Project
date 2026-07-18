@@ -9,6 +9,18 @@
       "serviceProvidersHint": "حسابات مزودي الخدمات المسجلة",
       "engineers": "المهندسون",
       "engineersHint": "حسابات المهندسين المسجلة"
+    },
+    "table": {
+      "user": "المستخدم",
+      "phone": "الهاتف",
+      "role": "الدور",
+      "identifier": "المعرف",
+      "actions": "الإجراءات",
+      "activate": "تفعيل",
+      "deactivate": "إلغاء التفعيل",
+      "delete": "حذف",
+      "empty": "لم يتم العثور على مستخدمين.",
+      "total": "{{count}} مستخدم إجمالاً"
     }
   }
 }

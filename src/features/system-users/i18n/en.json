@@ -9,6 +9,18 @@
       "serviceProvidersHint": "Registered service provider accounts",
       "engineers": "Engineers",
       "engineersHint": "Registered engineer accounts"
+    },
+    "table": {
+      "user": "User",
+      "phone": "Phone",
+      "role": "Role",
+      "identifier": "Identifier",
+      "actions": "Actions",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "delete": "Delete",
+      "empty": "No users found.",
+      "total": "{{count}} users total"
     }
   }
 }
