@@ -79,6 +79,13 @@
         "confirm": "Add Category"
       }
     },
+    "editModal": {
+      "title": "Edit Category",
+      "description": "Update category details.",
+      "actions": {
+        "confirm": "Update Category"
+      }
+    },
     "detailsModal": {
       "title": "Category Details",
       "name": "Name",

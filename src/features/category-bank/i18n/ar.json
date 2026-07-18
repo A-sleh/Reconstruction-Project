@@ -79,6 +79,13 @@
         "confirm": "إضافة الفئة"
       }
     },
+    "editModal": {
+      "title": "تعديل الفئة",
+      "description": "تحديث تفاصيل الفئة.",
+      "actions": {
+        "confirm": "تحديث الفئة"
+      }
+    },
     "detailsModal": {
       "title": "تفاصيل الفئة",
       "name": "الاسم",
