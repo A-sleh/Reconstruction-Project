@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
-import { Search, Pencil, Trash2, MoreVertical } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Search, Pencil, Trash2, MoreVertical, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useParams } from "react-router";
-import { useRWorkSiteResourcesInfinite } from "../api/queries";
+import { useRWorkSiteResourcesInfinite, useBankCategories } from "../api/queries";
 import {
   Table,
   TableHeader,
@@ -14,6 +14,13 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import {
   DropdownMenu,
@@ -24,7 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import ModifyResourceModel from "./ModifyResourceModel";
-import CategoryFilterPopup from "./CategoryFilterPopup";
+import CollapsibleFilter from "@/components/common/CollapsibleFilter";
 import { PureResource } from "../api/types";
 import { useDeleteWorksiteItem } from "../api/actions";
 
@@ -42,6 +49,17 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
     useDeleteWorksiteItem();
   const isArabic = i18n.language == "ar";
   const [categoryId, setCategoryId] = useState<number | "all">("all");
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | "active" | "hold">("all");
+
+  const { data: categoriesData } = useBankCategories();
+  const categories = useMemo(
+    () =>
+      Array.isArray(categoriesData)
+        ? categoriesData
+        : categoriesData?.categories || [],
+    [categoriesData],
+  );
 
   const {
     data: resourcesData,
@@ -51,35 +69,97 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
     isPending,
   } = useRWorkSiteResourcesInfinite({
     categoryId,
-    search: "",
+    search,
     workSiteId: Number(effectiveSiteId),
   });
 
-  const items: PureResource[] =
+  const allItems: PureResource[] =
     resourcesData?.pages.flatMap((page) => page.data) || [];
+
+  const items = useMemo(() => {
+    if (statusFilter === "all") return allItems;
+    return allItems.filter((r) =>
+      statusFilter === "active" ? r.isAvailable : !r.isAvailable,
+    );
+  }, [allItems, statusFilter]);
 
   return (
     <div className="space-y-4">
       {/* Header with Search and Filter */}
-      <div className="flex gap-2 items-center mb-4">
-        <div
-          className="relative w-90 rounded-lg bg-white"
-          dir={isArabic ? "rtl" : "ltr"}
-        >
-          <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder={t(
-              "workSites.resource.search-placeholder",
-            )}
-            className="pr-9 w-full bg-transparent"
-          />
+      <CollapsibleFilter
+        trigger={
+          <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+            <Filter className="h-4 w-4" />
+            {t("workSites.resource.filters", "Filters")}
+          </span>
+        }
+      >
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
+          <div
+            className="relative w-full md:w-90 rounded-lg bg-white"
+            dir={isArabic ? "rtl" : "ltr"}
+          >
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder={t(
+                "workSites.resource.search-placeholder",
+              )}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pr-9 w-full bg-transparent"
+            />
+          </div>
+          <Select
+            value={categoryId === "all" ? "all" : String(categoryId)}
+            onValueChange={(value) =>
+              setCategoryId(value === "all" ? "all" : Number(value))
+            }
+          >
+            <SelectTrigger className="w-full md:w-fit" dir={isArabic ? "rtl" : "ltr"}>
+              <SelectValue
+                placeholder={t(
+                  "workSites.resource.filterByCategory",
+                  "Filter by category",
+                )}
+              />
+            </SelectTrigger>
+            <SelectContent dir={isArabic ? "rtl" : "ltr"}>
+              <SelectItem value="all">
+                {t("workSites.resource.allCategories", "All Categories")}
+              </SelectItem>
+              {categories.map((category) => (
+                <SelectItem key={category.id} value={String(category.id)}>
+                  {category.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select
+            value={statusFilter}
+            onValueChange={(v) => setStatusFilter(v as "all" | "active" | "hold")}
+          >
+            <SelectTrigger className="w-full md:w-fit" dir={isArabic ? "rtl" : "ltr"}>
+              <SelectValue
+                placeholder={t(
+                  "workSites.resource.filterByStatus",
+                  "Filter by status",
+                )}
+              />
+            </SelectTrigger>
+            <SelectContent dir={isArabic ? "rtl" : "ltr"}>
+              <SelectItem value="all">
+                {t("workSites.resource.allStatuses", "All Statuses")}
+              </SelectItem>
+              <SelectItem value="active">
+                {t("workSites.resource.active", "Active")}
+              </SelectItem>
+              <SelectItem value="hold">
+                {t("workSites.resource.onHold", "On Hold")}
+              </SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-        <CategoryFilterPopup
-          onSelect={(value) =>
-            setCategoryId(value === "all" ? "all" : Number(value))
-          }
-        />
-      </div>
+      </CollapsibleFilter>
 
       {items.length === 0 && !isPending ? (
         <div className="rounded-2xl border border-dashed border-border py-16 text-center text-muted-foreground bg-white">
