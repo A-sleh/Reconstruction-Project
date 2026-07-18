@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Search, Check, X } from "lucide-react";
+import { Search, Check, X, Filter } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -21,12 +22,15 @@ import {
 import { RejectRequestModal } from "./RejectRequestModal";
 import { ApproveRequestModal } from "./ApproveRequestModal";
 import { MOCK_PENDING_REQUESTS, PendingRequest } from "../mock/pendingRequests";
+import CollapsibleFilter from "@/components/common/CollapsibleFilter";
 
 const PendingApprovableRequests = () => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
 
-  const [requests, setRequests] = useState<PendingRequest[]>(MOCK_PENDING_REQUESTS);
+  const [requests, setRequests] = useState<PendingRequest[]>(
+    MOCK_PENDING_REQUESTS,
+  );
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
   const [dateFrom, setDateFrom] = useState("");
@@ -63,63 +67,88 @@ const PendingApprovableRequests = () => {
 
   return (
     <div className="space-y-4 w-full">
-      <div className="flex flex-wrap gap-3 items-center mb-4">
+      <div className="flex gap-2">
         <div
-          className="relative w-72 rounded-lg bg-white"
+          className="relative w-full md:w-72 rounded-lg bg-white"
           dir={isArabic ? "rtl" : "ltr"}
         >
           <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder={t("categoryBank.table.searchPlaceholder", "Search requests...")}
+            placeholder={t(
+              "categoryBank.table.searchPlaceholder",
+              "Search requests...",
+            )}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pr-9 w-full bg-transparent"
           />
         </div>
+        <CollapsibleFilter
+          trigger={
+            <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+              <Filter className="h-4 w-4" />
+              {t("workSites.resource.filters", "Filters")}
+            </span>
+          }
+        >
+          <div className="flex flex-col gap-3 md:flex-row md:items-end md:flex-wrap md:gap-3 mb-4">
+            <div className="flex flex-col gap-1.5">
+              <Label>{t("categoryBank.table.typeLabel", "Type")}</Label>
+              <Select value={typeFilter} onValueChange={setTypeFilter}>
+                <SelectTrigger className="w-full md:w-44 flex-1">
+                  <SelectValue
+                    placeholder={t(
+                      "categoryBank.table.filterByType",
+                      "Filter by type",
+                    )}
+                  />
+                </SelectTrigger>
+                <SelectContent >
+                  <SelectItem value="all">
+                    {t("categoryBank.table.allTypes", "All Types")}
+                  </SelectItem>
+                  <SelectItem value="resource">
+                    {t("categoryBank.table.resource", "Resource")}
+                  </SelectItem>
+                  <SelectItem value="service">
+                    {t("categoryBank.table.service", "Service")}
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-        <Select value={typeFilter} onValueChange={setTypeFilter}>
-          <SelectTrigger className="w-44">
-            <SelectValue placeholder={t("categoryBank.table.filterByType", "Filter by type")} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">
-              {t("categoryBank.table.allTypes", "All Types")}
-            </SelectItem>
-            <SelectItem value="resource">
-              {t("categoryBank.table.resource", "Resource")}
-            </SelectItem>
-            <SelectItem value="service">
-              {t("categoryBank.table.service", "Service")}
-            </SelectItem>
-          </SelectContent>
-        </Select>
-
-        <div className="flex items-center gap-2">
-          <Input
-            type="date"
-            value={dateFrom}
-            onChange={(e) => setDateFrom(e.target.value)}
-            className="w-40 bg-white"
-            placeholder={t("categoryBank.table.fromDate", "From date")}
-          />
-          <span className="text-muted-foreground text-sm">
-            {t("categoryBank.table.toSeparator", "to")}
-          </span>
-          <Input
-            type="date"
-            value={dateTo}
-            onChange={(e) => setDateTo(e.target.value)}
-            className="w-40 bg-white"
-            placeholder={t("categoryBank.table.toDate", "To date")}
-          />
-        </div>
+            <div className="flex flex-col gap-1.5">
+              <Label>
+                {t("categoryBank.table.dateRangeLabel", "Date Range")}
+              </Label>
+              <div className="flex items-center gap-2">
+                <Input
+                  type="date"
+                  value={dateFrom}
+                  onChange={(e) => setDateFrom(e.target.value)}
+                  className="w-full md:w-40 bg-white"
+                  placeholder={t("categoryBank.table.fromDate", "From date")}
+                />
+                <span className="text-muted-foreground text-sm">
+                  {t("categoryBank.table.toSeparator", "to")}
+                </span>
+                <Input
+                  type="date"
+                  value={dateTo}
+                  onChange={(e) => setDateTo(e.target.value)}
+                  className="w-full md:w-40 bg-white"
+                  placeholder={t("categoryBank.table.toDate", "To date")}
+                />
+              </div>
+            </div>
+          </div>
+        </CollapsibleFilter>
       </div>
-
       <div className="rounded-xl border border-gray-300 bg-white shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow >
+              <TableRow>
                 <TableHead>{t("categoryBank.table.owner")}</TableHead>
                 <TableHead>{t("categoryBank.table.category")}</TableHead>
                 <TableHead>{t("categoryBank.table.date")}</TableHead>
@@ -156,7 +185,7 @@ const PendingApprovableRequests = () => {
                     </div>
                   </TableCell>
 
-                  <TableCell >
+                  <TableCell>
                     <div>
                       <div className="font-medium flex items-center gap-2">
                         {req.categoryName}
