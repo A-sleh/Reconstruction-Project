@@ -85,6 +85,17 @@ const ServiceProvidor_Profile = lazy(
 
 // Engineers importing pages
 
+// Admin importing pages
+const Admin_Categories = lazy(
+  () => import("@/pages/admin/Categories.view"),
+);
+const Admin_ManageUsers = lazy(
+  () => import("@/pages/admin/ManageUsersSystem.view"),
+);
+const Admin_Support = lazy(
+  () => import("@/pages/admin/Support.view"),
+);
+
 // Fallback component for lazy loading
 const LoadingFallback = () => <Loader />;
 
@@ -325,6 +336,37 @@ const router: RouteObject[] = [
           <Suspense fallback={<LoadingFallback />}>
             <AuthGuard allowedRoles={["Investor"]}>
               <Project_Work_Site />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      // Admin routes
+      {
+        path: paths.app.admin.categories.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Admin"]}>
+              <Admin_Categories />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.admin.manageUsers.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Admin"]}>
+              <Admin_ManageUsers />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.admin.support.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Admin"]}>
+              <Admin_Support />
             </AuthGuard>
           </Suspense>
         ),

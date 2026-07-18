@@ -125,5 +125,19 @@ export const paths = {
         getHref: () => `/app/project/list-property`,
       },
     },
+    admin: {
+      categories: {
+        path: "/app/admin/categories",
+        getHref: () => `/app/admin/categories`,
+      },
+      manageUsers: {
+        path: "/app/admin/manage-users",
+        getHref: () => `/app/admin/manage-users`,
+      },
+      support: {
+        path: "/app/admin/support",
+        getHref: () => `/app/admin/support`,
+      },
+    },
   },
 } as const;
