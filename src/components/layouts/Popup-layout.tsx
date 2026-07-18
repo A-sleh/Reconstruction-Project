@@ -35,7 +35,7 @@ export default function PopuupLayout({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 backdrop-blur-sm"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -45,7 +45,7 @@ export default function PopuupLayout({
             onClick={(e) => e.stopPropagation()}
             className="w-full max-w-2xl rounded-2xl border border-gray-300 bg-white shadow-elegant"
           >
-            <div className="flex items-center justify-between border-b border-gray-300 p-6">
+            <div className="flex items-center justify-between border-b border-gray-300 p-4">
               <div hidden={withOutHeader}>
                 <h2 hidden={!title} className="text-xl font-semibold">
                   {title}
@@ -67,7 +67,7 @@ export default function PopuupLayout({
                 </button>
               </Model.Close>
             </div>
-            <div className="p-6">
+            <div className="p-4 py-2">
               {typeof children == "function"
                 ? children(handleCloseModal)
                 : children}
