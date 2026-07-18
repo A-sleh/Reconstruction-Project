@@ -1,0 +1,29 @@
+{
+  "support": {
+    "chatHeader": {
+      "active": "نشط",
+      "offline": "غير متصل"
+    },
+    "chatAction": {
+      "messagePlaceholder": "اكتب رسالة..."
+    },
+    "chatMessages": {
+      "noMessages": "لا توجد رسائل بعد."
+    },
+    "emojiPicker": {
+      "openPicker": "فتح قائمة الرموز التعبيرية"
+    },
+    "listUsers": {
+      "noUsers": "لا توجد محادثات.",
+      "searchPlaceholder": "بحث في المحادثات..."
+    },
+    "tabs": {
+      "new": "جديد",
+      "replied": "تم الرد"
+    },
+    "emptyState": {
+      "title": "لم يتم اختيار محادثة",
+      "description": "اختر محادثة من القائمة لبدء المراسلة"
+    }
+  }
+}

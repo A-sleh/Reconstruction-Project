@@ -1,0 +1,29 @@
+{
+  "support": {
+    "chatHeader": {
+      "active": "Active",
+      "offline": "Offline"
+    },
+    "chatAction": {
+      "messagePlaceholder": "Type a message..."
+    },
+    "chatMessages": {
+      "noMessages": "No messages yet."
+    },
+    "emojiPicker": {
+      "openPicker": "Open emoji picker"
+    },
+    "listUsers": {
+      "noUsers": "No conversations found.",
+      "searchPlaceholder": "Search conversations..."
+    },
+    "tabs": {
+      "new": "New",
+      "replied": "Replied"
+    },
+    "emptyState": {
+      "title": "No conversation selected",
+      "description": "Choose a conversation from the list to start messaging"
+    }
+  }
+}
