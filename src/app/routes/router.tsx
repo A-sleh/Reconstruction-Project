@@ -345,7 +345,7 @@ const router: RouteObject[] = [
         path: paths.app.admin.categories.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Admin"]}>
+            <AuthGuard allowedRoles={["Admin","Investor"]}>
               <Admin_Categories />
             </AuthGuard>
           </Suspense>
@@ -355,7 +355,7 @@ const router: RouteObject[] = [
         path: paths.app.admin.manageUsers.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Admin"]}>
+            <AuthGuard allowedRoles={["Admin","Investor"]}>
               <Admin_ManageUsers />
             </AuthGuard>
           </Suspense>
@@ -365,7 +365,7 @@ const router: RouteObject[] = [
         path: paths.app.admin.support.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Admin"]}>
+            <AuthGuard allowedRoles={["Admin","Investor"]}>
               <Admin_Support />
             </AuthGuard>
           </Suspense>

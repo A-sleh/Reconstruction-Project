@@ -20,7 +20,10 @@
       "deactivate": "Deactivate",
       "delete": "Delete",
       "empty": "No users found.",
-      "total": "{{count}} users total"
+      "total": "{{count}} users total",
+      "searchPlaceholder": "Search users...",
+      "filterByRole": "Filter by role",
+      "allRoles": "All Roles"
     }
   }
 }
