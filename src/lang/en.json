@@ -29,6 +29,12 @@
     "readOnlyNotice": "This profile is read-only because you are viewing another user.",
     "updatedMessage": "Profile updated successfully."
   },
+  "landmap": {
+    "emptyHint": "Click on the map to start placing points",
+    "closeHintPrefix": "Click the",
+    "closeHintGreen": "green point",
+    "closeHintSuffix": "to close the polygon (min 3 points)"
+  },
   "common": {
     "logout": "Logout",
     "error": "Some thing went wrong",

@@ -29,6 +29,12 @@
     "readOnlyNotice": "هذا الملف للعرض فقط لأنك تشاهد ملف مستخدم آخر.",
     "updatedMessage": "تم تحديث الملف الشخصي بنجاح."
   },
+  "landmap": {
+    "emptyHint": "انقر على الخريطة لبدء وضع النقاط",
+    "closeHintPrefix": "انقر على",
+    "closeHintGreen": "النقطة الخضراء",
+    "closeHintSuffix": "لإغلاق المضلع (الحد الأدنى 3 نقاط)"
+  },
   "common": {
     "logout": "تسجيل الخروج",
     "logoutSuccess": "تم تسجيل الخروج بنجاح",

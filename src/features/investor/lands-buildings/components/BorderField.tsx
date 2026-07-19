@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { LandMap } from "@/components/shared/LandMap";
 import type { LatLng } from "@/lib/helpers";
 
@@ -32,6 +33,7 @@ export default function BorderField({
   disabled = false,
   error,
 }: BorderFieldProps) {
+  const { t } = useTranslation();
   const points = useMemo(() => parseBorderString(value), [value]);
 
   const handleChange = useCallback(
@@ -45,11 +47,11 @@ export default function BorderField({
     <div className="w-full space-y-2">
       <div className="flex items-center justify-between">
         <label className="text-sm font-medium text-foreground">
-          Land Border
+          {t("investor.border-label")}
         </label>
         {points.length > 0 && (
           <span className="text-xs text-muted-foreground">
-            {points.length} point{points.length !== 1 ? "s" : ""}
+            {t("investor.border-points", { count: points.length })}
           </span>
         )}
       </div>
@@ -67,7 +69,7 @@ export default function BorderField({
       )}
 
       <p className="text-xs text-muted-foreground">
-        Click on the map to place boundary points. Click near the first point to close the polygon.
+        {t("investor.border-hint")}
       </p>
     </div>
   );
