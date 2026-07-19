@@ -113,6 +113,10 @@ export const paths = {
         path: "/app/investor/market-buildings-lands/:id",
         getHref: (id: number) => `/app/investor/market-buildings-lands/${id}`,
       },
+      basicLandInfo: {
+        path: "/app/investor/basic-land-info",
+        getHref: () => `/app/investor/basic-land-info`,
+      },
     },
     engineer: {},
     projects: {

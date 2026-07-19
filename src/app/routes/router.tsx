@@ -62,6 +62,9 @@ const Invesort_Market_Place = lazy(
 const Invesort_Property_Details = lazy(
   () => import("@/pages/investor/PropertyDetails.view"),
 );
+const Investor_BasicLandInfo = lazy(
+  () => import("@/pages/investor/BasicLandInfo.view"),
+);
 const Project_List_Property = lazy(
   () => import("@/pages/project/ListProperty.view"),
 );
@@ -316,6 +319,16 @@ const router: RouteObject[] = [
           <Suspense fallback={<LoadingFallback />}>
             <AuthGuard allowedRoles={["Investor"]}>
               <Invesort_Property_Details />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.investor.basicLandInfo.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedRoles={["Admin", "Investor"]}>
+              <Investor_BasicLandInfo />
             </AuthGuard>
           </Suspense>
         ),
