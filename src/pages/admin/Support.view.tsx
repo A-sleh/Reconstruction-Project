@@ -342,7 +342,7 @@ const Support = () => {
         <div className="flex items-center gap-2 px-4 py-3 bg-card border-b border-border">
           <Button
             variant="ghost"
-            className="hover:bg-gray-300/30 transition-all cursor-pointer"
+            className="hover:bg-gray-300/30 transition-all cursor-pointer "
             size="icon"
             onClick={() => setIsSidebarOpen((prev) => !prev)}
             data-icon="inline-start"

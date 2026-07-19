@@ -1,0 +1,26 @@
+{
+  "investor": {
+    "dashboard": "لوحة تحكم المستثمر",
+    "portfolioOverview": "نظرة عامة على المحفظة",
+    "portfolioDescription": "إدارة الأصول المملوكة، والإشراف على المشاريع، وتتبع الأداء المالي.",
+    "addProperty": "إضافة عقار جديد",
+    "totalPortfolioValue": "إجمالي قيمة المحفظة",
+    "yoyGrowth": "+4.2% سنوياً",
+    "buildings": "المباني",
+    "operationalAndDev": "تشغيلي وقيد التطوير",
+    "landParcels": "قطع الأراضي",
+    "acrossRegions": "عبر 4 مناطق",
+    "activeProjects": "المشاريع النشطة",
+    "onSiteConstruction": "بناء في الموقع",
+    "allAssets": "جميع الأصول",
+    "lands": "الأراضي",
+    "portfolioUp": "المحفظة ترتفع",
+    "quarterGrowth": "+4.2%",
+    "thisQuarter": "هذا الربع",
+    "valuation": "التقييم",
+    "area": "المساحة",
+    "squareMeters": "م²",
+    "view": "عرض",
+    "edit": "تعديل"
+  }
+}

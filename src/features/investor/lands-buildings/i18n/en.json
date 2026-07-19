@@ -1,0 +1,26 @@
+{
+  "investor": {
+    "dashboard": "Investor Dashboard",
+    "portfolioOverview": "Portfolio Overview",
+    "portfolioDescription": "Manage owned assets, oversee projects, and track financial performance.",
+    "addProperty": "Add New Property",
+    "totalPortfolioValue": "Total Portfolio Value",
+    "yoyGrowth": "+4.2% YoY",
+    "buildings": "Buildings",
+    "operationalAndDev": "Operational & dev.",
+    "landParcels": "Land Parcels",
+    "acrossRegions": "Across 4 regions",
+    "activeProjects": "Active Projects",
+    "onSiteConstruction": "On-site construction",
+    "allAssets": "All Assets",
+    "lands": "Lands",
+    "portfolioUp": "Portfolio up",
+    "quarterGrowth": "+4.2%",
+    "thisQuarter": "this quarter",
+    "valuation": "Valuation",
+    "area": "Area",
+    "squareMeters": "m²",
+    "view": "View",
+    "edit": "Edit"
+  }
+}
