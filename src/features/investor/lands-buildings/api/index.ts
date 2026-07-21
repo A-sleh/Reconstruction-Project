@@ -3,7 +3,7 @@ const BASE_LAND_ROUTE = "land";
 export enum LandController {
   CreateLand = `${BASE_LAND_ROUTE}/create-land`,
   UpdateLand = `${BASE_LAND_ROUTE}/update`,
-  DeleteLand = `${BASE_LAND_ROUTE}/delete`,
+  DeleteLand = `${BASE_LAND_ROUTE}/delete-land`,
   GetLandById = `${BASE_LAND_ROUTE}/get-by-id`,
   GetAllLands = `${BASE_LAND_ROUTE}/get-all`,
 }

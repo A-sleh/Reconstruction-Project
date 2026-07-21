@@ -13,14 +13,8 @@ import type {
 import { EZoningType } from "./types";
 
 export const landFormSchema = z.object({
-  name: z
-    .string()
-    .min(1, i18n.t("investor.validation-name-req"))
-    .trim(),
-  address: z
-    .string()
-    .min(1, i18n.t("investor.validation-address-req"))
-    .trim(),
+  name: z.string().min(1, i18n.t("investor.validation-name-req")).trim(),
+  address: z.string().min(1, i18n.t("investor.validation-address-req")).trim(),
   location: z
     .string()
     .min(1, i18n.t("investor.validation-location-req"))
@@ -67,6 +61,31 @@ const updateLandApi = async (payload: UpdateLandRequest): Promise<Land> => {
     payload,
   );
   return data;
+};
+
+const deleteLandApi = async (id: string | number) => {
+  const { data } = await ApiInstance.delete(`/${LandController.DeleteLand}`, {
+    params: { id },
+  });
+  return data;
+};
+
+export const useDeleteLand = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.lands.delete(),
+    mutationFn: deleteLandApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.lands.all });
+      successToast(i18n.t("investor.land-deleted-success"));
+    },
+    onError: (error: any) => {
+      const message =
+        error?.response?.data?.message || i18n.t("investor.land-deleted-error");
+      errorToast(message);
+    },
+  });
 };
 
 export const useCreateLand = () => {
