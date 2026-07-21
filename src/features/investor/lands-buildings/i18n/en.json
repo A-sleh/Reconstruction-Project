@@ -9,7 +9,7 @@
     "buildings": "Buildings",
     "operationalAndDev": "Operational & dev.",
     "landParcels": "Land Parcels",
-    "acrossRegions": "Across 4 regions",
+    "acrossRegions": "Across {{lands}} regions",
     "activeProjects": "Active Projects",
     "onSiteConstruction": "On-site construction",
     "allAssets": "All Assets",

@@ -1,7 +1,11 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
 import { LandController, QUERY_KEYS } from ".";
-import type { GetAllLandsFilters, LandsResponse } from "./types";
+import type {
+  GetAllLandsFilters,
+  InvestorPropertiesSummary,
+  LandsResponse,
+} from "./types";
 
 const getAllLands = async (filters: GetAllLandsFilters) => {
   const { data } = await ApiInstance.get<LandsResponse>(
@@ -28,5 +32,19 @@ export const useLandsInfinite = (filters: GetAllLandsFilters) => {
       }
       return undefined;
     },
+  });
+};
+
+const getInvestorProperties = async (): Promise<InvestorPropertiesSummary> => {
+  const { data } = await ApiInstance.get<InvestorPropertiesSummary>(
+    `/${LandController.GetInvestorProperties}`,
+  );
+  return data;
+};
+
+export const useInvestorProperties = () => {
+  return useQuery<InvestorPropertiesSummary, Error>({
+    queryKey: QUERY_KEYS.lands.investorProperties(),
+    queryFn: getInvestorProperties,
   });
 };

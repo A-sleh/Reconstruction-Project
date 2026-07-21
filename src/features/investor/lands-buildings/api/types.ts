@@ -81,4 +81,10 @@ export interface LandResponse {
   isSuccess: boolean;
 }
 
+export interface InvestorPropertiesSummary {
+  totalBuidlings: number;
+  totalLands: number;
+  allOpenedProjects: number;
+}
+
 export interface LandsResponse extends Paginated<LandListItem> {}

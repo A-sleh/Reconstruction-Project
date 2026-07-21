@@ -9,7 +9,7 @@
     "buildings": "المباني",
     "operationalAndDev": "تشغيلي وقيد التطوير",
     "landParcels": "قطع الأراضي",
-    "acrossRegions": "عبر 4 مناطق",
+    "acrossRegions": "عبر {{lands}} مناطق",
     "activeProjects": "المشاريع النشطة",
     "onSiteConstruction": "بناء في الموقع",
     "allAssets": "جميع الأصول",
