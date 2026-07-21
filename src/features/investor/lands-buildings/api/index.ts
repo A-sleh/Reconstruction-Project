@@ -1,3 +1,5 @@
+import { GetAllLandsFilters } from "./types";
+
 const BASE_LAND_ROUTE = "land";
 
 export enum LandController {
@@ -12,7 +14,7 @@ export const QUERY_KEYS = {
   lands: {
     all: ["lands"] as const,
     lists: () => [...QUERY_KEYS.lands.all, "list"] as const,
-    list: (filters: Record<string, unknown>) =>
+    list: (filters: GetAllLandsFilters) =>
       [...QUERY_KEYS.lands.lists(), filters] as const,
     detail: (id: string | number) =>
       [...QUERY_KEYS.lands.all, "detail", id] as const,

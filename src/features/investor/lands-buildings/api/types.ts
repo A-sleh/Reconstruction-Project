@@ -1,3 +1,5 @@
+import { Paginated } from "@/types";
+
 export enum EZoningType {
   Residential = 0,
   Commercial = 1,
@@ -7,6 +9,12 @@ export enum EZoningType {
   Hospitality = 5,
   Office = 6,
   TechPark = 7,
+}
+
+export interface GetAllLandsFilters {
+  HasBuilding: boolean;
+  PageNumber?: number;
+  PageSize?: number;
 }
 
 export const ZONING_LABELS: Record<EZoningType, string> = {
@@ -20,6 +28,11 @@ export const ZONING_LABELS: Record<EZoningType, string> = {
   [EZoningType.TechPark]: "Tech Park",
 };
 
+interface ILoncation {
+  longitude: number;
+  latitude: number;
+}
+
 export interface Land {
   id: string;
   name: string;
@@ -30,6 +43,18 @@ export interface Land {
   address: string;
   area: number;
   location: string;
+  coverImageUrl: string;
+}
+export interface LandListItem {
+  id: string;
+  name: string;
+  border: ILoncation[];
+  isValidated: boolean;
+  zoningType: EZoningType;
+  accessability: boolean;
+  address: string;
+  area: number;
+  location: ILoncation;
   coverImageUrl: string;
 }
 
@@ -56,8 +81,4 @@ export interface LandResponse {
   isSuccess: boolean;
 }
 
-export interface LandsResponse {
-  data: Land[];
-  message: string;
-  isSuccess: boolean;
-}
+export interface LandsResponse extends Paginated<LandListItem> {}

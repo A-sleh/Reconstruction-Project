@@ -53,6 +53,13 @@
     "btn-cancel": "Cancel",
     "btn-save": "Save Changes",
     "btn-create": "Create Land",
-    "back": "Back"
+    "back": "Back",
+    "loading": "Loading...",
+    "error-loading": "Failed to load lands",
+    "no-results": "No lands found",
+    "loadMore": "Load more",
+    "validated": "Validated",
+    "notValidated": "Not Validated",
+    "withProjects": "Show lands with projects"
   }
 }
