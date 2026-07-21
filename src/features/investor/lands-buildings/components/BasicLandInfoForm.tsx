@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import Input from "@/components/inputs/Input";
+import ImageUploader from "@/components/inputs/ImageUploader";
 import {
   landFormSchema,
   initialLandValues,
@@ -12,6 +13,7 @@ import {
   useUpdateLand,
 } from "../api/actions";
 import { ZONING_LABELS, EZoningType, type Land } from "../api/types";
+import { useFileUpload } from "@/hooks/useFileUpload";
 import BorderField from "./BorderField";
 
 interface Props {
@@ -19,7 +21,10 @@ interface Props {
   onSuccess?: () => void;
 }
 
-export default function BasicLandInfoForm({ initial = null, onSuccess }: Props) {
+export default function BasicLandInfoForm({
+  initial = null,
+  onSuccess,
+}: Props) {
   const { t } = useTranslation();
 
   const {
@@ -40,6 +45,15 @@ export default function BasicLandInfoForm({ initial = null, onSuccess }: Props) 
   const zoningValue = watch("zoning");
   const accessabilityValue = watch("accessability");
 
+  const {
+    previewUrl: coverPreviewUrl,
+    fileId: coverFileId,
+    isPending: isUploading,
+    onChange: onCoverChange,
+  } = useFileUpload({
+    onSuccess: (id) => setValue("coverImageId", id),
+  });
+
   useEffect(() => {
     if (initial) {
       reset({
@@ -51,7 +65,7 @@ export default function BasicLandInfoForm({ initial = null, onSuccess }: Props) 
         border: initial.border ?? [],
         isValidated: initial.isValidated ?? false,
         accessability: initial.accessability ?? false,
-        coverImageUrl: initial.coverImageUrl ?? "",
+        coverImageId: initial.coverImageUrl ?? "",
       });
     }
   }, [initial, reset]);
@@ -63,16 +77,24 @@ export default function BasicLandInfoForm({ initial = null, onSuccess }: Props) 
     if (initial) {
       updateLand(
         { ...data, id: initial.id },
-        { onSuccess: () => { reset(); onSuccess?.(); } },
+        {
+          onSuccess: () => {
+            reset();
+            onSuccess?.();
+          },
+        },
       );
     } else {
       createLand(data, {
-        onSuccess: () => { reset(); onSuccess?.(); },
+        onSuccess: () => {
+          reset();
+          onSuccess?.();
+        },
       });
     }
   };
 
-  const isPending = isCreating || isUpdating;
+  const isPending = isCreating || isUpdating || isUploading;
 
   return (
     <form
@@ -97,6 +119,15 @@ export default function BasicLandInfoForm({ initial = null, onSuccess }: Props) 
           {...register("address")}
         />
       </div>
+      <ImageUploader
+        label={t("investor.label-cover-image", "Cover Image")}
+        accept="image/*"
+        disabled={isPending || isUploading}
+        value={coverPreviewUrl ?? (coverFileId || null)}
+        onFileChange={onCoverChange}
+        errors={errors}
+        fieldName="coverImageId"
+      />
 
       <div className="flex flex-col gap-4 md:flex-row">
         <Input
@@ -125,7 +156,9 @@ export default function BasicLandInfoForm({ initial = null, onSuccess }: Props) 
           </label>
           <select
             value={zoningValue}
-            onChange={(e) => setValue("zoning", Number(e.target.value) as EZoningType)}
+            onChange={(e) =>
+              setValue("zoning", Number(e.target.value) as EZoningType)
+            }
             className="w-full h-10 rounded-md border border-border bg-canvas-elevated px-3.5 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/25"
           >
             {Object.entries(ZONING_LABELS).map(([key, label]) => (
@@ -135,7 +168,9 @@ export default function BasicLandInfoForm({ initial = null, onSuccess }: Props) 
             ))}
           </select>
           {errors.zoning && (
-            <p className="text-xs text-destructive mt-1">{errors.zoning.message}</p>
+            <p className="text-xs text-destructive mt-1">
+              {errors.zoning.message}
+            </p>
           )}
         </div>
       </div>
@@ -148,7 +183,9 @@ export default function BasicLandInfoForm({ initial = null, onSuccess }: Props) 
             onChange={(e) => setValue("accessability", e.target.checked)}
             className="h-4 w-4 rounded border-border accent-primary"
           />
-          <span className="text-sm text-foreground">{t("investor.label-accessibility")}</span>
+          <span className="text-sm text-foreground">
+            {t("investor.label-accessibility")}
+          </span>
         </label>
       </div>
 
