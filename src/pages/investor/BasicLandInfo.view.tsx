@@ -1,10 +1,12 @@
 import BasicLandInfoHeader from "@/features/investor/lands-buildings/components/BasicLandInfoHeader";
 import BasicLandInfoForm from "@/features/investor/lands-buildings/components/BasicLandInfoForm";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { paths } from "@/config/paths";
 
 const BasicLandInfo = () => {
   const goto = useNavigate();
+  const { state } = useLocation();
+  const land = state?.land ? state?.land : null;
 
   const onSuccessCreated = () => {
     goto(paths.app.investor.hisLandsAndBuildings.getHref());
@@ -12,8 +14,8 @@ const BasicLandInfo = () => {
 
   return (
     <div className="space-y-6">
-      <BasicLandInfoHeader />
-      <BasicLandInfoForm onSuccess={onSuccessCreated}/>
+      <BasicLandInfoHeader updateable={land != null} />
+      <BasicLandInfoForm onSuccess={onSuccessCreated} initial={land} />
     </div>
   );
 };

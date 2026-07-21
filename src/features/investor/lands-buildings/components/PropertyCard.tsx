@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MapPin, Pencil, Trash2 } from "lucide-react";
 import L from "leaflet";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
@@ -13,7 +13,7 @@ import { injectLeafletOverrides } from "@/components/shared/LandMap/LandMapStyle
 import LandMapViewer from "@/components/shared/LandMap/LandMapViewer";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import { useDeleteLand } from "../api/actions";
-import type {  LandListItem } from "../api/types";
+import type { LandListItem } from "../api/types";
 import type { LatLng as LatLngType } from "@/lib/helpers";
 
 function FitBoundsOnMount({ polygon }: { polygon: LatLngType[] }) {
@@ -30,13 +30,18 @@ function FitBoundsOnMount({ polygon }: { polygon: LatLngType[] }) {
   return null;
 }
 
-function PropertyCard({ p }: { p:  LandListItem }) {
+function PropertyCard({ p }: { p: LandListItem }) {
   const { t } = useTranslation();
+  const goto = useNavigate();
   const deleteMutation = useDeleteLand();
 
   useEffect(() => {
     injectLeafletOverrides();
   }, []);
+
+  const onUpdateClicked = () => {
+    goto(paths.app.investor.basicLandInfo.getHref(), { state: { land: p } });
+  };
 
   const onDelete = () => {
     deleteMutation.mutate(p.id);
@@ -155,7 +160,7 @@ function PropertyCard({ p }: { p:  LandListItem }) {
               {t("investor.view")}
             </Link>
           </Button>
-          <Button size="sm" variant="outline" className="gap-1">
+          <Button size="sm" variant="outline" className="gap-1" onClick={onUpdateClicked}>
             <Pencil className="h-3.5 w-3.5" /> {t("investor.edit")}
           </Button>
         </div>
