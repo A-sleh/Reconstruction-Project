@@ -1,3 +1,5 @@
+import { ILoncation } from "@/features/investor/lands-buildings/api/types";
+
 export type LatLng = {
   lat: number;
   lng: number;
@@ -52,3 +54,13 @@ export const formatDate = (
     ...options,
   });
 };
+
+export function locationToString(loc: ILoncation): string {
+  return `${loc.longitude},${loc.latitude}`;
+}
+
+export function stringToLocation(str: string): ILoncation {
+  const [longitude, latitude] = str.split(",").map(Number);
+  return { longitude, latitude };
+}
+

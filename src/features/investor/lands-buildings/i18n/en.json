@@ -60,6 +60,7 @@
     "loadMore": "Load more",
     "validated": "Validated",
     "notValidated": "Not Validated",
-    "withProjects": "Show lands with projects"
+    "withProjects": "Show lands with projects",
+    "label-cover-image": "Property cover image"
   }
 }

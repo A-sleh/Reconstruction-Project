@@ -30,7 +30,7 @@ export const landFormSchema = z.object({
     .min(1, i18n.t("investor.validation-border-req")),
   isValidated: z.boolean().default(false),
   accessability: z.boolean().default(false),
-  coverImageUrl: z.string().default(""),
+  coverImageId: z.string().default(""),
 });
 
 export type LandFormSchema = z.infer<typeof landFormSchema>;
@@ -44,7 +44,7 @@ export const initialLandValues: LandFormSchema = {
   border: [],
   isValidated: false,
   accessability: false,
-  coverImageUrl: "",
+  coverImageId: "",
 };
 
 const createLandApi = async (payload: CreateLandRequest): Promise<Land> => {

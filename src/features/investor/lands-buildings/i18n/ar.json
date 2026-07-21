@@ -60,6 +60,7 @@
     "loadMore": "تحميل المزيد",
     "validated": "تم التحقق",
     "notValidated": "لم يتم التحقق",
-    "withProjects": "عرض الأراضي التي بها مشاريع"
+    "withProjects": "عرض الأراضي التي بها مشاريع",
+    "label-cover-image": "صورة عن العقار"
   }
 }

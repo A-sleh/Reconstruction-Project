@@ -28,7 +28,7 @@ export const ZONING_LABELS: Record<EZoningType, string> = {
   [EZoningType.TechPark]: "Tech Park",
 };
 
-interface ILoncation {
+export interface ILoncation {
   longitude: number;
   latitude: number;
 }
@@ -67,7 +67,7 @@ export interface LandFormValues {
   address: string;
   area: number;
   location: string;
-  coverImageUrl: string;
+  coverImageId: string;
 }
 
 export interface CreateLandRequest extends LandFormValues {}

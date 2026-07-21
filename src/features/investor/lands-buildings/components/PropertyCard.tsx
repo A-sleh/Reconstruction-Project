@@ -14,7 +14,7 @@ import LandMapViewer from "@/components/shared/LandMap/LandMapViewer";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import { useDeleteLand } from "../api/actions";
 import type { LandListItem } from "../api/types";
-import type { LatLng as LatLngType } from "@/lib/helpers";
+import { locationToString, type LatLng as LatLngType } from "@/lib/helpers";
 
 function FitBoundsOnMount({ polygon }: { polygon: LatLngType[] }) {
   const map = useMap();
@@ -40,7 +40,16 @@ function PropertyCard({ p }: { p: LandListItem }) {
   }, []);
 
   const onUpdateClicked = () => {
-    goto(paths.app.investor.basicLandInfo.getHref(), { state: { land: p } });
+    const landWithMappedBorders = {
+      ...p,
+      border: p.border
+        .map((b) => locationToString(b))
+        .filter((_, Idx) => Idx + 1 < p.border.length),
+      location: locationToString(p.location),
+    };
+    goto(paths.app.investor.basicLandInfo.getHref(), {
+      state: { land: landWithMappedBorders },
+    });
   };
 
   const onDelete = () => {
@@ -160,7 +169,12 @@ function PropertyCard({ p }: { p: LandListItem }) {
               {t("investor.view")}
             </Link>
           </Button>
-          <Button size="sm" variant="outline" className="gap-1" onClick={onUpdateClicked}>
+          <Button
+            size="sm"
+            variant="outline"
+            className="gap-1"
+            onClick={onUpdateClicked}
+          >
             <Pencil className="h-3.5 w-3.5" /> {t("investor.edit")}
           </Button>
         </div>
