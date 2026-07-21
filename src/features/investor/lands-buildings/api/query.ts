@@ -14,7 +14,7 @@ const getAllLands = async (filters: GetAllLandsFilters) => {
 export const useLandsInfinite = (filters: GetAllLandsFilters) => {
   return useInfiniteQuery<LandsResponse, Error>({
     queryKey: QUERY_KEYS.lands.list(filters),
-    queryFn: async ({ pageParam = 1 }) => {
+    queryFn: async ({ pageParam = 0 }) => {
       return await getAllLands({
         ...filters,
         PageNumber: pageParam as number,
