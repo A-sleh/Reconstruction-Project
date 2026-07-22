@@ -24,6 +24,14 @@
       "searchPlaceholder": "Search users...",
       "filterByRole": "Filter by role",
       "allRoles": "All Roles"
+    },
+    "toast": {
+      "activateSuccess": "User activated successfully",
+      "activateError": "Failed to activate user",
+      "deactivateSuccess": "User deactivated successfully",
+      "deactivateError": "Failed to deactivate user",
+      "deleteSuccess": "User deleted successfully",
+      "deleteError": "Failed to delete user"
     }
   }
 }

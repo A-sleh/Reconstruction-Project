@@ -9,14 +9,14 @@ import { SystemUserController, QUERY_KEYS, MUTATION_KEYS } from ".";
 // ==========================================
 
 const activateUser = async (id: number) => {
-  const { data } = await ApiInstance.post(
+  const { data } = await ApiInstance.put(
     `/${SystemUserController.Activate}/${id}`,
   );
   return data;
 };
 
 const deactivateUser = async (id: number) => {
-  const { data } = await ApiInstance.post(
+  const { data } = await ApiInstance.put(
     `/${SystemUserController.Deactivate}/${id}`,
   );
   return data;

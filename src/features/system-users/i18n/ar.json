@@ -24,6 +24,14 @@
       "searchPlaceholder": "بحث عن مستخدمين...",
       "filterByRole": "تصفية حسب الدور",
       "allRoles": "جميع الأدوار"
+    },
+    "toast": {
+      "activateSuccess": "تم تفعيل المستخدم بنجاح",
+      "activateError": "فشل تفعيل المستخدم",
+      "deactivateSuccess": "تم إلغاء تفعيل المستخدم بنجاح",
+      "deactivateError": "فشل إلغاء تفعيل المستخدم",
+      "deleteSuccess": "تم حذف المستخدم بنجاح",
+      "deleteError": "فشل حذف المستخدم"
     }
   }
 }
