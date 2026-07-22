@@ -11,21 +11,24 @@ function InvestorLandsAndBuildingsStats() {
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
       <KpiCard
         label={t("investor.buildings")}
-        value={isLoading ? "—" : String(data?.totalBuidlings ?? 0)}
+        value={String(data?.totalBuidlings ?? 0)}
         hint={t("investor.operationalAndDev")}
         icon={Building2}
+        isLoading={isLoading}
       />
       <KpiCard
         label={t("investor.landParcels")}
-        value={isLoading ? "—" : String(data?.totalLands ?? 0)}
+        value={String(data?.totalLands ?? 0)}
         hint={t("investor.acrossRegions", { lands: data?.totalBuidlings })}
         icon={Layers}
+        isLoading={isLoading}
       />
       <KpiCard
         label={t("investor.activeProjects")}
-        value={isLoading ? "—" : String(data?.allOpenedProjects ?? 0)}
+        value={String(data?.allOpenedProjects ?? 0)}
         hint={t("investor.onSiteConstruction")}
         icon={HardHat}
+        isLoading={isLoading}
       />
     </div>
   );

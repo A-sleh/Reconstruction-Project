@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TrendingUp, AlertCircle } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/Label";
+import { Switch } from "@/components/ui/switch";
 import { useLandsInfinite } from "../api/query";
 import PropertyCard from "./PropertyCard";
 import CardSkeleton from "./PropertySkeleton";
@@ -12,6 +11,8 @@ type TabValue = "all" | "building" | "land";
 
 function InvestorLandsAndBuildingsTabs() {
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const isArabic = i18n.language == "ar";
   const [tab, setTab] = useState<TabValue>("all");
   const [withProjects, setWithProjects] = useState(false);
 
@@ -22,7 +23,7 @@ function InvestorLandsAndBuildingsTabs() {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useLandsInfinite({ HasBuilding: false });
+  } = useLandsInfinite({ HasBuilding: withProjects });
 
   const lands = data?.pages.flatMap((p) => p.data) ?? [];
 
@@ -31,6 +32,7 @@ function InvestorLandsAndBuildingsTabs() {
       value={tab}
       onValueChange={(v) => setTab(v as TabValue)}
       className="w-full"
+      dir={isArabic ? "rtl" : "ltr"}
     >
       <div className="flex items-center justify-between flex-wrap gap-3">
         <TabsList className="bg-white">
@@ -50,15 +52,18 @@ function InvestorLandsAndBuildingsTabs() {
 
       <div className="mt-5">
         {tab === "land" && (
-          <div className="flex items-center gap-2 mb-4">
-            <Checkbox
+          <div className="flex items-center gap-3 mb-4 px-4 py-2.5 rounded-xl bg-muted/50 border border-border/50 w-fit">
+            <Switch
               id="with-projects"
               checked={withProjects}
-              onCheckedChange={(checked) => setWithProjects(checked === true)}
+              onCheckedChange={setWithProjects}
             />
-            <Label htmlFor="with-projects" className="cursor-pointer text-sm">
+            <label
+              htmlFor="with-projects"
+              className="cursor-pointer text-sm font-medium text-foreground select-none"
+            >
               {t("investor.withProjects")}
-            </Label>
+            </label>
           </div>
         )}
 

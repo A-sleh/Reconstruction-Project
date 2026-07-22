@@ -2,16 +2,11 @@ import * as React from "react";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
 
 import { cn } from "@/lib/utils";
-import { useTranslation } from "react-i18next";
 
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
 >(({ className, ...props }, ref) => {
-  const { i18n } = useTranslation();
-  const isArabic = i18n.language == "ar";
-  const switchRef = React.useRef<null | HTMLInputElement>(null);
-  const isChecked = switchRef.current?.dataset["state"] == "checked";
   return (
     <SwitchPrimitives.Root
       className={cn(
@@ -22,12 +17,8 @@ const Switch = React.forwardRef<
       ref={ref}
     >
       <SwitchPrimitives.Thumb
-        ref={switchRef}
-        style={{
-          transform: `translateX(${isArabic ? (isChecked ? "-100%" : "0%") : isChecked ? "100%" : "0%"})`,
-        }}
         className={cn(
-          `pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform `,
+          "pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 rtl:data-[state=checked]:-translate-x-5 rtl:data-[state=unchecked]:translate-x-0",
         )}
       />
     </SwitchPrimitives.Root>
