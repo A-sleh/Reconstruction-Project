@@ -3,7 +3,7 @@ import { Paginated } from "@/types";
 // ============================================================================
 // Enums
 // ============================================================================
-export type SystemUserRole = "Provider" | "Investor" | "Engineer" | "ServiceProvider";
+export type SystemUserRole = "Provider" | "Investor" | "Engineer";
 
 // ============================================================================
 // Core Entities

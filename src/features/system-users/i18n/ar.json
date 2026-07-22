@@ -23,7 +23,8 @@
       "total": "{{count}} مستخدم إجمالاً",
       "searchPlaceholder": "بحث عن مستخدمين...",
       "filterByRole": "تصفية حسب الدور",
-      "allRoles": "جميع الأدوار"
+      "allRoles": "جميع الأدوار",
+      "emptyHint": "حاول تعديل البحث أو الفلاتر"
     },
     "toast": {
       "activateSuccess": "تم تفعيل المستخدم بنجاح",

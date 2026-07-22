@@ -23,7 +23,8 @@
       "total": "{{count}} users total",
       "searchPlaceholder": "Search users...",
       "filterByRole": "Filter by role",
-      "allRoles": "All Roles"
+      "allRoles": "All Roles",
+      "emptyHint": "Try adjusting your search or filters"
     },
     "toast": {
       "activateSuccess": "User activated successfully",
