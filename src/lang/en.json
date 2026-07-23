@@ -33,7 +33,18 @@
     "emptyHint": "Click on the map to start placing points",
     "closeHintPrefix": "Click the",
     "closeHintGreen": "green point",
-    "closeHintSuffix": "to close the polygon (min 3 points)"
+    "closeHintSuffix": "to close the polygon (min 3 points)",
+    "toolAdd": "Add Points",
+    "toolRemoveVertex": "Remove Points",
+    "toolMoveSingle": "Move Single Point",
+    "toolMoveAll": "Move All Points",
+    "toolClearAll": "Clear All Points",
+    "modeHint": {
+      "add": "Click on the map to add points",
+      "remove-vertex": "Click on a point to remove it",
+      "move-single": "Drag any point to move it",
+      "move-all": "Drag anywhere to move the polygon"
+    }
   },
   "common": {
     "logout": "Logout",

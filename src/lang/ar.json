@@ -33,7 +33,18 @@
     "emptyHint": "انقر على الخريطة لبدء وضع النقاط",
     "closeHintPrefix": "انقر على",
     "closeHintGreen": "النقطة الخضراء",
-    "closeHintSuffix": "لإغلاق المضلع (الحد الأدنى 3 نقاط)"
+    "closeHintSuffix": "لإغلاق المضلع (الحد الأدنى 3 نقاط)",
+    "toolAdd": "إضافة نقاط",
+    "toolRemoveVertex": "حذف نقاط",
+    "toolMoveSingle": "نقل نقطة واحدة",
+    "toolMoveAll": "نقل جميع النقاط",
+    "toolClearAll": "مسح جميع النقاط",
+    "modeHint": {
+      "add": "انقر على الخريطة لإضافة نقاط",
+      "remove-vertex": "انقر على نقطة لإزالتها",
+      "move-single": "اسحب أي نقطة لتحريكها",
+      "move-all": "اسحب في أي مكان لتحريك المضلع"
+    }
   },
   "common": {
     "logout": "تسجيل الخروج",

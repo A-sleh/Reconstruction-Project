@@ -47,6 +47,7 @@ export interface Land {
 }
 export interface LandListItem {
   id: string;
+  landId: string;
   name: string;
   border: ILoncation[];
   isValidated: boolean;

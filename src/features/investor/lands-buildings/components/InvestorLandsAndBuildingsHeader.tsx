@@ -1,8 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { paths } from "@/config/paths";
-import { Link } from "react-router";
 
 function InvestorLandsAndBuildingsHeader() {
   const { t } = useTranslation();
@@ -20,11 +16,6 @@ function InvestorLandsAndBuildingsHeader() {
           {t("investor.portfolioDescription")}
         </p>
       </div>
-      <Link to={paths.app.investor.basicLandInfo.getHref()}>
-        <Button className="bg-gradient-emerald hover:opacity-95 text-white shadow-elegant gap-2">
-          <Plus className="h-4 w-4" /> {t("investor.addProperty")}
-        </Button>
-      </Link>
     </div>
   );
 }

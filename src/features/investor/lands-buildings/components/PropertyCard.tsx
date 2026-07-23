@@ -53,7 +53,7 @@ function PropertyCard({ p }: { p: LandListItem }) {
   };
 
   const onDelete = () => {
-    deleteMutation.mutate(p.id);
+    deleteMutation.mutate(p.landId);
   };
 
   const polygon: LatLngType[] =
