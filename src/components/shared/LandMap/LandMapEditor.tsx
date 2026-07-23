@@ -5,6 +5,7 @@ import L from "leaflet";
 import { Polygon, Polyline, CircleMarker } from "react-leaflet";
 import type { LatLng } from "@/lib/helpers";
 import { polygonStyle, createVertexIcon } from "./LandMapStyles";
+import LandMapToolbar, { type EditorTool } from "./LandMapToolbar";
 
 type Props = {
   value: LatLng[];
@@ -24,6 +25,7 @@ function EditorEvents({
   setClosing,
   mousePos,
   setMousePos,
+  activeTool,
 }: {
   points: LatLng[];
   onChange: (p: LatLng[]) => void;
@@ -32,34 +34,37 @@ function EditorEvents({
   setClosing: (v: boolean) => void;
   mousePos: LatLng | null;
   setMousePos: (p: LatLng | null) => void;
+  activeTool: EditorTool;
 }) {
   const map = useMapEvents({
     click(e) {
-      if (closing) return;
-      if (maxPoints && points.length >= maxPoints) return;
+      if (activeTool === "add") {
+        if (closing) return;
+        if (maxPoints && points.length >= maxPoints) return;
 
-      const newPoint: LatLng = {
-        lat: Math.round(e.latlng.lat * 1e7) / 1e7,
-        lng: Math.round(e.latlng.lng * 1e7) / 1e7,
-      };
+        const newPoint: LatLng = {
+          lat: Math.round(e.latlng.lat * 1e7) / 1e7,
+          lng: Math.round(e.latlng.lng * 1e7) / 1e7,
+        };
 
-      if (points.length >= 3) {
-        const first = map.latLngToContainerPoint(
-          L.latLng(points[0].lat, points[0].lng),
-        );
-        const clicked = map.latLngToContainerPoint(e.latlng);
-        if (first.distanceTo(clicked) < CLOSE_THRESHOLD) {
-          setClosing(true);
-          setMousePos(null);
-          onChange(points);
-          return;
+        if (points.length >= 3) {
+          const first = map.latLngToContainerPoint(
+            L.latLng(points[0].lat, points[0].lng),
+          );
+          const clicked = map.latLngToContainerPoint(e.latlng);
+          if (first.distanceTo(clicked) < CLOSE_THRESHOLD) {
+            setClosing(true);
+            setMousePos(null);
+            onChange(points);
+            return;
+          }
         }
-      }
 
-      onChange([...points, newPoint]);
+        onChange([...points, newPoint]);
+      }
     },
     mousemove(e) {
-      if (closing || points.length === 0) {
+      if (activeTool !== "add" || closing || points.length === 0) {
         setMousePos(null);
         return;
       }
@@ -76,6 +81,53 @@ function EditorEvents({
   return null;
 }
 
+function MoveAllHandler({
+  points,
+  onChange,
+  enabled,
+}: {
+  points: LatLng[];
+  onChange: (p: LatLng[]) => void;
+  enabled: boolean;
+}) {
+  const map = useMap();
+  const dragRef = useRef<{
+    startLat: number;
+    startLng: number;
+    originalPoints: LatLng[];
+  } | null>(null);
+
+  useMapEvents({
+    mousedown(e) {
+      if (!enabled || points.length === 0) return;
+      map.dragging.disable();
+      dragRef.current = {
+        startLat: e.latlng.lat,
+        startLng: e.latlng.lng,
+        originalPoints: [...points],
+      };
+    },
+    mousemove(e) {
+      if (!dragRef.current || !enabled) return;
+      const dLat = e.latlng.lat - dragRef.current.startLat;
+      const dLng = e.latlng.lng - dragRef.current.startLng;
+      onChange(
+        dragRef.current.originalPoints.map((p) => ({
+          lat: Math.round((p.lat + dLat) * 1e7) / 1e7,
+          lng: Math.round((p.lng + dLng) * 1e7) / 1e7,
+        })),
+      );
+    },
+    mouseup() {
+      if (!dragRef.current) return;
+      dragRef.current = null;
+      map.dragging.enable();
+    },
+  });
+
+  return null;
+}
+
 export default function LandMapEditor({
   value,
   onChange,
@@ -85,6 +137,7 @@ export default function LandMapEditor({
 }: Props) {
   const [closing, setClosing] = useState(false);
   const [mousePos, setMousePos] = useState<LatLng | null>(null);
+  const [activeTool, setActiveTool] = useState<EditorTool>("add");
   const { t } = useTranslation();
 
   const handleVertexDrag = useCallback(
@@ -98,28 +151,55 @@ export default function LandMapEditor({
 
   const handleVertexRemove = useCallback(
     (index: number) => {
-      onChange(value.filter((_, i) => i !== index));
+      const next = value.filter((_, i) => i !== index);
+      onChange(next);
+      if (next.length < 3) setClosing(false);
     },
     [value, onChange],
   );
+
+  const handleClearAll = useCallback(() => {
+    onChange([]);
+    setClosing(false);
+    setMousePos(null);
+    setActiveTool("add");
+  }, [onChange]);
 
   const isClosed = value.length >= 3 && closing;
   const isOpen = value.length > 0 && !closing;
 
   const rubberBand =
-    isOpen && mousePos && value.length > 0
+    isOpen && mousePos && value.length > 0 && activeTool === "add"
       ? [value[value.length - 1], mousePos]
       : null;
 
-  const showCloseHint = value.length >= 3 && !closing;
+  const showCloseHint = value.length >= 3 && !closing && activeTool === "add";
 
   const markerIcons = useMemo(
     () => value.map(() => createVertexIcon()),
     [value.length],
   );
 
+  const vertexCursor =
+    activeTool === "remove-vertex"
+      ? "pointer"
+      : activeTool === "move-single"
+        ? "grab"
+        : "crosshair";
+
   return (
     <>
+      <LandMapToolbar
+        activeTool={activeTool}
+        onToolChange={(tool) => {
+          setActiveTool(tool);
+          if (tool !== "add") {
+            setMousePos(null);
+          }
+        }}
+        onClearAll={handleClearAll}
+      />
+
       <EditorEvents
         points={value}
         onChange={onChange}
@@ -128,12 +208,24 @@ export default function LandMapEditor({
         setClosing={setClosing}
         mousePos={mousePos}
         setMousePos={setMousePos}
+        activeTool={activeTool}
       />
+
+      {activeTool === "move-all" && (
+        <MoveAllHandler
+          points={isClosed ? value : value}
+          onChange={onChange}
+          enabled={true}
+        />
+      )}
 
       {isClosed && (
         <Polygon
           positions={value.map((p) => [p.lat, p.lng])}
-          pathOptions={polygonStyle(fillColor, borderColor)}
+          pathOptions={{
+            ...polygonStyle(fillColor, borderColor),
+            cursor: activeTool === "move-all" ? "move" : "inherit",
+          }}
         />
       )}
 
@@ -165,15 +257,21 @@ export default function LandMapEditor({
         <CircleMarker
           key={i}
           center={[point.lat, point.lng]}
-          radius={6}
+          radius={activeTool === "remove-vertex" ? 8 : 6}
           pathOptions={{
-            color: "#1a1a1a",
+            color: activeTool === "remove-vertex" ? "#EF4444" : "#1a1a1a",
             weight: 2,
-            fillColor: i === 0 && showCloseHint ? "#D7FF3D" : "#ffffff",
+            fillColor:
+              activeTool === "remove-vertex"
+                ? "#FEE2E2"
+                : i === 0 && showCloseHint
+                  ? "#D7FF3D"
+                  : "#ffffff",
             fillOpacity: 1,
+            cursor: vertexCursor,
           }}
           icon={markerIcons[i]}
-          draggable
+          draggable={activeTool === "move-single" || activeTool === "add"}
           eventHandlers={{
             dragend(e) {
               const pos = e.target.getLatLng();
@@ -181,6 +279,12 @@ export default function LandMapEditor({
                 lat: Math.round(pos.lat * 1e7) / 1e7,
                 lng: Math.round(pos.lng * 1e7) / 1e7,
               });
+            },
+            click(e) {
+              if (activeTool === "remove-vertex") {
+                L.DomEvent.stopPropagation(e.originalEvent);
+                handleVertexRemove(i);
+              }
             },
             contextmenu(e) {
               L.DomEvent.stopPropagation(e.originalEvent);
@@ -192,7 +296,7 @@ export default function LandMapEditor({
 
       {value.length === 0 && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[1000]">
-          <div className="bg-canvas-elevated/90 border border-border rounded-md px-4 py-2 text-sm text-muted-foreground shadow-raised">
+          <div className="bg-[#131316]/90 border border-[#2A2A2E] rounded-lg px-5 py-3 text-sm text-[#A1A1AA] shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
             {t("landmap.emptyHint")}
           </div>
         </div>
@@ -200,10 +304,20 @@ export default function LandMapEditor({
 
       {showCloseHint && (
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none z-[1000]">
-          <div className="bg-canvas-elevated/90 border border-border rounded-md px-4 py-2 text-xs text-muted-foreground shadow-raised whitespace-nowrap">
+          <div className="bg-[#131316]/90 border border-[#2A2A2E] rounded-lg px-4 py-2 text-xs text-[#A1A1AA] shadow-[0_4px_12px_rgba(0,0,0,0.4)] whitespace-nowrap">
             {t("landmap.closeHintPrefix")}{" "}
-            <span className="text-emerald font-medium">{t("landmap.closeHintGreen")}</span>{" "}
+            <span className="text-[#D7FF3D] font-medium">
+              {t("landmap.closeHintGreen")}
+            </span>{" "}
             {t("landmap.closeHintSuffix")}
+          </div>
+        </div>
+      )}
+
+      {activeTool && activeTool !== "add" && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none z-[1000]">
+          <div className="bg-[#131316]/90 border border-[#2A2A2E] rounded-lg px-4 py-2 text-xs text-[#A1A1AA] shadow-[0_4px_12px_rgba(0,0,0,0.4)] whitespace-nowrap">
+            {t(`landmap.modeHint.${activeTool}`)}
           </div>
         </div>
       )}

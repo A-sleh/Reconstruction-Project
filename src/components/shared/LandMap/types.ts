@@ -4,6 +4,13 @@ export type { LatLng };
 
 export type LandMapMode = "edit" | "show" | "select";
 
+export type EditorTool =
+  | "add"
+  | "remove-vertex"
+  | "move-all"
+  | "move-single"
+  | null;
+
 export type LandMapOption = {
   id: string;
   label: string;
