@@ -8,250 +8,350 @@
 
 ```yaml
 skill:
-  name: identity-community-platform
-  domain: "dark-mode identity / avatar / community product"
+  name: reconstruction-platform
+  domain: "multi-role marketplace for post-war reconstruction in Syria"
   tech_stack:
-    framework: "Next.js 15 (App Router, RSC by default, 'use client' only for interactive leaves)"
-    styling: "Tailwind CSS v4"
-    components: "shadcn/ui (Radix Primitives underneath)"
-    icons: "lucide-react"
-    motion: "Framer Motion (micro-interactions only, never for layout)"
+    framework: "Vite 7 + React 19 + React Router v7"
+    styling: "Tailwind CSS v4 (@theme directive in globals.css)"
+    components: "shadcn/ui (radix-nova style, Radix Primitives)"
+    icons: "lucide-react + react-icons"
+    motion: "Framer Motion (micro-interactions, scroll reveals, page transitions)"
+    state: "Zustand (client) + TanStack React Query (server)"
+    forms: "React Hook Form + Zod"
+    i18n: "i18next + react-i18next (Arabic primary, English secondary, full RTL support)"
+    maps: "Leaflet + React-Leaflet"
+    3d: "Three.js via React Three Fiber + Drei"
   brand_vibe: >
-    High-contrast near-black canvas, confident geometric sans type,
-    single acid-lime accent used sparingly as the "action" color,
-    saturated gradient avatar/identity cards as the only place color
-    is allowed to run wild. Product feels premium, playful-but-controlled,
-    community-native — not corporate SaaS, not neon-cyberpunk.
+    Professional, trustworthy, clean. A light-mode-first construction/reconstruction
+    marketplace. Teal primary conveys reliability and growth. Emerald and gold accents
+    add warmth. White cards on warm-gray backgrounds with subtle shadows. Arabic-first
+    typography with Noto Kufi Arabic. Not corporate SaaS — grounded, practical, builder-native.
 
 tokens:
   color:
-    canvas:
-      base: "#0A0A0C"        # page background
-      elevated: "#131316"    # cards, panels, nav pill
-      overlay: "#1C1C20"     # modals, popovers, dropdown surfaces
-      border: "#2A2A2E"      # 1px hairlines on dark surfaces
-    ink:
-      primary: "#F5F5F7"     # headings, primary text
-      secondary: "#A1A1AA"   # body copy, descriptions
-      tertiary: "#6B6B70"    # placeholders, disabled text, timestamps
-      inverse: "#0A0A0C"     # text placed on light/accent surfaces
-    brand:
-      primary: "#D7FF3D"     # lime — CTAs, active states, focus accents
-      primary-ink: "#0A0A0C" # text/icon color when placed ON primary
-      secondary: "#2DD4BF"   # teal — tags, secondary badges (e.g. "Robert" pill)
-      secondary-ink: "#0A0A0C"
-    identity-gradients:      # RESERVED exclusively for avatar/persona cards — never for UI chrome
-      violet: ["#8E7CFF", "#5B4FD6"]
-      coral:  ["#FF6B7A", "#E23A57"]
-      teal:   ["#22D3C9", "#0E8E86"]
-      lime:   ["#B8F24C", "#7BC62D"]
-      indigo: ["#5B6EF5", "#2F3BB8"]
-    semantic:
-      success: "#22C55E"
-      success-surface: "#123821"
-      warning: "#F5A623"
-      warning-surface: "#3A2A0C"
-      error: "#F0435C"
-      error-surface: "#3A1420"
-      info: "#3AA0FF"
-      info-surface: "#0F2438"
+    background: "hsl(0 20% 96%)"          # warm light gray page canvas (~#f4f2ef)
+    foreground: "hsl(220 20% 20%)"         # dark gray text (~#2b2d35)
+    card: "#ffffff"                         # white card surfaces
+    card-foreground: "hsl(220 20% 20%)"    # same as foreground
+    border: "hsl(220 10% 85%)"             # light gray borders (~#d4d6db)
+    muted: "hsl(220 10% 92%)"              # light gray backgrounds
+    muted-foreground: "hsl(220 10% 50%)"   # medium gray secondary text
+    primary: "hsl(170.46 100% 19.54%)"     # dark teal — main brand color
+    primary-foreground: "#ffffff"           # white text on primary
+    primary-hover: "#054239"               # darker teal for hover
+    primary-hover-two: "#428177"           # medium teal for secondary hover
+    secondary: "#ffffff"                   # white
+    secondary-hover: "#b9a779"             # muted gold
+    secondary-hover-two: "#edebe07e"       # light beige translucent
+    emerald: "hsl(160 84% 39%)"            # emerald green accent
+    emerald-soft: "hsl(160 84% 95%)"       # very light emerald for surfaces
+    slate: "hsl(215 25% 27%)"              # dark blue-gray
+    gold: "hsl(38 92% 50%)"               # gold/amber accent
+    destructive: "hsl(0 75% 50%)"          # red for errors/destructive actions
+    destructive-foreground: "#ffffff"
+    success: "hsl(145 60% 40%)"            # green for success states
+    success-foreground: "#ffffff"
+    warning: "hsl(38 92% 50%)"             # gold/amber for warnings
+    warning-foreground: "hsl(215 30% 15%)"
+    # Dark mode tokens (exist but NOT actively used — no dark mode toggle)
+    primary-dark: "#161616"
+    primary-dark-hover: "#2d2a3b"
+    primary-dark-hover-two: "#ffffff"
+  gradient:
+    primary: "linear-gradient(135deg, hsl(170.46 100% 19.54% / 89%) 0%, hsl(170.46 100% 35%) 100%)"
+    emerald: "linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(160 84% 29%) 100%)"
+    accent: "linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(170.46 100% 25%) 100%)"
+    hero: "linear-gradient(135deg, hsl(170.46 100% 19.54% / 89%) 5%, hsl(170.46 100% 19.54%) 60%, hsl(136.23 100% 89.53%) 140%)"
   radius:
-    xs: "6px"     # checkboxes, small chips
-    sm: "10px"    # inputs, buttons (default)
-    md: "16px"    # cards, dropdowns, modals
-    lg: "28px"    # hero panels, avatar/identity cards
-    pill: "9999px" # nav container, badge pills, primary CTA buttons
+    sm: "0.125rem"    # 2px — checkboxes, small chips
+    md: "0.25rem"     # 4px — inputs, buttons
+    lg: "0.5rem"      # 8px — cards, modals, dropdowns
   shadow:
-    ambient: "0 1px 2px rgba(0,0,0,0.4)"
-    raised: "0 8px 24px -8px rgba(0,0,0,0.6)"
-    glow-brand: "0 0 0 4px rgba(215,255,61,0.15)"   # focus/hover halo on lime elements
-  spacing_unit: "4px"   # ALL spacing must be a multiple of this — see §1.2
+    card: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)"
+    lg: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
+    accent: "0 0 0 3px hsl(160 84% 39% / 0.15)"
+  spacing_unit: "4px"
   typography:
     font_family:
-      display: "'General Sans', 'Inter', ui-sans-serif, system-ui, sans-serif"
-      body: "'Inter', ui-sans-serif, system-ui, sans-serif"
-      mono: "'JetBrains Mono', ui-monospace, monospace"
+      primary: "'Noto Kufi Arabic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+      # Noto Kufi Arabic is loaded with all 9 weights (100–900) via @font-face
+      # Additional bundled fonts (not primary): Noto Sans, Playpen Sans Arabic
     weight:
+      thin: 100
+      extralight: 200
+      light: 300
       regular: 400
       medium: 500
       semibold: 600
       bold: 700
-    accent_treatment: >
-      A single lowercase italic display letter (e.g. the swash "c" in
-      "Connect") may be used ONCE per hero/page as a brand signature.
-      Never repeat this treatment inside product UI, cards, or body copy.
+      extrabold: 800
+      black: 900
+    # Arabic-first: all body text defaults to Noto Kufi Arabic
+    # English text inherits the same font — no separate Latin font face loaded
   motion:
     duration_fast: "120ms"
     duration_base: "200ms"
+    duration_smooth: "250ms"
     duration_slow: "320ms"
-    easing: "cubic-bezier(0.16, 1, 0.3, 1)"   # ease-out-expo, use for all enter/hover transitions
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)"  # ease-in-out for transitions
+    easing_spring: "cubic-bezier(0.16, 1, 0.3, 1)"  # for enter/hover transitions
+  animation:
+    fade_in: "fade-in 2.5s ease-in-out"
+    infinite_loop: "infinit-loop 16s ease-in-out infinite"
 ```
 
 ---
 
 ## 1. VISUAL PHILOSOPHY & IDENTITY
 
-### 1.1 Typographic Scale (locked — do not interpolate new sizes)
+### 1.1 Mode: Light-First
 
-| Token | Size / Line-height | Weight | Usage |
-|---|---|---|---|
-| `text-display-xl` | 56px / 60px | 700 | Hero H1 only |
-| `text-display-lg` | 40px / 44px | 700 | Section headers |
-| `text-title` | 24px / 32px | 600 | Card titles, modal headers |
-| `text-subtitle` | 18px / 26px | 500 | Card subtitles, panel labels |
-| `text-body` | 15px / 22px | 400 | Default UI copy |
-| `text-body-sm` | 13px / 18px | 400 | Helper text, table cells |
-| `text-caption` | 12px / 16px | 500 | Badges, timestamps, metadata (often uppercase, +0.02em tracking) |
+This application is **light mode only**. No dark mode toggle exists. All design decisions assume light backgrounds with dark text.
 
-Rule: never generate a font-size outside this table. If a design brief implies "slightly smaller," round to the nearest defined token — do not compute `14.5px`.
+- Page background: warm light gray (`background` token)
+- Card/panel surfaces: white (`card` token)
+- Text: dark gray (`foreground` token)
+- Borders: light gray (`border` token)
 
-### 1.2 Spacing Rhythm — 4px Grid
+### 1.2 Typographic Scale
 
-- **Base unit = 4px.** Every margin, padding, gap, and offset must resolve to `n × 4px` (Tailwind's default scale already enforces this: `p-1`=4px … `p-6`=24px … `p-8`=32px).
-- **Component-internal padding** uses the 8px sub-rhythm (`p-2`, `p-3`, `p-4`) — never `p-2.5` or arbitrary values like `p-[13px]`.
-- **Section-level spacing** (between major blocks) uses the 8px multiple of 8 rhythm: 32px / 48px / 64px / 96px.
-- **Icon-to-label gap** inside buttons/badges is fixed at `gap-2` (8px). Never `gap-1` or `gap-3` for this pairing.
+| Token | Usage |
+|---|---|
+| `text-4xl` / `text-5xl` | Hero headings on landing page |
+| `text-2xl` / `text-3xl` | Section headers |
+| `text-xl` | Card titles, modal headers |
+| `text-lg` | Card subtitles, panel labels |
+| `text-base` (16px) | Default body copy |
+| `text-sm` (14px) | Helper text, table cells |
+| `text-xs` (12px) | Badges, timestamps, metadata |
 
-### 1.3 Accessibility Constraints (non-negotiable)
+- **Primary font**: Noto Kufi Arabic — an Arabic-first geometric sans-serif. Used for ALL text.
+- **RTL support**: Full Arabic/English switching via i18next. Layout flips via `dir="rtl"` / `dir="ltr"`.
+- Body text color: `foreground` token. Muted text: `muted-foreground` token.
+- Never use font sizes outside Tailwind's default scale.
 
-- **Text contrast:** body/caption text on `canvas.base` or `canvas.elevated` must meet **WCAG AA (4.5:1)** minimum; primary headings target **AAA (7:1)** where feasible given `ink.primary` on `canvas.base` (already ~15:1 — safe).
-- **Brand lime (`#D7FF3D`) is never used as a text color on dark canvas for body copy** — it fails ink-on-ink legibility at small sizes. Lime is a **surface/border/icon** color only, or text color when the ink is `primary-ink` (dark) on a lime surface.
-- **Focus visibility:** every interactive element MUST have a non-removable `focus-visible` ring (see §2). `outline: none` without a replacement focus style is a hard build failure.
-- **Touch targets:** minimum 40×40px hit area for icon buttons, even if the visual glyph is smaller (pad with invisible hit-slop).
-- **Motion:** respect `prefers-reduced-motion` — all Framer Motion transitions must degrade to instant/opacity-only.
+### 1.3 Spacing Rhythm — 4px Grid
 
-### 1.4 Hard Anti-Patterns — the Agent must NEVER
+- **Base unit = 4px.** Every margin, padding, gap, and offset must resolve to `n × 4px`.
+- **Component-internal padding** uses `p-2` (8px), `p-3` (12px), `p-4` (16px), `p-6` (24px).
+- **Section-level spacing**: `py-12` (48px), `py-16` (64px), `py-24` (96px).
+- **Icon-to-label gap** inside buttons/badges: `gap-2` (8px).
 
-1. **No decorative gradients on UI chrome** (buttons, inputs, nav, sidebars). Gradients are reserved exclusively for `identity-gradients` avatar/persona cards.
-2. **No arbitrary Tailwind values** (`p-[17px]`, `text-[15.3px]`, `w-[342px]`) unless replicating a fixed external asset (e.g., a logo mark) — always resolve to the nearest token/scale step.
-3. **No drop-shadows on flat UI surfaces** outside the two defined shadow tokens (`ambient`, `raised`). No `shadow-2xl`, no colored glows except `glow-brand` on focus.
-4. **No mixed border-radius within a single component** (e.g., a card with `rounded-tl-lg rounded-br-sm`) — radius must be uniform per component per §0 radius tokens.
-5. **No pure black (`#000`) or pure white (`#FFF`)** anywhere — always route through `canvas`/`ink` tokens for correct dark-mode contrast behavior.
-6. **No more than one accent color per interactive element.** A button is lime OR teal OR neutral — never a lime border with a teal icon.
-7. **No system default focus rings, no removed focus states.**
-8. **No centered body paragraphs.** Body copy is always left-aligned; only hero/marketing headlines may be centered.
-9. **No emoji as functional UI icons** — use `lucide-react` exclusively for iconography.
-10. **No skeuomorphic textures, noise overlays, or glassmorphism blur** unless explicitly specified for a modal scrim (`backdrop-blur-sm` max).
+### 1.4 Accessibility Constraints (non-negotiable)
+
+- **Text contrast:** body text on `background` or `card` must meet **WCAG AA (4.5:1)** minimum.
+- **Focus visibility:** every interactive element MUST have a visible focus style (`focus-visible:ring-2` with `ring-accent` color).
+- **Touch targets:** minimum 40×40px hit area for icon buttons.
+- **Motion:** respect `prefers-reduced-motion`.
+- **RTL:** all components must work in both LTR and RTL layouts. Use logical properties (`ms-*`, `me-*`, `ps-*`, `pe-*`) where possible.
+
+### 1.5 Hard Anti-Patterns — the Agent must NEVER
+
+1. **No dark mode assumptions** — do not add `dark:` variants unless explicitly requested. The app has no dark mode.
+2. **No arbitrary Tailwind values** (`p-[17px]`, `text-[15.3px]`) unless replicating a fixed external asset — always resolve to the nearest token/scale step.
+3. **No pure black (`#000`) or pure white (`#FFF`)** for text — always use `foreground`/`card-foreground` tokens for correct contrast.
+4. **No emoji as functional UI icons** — use `lucide-react` or `react-icons` exclusively.
+5. **No generic placeholder text** — use realistic Arabic or English content relevant to reconstruction/construction.
+6. **No inline styles for colors** — always use Tailwind classes mapped to theme tokens.
+7. **No mixing of the two Button systems** without understanding context:
+   - `src/components/ui/button.tsx` (shadcn) — for app pages (MarketPlace, forms, dashboards)
+   - `src/components/inputs/Button.tsx` (custom) — for landing page and marketing sections
+8. **No font-family overrides** — Noto Kufi Arabic is the single font for all text. Do not introduce Inter, Roboto, or other Latin fonts.
+9. **No gradients on functional UI elements** — gradients are reserved for hero sections, marketing backgrounds, and CTA buttons. Cards, inputs, and nav use flat colors.
+10. **No center-aligned body copy** — body text is always left-aligned (LTR) or right-aligned (RTL). Only hero/marketing headlines may be centered.
 
 ---
 
 ## 2. COMPONENT SPECIFICATIONS & INTERACTION STATES
 
-### 2.1 Navigation Pill (top bar)
+### 2.1 Navigation Bar
 
-- Container: `canvas.elevated` surface, `radius.pill`, horizontal padding `px-2`, vertical `py-1.5`, sits centered atop `canvas.base`.
-- Active nav item: `canvas.overlay` background pill behind the label, `ink.primary` text.
-- Inactive nav item: transparent background, `ink.secondary` text; hover → `ink.primary` text + `canvas.overlay` background at 60% opacity, `duration_fast` transition.
-- Primary CTA (e.g., "Contact"): `ink.primary` background / `ink.inverse` text, `radius.pill`, never lime (lime is reserved for the single strongest action on a page, e.g. "Get Started").
+- Container: `bg-white shadow-sm`, full-width, sticky top.
+- Active nav item: `bg-primary text-white` with `rounded-md`.
+- Inactive nav item: `text-foreground hover:bg-primary/50 hover:text-white`.
+- Logo: left-aligned (LTR) / right-aligned (RTL).
+- Language toggle: present in navbar, switches between Arabic and English.
+- Mobile: collapses to hamburger menu with slide-out sheet.
 
 ### 2.2 Buttons
 
-| Variant | Default | Hover | Focus-visible | Disabled |
-|---|---|---|---|---|
-| **Primary (lime)** | bg `brand.primary`, text `brand.primary-ink`, `radius.pill` | bg darken 8% (`#C4EB2E`), `duration_fast` | 2px ring `brand.primary` at 40% opacity offset 2px (`glow-brand`) | bg `canvas.overlay`, text `ink.tertiary`, `cursor-not-allowed`, no hover transform |
-| **Secondary (outline)** | 1px border `canvas.border`, transparent bg, text `ink.primary` | border → `ink.secondary`, bg `canvas.elevated` | ring `2px` `brand.primary` offset 2px | border `canvas.border` at 40%, text `ink.tertiary` |
-| **Ghost** | transparent, text `ink.secondary` | text `ink.primary`, bg `canvas.elevated` | ring `2px` `brand.primary` offset 2px | text `ink.tertiary`, no hover |
-| **Destructive** | bg `error.surface`, text `error`, 1px border `error` at 30% | bg `error` at 15% opacity | ring `2px` `error` offset 2px | text `ink.tertiary`, border `canvas.border` |
+#### shadcn Button (`src/components/ui/button.tsx`)
 
-All buttons: `h-10` default / `h-9` small / `h-11` large. Icon-only buttons are always square (`aspect-square`) at those same heights.
+| Variant | Default | Hover | Disabled |
+|---|---|---|---|
+| **default** | bg `primary`, text `primary-foreground` | bg `primary-hover` | opacity-50, pointer-events-none |
+| **destructive** | bg `destructive`, text `destructive-foreground` | bg `destructive/90` | opacity-50 |
+| **outline** | border `border-gray-300`, bg white, text `foreground` | bg `primary`, text white | opacity-50 |
+| **secondary** | bg `secondary`, text `secondary-foreground` | bg `secondary/80` | opacity-50 |
+| **ghost** | transparent, text `foreground` | bg `muted` | opacity-50 |
+| **link** | text `primary`, underline-offset-4 | underline | opacity-50 |
+| **accent** | gradient-accent, text white, with glow shadow | shadow-accent-glow, -translate-y-0.5 | opacity-50 |
+| **hero** | gradient-primary, text white, with elegant shadow | shadow-elegant, -translate-y-0.5 | opacity-50 |
 
-### 2.3 Identity / Avatar Card (the signature component)
+Sizes: `default` (h-10), `sm` (h-9), `lg` (h-11), `icon` (h-10 w-10).
 
-- Base shape: `radius.lg` (28px), full-bleed gradient fill from `identity-gradients`, `p-6` internal padding, `aspect-[3/4]` on desktop, stacks to `aspect-square` on mobile.
-- Card title: `text-title`, `ink.primary` (gradients are dark/saturated enough to guarantee AA — verify programmatically per gradient pair).
-- Card subtitle: `text-body-sm`, `ink.primary` at 75% opacity.
-- Fan/carousel layout (as in reference): sibling cards rotate ±6°/±3° with `translateY` offset, center card scales `1.0`, side cards `0.92`, using `duration_slow` ease on hover-to-focus swap. Only the **center card** may host a floating CTA badge.
-- Floating name-tag badges (e.g., "Robert", "Clarissa"): `radius.pill`, `px-3 py-1.5`, `text-caption` weight 600, background is a **solid** semantic or secondary token (never a gradient), small triangular pointer anchored via CSS `clip-path`, never an image asset.
+#### Custom Button (`src/components/inputs/Button.tsx`)
 
-### 2.4 Form Inputs — State Matrix
+| Variant | Styling |
+|---|---|
+| **solid** | `bg-primary text-primary-foreground` |
+| **outline** | `border border-primary text-primary` |
+| **secondary** | `bg-secondary text-foreground` |
+| **primary** | gradient-primary with brand tokens |
 
-| State | Border | Background | Ring | Notes |
-|---|---|---|---|---|
-| **Default** | 1px `canvas.border` | `canvas.elevated` | none | placeholder text = `ink.tertiary` |
-| **Hover** | 1px `ink.tertiary` | `canvas.elevated` | none | `duration_fast` |
-| **Focus** | 1px `brand.primary` | `canvas.elevated` | `2px` `brand.primary` @ 25% opacity, `offset-2` | label (if floating) transitions to `text-caption` above field |
-| **Filled/Valid** | 1px `canvas.border` | `canvas.elevated` | none | optional small `success` check icon, right-aligned |
-| **Error** | 1px `error` | `error.surface` @ 8% mixed into `canvas.elevated` | `2px` `error` @ 25% opacity | helper text below field switches to `error` color, `text-body-sm`, prefixed with alert icon |
-| **Disabled** | 1px `canvas.border` @ 50% | `canvas.overlay` | none | text + placeholder `ink.tertiary`, `cursor-not-allowed`, no hover/focus transitions fire |
+### 2.3 Cards
 
-Input radius: `radius.sm` (10px), height `h-10`, horizontal padding `px-3.5`. Never mix pill-radius inputs with rectangular buttons in the same form row.
+- Background: `bg-white` (card token).
+- Border: `border border-gray-300` or `border-border`.
+- Shadow: `shadow-card`.
+- Radius: `rounded-lg` (8px).
+- Internal padding: `p-4` to `p-6` depending on card size.
+- KPI cards (`KpiCard.tsx`): icon + value + label layout, often with colored left border accent.
+
+### 2.4 Form Inputs
+
+| State | Border | Background | Ring |
+|---|---|---|---|
+| **Default** | 1px `border` | `card` (white) | none |
+| **Hover** | 1px `muted-foreground` | `card` | none |
+| **Focus** | 1px `primary` | `card` | 2px `primary` @ 15% opacity, offset-2 |
+| **Error** | 1px `destructive` | `destructive` @ 5% mixed into white | 2px `destructive` @ 15% opacity |
+| **Disabled** | 1px `border` @ 50% | `muted` | none |
+
+Input radius: `rounded-md` (4px), height `h-10` or `h-11`.
 
 ### 2.5 Badges / Tags / Chips
 
-- `radius.pill`, `px-2.5 py-1`, `text-caption`.
-- Semantic badges (status): background = `{semantic}.surface`, text = `{semantic}`, 1px border `{semantic}` @ 20%.
-- Neutral badges: background `canvas.overlay`, text `ink.secondary`.
-- Never use `identity-gradients` on functional status badges — gradients communicate "persona," not "state."
+- Radius: `rounded-full` (pill shape).
+- Padding: `px-2.5 py-1`.
+- Font: `text-xs font-medium`.
+- Semantic badges: bg `success`/`warning`/`destructive` @ 10% opacity, text matching semantic color.
+- Neutral badges: bg `muted`, text `muted-foreground`.
+
+### 2.6 Tables
+
+- Header: `bg-muted` or `bg-gray-300`.
+- Rows: `border-b border-gray-300`.
+- Row hover: `hover:bg-muted/50`.
+- Mobile: tables collapse to stacked card rows (each row becomes a card with label/value pairs).
+- RTL-aware: table component handles direction switching.
+
+### 2.7 Modals / Sheets
+
+- Overlay: `overlay-black` utility (fixed, `rgba(0,0,0,0.65)`, z-50).
+- Content: `bg-white rounded-lg shadow-lg`.
+- Sheet: slides from left (LTR) or right (RTL).
+- Always include `SheetTitle` / `DialogTitle` for accessibility.
 
 ---
 
 ## 3. RESPONSIVE & LAYOUT CONSTRAINTS
 
-### 3.1 Breakpoints (Tailwind defaults — do not redefine)
+### 3.1 Breakpoints (Tailwind defaults)
 
-| Token | Min-width | Container max-width | Grid columns (default) |
-|---|---|---|---|
-| `base` (mobile) | 0px | 100%, `px-4` gutter | 1 |
-| `sm` | 640px | 100%, `px-6` gutter | 2 |
-| `md` | 768px | 720px | 4 |
-| `lg` | 1024px | 960px | 8 |
-| `xl` | 1280px | 1152px | 12 |
-| `2xl` | 1536px | 1320px | 12 |
+| Token | Min-width | Behavior |
+|---|---|---|
+| `base` (mobile) | 0px | Single column, `px-4` gutter |
+| `sm` | 640px | 2-column grids possible |
+| `md` | 768px | Tables visible, 4-column grids |
+| `lg` | 1024px | Full layout, 8-column grids |
+| `xl` | 1280px | Max content width, 12-column grids |
 
-Page shell always: `mx-auto w-full max-w-[var(--container)] px-4 sm:px-6 lg:px-8`.
+### 3.2 Page Shell
 
-### 3.2 Dense Data Layouts (tables, dynamic input rows)
+- Main layout: `bg-background text-slate-950`, centered content with `max-w-380` (for app pages).
+- Landing page: full-width, no max-width constraint.
+- Auth layout: split — decorative image left (LTR) / form right, `bg-primary` outer shell.
 
-- Below `md`: tables collapse to **stacked card rows** — each row becomes a `canvas.elevated` card, `radius.md`, with label/value pairs stacked vertically (`flex flex-col gap-1`). Never force horizontal scroll on primary data at mobile width as a first resort; horizontal scroll is the fallback only for ≥6-column dense grids explicitly marked `data-dense="true"`.
-- `md`–`lg`: table reverts to a real `<table>` or CSS grid with a fixed first column (`sticky left-0`) for row identifiers when >5 columns.
-- Dynamic/repeatable input rows (e.g., "add another field"): each row is a `grid grid-cols-[1fr_1fr_auto] gap-3 items-start` on `md+`, collapsing to `flex flex-col gap-2` below `md`. The trailing `auto` column is always the remove/drag-handle icon button — fixed width `w-10`, never reflowed into the stack.
-- Row-add action is always a `Ghost` button, left-aligned, icon-leading, positioned directly under the last row with `mt-2`.
+### 3.3 Dense Data Layouts
 
-### 3.3 Identity Card Fan/Grid
+- Below `md`: tables → stacked card rows with `flex flex-col gap-1`.
+- `md`+: real `<table>` or CSS grid with sticky first column for row identifiers.
+- Dynamic input rows: `grid grid-cols-[1fr_1fr_auto] gap-3` on `md+`, `flex flex-col gap-2` below `md`.
 
-- `base`–`sm`: single card, swipeable carousel (no fan rotation — rotation transforms are disabled below `sm` for touch legibility).
-- `md+`: fan layout re-enables, max 5 visible cards, center-anchored, overflow cards clipped at container edge with `overflow-visible` on the row and `mask-image` fade at the container's outer 10%.
+### 3.4 Vertical Rhythm
 
-### 3.4 Vertical Rhythm Between Sections
-
-Hero → Section gap: `py-24` desktop / `py-16` mobile. Card-grid → Card-grid gap: `gap-6` desktop / `gap-4` mobile. Never collapse section padding below `py-12` regardless of viewport.
+- Hero → Section gap: `py-16` mobile / `py-24` desktop.
+- Card grid gap: `gap-4` mobile / `gap-6` desktop.
+- Never collapse section padding below `py-12`.
 
 ---
 
-## 4. CODESPACE INTEGRATION / COHESION
+## 4. GRADIENTS & DECORATIVE ELEMENTS
 
-### 4.1 Tailwind Class Ordering (enforced, not stylistic preference)
+### 4.1 Gradient Usage Rules
 
-Classes must always be written in this exact left-to-right sequence. A linter/formatter (e.g., `prettier-plugin-tailwindcss`) should be configured to auto-sort, but the Agent must author in this order by default so diffs stay clean pre-format:
+Gradients are defined as CSS custom properties and exposed as utility classes:
 
-1. **Layout** — `flex`, `grid`, `block`, `absolute`, `relative`, `inset-*`, `z-*`
-2. **Sizing** — `w-*`, `h-*`, `min-*`, `max-*`, `aspect-*`
-3. **Spacing** — `p-*`, `px-*`, `py-*`, `m-*`, `gap-*`, `space-x-*`/`space-y-*`
-4. **Flex/Grid alignment** — `items-*`, `justify-*`, `grid-cols-*`, `flex-*`
+| Class | Gradient |
+|---|---|
+| `gradient-primary` / `bg-gradient-primary` | Teal gradient (135deg) |
+| `gradient-accent` / `bg-gradient-accent` | Emerald → Teal (135deg) |
+| `bg-gradient-emerald` | Emerald gradient (135deg) |
+| `gradient-hero` | Teal → light green (135deg) |
+
+- **Allowed on:** hero sections, CTA buttons (`accent`/`hero` variants), marketing backgrounds, landing page feature sections.
+- **NOT allowed on:** cards, inputs, nav, tables, functional UI chrome.
+
+### 4.2 Shadows
+
+| Class | Shadow |
+|---|---|
+| `shadow-card` | Subtle card lift (default for all cards) |
+| `shadow-lg` / `shadow-elegant` | Elevated panels, modals |
+| `shadow-accent-glow` | Focus/hover ring glow (emerald, 15% opacity) |
+
+- No `shadow-2xl`, no colored shadows beyond `shadow-accent`.
+- Cards use `shadow-card` by default. Elevated elements use `shadow-lg`.
+
+### 4.3 Overlay
+
+- `.overlay-black`: fixed full-screen dark overlay at 65% opacity, z-50. Used for modal backdrops.
+
+---
+
+## 5. CODESPACE INTEGRATION / COHESION
+
+### 5.1 Tailwind Class Ordering
+
+Classes should be written in this left-to-right sequence:
+
+1. **Layout** — `flex`, `grid`, `absolute`, `relative`, `inset-*`, `z-*`
+2. **Sizing** — `w-*`, `h-*`, `min-*`, `max-*`
+3. **Spacing** — `p-*`, `px-*`, `py-*`, `m-*`, `gap-*`
+4. **Flex/Grid alignment** — `items-*`, `justify-*`, `grid-cols-*`
 5. **Typography** — `text-*`, `font-*`, `leading-*`, `tracking-*`
-6. **Border** — `border*`, `rounded-*`, `divide-*`
-7. **Background/Color** — `bg-*`, `text-{color}`, `fill-*`, `stroke-*`
-8. **Effects** — `shadow-*`, `opacity-*`, `blur-*`, `backdrop-*`
-9. **Transitions/Animation** — `transition-*`, `duration-*`, `ease-*`, `animate-*`
-10. **State variants last, grouped by prefix** — all `hover:`, then all `focus-visible:`, then all `disabled:`, then all `sm:`/`md:`/`lg:` responsive variants, in that fixed order.
+6. **Border** — `border*`, `rounded-*`
+7. **Background/Color** — `bg-*`, `text-{color}`
+8. **Effects** — `shadow-*`, `opacity-*`
+9. **Transitions** — `transition-*`, `duration-*`, `animate-*`
+10. **State variants** — `hover:`, `focus-visible:`, `disabled:`, responsive `sm:`/`md:`/`lg:`
 
-```tsx
-// CORRECT ordering example
-<button className="flex items-center justify-center gap-2 h-10 px-4 rounded-pill text-body font-medium bg-brand-primary text-brand-primary-ink shadow-ambient transition-colors duration-fast hover:bg-[#C4EB2E] focus-visible:ring-2 focus-visible:ring-brand-primary/40 disabled:bg-canvas-overlay disabled:text-ink-tertiary">
-```
+### 5.2 Token Consumption Rule
 
-### 4.2 Token Consumption Rule
+- **Use Tailwind theme tokens** (`bg-primary`, `text-foreground`, `border-border`) whenever possible.
+- **Raw hex/Tailwind colors** (`bg-white`, `border-gray-300`, `bg-[#142015]`) are acceptable when tokens don't cover the use case — the project uses both.
+- **Gradient utilities** are pre-defined in `globals.css` — use the class names, not inline gradients.
+- **Custom utility classes** (`shadow-elegant`, `shadow-accent-glow`, `transition-smooth`, `overlay-black`) are defined in `globals.css` `@layer utilities`.
 
-- **Never hardcode hex values in component files.** All colors resolve through Tailwind theme extensions mapped 1:1 to §0 tokens (e.g., `bg-canvas-base`, `text-ink-secondary`, `border-canvas-border`). If a required color isn't in `tailwind.config`, the Agent must add it to the config's `theme.extend` block first — it may never inline `bg-[#0A0A0C]`.
-- `identity-gradients` are implemented as named utility classes (`.gradient-violet`, `.gradient-coral`, etc.) defined once in `globals.css`, not regenerated inline per component.
+### 5.3 Component File Cohesion
 
-### 4.3 Component File Cohesion
+- shadcn components live in `src/components/ui/` — do not fork shadcn internals.
+- Shared variant logic uses `cva` (class-variance-authority).
+- Custom components live in `src/components/common/`, `src/components/shared/`, `src/components/inputs/`.
+- Feature-specific components live in `src/features/{feature}/components/`.
+- All route-level views are in `src/pages/` and are lazy-loaded with `<Suspense>` + `<Loader />`.
+- RTL support: use `react-i18next` `useTranslation()` and layout direction from i18n context. The `Table` and `Progress` components have built-in RTL awareness.
 
-- Every new component under `/components/ui/` that wraps a shadcn primitive must preserve the primitive's `data-slot`/`asChild` API — no forking shadcn internals.
-- Shared variant logic uses `cva` (class-variance-authority); the Agent must extend existing `cva` variant maps rather than creating parallel one-off variant unions.
-- Any new component must be accompanied by a Storybook/preview entry (or equivalent route in `/app/(preview)/`) demonstrating all states from §2's state matrices — a component without documented Default/Hover/Focus/Disabled/Error states is considered incomplete.
-- Before merging, the Agent self-checks against §1.4 Anti-Patterns as a literal checklist — each of the 10 items gets an explicit pass/fail, not a general "looks fine."
+### 5.4 Two Button Systems (important)
+
+This project has **two Button components**:
+
+1. **`src/components/ui/button.tsx`** (shadcn) — Used in app pages (dashboards, forms, marketplace). Has 8 variants including `accent` and `hero` with gradient support.
+2. **`src/components/inputs/Button.tsx`** (custom) — Used in landing page and marketing sections. Has 4 variants (`solid`, `outline`, `secondary`, `primary`).
+
+When building app pages, use the shadcn Button. When building landing/marketing sections, use the custom Button. Do not mix them within the same visual section.
 
 ---
 
-**Document status:** locked v1.0. Any token change requires updating this file in the same commit as the code change — the two must never drift.
+**Document status:** v2.0 — Rewritten to match actual project implementation. Any token change requires updating this file in the same commit as the code change.
