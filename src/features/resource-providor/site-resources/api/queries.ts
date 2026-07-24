@@ -4,7 +4,7 @@ import {
   QUERY_KEYS,
   WorkSiteResourcesController,
 } from ".";
-import { BankCategories, OrderRequest, Resources, SiteDetailsWithResources, WorkSiteResourcesStatistics } from "./types";
+import { BankCategories, OrderRequest, Resources, WorkSiteResourcesStatistics } from "./types";
 
 const fetchWorkSiteResourceApi = async ({
   CategoryId,

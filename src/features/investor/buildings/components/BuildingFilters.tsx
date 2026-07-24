@@ -27,7 +27,7 @@ const BuildingFilters: React.FC<BuildingFiltersProps> = ({
   const isArabic = i18n.language === "ar";
 
   return (
-    <div className="flex items-center gap-3 mb-4 flex-wrap">
+    <div className="flex items-center gap-3 flex-wrap">
       <div className="relative w-72">
         <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Plus } from "lucide-react";
 import { useBuildingsInfinite } from "../api/query";
 import type { BuildingType } from "../api/types";
 import BuildingCard from "./BuildingCard";
@@ -7,6 +7,9 @@ import CardSkeleton from "../../lands-buildings/components/PropertySkeleton";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useState } from "react";
 import BuildingFilters from "./BuildingFilters";
+import { Link } from "react-router";
+import { Button } from "@/components/ui/button";
+import { paths } from "@/config/paths";
 
 interface BuildingsListProps {
   onEdit?: (buildingId: number) => void;
@@ -35,12 +38,19 @@ const BuildingsList: React.FC<BuildingsListProps> = ({ onEdit }) => {
 
   return (
     <div>
-      <BuildingFilters
-        search={search}
-        onSearchChange={setSearch}
-        buildingType={buildingTypeFilter}
-        onBuildingTypeChange={setBuildingTypeFilter}
-      />
+      <div className="flex items-center justify-between mb-4">
+        <BuildingFilters
+          search={search}
+          onSearchChange={setSearch}
+          buildingType={buildingTypeFilter}
+          onBuildingTypeChange={setBuildingTypeFilter}
+        />
+        <Link to={paths.app.investor.createBuilding.getHref()}>
+          <Button className="bg-gradient-emerald hover:opacity-95 text-white shadow-elegant gap-2">
+            <Plus className="h-4 w-4" /> {t("investor.addBuilding", "Add Building")}
+          </Button>
+        </Link>
+      </div>
 
       {isLoading && (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

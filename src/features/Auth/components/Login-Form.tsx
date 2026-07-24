@@ -9,6 +9,8 @@ import Button from "@/components/inputs/Button";
 import Input from "@/components/inputs/Input";
 import { useRefreshToken } from "@/stores/useAuthStore";
 import useExchangeState from "@/hooks/useExchangeState";
+import { ROLE_DEFAULT_PATH } from "@/lib/permissions";
+import type { Role } from "@/types";
 
 const LoginForm = () => {
   const goto = useNavigate();
@@ -31,14 +33,7 @@ const LoginForm = () => {
           setRefreshTokenToken({ refreshToken });
         }
 
-        switch (role) {
-          case "Provider":
-            goto(paths.app.resourceProvidor.profile.path);
-            break;
-          case "Investor":
-            goto(paths.app.investor.hisLandsAndBuildings.path);
-            break;
-        }
+        goto(ROLE_DEFAULT_PATH[role as Role] ?? paths.app.home.path);
       },
     });
   };
