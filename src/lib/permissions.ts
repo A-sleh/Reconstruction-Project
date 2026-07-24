@@ -16,6 +16,7 @@ export const Permissions = {
   ORDERS_VIEW: "orders.view",
   ORDERS_CREATE: "orders.create",
   ORDERS_MANAGE: "orders.manage",
+  ORDERS_CANCEL: "orders.cancel",
 
   // ── Resources ───────────────────────────────────────────────
   RESOURCES_VIEW: "resources.view",
@@ -72,6 +73,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.PROFILE_VIEW,
     Permissions.PROFILE_EDIT,
     Permissions.STATISTICS_VIEW,
+    Permissions.ORDERS_CANCEL,
   ],
   Investor: [
     Permissions.HOME_VIEW,
@@ -87,6 +89,10 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.USERS_MANAGE,
     Permissions.SUPPORT_MANAGE,
     Permissions.PROJECTS_VIEW,
+
+
+
+    Permissions.ORDERS_MANAGE,
   ],
   Engineer: [
     Permissions.HOME_VIEW,

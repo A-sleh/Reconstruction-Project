@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ResourceHeader from "@/features/resource-providor/site-resources/components/ResourceHeader";
 import InventoryTab from "@/features/resource-providor/site-resources/components/InventoryTab";
-import OrdersTab from "@/features/resource-providor/site-resources/components/OrdersTab";
+import BankItemsRequests from "@/features/category-bank/components/BankItemsRequests";
 
 const WorkSiteDetails = () => {
   const { t, i18n } = useTranslation();
@@ -31,7 +31,7 @@ const WorkSiteDetails = () => {
             <InventoryTab />
           </TabsContent>
           <TabsContent value="orders" className="mt-6">
-            <OrdersTab />
+            <BankItemsRequests />
           </TabsContent>
         </Tabs>
       </section>

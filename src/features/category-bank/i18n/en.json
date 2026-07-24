@@ -22,6 +22,14 @@
       "actions": "Actions",
       "reject": "Reject",
       "approve": "Approve",
+      "resolve": "Resolve",
+      "cancel": "Cancel",
+      "actions": {
+        "approve": "Approve",
+        "resolve": "Resolve",
+        "reject": "Reject",
+        "cancel": "Cancel Request"
+      },
       "empty": "No pending requests found.",
       "total": "{{count}} requests total",
       "searchLabel": "Search",
@@ -55,6 +63,22 @@
       "actions": {
         "confirm": "Reject"
       }
+    },
+    "resolveModal": {
+      "title": "Resolve Request",
+      "description": "Assign this request to an existing bank item and add a tag.",
+      "tagNameLabel": "Tag Name",
+      "tagNamePlaceholder": "Enter tag name...",
+      "existingItemLabel": "Existing Bank Item",
+      "selectItemPlaceholder": "Select a bank item...",
+      "searchPlaceholder": "Search bank items...",
+      "noResults": "No matching items found.",
+      "actions": {
+        "confirm": "Resolve"
+      }
+    },
+    "cancelModal": {
+      "itemName": "this request"
     },
     "approveModal": {
       "title": "Approve & Assign Category",
@@ -103,6 +127,17 @@
       "actions": {
         "confirm": "Save Tags"
       }
+    },
+    "toast": {
+      "approveSuccess": "Request approved successfully",
+      "approveError": "Failed to approve request",
+      "rejectSuccess": "Request rejected successfully",
+      "rejectError": "Failed to reject request",
+      "resolveSuccess": "Request resolved successfully",
+      "resolveError": "Failed to resolve request",
+      "cancelSuccess": "Request cancelled successfully",
+      "cancelError": "Failed to cancel request",
+      "cancelledByAdmin": "Cancelled by admin"
     }
   }
 }

@@ -22,6 +22,14 @@
       "actions": "الإجراءات",
       "reject": "رفض",
       "approve": "موافقة",
+      "resolve": "حل",
+      "cancel": "إلغاء",
+      "actions": {
+        "approve": "موافقة",
+        "resolve": "حل",
+        "reject": "رفض",
+        "cancel": "إلغاء الطلب"
+      },
       "empty": "لم يتم العثور على طلبات معلقة.",
       "total": "{{count}} طلب إجمالاً",
       "searchLabel": "بحث",
@@ -55,6 +63,22 @@
       "actions": {
         "confirm": "رفض"
       }
+    },
+    "resolveModal": {
+      "title": "حل الطلب",
+      "description": "قم بتعيين هذا الطلب إلى عنصر بنك موجود وأضف وسماً.",
+      "tagNameLabel": "اسم الوسم",
+      "tagNamePlaceholder": "أدخل اسم الوسم...",
+      "existingItemLabel": "عنصر بنك موجود",
+      "selectItemPlaceholder": "اختر عنصر بنك...",
+      "searchPlaceholder": "بحث في عناصر البنك...",
+      "noResults": "لم يتم العثور على عناصر مطابقة.",
+      "actions": {
+        "confirm": "حل"
+      }
+    },
+    "cancelModal": {
+      "itemName": "هذا الطلب"
     },
     "approveModal": {
       "title": "موافقة وتعيين فئة",
@@ -103,6 +127,17 @@
       "actions": {
         "confirm": "حفظ الوسوم"
       }
+    },
+    "toast": {
+      "approveSuccess": "تمت الموافقة على الطلب بنجاح",
+      "approveError": "فشل الموافقة على الطلب",
+      "rejectSuccess": "تم رفض الطلب بنجاح",
+      "rejectError": "فشل رفض الطلب",
+      "resolveSuccess": "تم حل الطلب بنجاح",
+      "resolveError": "فشل حل الطلب",
+      "cancelSuccess": "تم إلغاء الطلب بنجاح",
+      "cancelError": "فشل إلغاء الطلب",
+      "cancelledByAdmin": "تم الإلغاء من قبل المسؤول"
     }
   }
 }
