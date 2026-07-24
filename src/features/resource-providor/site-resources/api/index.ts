@@ -8,7 +8,6 @@ export enum WorkSiteResourcesController_Legacy {
   WorkSiteResourcesStatistics = "worksite/order-statistic",
   updateWorkSite = "worksite/update-resource",
   delelteResource = "worksite/delete-item",
-  WorkSiteResources = `worksite/get-resource`,
   OrderRequest = "orders",
 }
 

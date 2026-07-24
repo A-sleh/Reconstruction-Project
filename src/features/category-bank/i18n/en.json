@@ -139,6 +139,28 @@
       "cancelSuccess": "Request cancelled successfully",
       "cancelError": "Failed to cancel request",
       "cancelledByAdmin": "Cancelled by admin"
+    },
+    "systemResources": {
+      "searchPlaceholder": "Search resources...",
+      "filterByCategory": "Filter by category",
+      "allCategories": "All Categories",
+      "table": {
+        "id": "ID",
+        "name": "Name",
+        "description": "Description",
+        "category": "Category",
+        "empty": "No resources found.",
+        "totalResources": "{{count}} resources total"
+      }
+    },
+    "systemServices": {
+      "searchPlaceholder": "Search services...",
+      "empty": "No services found.",
+      "columns": {
+        "name": "Name",
+        "description": "Description",
+        "category": "Category"
+      }
     }
   }
 }

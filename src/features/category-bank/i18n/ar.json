@@ -139,6 +139,28 @@
       "cancelSuccess": "تم إلغاء الطلب بنجاح",
       "cancelError": "فشل إلغاء الطلب",
       "cancelledByAdmin": "تم الإلغاء من قبل المسؤول"
+    },
+    "systemResources": {
+      "searchPlaceholder": "بحث في الموارد...",
+      "filterByCategory": "تصفية حسب الفئة",
+      "allCategories": "جميع الفئات",
+      "table": {
+        "id": "المعرف",
+        "name": "الاسم",
+        "description": "الوصف",
+        "category": "الفئة",
+        "empty": "لم يتم العثور على موارد.",
+        "totalResources": "{{count}} مورد إجمالاً"
+      }
+    },
+    "systemServices": {
+      "searchPlaceholder": "بحث في الخدمات...",
+      "empty": "لم يتم العثور على خدمات.",
+      "columns": {
+        "name": "الاسم",
+        "description": "الوصف",
+        "category": "الفئة"
+      }
     }
   }
 }

@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BankCategoryKPISection from "@/features/category-bank/components/BankCategoryKPISection";
-import SystemCategories from "@/features/category-bank/components/SystemCateogries";
 import BankItemsRequests from "@/features/category-bank/components/BankItemsRequests";
+import SystemResources from "@/features/category-bank/components/SystemResources";
+import SystemServices from "@/features/category-bank/components/SystemServices";
 
 const Categories = () => {
   const { t, i18n } = useTranslation();
@@ -30,7 +31,7 @@ const Categories = () => {
             <TabsTrigger value="allResources">
               {t("categoryBank.tabs.allResources")}
             </TabsTrigger>
-            <TabsTrigger value="all">
+            <TabsTrigger value="allServices">
               {t("categoryBank.tabs.allServices")}
             </TabsTrigger>
           </TabsList>
@@ -39,10 +40,10 @@ const Categories = () => {
             <BankItemsRequests />
           </TabsContent>
           <TabsContent value="allResources" className="mt-6">
-            <SystemCategories />
+            <SystemResources />
           </TabsContent>
           <TabsContent value="allServices" className="mt-6">
-            <SystemCategories />
+            <SystemServices />
           </TabsContent>
         </Tabs>
       </section>

@@ -85,4 +85,12 @@ export interface PureResource {
   unit: string;
 }
 
+export interface Service {
+  id: number;
+  name: string;
+  description: string;
+  serviceType: Category;
+}
+
 export interface Resources extends Paginated<PureResource> {}
+export interface Services extends Paginated<Service> {}
