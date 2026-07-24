@@ -27,15 +27,21 @@ const Categories = () => {
             <TabsTrigger value="pending">
               {t("categoryBank.tabs.pendingRequests")}
             </TabsTrigger>
+            <TabsTrigger value="allResources">
+              {t("categoryBank.tabs.allResources")}
+            </TabsTrigger>
             <TabsTrigger value="all">
-              {t("categoryBank.tabs.allCategories")}
+              {t("categoryBank.tabs.allServices")}
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="pending" className="mt-6">
             <BankItemsRequests />
           </TabsContent>
-          <TabsContent value="all" className="mt-6">
+          <TabsContent value="allResources" className="mt-6">
+            <SystemCategories />
+          </TabsContent>
+          <TabsContent value="allServices" className="mt-6">
             <SystemCategories />
           </TabsContent>
         </Tabs>

@@ -2,7 +2,8 @@
   "categoryBank": {
     "tabs": {
       "pendingRequests": "Pending Requests",
-      "allCategories": "All Categories",
+      "allResources": "All resources",
+      "allServices": "All services",
       "allCategoriesPlaceholder": "All categories view coming soon."
     },
     "kpi": {

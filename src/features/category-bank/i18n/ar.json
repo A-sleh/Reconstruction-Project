@@ -2,7 +2,8 @@
   "categoryBank": {
     "tabs": {
       "pendingRequests": "الطلبات المعلقة",
-      "allCategories": "جميع الفئات",
+      "allResources": "جميع موارد النظام",
+      "allServices": "جميع خدمات النظام",
       "allCategoriesPlaceholder": "عرض جميع الفئات قادم قريباً."
     },
     "kpi": {

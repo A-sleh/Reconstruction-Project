@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/Label";
 import { X } from "lucide-react";
 import { useAddBankItemRequest } from "@/features/category-bank/api/actions";
-import { useBankCategories } from "../api/queries";
+import { useBankCategories } from "@/features/category-bank/api/quertes";
 import { successToast, errorToast } from "@/components/common/Toast";
 import Input from "@/components/inputs/Input";
 import Selector from "@/components/inputs/Selector";

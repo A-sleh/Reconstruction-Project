@@ -1,10 +1,10 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
 import { BankItemController, QUERY_KEYS } from ".";
-import { BankItemRequestsResponse, BankItemStatus } from "./types";
+import { BankItemRequestsResponse, BankItemStatus, BankCategories, Resources } from "./types";
 
 // ==========================================
-// API Fetchers
+// Bank Item Requests Fetcher
 // ==========================================
 const getBankItemRequests = async (
   pageNumber: number,
@@ -21,7 +21,38 @@ const getBankItemRequests = async (
 };
 
 // ==========================================
-// Custom Infinite Query Hooks
+// Bank Categories & Resources Fetchers
+// ==========================================
+const fetchResourceCategoriesAPI = async (): Promise<BankCategories> => {
+  const { data } = await ApiInstance.get<BankCategories>(
+    `/${BankItemController.BankCategories}`,
+  );
+  return data;
+};
+
+
+const fetchResourceApi = async ({
+  CategoryId,
+  PageNumber = 1,
+  PageSize = 10,
+  Search,
+}: {
+  CategoryId: number;
+  Search: string;
+  PageSize: number;
+  PageNumber: number;
+}): Promise<Resources> => {
+  const { data } = await ApiInstance.get<Resources>(
+    `/${BankItemController.Resources}`,
+    {
+      params: { ResourceCategoryId: CategoryId, PageNumber, PageSize, Search },
+    },
+  );
+  return data;
+};
+
+// ==========================================
+// Bank Item Requests Hook
 // ==========================================
 export const useBankItemRequests = ({
   pageSize = 10,
@@ -43,6 +74,52 @@ export const useBankItemRequests = ({
     },
 
     initialPageParam: 0,
+
+    getNextPageParam: (lastPage) => {
+      if (lastPage.hasNextPage) {
+        return lastPage.pageNum + 1;
+      }
+      return undefined;
+    },
+  });
+};
+
+// ==========================================
+// Bank Categories Hook
+// ==========================================
+export const useBankCategories = () => {
+  return useQuery<BankCategories, unknown>({
+    queryKey: QUERY_KEYS.bankCategories,
+    queryFn: fetchResourceCategoriesAPI,
+  });
+};
+
+// ==========================================
+// Resources Infinite Queries
+// ==========================================
+export const useResourcesInfinite = ({
+  search,
+  categoryId,
+}: {
+  search: string;
+  categoryId: number | "all";
+}) => {
+  return useInfiniteQuery<Resources, unknown>({
+    queryKey: [...QUERY_KEYS.resources, search, categoryId],
+
+    queryFn: async ({ pageParam = 1 }) => {
+      const parsedCategoryId =
+        categoryId === "all" ? undefined : (categoryId as number);
+
+      return await fetchResourceApi({
+        Search: search,
+        CategoryId: parsedCategoryId as number,
+        PageNumber: pageParam as number,
+        PageSize: 10,
+      });
+    },
+
+    initialPageParam: 1,
 
     getNextPageParam: (lastPage) => {
       if (lastPage.hasNextPage) {

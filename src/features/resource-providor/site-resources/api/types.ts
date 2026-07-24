@@ -2,6 +2,9 @@ import { Paginated } from "@/types";
 import { WorkSite } from "../../work-sites/api";
 import { Resource } from "./actions";
 
+// Re-export moved types from category-bank
+export type { Category, PureResource, Resources, BankCategories } from "@/features/category-bank/api/types";
+
 export type OrderRequestStatus = "pending" | "approved" | "rejected";
 export type ResourceAvailability = "in-stock" | "low-stock" | "out-of-stock";
 export type UnitType =
@@ -48,21 +51,6 @@ export const initialCategories: string[] = [
   "Labor",
 ];
 
-export interface Category {
-  id: number;
-  name: string;
-}
-
-export interface PureResource {
-  id: number;
-  name: string;
-  imageURL: string;
-  description: string;
-  category: Category;
-  price: number;
-  isAvailable: boolean;
-  unit: UnitType;
-}
 export interface OrderRequest {
   id: string;
   siteId: string;
@@ -92,18 +80,12 @@ export interface WorkSiteResourcesStatistics {
   fulfillCount: number;
 }
 
-export interface BankCategories {
-  categories: Category[];
-}
-
-export interface Resources extends Paginated<PureResource> {}
-
 export interface ResourcesPayload {
   resources: Resource[];
   workSiteId: number | string;
 }
 
 export interface DeleteWorksiteItemParams {
-  Id: number;         // query ($int64)
-  ItemType: string;   // query string (e.g., "Resource")
+  Id: number;
+  ItemType: string;
 }

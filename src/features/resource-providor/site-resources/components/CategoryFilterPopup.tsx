@@ -1,7 +1,7 @@
 import { Filter, X } from "lucide-react";
 import Model from "@/components/model/Model";
 import useQueryStringState from "@/hooks/useQueryStringState";
-import { useBankCategories } from "../api/queries";
+import { useBankCategories } from "@/features/category-bank/api/quertes";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";

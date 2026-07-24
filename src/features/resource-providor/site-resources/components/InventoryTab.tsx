@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useParams } from "react-router";
-import { useRWorkSiteResourcesInfinite, useBankCategories } from "../api/queries";
+import { useRWorkSiteResourcesInfinite, useBankCategories } from "@/features/category-bank/api/quertes";
 import {
   Table,
   TableHeader,
@@ -32,7 +32,7 @@ import {
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import ModifyResourceModel from "./ModifyResourceModel";
 import CollapsibleFilter from "@/components/common/CollapsibleFilter";
-import { PureResource } from "../api/types";
+import { PureResource } from "@/features/category-bank/api/types";
 import { useDeleteWorksiteItem } from "../api/actions";
 
 interface InventoryTabProps {

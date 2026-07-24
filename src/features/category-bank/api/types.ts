@@ -61,3 +61,28 @@ export interface AddRequestParams {
   note: string;
   categoryId: number;
 }
+
+// ============================================================================
+// Bank Categories & Resources (moved from site-resources/api)
+// ============================================================================
+export interface Category {
+  id: number;
+  name: string;
+}
+
+export interface BankCategories {
+  categories: Category[];
+}
+
+export interface PureResource {
+  id: number;
+  name: string;
+  imageURL: string;
+  description: string;
+  category: Category;
+  price: number;
+  isAvailable: boolean;
+  unit: string;
+}
+
+export interface Resources extends Paginated<PureResource> {}
