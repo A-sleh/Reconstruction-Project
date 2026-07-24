@@ -18,19 +18,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Power, Trash2 } from "lucide-react";
-import ConfirmDelete from "@/components/model/ConfirmDelete";
+import { Power } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { useSystemUsersInfinite } from "../api/query";
-import {
-  useActivateUser,
-  useDeactivateUser,
-  useDeleteUser,
-} from "../api/actions";
-import type { SystemUserRole } from "../api/types";
+import { useActivateUser, useDeactivateUser } from "../api/actions";
 import { useDebounce } from "@/hooks/useDebounce";
+import type { SystemUser, SystemUserRole } from "../api/types";
 import UserRowSkeleton from "./UserRowSkeleton";
 import EmptyUsersState from "./EmptyUsersState";
 import RoleBadge from "./RoleBadge";
+import LoadMoreButton from "@/components/shared/LoadMoreButton";
+import defaultAvatar from "@/assets/images/default-avatar.svg";
 
 const ROLES: { value: SystemUserRole; label: string }[] = [
   { value: "Investor", label: "مستثمر" },
@@ -42,7 +40,7 @@ const UsersTable = () => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
   const [search, setSearch] = useState("");
-  const [currentUserId, setCurrentUserId] = useState(null);
+  const [currentUserId, setCurrentUserId] = useState<null | number>(null);
   const [roleFilter, setRoleFilter] = useState<string>("all");
   const debouncedSearch = useDebounce(search, 500);
 
@@ -52,12 +50,26 @@ const UsersTable = () => {
       Role: roleFilter !== "all" ? (roleFilter as SystemUserRole) : undefined,
     });
 
-  const users = data?.pages.flatMap((p) => p) ?? [];
+  const users = data?.pages.flatMap((p) => p.data) ?? [];
 
   const { mutate: activateUser, isPending: isActivating } = useActivateUser();
   const { mutate: deactivateUser, isPending: isDeactivating } =
     useDeactivateUser();
-  const { mutate: deleteUser, isPending: isDeleting } = useDeleteUser();
+
+  function onChangeUserMode(user: SystemUser) {
+    setCurrentUserId(user.id);
+    user.isActive
+      ? deactivateUser(user.id, {
+          onSettled: () => {
+            setCurrentUserId(null);
+          },
+        })
+      : activateUser(user.id, {
+          onSettled: () => {
+            setCurrentUserId(null);
+          },
+        });
+  }
 
   return (
     <div className="space-y-4 w-full" dir={isArabic ? "rtl" : "ltr"}>
@@ -120,17 +132,20 @@ const UsersTable = () => {
 
               {!isLoading && users.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={5} className="p-0">
+                  <TableCell colSpan={6} className="p-0">
                     <EmptyUsersState />
                   </TableCell>
                 </TableRow>
               )}
 
               {!isLoading &&
-                users.map((user,Idx) => (
+                users.map((user, Idx) => (
                   <TableRow
                     key={user.id}
-                    className="hover:bg-muted/40 transition-colors"
+                    className={cn(
+                      "hover:bg-muted/40 transition-all duration-200",
+                      !user.isActive && "opacity-60 bg-muted/20",
+                    )}
                   >
                     <TableCell className="text-sm text-muted-foreground">
                       {Idx + 1}
@@ -138,9 +153,12 @@ const UsersTable = () => {
                     <TableCell>
                       <div className="flex items-center gap-3">
                         <img
-                          src={user?.avatarUrl}
+                          src={user?.avatarUrl || defaultAvatar}
                           alt={`${user.firstName} ${user.lastName}`}
                           className="h-10 w-10 rounded-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = defaultAvatar;
+                          }}
                         />
                         <div>
                           <div className="font-medium">
@@ -162,7 +180,7 @@ const UsersTable = () => {
                       {user.personalIdentifier}
                     </TableCell>
                     <TableCell className="text-right">
-                      <div className="flex items-center  gap-1">
+                      <div className="flex items-center gap-1">
                         <Button
                           size="icon"
                           isLoading={
@@ -170,20 +188,7 @@ const UsersTable = () => {
                             currentUserId == user.id
                           }
                           variant={user.isActive ? "outline" : "default"}
-                          onClick={() => {
-                            setCurrentUserId(user.id);
-                            user.isActive
-                              ? deactivateUser(user.id, {
-                                  onSettled: () => {
-                                    setCurrentUserId(null);
-                                  },
-                                })
-                              : activateUser(user.id, {
-                                  onSettled: () => {
-                                    setCurrentUserId(null);
-                                  },
-                                });
-                          }}
+                          onClick={() => onChangeUserMode(user)}
                           disabled={
                             (isActivating || isDeactivating) &&
                             currentUserId == user.id
@@ -193,26 +198,15 @@ const UsersTable = () => {
                               ? t("systemUsers.table.deactivate")
                               : t("systemUsers.table.activate")
                           }
-                          className="h-8 w-8"
+                          className={cn(
+                            "h-8 w-8 transition-all duration-200",
+                            user.isActive
+                              ? "border-green-300 text-green-600 hover:bg-green-50 hover:text-green-700 hover:border-green-400"
+                              : "bg-gray-200 text-gray-500 border-gray-300 hover:bg-gray-300 hover:text-gray-700",
+                          )}
                         >
                           <Power className="h-4 w-4" />
                         </Button>
-
-                        <ConfirmDelete
-                          item={`${user.firstName} ${user.lastName}`}
-                          onConfirm={() => deleteUser(user.id)}
-                          isLoading={isDeleting}
-                          openButton={
-                            <Button
-                              size="icon"
-                              variant="destructive"
-                              title={t("systemUsers.table.delete")}
-                              className="h-8 w-8"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          }
-                        />
                       </div>
                     </TableCell>
                   </TableRow>
@@ -222,22 +216,13 @@ const UsersTable = () => {
         </div>
 
         {!isLoading && users.length > 0 && (
-          <>
-            <p className="text-center text-xs text-muted-foreground py-4">
-              {t("systemUsers.table.total", { count: users.length })}
-            </p>
-            {hasNextPage && (
-              <div className="pb-4 flex justify-center">
-                <button
-                  onClick={() => fetchNextPage()}
-                  disabled={isFetchingNextPage}
-                  className="text-sm text-primary hover:underline disabled:opacity-50"
-                >
-                  {isFetchingNextPage ? "Loading..." : "Load more"}
-                </button>
-              </div>
-            )}
-          </>
+          <LoadMoreButton
+            onLoadMore={() => fetchNextPage()}
+            isLoading={isFetchingNextPage}
+            hasMore={hasNextPage ?? false}
+            total={users.length}
+            totalLabel={t("systemUsers.table.total", { count: users.length })}
+          />
         )}
       </div>
     </div>

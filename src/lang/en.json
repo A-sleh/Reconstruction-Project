@@ -52,6 +52,8 @@
     "logoutSuccess": "Logged out successfully",
     "logoutError": "Logout failed",
     "loading": "Loading...",
+    "loadMore": "Load More",
+    "totalItems": "{{count}} items total",
     "banner": {
       "message": "You have unsaved changes to resource quantities.",
       "cancel": "Discard",

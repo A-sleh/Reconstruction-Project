@@ -4,6 +4,9 @@ const UserRowSkeleton = () => {
   return (
     <TableRow>
       <TableCell>
+        <div className="h-4 w-4 rounded bg-muted animate-pulse" />
+      </TableCell>
+      <TableCell>
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-muted animate-pulse" />
           <div className="space-y-1.5">

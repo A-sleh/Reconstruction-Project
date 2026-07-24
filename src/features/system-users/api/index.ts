@@ -7,7 +7,6 @@ export enum SystemUserController {
   GetStats = `${BASE_SYSTEM_USER_ROUTE}/get-stats`,
   Activate = `${BASE_SYSTEM_USER_ROUTE}/activate`,
   Deactivate = `${BASE_SYSTEM_USER_ROUTE}/deactivate`,
-  Delete = `${BASE_SYSTEM_USER_ROUTE}/delete`,
 }
 
 export const QUERY_KEYS = {
@@ -24,6 +23,5 @@ export const MUTATION_KEYS = {
   systemUsers: {
     activate: () => ["systemUsers", "activate"],
     deactivate: () => ["systemUsers", "deactivate"],
-    delete: () => ["systemUsers", "delete"],
   },
 };

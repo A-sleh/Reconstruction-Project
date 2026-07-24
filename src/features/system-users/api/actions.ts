@@ -9,22 +9,15 @@ import { SystemUserController, QUERY_KEYS, MUTATION_KEYS } from ".";
 // ==========================================
 
 const activateUser = async (id: number) => {
-  const { data } = await ApiInstance.put(
+  const { data } = await ApiInstance.patch(
     `/${SystemUserController.Activate}/${id}`,
   );
   return data;
 };
 
 const deactivateUser = async (id: number) => {
-  const { data } = await ApiInstance.put(
+  const { data } = await ApiInstance.patch(
     `/${SystemUserController.Deactivate}/${id}`,
-  );
-  return data;
-};
-
-const deleteUser = async (id: number) => {
-  const { data } = await ApiInstance.delete(
-    `/${SystemUserController.Delete}/${id}`,
   );
   return data;
 };
@@ -70,27 +63,6 @@ export const useDeactivateUser = () => {
       const serverMessage = error?.response?.data?.message || error?.message;
       const message =
         serverMessage || i18n.t("systemUsers.toast.deactivateError");
-      errorToast(message);
-    },
-  });
-};
-
-export const useDeleteUser = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationKey: MUTATION_KEYS.systemUsers.delete(),
-    mutationFn: deleteUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.systemUsers.all,
-      });
-      successToast(i18n.t("systemUsers.toast.deleteSuccess"));
-    },
-    onError: (error: any) => {
-      const serverMessage = error?.response?.data?.message || error?.message;
-      const message =
-        serverMessage || i18n.t("systemUsers.toast.deleteError");
       errorToast(message);
     },
   });
