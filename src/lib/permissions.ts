@@ -1,0 +1,132 @@
+import type { Role } from "@/types";
+import { paths } from "@/config/paths";
+
+/**
+ * All application permissions grouped by domain.
+ * Convention: "domain.action" e.g. "work_sites.view", "orders.create"
+ */
+export const Permissions = {
+  // ── Work Sites ──────────────────────────────────────────────
+  WORK_SITES_VIEW: "work_sites.view",
+  WORK_SITES_CREATE: "work_sites.create",
+  WORK_SITES_EDIT: "work_sites.edit",
+  WORK_SITES_DELETE: "work_sites.delete",
+
+  // ── Orders ──────────────────────────────────────────────────
+  ORDERS_VIEW: "orders.view",
+  ORDERS_CREATE: "orders.create",
+  ORDERS_MANAGE: "orders.manage",
+
+  // ── Resources ───────────────────────────────────────────────
+  RESOURCES_VIEW: "resources.view",
+  RESOURCES_ADD: "resources.add",
+
+  // ── Investor: Lands & Buildings ──────────────────────────────
+  LANDS_VIEW: "lands.view",
+  LANDS_CREATE: "lands.create",
+  BUILDINGS_VIEW: "buildings.view",
+  BUILDINGS_CREATE: "buildings.create",
+
+  // ── Marketplace ─────────────────────────────────────────────
+  MARKETPLACE_VIEW: "marketplace.view",
+  PROPERTY_LIST: "property.list",
+
+  // ── Categories (Admin) ──────────────────────────────────────
+  CATEGORIES_MANAGE: "categories.manage",
+
+  // ── System Users (Admin) ────────────────────────────────────
+  USERS_MANAGE: "users.manage",
+
+  // ── Support (Admin) ─────────────────────────────────────────
+  SUPPORT_MANAGE: "support.manage",
+
+  // ── Profile (shared) ────────────────────────────────────────
+  PROFILE_VIEW: "profile.view",
+  PROFILE_EDIT: "profile.edit",
+
+  // ── Statistics ──────────────────────────────────────────────
+  STATISTICS_VIEW: "statistics.view",
+
+  // ── Home ────────────────────────────────────────────────────
+  HOME_VIEW: "home.view",
+
+  // ── Projects ────────────────────────────────────────────────
+  PROJECTS_VIEW: "projects.view",
+} as const;
+
+export type Permission = (typeof Permissions)[keyof typeof Permissions];
+
+/**
+ * Maps each role to its array of permissions.
+ */
+export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
+  Provider: [
+    Permissions.HOME_VIEW,
+    Permissions.WORK_SITES_VIEW,
+    Permissions.WORK_SITES_CREATE,
+    Permissions.WORK_SITES_EDIT,
+    Permissions.ORDERS_VIEW,
+    Permissions.ORDERS_CREATE,
+    Permissions.RESOURCES_VIEW,
+    Permissions.RESOURCES_ADD,
+    Permissions.PROFILE_VIEW,
+    Permissions.PROFILE_EDIT,
+    Permissions.STATISTICS_VIEW,
+  ],
+  Investor: [
+    Permissions.HOME_VIEW,
+    Permissions.LANDS_VIEW,
+    Permissions.LANDS_CREATE,
+    Permissions.BUILDINGS_VIEW,
+    Permissions.BUILDINGS_CREATE,
+    Permissions.MARKETPLACE_VIEW,
+    Permissions.PROPERTY_LIST,
+    Permissions.PROFILE_VIEW,
+    Permissions.PROFILE_EDIT,
+    Permissions.CATEGORIES_MANAGE,
+    Permissions.USERS_MANAGE,
+    Permissions.SUPPORT_MANAGE,
+    Permissions.PROJECTS_VIEW,
+  ],
+  Engineer: [
+    Permissions.HOME_VIEW,
+    Permissions.WORK_SITES_VIEW,
+    Permissions.ORDERS_VIEW,
+    Permissions.PROFILE_VIEW,
+    Permissions.PROFILE_EDIT,
+    Permissions.PROJECTS_VIEW,
+  ],
+  Admin: [
+    Permissions.HOME_VIEW,
+    Permissions.WORK_SITES_VIEW,
+    Permissions.WORK_SITES_CREATE,
+    Permissions.WORK_SITES_EDIT,
+    Permissions.WORK_SITES_DELETE,
+    Permissions.ORDERS_VIEW,
+    Permissions.ORDERS_CREATE,
+    Permissions.ORDERS_MANAGE,
+    Permissions.RESOURCES_VIEW,
+    Permissions.RESOURCES_ADD,
+    Permissions.LANDS_VIEW,
+    Permissions.LANDS_CREATE,
+    Permissions.BUILDINGS_VIEW,
+    Permissions.BUILDINGS_CREATE,
+    Permissions.MARKETPLACE_VIEW,
+    Permissions.PROPERTY_LIST,
+    Permissions.CATEGORIES_MANAGE,
+    Permissions.USERS_MANAGE,
+    Permissions.SUPPORT_MANAGE,
+    Permissions.PROFILE_VIEW,
+    Permissions.PROFILE_EDIT,
+    Permissions.STATISTICS_VIEW,
+    Permissions.PROJECTS_VIEW,
+  ],
+};
+
+/** Default landing page per role after login */
+export const ROLE_DEFAULT_PATH: Record<Role, string> = {
+  Provider: paths.app.resourceProvidor.profile.path,
+  Investor: paths.app.investor.hisLandsAndBuildings.path,
+  Engineer: paths.app.home.path,
+  Admin: paths.app.admin.manageUsers.path,
+};

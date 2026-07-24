@@ -1,9 +1,10 @@
 import { Paginated } from "@/types";
+import type { Role } from "@/types";
 
 // ============================================================================
 // Enums
 // ============================================================================
-export type SystemUserRole = "Provider" | "Investor" | "Engineer";
+export type SystemUserRole = Role;
 
 // ============================================================================
 // Core Entities

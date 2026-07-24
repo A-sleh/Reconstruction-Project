@@ -1,5 +1,8 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import type { Role } from "@/types";
+import type { Permission } from "@/lib/permissions";
+import { ROLE_PERMISSIONS } from "@/lib/permissions";
 
 enum STORAGE_KEYS {
   accessToken = "access-token",
@@ -7,21 +10,25 @@ enum STORAGE_KEYS {
   auth = "auth-storage",
 }
 
-export type ROLE = "Provider" | "Investor";
+export type { Role };
+export type ROLE = Role;
+
 export interface User {
   firstName: string;
   lastName: string;
   photoURL: string;
-  role: ROLE;
+  role: Role;
 }
 
 export interface AuthState {
-  role: null | ROLE;
+  role: null | Role;
   user: User | null;
+  permissions: Permission[];
   accessToken: string;
   refreshToken: string;
   isAuthenticated: boolean;
-  setAuth: (payload: { isAuthenticated: boolean; role: ROLE }) => void;
+  setAuth: (payload: { isAuthenticated: boolean; role: Role }) => void;
+  can: (permission: Permission) => boolean;
   clearAuth: () => void;
   setUser: (user: User | null) => void;
 }
@@ -62,18 +69,26 @@ export const clearTokens = () => {
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       accessToken: "",
       refreshToken: "",
       role: null,
       user: null,
+      permissions: [],
       isAuthenticated: false,
-      setAuth: ({ isAuthenticated, role }) => set({ isAuthenticated, role }),
+      setAuth: ({ isAuthenticated, role }) => {
+        const permissions = role ? (ROLE_PERMISSIONS[role] ?? []) : [];
+        set({ isAuthenticated, role, permissions });
+      },
+      can: (permission: Permission) => {
+        return get().permissions.includes(permission);
+      },
       setUser: (user) => set({ user }),
       clearAuth: () =>
         set({
           isAuthenticated: false,
           role: null,
+          permissions: [],
         }),
     }),
     {

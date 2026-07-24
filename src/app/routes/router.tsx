@@ -5,6 +5,7 @@ import { RouteObject } from "react-router";
 import Loader from "@/components/shared/Loader";
 import ApplicationLayout from "@/components/layouts/Main-layout";
 import AuthGuard from "@/features/Auth/components/AuthGuard";
+import { Permissions } from "@/lib/permissions";
 
 // Auth pages
 const Login = lazy(() => import("@/pages/authentication/Login.view"));
@@ -64,6 +65,9 @@ const Invesort_Property_Details = lazy(
 );
 const Investor_BasicLandInfo = lazy(
   () => import("@/pages/investor/BasicLandInfo.view"),
+);
+const Investor_CreateBuilding = lazy(
+  () => import("@/pages/investor/CreateBuilding.view"),
 );
 const Project_List_Property = lazy(
   () => import("@/pages/project/ListProperty.view"),
@@ -174,7 +178,7 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.workSites.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.WORK_SITES_VIEW}>
               <ResourceProvidor_WorkSites />
             </AuthGuard>
           </Suspense>
@@ -184,7 +188,7 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.workSite.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.WORK_SITES_VIEW}>
               <ResourceProvidor_Site />
             </AuthGuard>
           </Suspense>
@@ -194,7 +198,7 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.profile.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.PROFILE_VIEW}>
               <ResourceProvidor_Profile />
             </AuthGuard>
           </Suspense>
@@ -204,7 +208,7 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.statistics.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.STATISTICS_VIEW}>
               <ResourceProvidor_Statistics />
             </AuthGuard>
           </Suspense>
@@ -214,7 +218,7 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.orders.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.ORDERS_VIEW}>
               <ResourceProvidor_Orders />
             </AuthGuard>
           </Suspense>
@@ -224,7 +228,7 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.orderDetails.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.ORDERS_VIEW}>
               <ResourceProvidor_OrderDetails />
             </AuthGuard>
           </Suspense>
@@ -234,7 +238,7 @@ const router: RouteObject[] = [
         path: paths.app.resourceProvidor.newResources.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.RESOURCES_ADD}>
               <ResourceProvidor_NewResources />
             </AuthGuard>
           </Suspense>
@@ -245,7 +249,7 @@ const router: RouteObject[] = [
         path: paths.app.serviceProvidor.workSites.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.WORK_SITES_VIEW}>
               <ServiceProvidor_WorkSites />
             </AuthGuard>
           </Suspense>
@@ -255,7 +259,7 @@ const router: RouteObject[] = [
         path: paths.app.serviceProvidor.orders.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.ORDERS_VIEW}>
               <ServiceProvidor_Orders />
             </AuthGuard>
           </Suspense>
@@ -265,7 +269,7 @@ const router: RouteObject[] = [
         path: paths.app.serviceProvidor.orderDetails.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.ORDERS_VIEW}>
               <ServiceProvidor_OrderDetails />
             </AuthGuard>
           </Suspense>
@@ -275,7 +279,7 @@ const router: RouteObject[] = [
         path: paths.app.serviceProvidor.profile.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Provider"]}>
+            <AuthGuard allowedPermissions={Permissions.PROFILE_VIEW}>
               <ServiceProvidor_Profile />
             </AuthGuard>
           </Suspense>
@@ -287,7 +291,7 @@ const router: RouteObject[] = [
         path: paths.app.investor.hisLandsAndBuildings.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Investor"]}>
+            <AuthGuard allowedPermissions={Permissions.LANDS_VIEW}>
               <Invesort_Buildings_lands />
             </AuthGuard>
           </Suspense>
@@ -297,7 +301,7 @@ const router: RouteObject[] = [
         path: paths.app.investor.marketOfLandsBuildings.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Investor"]}>
+            <AuthGuard allowedPermissions={Permissions.MARKETPLACE_VIEW}>
               <Invesort_Market_Place />
             </AuthGuard>
           </Suspense>
@@ -307,7 +311,7 @@ const router: RouteObject[] = [
         path: paths.app.investor.propertyVerfication.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Investor"]}>
+            <AuthGuard allowedPermissions={Permissions.PROPERTY_LIST}>
               <Project_List_Property />
             </AuthGuard>
           </Suspense>
@@ -317,7 +321,7 @@ const router: RouteObject[] = [
         path: paths.app.investor.landBuildingDetails.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Investor"]}>
+            <AuthGuard allowedPermissions={Permissions.MARKETPLACE_VIEW}>
               <Invesort_Property_Details />
             </AuthGuard>
           </Suspense>
@@ -327,8 +331,18 @@ const router: RouteObject[] = [
         path: paths.app.investor.basicLandInfo.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Admin", "Investor"]}>
+            <AuthGuard allowedPermissions={Permissions.LANDS_VIEW}>
               <Investor_BasicLandInfo />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.investor.createBuilding.path,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AuthGuard allowedPermissions={Permissions.BUILDINGS_CREATE}>
+              <Investor_CreateBuilding />
             </AuthGuard>
           </Suspense>
         ),
@@ -337,7 +351,7 @@ const router: RouteObject[] = [
         path: paths.app.projects.ListProperty.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Investor"]}>
+            <AuthGuard allowedPermissions={Permissions.PROPERTY_LIST}>
               <Project_List_Property />
             </AuthGuard>
           </Suspense>
@@ -347,7 +361,7 @@ const router: RouteObject[] = [
         path: paths.app.projects.projectWorkSite.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Investor"]}>
+            <AuthGuard allowedPermissions={Permissions.PROJECTS_VIEW}>
               <Project_Work_Site />
             </AuthGuard>
           </Suspense>
@@ -358,7 +372,7 @@ const router: RouteObject[] = [
         path: paths.app.admin.categories.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Admin","Investor"]}>
+            <AuthGuard allowedPermissions={Permissions.CATEGORIES_MANAGE}>
               <Admin_Categories />
             </AuthGuard>
           </Suspense>
@@ -368,7 +382,7 @@ const router: RouteObject[] = [
         path: paths.app.admin.manageUsers.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Admin","Investor"]}>
+            <AuthGuard allowedPermissions={Permissions.USERS_MANAGE}>
               <Admin_ManageUsers />
             </AuthGuard>
           </Suspense>
@@ -378,7 +392,7 @@ const router: RouteObject[] = [
         path: paths.app.admin.support.path,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AuthGuard allowedRoles={["Admin","Investor"]}>
+            <AuthGuard allowedPermissions={Permissions.SUPPORT_MANAGE}>
               <Admin_Support />
             </AuthGuard>
           </Suspense>

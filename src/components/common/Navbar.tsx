@@ -11,8 +11,6 @@ import {
 import { CgProfile } from "react-icons/cg";
 import {
   MdOutlineConstruction,
-  MdOutlineVerified,
-  MdDomain,
 } from "react-icons/md";
 import { FiBarChart2 } from "react-icons/fi";
 
@@ -22,60 +20,62 @@ import NotificationBox from "./Notification-box";
 import ToggleLanguage from "./Toggle-language";
 import { useTranslation } from "react-i18next";
 import Avatar from "./Avatar";
-import { ROLE, useAuthStore } from "@/stores/useAuthStore";
+import { useCan } from "@/hooks/useCan";
+import { Permissions } from "@/lib/permissions";
+import type { Permission } from "@/lib/permissions";
 
 const Navbar = () => {
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const role = useAuthStore((s) => s.role);
+  const can = useCan();
 
   const links: Array<{
     label: string;
     href: string;
     icon: ReactNode;
-    role: ROLE[];
+    permission: Permission;
   }> = [
     {
       label: t("navbar.workSites"),
       href: paths.app.resourceProvidor.workSites.path,
       icon: <MdOutlineConstruction size={18} />,
-      role: ["Provider"],
+      permission: Permissions.WORK_SITES_VIEW,
     },
     {
       label: t("navbar.profile"),
       href: paths.app.resourceProvidor.profile.path,
       icon: <CgProfile size={18} />,
-      role: ["Provider"],
+      permission: Permissions.PROFILE_VIEW,
     },
     {
       label: t("navbar.statistics"),
       href: paths.app.resourceProvidor.statistics.path,
       icon: <FiBarChart2 size={18} />,
-      role: ["Provider"],
+      permission: Permissions.STATISTICS_VIEW,
     },
     {
       label: t("navbar.orders"),
       href: paths.app.resourceProvidor.orders.path,
       icon: <RiShoppingBagLine size={18} />,
-      role: ["Provider"],
+      permission: Permissions.ORDERS_VIEW,
     },
     {
       label: t("navbar.hisLands"),
       href: paths.app.investor.hisLandsAndBuildings.path,
       icon: <RiBuilding2Line size={18} />,
-      role: ["Investor"],
+      permission: Permissions.LANDS_VIEW,
     },
     {
       label: t("navbar.market"),
       href: paths.app.investor.marketOfLandsBuildings.path,
       icon: <RiStore2Line size={18} />,
-      role: ["Investor"],
+      permission: Permissions.MARKETPLACE_VIEW,
     },
     {
       label: t("navbar.listProperty"),
       href: paths.app.investor.propertyVerfication.path,
       icon: <RiListUnordered size={18} />,
-      role: ["Investor"],
+      permission: Permissions.PROPERTY_LIST,
     }
   ];
 
@@ -87,7 +87,7 @@ const Navbar = () => {
     },
   ];
 
-  const filteredLinks = role ? links.filter((link) => link.role.includes(role)) : [];
+  const filteredLinks = links.filter((link) => can(link.permission));
 
   return (
     <header className="bg-white shadow-sm w-[95%] md:w-[98%] mx-auto rounded-lg sticky top-4 z-50">

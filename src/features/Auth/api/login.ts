@@ -4,9 +4,9 @@ import ApiInstance from "@/config/api-instance";
 import useAuthStore, {
   AuthState,
   clearTokens,
-  ROLE,
   useAccessToken,
 } from "@/stores/useAuthStore";
+import type { Role } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 import { errorToast, successToast } from "@/components/common/Toast";
 
@@ -47,7 +47,7 @@ export const useLoginMutation = () => {
         clearTokens();
         setAuth({
           isAuthenticated: user != null,
-          role: user?.role as ROLE,
+          role: user?.role as Role,
         });
 
         if (accessToken) {

@@ -1,0 +1,7 @@
+{
+  "authGuard": {
+    "unauthorized": "ليس لديك صلاحية للوصول إلى هذه الصفحة",
+    "insufficientPermissions": "ليس لديك الصلاحيات المطلوبة",
+    "loginRequired": "يرجى تسجيل الدخول للمتابعة"
+  }
+}

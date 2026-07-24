@@ -1,3 +1,5 @@
+export type Role = "Provider" | "Investor" | "Engineer" | "Admin";
+
 export interface Paginated<T> {
   data: T[];
   pageNum: number;
