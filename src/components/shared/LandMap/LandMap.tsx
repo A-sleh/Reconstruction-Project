@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import type { LatLng } from "@/lib/helpers";
 import { DEFAULT_CENTER, injectLeafletOverrides } from "./LandMapStyles";
 import LandMapEditor from "./LandMapEditor";
 import LandMapViewer from "./LandMapViewer";
 import LandMapSelector from "./LandMapSelector";
 import type { LandMapProps } from "./types";
+import FitBoundsOnMount from "./FitBoundsOnMount";
 
 export default function LandMap({
   mode,
@@ -61,6 +61,8 @@ export default function LandMap({
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        <FitBoundsOnMount polygon={polygon} /> 
 
         <div className={noCursorClass}>
           {mode === "edit" && onChange && (
