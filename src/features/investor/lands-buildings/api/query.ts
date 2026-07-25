@@ -4,6 +4,7 @@ import { LandController, QUERY_KEYS } from ".";
 import type {
   GetAllLandsFilters,
   InvestorPropertiesSummary,
+  LandDetail,
   LandsResponse,
 } from "./types";
 
@@ -46,5 +47,21 @@ export const useInvestorProperties = () => {
   return useQuery<InvestorPropertiesSummary, Error>({
     queryKey: QUERY_KEYS.lands.investorProperties(),
     queryFn: getInvestorProperties,
+  });
+};
+
+const getLandById = async (landId: string | number): Promise<LandDetail> => {
+  const { data } = await ApiInstance.get<LandDetail>(
+    `/${LandController.GetLandById}`,
+    { params: { landId } },
+  );
+  return data;
+};
+
+export const useLandById = (landId: string | number) => {
+  return useQuery<LandDetail, Error>({
+    queryKey: QUERY_KEYS.lands.detail(landId),
+    queryFn: () => getLandById(landId),
+    enabled: !!landId,
   });
 };

@@ -89,3 +89,55 @@ export interface InvestorPropertiesSummary {
 }
 
 export interface LandsResponse extends Paginated<LandListItem> {}
+
+// ============================================================================
+// Land Detail (GET /api/land/get-by-id)
+// ============================================================================
+export interface Attachment {
+  id: number;
+  name: string;
+  url: string;
+  description: string;
+}
+
+export interface BuildingPart {
+  id: number;
+  area: number;
+  buildingPartType: string;
+}
+
+export interface Building {
+  landId: number;
+  buildingId: number;
+  name: string;
+  city: string;
+  streetName: string;
+  zoneType: string;
+  readinessLevel: string;
+  orientation: string;
+  buildingType: string;
+  area: number;
+  address: string;
+  location: ILoncation;
+  coverImageUrl: string;
+  updateAt: string;
+  buildingParts: BuildingPart[];
+  attachments: Attachment[];
+}
+
+export interface LandDetail {
+  landId: number;
+  name: string;
+  isValidated: boolean;
+  zoningType: string;
+  accessability: boolean;
+  area: number;
+  address: string;
+  longitude: number;
+  latitude: number;
+  location: ILoncation;
+  coverImageUrl: string;
+  border: ILoncation[];
+  attachments: Attachment[];
+  buildings: Building[];
+}
