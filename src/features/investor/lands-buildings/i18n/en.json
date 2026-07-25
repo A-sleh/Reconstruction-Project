@@ -102,6 +102,15 @@
     "building-type-religious": "Religious",
     "building-type-mixeduse": "Mixed Use",
     "building-type-infrastructure": "Infrastructure",
-    "building-type-other": "Other"
+    "building-type-other": "Other",
+
+    "yes": "Yes",
+    "no": "No",
+    "location": "Location",
+    "borderPoints": "Border Points",
+    "landInformation": "Land Information",
+    "attachments": "Attachments",
+    "noAttachments": "No attachments available",
+    "noBuildings": "No buildings on this land yet"
   }
 }

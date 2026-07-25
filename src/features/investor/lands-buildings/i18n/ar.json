@@ -102,6 +102,15 @@
     "building-type-religious": "ديني",
     "building-type-mixeduse": "متعدد الاستخدامات",
     "building-type-infrastructure": "بنية تحتية",
-    "building-type-other": "أخرى"
+    "building-type-other": "أخرى",
+
+    "yes": "نعم",
+    "no": "لا",
+    "location": "الموقع",
+    "borderPoints": "نقاط الحدود",
+    "landInformation": "معلومات الأرض",
+    "attachments": "المرفقات",
+    "noAttachments": "لا توجد مرفقات متاحة",
+    "noBuildings": "لا توجد مباني على هذه الأرض بعد"
   }
 }

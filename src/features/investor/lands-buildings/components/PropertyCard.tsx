@@ -2,9 +2,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { MapPin, Pencil, Trash2 } from "lucide-react";
-import L from "leaflet";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import { MapContainer, TileLayer } from "react-leaflet";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/button";
@@ -15,20 +13,7 @@ import ConfirmDelete from "@/components/model/ConfirmDelete";
 import { useDeleteLand } from "../api/actions";
 import type { LandListItem } from "../api/types";
 import { locationToString, type LatLng as LatLngType } from "@/lib/helpers";
-
-function FitBoundsOnMount({ polygon }: { polygon: LatLngType[] }) {
-  const map = useMap();
-
-  useEffect(() => {
-    if (polygon.length < 3) return;
-    const bounds = L.latLngBounds(
-      polygon.map((pt) => L.latLng(pt.lat, pt.lng)),
-    );
-    map.fitBounds(bounds, { padding: [20, 20], maxZoom: 19 });
-  }, [polygon, map]);
-
-  return null;
-}
+import FitBoundsOnMount from "@/components/shared/LandMap/FitBoundsOnMount";
 
 function PropertyCard({ p }: { p: LandListItem }) {
   const { t } = useTranslation();
@@ -165,7 +150,7 @@ function PropertyCard({ p }: { p: LandListItem }) {
             size="sm"
             className="flex-1 bg-primary hover:bg-primary/90"
           >
-            <Link to={paths.app.investor.landBuildingDetails.getHref(p.id)}>
+            <Link to={paths.app.investor.landBuildingDetails.getHref(p.landId)}>
               {t("investor.view")}
             </Link>
           </Button>
