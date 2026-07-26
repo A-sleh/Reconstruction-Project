@@ -17,7 +17,7 @@ function InvestorLandsAndBuildingsTabs() {
   const { t } = useTranslation();
   const { i18n } = useTranslation();
   const isArabic = i18n.language == "ar";
-  const [tab, setTab] = useState<TabValue>("all");
+  const [tab, setTab] = useState<TabValue>("land");
   const [withProjects, setWithProjects] = useState(false);
 
   // Land query
@@ -41,8 +41,8 @@ function InvestorLandsAndBuildingsTabs() {
     >
       <div className="flex items-center justify-between flex-wrap gap-3">
         <TabsList className="bg-white">
-          <TabsTrigger value="building">{t("investor.buildings")}</TabsTrigger>
           <TabsTrigger value="land">{t("investor.lands")}</TabsTrigger>
+          <TabsTrigger value="building">{t("investor.buildings")}</TabsTrigger>
         </TabsList>
         <div className="text-xs text-muted-foreground flex items-center gap-1">
           <TrendingUp className="h-3.5 w-3.5 text-emerald" />{" "}

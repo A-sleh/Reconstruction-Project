@@ -53,7 +53,7 @@ export default function BasicLandInfoForm({
 
   const { mutate: uploadFile } = useUploadFile();
   const [pendingAttachments, setPendingAttachments] = useState<
-    { id: number; description: string; url: string }[]
+    { id: number; description: string; name: string; url: string }[]
   >([]);
   const [uploadingIdx, setUploadingIdx] = useState<number | null>(null);
 
@@ -119,6 +119,7 @@ export default function BasicLandInfoForm({
         append({
           id: Number(res.fileId),
           description: "",
+          name: file.name.toString(),
           removed: false,
         });
         setUploadingIdx(null);
@@ -137,6 +138,7 @@ export default function BasicLandInfoForm({
         {
           id: field.id,
           description: field.description,
+          name: field.name,
           url: (field as any).url ?? "",
         },
       ]);
@@ -153,6 +155,7 @@ export default function BasicLandInfoForm({
     append({
       id: att.id,
       description: att.description,
+      name: att.name,
       removed: false,
     });
     setPendingAttachments((prev) => prev.filter((a) => a.id !== att.id));

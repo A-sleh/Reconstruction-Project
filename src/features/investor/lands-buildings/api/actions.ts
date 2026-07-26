@@ -36,6 +36,7 @@ export const landFormSchema = z.object({
       z.object({
         id: z.number(),
         description: z.string(),
+        name: z.string(),
         removed: z.boolean().optional(),
       }),
     )
