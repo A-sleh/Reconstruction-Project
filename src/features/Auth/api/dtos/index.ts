@@ -10,7 +10,7 @@ const destructTheUser = (user: BaseRegistrationValues) => {
     firstName,
     lastName,
     password,
-    photoUrl,
+    photoId,
     personalIdentifier,
     phone,
   } = user;
@@ -19,7 +19,7 @@ const destructTheUser = (user: BaseRegistrationValues) => {
     firstName,
     lastName,
     password,
-    photoUrl,
+    photoId,
     personalIdentifier,
     phone,
   };
@@ -35,7 +35,7 @@ export const providerDTO = (
     companyName,
     workSiteType,
     licenseOfService,
-    logoUrl,
+    logoId,
   } = provider;
   return {
     user: destructTheUser(provider),
@@ -44,7 +44,7 @@ export const providerDTO = (
       providerRole,
       workSite: {
         name: companyName,
-        logoUrl: logoUrl,
+        logoId,
         location,
         address: companyAddress,
         workSiteType: workSiteType,

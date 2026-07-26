@@ -3,6 +3,7 @@ import { useFormContext } from "react-hook-form";
 import type { BaseRegistrationValues } from "../api/create-account";
 import Input from "@/components/inputs/Input";
 import ImageUploader from "@/components/inputs/ImageUploader";
+import { useFileUpload } from "@/hooks/useFileUpload";
 
 const BaseRegisterInputs = () => {
   const { t } = useTranslation();
@@ -12,12 +13,20 @@ const BaseRegisterInputs = () => {
     watch,
     formState: { errors },
   } = useFormContext<BaseRegistrationValues>();
-  const imageOfPhoto = watch("photoUrl");
-  const imageLocalFile = watch("file");
+  const imageOfPhoto = watch("photoId");
 
-  const handleImageChange = (file: File | null) => {
-    setValue("photoUrl", file?.name ?? "");
-    setValue("file", file ?? undefined);
+  const { previewUrl, isPending, onChange } = useFileUpload({
+    onSuccess: (id) => {
+      setValue("photoId", id);
+    },
+  });
+
+  const handleImageChange = (selectedFile: File | null) => {
+    onChange(selectedFile);
+    if (!selectedFile) {
+      setValue("photoId", "");
+      setValue("file", undefined);
+    }
   };
 
   return (
@@ -89,7 +98,8 @@ const BaseRegisterInputs = () => {
         label={t("auth.register.generalInformation.profilePhoto")}
         required={true}
         fileName={"photoUrl"}
-        value={imageLocalFile || imageOfPhoto}
+        value={previewUrl || imageOfPhoto}
+        disabled={isPending}
         onFileChange={handleImageChange}
         errors={errors ?? null}
         fieldName="photoUrl"

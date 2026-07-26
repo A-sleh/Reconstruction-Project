@@ -18,6 +18,7 @@ import { WorkSite } from "../api/types";
 import ImageUploader from "@/components/inputs/ImageUploader";
 import WorkSiteType from "@/features/work-sites/components/WorkSiteType";
 import PopuupLayout from "@/components/layouts/Popup-layout";
+import { useFileUpload } from "@/hooks/useFileUpload";
 
 interface Props {
   openKey: string;
@@ -48,11 +49,25 @@ export function WorkSiteFormModel({
   });
 
   // Watch the status value to keep the Radix Select component in sync
-  const logoFile = watch("file");
-  const logoUrl = watch("logoURL");
+  // const logoFile = watch("file");
+  const logoId = watch("logoId");
   const companyLocationValue = watch("location");
   const workSiteType = watch("workSiteType");
   const preventUpdateWorkSiteType = initial != null;
+
+  const { previewUrl, isPending, onChange } = useFileUpload({
+    onSuccess: (id) => {
+      setValue("logoId", id);
+    },
+  });
+
+  const handleImageChange = (selectedFile: File | null) => {
+    onChange(selectedFile);
+    if (!selectedFile) {
+      setValue("logoId", "");
+      setValue("file", undefined);
+    }
+  };
 
   // Sync initial/incoming data with the form fields whenever the modal opens
   useEffect(() => {
@@ -65,11 +80,6 @@ export function WorkSiteFormModel({
         address: initial?.address ?? "",
       });
   }, [initial, reset]);
-
-  const handleImageChange = (file: File | null) => {
-    setValue("logoURL", file?.name ?? "");
-    setValue("file", file ?? undefined);
-  };
 
   const { mutate: createWorkSite, isPending: isCreated } = useCreateWorkSite();
   const { mutate: updateWorkSite, isPending: isUpdated } = useUpdateWorkSite();
@@ -124,9 +134,7 @@ export function WorkSiteFormModel({
             <Input
               label={t("workSites.label-site-name")}
               id="site-name"
-              placeholder={t(
-                "workSites.placeholder-site-name",
-              )}
+              placeholder={t("workSites.placeholder-site-name")}
               fieldName="name"
               errors={errors}
               {...register("name")}
@@ -149,9 +157,7 @@ export function WorkSiteFormModel({
                   type="text"
                   readOnly={true}
                   label={t("workSites.label-location")}
-                  placeholder={t(
-                    "workSites.placeholder-location",
-                  )}
+                  placeholder={t("workSites.placeholder-location")}
                   required={true}
                   fieldName="companyLoclocationation"
                   errors={errors}
@@ -183,7 +189,8 @@ export function WorkSiteFormModel({
               label={t("auth.register.providor.companyLogo")}
               required={true}
               onFileChange={handleImageChange}
-              value={logoFile || logoUrl}
+              value={previewUrl || logoId}
+              disabled={isPending}
               errors={errors ?? null}
               fieldName="logoURL"
             />
@@ -200,7 +207,7 @@ export function WorkSiteFormModel({
                 {t("workSites.btn-cancel")}
               </Button>
             </Model.Close>
-            <Button type="submit" disabled={isCreated || isUpdated}>
+            <Button type="submit" disabled={isCreated || isUpdated || isPending}>
               {isCreated || isUpdated
                 ? t("common.loading", "Saving...")
                 : initial

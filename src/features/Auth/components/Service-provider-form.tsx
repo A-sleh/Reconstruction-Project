@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import Input from "@/components/inputs/Input";
 import { PickCoordsFromMap } from "@/components/model/PickCoordsFromMap.model";
 import ImageUploader from "@/components/inputs/ImageUploader";
-import WorkSiteType from "@/features/work-sites/components/WorkSiteType"; 
+import WorkSiteType from "@/features/work-sites/components/WorkSiteType";
+import { useFileUpload } from "@/hooks/useFileUpload";
 
 const ServiceProviderForm = () => {
   const { t } = useTranslation();
@@ -14,8 +15,7 @@ const ServiceProviderForm = () => {
     formState: { errors },
   } = useFormContext();
 
-  const imageLocalFile = watch("logoFile");
-  const logoUrl = watch("logoUrl");
+  const logoId = watch("logoId");
   const providerRole = watch("providerRole");
   const companyLocationValue = watch("location");
   const workSiteType = watch("workSiteType");
@@ -24,9 +24,18 @@ const ServiceProviderForm = () => {
     setValue("providerRole", type);
   };
 
-  const handleImageChange = (file: File | null) => {
-    setValue("logoUrl", file?.name ?? "");
-    setValue("logoFile", file ?? undefined);
+  const { previewUrl, isPending, onChange } = useFileUpload({
+    onSuccess: (id) => {
+      setValue("logoId", id);
+    },
+  });
+
+  const handleImageChange = (selectedFile: File | null) => {
+    onChange(selectedFile);
+    if (!selectedFile) {
+      setValue("logoId", "");
+      setValue("logoFile", undefined);
+    }
   };
 
   return (
@@ -120,7 +129,8 @@ const ServiceProviderForm = () => {
       <ImageUploader
         label={t("auth.register.providor.companyLogo")}
         required={true}
-        value={imageLocalFile || logoUrl}
+        disabled={isPending}
+        value={previewUrl || logoId}
         onFileChange={handleImageChange}
         errors={errors ?? null}
         fieldName="logoUrl"

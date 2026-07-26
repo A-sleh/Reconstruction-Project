@@ -22,6 +22,7 @@ export const siteFormSchema = z.object({
     .min(1, i18n.t("workSites.validation-address-req"))
     .trim(),
   workSiteType: z.string(),
+  logoId: z.string().optional(),
   logoURL: z.string().optional(),
   file: z.file().optional(),
 });
@@ -31,7 +32,7 @@ export const initialSiteValues: SiteFormValues = {
   name: "",
   address: "",
   workSiteType: workSiteTypes[0],
-  logoURL: "",
+  logoId: "",
   location: "",
 };
 

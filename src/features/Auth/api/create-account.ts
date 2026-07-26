@@ -37,7 +37,7 @@ export const BaseRegistrationSchema = z.object({
         "auth.register.generalInformation.validation.national_number_required",
       ),
     ),
-  photoUrl: z.string(),
+  photoId: z.string(),
   file: z.file().optional(),
 });
 export type BaseRegistrationValues = z.infer<typeof BaseRegistrationSchema>;
@@ -47,7 +47,9 @@ export const intialBasicRegisterationValues: BaseRegistrationValues = {
   email: "",
   password: "",
   personalIdentifier: "",
+  photoId: "",
   file: undefined,
+  phone: "",
 };
 
 //? Base schema for  provider registration
@@ -66,7 +68,7 @@ export const ResourceProviderSchema = BaseRegistrationSchema.extend({
       5,
       i18n.t("auth.register.providor.validation.company_location_required"),
     ),
-  logoUrl: z.string().optional(),
+  logoId: z.string().optional(),
   logoFile: z.file().optional(),
   companyAddress: z
     .string()
@@ -84,7 +86,7 @@ export const intialProviderValues: ResourceProviderFormValues = {
   location: "",
   companyAddress: "",
   workSiteType: "",
-  logoUrl: "",
+  logoId: "",
   providerRole: "Resource",
 };
 
