@@ -14,8 +14,8 @@ import {
 import { BUILDING_TYPES } from "./BuildingTypes";
 import { useFileUpload } from "@/hooks/useFileUpload";
 import { useUploadFile } from "@/features/attachment/api/actions";
-import { Trash2, Upload, FileText } from "lucide-react";
 import LocationPickerField from "./LocationPickerField";
+import AttachmentList from "@/features/attachment/components/AttachmentList";
 
 interface BuildingFormProps {
   landId: number;
@@ -267,100 +267,16 @@ export default function BuildingForm({ landId, onSuccess }: BuildingFormProps) {
         fieldName="coverImageId"
       />
 
-      {/* Attachments Section */}
-      <div className="space-y-3">
-        <label className="text-sm font-medium text-foreground block">
-          {t("investor.label-attachments", "Attachments")}
-        </label>
-
-        {/* Existing attachments */}
-        {fields.length > 0 && (
-          <div className="space-y-2">
-            {fields.map((field, idx) => (
-              <div
-                key={field.id}
-                className="flex items-center gap-3 p-3 rounded-lg border border-border bg-muted/30"
-              >
-                <FileText className="h-5 w-5 text-muted-foreground shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">
-                    {(field as any).name || `File ${idx + 1}`}
-                  </p>
-                  <input
-                    {...register(`attachments.${idx}.description`)}
-                    placeholder={t(
-                      "investor.placeholder-attachment-desc",
-                      "Add description...",
-                    )}
-                    className="w-full mt-1 text-xs bg-transparent border-b border-border outline-none py-1 placeholder:text-muted-foreground"
-                  />
-                </div>
-                <Button
-                  type="button"
-                  size="icon"
-                  variant="ghost"
-                  className="h-7 w-7 text-destructive hover:text-destructive"
-                  onClick={() => handleRemoveAttachment(idx)}
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Removed attachments (revert) */}
-        {pendingAttachments.length > 0 && (
-          <div className="space-y-2">
-            <p className="text-xs text-muted-foreground">
-              {t(
-                "investor.removedAttachments",
-                "Removed attachments (click to restore):",
-              )}
-            </p>
-            {pendingAttachments.map((att) => (
-              <div
-                key={att.id}
-                className="flex items-center gap-3 p-3 rounded-lg border border-dashed border-border bg-muted/10 opacity-60"
-              >
-                <FileText className="h-5 w-5 text-muted-foreground shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm truncate">{att.name || `File`}</p>
-                </div>
-                <Button
-                  type="button"
-                  size="sm"
-                  variant="outline"
-                  className="h-7 text-xs"
-                  onClick={() => handleRevertAttachment(att)}
-                >
-                  {t("investor.revert", "Restore")}
-                </Button>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Upload button */}
-        <label className="inline-flex items-center gap-2 cursor-pointer px-4 py-2 rounded-lg border border-dashed border-border hover:border-primary hover:bg-muted/50 transition-colors text-sm text-muted-foreground hover:text-foreground">
-          <Upload className="h-4 w-4" />
-          {uploadingIdx !== null
-            ? t("common.loading", "Uploading...")
-            : t("investor.uploadAttachment", "Upload Attachment")}
-          <input
-            type="file"
-            className="sr-only"
-            disabled={uploadingIdx !== null}
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) {
-                handleUploadAttachment(file, fields.length);
-                e.target.value = "";
-              }
-            }}
-          />
-        </label>
-      </div>
+      <AttachmentList
+        fields={fields as any}
+        register={register}
+        errors={errors}
+        onUpload={(file) => handleUploadAttachment(file, fields.length)}
+        onRemove={handleRemoveAttachment}
+        onRevert={handleRevertAttachment}
+        pendingItems={pendingAttachments}
+        isUploading={uploadingIdx !== null}
+      />
 
       <div className="flex justify-end gap-3 pt-2">
         <Button

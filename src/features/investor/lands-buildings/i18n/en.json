@@ -111,6 +111,7 @@
     "landInformation": "Land Information",
     "attachments": "Attachments",
     "noAttachments": "No attachments available",
-    "noBuildings": "No buildings on this land yet"
+    "noBuildings": "No buildings on this land yet",
+    "attachments-hint": "Upload plans, designs, or any documents related to this land"
   }
 }

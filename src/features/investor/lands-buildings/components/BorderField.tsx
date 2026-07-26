@@ -49,9 +49,9 @@ export default function BorderField({
         <label className="text-sm font-medium text-foreground">
           {t("investor.border-label")}
         </label>
-        {points.length > 0 && (
+        {points?.length > 0 && (
           <span className="text-xs text-muted-foreground">
-            {t("investor.border-points", { count: points.length })}
+            {t("investor.border-points", { count: points?.length })}
           </span>
         )}
       </div>

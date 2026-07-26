@@ -4,14 +4,14 @@ import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 
 export default function FitBoundsOnMount({
-  polygon,
+  polygon = [],
 }: {
   polygon: LatLngType[];
 }) {
   const map = useMap();
 
   useEffect(() => {
-    if (polygon.length < 3) return;
+    if (polygon?.length < 3) return;
     const bounds = L.latLngBounds(
       polygon.map((pt) => L.latLng(pt.lat, pt.lng)),
     );

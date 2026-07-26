@@ -1,8 +1,9 @@
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
+import Select from "@/components/inputs/Selector";
 import Input from "@/components/inputs/Input";
 import ImageUploader from "@/components/inputs/ImageUploader";
 import {
@@ -14,7 +15,10 @@ import {
 } from "../api/actions";
 import { ZONING_LABELS, EZoningType, type Land } from "../api/types";
 import { useFileUpload } from "@/hooks/useFileUpload";
+import { useUploadFile } from "@/features/attachment/api/actions";
 import BorderField from "./BorderField";
+import AttachmentList from "@/features/attachment/components/AttachmentList";
+import { Message } from "@/components/common/Message";
 
 interface Props {
   initial?: Land | null;
@@ -33,6 +37,7 @@ export default function BasicLandInfoForm({
     reset,
     setValue,
     watch,
+    control,
     formState: { errors },
   } = useForm<LandFormSchema>({
     resolver: zodResolver(landFormSchema),
@@ -40,6 +45,17 @@ export default function BasicLandInfoForm({
     criteriaMode: "all",
     mode: "onSubmit",
   });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "attachments",
+  });
+
+  const { mutate: uploadFile } = useUploadFile();
+  const [pendingAttachments, setPendingAttachments] = useState<
+    { id: number; description: string; url: string }[]
+  >([]);
+  const [uploadingIdx, setUploadingIdx] = useState<number | null>(null);
 
   const borderValue = watch("border");
   const zoningValue = watch("zoning");
@@ -57,15 +73,15 @@ export default function BasicLandInfoForm({
   useEffect(() => {
     if (initial) {
       reset({
-        name: initial.name ?? "",
-        address: initial.address ?? "",
-        location: initial.location ?? "",
-        area: initial.area ?? 0,
-        zoning: initial.zoning ?? EZoningType.Residential,
-        border: initial.border ?? [],
-        isValidated: initial.isValidated ?? false,
-        accessability: initial.accessability ?? false,
-        coverImageId: initial.coverImageUrl ?? "",
+        name: initial?.name ?? "",
+        address: initial?.address ?? "",
+        location: initial?.location ?? "",
+        area: initial?.area ?? 0,
+        zoning: initial?.zoning ?? EZoningType.Residential,
+        border: initial?.border ?? [],
+        isValidated: initial?.isValidated ?? false,
+        accessability: initial?.accessability ?? false,
+        coverImageId: initial?.coverImageUrl ?? "",
       });
     }
   }, [initial, reset]);
@@ -96,12 +112,59 @@ export default function BasicLandInfoForm({
 
   const isPending = isCreating || isUpdating || isUploading;
 
+  const handleUploadAttachment = (file: File) => {
+    setUploadingIdx(fields?.length);
+    uploadFile(file, {
+      onSuccess: (res) => {
+        append({
+          id: Number(res.fileId),
+          description: "",
+          removed: false,
+        });
+        setUploadingIdx(null);
+      },
+      onError: () => {
+        setUploadingIdx(null);
+      },
+    });
+  };
+
+  const handleRemoveAttachment = (idx: number) => {
+    const field = fields[idx];
+    if (field) {
+      setPendingAttachments((prev) => [
+        ...prev,
+        {
+          id: field.id,
+          description: field.description,
+          url: (field as any).url ?? "",
+        },
+      ]);
+      remove(idx);
+    }
+  };
+
+  const handleRevertAttachment = (att: {
+    id: number;
+    description: string;
+    name: string;
+    url: string;
+  }) => {
+    append({
+      id: att.id,
+      description: att.description,
+      removed: false,
+    });
+    setPendingAttachments((prev) => prev.filter((a) => a.id !== att.id));
+  };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 p-6 bg-canvas-elevated rounded-md border border-gray-300 bg-white"
+      className="space-y-5 p-6 bg-canvas-elevated rounded-md border border-gray-300 bg-white"
     >
-      <div className="flex flex-col gap-4 md:flex-row">
+      {/* Row 1: Name + Address */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <Input
           label={t("investor.label-name")}
           id="land-name"
@@ -119,17 +182,9 @@ export default function BasicLandInfoForm({
           {...register("address")}
         />
       </div>
-      <ImageUploader
-        label={t("investor.label-cover-image", "Cover Image")}
-        accept="image/*"
-        disabled={isPending || isUploading}
-        value={coverPreviewUrl ?? (coverFileId || null)}
-        onFileChange={onCoverChange}
-        errors={errors}
-        fieldName="coverImageId"
-      />
 
-      <div className="flex flex-col gap-4 md:flex-row">
+      {/* Row 2: Location + Area + Zoning */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <Input
           label={t("investor.label-location")}
           id="land-location"
@@ -147,26 +202,20 @@ export default function BasicLandInfoForm({
           errors={errors}
           {...register("area", { valueAsNumber: true })}
         />
-      </div>
-
-      <div className="flex flex-col gap-4 md:flex-row">
         <div className="w-full">
-          <label className="text-sm font-medium text-foreground mb-1.5 block">
-            {t("investor.label-zoning")}
-          </label>
-          <select
-            value={zoningValue}
-            onChange={(e) =>
-              setValue("zoning", Number(e.target.value) as EZoningType)
-            }
-            className="w-full h-10 rounded-md border border-border bg-canvas-elevated px-3.5 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/25"
+          <label className="text-[11px] text-muted-foreground mb-1.5 md:text-sm block"></label>
+          <Select
+            asInput={true}
+            label={t("investor.label-zoning")}
+            value={String(zoningValue)}
+            setValue={(val) => setValue("zoning", Number(val) as EZoningType)}
           >
             {Object.entries(ZONING_LABELS).map(([key, label]) => (
               <option key={key} value={key}>
                 {label}
               </option>
             ))}
-          </select>
+          </Select>
           {errors.zoning && (
             <p className="text-xs text-destructive mt-1">
               {errors.zoning.message}
@@ -175,24 +224,53 @@ export default function BasicLandInfoForm({
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 md:flex-row">
-        <label className="flex items-center gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={accessabilityValue}
-            onChange={(e) => setValue("accessability", e.target.checked)}
-            className="h-4 w-4 rounded border-border accent-primary"
-          />
-          <span className="text-sm text-foreground">
-            {t("investor.label-accessibility")}
-          </span>
-        </label>
-      </div>
+      {/* Row 3: Accessibility */}
+      <label className="flex items-center gap-2 cursor-pointer w-fit">
+        <input
+          type="checkbox"
+          checked={accessabilityValue}
+          onChange={(e) => setValue("accessability", e.target.checked)}
+          className="h-4 w-4 rounded border-border accent-primary"
+        />
+        <span className="text-sm text-foreground">
+          {t("investor.label-accessibility")}
+        </span>
+      </label>
+
+      {/* Cover Image */}
+      <ImageUploader
+        label={t("investor.label-cover-image", "Cover Image")}
+        accept="image/*"
+        disabled={isPending || isUploading}
+        value={coverPreviewUrl ?? (coverFileId || null)}
+        onFileChange={onCoverChange}
+        errors={errors}
+        fieldName="coverImageId"
+      />
 
       <BorderField
-        value={borderValue}
+        value={borderValue || []}
         onChange={(val) => setValue("border", val)}
         error={errors.border?.message}
+      />
+
+      <Message
+        type="info"
+        message={t(
+          "investor.attachments-hint",
+          "Upload plans, designs, or any documents related to this land",
+        )}
+      />
+
+      <AttachmentList
+        fields={fields as any}
+        register={register}
+        errors={errors}
+        onUpload={handleUploadAttachment}
+        onRemove={handleRemoveAttachment}
+        onRevert={handleRevertAttachment}
+        pendingItems={pendingAttachments}
+        isUploading={uploadingIdx !== null}
       />
 
       <div className="flex justify-end gap-3 pt-2">

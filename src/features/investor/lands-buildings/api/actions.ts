@@ -28,9 +28,18 @@ export const landFormSchema = z.object({
   border: z
     .array(z.string().min(1))
     .min(1, i18n.t("investor.validation-border-req")),
-  isValidated: z.boolean().default(false),
+  isValidated: z.boolean().default(false).optional(),
   accessability: z.boolean().default(false),
   coverImageId: z.string().default(""),
+  attachments: z
+    .array(
+      z.object({
+        id: z.number(),
+        description: z.string(),
+        removed: z.boolean().optional(),
+      }),
+    )
+    .default([]),
 });
 
 export type LandFormSchema = z.infer<typeof landFormSchema>;
@@ -45,6 +54,7 @@ export const initialLandValues: LandFormSchema = {
   isValidated: false,
   accessability: false,
   coverImageId: "",
+  attachments: [],
 };
 
 const createLandApi = async (payload: CreateLandRequest): Promise<Land> => {
