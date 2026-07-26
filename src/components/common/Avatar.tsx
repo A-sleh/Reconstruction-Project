@@ -8,7 +8,7 @@ import { paths } from "@/config/paths";
 const Avatar = () => {
   const goto = useNavigate();
   const { i18n, t } = useTranslation();
-  const { clearAuth } = useAuthStore();
+  const { clearAuth, user } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -37,7 +37,7 @@ const Avatar = () => {
       <img
         onClick={() => setIsOpen(true)}
         className="w-10 h-10 rounded-full object-contain"
-        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+        src={user?.photoURL || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"}
         alt="user-avatar"
       />
       {isOpen && (
