@@ -17,9 +17,10 @@ import {
   useUpdateResource,
 } from "../api/actions";
 import ImageUploader from "@/components/inputs/ImageUploader";
-import { unitTypes } from "../api/types"; 
+import { unitTypes } from "../api/types";
 import { DynamicAsyncSelector } from "./SmartDataGrid";
 import { Switch } from "@/components/ui/switch";
+import { useFileUpload } from "@/hooks/useFileUpload";
 
 interface Props {
   openButton?: React.ReactNode;
@@ -53,6 +54,11 @@ export function NewResourceForm({
     defaultValues: defaultResourceValues as ResourceFormValues,
     mode: "onChange",
   });
+  const { isPending, onChange, previewUrl } = useFileUpload({
+    onSuccess: (id) => {
+      setValue("imageId", id ?? "");
+    },
+  });
 
   const watched = watch();
   const unitType = watched.unit;
@@ -76,9 +82,15 @@ export function NewResourceForm({
     });
   }, [initial, reset]);
 
-  const handleImageChange = (file: File | null) => {
-    setValue("imageUrl", file?.name ?? "");
-    setValue("file", file ?? undefined);
+  const handleImageChange = (selectedFile: File | null) => {
+    onChange(selectedFile);
+    if (!selectedFile) {
+      setValue("imageId", "");
+      setValue("imageUrl", "");
+      setValue("file", undefined);
+    } else {
+      setValue("file", selectedFile);
+    }
   };
 
   const handleGenerateMockData = () => {
@@ -91,7 +103,6 @@ export function NewResourceForm({
       reset(defaultResourceValues);
       return;
     } else if (updateable && onSateled) {
-      alert("here");
       updateResource(values, {
         onSuccess: (_) => {
           onSateled();
@@ -118,9 +129,7 @@ export function NewResourceForm({
         <div className="space-y-4">
           <Textarea
             label={t("workSites.resource.label-description")}
-            placeholder={t(
-              "workSites.resource.placeholder-description",
-            )}
+            placeholder={t("workSites.resource.placeholder-description")}
             rows={3}
             fieldName="description"
             errors={errors}
@@ -157,9 +166,7 @@ export function NewResourceForm({
             </Select>
           </div>
           <Input
-            label={t(
-              "workSites.resource.label-price-per-unit",
-            )}
+            label={t("workSites.resource.label-price-per-unit")}
             id="price"
             type="number"
             min={0}
@@ -186,7 +193,8 @@ export function NewResourceForm({
           label={t("workSites.resource.label-image")}
           required={true}
           fileName={"imageUrl"}
-          value={localImageFile || image}
+          value={previewUrl || localImageFile || image}
+          disabled={isPending}
           onFileChange={handleImageChange}
           errors={errors ?? null}
           fieldName="imageUrl"

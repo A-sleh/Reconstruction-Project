@@ -29,7 +29,8 @@ export const resourceSchema = z.object({
     .nullable()
     .optional(),
   resourceBank: z.any().optional(),
-  imageUrl: z
+  imageUrl: z.string().optional(),
+  imageId: z
     .string()
     .nonempty(
       i18n.t("workSites.resource.validation.image_required"),
@@ -65,6 +66,7 @@ export const defaultResourceValues: Resource = {
   resourceBankId: 0,
   description: "",
   imageUrl: "",
+  imageId: "",
   price: 0,
   workSiteId: null,
 };
@@ -83,6 +85,7 @@ export const generateMockResourceValues = (): Resource => {
       category: faker.commerce.department(),
       description: faker.commerce.productDescription(),
     },
+    imageId: "1",
     imageUrl: faker.image.urlLoremFlickr({
       width: 400,
       height: 300,
