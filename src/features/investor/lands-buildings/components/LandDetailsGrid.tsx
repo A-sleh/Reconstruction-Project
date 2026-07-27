@@ -1,7 +1,12 @@
 import { useTranslation } from "react-i18next";
-import { FileText, ExternalLink } from "lucide-react";
+import { FileText, ExternalLink, Trash2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { LandDetail } from "../api/types";
+import { Button } from "@/components/ui/button";
+import ConfirmDelete from "@/components/model/ConfirmDelete";
+import { useUpdateLand } from "../api/actions";
+import { type Attachment, type LandDetail } from "../api/types";
+import { buildUpdatePayload } from "../api/DTOs";
+import AddAttachmentPopup from "./AddAttachmentPopup";
 
 interface LandDetailsGridProps {
   land: LandDetail;
@@ -9,13 +14,25 @@ interface LandDetailsGridProps {
 
 export default function LandDetailsGrid({ land }: LandDetailsGridProps) {
   const { t } = useTranslation();
+  const { mutate: updateLand, isPending: isUpdating } = useUpdateLand();
+
+  const handleSaveAttachments = (
+    items: Attachment[],
+    closePopup: () => void,
+  ) => {
+    updateLand(buildUpdatePayload(land, items), {
+      onSuccess: () => closePopup(),
+    });
+  };
+
+  const handleDeleteAttachment = (attId: number) => {
+    const updated = land.attachments.filter((a) => a.id !== attId);
+    updateLand(buildUpdatePayload(land, updated));
+  };
 
   const infoRows = [
     { label: t("investor.label-address"), value: land.address },
-    {
-      label: t("investor.label-zoning"),
-      value: land.zoningType,
-    },
+    { label: t("investor.label-zoning"), value: land.zoningType },
     {
       label: t("investor.area"),
       value: `${land.area.toLocaleString()} ${t("investor.squareMeters")}`,
@@ -51,7 +68,9 @@ export default function LandDetailsGrid({ land }: LandDetailsGridProps) {
                 <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
                   {row.label}
                 </p>
-                <p className="text-sm font-medium text-foreground">{row.value}</p>
+                <p className="text-sm font-medium text-foreground">
+                  {row.value}
+                </p>
               </div>
             ))}
           </div>
@@ -59,28 +78,50 @@ export default function LandDetailsGrid({ land }: LandDetailsGridProps) {
       </Card>
 
       <Card className="border-border">
-        <CardHeader className="pb-3">
+        <CardHeader className="pb-3 flex flex-row items-center justify-between">
           <CardTitle className="text-base font-semibold">
             {t("investor.attachments")}
           </CardTitle>
+          <AddAttachmentPopup
+            initialItems={[]}
+            onSave={handleSaveAttachments}
+            isSaving={isUpdating}
+          />
         </CardHeader>
         <CardContent>
-          {land.attachments && land.attachments.length > 0 ? (
+          {land.attachments.length > 0 ? (
             <ul className="space-y-2">
               {land.attachments.map((att) => (
-                <li key={att.id}>
+                <li key={att.id} className="flex items-center gap-2">
                   <a
                     href={att.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-primary hover:underline"
+                    className="flex items-center gap-2 text-sm text-primary hover:underline flex-1 min-w-0"
                   >
                     <FileText className="h-4 w-4 shrink-0" />
-                    <span className="truncate flex-1">
+                    <span className="truncate">
                       {att.description || att.name}
                     </span>
-                    <ExternalLink className="h-3 w-3 shrink-0 text-muted-foreground" />
+                    {att.url && (
+                      <ExternalLink className="h-3 w-3 shrink-0 text-muted-foreground" />
+                    )}
                   </a>
+                  <ConfirmDelete
+                    item={att.name}
+                    onConfirm={() => handleDeleteAttachment(att.id)}
+                    isLoading={isUpdating}
+                    openButton={
+                      <Button
+                        type="button"
+                        size="icon"
+                        variant="ghost"
+                        className="h-7 w-7 text-destructive hover:text-destructive shrink-0"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    }
+                  />
                 </li>
               ))}
             </ul>

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -13,9 +13,8 @@ import {
 } from "../api/actions";
 import { BUILDING_TYPES } from "./BuildingTypes";
 import { useFileUpload } from "@/hooks/useFileUpload";
-import { useUploadFile } from "@/features/attachment/api/actions";
 import LocationPickerField from "./LocationPickerField";
-import AttachmentList from "@/features/attachment/components/AttachmentList";
+import AttachmentList, { type AttachmentListHandle } from "@/features/attachment/components/AttachmentList";
 
 interface BuildingFormProps {
   landId: number;
@@ -24,7 +23,6 @@ interface BuildingFormProps {
 
 export default function BuildingForm({ landId, onSuccess }: BuildingFormProps) {
   const { t } = useTranslation();
-  const { mutate: uploadFile } = useUploadFile();
 
   const {
     register,
@@ -32,7 +30,6 @@ export default function BuildingForm({ landId, onSuccess }: BuildingFormProps) {
     reset,
     setValue,
     watch,
-    control,
     formState: { errors },
   } = useForm<BuildingFormSchema>({
     resolver: zodResolver(buildingFormSchema),
@@ -41,10 +38,7 @@ export default function BuildingForm({ landId, onSuccess }: BuildingFormProps) {
     mode: "onSubmit",
   });
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "attachments",
-  });
+  const attachmentListRef = useRef<AttachmentListHandle>(null);
 
   const {
     previewUrl: coverPreviewUrl,
@@ -55,70 +49,18 @@ export default function BuildingForm({ landId, onSuccess }: BuildingFormProps) {
     onSuccess: (id) => setValue("coverImageId", Number(id)),
   });
 
-  // Attachment upload state
-  const [pendingAttachments, setPendingAttachments] = useState<
-    { id: number; description: string; name: string; url: string }[]
-  >([]);
-  const [uploadingIdx, setUploadingIdx] = useState<number | null>(null);
-
   const locationValue = watch("location");
 
   useEffect(() => {
     reset({ ...initialBuildingValues, landId });
   }, [landId, reset]);
 
-  const handleUploadAttachment = (file: File, idx: number) => {
-    setUploadingIdx(idx);
-    uploadFile(file, {
-      onSuccess: (res) => {
-        append({
-          id: Number(res.fileId),
-          description: "",
-          name: file.name,
-          url: URL.createObjectURL(file),
-        });
-        setUploadingIdx(null);
-      },
-      onError: () => {
-        setUploadingIdx(null);
-      },
-    });
-  };
-
-  const handleRemoveAttachment = (idx: number) => {
-    const field = fields[idx];
-    if (field) {
-      setPendingAttachments((prev) => [
-        ...prev,
-        {
-          id: field.id,
-          description: field.description,
-          name: (field as any).name ?? "",
-          url: (field as any).url ?? "",
-        },
-      ]);
-      remove(idx);
-    }
-  };
-
-  const handleRevertAttachment = (att: {
-    id: number;
-    description: string;
-    name: string;
-    url: string;
-  }) => {
-    append({
-      id: att.id,
-      description: att.description,
-      name: att.name,
-      url: att.url,
-    });
-    setPendingAttachments((prev) => prev.filter((a) => a.id !== att.id));
-  };
-
   const { mutate: createBuilding, isPending: isCreating } = useCreateBuilding();
 
+  const isPending = isCreating || isUploadingCover;
+
   const onSubmit = (data: BuildingFormSchema) => {
+    const attachments = attachmentListRef.current?.getValues() ?? [];
     const payload = {
       name: data.name,
       landId: data.landId,
@@ -130,7 +72,7 @@ export default function BuildingForm({ landId, onSuccess }: BuildingFormProps) {
       orientation: data.orientation,
       location: data.location,
       coverImageId: data.coverImageId,
-      attachments: data.attachments.map((a) => ({
+      attachments: attachments.map((a) => ({
         id: a.id,
         description: a.description,
       })),
@@ -143,8 +85,6 @@ export default function BuildingForm({ landId, onSuccess }: BuildingFormProps) {
       },
     });
   };
-
-  const isPending = isCreating || isUploadingCover;
 
   return (
     <form
@@ -268,14 +208,8 @@ export default function BuildingForm({ landId, onSuccess }: BuildingFormProps) {
       />
 
       <AttachmentList
-        fields={fields as any}
-        register={register}
-        errors={errors}
-        onUpload={(file) => handleUploadAttachment(file, fields.length)}
-        onRemove={handleRemoveAttachment}
-        onRevert={handleRevertAttachment}
-        pendingItems={pendingAttachments}
-        isUploading={uploadingIdx !== null}
+        ref={attachmentListRef}
+        mode="self-contained"
       />
 
       <div className="flex justify-end gap-3 pt-2">

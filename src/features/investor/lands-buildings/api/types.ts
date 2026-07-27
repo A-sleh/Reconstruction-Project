@@ -96,8 +96,8 @@ export interface LandsResponse extends Paginated<LandListItem> {}
 export interface Attachment {
   id: number;
   name: string;
-  url: string;
   description: string;
+  url?: string;
 }
 
 export interface BuildingPart {

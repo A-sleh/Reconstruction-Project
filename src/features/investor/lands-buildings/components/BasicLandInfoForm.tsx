@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -15,9 +15,8 @@ import {
 } from "../api/actions";
 import { ZONING_LABELS, EZoningType, type Land } from "../api/types";
 import { useFileUpload } from "@/hooks/useFileUpload";
-import { useUploadFile } from "@/features/attachment/api/actions";
 import BorderField from "./BorderField";
-import AttachmentList from "@/features/attachment/components/AttachmentList";
+import AttachmentList, { type AttachmentListHandle } from "@/features/attachment/components/AttachmentList";
 import { Message } from "@/components/common/Message";
 
 interface Props {
@@ -37,7 +36,6 @@ export default function BasicLandInfoForm({
     reset,
     setValue,
     watch,
-    control,
     formState: { errors },
   } = useForm<LandFormSchema>({
     resolver: zodResolver(landFormSchema),
@@ -46,16 +44,7 @@ export default function BasicLandInfoForm({
     mode: "onSubmit",
   });
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "attachments",
-  });
-
-  const { mutate: uploadFile } = useUploadFile();
-  const [pendingAttachments, setPendingAttachments] = useState<
-    { id: number; description: string; name: string; url: string }[]
-  >([]);
-  const [uploadingIdx, setUploadingIdx] = useState<number | null>(null);
+  const attachmentListRef = useRef<AttachmentListHandle>(null);
 
   const borderValue = watch("border");
   const zoningValue = watch("zoning");
@@ -89,10 +78,15 @@ export default function BasicLandInfoForm({
   const { mutate: createLand, isPending: isCreating } = useCreateLand();
   const { mutate: updateLand, isPending: isUpdating } = useUpdateLand();
 
+  const isPending = isCreating || isUpdating || isUploading;
+
   const onSubmit = (data: LandFormSchema) => {
+    const attachments = attachmentListRef.current?.getValues() ?? [];
+    const payload = { ...data, attachments: attachments.map((a) => ({ ...a, removed: false })) };
+
     if (initial) {
       updateLand(
-        { ...data, id: initial.id },
+        { ...payload, id: initial.id },
         {
           onSuccess: () => {
             reset();
@@ -101,64 +95,13 @@ export default function BasicLandInfoForm({
         },
       );
     } else {
-      createLand(data, {
+      createLand(payload, {
         onSuccess: () => {
           reset();
           onSuccess?.();
         },
       });
     }
-  };
-
-  const isPending = isCreating || isUpdating || isUploading;
-
-  const handleUploadAttachment = (file: File) => {
-    setUploadingIdx(fields?.length);
-    uploadFile(file, {
-      onSuccess: (res) => {
-        append({
-          id: Number(res.fileId),
-          description: "",
-          name: file.name.toString(),
-          removed: false,
-        });
-        setUploadingIdx(null);
-      },
-      onError: () => {
-        setUploadingIdx(null);
-      },
-    });
-  };
-
-  const handleRemoveAttachment = (idx: number) => {
-    const field = fields[idx];
-    if (field) {
-      setPendingAttachments((prev) => [
-        ...prev,
-        {
-          id: field.id,
-          description: field.description,
-          name: field.name,
-          url: (field as any).url ?? "",
-        },
-      ]);
-      remove(idx);
-    }
-  };
-
-  const handleRevertAttachment = (att: {
-    id: number;
-    description: string;
-    name: string;
-    url: string;
-  }) => {
-    append({
-      id: att.id,
-      description: att.description,
-      name: att.name,
-      removed: false,
-    });
-    setPendingAttachments((prev) => prev.filter((a) => a.id !== att.id));
   };
 
   return (
@@ -266,14 +209,8 @@ export default function BasicLandInfoForm({
       />
 
       <AttachmentList
-        fields={fields as any}
-        register={register}
-        errors={errors}
-        onUpload={handleUploadAttachment}
-        onRemove={handleRemoveAttachment}
-        onRevert={handleRevertAttachment}
-        pendingItems={pendingAttachments}
-        isUploading={uploadingIdx !== null}
+        ref={attachmentListRef}
+        mode="self-contained"
       />
 
       <div className="flex justify-end gap-3 pt-2">

@@ -26,11 +26,10 @@ export const openInGoogleMaps = (location?: string) => {
     window.open(
       `https://www.google.com/maps?q=${coords.lat},${coords.lng}`,
       "_blank",
-      "noopener,noreferrer"
+      "noopener,noreferrer",
     );
   }
 };
-
 
 export const fmtCurrency = (value: number) => {
   return new Intl.NumberFormat("en-US", {
@@ -64,3 +63,9 @@ export function stringToLocation(str: string): ILoncation {
   return { longitude, latitude };
 }
 
+export function parsingTheStringToEnum<T>(meta: Object, labelParam: string): T {
+  const labelAsEnum = Object.entries(meta).find(
+    ([, label]) => label === labelParam,
+  );
+  return labelAsEnum ? (Number(labelAsEnum[0]) as T) : 0 as T;
+}

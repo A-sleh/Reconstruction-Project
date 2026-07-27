@@ -109,6 +109,7 @@
     "location": "Location",
     "borderPoints": "Border Points",
     "landInformation": "Land Information",
+    "addAttachment": "Add Attachment",
     "attachments": "Attachments",
     "noAttachments": "No attachments available",
     "noBuildings": "No buildings on this land yet",
