@@ -29,6 +29,7 @@ export type LandMapProps = {
   maxPoints?: number;
 
   polygon?: LatLng[];
+  constraintPolygon?: LatLng[];
   fillColor?: string;
   borderColor?: string;
 

@@ -5,7 +5,15 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@/config/paths";
 
-const BasicLandInfoHeader = ({ updateable }: { updateable?: boolean }) => {
+const BasicLandInfoHeader = ({
+  updateable,
+  description,
+  title = "",
+}: {
+  updateable?: boolean;
+  title?: string;
+  description?: string;
+}) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -20,10 +28,11 @@ const BasicLandInfoHeader = ({ updateable }: { updateable?: boolean }) => {
           {t("investor.dashboard")}
         </p>
         <h1 className="text-3xl font-semibold mt-1 text-foreground">
-          {updateable ? t("investor.edit-land") : t("investor.add-land")}
+          {title ||
+            (updateable ? t("investor.edit-land") : t("investor.add-land"))}
         </h1>
         <p className="text-sm text-muted-foreground mt-1">
-          {t("investor.land-form-description")}
+          {description || t("investor.land-form-description")}
         </p>
       </div>
       <Button

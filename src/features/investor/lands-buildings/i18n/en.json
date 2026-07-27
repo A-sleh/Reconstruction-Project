@@ -113,6 +113,22 @@
     "attachments": "Attachments",
     "noAttachments": "No attachments available",
     "noBuildings": "No buildings on this land yet",
-    "attachments-hint": "Upload plans, designs, or any documents related to this land"
+    "attachments-hint": "Upload plans, designs, or any documents related to this land",
+    "addBuilding": "Add Building",
+    "createBuilding": "Create New Building",
+    "createBuildingDesc": "Fill in the details to add a new building",
+    "clickInsideLand": "Click inside the land boundary to select a location",
+    "clickOutsideLand": "Point must be inside the land boundary",
+    "buildingBorder": "Building Border",
+    "clickToDrawBorder": "Click on the map to draw the building border",
+    "drawBorderHint": "Click inside the land boundary to place points. Close the polygon to finish.",
+    "basicInformation": "Basic Information",
+    "locationArea": "Location & Area",
+    "mediaAttachments": "Media & Attachments",
+    "validation-land-req": "Land is required",
+    "validation-city-req": "City is required",
+    "validation-street-req": "Street name is required",
+    "validation-buildingType-req": "Building type is required",
+    "validation-orientation-req": "Orientation is required"
   }
 }

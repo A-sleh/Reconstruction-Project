@@ -10,12 +10,13 @@ import type {
   BuildingListItem,
   BuildingType,
 } from "./types";
+import type { LatLng } from "@/lib/helpers";
 
 export const buildingFormSchema = z.object({
   name: z.string().min(1, i18n.t("investor.validation-name-req")).trim(),
   landId: z
-    .string({ message: i18n.t("investor.validation-land-req") }),
-    // .positive({ message: i18n.t("investor.validation-land-req") }).optional(),
+    .number({ message: i18n.t("investor.validation-land-req") })
+    .positive({ message: i18n.t("investor.validation-land-req") }),
   city: z.string().min(1, i18n.t("investor.validation-city-req")).trim(),
   streetName: z.string().min(1, i18n.t("investor.validation-street-req")).trim(),
   address: z.string().min(1, i18n.t("investor.validation-address-req")).trim(),
@@ -29,6 +30,7 @@ export const buildingFormSchema = z.object({
     .min(1, i18n.t("investor.validation-location-req"))
     .trim(),
   coverImageId: z.number().default(0),
+  buildingBorder: z.array(z.object({ lat: z.number(), lng: z.number() })).default([]),
   attachments: z.array(
     z.object({
       id: z.number(),
@@ -51,6 +53,7 @@ export const initialBuildingValues: BuildingFormSchema = {
   orientation: "",
   location: "",
   coverImageId: 0,
+  buildingBorder: [],
   attachments: [],
 };
 

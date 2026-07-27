@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Polygon } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { DEFAULT_CENTER, injectLeafletOverrides } from "./LandMapStyles";
+import { DEFAULT_CENTER, injectLeafletOverrides, polygonStyle } from "./LandMapStyles";
 import LandMapEditor from "./LandMapEditor";
 import LandMapViewer from "./LandMapViewer";
 import LandMapSelector from "./LandMapSelector";
@@ -17,6 +17,7 @@ export default function LandMap({
   onChange,
   maxPoints,
   polygon,
+  constraintPolygon,
   fillColor,
   borderColor,
   options = [],
@@ -62,7 +63,19 @@ export default function LandMap({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <FitBoundsOnMount polygon={polygon} /> 
+        <FitBoundsOnMount polygon={polygon} />
+
+        {mode === "edit" && constraintPolygon && constraintPolygon.length >= 3 && (
+          <Polygon
+            positions={constraintPolygon.map((p) => [p.lat, p.lng])}
+            pathOptions={{
+              ...polygonStyle("#6B7280", "#6B7280"),
+              fillOpacity: 0.08,
+              dashArray: "8 4",
+              weight: 2,
+            }}
+          />
+        )}
 
         <div className={noCursorClass}>
           {mode === "edit" && onChange && (
@@ -72,6 +85,7 @@ export default function LandMap({
               maxPoints={maxPoints}
               fillColor={fillColor}
               borderColor={borderColor}
+              constraintPolygon={constraintPolygon}
             />
           )}
 

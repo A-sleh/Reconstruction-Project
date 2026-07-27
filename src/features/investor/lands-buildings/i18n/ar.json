@@ -113,6 +113,22 @@
     "attachments": "المرفقات",
     "noAttachments": "لا توجد مرفقات متاحة",
     "noBuildings": "لا توجد مباني على هذه الأرض بعد",
-    "attachments-hint": "ارفع المخططات أو التصاميم أو أي مستندات متعلقة بهذه الأرض"
+    "attachments-hint": "ارفع المخططات أو التصاميم أو أي مستندات متعلقة بهذه الأرض",
+    "addBuilding": "إضافة مبنى",
+    "createBuilding": "إنشاء مبنى جديد",
+    "createBuildingDesc": "املأ التفاصيل لإضافة مبنى جديد",
+    "clickInsideLand": "انقر داخل حدود الأرض لاختيار الموقع",
+    "clickOutsideLand": "يجب أن تكون النقطة داخل حدود الأرض",
+    "buildingBorder": "حدود المبنى",
+    "clickToDrawBorder": "انقر على الخريطة لرسم حدود المبنى",
+    "drawBorderHint": "انقر داخل حدود الأرض لوضع النقاط. أغلق المضلع للإنهاء.",
+    "basicInformation": "المعلومات الأساسية",
+    "locationArea": "الموقع والمساحة",
+    "mediaAttachments": "الوسائط والمرفقات",
+    "validation-land-req": "الأرض مطلوبة",
+    "validation-city-req": "المدينة مطلوبة",
+    "validation-street-req": "اسم الشارع مطلوب",
+    "validation-buildingType-req": "نوع المبنى مطلوب",
+    "validation-orientation-req": "الاتجاه مطلوب"
   }
 }

@@ -1,18 +1,39 @@
 import { useCallback, useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Polygon,
+  useMapEvents,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useTranslation } from "react-i18next";
-import { DEFAULT_CENTER, injectLeafletOverrides, createMarkerIcon } from "@/components/shared/LandMap/LandMapStyles";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import {
+  DEFAULT_CENTER,
+  injectLeafletOverrides,
+  createMarkerIcon,
+  polygonStyle,
+} from "@/components/shared/LandMap/LandMapStyles";
+import FitBoundsOnMount from "@/components/shared/LandMap/FitBoundsOnMount";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { MapPin, X } from "lucide-react";
-import type { LatLng } from "@/lib/helpers";
+import { MapPin, X, AlertTriangle } from "lucide-react";
+import { type LatLng, isPointInPolygon } from "@/lib/helpers";
+import type { ILoncation } from "@/features/investor/lands-buildings/api/types";
+import { createPortal } from "react-dom";
 
 interface LocationPickerFieldProps {
   value: string;
   onChange: (value: string) => void;
   error?: string;
   disabled?: boolean;
+  landBorder?: ILoncation[];
 }
 
 function parseLocation(value: string): LatLng | null {
@@ -28,21 +49,33 @@ function parseLocation(value: string): LatLng | null {
 function LocationMarker({
   position,
   onPick,
+  landBorder,
+  onOutsideClick,
 }: {
   position: LatLng | null;
   onPick: (pos: LatLng) => void;
+  landBorder?: LatLng[];
+  onOutsideClick?: () => void;
 }) {
   useMapEvents({
     click(e) {
+      if (landBorder && landBorder.length >= 3) {
+        if (
+          !isPointInPolygon(
+            { lat: e.latlng.lat, lng: e.latlng.lng },
+            landBorder,
+          )
+        ) {
+          onOutsideClick?.();
+          return;
+        }
+      }
       onPick({ lat: e.latlng.lat, lng: e.latlng.lng });
     },
   });
 
   return position ? (
-    <Marker
-      position={[position.lat, position.lng]}
-      icon={createMarkerIcon()}
-    />
+    <Marker position={[position.lat, position.lng]} icon={createMarkerIcon()} />
   ) : null;
 }
 
@@ -51,11 +84,18 @@ export default function LocationPickerField({
   onChange,
   error,
   disabled = false,
+  landBorder,
 }: LocationPickerFieldProps) {
   const { t } = useTranslation();
   const [pos, setPos] = useState<LatLng | null>(() => parseLocation(value));
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<LatLng | null>(null);
+  const [outsideError, setOutsideError] = useState(false);
+
+  const borderLatLng: LatLng[] | undefined = landBorder?.map((p) => ({
+    lat: p.latitude,
+    lng: p.longitude,
+  }));
 
   useEffect(() => {
     injectLeafletOverrides();
@@ -67,15 +107,18 @@ export default function LocationPickerField({
 
   const handleOpen = () => {
     setDraft(pos);
+    setOutsideError(false);
     setOpen(true);
   };
 
-  const handlePick = useCallback(
-    (p: LatLng) => {
-      setDraft(p);
-    },
-    [],
-  );
+  const handlePick = useCallback((p: LatLng) => {
+    setDraft(p);
+    setOutsideError(false);
+  }, []);
+
+  const handleOutsideClick = useCallback(() => {
+    setOutsideError(true);
+  }, []);
 
   const handleConfirm = () => {
     if (draft) {
@@ -87,7 +130,10 @@ export default function LocationPickerField({
 
   const handleClear = () => {
     setDraft(null);
+    setOutsideError(false);
   };
+
+  const hasBorder = Boolean(borderLatLng && borderLatLng.length >= 3);
 
   return (
     <div className="w-full space-y-2">
@@ -108,61 +154,116 @@ export default function LocationPickerField({
           </span>
         ) : (
           <span className="text-muted-foreground">
-            {t("investor.clickToPickLocation", "Click to select location on map")}
+            {t(
+              "investor.clickToPickLocation",
+              "Click to select location on map",
+            )}
           </span>
         )}
       </button>
 
       {error && <p className="text-xs text-destructive">{error}</p>}
+      {createPortal(
+        <Dialog open={open} onOpenChange={setOpen} > 
+          <DialogContent className="max-w-2xl p-0 gap-0 overflow-hidden ">
+            <DialogHeader className="p-4 pb-2">
+              <DialogTitle>{t("investor.label-location")}</DialogTitle>
+            </DialogHeader>
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-2xl p-0 gap-0 overflow-hidden">
-          <DialogHeader className="p-4 pb-2">
-            <DialogTitle>{t("investor.label-location")}</DialogTitle>
-          </DialogHeader>
-
-          <div className="relative w-full h-96">
-            <MapContainer
-              center={draft ? [draft.lat, draft.lng] : (pos ? [pos.lat, pos.lng] : DEFAULT_CENTER)}
-              zoom={draft || pos ? 15 : 12}
-              className="w-full h-full landmap-container"
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <LocationMarker position={draft} onPick={handlePick} />
-            </MapContainer>
-          </div>
-
-          <div className="flex items-center justify-between p-4 pt-2 border-t">
-            <div className="flex items-center gap-2">
-              {draft && (
-                <p className="text-xs text-muted-foreground">
-                  {t("investor.selectedLocation", "Selected")}: {draft.lat.toFixed(6)}, {draft.lng.toFixed(6)}
-                </p>
-              )}
-              {!draft && (
-                <p className="text-xs text-muted-foreground">
-                  {t("investor.clickToPickLocation", "Click on the map to select a location")}
-                </p>
-              )}
+            <div className="relative w-full h-96">
+              <MapContainer
+                center={
+                  draft
+                    ? [draft.lat, draft.lng]
+                    : pos
+                      ? [pos.lat, pos.lng]
+                      : DEFAULT_CENTER
+                }
+                zoom={draft || pos ? 15 : 12}
+                className="w-full h-full landmap-container"
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                {hasBorder && borderLatLng && (
+                  <>
+                    <FitBoundsOnMount polygon={borderLatLng} />
+                    <Polygon
+                      positions={borderLatLng.map((p) => [p.lat, p.lng])}
+                      pathOptions={polygonStyle()}
+                    />
+                  </>
+                )}
+                <LocationMarker
+                  position={draft}
+                  onPick={handlePick}
+                  landBorder={borderLatLng}
+                  onOutsideClick={handleOutsideClick}
+                />
+              </MapContainer>
             </div>
 
-            <DialogFooter className="sm:justify-end gap-2 p-0 border-0">
-              {draft && (
-                <Button type="button" variant="ghost" size="sm" onClick={handleClear}>
-                  <X className="h-4 w-4 mr-1" />
-                  {t("investor.clear", "Clear")}
+            <div className="flex items-center justify-between p-4 pt-2 border-t">
+              <div className="flex items-center gap-2 min-w-0">
+                {outsideError && (
+                  <div className="flex items-center gap-1.5 text-xs text-destructive">
+                    <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
+                    <span>
+                      {t(
+                        "investor.clickOutsideLand",
+                        "Point must be inside the land boundary",
+                      )}
+                    </span>
+                  </div>
+                )}
+                {!outsideError && draft && (
+                  <p className="text-xs text-muted-foreground">
+                    {t("investor.selectedLocation", "Selected")}:{" "}
+                    {draft.lat.toFixed(6)}, {draft.lng.toFixed(6)}
+                  </p>
+                )}
+                {!outsideError && !draft && (
+                  <p className="text-xs text-muted-foreground">
+                    {hasBorder
+                      ? t(
+                          "investor.clickInsideLand",
+                          "Click inside the land boundary to select a location",
+                        )
+                      : t(
+                          "investor.clickToPickLocation",
+                          "Click on the map to select a location",
+                        )}
+                  </p>
+                )}
+              </div>
+
+              <DialogFooter className="sm:justify-end gap-2 p-0 border-0">
+                {draft && (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleClear}
+                  >
+                    <X className="h-4 w-4 mr-1" />
+                    {t("investor.clear", "Clear")}
+                  </Button>
+                )}
+                <Button
+                  type="button"
+                  size="sm"
+                  onClick={handleConfirm}
+                  disabled={!draft}
+                >
+                  {t("investor.confirm", "Confirm")}
                 </Button>
-              )}
-              <Button type="button" size="sm" onClick={handleConfirm} disabled={!draft}>
-                {t("investor.confirm", "Confirm")}
-              </Button>
-            </DialogFooter>
-          </div>
-        </DialogContent>
-      </Dialog>
+              </DialogFooter>
+            </div>
+          </DialogContent>
+        </Dialog>,
+        document.body,
+      )}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import L from "leaflet";
 import { Polygon, Polyline, CircleMarker } from "react-leaflet";
 import type { LatLng } from "@/lib/helpers";
+import { isPointInPolygon } from "@/lib/helpers";
 import { polygonStyle, createVertexIcon } from "./LandMapStyles";
 import LandMapToolbar, { type EditorTool } from "./LandMapToolbar";
 
@@ -13,6 +14,7 @@ type Props = {
   maxPoints?: number;
   fillColor?: string;
   borderColor?: string;
+  constraintPolygon?: LatLng[];
 };
 
 const CLOSE_THRESHOLD = 15;
@@ -26,6 +28,7 @@ function EditorEvents({
   mousePos,
   setMousePos,
   activeTool,
+  constraintPolygon,
 }: {
   points: LatLng[];
   onChange: (p: LatLng[]) => void;
@@ -35,12 +38,19 @@ function EditorEvents({
   mousePos: LatLng | null;
   setMousePos: (p: LatLng | null) => void;
   activeTool: EditorTool;
+  constraintPolygon?: LatLng[];
 }) {
   const map = useMapEvents({
     click(e) {
       if (activeTool === "add") {
         if (closing) return;
         if (maxPoints && points.length >= maxPoints) return;
+
+        if (constraintPolygon && constraintPolygon.length >= 3) {
+          if (!isPointInPolygon({ lat: e.latlng.lat, lng: e.latlng.lng }, constraintPolygon)) {
+            return;
+          }
+        }
 
         const newPoint: LatLng = {
           lat: Math.round(e.latlng.lat * 1e7) / 1e7,
@@ -134,6 +144,7 @@ export default function LandMapEditor({
   maxPoints,
   fillColor,
   borderColor,
+  constraintPolygon,
 }: Props) {
   const [closing, setClosing] = useState(false);
   const [mousePos, setMousePos] = useState<LatLng | null>(null);
@@ -209,6 +220,7 @@ export default function LandMapEditor({
         mousePos={mousePos}
         setMousePos={setMousePos}
         activeTool={activeTool}
+        constraintPolygon={constraintPolygon}
       />
 
       {activeTool === "move-all" && (

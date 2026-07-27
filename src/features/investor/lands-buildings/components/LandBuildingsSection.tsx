@@ -1,12 +1,15 @@
 import { useTranslation } from "react-i18next";
-import { Building2, MapPin, Layers, ExternalLink } from "lucide-react";
+import { useNavigate } from "react-router";
+import { Building2, MapPin, Layers, ExternalLink, Plus } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { paths } from "@/config/paths";
 import type { LandDetail, Building } from "../api/types";
 
 interface LandBuildingsSectionProps {
@@ -90,7 +93,14 @@ export default function LandBuildingsSection({
   land,
 }: LandBuildingsSectionProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const buildings = land.buildings ?? [];
+
+  const handleAddBuilding = () => {
+    const base = paths.app.investor.createBuilding.getHref(land.landId);
+    const borderParam = encodeURIComponent(JSON.stringify(land.border));
+    navigate(`${base}&border=${borderParam}`);
+  };
 
   return (
     <div className="space-y-3">
@@ -101,9 +111,19 @@ export default function LandBuildingsSection({
             {t("investor.buildings")}
           </h3>
         </div>
-        <Badge variant="outline" className="text-xs">
-          {buildings.length}
-        </Badge>
+        <div className="flex items-center gap-2">
+          <Badge variant="outline" className="text-xs">
+            {buildings.length}
+          </Badge>
+          <Button
+            size="sm"
+            onClick={handleAddBuilding}
+            className="h-8 gap-1.5"
+          >
+            <Plus className="h-4 w-4" />
+            {t("investor.addBuilding", "Add Building")}
+          </Button>
+        </div>
       </div>
 
       {buildings.length === 0 ? (

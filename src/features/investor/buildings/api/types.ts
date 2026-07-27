@@ -88,6 +88,7 @@ export interface CreateBuildingRequest {
   orientation: string;
   location: string;
   coverImageId: number;
+  buildingBorder: string[];
   attachments: { id: number; description: string }[];
 }
 
