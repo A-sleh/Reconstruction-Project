@@ -7,6 +7,7 @@ import { useUpdateLand } from "../api/actions";
 import { type Attachment, type LandDetail } from "../api/types";
 import { buildUpdatePayload } from "../api/DTOs";
 import AddAttachmentPopup from "./AddAttachmentPopup";
+import EditLandPopup from "./EditLandPopup";
 
 interface LandDetailsGridProps {
   land: LandDetail;
@@ -56,10 +57,11 @@ export default function LandDetailsGrid({ land }: LandDetailsGridProps) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <Card className="lg:col-span-2 border-border">
-        <CardHeader className="pb-3">
+        <CardHeader className="pb-3 flex flex-row items-center justify-between">
           <CardTitle className="text-base font-semibold">
             {t("investor.landInformation")}
           </CardTitle>
+          <EditLandPopup land={land} />
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
