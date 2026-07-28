@@ -77,7 +77,8 @@
       "status": {
         "pending": "Pending",
         "approved": "Approved",
-        "rejected": "Rejected"
+        "rejected": "Rejected",
+        "resolved": "Resolved"
       },
       "table": {
         "columns": {

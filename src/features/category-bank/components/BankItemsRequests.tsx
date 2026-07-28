@@ -31,14 +31,21 @@ import RequestActionsMenu from "./RequestActionsMenu";
 import { toast } from "sonner";
 
 import { NewResorceRequestModel } from "@/features/resource-providor/site-resources/components/NewResorceRequestModel";
-import Select from "@/components/inputs/Selector";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import Can from "@/components/shared/Can";
 import { Permissions } from "@/lib/permissions";
 
 const SKELETON_ROWS = 7;
 
 export default function BankItemsRequests() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language == "ar";
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useQueryStringState<
     BankItemStatus | ""
@@ -52,10 +59,21 @@ export default function BankItemsRequests() {
     setDebouncedSearch(debouncedValue);
   }
 
+  const REQUESTS_STATUS_FILTERS = [
+    { label: t("workSites.orders.filters.all"), value: "All" },
+    { label: t("workSites.orders.status.pending"), value: "Pending" },
+    { label: t("workSites.orders.status.approved"), value: "Accepted" },
+    { label: t("workSites.orders.status.rejected"), value: "Rejected" },
+    { label: t("workSites.orders.status.resolved"), value: "Resolved" },
+  ];
+
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useBankItemRequests({
       search: debouncedSearch || undefined,
-      status: (statusFilter as BankItemStatus) || undefined,
+      status:
+        statusFilter == "All"
+          ? undefined
+          : (statusFilter as BankItemStatus) || undefined,
       pageSize: 10,
     });
 
@@ -167,23 +185,23 @@ export default function BankItemsRequests() {
           <div className="relative w-full sm:w-auto">
             <Select
               value={statusFilter}
-              setValue={(value: BankItemStatus) => setStatusFilter(value)}
+              onValueChange={(value: BankItemStatus) => setStatusFilter(value)}
             >
-              <option value="">
-                {t("workSites.orders.filters.status_placeholder")}
-              </option>
-              <option value="Pending">
-                {t("workSites.orders.status.pending")}
-              </option>
-              <option value="Accepted">
-                {t("workSites.orders.status.approved")}
-              </option>
-              <option value="Rejected">
-                {t("workSites.orders.status.rejected")}
-              </option>
-              <option value="Resolved">
-                {t("workSites.orders.status.resolved")}
-              </option>
+              <SelectTrigger
+                className="w-full md:w-fit"
+                dir={isArabic ? "rtl" : "ltr"}
+              >
+                <SelectValue
+                  placeholder={t("workSites.orders.filters.status_placeholder")}
+                />
+              </SelectTrigger>
+              <SelectContent dir={isArabic ? "rtl" : "ltr"}>
+                {REQUESTS_STATUS_FILTERS.map((filter) => (
+                  <SelectItem key={filter.value} value={filter.value}>
+                    {filter.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
             </Select>
           </div>
         </div>

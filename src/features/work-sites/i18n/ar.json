@@ -77,7 +77,8 @@
       "status": {
         "pending": "قيد الانتظار",
         "approved": "تمت الموافقة",
-        "rejected": "مرفوض"
+        "rejected": "مرفوض",
+        "resolved": "تم الحل"
       },
       "table": {
         "columns": {

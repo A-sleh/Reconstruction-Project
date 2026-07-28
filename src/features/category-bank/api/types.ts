@@ -3,7 +3,7 @@ import { Paginated } from "@/types";
 // ============================================================================
 // Shared Enums & Types
 // ============================================================================
-export type BankItemStatus = "Pending" | "Rejected" | "Resolved" | "Accepted";
+export type BankItemStatus = "Pending" | "Rejected" | "Resolved" | "Accepted" | "All";
 
 // ============================================================================
 // Core Entities
