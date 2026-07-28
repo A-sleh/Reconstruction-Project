@@ -106,6 +106,8 @@ export function WorkSiteFormModel({
     }
   };
 
+  const isLoading = isCreated || isUpdated || isPending;
+
   return (
     <PopuupLayout
       openKey={openKey}
@@ -207,7 +209,7 @@ export function WorkSiteFormModel({
                 {t("workSites.btn-cancel")}
               </Button>
             </Model.Close>
-            <Button type="submit" disabled={isCreated || isUpdated || isPending}>
+            <Button type="submit" disabled={isLoading} isLoading={isLoading}>
               {isCreated || isUpdated
                 ? t("common.loading", "Saving...")
                 : initial

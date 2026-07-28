@@ -9,13 +9,12 @@ import {
   ReceiptText,
   ShoppingCart,
 } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { StatusBadge } from "./StatusBadge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/config/paths";
 import { useResourceStatistics } from "@/features/resource-providor/site-resources/api/queries";
-import useExchangeState from "@/hooks/useExchangeState";
 interface StatItem {
   label: string;
   value: number | string;
@@ -26,18 +25,12 @@ export default function ResourceHeader() {
   const { siteId } = useParams();
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language == "ar";
+  const [searchParams] = useSearchParams();
+  const siteName = searchParams.get("siteName") ?? "";
+  const address = searchParams.get("address") ?? "";
+  const status = searchParams.get("status") ?? "";
+  const manager = searchParams.get("manager") ?? "";
   const { data, isLoading } = useResourceStatistics();
-  const {
-    siteName = "",
-    address = "",
-    status = "",
-    manager = "",
-  } = useExchangeState<{
-    siteName: string;
-    address: string;
-    status: string;
-    manager: string;
-  }>();
 
   const stats: StatItem[] = [
     {
@@ -92,7 +85,7 @@ export default function ResourceHeader() {
           >
             <div className="flex items-center gap-3">
               <div className="bg-white rounded-full">
-                <StatusBadge status={status ? "active" : "on-hold"} />
+                <StatusBadge status={status || "on-hold"} />
               </div>
               <span className="text-sm text-primary-foreground">
                 {t("workSites.label-manager")} ·{" "}

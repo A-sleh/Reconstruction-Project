@@ -101,14 +101,13 @@ export function SiteCard({ site, index }: Props) {
 
       <button
         onClick={() => {
-          goto(paths.app.resourceProvidor.workSite.getHref(site.id), {
-            state: {
-              siteName: site?.name,
-              address: site?.address,
-              status: site?.status || "active",
-              manager: `${firstName} ${lastName}`,
-            },
+          const params = new URLSearchParams({
+            siteName: site?.name ?? "",
+            address: site?.address ?? "",
+            status: site?.status || "active",
+            manager: `${firstName} ${lastName}`,
           });
+          goto(`${paths.app.resourceProvidor.workSite.getHref(site.id)}?${params.toString()}`);
         }}
         className="block h-full w-full rounded-xl p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
       >
