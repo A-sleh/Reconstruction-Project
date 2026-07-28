@@ -5,7 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useParams } from "react-router";
-import { useRWorkSiteResourcesInfinite, useBankCategories } from "@/features/category-bank/api/quertes";
+import {
+  useRWorkSiteResourcesInfinite,
+  useBankCategories,
+} from "@/features/category-bank/api/quertes";
 import {
   Table,
   TableHeader,
@@ -50,7 +53,9 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
   const isArabic = i18n.language == "ar";
   const [categoryId, setCategoryId] = useState<number | "all">("all");
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState<"all" | "active" | "hold">("all");
+  const [statusFilter, setStatusFilter] = useState<"all" | "active" | "hold">(
+    "all",
+  );
 
   const { data: categoriesData } = useBankCategories();
   const categories = useMemo(
@@ -86,80 +91,88 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
   return (
     <div className="space-y-4">
       {/* Header with Search and Filter */}
-      <CollapsibleFilter
-        trigger={
-          <span className="flex items-center gap-2 text-sm font-medium text-foreground">
-            <Filter className="h-4 w-4" />
-            {t("workSites.resource.filters", "Filters")}
-          </span>
-        }
-      >
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
-          <div
-            className="relative w-full md:w-90 rounded-lg bg-white"
-            dir={isArabic ? "rtl" : "ltr"}
-          >
-            <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder={t(
-                "workSites.resource.search-placeholder",
-              )}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="pr-9 w-full bg-transparent"
-            />
-          </div>
-          <Select
-            value={categoryId === "all" ? "all" : String(categoryId)}
-            onValueChange={(value) =>
-              setCategoryId(value === "all" ? "all" : Number(value))
-            }
-          >
-            <SelectTrigger className="w-full md:w-fit" dir={isArabic ? "rtl" : "ltr"}>
-              <SelectValue
-                placeholder={t(
-                  "workSites.resource.filterByCategory",
-                  "Filter by category",
-                )}
-              />
-            </SelectTrigger>
-            <SelectContent dir={isArabic ? "rtl" : "ltr"}>
-              <SelectItem value="all">
-                {t("workSites.resource.allCategories", "All Categories")}
-              </SelectItem>
-              {categories.map((category) => (
-                <SelectItem key={category.id} value={String(category.id)}>
-                  {category.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select
-            value={statusFilter}
-            onValueChange={(v) => setStatusFilter(v as "all" | "active" | "hold")}
-          >
-            <SelectTrigger className="w-full md:w-fit" dir={isArabic ? "rtl" : "ltr"}>
-              <SelectValue
-                placeholder={t(
-                  "workSites.resource.filterByStatus",
-                  "Filter by status",
-                )}
-              />
-            </SelectTrigger>
-            <SelectContent dir={isArabic ? "rtl" : "ltr"}>
-              <SelectItem value="all">
-                {t("workSites.resource.allStatuses", "All Statuses")}
-              </SelectItem>
-              <SelectItem value="active">
-                {t("workSites.resource.active", "Active")}
-              </SelectItem>
-              <SelectItem value="hold">
-                {t("workSites.resource.onHold", "On Hold")}
-              </SelectItem>
-            </SelectContent>
-          </Select>
+      <div className="flex gap-2">
+        <div
+          className="relative w-full md:w-90 rounded-lg bg-white"
+          dir={isArabic ? "rtl" : "ltr"}
+        >
+          <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder={t("workSites.resource.search-placeholder")}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pr-9 w-full bg-transparent"
+          />
         </div>
-      </CollapsibleFilter>
+        <CollapsibleFilter
+          trigger={
+            <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+              <Filter className="h-4 w-4" />
+              {t("workSites.resource.filters", "Filters")}
+            </span>
+          }
+        >
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
+            <Select
+              value={categoryId === "all" ? "all" : String(categoryId)}
+              onValueChange={(value) =>
+                setCategoryId(value === "all" ? "all" : Number(value))
+              }
+            >
+              <SelectTrigger
+                className="w-full md:w-fit"
+                dir={isArabic ? "rtl" : "ltr"}
+              >
+                <SelectValue
+                  placeholder={t(
+                    "workSites.resource.filterByCategory",
+                    "Filter by category",
+                  )}
+                />
+              </SelectTrigger>
+              <SelectContent dir={isArabic ? "rtl" : "ltr"}>
+                <SelectItem value="all">
+                  {t("workSites.resource.allCategories", "All Categories")}
+                </SelectItem>
+                {categories.map((category) => (
+                  <SelectItem key={category.id} value={String(category.id)}>
+                    {category.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select
+              value={statusFilter}
+              onValueChange={(v) =>
+                setStatusFilter(v as "all" | "active" | "hold")
+              }
+            >
+              <SelectTrigger
+                className="w-full md:w-fit"
+                dir={isArabic ? "rtl" : "ltr"}
+              >
+                <SelectValue
+                  placeholder={t(
+                    "workSites.resource.filterByStatus",
+                    "Filter by status",
+                  )}
+                />
+              </SelectTrigger>
+              <SelectContent dir={isArabic ? "rtl" : "ltr"}>
+                <SelectItem value="all">
+                  {t("workSites.resource.allStatuses", "All Statuses")}
+                </SelectItem>
+                <SelectItem value="active">
+                  {t("workSites.resource.active", "Active")}
+                </SelectItem>
+                <SelectItem value="hold">
+                  {t("workSites.resource.onHold", "On Hold")}
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CollapsibleFilter>
+      </div>
 
       {items.length === 0 && !isPending ? (
         <div className="rounded-2xl border border-dashed border-border py-16 text-center text-muted-foreground bg-white">
@@ -307,10 +320,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                                   className="flex items-center gap-2"
                                 >
                                   <Pencil className="h-4 w-4" />
-                                  {t(
-                                    "workSites.btn-edit",
-                                    "Edit",
-                                  )}
+                                  {t("workSites.btn-edit", "Edit")}
                                 </DropdownMenuItem>
                               }
                               initial={resource}
@@ -333,10 +343,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                                   className="flex items-center gap-2 text-destructive focus:text-destructive"
                                 >
                                   <Trash2 className="h-4 w-4" />
-                                  {t(
-                                    "workSites.btn-delete",
-                                    "Delete",
-                                  )}
+                                  {t("workSites.btn-delete", "Delete")}
                                 </DropdownMenuItem>
                               }
                             />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
@@ -19,13 +19,27 @@ export default function CollapsibleFilter({
   const { i18n } = useTranslation();
   const isArabic = i18n.language == "ar";
   const [isOpen, setIsOpen] = useState(defaultOpen);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
 
   return (
-    <div className={cn("w-fit relative", className)}>
+    <div ref={containerRef} className={cn("w-fit relative", className)}>
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between gap-2 rounded-lg border border-gray-300  bg-white px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-gray-50"
+        className="flex w-full items-center justify-between gap-2 rounded-md border border-gray-300  bg-white px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-gray-50"
       >
         <span className="flex items-center gap-2">{trigger}</span>
         <ChevronDown
