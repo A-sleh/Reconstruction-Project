@@ -118,11 +118,11 @@ export function NewResourceForm({
       exit={{ opacity: 0, scale: 0.95, y: 20 }}
       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
       onClick={(e) => e.stopPropagation()}
-      className="w-full  rounded-xl border border-gray-300 bg-white overflow-hidden flex-1"
+      className="w-full  overflow-hidden flex-1"
     >
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
-        className="space-y-5 p-6 overflow-auto max-h-130 relative w-full"
+        className="space-y-5 p-2 overflow-auto max-h-130 relative w-full"
         style={{ scrollbarWidth: "none" }}
       >
         {/* resource description  */}
@@ -213,7 +213,7 @@ export function NewResourceForm({
             )}
           </Button>
 
-          <Button isLoading={resouceIsUpdated} type="submit">
+          <Button isLoading={resouceIsUpdated || isPending} disabled={isPending || resouceIsUpdated} type="submit">
             {initial
               ? t("workSites.btn-save")
               : t("workSites.resource.btn-create")}

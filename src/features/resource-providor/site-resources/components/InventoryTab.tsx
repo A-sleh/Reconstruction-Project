@@ -281,9 +281,9 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                         </span>
                       </TableCell>
                       <TableCell className="p-3">
-                          <StatusBadge
-                            status={resource.isAvailable ? "active" : "on-hold"}
-                          />
+                        <StatusBadge
+                          status={resource.isAvailable ? "active" : "on-hold"}
+                        />
                       </TableCell>
                       <TableCell className="p-3">
                         <p className="font-semibold text-primary tabular-nums">
@@ -296,7 +296,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                         </p>
                       </TableCell>
                       <TableCell className="p-3 text-center">
-                        <DropdownMenu>
+                        <DropdownMenu modal={false}>
                           <DropdownMenuTrigger asChild>
                             <Button
                               variant="ghost"

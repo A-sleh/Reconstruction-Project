@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Trash2 } from "lucide-react";
+import { ArrowLeft, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NewResourceForm } from "@/features/resource-providor/site-resources/components/NewResourceForm";
 import {
@@ -21,7 +21,7 @@ const AddWorkSiteResources = () => {
 
   const [resources, setResources] = useState<LocalResource[]>([]);
   const [selected, setSelected] = useState<LocalResource | null>(null);
-  console.log(resources)
+  console.log(resources);
 
   const selectedResource = useMemo(
     () => resources.find((resource) => resource.id === selected?.id) ?? null,
@@ -88,6 +88,15 @@ const AddWorkSiteResources = () => {
         dir={isArabic ? "rtl" : "ltr"}
       >
         <div>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="mb-3 text-white hover:bg-white/20 gap-1.5 -ms-2"
+            onClick={() => navigate(-1)}
+          >
+            <ArrowLeft className="h-4 w-4" />
+            {t("investor.back")}
+          </Button>
           <h1 className="text-2xl font-semibold mb-2">
             {t("workSites.add-resource-heading")}
           </h1>
@@ -97,14 +106,11 @@ const AddWorkSiteResources = () => {
         </div>
         <div className="flex flex-wrap gap-2">
           <Button
-            variant="secondary"
+            variant="accent"
             onClick={handleClearSelection}
             disabled={!selected?.id}
           >
-            {t(
-              "workSites.resource.add-another",
-              "Add another",
-            )}
+            {t("workSites.resource.add-another", "Add another")}
           </Button>
           <Button
             variant="default"
@@ -166,7 +172,9 @@ const AddWorkSiteResources = () => {
                       <div className="min-w-0 flex flex-col items-start">
                         <p className="flex flex-col font-semibold truncate items-start">
                           {resource.resourceBank.name}
-                          <span className="text-[10px] text-gray-600 p-1 px-2 rounded-full bg-gray-600/20">{resource.resourceBank.category.name}</span>
+                          <span className="text-[10px] text-gray-600 p-1 px-2 rounded-full bg-gray-600/20">
+                            {resource.resourceBank.category.name}
+                          </span>
                         </p>
                         <p className="font-semibold text-gray-500 text-sm w-60 truncate">
                           {resource.description}
@@ -174,10 +182,8 @@ const AddWorkSiteResources = () => {
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-sm text-muted-foreground whitespace-nowrap">
-                          {t(
-                            "workSites.resource.card.price_per_unit",
-                          )}
-                          : {resource.price.toFixed(2)} {resource.unit}
+                          {t("workSites.resource.card.price_per_unit")}:{" "}
+                          {resource.price.toFixed(2)} {resource.unit}
                         </span>
                       </div>
                     </div>
@@ -202,7 +208,7 @@ const AddWorkSiteResources = () => {
           </div>
         </aside>
 
-        <div className="w-[70%] ">
+        <div className="w-[70%] bg-white p-6 rounded-xl">
           <NewResourceForm
             key={selectedResource?.id ?? "new-resource-form"}
             initial={selectedResource}
