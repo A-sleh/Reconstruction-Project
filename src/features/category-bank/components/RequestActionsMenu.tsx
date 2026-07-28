@@ -51,7 +51,7 @@ export default function RequestActionsMenu({
   if(isProcessing) return <Loader2 />
 
   return (
-    <DropdownMenu dir={isArabic ? "rtl" : "ltr"}>
+    <DropdownMenu modal={false} dir={isArabic ? "rtl" : "ltr"}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"

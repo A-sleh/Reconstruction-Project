@@ -148,7 +148,7 @@ export function DynamicAsyncSelector({
       </PopoverTrigger>
 
       <PopoverContent
-        className="w-108 p-0 bg-white border-gray-300 overflow-hidden"
+        className="w-108 p-0 bg-white border-gray-300 overflow-hidden z-100"
         align="start"
         dir="rtl"
       >
