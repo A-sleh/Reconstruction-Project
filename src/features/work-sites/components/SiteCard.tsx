@@ -54,7 +54,7 @@ export function SiteCard({ site, index }: Props) {
           openButton={
             <Button
               size="icon"
-              className="h-8 w-8 rounded-full shadow-md"
+              className="h-8 w-8 rounded-full shadow-md hover:bg-blue-400"
               onClick={(e) => {
                 e.preventDefault();
               }}
@@ -67,7 +67,8 @@ export function SiteCard({ site, index }: Props) {
         />
         <Button
           size="icon"
-          className="h-8 w-8 rounded-full shadow-md hover:bg-secondary hover:text-secondary-foreground"
+          isLoading={isPending}
+          className="h-8 w-8 rounded-full shadow-md hover:bg-green-400 hover:text-secondary-foreground"
           onClick={(e) => {
             e.preventDefault();
             deactivateWorkSite({

@@ -126,7 +126,7 @@ export function WorkSiteFormModel({
       children={(close: () => void) => (
         <form
           onSubmit={handleSubmit((data) => onSubmit(data, close))}
-          className="space-y-5 p-6 overflow-auto max-h-130"
+          className="space-y-5 overflow-auto max-h-130"
           style={{ scrollbarWidth: "none" }}
         >
           {/* Site Name Field */}
