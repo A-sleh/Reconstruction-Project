@@ -10,11 +10,11 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import { StatusBadge } from "./StatusBadge";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/config/paths";
 import { useResourceStatistics } from "@/features/resource-providor/site-resources/api/queries";
+import { StatusBadge } from "@/features/work-sites/components/StatusBadge";
 interface StatItem {
   label: string;
   value: number | string;

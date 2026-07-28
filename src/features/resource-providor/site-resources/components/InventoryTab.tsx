@@ -37,6 +37,7 @@ import ModifyResourceModel from "./ModifyResourceModel";
 import CollapsibleFilter from "@/components/common/CollapsibleFilter";
 import { PureResource } from "@/features/category-bank/api/types";
 import { useDeleteWorksiteItem } from "../api/actions";
+import { StatusBadge } from "@/features/work-sites/components/StatusBadge";
 
 interface InventoryTabProps {
   siteId?: string;
@@ -280,15 +281,9 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                         </span>
                       </TableCell>
                       <TableCell className="p-3">
-                        <span
-                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            resource.isAvailable
-                              ? "bg-green-100 text-green-700"
-                              : "bg-amber-100 text-amber-700"
-                          }`}
-                        >
-                          {resource.isAvailable ? "Active" : "On Hold"}
-                        </span>
+                          <StatusBadge
+                            status={resource.isAvailable ? "active" : "on-hold"}
+                          />
                       </TableCell>
                       <TableCell className="p-3">
                         <p className="font-semibold text-primary tabular-nums">
