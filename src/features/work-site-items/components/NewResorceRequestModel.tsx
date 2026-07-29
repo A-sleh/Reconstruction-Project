@@ -10,6 +10,11 @@ import { useBankCategories } from "@/features/category-bank/api/quertes";
 import { successToast, errorToast } from "@/components/common/Toast";
 import Input from "@/components/inputs/Input";
 import Selector from "@/components/inputs/Selector";
+import useAuthStore, { User } from "@/stores/useAuthStore";
+
+export function getRolePrefix(role: string) {
+  return role === "Service" ? "workSiteItems.serviceProvidor" : "workSiteItems.resourceProvidor";
+}
 
 interface NewResorceRequestModelProps {
   openButton: React.ReactNode;
@@ -19,6 +24,8 @@ export function NewResorceRequestModel({
   openButton,
 }: NewResorceRequestModelProps) {
   const { t } = useTranslation();
+  const providerRole = useAuthStore((s) => (s.user as User)?.providerRole) ?? "Resource";
+  const rolePrefix = getRolePrefix(providerRole);
   const { mutate: addRequest, isPending } = useAddBankItemRequest();
   const { data: categoriesData, isLoading: categoriesLoading } =
     useBankCategories();
@@ -45,7 +52,7 @@ export function NewResorceRequestModel({
       {
         onSuccess: () => {
           successToast(
-            t("workSites.orders.request-modal.success"),
+            t(`${rolePrefix}.requestModal.success`),
           );
           setItemName("");
           setDescription("");
@@ -58,7 +65,7 @@ export function NewResorceRequestModel({
             error?.response?.data?.message || error?.message;
           errorToast(
             serverMessage ||
-              t("workSites.orders.request-modal.error"),
+              t(`${rolePrefix}.requestModal.error`),
           );
         },
       },
@@ -73,12 +80,10 @@ export function NewResorceRequestModel({
           <div className="flex justify-between items-start mb-5">
             <div>
               <h2 className="text-xl font-semibold text-gray-900">
-                {t("workSites.orders.request-modal.title")}
+                {t(`${rolePrefix}.requestModal.title`)}
               </h2>
               <p className="text-sm text-gray-500 mt-0.5">
-                {t(
-                  "workSites.orders.request-modal.description",
-                )}
+                {t(`${rolePrefix}.requestModal.description`)}
               </p>
             </div>
             <Model.Close>
@@ -96,15 +101,11 @@ export function NewResorceRequestModel({
             {/* Item Name */}
             <div className="space-y-1.5">
               <Input
-                label={t(
-                  "workSites.orders.request-modal.item_name",
-                )}
+                label={t(`${rolePrefix}.requestModal.item_name`)}
                 id="item-name"
                 value={itemName}
                 onChange={(e) => setItemName(e.target.value)}
-                placeholder={t(
-                  "workSites.orders.request-modal.item_name_placeholder",
-                )}
+                placeholder={t(`${rolePrefix}.requestModal.item_name_placeholder`)}
                 className="border-gray-200"
               />
             </div>
@@ -115,17 +116,13 @@ export function NewResorceRequestModel({
                 htmlFor="item-description"
                 className="text-sm font-medium text-gray-700"
               >
-                {t(
-                  "workSites.orders.request-modal.item_description",
-                )}
+                {t(`${rolePrefix}.requestModal.item_description`)}
               </Label>
               <Textarea
                 id="item-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder={t(
-                  "workSites.orders.request-modal.item_description_placeholder",
-                )}
+                placeholder={t(`${rolePrefix}.requestModal.item_description_placeholder`)}
                 rows={3}
                 className="border-gray-200 resize-none"
               />
@@ -133,16 +130,12 @@ export function NewResorceRequestModel({
 
             {/* Category */}
             <Selector
-              label={t(
-                "workSites.orders.request-modal.category",
-              )}
+              label={t(`${rolePrefix}.requestModal.category`)}
               value={categoryId}
               setValue={(value) => setCategoryId(value ? Number(value) : "")}
             >
               <option value="">
-                {t(
-                  "workSites.orders.request-modal.category_placeholder",
-                )}
+                {t(`${rolePrefix}.requestModal.category_placeholder`)}
               </option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
@@ -157,15 +150,13 @@ export function NewResorceRequestModel({
                 htmlFor="note"
                 className="text-sm font-medium text-gray-700"
               >
-                {t("workSites.orders.request-modal.note")}
+                {t(`${rolePrefix}.requestModal.note`)}
               </Label>
               <Textarea
                 id="note"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                placeholder={t(
-                  "workSites.orders.request-modal.note_placeholder",
-                )}
+                placeholder={t(`${rolePrefix}.requestModal.note_placeholder`)}
                 rows={2}
                 className="border-gray-200 resize-none"
               />
@@ -180,9 +171,7 @@ export function NewResorceRequestModel({
                 variant="ghost"
                 className="text-gray-600 hover:text-gray-900"
               >
-                {t(
-                  "resourceProvidor.investor-request.cancel-modal.actions.cancel",
-                )}
+                {t("workSites.btn-cancel")}
               </Button>
             </Model.Close>
             <Button
@@ -192,7 +181,7 @@ export function NewResorceRequestModel({
               onClick={handleSubmit}
               className="bg-primary text-white hover:opacity-90"
             >
-              {t("workSites.orders.request-modal.submit")}
+              {t(`${rolePrefix}.requestModal.submit`)}
             </Button>
           </div>
         </div>

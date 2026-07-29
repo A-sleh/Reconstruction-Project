@@ -1,10 +1,62 @@
 {
   "workSiteItems": {
     "resourceProvidor": {
-      "add-new": "Add New Resource"
+      "add-new": "Add New Resource",
+      "requestModal": {
+        "title": "Request New Resource",
+        "description": "Submit a new resource item to the bank for admin approval.",
+        "item_name": "Item Name",
+        "item_name_placeholder": "e.g. Steel Beam Type A",
+        "item_description": "Description",
+        "item_description_placeholder": "Describe the resource item...",
+        "category": "Category",
+        "category_placeholder": "Select a category",
+        "note": "Note",
+        "note_placeholder": "Any additional notes for the admin...",
+        "submit": "Submit Request",
+        "success": "Resource request submitted successfully",
+        "error": "Failed to submit resource request"
+      },
+      "form": {
+        "label-description": "Description",
+        "placeholder-description": "Specs, grade, intended use...",
+        "label-unit-type": "Unit Type",
+        "label-price-per-unit": "Price per Unit ($)",
+        "isAvailable-label": "Is available",
+        "label-image": "Image URL",
+        "btn-generate-mock-data": "Generate mock data",
+        "btn-save": "Save Changes",
+        "btn-create": "Create Resource"
+      }
     },
     "serviceProvidor": {
-      "add-new": "Add New Service"
+      "add-new": "Add New Service",
+      "requestModal": {
+        "title": "Request New Service",
+        "description": "Submit a new service item to the bank for admin approval.",
+        "item_name": "Service Name",
+        "item_name_placeholder": "e.g. Electrical Maintenance",
+        "item_description": "Description",
+        "item_description_placeholder": "Describe the service...",
+        "category": "Category",
+        "category_placeholder": "Select a category",
+        "note": "Note",
+        "note_placeholder": "Any additional notes for the admin...",
+        "submit": "Submit Request",
+        "success": "Service request submitted successfully",
+        "error": "Failed to submit service request"
+      },
+      "form": {
+        "label-description": "Service Description",
+        "placeholder-description": "Service details, scope, specifications...",
+        "label-unit-type": "Unit Type",
+        "label-price-per-unit": "Price per Unit ($)",
+        "isAvailable-label": "Is available",
+        "label-image": "Service Image",
+        "btn-generate-mock-data": "Generate mock data",
+        "btn-save": "Save Changes",
+        "btn-create": "Create Service"
+      }
     }
   }
 }

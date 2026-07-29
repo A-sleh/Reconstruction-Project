@@ -1,10 +1,62 @@
 {
   "workSiteItems": {
     "resourceProvidor": {
-      "add-new": "إضافة مورد جديد"
+      "add-new": "إضافة مورد جديد",
+      "requestModal": {
+        "title": "طلب مورد جديد",
+        "description": "قم بإرسال عنصر مورد جديد إلى البنك للموافقة عليه من الإدارة.",
+        "item_name": "اسم العنصر",
+        "item_name_placeholder": "مثال: حديد تمديد نوع أ",
+        "item_description": "الوصف",
+        "item_description_placeholder": "صف عنصر المورد...",
+        "category": "الفئة",
+        "category_placeholder": "اختر فئة",
+        "note": "ملاحظة",
+        "note_placeholder": "أي ملاحظات إضافية للمدير...",
+        "submit": "إرسال الطلب",
+        "success": "تم إرسال طلب المورد بنجاح",
+        "error": "فشل في إرسال طلب المورد"
+      },
+      "form": {
+        "label-description": "الوصف",
+        "placeholder-description": "المواصفات والدرجة والاستخدام المقصود...",
+        "label-unit-type": "نوع الوحدة",
+        "label-price-per-unit": "السعر للوحدة ($)",
+        "isAvailable-label": "متاح",
+        "label-image": "رابط الصورة",
+        "btn-generate-mock-data": "توليد بيانات تجريبية",
+        "btn-save": "حفظ التغييرات",
+        "btn-create": "إنشاء مورد"
+      }
     },
     "serviceProvidor": {
-      "add-new": "إضافة خدمة جديدة"
+      "add-new": "إضافة خدمة جديدة",
+      "requestModal": {
+        "title": "طلب خدمة جديدة",
+        "description": "قم بإرسال عنصر خدمة جديد إلى البنك للموافقة عليه من الإدارة.",
+        "item_name": "اسم الخدمة",
+        "item_name_placeholder": "مثال: صيانة كهربائية",
+        "item_description": "الوصف",
+        "item_description_placeholder": "صف الخدمة...",
+        "category": "الفئة",
+        "category_placeholder": "اختر فئة",
+        "note": "ملاحظة",
+        "note_placeholder": "أي ملاحظات إضافية للمدير...",
+        "submit": "إرسال الطلب",
+        "success": "تم إرسال طلب الخدمة بنجاح",
+        "error": "فشل في إرسال طلب الخدمة"
+      },
+      "form": {
+        "label-description": "وصف الخدمة",
+        "placeholder-description": "تفاصيل الخدمة والنطاق والمواصفات...",
+        "label-unit-type": "نوع الوحدة",
+        "label-price-per-unit": "السعر للوحدة ($)",
+        "isAvailable-label": "متاح",
+        "label-image": "صورة الخدمة",
+        "btn-generate-mock-data": "توليد بيانات تجريبية",
+        "btn-save": "حفظ التغييرات",
+        "btn-create": "إنشاء خدمة"
+      }
     }
   }
 }

@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UnitType } from "@/data/resource-providor/mockData";
 import { useTranslation } from "react-i18next";
+import { useAuthStore, User } from "@/stores/useAuthStore";
 import {
   defaultResourceValues,
   generateMockResourceValues,
@@ -21,6 +22,7 @@ import { unitTypes } from "../api/types";
 import { DynamicAsyncSelector } from "./SmartDataGrid";
 import { Switch } from "@/components/ui/switch";
 import { useFileUpload } from "@/hooks/useFileUpload";
+import { getRolePrefix } from "./NewResorceRequestModel";
 
 interface Props {
   openButton?: React.ReactNode;
@@ -39,6 +41,9 @@ export function NewResourceForm({
   fromWorkSiteId,
 }: Props) {
   const { t } = useTranslation();
+  const providerRole =
+    useAuthStore((s) => (s.user as User)?.providerRole) ?? "Resource";
+  const rolePrefix = getRolePrefix(providerRole);
   const { mutate: updateResource, isPending: resouceIsUpdated } =
     useUpdateResource();
 
@@ -128,12 +133,12 @@ export function NewResourceForm({
         {/* resource description  */}
         <div className="space-y-4">
           <Textarea
-            label={t("workSites.resource.label-description")}
-            placeholder={t("workSites.resource.placeholder-description")}
+            label={t(`${rolePrefix}.label-description`)}
+            placeholder={t(`${rolePrefix}.placeholder-description`)}
             rows={3}
             fieldName="description"
             errors={errors}
-            {...register("description")}
+            {...register(`description`)}
           />
         </div>
 
@@ -152,7 +157,7 @@ export function NewResourceForm({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2 flex-1">
             <Select
-              label={t("workSites.resource.label-unit-type")}
+              label={t(`${rolePrefix}.label-unit-type`)}
               fieldName="unit"
               errors={errors}
               value={unitType}
@@ -166,7 +171,7 @@ export function NewResourceForm({
             </Select>
           </div>
           <Input
-            label={t("workSites.resource.label-price-per-unit")}
+            label={t(`${rolePrefix}.label-price-per-unit`)}
             id="price"
             type="number"
             min={0}
@@ -174,11 +179,11 @@ export function NewResourceForm({
             fieldName="price"
             className="flex-1"
             errors={errors}
-            {...register("price")}
+            {...register(`price`)}
           />
           <div className="space-y-2 flex flex-col gap-2">
             <label className={`text-sm`}>
-              {t("workSites.resource.isAvailable-label")}
+              {t(`${rolePrefix}.isAvailable-label`)}
             </label>
             <Switch
               checked={isAvailable as boolean}
@@ -190,7 +195,7 @@ export function NewResourceForm({
         </div>
 
         <ImageUploader
-          label={t("workSites.resource.label-image")}
+          label={t(`${rolePrefix}.label-image`)}
           required={true}
           fileName={"imageUrl"}
           value={previewUrl || localImageFile || image}
@@ -207,16 +212,17 @@ export function NewResourceForm({
             variant="secondary"
             onClick={handleGenerateMockData}
           >
-            {t(
-              "workSites.resource.btn-generate-mock-data",
-              "Generate mock data",
-            )}
+            {t(`${rolePrefix}.btn-generate-mock-data`)}
           </Button>
 
-          <Button isLoading={resouceIsUpdated || isPending} disabled={isPending || resouceIsUpdated} type="submit">
+          <Button
+            isLoading={resouceIsUpdated || isPending}
+            disabled={isPending || resouceIsUpdated}
+            type="submit"
+          >
             {initial
-              ? t("workSites.btn-save")
-              : t("workSites.resource.btn-create")}
+              ? t(`${rolePrefix}.btn-save`)
+              : t(`${rolePrefix}.btn-create`)}
           </Button>
         </div>
       </form>
