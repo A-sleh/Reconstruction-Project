@@ -9,9 +9,7 @@ import {
   RiListUnordered,
 } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
-import {
-  MdOutlineConstruction,
-} from "react-icons/md";
+import { MdOutlineConstruction } from "react-icons/md";
 import { FiBarChart2 } from "react-icons/fi";
 
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
@@ -23,11 +21,15 @@ import Avatar from "./Avatar";
 import { useCan } from "@/hooks/useCan";
 import { Permissions } from "@/lib/permissions";
 import type { Permission } from "@/lib/permissions";
+import useAuthStore from "@/stores/useAuthStore";
 
 const Navbar = () => {
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
   const can = useCan();
+
+  const user = useAuthStore((s) => s.user);
+  const isResourceProvidor = user?.providerRole == "Resource";
 
   const links: Array<{
     label: string;
@@ -37,7 +39,9 @@ const Navbar = () => {
   }> = [
     {
       label: t("navbar.workSites"),
-      href: paths.app.resourceProvidor.workSites.path,
+      href: isResourceProvidor
+        ? paths.app.resourceProvidor.workSites.path
+        : paths.app.serviceProvidor.workSites.path,
       icon: <MdOutlineConstruction size={18} />,
       permission: Permissions.WORK_SITES_VIEW,
     },
@@ -76,7 +80,7 @@ const Navbar = () => {
       href: paths.app.investor.propertyVerfication.path,
       icon: <RiListUnordered size={18} />,
       permission: Permissions.PROPERTY_LIST,
-    }
+    },
   ];
 
   const sharedLink: Array<{ label: string; href: string; icon: ReactNode }> = [

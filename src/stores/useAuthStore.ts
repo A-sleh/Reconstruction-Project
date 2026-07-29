@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import type { Role } from "@/types";
+import type { ProviderRole, Role } from "@/types";
 import type { Permission } from "@/lib/permissions";
 import { ROLE_PERMISSIONS } from "@/lib/permissions";
 
@@ -18,6 +18,7 @@ export interface User {
   lastName: string;
   photoURL: string;
   role: Role;
+  providerRole: ProviderRole;
 }
 
 export interface AuthState {
@@ -41,7 +42,7 @@ export const getAuth = (): null | AuthState => {
 };
 
 export const updateAccessToken = (newAccessToken: string) => {
-  const accessToken = getAccessToken()
+  const accessToken = getAccessToken();
 
   if (accessToken) {
     const newValue = { ...accessToken, state: { accessToken: newAccessToken } };
