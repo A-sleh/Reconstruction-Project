@@ -2,16 +2,9 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import Input from "@/components/inputs/Input";
-import { Label } from "@/components/ui/Label";
 import PopuupLayout from "@/components/layouts/Popup-layout";
 
-import { DynamicAsyncSelector } from "@/features/resource-providor/site-resources/components/SmartDataGrid";
-
-interface BankItem {
-  id: number;
-  name: string;
-  description?: string;
-}
+import { DynamicAsyncSelector } from "@/features/site-resources/components/SmartDataGrid";
 
 interface ResolveRequestModalProps {
   requestId: number | null;

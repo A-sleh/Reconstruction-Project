@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ResourceHeader from "@/features/resource-providor/site-resources/components/ResourceHeader";
-import InventoryTab from "@/features/resource-providor/site-resources/components/InventoryTab";
+import ResourceHeader from "@/features/site-resources/components/ResourceHeader";
+import InventoryTab from "@/features/site-resources/components/InventoryTab";
 import BankItemsRequests from "@/features/category-bank/components/BankItemsRequests";
 
 const WorkSiteDetails = () => {

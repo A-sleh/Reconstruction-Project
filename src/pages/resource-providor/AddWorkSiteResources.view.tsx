@@ -3,11 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { NewResourceForm } from "@/features/resource-providor/site-resources/components/NewResourceForm";
+import { NewResourceForm } from "@/features/site-resources/components/NewResourceForm";
 import {
   Resource,
   useCreateResource,
-} from "@/features/resource-providor/site-resources/api/actions";
+} from "@/features/site-resources/api/actions";
 import { paths } from "@/config/paths";
 import { motion } from "motion/react";
 
