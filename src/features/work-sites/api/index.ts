@@ -1,5 +1,16 @@
 import { SiteStatus } from "./types";
 
+const BASE_CONTROLLER = "worksite";
+
+export enum SiteController {
+  WorkSites = `${BASE_CONTROLLER}/get-all`,
+  WorkSiteCreate = `${BASE_CONTROLLER}/create`,
+  WorkSiteUpdate = `${BASE_CONTROLLER}/update`,
+  WorkSiteDelete = `${BASE_CONTROLLER}/delete`,
+  deactivateWorkSite = `${BASE_CONTROLLER}/deactivate`,
+  WorkSitesStatistics = `${BASE_CONTROLLER}/get-summary-cards`,
+}
+
 export const QUERY_KEYS = {
   resourceProvidor: ["resourceProvidor"],
   workSites: (filter?: string) => [

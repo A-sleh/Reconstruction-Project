@@ -3,24 +3,18 @@ import i18n from "i18next";
 import ApiInstance from "@/config/api-instance";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { successToast, errorToast } from "@/components/common/Toast";
-import { QUERY_KEYS, MUTATION_KEYS } from "./index";
-import { WorkSite, SiteController, DeactivateWorkSite } from "./types";
+import { SiteController, QUERY_KEYS, MUTATION_KEYS } from "./index";
+import { WorkSite, DeactivateWorkSite } from "./types";
 import { workSiteTypes } from "@/features/work-sites/components/WorkSiteType";
 
 // Define the validation schema with dynamic translation messages inside the component
 export const siteFormSchema = z.object({
-  name: z
-    .string()
-    .min(1, i18n.t("workSites.validation-name-req"))
-    .trim(),
+  name: z.string().min(1, i18n.t("workSites.validation-name-req")).trim(),
   location: z
     .string()
     .min(1, i18n.t("workSites.validation-location-req"))
     .trim(),
-  address: z
-    .string()
-    .min(1, i18n.t("workSites.validation-address-req"))
-    .trim(),
+  address: z.string().min(1, i18n.t("workSites.validation-address-req")).trim(),
   workSiteType: z.string(),
   logoId: z.string().optional(),
   logoURL: z.string().optional(),
@@ -103,10 +97,7 @@ export const useDeactivateWorkSite = () => {
       const serverMessage = error?.response?.data?.message || error?.message;
       const message =
         serverMessage ||
-        i18n.t(
-          "workSites.update-error",
-          "Failed to update site",
-        );
+        i18n.t("workSites.update-error", "Failed to update site");
       errorToast(message);
     },
   });
@@ -119,9 +110,7 @@ export const useUpdateWorkSite = () => {
     mutationFn: (site: WorkSite) => updateWorkSiteApi(site),
     mutationKey: MUTATION_KEYS.workSites.update(),
     onSuccess: (_: any) => {
-      successToast(
-        i18n.t("workSites.site-updated", "Site updated"),
-      );
+      successToast(i18n.t("workSites.site-updated", "Site updated"));
       try {
         //@ts-ignore
         queryClient.invalidateQueries(QUERY_KEYS.workSites);
@@ -131,10 +120,7 @@ export const useUpdateWorkSite = () => {
       const serverMessage = error?.response?.data?.message || error?.message;
       const message =
         serverMessage ||
-        i18n.t(
-          "workSites.update-error",
-          "Failed to update site",
-        );
+        i18n.t("workSites.update-error", "Failed to update site");
       errorToast(message);
     },
   });
@@ -147,9 +133,7 @@ export const useDeleteWorkSite = () => {
     mutationFn: (id: string | number) => deleteWorkSiteApi(id),
     mutationKey: MUTATION_KEYS.workSites.delete(),
     onSuccess: () => {
-      successToast(
-        i18n.t("workSites.site-deleted", "Site deleted"),
-      );
+      successToast(i18n.t("workSites.site-deleted", "Site deleted"));
       try {
         //@ts-ignore
         queryClient.invalidateQueries(QUERY_KEYS.workSites);
@@ -159,10 +143,7 @@ export const useDeleteWorkSite = () => {
       const serverMessage = error?.response?.data?.message || error?.message;
       const message =
         serverMessage ||
-        i18n.t(
-          "workSites.delete-error",
-          "Failed to delete site",
-        );
+        i18n.t("workSites.delete-error", "Failed to delete site");
       errorToast(message);
     },
   });
@@ -175,9 +156,7 @@ export const useCreateWorkSite = () => {
     mutationFn: (payload: SiteFormValues) => createWorkSiteApi(payload),
     mutationKey: MUTATION_KEYS.workSites.create(),
     onSuccess: (_: any) => {
-      successToast(
-        i18n.t("workSites.site-created", "Site created"),
-      );
+      successToast(i18n.t("workSites.site-created", "Site created"));
       try {
         //@ts-ignore
         queryClient.invalidateQueries(QUERY_KEYS.workSites);
@@ -187,10 +166,7 @@ export const useCreateWorkSite = () => {
       const serverMessage = error?.response?.data?.message || error?.message;
       const message =
         serverMessage ||
-        i18n.t(
-          "workSites.create-error",
-          "Failed to create site",
-        );
+        i18n.t("workSites.create-error", "Failed to create site");
       errorToast(message);
     },
   });
