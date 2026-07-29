@@ -13,6 +13,7 @@ import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/config/paths";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { useResourceStatistics } from "@/features/work-site-items/api/queries";
 import { StatusBadge } from "@/features/work-sites/components/StatusBadge";
 interface StatItem {
@@ -30,6 +31,11 @@ export default function ResourceHeader() {
   const address = searchParams.get("address") ?? "";
   const status = searchParams.get("status") ?? "";
   const manager = searchParams.get("manager") ?? "";
+
+  const user = useAuthStore((s) => s.user);
+  const providerRole = user?.providerRole;
+  const isResource = providerRole === "Resource";
+  
   const { data, isLoading } = useResourceStatistics();
 
   const stats: StatItem[] = [
@@ -64,11 +70,16 @@ export default function ResourceHeader() {
       icon: DollarSign,
     },
   ];
+  
   return (
     <section className="border-b border-gray-300 gradient-hero text-primary-foreground rounded-lg p-6">
       <div className="container py-10">
         <Link
-          to={paths.app.resourceProvidor.workSites.path}
+          to={
+            isResource
+              ? paths.app.resourceProvidor.workSites.path
+              : paths.app.serviceProvidor.workSites.path
+          }
           className={`inline-flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-primary-foreground transition-smooth ${
             isArabic ? "flex-row-reverse" : "flex-row"
           }`}
@@ -105,7 +116,9 @@ export default function ResourceHeader() {
               className="bg-white text-primary hover:bg-white hover:opacity-70"
             >
               <Package className="h-4 w-4" />
-              {t("workSites.add-new-resource")}
+              {isResource
+                ? t("workSiteItems.resourceProvidor.add-new")
+                : t("workSiteItems.serviceProvidor.add-new")}
             </Button>
           </Link>
         </div>

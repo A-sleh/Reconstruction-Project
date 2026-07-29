@@ -1,0 +1,10 @@
+{
+  "workSiteItems": {
+    "resourceProvidor": {
+      "add-new": "إضافة مورد جديد"
+    },
+    "serviceProvidor": {
+      "add-new": "إضافة خدمة جديدة"
+    }
+  }
+}
