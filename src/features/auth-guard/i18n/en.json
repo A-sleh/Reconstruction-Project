@@ -1,7 +1,0 @@
-{
-  "authGuard": {
-    "unauthorized": "You are not authorized to access this page",
-    "insufficientPermissions": "You don't have the required permissions",
-    "loginRequired": "Please log in to continue"
-  }
-}
