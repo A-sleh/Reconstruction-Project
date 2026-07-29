@@ -133,8 +133,8 @@ export function NewResourceForm({
         {/* resource description  */}
         <div className="space-y-4">
           <Textarea
-            label={t(`${rolePrefix}.label-description`)}
-            placeholder={t(`${rolePrefix}.placeholder-description`)}
+            label={t(`${rolePrefix}.form.label-description`)}
+            placeholder={t(`${rolePrefix}.form.placeholder-description`)}
             rows={3}
             fieldName="description"
             errors={errors}
@@ -157,7 +157,7 @@ export function NewResourceForm({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2 flex-1">
             <Select
-              label={t(`${rolePrefix}.label-unit-type`)}
+              label={t(`${rolePrefix}.form.label-unit-type`)}
               fieldName="unit"
               errors={errors}
               value={unitType}
@@ -171,7 +171,7 @@ export function NewResourceForm({
             </Select>
           </div>
           <Input
-            label={t(`${rolePrefix}.label-price-per-unit`)}
+            label={t(`${rolePrefix}.form.label-price-per-unit`)}
             id="price"
             type="number"
             min={0}
@@ -183,7 +183,7 @@ export function NewResourceForm({
           />
           <div className="space-y-2 flex flex-col gap-2">
             <label className={`text-sm`}>
-              {t(`${rolePrefix}.isAvailable-label`)}
+              {t(`${rolePrefix}.form.isAvailable-label`)}
             </label>
             <Switch
               checked={isAvailable as boolean}
@@ -195,7 +195,7 @@ export function NewResourceForm({
         </div>
 
         <ImageUploader
-          label={t(`${rolePrefix}.label-image`)}
+          label={t(`${rolePrefix}.form.label-image`)}
           required={true}
           fileName={"imageUrl"}
           value={previewUrl || localImageFile || image}
@@ -212,7 +212,7 @@ export function NewResourceForm({
             variant="secondary"
             onClick={handleGenerateMockData}
           >
-            {t(`${rolePrefix}.btn-generate-mock-data`)}
+            {t(`${rolePrefix}.form.btn-generate-mock-data`)}
           </Button>
 
           <Button
@@ -221,8 +221,8 @@ export function NewResourceForm({
             type="submit"
           >
             {initial
-              ? t(`${rolePrefix}.btn-save`)
-              : t(`${rolePrefix}.btn-create`)}
+              ? t(`${rolePrefix}.form.btn-save`)
+              : t(`${rolePrefix}.form.btn-create`)}
           </Button>
         </div>
       </form>

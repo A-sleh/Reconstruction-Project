@@ -2,6 +2,16 @@
   "workSiteItems": {
     "resourceProvidor": {
       "add-new": "Add New Resource",
+      "addResources": {
+        "heading": "Add Resources",
+        "provide-details": "Provide product details, unit pricing, and category.",
+        "add-another": "Add another",
+        "submit-resources": "Submit {{count}} resources",
+        "added-resources": "{{count}} resources added",
+        "select-to-edit": "Click an item to edit it before submitting.",
+        "no-added-resources": "No resources added yet. Use the form to add one.",
+        "remove-resource": "Remove"
+      },
       "requestModal": {
         "title": "Request New Resource",
         "description": "Submit a new resource item to the bank for admin approval.",
@@ -31,6 +41,16 @@
     },
     "serviceProvidor": {
       "add-new": "Add New Service",
+      "addResources": {
+        "heading": "Add Services",
+        "provide-details": "Provide service details, pricing, and category.",
+        "add-another": "Add another",
+        "submit-resources": "Submit {{count}} services",
+        "added-resources": "{{count}} services added",
+        "select-to-edit": "Click an item to edit it before submitting.",
+        "no-added-resources": "No services added yet. Use the form to add one.",
+        "remove-resource": "Remove"
+      },
       "requestModal": {
         "title": "Request New Service",
         "description": "Submit a new service item to the bank for admin approval.",

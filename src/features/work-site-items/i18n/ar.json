@@ -2,6 +2,16 @@
   "workSiteItems": {
     "resourceProvidor": {
       "add-new": "إضافة مورد جديد",
+      "addResources": {
+        "heading": "إضافة موارد",
+        "provide-details": "أدخل تفاصيل المنتج، سعر الوحدة، والفئة.",
+        "add-another": "أضف موردًا آخر",
+        "submit-resources": "إرسال {{count}} موارد",
+        "added-resources": "تمت إضافة {{count}} موارد",
+        "select-to-edit": "انقر على عنصر لتحريره قبل الإرسال.",
+        "no-added-resources": "لم تُضف أي موارد بعد. استخدم النموذج لإضافة واحدة.",
+        "remove-resource": "حذف"
+      },
       "requestModal": {
         "title": "طلب مورد جديد",
         "description": "قم بإرسال عنصر مورد جديد إلى البنك للموافقة عليه من الإدارة.",
@@ -31,6 +41,16 @@
     },
     "serviceProvidor": {
       "add-new": "إضافة خدمة جديدة",
+      "addResources": {
+        "heading": "إضافة خدمات",
+        "provide-details": "أدخل تفاصيل الخدمة والسعر والفئة.",
+        "add-another": "أضف خدمة أخرى",
+        "submit-resources": "إرسال {{count}} خدمات",
+        "added-resources": "تمت إضافة {{count}} خدمات",
+        "select-to-edit": "انقر على عنصر لتحريره قبل الإرسال.",
+        "no-added-resources": "لم تُضف أي خدمات بعد. استخدم النموذج لإضافة واحدة.",
+        "remove-resource": "حذف"
+      },
       "requestModal": {
         "title": "طلب خدمة جديدة",
         "description": "قم بإرسال عنصر خدمة جديد إلى البنك للموافقة عليه من الإدارة.",
