@@ -47,7 +47,9 @@ const Navbar = () => {
     },
     {
       label: t("navbar.profile"),
-      href: paths.app.resourceProvidor.profile.path,
+      href: isResourceProvidor
+        ? paths.app.resourceProvidor.profile.path
+        : paths.app.serviceProvidor.profile.path,
       icon: <CgProfile size={18} />,
       permission: Permissions.PROFILE_VIEW,
     },
@@ -59,7 +61,9 @@ const Navbar = () => {
     },
     {
       label: t("navbar.orders"),
-      href: paths.app.resourceProvidor.orders.path,
+      href: isResourceProvidor
+        ? paths.app.resourceProvidor.orders.path
+        : paths.app.serviceProvidor.orders.path,
       icon: <RiShoppingBagLine size={18} />,
       permission: Permissions.ORDERS_VIEW,
     },
