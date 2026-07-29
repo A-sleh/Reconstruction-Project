@@ -38,6 +38,8 @@ import CollapsibleFilter from "@/components/common/CollapsibleFilter";
 import { PureResource } from "@/features/category-bank/api/types";
 import { useDeleteWorksiteItem } from "../api/actions";
 import { StatusBadge } from "@/features/work-sites/components/StatusBadge";
+import useAuthStore, { User } from "@/stores/useAuthStore";
+import { getRolePrefix } from "./NewResorceRequestModel";
 
 interface InventoryTabProps {
   siteId?: string;
@@ -52,6 +54,8 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
   const { mutate: deleteWorkSiteItem, isPending: isDeleting } =
     useDeleteWorksiteItem();
   const isArabic = i18n.language == "ar";
+  const providerRole = useAuthStore((s) => (s.user as User)?.providerRole) ?? "Resource";
+  const rolePrefix = getRolePrefix(providerRole);
   const [categoryId, setCategoryId] = useState<number | "all">("all");
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | "active" | "hold">(
@@ -99,7 +103,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
         >
           <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder={t("workSites.resource.search-placeholder")}
+            placeholder={t(`${rolePrefix}.inventory.search-placeholder`)}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pr-9 w-full bg-transparent"
@@ -109,7 +113,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
           trigger={
             <span className="flex items-center gap-2 text-sm font-medium text-foreground">
               <Filter className="h-4 w-4" />
-              {t("workSites.resource.filters", "Filters")}
+              {t(`${rolePrefix}.inventory.filters`)}
             </span>
           }
         >
@@ -125,15 +129,12 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                 dir={isArabic ? "rtl" : "ltr"}
               >
                 <SelectValue
-                  placeholder={t(
-                    "workSites.resource.filterByCategory",
-                    "Filter by category",
-                  )}
+                  placeholder={t(`${rolePrefix}.inventory.filterByCategory`)}
                 />
               </SelectTrigger>
               <SelectContent dir={isArabic ? "rtl" : "ltr"}>
                 <SelectItem value="all">
-                  {t("workSites.resource.allCategories", "All Categories")}
+                  {t(`${rolePrefix}.inventory.allCategories`)}
                 </SelectItem>
                 {categories.map((category) => (
                   <SelectItem key={category.id} value={String(category.id)}>
@@ -153,21 +154,18 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                 dir={isArabic ? "rtl" : "ltr"}
               >
                 <SelectValue
-                  placeholder={t(
-                    "workSites.resource.filterByStatus",
-                    "Filter by status",
-                  )}
+                  placeholder={t(`${rolePrefix}.inventory.filterByStatus`)}
                 />
               </SelectTrigger>
               <SelectContent dir={isArabic ? "rtl" : "ltr"}>
                 <SelectItem value="all">
-                  {t("workSites.resource.allStatuses", "All Statuses")}
+                  {t(`${rolePrefix}.inventory.allStatuses`)}
                 </SelectItem>
                 <SelectItem value="active">
-                  {t("workSites.resource.active", "Active")}
+                  {t(`${rolePrefix}.inventory.active`)}
                 </SelectItem>
                 <SelectItem value="hold">
-                  {t("workSites.resource.onHold", "On Hold")}
+                  {t(`${rolePrefix}.inventory.onHold`)}
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -192,7 +190,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
               />
             </svg>
           </div>
-          <p>{t("workSites.no-resources-match")}</p>
+          <p>{t(`${rolePrefix}.inventory.no-match`)}</p>
         </div>
       ) : (
         <div className="rounded-xl border border-gray-200 bg-white overflow-hidden">
@@ -200,25 +198,25 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
             <TableHeader>
               <TableRow className="border-b border-gray-200 bg-gray-50">
                 <TableHead className="p-3 font-medium text-gray-500 w-24">
-                  {t("workSites.resource.table.image")}
+                  {t(`${rolePrefix}.inventory.table.image`)}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500">
-                  {t("workSites.resource.table.name")}
+                  {t(`${rolePrefix}.inventory.table.name`)}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500">
-                  {t("workSites.resource.table.category")}
+                  {t(`${rolePrefix}.inventory.table.category`)}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500">
-                  {t("workSites.resource.table.status")}
+                  {t(`${rolePrefix}.inventory.table.status`)}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500">
-                  {t("workSites.resource.table.price")}
+                  {t(`${rolePrefix}.inventory.table.price`)}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500">
-                  {t("workSites.resource.table.unit")}
+                  {t(`${rolePrefix}.inventory.table.unit`)}
                 </TableHead>
                 <TableHead className="p-3 font-medium text-gray-500 text-center w-48">
-                  {t("workSites.resource.table.actions")}
+                  {t(`${rolePrefix}.inventory.table.actions`)}
                 </TableHead>
               </TableRow>
             </TableHeader>

@@ -37,6 +37,26 @@
         "btn-generate-mock-data": "توليد بيانات تجريبية",
         "btn-save": "حفظ التغييرات",
         "btn-create": "إنشاء مورد"
+      },
+      "inventory": {
+        "search-placeholder": "البحث في الموارد...",
+        "filters": "تصفية",
+        "filterByCategory": "تصفية حسب الصنف",
+        "allCategories": "جميع الأصناف",
+        "filterByStatus": "تصفية حسب الحالة",
+        "allStatuses": "جميع الحالات",
+        "active": "نشط",
+        "onHold": "معلق",
+        "no-match": "لا توجد موارد تطابق مرشحاتك.",
+        "table": {
+          "image": "الصورة",
+          "name": "الاسم",
+          "category": "الفئة",
+          "status": "الحالة",
+          "price": "السعر",
+          "unit": "الوحدة",
+          "actions": "الإجراءات"
+        }
       }
     },
     "serviceProvidor": {
@@ -76,6 +96,26 @@
         "btn-generate-mock-data": "توليد بيانات تجريبية",
         "btn-save": "حفظ التغييرات",
         "btn-create": "إنشاء خدمة"
+      },
+      "inventory": {
+        "search-placeholder": "البحث في الخدمات...",
+        "filters": "تصفية",
+        "filterByCategory": "تصفية حسب الفئة",
+        "allCategories": "جميع الفئات",
+        "filterByStatus": "تصفية حسب الحالة",
+        "allStatuses": "جميع الحالات",
+        "active": "نشط",
+        "onHold": "معلق",
+        "no-match": "لا توجد خدمات تطابق مرشحاتك.",
+        "table": {
+          "image": "الصورة",
+          "name": "الاسم",
+          "category": "الفئة",
+          "status": "الحالة",
+          "price": "السعر",
+          "unit": "الوحدة",
+          "actions": "الإجراءات"
+        }
       }
     }
   }

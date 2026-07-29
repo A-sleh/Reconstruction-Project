@@ -37,6 +37,26 @@
         "btn-generate-mock-data": "Generate mock data",
         "btn-save": "Save Changes",
         "btn-create": "Create Resource"
+      },
+      "inventory": {
+        "search-placeholder": "Search resources...",
+        "filters": "Filters",
+        "filterByCategory": "Filter by category",
+        "allCategories": "All Categories",
+        "filterByStatus": "Filter by status",
+        "allStatuses": "All Statuses",
+        "active": "Active",
+        "onHold": "On Hold",
+        "no-match": "No resources match your filters.",
+        "table": {
+          "image": "Image",
+          "name": "Name",
+          "category": "Category",
+          "status": "Status",
+          "price": "Price",
+          "unit": "Unit",
+          "actions": "Actions"
+        }
       }
     },
     "serviceProvidor": {
@@ -76,6 +96,26 @@
         "btn-generate-mock-data": "Generate mock data",
         "btn-save": "Save Changes",
         "btn-create": "Create Service"
+      },
+      "inventory": {
+        "search-placeholder": "Search services...",
+        "filters": "Filters",
+        "filterByCategory": "Filter by category",
+        "allCategories": "All Categories",
+        "filterByStatus": "Filter by status",
+        "allStatuses": "All Statuses",
+        "active": "Active",
+        "onHold": "On Hold",
+        "no-match": "No services match your filters.",
+        "table": {
+          "image": "Image",
+          "name": "Name",
+          "category": "Category",
+          "status": "Status",
+          "price": "Price",
+          "unit": "Unit",
+          "actions": "Actions"
+        }
       }
     }
   }
