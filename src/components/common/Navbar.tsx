@@ -55,7 +55,9 @@ const Navbar = () => {
     },
     {
       label: t("navbar.statistics"),
-      href: paths.app.resourceProvidor.statistics.path,
+      href: isResourceProvidor
+        ? paths.app.resourceProvidor.statistics.path
+        : paths.app.serviceProvidor.statistics.path,
       icon: <FiBarChart2 size={18} />,
       permission: Permissions.STATISTICS_VIEW,
     },

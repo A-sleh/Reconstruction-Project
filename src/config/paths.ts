@@ -91,6 +91,10 @@ export const paths = {
         getHref: (orderId: number | string) =>
           `/app/service-providor/orders/${orderId}`,
       },
+      statistics: {
+        path: "/app/service-providor/statistics",
+        getHref: () => `/app/service-providor/statistics`,
+      },
       profile: {
         path: "/app/service-providor/profile",
         getHref: () => `/app/service-providor/profile`,
