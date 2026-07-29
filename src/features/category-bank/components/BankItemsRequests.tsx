@@ -30,7 +30,7 @@ import BankItemStatusBadge from "./BankItemStatusBadge";
 import RequestActionsMenu from "./RequestActionsMenu";
 import { toast } from "sonner";
 
-import { NewResorceRequestModel } from "@/features/site-resources/components/NewResorceRequestModel";
+import { NewResorceRequestModel } from "@/features/work-site-items/components/NewResorceRequestModel";
 import {
   Select,
   SelectContent,

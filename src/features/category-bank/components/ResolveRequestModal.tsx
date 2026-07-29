@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Input from "@/components/inputs/Input";
 import PopuupLayout from "@/components/layouts/Popup-layout";
 
-import { DynamicAsyncSelector } from "@/features/site-resources/components/SmartDataGrid";
+import { DynamicAsyncSelector } from "@/features/work-site-items/components/SmartDataGrid";
 
 interface ResolveRequestModalProps {
   requestId: number | null;

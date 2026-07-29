@@ -13,7 +13,7 @@ import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { paths } from "@/config/paths";
-import { useResourceStatistics } from "@/features/site-resources/api/queries";
+import { useResourceStatistics } from "@/features/work-site-items/api/queries";
 import { StatusBadge } from "@/features/work-sites/components/StatusBadge";
 interface StatItem {
   label: string;
