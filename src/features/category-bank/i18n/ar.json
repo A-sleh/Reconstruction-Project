@@ -149,7 +149,19 @@
       "tagsAdded": "تمت إضافة الوسوم",
       "tagsAddError": "فشل إضافة الوسوم",
       "tagsRemoved": "تمت إزالة الوسوم",
-      "tagsRemoveError": "فشل إزالة الوسوم"
+      "tagsRemoveError": "فشل إزالة الوسوم",
+      "serviceCreated": "تم إنشاء الخدمة بنجاح",
+      "serviceCreateError": "فشل إنشاء الخدمة",
+      "serviceUpdated": "تم تحديث الخدمة بنجاح",
+      "serviceUpdateError": "فشل تحديث الخدمة",
+      "serviceDeleted": "تم حذف الخدمة بنجاح",
+      "serviceDeleteError": "فشل حذف الخدمة",
+      "resourceCreated": "تم إنشاء المورد بنجاح",
+      "resourceCreateError": "فشل إنشاء المورد",
+      "resourceUpdated": "تم تحديث المورد بنجاح",
+      "resourceUpdateError": "فشل تحديث المورد",
+      "resourceDeleted": "تم حذف المورد بنجاح",
+      "resourceDeleteError": "فشل حذف المورد"
     },
     "systemResources": {
       "searchPlaceholder": "بحث في الموارد...",

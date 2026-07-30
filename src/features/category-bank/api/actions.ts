@@ -13,6 +13,10 @@ import {
   AddServiceTagsParams,
   RemoveResourceTagsParams,
   RemoveServiceTagsParams,
+  CreateServicePayload,
+  UpdateServicePayload,
+  CreateResourcePayload,
+  UpdateResourcePayload,
 } from "./types";
 
 // ==========================================
@@ -242,6 +246,150 @@ export const useRemoveServiceTags = () => {
     },
     onError: () => {
       errorToast(i18n.t("categoryBank.toast.tagsRemoveError", "Failed to remove tags"));
+    },
+  });
+};
+
+// ==========================================
+// Bank Item CRUD - Services
+// ==========================================
+const createServiceApi = async (payload: CreateServicePayload) => {
+  const { data } = await ApiInstance.post(
+    `/${BankItemController.AddService}`,
+    payload,
+  );
+  return data;
+};
+
+const updateServiceApi = async (payload: UpdateServicePayload) => {
+  const { data } = await ApiInstance.put(
+    `/${BankItemController.UpdateService}`,
+    payload,
+  );
+  return data;
+};
+
+const deleteServiceApi = async (serviceBankId: number) => {
+  const { data } = await ApiInstance.delete(
+    `/${BankItemController.DeleteService}`,
+    { params: { serviceBankId } },
+  );
+  return data;
+};
+
+export const useCreateService = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.bankItem.createService(),
+    mutationFn: createServiceApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.services });
+      successToast(i18n.t("categoryBank.toast.serviceCreated", "Service created"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.serviceCreateError", "Failed to create service"));
+    },
+  });
+};
+
+export const useUpdateService = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.bankItem.updateService(),
+    mutationFn: updateServiceApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.services });
+      successToast(i18n.t("categoryBank.toast.serviceUpdated", "Service updated"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.serviceUpdateError", "Failed to update service"));
+    },
+  });
+};
+
+export const useDeleteService = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.bankItem.deleteService(),
+    mutationFn: deleteServiceApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.services });
+      successToast(i18n.t("categoryBank.toast.serviceDeleted", "Service deleted"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.serviceDeleteError", "Failed to delete service"));
+    },
+  });
+};
+
+// ==========================================
+// Bank Item CRUD - Resources
+// ==========================================
+const createResourceItemApi = async (payload: CreateResourcePayload) => {
+  const { data } = await ApiInstance.post(
+    `/${BankItemController.AddResource}`,
+    payload,
+  );
+  return data;
+};
+
+const updateResourceItemApi = async (payload: UpdateResourcePayload) => {
+  const { data } = await ApiInstance.put(
+    `/${BankItemController.UpdateResource}`,
+    payload,
+  );
+  return data;
+};
+
+const deleteResourceItemApi = async (resourceBankId: number) => {
+  const { data } = await ApiInstance.delete(
+    `/${BankItemController.DeleteResource}`,
+    { params: { resourceBankId } },
+  );
+  return data;
+};
+
+export const useCreateResourceItem = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.bankItem.createResource(),
+    mutationFn: createResourceItemApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
+      successToast(i18n.t("categoryBank.toast.resourceCreated", "Resource created"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.resourceCreateError", "Failed to create resource"));
+    },
+  });
+};
+
+export const useUpdateResourceItem = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.bankItem.updateResource(),
+    mutationFn: updateResourceItemApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
+      successToast(i18n.t("categoryBank.toast.resourceUpdated", "Resource updated"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.resourceUpdateError", "Failed to update resource"));
+    },
+  });
+};
+
+export const useDeleteResourceItem = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.bankItem.deleteResource(),
+    mutationFn: deleteResourceItemApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
+      successToast(i18n.t("categoryBank.toast.resourceDeleted", "Resource deleted"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.resourceDeleteError", "Failed to delete resource"));
     },
   });
 };

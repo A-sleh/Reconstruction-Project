@@ -149,7 +149,19 @@
       "tagsAdded": "Tags added",
       "tagsAddError": "Failed to add tags",
       "tagsRemoved": "Tags removed",
-      "tagsRemoveError": "Failed to remove tags"
+      "tagsRemoveError": "Failed to remove tags",
+      "serviceCreated": "Service created",
+      "serviceCreateError": "Failed to create service",
+      "serviceUpdated": "Service updated",
+      "serviceUpdateError": "Failed to update service",
+      "serviceDeleted": "Service deleted",
+      "serviceDeleteError": "Failed to delete service",
+      "resourceCreated": "Resource created",
+      "resourceCreateError": "Failed to create resource",
+      "resourceUpdated": "Resource updated",
+      "resourceUpdateError": "Failed to update resource",
+      "resourceDeleted": "Resource deleted",
+      "resourceDeleteError": "Failed to delete resource"
     },
     "systemResources": {
       "searchPlaceholder": "Search resources...",

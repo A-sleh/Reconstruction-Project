@@ -24,6 +24,14 @@ export enum BankItemController {
   AddServiceTags = `${BASE_BANK_ROUTE}/services/add-tags`,
   RemoveResourceTags = `${BASE_BANK_ROUTE}/resources/remove-tags`,
   RemoveServiceTags = `${BASE_BANK_ROUTE}/services/remove-tags`,
+
+  // Bank Item CRUD
+  AddService = `${BASE_BANK_ROUTE}/add-service`,
+  UpdateService = `${BASE_BANK_ROUTE}/add-service`,
+  DeleteService = `${BASE_BANK_ROUTE}/add-service`,
+  AddResource = `${BASE_BANK_ROUTE}/add-resource`,
+  UpdateResource = `${BASE_BANK_ROUTE}/add-resource`,
+  DeleteResource = `${BASE_BANK_ROUTE}/add-resource`,
 }
 
 export const QUERY_KEYS = {
@@ -59,5 +67,13 @@ export const MUTATION_KEYS = {
     addService: () => ["categoryBank", "tags", "add-service"],
     removeResource: () => ["categoryBank", "tags", "remove-resource"],
     removeService: () => ["categoryBank", "tags", "remove-service"],
+  },
+  bankItem: {
+    createService: () => ["categoryBank", "bankItem", "create-service"],
+    updateService: () => ["categoryBank", "bankItem", "update-service"],
+    deleteService: () => ["categoryBank", "bankItem", "delete-service"],
+    createResource: () => ["categoryBank", "bankItem", "create-resource"],
+    updateResource: () => ["categoryBank", "bankItem", "update-resource"],
+    deleteResource: () => ["categoryBank", "bankItem", "delete-resource"],
   },
 };

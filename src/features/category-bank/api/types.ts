@@ -134,3 +134,32 @@ export interface RemoveServiceTagsParams {
   serviceId: number;
   tags: { name: string }[];
 }
+
+// ============================================================================
+// Bank Item CRUD
+// ============================================================================
+export interface CreateServicePayload {
+  name: string;
+  description: string;
+  serviceTypeId: number;
+}
+
+export interface UpdateServicePayload {
+  id: number;
+  name: string;
+  description: string;
+  serviceTypeId: number;
+}
+
+export interface CreateResourcePayload {
+  name: string;
+  description: string;
+  categoryId: number;
+}
+
+export interface UpdateResourcePayload {
+  id: number;
+  name: string;
+  description: string;
+  categoryId: number;
+}
