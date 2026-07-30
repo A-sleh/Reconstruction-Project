@@ -5,10 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useParams } from "react-router";
-import {
-  useRWorkSiteResourcesInfinite,
-  useBankCategories,
-} from "@/features/category-bank/api/quertes";
+import { useBankCategories } from "@/features/category-bank/api/quertes";
 import {
   Table,
   TableHeader,
@@ -35,11 +32,12 @@ import {
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import ModifyResourceModel from "./ModifyResourceModel";
 import CollapsibleFilter from "@/components/common/CollapsibleFilter";
-import { PureResource } from "@/features/category-bank/api/types";
 import { useDeleteWorksiteItem } from "../api/actions";
 import { StatusBadge } from "@/features/work-sites/components/StatusBadge";
 import useAuthStore, { User } from "@/stores/useAuthStore";
 import { getRolePrefix } from "./NewResorceRequestModel";
+import { useWorkSiteResourcesInfinite } from "../api/queries";
+import { PureResource } from "../api/types";
 
 interface InventoryTabProps {
   siteId?: string;
@@ -54,7 +52,8 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
   const { mutate: deleteWorkSiteItem, isPending: isDeleting } =
     useDeleteWorksiteItem();
   const isArabic = i18n.language == "ar";
-  const providerRole = useAuthStore((s) => (s.user as User)?.providerRole) ?? "Resource";
+  const providerRole =
+    useAuthStore((s) => (s.user as User)?.providerRole) ?? "Resource";
   const rolePrefix = getRolePrefix(providerRole);
   const [categoryId, setCategoryId] = useState<number | "all">("all");
   const [search, setSearch] = useState("");
@@ -77,7 +76,7 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
     hasNextPage,
     isFetchingNextPage,
     isPending,
-  } = useRWorkSiteResourcesInfinite({
+  } = useWorkSiteResourcesInfinite({
     categoryId,
     search,
     workSiteId: Number(effectiveSiteId),

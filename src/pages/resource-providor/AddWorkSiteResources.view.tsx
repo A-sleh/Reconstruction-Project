@@ -32,6 +32,7 @@ const AddWorkSiteResources = () => {
 
   const { mutate: submitResources, isPending: isSubmitting } =
     useCreateResource();
+    
 
   const handleResourceSubmit = (values: Resource) => {
     if (selected) {

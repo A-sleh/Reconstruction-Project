@@ -1,37 +1,27 @@
-import { BankItemController } from "@/features/category-bank/api";
+const BASE_WORKSITE_ROUTE = "worksite";
 
-// Re-export moved query keys from category-bank
-export { QUERY_KEYS as BankCategoryQueryKeys } from "@/features/category-bank/api";
-
-export enum WorkSiteResourcesController_Legacy {
-  AddResources = "worksite/add-resources",
-  WorkSiteResourcesStatistics = "worksite/order-statistic",
-  updateWorkSite = "worksite/update-resource",
-  delelteResource = "worksite/delete-item",
-  OrderRequest = "orders",
+export enum WorkSiteItemsController {
+  AddResources = `${BASE_WORKSITE_ROUTE}/add-resources`,
+  AddServices = `${BASE_WORKSITE_ROUTE}/add-services`,
+  WorkSiteResourcesStatistics = `${BASE_WORKSITE_ROUTE}/order-statistic`,
+  UpdateWorkSite = `${BASE_WORKSITE_ROUTE}/update-resource`,
+  DelelteResource = `${BASE_WORKSITE_ROUTE}/delete-item`,
+  WorkSiteResources = `${BASE_WORKSITE_ROUTE}/get-resource`,
+  WorkSiteServices = `${BASE_WORKSITE_ROUTE}/get-services`,
 }
 
-// Merged controller for backward compatibility
-export const WorkSiteResourcesController = {
-  ...WorkSiteResourcesController_Legacy,
-  BankCategories: BankItemController.BankCategories,
-  Resources: BankItemController.Resources,
-  WorkSiteResources: BankItemController.WorkSiteResources,
-};
-
 export const QUERY_KEYS = {
-  resource: (id: any) => ["resourceProvidor", "workSite", "resource", id],
-  resources: ["resourceProvidor", "workSite", "resources"],
-  bankCategories: ["resourceProvidor", "resorces", "bank-categories"],
-  statistics: ["resourceProvidor", "resorces", "statistics"],
-  orders: ["resourceProvidor", "resorces", "orders"],
-  deltee: ["resourceProvidor", "resorces", "delete"],
+  resource: (id: any) => ["Providor", "workSite", "items", id],
+  resources: ["Providor", "workSite", "resources"],
+  services: ["Providor", "workSite", "services"],
+  statistics: ["Providor", "items", "statistics"],
+  deltee: ["Providor", "items", "delete"],
 };
 
 export const MUTATION_KEYS = {
   resource: {
-    create: () => ["resourceProvidor", "workSites", "resource", "create"],
-    update: () => ["resourceProvidor", "workSites", "resource", "update"],
-    delete: () => ["resourceProvidor", "workSite", "resource", "delete"],
+    create: () => ["resourceProvidor", "workSites", "items", "create"],
+    update: () => ["resourceProvidor", "workSites", "items", "update"],
+    delete: () => ["resourceProvidor", "workSite", "items", "delete"],
   },
 };

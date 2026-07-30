@@ -11,17 +11,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useResourcesInfinite } from "@/features/category-bank/api/quertes";
 import { useDebounce } from "@/hooks/useDebounce";
 import LoadMoreButton from "@/components/shared/LoadMoreButton";
 import CategoryFilter from "./CategoryFilter";
 import EmptyState from "@/components/common/EmptyState";
+import { useWorkSiteResourcesInfinite } from "@/features/work-site-items/api/queries";
+import { useParams } from "react-router";
 
 const SKELETON_ROWS = 5;
 
 const SystemResources = () => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
+  const { siteId } = useParams();
 
   const [search, setSearch] = useState("");
   const [categoryId, setCategoryId] = useState<number | "all">("all");
@@ -35,9 +37,10 @@ const SystemResources = () => {
     isFetchingNextPage,
     isPending,
     isLoading,
-  } = useResourcesInfinite({
-    search: debouncedSearch,
-    categoryId,
+  } = useWorkSiteResourcesInfinite({
+    search: debouncedSearch ?? undefined,
+    categoryId: categoryId ?? "all",
+    workSiteId: Number(siteId),
   });
 
   const allItems = resourcesData?.pages.flatMap((page) => page.data) ?? [];

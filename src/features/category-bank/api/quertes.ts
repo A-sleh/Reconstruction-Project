@@ -51,33 +51,6 @@ const fetchResourceApi = async ({
   return data;
 };
 
-const fetchWorkSiteResourceApi = async ({
-  CategoryId,
-  PageNumber = 1,
-  PageSize = 10,
-  Search,
-  WorkSiteId,
-}: {
-  CategoryId: number | undefined;
-  Search: string;
-  PageSize: number;
-  PageNumber: number;
-  WorkSiteId: number | string;
-}): Promise<Resources> => {
-  const { data } = await ApiInstance.get<Resources>(
-    `/${BankItemController.WorkSiteResources}`,
-    {
-      params: {
-        ResourceCategoryId: CategoryId,
-        PageNumber,
-        PageSize,
-        Search,
-        WorkSiteId,
-      },
-    },
-  );
-  return data;
-};
 
 const fetchServiceApi = async ({
   CategoryId,
@@ -178,38 +151,6 @@ export const useResourcesInfinite = ({
   });
 };
 
-export const useRWorkSiteResourcesInfinite = ({
-  search,
-  categoryId,
-  workSiteId,
-}: {
-  search: string;
-  workSiteId: number | string;
-  categoryId: number | "all";
-}) => {
-  return useInfiniteQuery<Resources, unknown>({
-    queryKey: [...QUERY_KEYS.resources, workSiteId, search, categoryId],
-
-    queryFn: async ({ pageParam = 1 }) => {
-      return await fetchWorkSiteResourceApi({
-        Search: search,
-        CategoryId: categoryId === "all" ? undefined : (categoryId as number),
-        PageNumber: pageParam as number,
-        PageSize: 10,
-        WorkSiteId: workSiteId,
-      });
-    },
-
-    initialPageParam: 0,
-
-    getNextPageParam: (lastPage) => {
-      if (lastPage.hasNextPage) {
-        return lastPage.pageNum + 1;
-      }
-      return undefined;
-    },
-  });
-};
 
 export const useServicesInfinite = ({
   search,

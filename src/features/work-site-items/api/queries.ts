@@ -1,28 +1,21 @@
 import ApiInstance from "@/config/api-instance";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS, WorkSiteResourcesController } from ".";
-import { OrderRequest, WorkSiteResourcesStatistics, Resources } from "./types";
-
-// Re-export moved hooks from category-bank
-export {
-  useBankCategories,
-  useResourcesInfinite,
-} from "@/features/category-bank/api/quertes";
+import { QUERY_KEYS, WorkSiteItemsController } from ".";
+import {
+  OrderRequest,
+  WorkSiteResourcesStatistics,
+  Resources,
+  Services,
+} from "./types";
 
 // ==========================================
 // Site-Specific Fetchers (NOT moved — belong to site-resources)
 // ==========================================
-const fetchOrderResourceRequestApi = async (): Promise<OrderRequest[]> => {
-  const { data } = await ApiInstance.get<OrderRequest[]>(
-    `/${WorkSiteResourcesController.OrderRequest}`,
-  );
-  return data;
-};
 
 const fetchWorkSiteResourcesStatisticsAPI =
   async (): Promise<WorkSiteResourcesStatistics> => {
     const { data } = await ApiInstance.get<WorkSiteResourcesStatistics>(
-      `/${WorkSiteResourcesController.WorkSiteResourcesStatistics}`,
+      `/${WorkSiteItemsController.WorkSiteResourcesStatistics}`,
     );
     return data;
   };
@@ -41,7 +34,7 @@ const fetchWorkSiteResourceApi = async ({
   WorkSiteId: number | string;
 }): Promise<Resources> => {
   const { data } = await ApiInstance.get<Resources>(
-    `/${WorkSiteResourcesController.WorkSiteResources}`,
+    `/${WorkSiteItemsController.WorkSiteResources}`,
     {
       params: {
         ResourceCategoryId: CategoryId,
@@ -55,16 +48,29 @@ const fetchWorkSiteResourceApi = async ({
   return data;
 };
 
+const fetchServiceApi = async ({
+  CategoryId,
+  PageNumber = 1,
+  PageSize = 10,
+  Search,
+}: {
+  CategoryId: number;
+  Search: string;
+  PageSize: number;
+  PageNumber: number;
+}): Promise<Services> => {
+  const { data } = await ApiInstance.get<Services>(
+    `/${WorkSiteItemsController.WorkSiteServices}`,
+    {
+      params: { ResourceCategoryId: CategoryId, PageNumber, PageSize, Search },
+    },
+  );
+  return data;
+};
+
 // ==========================================
 // Site-Specific Hooks
 // ==========================================
-export const useResorceOrders = () => {
-  return useQuery<OrderRequest[], unknown>({
-    queryKey: QUERY_KEYS.orders,
-    queryFn: fetchOrderResourceRequestApi,
-  });
-};
-
 export const useResourceStatistics = () => {
   return useQuery<WorkSiteResourcesStatistics, unknown>({
     queryKey: QUERY_KEYS.statistics,
@@ -72,7 +78,7 @@ export const useResourceStatistics = () => {
   });
 };
 
-export const useRWorkSiteResourcesInfinite = ({
+export const useWorkSiteResourcesInfinite = ({
   search,
   categoryId,
   workSiteId,
@@ -95,6 +101,39 @@ export const useRWorkSiteResourcesInfinite = ({
     },
 
     initialPageParam: 0,
+
+    getNextPageParam: (lastPage) => {
+      if (lastPage.hasNextPage) {
+        return lastPage.pageNum + 1;
+      }
+      return undefined;
+    },
+  });
+};
+
+export const useServicesInfinite = ({
+  search,
+  categoryId,
+}: {
+  search: string;
+  categoryId: number | "all";
+}) => {
+  return useInfiniteQuery<Services, unknown>({
+    queryKey: [...QUERY_KEYS.services, search, categoryId],
+
+    queryFn: async ({ pageParam = 1 }) => {
+      const parsedCategoryId =
+        categoryId === "all" ? undefined : (categoryId as number);
+
+      return await fetchServiceApi({
+        Search: search,
+        CategoryId: parsedCategoryId as number,
+        PageNumber: pageParam as number,
+        PageSize: 10,
+      });
+    },
+
+    initialPageParam: 1,
 
     getNextPageParam: (lastPage) => {
       if (lastPage.hasNextPage) {

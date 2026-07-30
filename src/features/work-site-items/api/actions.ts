@@ -6,10 +6,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   MUTATION_KEYS,
   QUERY_KEYS,
-  WorkSiteResourcesController,
+  WorkSiteItemsController,
 } from ".";
 import ApiInstance from "@/config/api-instance";
-import { DeleteWorksiteItemParams, ResourcesPayload, unitTypes } from "./types";
+import { DeleteWorksiteItemParams, ResourcesPayload, ServicesPayload, unitTypes } from "./types";
 
 export const resourceSchema = z.object({
   id: z.string().nullable().optional(),
@@ -100,7 +100,7 @@ const updateResourceApi = async (
   payload: ResourceFormValues,
 ): Promise<ResourceFormValues> => {
   const { data } = await ApiInstance.put(
-    `/${WorkSiteResourcesController.updateWorkSite}`,
+    `/${WorkSiteItemsController.UpdateWorkSite}`,
     payload,
   );
   return data;
@@ -110,7 +110,7 @@ const createResourceApi = async (
   payload: ResourcesPayload,
 ): Promise<ResourcesPayload> => {
   const { data } = await ApiInstance.post(
-    `/${WorkSiteResourcesController.AddResources}`,
+    `/${WorkSiteItemsController.AddResources}`,
     payload,
   );
   return data;
@@ -121,7 +121,7 @@ const deleteWorksiteItem = async ({
   ItemType,
 }: DeleteWorksiteItemParams) => {
   const { data } = await ApiInstance.delete(
-    `/${WorkSiteResourcesController.delelteResource}`,
+    `/${WorkSiteItemsController.DelelteResource}`,
     {
       params: {
         id: Id,
@@ -171,6 +171,35 @@ export const useCreateResource = () => {
           "workSites.resource.resource-error-created",
           "Failed to create site",
         );
+      errorToast(message);
+    },
+  });
+};
+
+const addServicesApi = async (
+  payload: ServicesPayload,
+): Promise<ServicesPayload> => {
+  const { data } = await ApiInstance.post(
+    `/${WorkSiteItemsController.AddServices}`,
+    payload,
+  );
+  return data;
+};
+
+export const useAddServices = () => {
+  return useMutation({
+    mutationFn: (payload: ServicesPayload) => addServicesApi(payload),
+    mutationKey: MUTATION_KEYS.resource.create(),
+    onSuccess: (_: any) => {
+      successToast(
+        i18n.t("workSites.resource.resource-created", "Services added"),
+      );
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message =
+        serverMessage ||
+        i18n.t("workSites.resource.resource-error-created", "Failed to add services");
       errorToast(message);
     },
   });

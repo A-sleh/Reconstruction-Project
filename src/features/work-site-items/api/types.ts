@@ -1,9 +1,13 @@
-import { Paginated } from "@/types";
-import { WorkSite } from "../../work-sites/api";
+import { WorkSite } from "@/data/resource-providor/mockData";
 import { Resource } from "./actions";
+import { Paginated } from "@/types";
+import { Category } from "./types";
 
 // Re-export moved types from category-bank
-export type { Category, PureResource, Resources, BankCategories } from "@/features/category-bank/api/types";
+export type {
+  Category,
+  BankCategories,
+} from "@/features/category-bank/api/types";
 
 export type OrderRequestStatus = "pending" | "approved" | "rejected";
 export type ResourceAvailability = "in-stock" | "low-stock" | "out-of-stock";
@@ -85,7 +89,40 @@ export interface ResourcesPayload {
   workSiteId: number | string;
 }
 
+export interface ServiceItem {
+  serviceBankId: number;
+  imageId: number;
+  price: number;
+  description: string;
+}
+
+export interface ServicesPayload {
+  services: ServiceItem[];
+  workSiteId: string | number;
+}
+
 export interface DeleteWorksiteItemParams {
   Id: number;
   ItemType: string;
 }
+
+export interface PureResource {
+  id: number;
+  name: string;
+  imageURL: string;
+  description: string;
+  category: Category;
+  price: number;
+  isAvailable: boolean;
+  unit: string;
+}
+
+export interface Service {
+  id: number;
+  name: string;
+  description: string;
+  serviceType: Category;
+}
+
+export interface Resources extends Paginated<PureResource> {}
+export interface Services extends Paginated<Service> {}
