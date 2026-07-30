@@ -1,6 +1,7 @@
 import EmptyState from "@/components/common/EmptyState";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import LoadMoreButton from "@/components/shared/LoadMoreButton";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/Skeleton";
 import {
@@ -12,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useDebounce } from "@/hooks/useDebounce";
-import { Eye, Inbox, Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { Eye, Inbox, Pencil, Plus, Search, Tag, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -24,6 +25,7 @@ import { useResourcesInfinite } from "../api/quertes";
 import CategoryFilter from "./CategoryFilter";
 import { ResourceDetailsModal } from "./ResourceDetailsModal";
 import { ResourceFormModal } from "./ResourceFormModal";
+import { TagsManagerModal } from "./TagsManagerModal";
 
 const SKELETON_ROWS = 5;
 
@@ -37,7 +39,7 @@ const SystemResources = () => {
   const debouncedSearch = useDebounce(search, 300);
 
   const {
-    data: resourcesData,
+    data: itemsData,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -52,7 +54,7 @@ const SystemResources = () => {
   const { mutate: updateResource } = useUpdateResourceItem();
   const { mutate: deleteResource } = useDeleteResourceItem();
 
-  const allItems = resourcesData?.pages.flatMap((page) => page.data) ?? [];
+  const allItems = itemsData?.pages.flatMap((page) => page.data) ?? [];
 
   return (
     <div className="space-y-4 w-full">
@@ -83,10 +85,10 @@ const SystemResources = () => {
         <ResourceFormModal
           onConfirm={(data) => createResource(data)}
           openButton={
-            <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors">
+            <Button>
               <Plus className="h-4 w-4" />
               {t("categoryBank.table.addCategory", "Create Resource")}
-            </button>
+            </Button>
           }
         />
       </div>
@@ -141,97 +143,122 @@ const SystemResources = () => {
                       </TableCell>
                     </TableRow>
                   ))
-                : allItems.map((resource) => (
-                    <TableRow
-                      key={resource.id}
-                      className="hover:bg-muted/40 transition-colors"
-                    >
-                      <TableCell className="tabular-nums text-muted-foreground">
-                        {resource.id}
-                      </TableCell>
-                      <TableCell>
-                        <span className="font-medium">{resource.name}</span>
-                      </TableCell>
-                      <TableCell>
-                        <span className="text-sm text-muted-foreground line-clamp-1 max-w-md">
-                          {resource.description}
-                        </span>
-                      </TableCell>
-                      <TableCell>
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                          {resource.category?.name || "—"}
-                        </span>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex flex-wrap gap-1">
-                          {resource.tags && resource.tags.length > 0 ? (
-                            resource.tags.slice(0, 3).map((tag) => (
-                              <span
-                                key={tag.id}
-                                className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-700"
-                              >
-                                {tag.name}
+                : allItems.map((item) => {
+                    const categoryName = (item as any).category?.name;
+
+                    return (
+                      <TableRow
+                        key={item.id}
+                        className="hover:bg-muted/40 transition-colors"
+                      >
+                        <TableCell className="tabular-nums text-muted-foreground">
+                          {item.id}
+                        </TableCell>
+                        <TableCell>
+                          <span className="font-medium">{item.name}</span>
+                        </TableCell>
+                        <TableCell>
+                          <span className="text-sm text-muted-foreground line-clamp-1 max-w-md">
+                            {item.description}
+                          </span>
+                        </TableCell>
+                        <TableCell>
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                            {categoryName || "—"}
+                          </span>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex flex-wrap gap-1">
+                            {item.tags && item.tags.length > 0 ? (
+                              item.tags.slice(0, 3).map((tag: any) => (
+                                <span
+                                  key={tag.id}
+                                  className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-700"
+                                >
+                                  {tag.name}
+                                </span>
+                              ))
+                            ) : (
+                              <span className="text-xs text-muted-foreground">
+                                —
                               </span>
-                            ))
-                          ) : (
-                            <span className="text-xs text-muted-foreground">
-                              —
-                            </span>
-                          )}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1">
-                          <ResourceDetailsModal
-                            resource={resource}
-                            openButton={
-                              <button
-                                title={t(
-                                  "categoryBank.table.viewDetails",
-                                  "View Details",
-                                )}
-                                className="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
-                              >
-                                <Eye className="h-3.5 w-3.5" />
-                              </button>
-                            }
-                          />
+                            )}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1">
+                            <TagsManagerModal
+                              type={"resource"}
+                              itemId={item.id}
+                              itemName={item.name}
+                              initialTags={item.tags ?? []}
+                              openButton={
+                                <button
+                                  title={t(
+                                    "categoryBank.table.manageTags",
+                                    "Manage Tags",
+                                  )}
+                                  className="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors"
+                                >
+                                  <Tag className="h-3.5 w-3.5" />
+                                </button>
+                              }
+                            />
 
-                          <ResourceFormModal
-                            initialValues={{
-                              name: resource.name,
-                              description: resource.description,
-                              categoryId: resource.category?.id ?? 0,
-                            }}
-                            onConfirm={(data) =>
-                              updateResource({ id: resource.id, ...data })
-                            }
-                            openButton={
-                              <button
-                                title={t("categoryBank.table.edit", "Edit")}
-                                className="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
-                              >
-                                <Pencil className="h-3.5 w-3.5" />
-                              </button>
-                            }
-                          />
+                            <ResourceDetailsModal
+                              resource={item as any}
+                              openButton={
+                                <button
+                                  title={t(
+                                    "categoryBank.table.viewDetails",
+                                    "View Details",
+                                  )}
+                                  className="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+                                >
+                                  <Eye className="h-3.5 w-3.5" />
+                                </button>
+                              }
+                            />
 
-                          <ConfirmDelete
-                            item={resource.name}
-                            onConfirm={() => deleteResource(resource.id)}
-                            openButton={
-                              <button
-                                title={t("categoryBank.table.delete", "Delete")}
-                                className="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
-                              >
-                                <Trash2 className="h-3.5 w-3.5" />
-                              </button>
-                            }
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                            <ResourceFormModal
+                              initialValues={{
+                                name: item.name,
+                                description: item.description,
+                                categoryId: (item as any).category?.id ?? 0,
+                              }}
+                              onConfirm={(data) =>
+                                updateResource({ id: item.id, ...data })
+                              }
+                              openButton={
+                                <button
+                                  title={t("categoryBank.table.edit", "Edit")}
+                                  className="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+                                >
+                                  <Pencil className="h-3.5 w-3.5" />
+                                </button>
+                              }
+                            />
+
+                            <ConfirmDelete
+                              item={item.name}
+                              onConfirm={() => deleteResource(item.id)}
+                              openButton={
+                                <button
+                                  title={t(
+                                    "categoryBank.table.delete",
+                                    "Delete",
+                                  )}
+                                  className="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                                >
+                                  <Trash2 className="h-3.5 w-3.5" />
+                                </button>
+                              }
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
 
               {!isLoading && !isPending && allItems.length === 0 && (
                 <TableRow>

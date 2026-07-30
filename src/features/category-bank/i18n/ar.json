@@ -55,8 +55,7 @@
       "viewDetails": "عرض التفاصيل",
       "manageTags": "إدارة الوسوم",
       "totalCategories": "{{count}} فئة إجمالاً",
-      "searchCategoriesPlaceholder": "بحث في الفئات...",
-      "tags": "الوسوم"
+      "searchCategoriesPlaceholder": "بحث في الفئات..."
     },
     "rejectModal": {
       "title": "رفض الطلب",
@@ -128,6 +127,7 @@
       "title": "إدارة الوسوم",
       "placeholder": "أدخل وسم جديد...",
       "noTags": "لم تُضف أي وسوم بعد.",
+      "addNew": "أضف تاغ جديد او موجود بالفعل",
       "actions": {
         "confirm": "حفظ الوسوم"
       }

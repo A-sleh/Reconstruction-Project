@@ -46,7 +46,6 @@
       "toDate": "To date",
       "toSeparator": "to",
       "type": "Type",
-      "tags": "Tags",
       "noTags": "—",
       "usageCount": "Usage",
       "addCategory": "Add Category",
@@ -128,6 +127,7 @@
       "title": "Manage Tags",
       "placeholder": "Enter new tag...",
       "noTags": "No tags added yet.",
+      "addNew": "Add or search tags",
       "actions": {
         "confirm": "Save Tags"
       }
