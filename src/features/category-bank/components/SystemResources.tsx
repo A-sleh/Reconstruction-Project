@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Inbox, Search } from "lucide-react";
+import EmptyState from "@/components/common/EmptyState";
+import LoadMoreButton from "@/components/shared/LoadMoreButton";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/Skeleton";
 import {
@@ -12,18 +11,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useDebounce } from "@/hooks/useDebounce";
-import LoadMoreButton from "@/components/shared/LoadMoreButton";
+import { Inbox, Search } from "lucide-react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useResourcesInfinite } from "../api/quertes";
 import CategoryFilter from "./CategoryFilter";
-import EmptyState from "@/components/common/EmptyState";
-import { useWorkSiteResourcesInfinite } from "@/features/work-site-items/api/queries";
-import { useParams } from "react-router";
 
 const SKELETON_ROWS = 5;
 
 const SystemResources = () => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
-  const { siteId } = useParams();
 
   const [search, setSearch] = useState("");
   const [categoryId, setCategoryId] = useState<number | "all">("all");
@@ -37,10 +35,9 @@ const SystemResources = () => {
     isFetchingNextPage,
     isPending,
     isLoading,
-  } = useWorkSiteResourcesInfinite({
+  } = useResourcesInfinite({
     search: debouncedSearch ?? undefined,
     categoryId: categoryId ?? "all",
-    workSiteId: Number(siteId),
   });
 
   const allItems = resourcesData?.pages.flatMap((page) => page.data) ?? [];
