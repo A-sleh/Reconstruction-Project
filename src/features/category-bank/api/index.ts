@@ -10,6 +10,9 @@ export enum BankItemController {
 
   // Bank Categories & Resources
   BankCategories = `${BASE_BANK_ROUTE}/get-bank-categories`,
+  CreateCategory = `${BASE_BANK_ROUTE}/category`,
+  UpdateCategory = `${BASE_BANK_ROUTE}/category`,
+  DeleteCategory = `${BASE_BANK_ROUTE}/category`,
   Resources = `${BASE_BANK_ROUTE}/get-resources`,
   Services = `${BASE_BANK_ROUTE}/get-services`,
 }
@@ -33,5 +36,10 @@ export const MUTATION_KEYS = {
     reject: () => ["bankItems", "reject"],
     approve: () => ["bankItems", "approve"],
     add: () => ["bankItems", "add"],
+  },
+  category: {
+    create: () => ["categoryBank", "category", "create"],
+    update: () => ["categoryBank", "category", "update"],
+    delete: () => ["categoryBank", "category", "delete"],
   },
 };

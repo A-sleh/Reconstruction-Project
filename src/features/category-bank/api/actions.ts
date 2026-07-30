@@ -6,6 +6,7 @@ import {
   RejectRequestParams,
   ApproveRequestParams,
   AddRequestParams,
+  CategoryPayload,
 } from "./types";
 
 // ==========================================
@@ -81,6 +82,68 @@ export const useAddBankItemRequest = () => {
     mutationFn: addRequest,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
+    },
+  });
+};
+
+// ==========================================
+// Bank Category CRUD
+// ==========================================
+const createCategoryApi = async (payload: CategoryPayload): Promise<CategoryPayload> => {
+  const { data } = await ApiInstance.post(
+    `/${BankItemController.CreateCategory}`,
+    payload,
+  );
+  return data;
+};
+
+const updateCategoryApi = async ({
+  id,
+  ...payload
+}: CategoryPayload & { id: number }): Promise<CategoryPayload> => {
+  const { data } = await ApiInstance.put(
+    `/${BankItemController.UpdateCategory}/${id}`,
+    payload,
+  );
+  return data;
+};
+
+const deleteCategoryApi = async (id: number) => {
+  const { data } = await ApiInstance.delete(
+    `/${BankItemController.DeleteCategory}/${id}`,
+  );
+  return data;
+};
+
+export const useCreateCategory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.category.create(),
+    mutationFn: createCategoryApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankCategories });
+    },
+  });
+};
+
+export const useUpdateCategory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.category.update(),
+    mutationFn: updateCategoryApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankCategories });
+    },
+  });
+};
+
+export const useDeleteCategory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.category.delete(),
+    mutationFn: deleteCategoryApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankCategories });
     },
   });
 };

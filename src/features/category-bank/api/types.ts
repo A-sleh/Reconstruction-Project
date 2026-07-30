@@ -70,6 +70,10 @@ export interface Category {
   name: string;
 }
 
+export interface CategoryPayload {
+  name: string;
+}
+
 export interface BankCategories {
   categories: Category[];
 }
