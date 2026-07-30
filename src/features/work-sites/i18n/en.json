@@ -243,5 +243,10 @@
     "delete-description-prefix": "This will permanently remove ",
     "btn-delete-confirm": "Delete",
     "viewOnMap": "View on Map"
+  },
+  "serviceProvider": {
+    "workSite": {
+      "workSitesDescOfHeader": "Manage your services and resources across all work sites."
+    }
   }
 }
