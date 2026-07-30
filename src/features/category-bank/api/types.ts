@@ -3,7 +3,12 @@ import { Paginated } from "@/types";
 // ============================================================================
 // Shared Enums & Types
 // ============================================================================
-export type BankItemStatus = "Pending" | "Rejected" | "Resolved" | "Accepted" | "All";
+export type BankItemStatus =
+  | "Pending"
+  | "Rejected"
+  | "Resolved"
+  | "Accepted"
+  | "All";
 
 // ============================================================================
 // Core Entities
@@ -84,6 +89,7 @@ export interface PureResource {
   imageURL: string;
   description: string;
   category: Category;
+  tags: Tag[];
   price: number;
   isAvailable: boolean;
   unit: string;
@@ -92,6 +98,7 @@ export interface PureResource {
 export interface Service {
   id: number;
   name: string;
+  tags: Tag[];
   description: string;
   serviceType: Category;
 }

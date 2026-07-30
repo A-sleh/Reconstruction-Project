@@ -21,7 +21,7 @@
       "owner": "Owner",
       "category": "Category",
       "date": "Date",
-      "actions": "Actions",
+      "actionsHead": "Actions",
       "reject": "Reject",
       "approve": "Approve",
       "resolve": "Resolve",
@@ -55,7 +55,8 @@
       "viewDetails": "View Details",
       "manageTags": "Manage Tags",
       "totalCategories": "{{count}} categories total",
-      "searchCategoriesPlaceholder": "Search categories..."
+      "searchCategoriesPlaceholder": "Search categories...",
+      "tags": "Tags"
     },
     "rejectModal": {
       "title": "Reject Request",
@@ -114,6 +115,7 @@
     },
     "detailsModal": {
       "title": "Category Details",
+      "resourceTitle": "Resource Details",
       "name": "Name",
       "description": "Description",
       "type": "Type",
@@ -173,7 +175,8 @@
         "description": "Description",
         "category": "Category",
         "empty": "No resources found.",
-        "totalResources": "{{count}} resources total"
+        "totalResources": "{{count}} resources total",
+        "tags": "Tags"
       }
     },
     "systemServices": {

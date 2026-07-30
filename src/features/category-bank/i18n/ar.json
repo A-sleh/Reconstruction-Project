@@ -21,7 +21,7 @@
       "owner": "المالك",
       "category": "الفئة",
       "date": "التاريخ",
-      "actions": "الإجراءات",
+      "actionsHead": "الإجراءات",
       "reject": "رفض",
       "approve": "موافقة",
       "resolve": "حل",
@@ -55,7 +55,8 @@
       "viewDetails": "عرض التفاصيل",
       "manageTags": "إدارة الوسوم",
       "totalCategories": "{{count}} فئة إجمالاً",
-      "searchCategoriesPlaceholder": "بحث في الفئات..."
+      "searchCategoriesPlaceholder": "بحث في الفئات...",
+      "tags": "الوسوم"
     },
     "rejectModal": {
       "title": "رفض الطلب",
@@ -114,6 +115,7 @@
     },
     "detailsModal": {
       "title": "تفاصيل الفئة",
+      "resourceTitle": "تفاصيل المورد",
       "name": "الاسم",
       "description": "الوصف",
       "type": "النوع",
@@ -173,7 +175,8 @@
         "description": "الوصف",
         "category": "الفئة",
         "empty": "لم يتم العثور على موارد.",
-        "totalResources": "{{count}} مورد إجمالاً"
+        "totalResources": "{{count}} مورد إجمالاً",
+        "tags": "الوسوم"
       }
     },
     "systemServices": {
