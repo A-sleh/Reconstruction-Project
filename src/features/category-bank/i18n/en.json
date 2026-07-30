@@ -115,6 +115,7 @@
     "detailsModal": {
       "title": "Category Details",
       "resourceTitle": "Resource Details",
+      "serviceTitle": "Service Details",
       "name": "Name",
       "description": "Description",
       "type": "Type",
@@ -181,11 +182,15 @@
     },
     "systemServices": {
       "searchPlaceholder": "Search services...",
-      "empty": "No services found.",
-      "columns": {
+      "filterByCategory": "Filter by category",
+      "allCategories": "All Categories",
+      "table": {
+        "id": "ID",
         "name": "Name",
         "description": "Description",
-        "category": "Category"
+        "category": "Category",
+        "empty": "No services found.",
+        "totalServices": "{{count}} services total"
       }
     }
   }

@@ -115,6 +115,7 @@
     "detailsModal": {
       "title": "تفاصيل الفئة",
       "resourceTitle": "تفاصيل المورد",
+      "serviceTitle": "تفاصيل الخدمة",
       "name": "الاسم",
       "description": "الوصف",
       "type": "النوع",
@@ -181,11 +182,15 @@
     },
     "systemServices": {
       "searchPlaceholder": "بحث في الخدمات...",
-      "empty": "لم يتم العثور على خدمات.",
-      "columns": {
+      "filterByCategory": "تصفية حسب الفئة",
+      "allCategories": "جميع الفئات",
+      "table": {
+        "id": "المعرف",
         "name": "الاسم",
         "description": "الوصف",
-        "category": "الفئة"
+        "category": "الفئة",
+        "empty": "لم يتم العثور على خدمات.",
+        "totalServices": "{{count}} خدمة إجمالاً"
       }
     }
   }
