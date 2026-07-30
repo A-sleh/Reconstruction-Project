@@ -4,6 +4,7 @@
       "pendingRequests": "Pending Requests",
       "allResources": "All resources",
       "allServices": "All services",
+      "categories": "All categories",
       "allCategoriesPlaceholder": "All categories view coming soon."
     },
     "kpi": {
@@ -138,7 +139,13 @@
       "resolveError": "Failed to resolve request",
       "cancelSuccess": "Request cancelled successfully",
       "cancelError": "Failed to cancel request",
-      "cancelledByAdmin": "Cancelled by admin"
+      "cancelledByAdmin": "Cancelled by admin",
+      "createSuccess": "Category created",
+      "createError": "Failed to create category",
+      "updateSuccess": "Category updated",
+      "updateError": "Failed to update category",
+      "deleteSuccess": "Category deleted",
+      "deleteError": "Failed to delete category"
     },
     "systemResources": {
       "searchPlaceholder": "Search resources...",

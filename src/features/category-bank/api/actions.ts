@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
+import i18n from "@/lib/i18n";
+import { errorToast, successToast } from "@/components/common/Toast";
 import { BankItemController, QUERY_KEYS, MUTATION_KEYS } from ".";
 import {
   ResolveRequestParams,
@@ -122,6 +124,10 @@ export const useCreateCategory = () => {
     mutationFn: createCategoryApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankCategories });
+      successToast(i18n.t("categoryBank.toast.createSuccess", "Category created"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.createError", "Failed to create category"));
     },
   });
 };
@@ -133,6 +139,10 @@ export const useUpdateCategory = () => {
     mutationFn: updateCategoryApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankCategories });
+      successToast(i18n.t("categoryBank.toast.updateSuccess", "Category updated"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.updateError", "Failed to update category"));
     },
   });
 };
@@ -144,6 +154,10 @@ export const useDeleteCategory = () => {
     mutationFn: deleteCategoryApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankCategories });
+      successToast(i18n.t("categoryBank.toast.deleteSuccess", "Category deleted"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.deleteError", "Failed to delete category"));
     },
   });
 };

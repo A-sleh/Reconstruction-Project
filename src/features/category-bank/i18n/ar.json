@@ -4,6 +4,7 @@
       "pendingRequests": "الطلبات المعلقة",
       "allResources": "جميع موارد النظام",
       "allServices": "جميع خدمات النظام",
+      "categories": "جميع الفئات",
       "allCategoriesPlaceholder": "عرض جميع الفئات قادم قريباً."
     },
     "kpi": {
@@ -138,7 +139,13 @@
       "resolveError": "فشل حل الطلب",
       "cancelSuccess": "تم إلغاء الطلب بنجاح",
       "cancelError": "فشل إلغاء الطلب",
-      "cancelledByAdmin": "تم الإلغاء من قبل المسؤول"
+      "cancelledByAdmin": "تم الإلغاء من قبل المسؤول",
+      "createSuccess": "تم إنشاء الفئة بنجاح",
+      "createError": "فشل إنشاء الفئة",
+      "updateSuccess": "تم تحديث الفئة بنجاح",
+      "updateError": "فشل تحديث الفئة",
+      "deleteSuccess": "تم حذف الفئة بنجاح",
+      "deleteError": "فشل حذف الفئة"
     },
     "systemResources": {
       "searchPlaceholder": "بحث في الموارد...",
