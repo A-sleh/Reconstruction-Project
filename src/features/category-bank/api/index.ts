@@ -15,6 +15,7 @@ export enum BankItemController {
   DeleteCategory = `${BASE_BANK_ROUTE}/category`,
   Resources = `${BASE_BANK_ROUTE}/get-resources`,
   Services = `${BASE_BANK_ROUTE}/get-services`,
+  BankStat = `${BASE_BANK_ROUTE}/stat`,
 }
 
 export const QUERY_KEYS = {
@@ -28,6 +29,7 @@ export const QUERY_KEYS = {
   resources: ["categoryBank", "resources"] as const,
   services: ["categoryBank", "services"] as const,
   bankCategories: ["categoryBank", "bank-categories"] as const,
+  bankStat: ["categoryBank", "stat"] as const,
 };
 
 export const MUTATION_KEYS = {

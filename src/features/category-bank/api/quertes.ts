@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
 import { BankItemController, QUERY_KEYS } from ".";
-import { BankItemRequestsResponse, BankItemStatus, BankCategories, Resources, Services } from "./types";
+import { BankItemRequestsResponse, BankItemStatus, BankCategories, Resources, Services, BankStatResponse } from "./types";
 
 // ==========================================
 // Bank Item Requests Fetcher
@@ -102,6 +102,23 @@ export const useBankItemRequests = ({
       }
       return undefined;
     },
+  });
+};
+
+// ==========================================
+// Bank Stat Hook
+// ==========================================
+const fetchBankStat = async (): Promise<BankStatResponse> => {
+  const { data } = await ApiInstance.get<BankStatResponse>(
+    `/${BankItemController.BankStat}`,
+  );
+  return data;
+};
+
+export const useBankStat = () => {
+  return useQuery<BankStatResponse, unknown>({
+    queryKey: QUERY_KEYS.bankStat,
+    queryFn: fetchBankStat,
   });
 };
 

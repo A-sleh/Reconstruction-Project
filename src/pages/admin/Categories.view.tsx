@@ -13,12 +13,7 @@ const Categories = () => {
   return (
     <div className="min-h-screen bg-background">
       <section className="container py-8 space-y-8">
-        <BankCategoryKPISection
-          totalCategories={12}
-          pendingRequests={6}
-          totalResources={45}
-          serviceCategories={8}
-        />
+        <BankCategoryKPISection />
 
         <Tabs
           defaultValue="pending"

@@ -98,3 +98,9 @@ export interface Service {
 
 export interface Resources extends Paginated<PureResource> {}
 export interface Services extends Paginated<Service> {}
+
+export interface BankStatResponse {
+  totalResourcesBank: number;
+  totalServicesBank: number;
+  totalUpcomingRequest: number;
+}
