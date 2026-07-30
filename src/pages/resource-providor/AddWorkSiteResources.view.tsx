@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { NewResourceForm } from "@/features/work-site-items/components/NewResourceForm";
 import {
   Resource,
+  useAddServices,
   useCreateResource,
 } from "@/features/work-site-items/api/actions";
 import { paths } from "@/config/paths";
@@ -11,6 +12,7 @@ import { AddResourcesHeader } from "@/features/work-site-items/components/AddRes
 import { AddedResourcesList } from "@/features/work-site-items/components/AddedResourcesList";
 import useAuthStore, { User } from "@/stores/useAuthStore";
 import { getRolePrefix } from "@/features/work-site-items/components/NewResorceRequestModel";
+import { ServiceItem } from "@/features/work-site-items/api/types";
 
 type LocalResource = Resource & { id: string };
 
@@ -19,7 +21,8 @@ const AddWorkSiteResources = () => {
   const isArabic = i18n.language === "ar";
   const { siteId = "" } = useParams();
   const navigate = useNavigate();
-  const providerRole = useAuthStore((s) => (s.user as User)?.providerRole) ?? "Resource";
+  const providerRole =
+    useAuthStore((s) => (s.user as User)?.providerRole) ?? "Resource";
   const rolePrefix = getRolePrefix(providerRole);
 
   const [resources, setResources] = useState<LocalResource[]>([]);
@@ -32,7 +35,8 @@ const AddWorkSiteResources = () => {
 
   const { mutate: submitResources, isPending: isSubmitting } =
     useCreateResource();
-    
+  const { mutate: submitServices, isPending: isServicesAdding } =
+    useAddServices();
 
   const handleResourceSubmit = (values: Resource) => {
     if (selected) {
@@ -69,14 +73,36 @@ const AddWorkSiteResources = () => {
   const handleSubmitAll = () => {
     if (!siteId || resources.length === 0) return;
 
-    submitResources(
-      { resources, workSiteId: siteId },
-      {
-        onSuccess: () => {
-          navigate(paths.app.resourceProvidor.workSite.getHref(siteId));
+    if (providerRole == "Resource") {
+      submitResources(
+        { resources, workSiteId: siteId },
+        {
+          onSuccess: () => {
+            navigate(paths.app.resourceProvidor.workSite.getHref(siteId));
+          },
         },
-      },
-    );
+      );
+    } else {
+      submitServices(
+        {
+          services: resources.map(
+            (item) =>
+              ({
+                description: item.description,
+                imageId: item.imageId,
+                price: item.price,
+                serviceBankId: item.resourceBankId,
+              }) as unknown as ServiceItem,
+          ),
+          workSiteId: siteId,
+        },
+        {
+          onSuccess: () => {
+            navigate(paths.app.resourceProvidor.workSite.getHref(siteId));
+          },
+        },
+      );
+    }
   };
 
   return (
@@ -85,7 +111,7 @@ const AddWorkSiteResources = () => {
         rolePrefix={rolePrefix}
         hasSelection={!!selected?.id}
         resourceCount={resources.length}
-        isSubmitting={isSubmitting}
+        isSubmitting={isSubmitting || isServicesAdding}
         onBack={() => navigate(-1)}
         onAddAnother={handleClearSelection}
         onSubmitAll={handleSubmitAll}

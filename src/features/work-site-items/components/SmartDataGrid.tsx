@@ -17,8 +17,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/Badge";
-import { useBankCategories, useResourcesInfinite } from "@/features/category-bank/api/quertes";
+import { useBankCategories, useResourcesInfinite, useServicesInfinite } from "@/features/category-bank/api/quertes";
 import { Label } from "@/components/ui/Label";
+import useAuthStore, { User } from "@/stores/useAuthStore";
 
 export interface OptionItem {
   id: number | string;
@@ -39,7 +40,6 @@ export function DynamicAsyncSelector({
   onSelect,
   value,
 }: DynamicAsyncSelectorProps) {
-  console.log("value: ", value);
   const { t } = useTranslation();
   const placeholderText =
     placeholder ||
@@ -82,14 +82,17 @@ export function DynamicAsyncSelector({
     return () => clearTimeout(timer);
   }, [search]);
 
-  // ================= 3. جلب الموارد (Infinite Scroll) =================
+  // ================= 3. جلب الموارد/الخدمات (Infinite Scroll) =================
+  const providerRole = useAuthStore((s) => (s.user as User)?.providerRole) ?? "Resource";
+  const useInfiniteHook = providerRole === "Service" ? useServicesInfinite : useResourcesInfinite;
+
   const {
     data: resourcesData,
     fetchNextPage,
     hasNextPage,
     isFetching,
     isFetchingNextPage,
-  } = useResourcesInfinite({
+  } = useInfiniteHook({
     search: debouncedSearch,
     categoryId: selectedCategory,
   });

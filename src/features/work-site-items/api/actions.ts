@@ -116,6 +116,16 @@ const createResourceApi = async (
   return data;
 };
 
+const addServicesApi = async (
+  payload: ServicesPayload,
+): Promise<ServicesPayload> => {
+  const { data } = await ApiInstance.post(
+    `/${WorkSiteItemsController.AddServices}`,
+    payload,
+  );
+  return data;
+};
+
 const deleteWorksiteItem = async ({
   Id,
   ItemType,
@@ -176,15 +186,6 @@ export const useCreateResource = () => {
   });
 };
 
-const addServicesApi = async (
-  payload: ServicesPayload,
-): Promise<ServicesPayload> => {
-  const { data } = await ApiInstance.post(
-    `/${WorkSiteItemsController.AddServices}`,
-    payload,
-  );
-  return data;
-};
 
 export const useAddServices = () => {
   return useMutation({
