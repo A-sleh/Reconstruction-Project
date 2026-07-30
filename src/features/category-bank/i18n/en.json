@@ -145,7 +145,11 @@
       "updateSuccess": "Category updated",
       "updateError": "Failed to update category",
       "deleteSuccess": "Category deleted",
-      "deleteError": "Failed to delete category"
+      "deleteError": "Failed to delete category",
+      "tagsAdded": "Tags added",
+      "tagsAddError": "Failed to add tags",
+      "tagsRemoved": "Tags removed",
+      "tagsRemoveError": "Failed to remove tags"
     },
     "systemResources": {
       "searchPlaceholder": "Search resources...",

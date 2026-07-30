@@ -9,6 +9,10 @@ import {
   ApproveRequestParams,
   AddRequestParams,
   CategoryPayload,
+  AddResourceTagsParams,
+  AddServiceTagsParams,
+  RemoveResourceTagsParams,
+  RemoveServiceTagsParams,
 } from "./types";
 
 // ==========================================
@@ -143,6 +147,101 @@ export const useUpdateCategory = () => {
     },
     onError: () => {
       errorToast(i18n.t("categoryBank.toast.updateError", "Failed to update category"));
+    },
+  });
+};
+
+// ==========================================
+// Tags Mutations
+// ==========================================
+const addResourceTagsApi = async (payload: AddResourceTagsParams) => {
+  const { data } = await ApiInstance.post(
+    `/${BankItemController.AddResourceTags}`,
+    payload,
+  );
+  return data;
+};
+
+const addServiceTagsApi = async (payload: AddServiceTagsParams) => {
+  const { data } = await ApiInstance.post(
+    `/${BankItemController.AddServiceTags}`,
+    payload,
+  );
+  return data;
+};
+
+const removeResourceTagsApi = async (payload: RemoveResourceTagsParams) => {
+  const { data } = await ApiInstance.delete(
+    `/${BankItemController.RemoveResourceTags}`,
+    { data: payload },
+  );
+  return data;
+};
+
+const removeServiceTagsApi = async (payload: RemoveServiceTagsParams) => {
+  const { data } = await ApiInstance.delete(
+    `/${BankItemController.RemoveServiceTags}`,
+    { data: payload },
+  );
+  return data;
+};
+
+export const useAddResourceTags = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.tags.addResource(),
+    mutationFn: addResourceTagsApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
+      successToast(i18n.t("categoryBank.toast.tagsAdded", "Tags added"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.tagsAddError", "Failed to add tags"));
+    },
+  });
+};
+
+export const useAddServiceTags = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.tags.addService(),
+    mutationFn: addServiceTagsApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.services });
+      successToast(i18n.t("categoryBank.toast.tagsAdded", "Tags added"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.tagsAddError", "Failed to add tags"));
+    },
+  });
+};
+
+export const useRemoveResourceTags = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.tags.removeResource(),
+    mutationFn: removeResourceTagsApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
+      successToast(i18n.t("categoryBank.toast.tagsRemoved", "Tags removed"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.tagsRemoveError", "Failed to remove tags"));
+    },
+  });
+};
+
+export const useRemoveServiceTags = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.tags.removeService(),
+    mutationFn: removeServiceTagsApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.services });
+      successToast(i18n.t("categoryBank.toast.tagsRemoved", "Tags removed"));
+    },
+    onError: () => {
+      errorToast(i18n.t("categoryBank.toast.tagsRemoveError", "Failed to remove tags"));
     },
   });
 };

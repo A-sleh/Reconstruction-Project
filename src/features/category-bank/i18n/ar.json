@@ -145,7 +145,11 @@
       "updateSuccess": "تم تحديث الفئة بنجاح",
       "updateError": "فشل تحديث الفئة",
       "deleteSuccess": "تم حذف الفئة بنجاح",
-      "deleteError": "فشل حذف الفئة"
+      "deleteError": "فشل حذف الفئة",
+      "tagsAdded": "تمت إضافة الوسوم",
+      "tagsAddError": "فشل إضافة الوسوم",
+      "tagsRemoved": "تمت إزالة الوسوم",
+      "tagsRemoveError": "فشل إزالة الوسوم"
     },
     "systemResources": {
       "searchPlaceholder": "بحث في الموارد...",

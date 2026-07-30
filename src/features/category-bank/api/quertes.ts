@@ -1,7 +1,7 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
 import { BankItemController, QUERY_KEYS } from ".";
-import { BankItemRequestsResponse, BankItemStatus, BankCategories, Resources, Services, BankStatResponse } from "./types";
+import { BankItemRequestsResponse, BankItemStatus, BankCategories, Resources, Services, BankStatResponse, TagsResponse } from "./types";
 
 // ==========================================
 // Bank Item Requests Fetcher
@@ -168,6 +168,41 @@ export const useResourcesInfinite = ({
   });
 };
 
+
+// ==========================================
+// Tags Queries
+// ==========================================
+const fetchResourceTags = async (search: string): Promise<TagsResponse> => {
+  const { data } = await ApiInstance.get<TagsResponse>(
+    `/${BankItemController.ResourceTags}`,
+    { params: { search } },
+  );
+  return data;
+};
+
+const fetchServiceTags = async (search: string): Promise<TagsResponse> => {
+  const { data } = await ApiInstance.get<TagsResponse>(
+    `/${BankItemController.ServiceTags}`,
+    { params: { search } },
+  );
+  return data;
+};
+
+export const useResourceTags = (search: string) => {
+  return useQuery<TagsResponse, unknown>({
+    queryKey: QUERY_KEYS.resourceTags(search),
+    queryFn: () => fetchResourceTags(search),
+    enabled: search.length > 0,
+  });
+};
+
+export const useServiceTags = (search: string) => {
+  return useQuery<TagsResponse, unknown>({
+    queryKey: QUERY_KEYS.serviceTags(search),
+    queryFn: () => fetchServiceTags(search),
+    enabled: search.length > 0,
+  });
+};
 
 export const useServicesInfinite = ({
   search,

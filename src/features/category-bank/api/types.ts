@@ -104,3 +104,33 @@ export interface BankStatResponse {
   totalServicesBank: number;
   totalUpcomingRequest: number;
 }
+
+// ============================================================================
+// Tags
+// ============================================================================
+export interface Tag {
+  id: number;
+  name: string;
+}
+
+export type TagsResponse = Tag[];
+
+export interface AddResourceTagsParams {
+  resourceId: number;
+  tags: { name: string }[];
+}
+
+export interface AddServiceTagsParams {
+  serviceId: number;
+  tags: { name: string }[];
+}
+
+export interface RemoveResourceTagsParams {
+  resourceId: number;
+  tags: { name: string }[];
+}
+
+export interface RemoveServiceTagsParams {
+  serviceId: number;
+  tags: { name: string }[];
+}
