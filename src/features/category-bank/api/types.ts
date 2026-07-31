@@ -75,9 +75,7 @@ export interface Category {
   name: string;
 }
 
-export interface CategoryPayload {
-  name: string;
-}
+export interface CategoryPayload extends Category {}
 
 export interface BankCategories {
   categories: Category[];

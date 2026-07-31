@@ -1,34 +1,40 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { errorToast, successToast } from "@/components/common/Toast";
 import ApiInstance from "@/config/api-instance";
 import i18n from "@/lib/i18n";
-import { errorToast, successToast } from "@/components/common/Toast";
-import { BankItemController, QUERY_KEYS, MUTATION_KEYS } from ".";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { BankItemController, MUTATION_KEYS, QUERY_KEYS } from ".";
 import {
-  ResolveRequestParams,
-  RejectRequestParams,
-  ApproveRequestParams,
   AddRequestParams,
-  CategoryPayload,
   AddResourceTagsParams,
   AddServiceTagsParams,
+  ApproveRequestParams,
+  CategoryPayload,
+  CreateResourcePayload,
+  CreateServicePayload,
+  RejectRequestParams,
   RemoveResourceTagsParams,
   RemoveServiceTagsParams,
-  CreateServicePayload,
-  UpdateServicePayload,
-  CreateResourcePayload,
+  ResolveRequestParams,
   UpdateResourcePayload,
+  UpdateServicePayload,
 } from "./types";
 
 // ==========================================
 // API Fetchers
 // ==========================================
 const resolveRequest = async (payload: ResolveRequestParams) => {
-  const { data } = await ApiInstance.put(`/${BankItemController.ResolveRequest}`, payload);
+  const { data } = await ApiInstance.put(
+    `/${BankItemController.ResolveRequest}`,
+    payload,
+  );
   return data;
 };
 
 const rejectRequest = async (payload: RejectRequestParams) => {
-  const { data } = await ApiInstance.put(`/${BankItemController.RejectRequest}`, payload);
+  const { data } = await ApiInstance.put(
+    `/${BankItemController.RejectRequest}`,
+    payload,
+  );
   return data;
 };
 
@@ -36,15 +42,15 @@ const approveRequest = async ({ RequestId }: ApproveRequestParams) => {
   const { data } = await ApiInstance.put(
     `/${BankItemController.ApproveRequest}`,
     {},
-    { params: { requestId: RequestId } }
+    { params: { requestId: RequestId } },
   );
   return data;
 };
 
 const addRequest = async (payload: AddRequestParams) => {
   const { data } = await ApiInstance.post(
-    `/${BankItemController.AddRequest}`, 
-    payload
+    `/${BankItemController.AddRequest}`,
+    payload,
   );
   return data;
 };
@@ -99,7 +105,9 @@ export const useAddBankItemRequest = () => {
 // ==========================================
 // Bank Category CRUD
 // ==========================================
-const createCategoryApi = async (payload: CategoryPayload): Promise<CategoryPayload> => {
+const createCategoryApi = async (
+  payload: Omit<CategoryPayload, "id">,
+): Promise<CategoryPayload> => {
   const { data } = await ApiInstance.post(
     `/${BankItemController.CreateCategory}`,
     payload,
@@ -107,12 +115,11 @@ const createCategoryApi = async (payload: CategoryPayload): Promise<CategoryPayl
   return data;
 };
 
-const updateCategoryApi = async ({
-  id,
-  ...payload
-}: CategoryPayload & { id: number }): Promise<CategoryPayload> => {
+const updateCategoryApi = async (
+  payload: CategoryPayload,
+): Promise<CategoryPayload> => {
   const { data } = await ApiInstance.put(
-    `/${BankItemController.UpdateCategory}/${id}`,
+    `/${BankItemController.UpdateCategory}`,
     payload,
   );
   return data;
@@ -120,7 +127,10 @@ const updateCategoryApi = async ({
 
 const deleteCategoryApi = async (id: number) => {
   const { data } = await ApiInstance.delete(
-    `/${BankItemController.DeleteCategory}/${id}`,
+    `/${BankItemController.DeleteCategory}`,
+    {
+      params: { id },
+    },
   );
   return data;
 };
@@ -132,10 +142,14 @@ export const useCreateCategory = () => {
     mutationFn: createCategoryApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankCategories });
-      successToast(i18n.t("categoryBank.toast.createSuccess", "Category created"));
+      successToast(
+        i18n.t("categoryBank.toast.createSuccess", "Category created"),
+      );
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.createError", "Failed to create category"));
+      errorToast(
+        i18n.t("categoryBank.toast.createError", "Failed to create category"),
+      );
     },
   });
 };
@@ -147,10 +161,14 @@ export const useUpdateCategory = () => {
     mutationFn: updateCategoryApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankCategories });
-      successToast(i18n.t("categoryBank.toast.updateSuccess", "Category updated"));
+      successToast(
+        i18n.t("categoryBank.toast.updateSuccess", "Category updated"),
+      );
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.updateError", "Failed to update category"));
+      errorToast(
+        i18n.t("categoryBank.toast.updateError", "Failed to update category"),
+      );
     },
   });
 };
@@ -200,7 +218,9 @@ export const useAddResourceTags = () => {
       successToast(i18n.t("categoryBank.toast.tagsAdded", "Tags added"));
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.tagsAddError", "Failed to add tags"));
+      errorToast(
+        i18n.t("categoryBank.toast.tagsAddError", "Failed to add tags"),
+      );
     },
   });
 };
@@ -215,7 +235,9 @@ export const useAddServiceTags = () => {
       successToast(i18n.t("categoryBank.toast.tagsAdded", "Tags added"));
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.tagsAddError", "Failed to add tags"));
+      errorToast(
+        i18n.t("categoryBank.toast.tagsAddError", "Failed to add tags"),
+      );
     },
   });
 };
@@ -230,7 +252,9 @@ export const useRemoveResourceTags = () => {
       successToast(i18n.t("categoryBank.toast.tagsRemoved", "Tags removed"));
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.tagsRemoveError", "Failed to remove tags"));
+      errorToast(
+        i18n.t("categoryBank.toast.tagsRemoveError", "Failed to remove tags"),
+      );
     },
   });
 };
@@ -245,7 +269,9 @@ export const useRemoveServiceTags = () => {
       successToast(i18n.t("categoryBank.toast.tagsRemoved", "Tags removed"));
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.tagsRemoveError", "Failed to remove tags"));
+      errorToast(
+        i18n.t("categoryBank.toast.tagsRemoveError", "Failed to remove tags"),
+      );
     },
   });
 };
@@ -284,10 +310,17 @@ export const useCreateService = () => {
     mutationFn: createServiceApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.services });
-      successToast(i18n.t("categoryBank.toast.serviceCreated", "Service created"));
+      successToast(
+        i18n.t("categoryBank.toast.serviceCreated", "Service created"),
+      );
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.serviceCreateError", "Failed to create service"));
+      errorToast(
+        i18n.t(
+          "categoryBank.toast.serviceCreateError",
+          "Failed to create service",
+        ),
+      );
     },
   });
 };
@@ -299,10 +332,17 @@ export const useUpdateService = () => {
     mutationFn: updateServiceApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.services });
-      successToast(i18n.t("categoryBank.toast.serviceUpdated", "Service updated"));
+      successToast(
+        i18n.t("categoryBank.toast.serviceUpdated", "Service updated"),
+      );
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.serviceUpdateError", "Failed to update service"));
+      errorToast(
+        i18n.t(
+          "categoryBank.toast.serviceUpdateError",
+          "Failed to update service",
+        ),
+      );
     },
   });
 };
@@ -314,10 +354,17 @@ export const useDeleteService = () => {
     mutationFn: deleteServiceApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.services });
-      successToast(i18n.t("categoryBank.toast.serviceDeleted", "Service deleted"));
+      successToast(
+        i18n.t("categoryBank.toast.serviceDeleted", "Service deleted"),
+      );
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.serviceDeleteError", "Failed to delete service"));
+      errorToast(
+        i18n.t(
+          "categoryBank.toast.serviceDeleteError",
+          "Failed to delete service",
+        ),
+      );
     },
   });
 };
@@ -356,10 +403,17 @@ export const useCreateResourceItem = () => {
     mutationFn: createResourceItemApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
-      successToast(i18n.t("categoryBank.toast.resourceCreated", "Resource created"));
+      successToast(
+        i18n.t("categoryBank.toast.resourceCreated", "Resource created"),
+      );
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.resourceCreateError", "Failed to create resource"));
+      errorToast(
+        i18n.t(
+          "categoryBank.toast.resourceCreateError",
+          "Failed to create resource",
+        ),
+      );
     },
   });
 };
@@ -371,10 +425,17 @@ export const useUpdateResourceItem = () => {
     mutationFn: updateResourceItemApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
-      successToast(i18n.t("categoryBank.toast.resourceUpdated", "Resource updated"));
+      successToast(
+        i18n.t("categoryBank.toast.resourceUpdated", "Resource updated"),
+      );
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.resourceUpdateError", "Failed to update resource"));
+      errorToast(
+        i18n.t(
+          "categoryBank.toast.resourceUpdateError",
+          "Failed to update resource",
+        ),
+      );
     },
   });
 };
@@ -386,10 +447,17 @@ export const useDeleteResourceItem = () => {
     mutationFn: deleteResourceItemApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
-      successToast(i18n.t("categoryBank.toast.resourceDeleted", "Resource deleted"));
+      successToast(
+        i18n.t("categoryBank.toast.resourceDeleted", "Resource deleted"),
+      );
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.resourceDeleteError", "Failed to delete resource"));
+      errorToast(
+        i18n.t(
+          "categoryBank.toast.resourceDeleteError",
+          "Failed to delete resource",
+        ),
+      );
     },
   });
 };
@@ -401,10 +469,14 @@ export const useDeleteCategory = () => {
     mutationFn: deleteCategoryApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankCategories });
-      successToast(i18n.t("categoryBank.toast.deleteSuccess", "Category deleted"));
+      successToast(
+        i18n.t("categoryBank.toast.deleteSuccess", "Category deleted"),
+      );
     },
     onError: () => {
-      errorToast(i18n.t("categoryBank.toast.deleteError", "Failed to delete category"));
+      errorToast(
+        i18n.t("categoryBank.toast.deleteError", "Failed to delete category"),
+      );
     },
   });
 };
