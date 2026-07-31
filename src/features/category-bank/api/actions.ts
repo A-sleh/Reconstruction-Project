@@ -298,7 +298,7 @@ const updateServiceApi = async (payload: UpdateServicePayload) => {
 const deleteServiceApi = async (serviceBankId: number) => {
   const { data } = await ApiInstance.delete(
     `/${BankItemController.DeleteService}`,
-    { params: { serviceBankId } },
+    { params: { BankId: serviceBankId } },
   );
   return data;
 };
@@ -391,7 +391,7 @@ const updateResourceItemApi = async (payload: UpdateResourcePayload) => {
 const deleteResourceItemApi = async (resourceBankId: number) => {
   const { data } = await ApiInstance.delete(
     `/${BankItemController.DeleteResource}`,
-    { params: { resourceBankId } },
+    { params: { BankId: resourceBankId } },
   );
   return data;
 };

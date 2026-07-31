@@ -26,12 +26,12 @@ export enum BankItemController {
   RemoveServiceTags = `${BASE_BANK_ROUTE}/remove-service-tags`,
 
   // Bank Item CRUD
-  AddService = `${BASE_BANK_ROUTE}/add-service`,
-  UpdateService = `${BASE_BANK_ROUTE}/add-service`,
-  DeleteService = `${BASE_BANK_ROUTE}/add-service`,
-  AddResource = `${BASE_BANK_ROUTE}/add-resource`,
-  UpdateResource = `${BASE_BANK_ROUTE}/add-resource`,
-  DeleteResource = `${BASE_BANK_ROUTE}/add-resource`,
+  AddService = `${BASE_BANK_ROUTE}/create-service-bank`,
+  UpdateService = `${BASE_BANK_ROUTE}/update-service-bank`,
+  DeleteService = `${BASE_BANK_ROUTE}/delete-service-bank`,
+  AddResource = `${BASE_BANK_ROUTE}/create-resource-bank`,
+  UpdateResource = `${BASE_BANK_ROUTE}/update-resource-bank`,
+  DeleteResource = `${BASE_BANK_ROUTE}/delete-resource-bank`,
 }
 
 export const QUERY_KEYS = {
