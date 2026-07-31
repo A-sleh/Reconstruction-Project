@@ -49,8 +49,14 @@ export function TagsManagerModal({
     if (toAdd.length > 0) {
       addTags(
         type === "resource"
-          ? { resourceId: itemId, tags: toAdd.map((t) => ({ name: t.name })) }
-          : { serviceId: itemId, tags: toAdd.map((t) => ({ name: t.name })) },
+          ? {
+              resourceBankId: itemId,
+              tags: toAdd.map((t) => ({ name: t.name })),
+            }
+          : {
+              serviceBankId: itemId,
+              tags: toAdd.map((t) => ({ name: t.name })),
+            },
       );
     }
 
@@ -58,16 +64,17 @@ export function TagsManagerModal({
       removeTags(
         type === "resource"
           ? {
-              resourceId: itemId,
+              resourceBankId: itemId,
               tags: toRemove.map((t) => ({ name: t.name })),
             }
           : {
-              serviceId: itemId,
+              serviceBankId: itemId,
               tags: toRemove.map((t) => ({ name: t.name })),
             },
       );
     }
 
+    setTags([]);
     closeModal();
   };
 

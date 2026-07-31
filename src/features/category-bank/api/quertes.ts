@@ -1,7 +1,15 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { BankItemController, QUERY_KEYS } from ".";
-import { BankItemRequestsResponse, BankItemStatus, BankCategories, Resources, Services, BankStatResponse, TagsResponse } from "./types";
+import {
+  BankCategories,
+  BankItemRequestsResponse,
+  BankItemStatus,
+  BankStatResponse,
+  Resources,
+  Services,
+  TagsResponse,
+} from "./types";
 
 // ==========================================
 // Bank Item Requests Fetcher
@@ -15,7 +23,7 @@ const getBankItemRequests = async (
     `/${BankItemController.GetAllRequests}`,
     {
       params: { PageNumber: pageNumber, PageSize: pageSize, ...filters },
-    }
+    },
   );
   return data;
 };
@@ -29,7 +37,6 @@ const fetchResourceCategoriesAPI = async (): Promise<BankCategories> => {
   );
   return data;
 };
-
 
 const fetchResourceApi = async ({
   CategoryId,
@@ -50,7 +57,6 @@ const fetchResourceApi = async ({
   );
   return data;
 };
-
 
 const fetchServiceApi = async ({
   CategoryId,
@@ -85,7 +91,12 @@ export const useBankItemRequests = ({
   status?: BankItemStatus;
 } = {}) => {
   return useInfiniteQuery<BankItemRequestsResponse, Error>({
-    queryKey: [...QUERY_KEYS.bankItems.all, pageSize, search ?? "", status ?? ""],
+    queryKey: [
+      ...QUERY_KEYS.bankItems.all,
+      pageSize,
+      search ?? "",
+      status ?? "",
+    ],
 
     queryFn: async ({ pageParam = 0 }) => {
       return await getBankItemRequests(pageParam as number, pageSize, {
@@ -168,39 +179,62 @@ export const useResourcesInfinite = ({
   });
 };
 
-
 // ==========================================
 // Tags Queries
 // ==========================================
-const fetchResourceTags = async (search: string): Promise<TagsResponse> => {
+const fetchResourceTags = async (
+  search: string,
+  pageNumber: number,
+  pageSize: number,
+): Promise<TagsResponse> => {
   const { data } = await ApiInstance.get<TagsResponse>(
     `/${BankItemController.ResourceTags}`,
-    { params: { search } },
+    { params: { search, PageNumber: pageNumber, PageSize: pageSize } },
   );
   return data;
 };
 
-const fetchServiceTags = async (search: string): Promise<TagsResponse> => {
+const fetchServiceTags = async (
+  search: string,
+  pageNumber: number,
+  pageSize: number,
+): Promise<TagsResponse> => {
   const { data } = await ApiInstance.get<TagsResponse>(
     `/${BankItemController.ServiceTags}`,
-    { params: { search } },
+    { params: { search, PageNumber: pageNumber, PageSize: pageSize } },
   );
   return data;
 };
 
 export const useResourceTags = (search: string) => {
-  return useQuery<TagsResponse, unknown>({
+  return useInfiniteQuery<TagsResponse, unknown>({
     queryKey: QUERY_KEYS.resourceTags(search),
-    queryFn: () => fetchResourceTags(search),
+    queryFn: async ({ pageParam = 1 }) =>
+      fetchResourceTags(search, pageParam as number, 10),
     enabled: search.length > 0,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.hasNextPage) {
+        return lastPage.pageNum + 1;
+      }
+      return undefined;
+    },
   });
 };
 
 export const useServiceTags = (search: string) => {
-  return useQuery<TagsResponse, unknown>({
+  return useInfiniteQuery<TagsResponse, unknown>({
     queryKey: QUERY_KEYS.serviceTags(search),
-    queryFn: () => fetchServiceTags(search),
+    queryFn: async ({ pageParam = 1 }) =>
+      fetchServiceTags(search, pageParam as number, 10),
     enabled: search.length > 0,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.hasNextPage) {
+        return lastPage.pageNum + 1;
+      }
+      return undefined;
+    },
   });
 };
 

@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/useDebounce";
 import { X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useResourceTags, useServiceTags } from "../api/quertes";
 import { Tag } from "../api/types";
@@ -24,13 +24,48 @@ export default function TagSearchInput({
   const [open, setOpen] = useState(false);
   const debouncedQuery = useDebounce(query, 300);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
-  const { data: suggestions } = useResourceTags(debouncedQuery);
-  const { data: serviceSuggestions } = useServiceTags(debouncedQuery);
+  const {
+    data: suggestions,
+    fetchNextPage: fetchNextTags,
+    hasNextPage: hasMoreTags,
+    isFetchingNextPage: isFetchingMoreTags,
+  } = useResourceTags(debouncedQuery);
+  const {
+    data: serviceSuggestions,
+    fetchNextPage: fetchNextServiceTags,
+    hasNextPage: hasMoreServiceTags,
+    isFetchingNextPage: isFetchingMoreServiceTags,
+  } = useServiceTags(debouncedQuery);
 
-  const results = type === "resource" ? suggestions : serviceSuggestions;
-  const filtered = (results ?? []).filter(
+  const isResource = type === "resource";
+  const results = isResource ? suggestions : serviceSuggestions;
+  const hasMore = isResource ? hasMoreTags : hasMoreServiceTags;
+  const isLoadingMore = isResource
+    ? isFetchingMoreTags
+    : isFetchingMoreServiceTags;
+  const loadMore = isResource ? fetchNextTags : fetchNextServiceTags;
+
+  const tags = results?.pages.flatMap((page) => page.data) ?? [];
+  const filtered = tags.filter(
     (tag) => !selectedTags.some((st) => st.id === tag.id),
+  );
+
+  const lastItemRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (isLoadingMore) return;
+      if (observerRef.current) observerRef.current.disconnect();
+
+      observerRef.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          loadMore();
+        }
+      });
+
+      if (node) observerRef.current.observe(node);
+    },
+    [isLoadingMore, hasMore, loadMore],
   );
 
   useEffect(() => {
@@ -109,19 +144,27 @@ export default function TagSearchInput({
               {t("categoryBank.tagsModal.noTags", "No matching tags")}
             </div>
           ) : (
-            filtered.map((tag) => (
-              <button
-                key={tag.id}
-                type="button"
-                onClick={() => addTag(tag)}
-                className="w-full text-right px-3 py-2 text-sm hover:bg-gray-50 transition-colors flex items-center justify-between"
-              >
-                <span>{tag.name}</span>
-                <span className="text-xs text-muted-foreground">
-                  ID: {tag.id}
-                </span>
-              </button>
-            ))
+            <div>
+              {filtered.map((tag) => (
+                <button
+                  key={tag.id}
+                  type="button"
+                  onClick={() => addTag(tag)}
+                  className="w-full text-right px-3 py-2 text-sm hover:bg-gray-50 transition-colors flex items-center justify-between"
+                >
+                  <span>{tag.name}</span>
+                  <span className="text-xs text-muted-foreground">
+                    ID: {tag.id}
+                  </span>
+                </button>
+              ))}
+              <div ref={lastItemRef} className="h-px" />
+              {isLoadingMore && (
+                <div className="px-3 py-2 text-center text-xs text-muted-foreground">
+                  {t("categoryBank.tagsModal.loading", "Loading...")}
+                </div>
+              )}
+            </div>
           )}
         </div>
       )}

@@ -15,15 +15,15 @@ export enum BankItemController {
   DeleteCategory = `category/delete`,
   Resources = `${BASE_BANK_ROUTE}/get-resources`,
   Services = `${BASE_BANK_ROUTE}/get-services`,
-  BankStat = `${BASE_BANK_ROUTE}/stat`,
+  BankStat = `${BASE_BANK_ROUTE}/get-statistics`,
 
   // Tags
-  ResourceTags = `${BASE_BANK_ROUTE}/resources/tags`,
-  ServiceTags = `${BASE_BANK_ROUTE}/service/tags`,
-  AddResourceTags = `${BASE_BANK_ROUTE}/resources/add-tags`,
-  AddServiceTags = `${BASE_BANK_ROUTE}/services/add-tags`,
-  RemoveResourceTags = `${BASE_BANK_ROUTE}/resources/remove-tags`,
-  RemoveServiceTags = `${BASE_BANK_ROUTE}/services/remove-tags`,
+  ResourceTags = `${BASE_BANK_ROUTE}/get-resource-tags`,
+  ServiceTags = `${BASE_BANK_ROUTE}/get-service-tags`,
+  AddResourceTags = `${BASE_BANK_ROUTE}/add-resource-tags`,
+  AddServiceTags = `${BASE_BANK_ROUTE}/add-service-tags`,
+  RemoveResourceTags = `${BASE_BANK_ROUTE}/remove-resource-tags`,
+  RemoveServiceTags = `${BASE_BANK_ROUTE}/remove-service-tags`,
 
   // Bank Item CRUD
   AddService = `${BASE_BANK_ROUTE}/add-service`,

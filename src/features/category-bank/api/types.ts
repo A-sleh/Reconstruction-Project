@@ -118,25 +118,25 @@ export interface Tag {
   name: string;
 }
 
-export type TagsResponse = Tag[];
+export interface TagsResponse extends Paginated<Tag> {}
 
 export interface AddResourceTagsParams {
-  resourceId: number;
+  resourceBankId: number;
   tags: { name: string }[];
 }
 
 export interface AddServiceTagsParams {
-  serviceId: number;
+  serviceBankId: number;
   tags: { name: string }[];
 }
 
 export interface RemoveResourceTagsParams {
-  resourceId: number;
+  resourceBankId: number;
   tags: { name: string }[];
 }
 
 export interface RemoveServiceTagsParams {
-  serviceId: number;
+  serviceBankId: number;
   tags: { name: string }[];
 }
 
