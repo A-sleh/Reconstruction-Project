@@ -163,7 +163,7 @@ export interface CreateResourcePayload {
 }
 
 export interface UpdateResourcePayload {
-  id: number;
+  resourceBankId: number;
   name: string;
   description: string;
   categoryId: number;

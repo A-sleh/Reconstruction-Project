@@ -205,7 +205,7 @@ export const useResourcesInfinite = ({
   return useInfiniteQuery<Resources, unknown>({
     queryKey: [...QUERY_KEYS.resources, search, categoryId],
 
-    queryFn: async ({ pageParam = 1 }) => {
+    queryFn: async ({ pageParam = 0 }) => {
       const parsedCategoryId =
         categoryId === "all" ? undefined : (categoryId as number);
 
@@ -217,7 +217,7 @@ export const useResourcesInfinite = ({
       });
     },
 
-    initialPageParam: 1,
+    initialPageParam: 0,
 
     getNextPageParam: (lastPage) => {
       if (lastPage.hasNextPage) {
@@ -258,10 +258,10 @@ const fetchServiceTags = async (
 export const useResourceTags = (search: string) => {
   return useInfiniteQuery<TagsResponse, unknown>({
     queryKey: QUERY_KEYS.resourceTags(search),
-    queryFn: async ({ pageParam = 1 }) =>
+    queryFn: async ({ pageParam = 0 }) =>
       fetchResourceTags(search, pageParam as number, 10),
     enabled: search.length > 0,
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (lastPage.hasNextPage) {
         return lastPage.pageNum + 1;
@@ -274,10 +274,10 @@ export const useResourceTags = (search: string) => {
 export const useServiceTags = (search: string) => {
   return useInfiniteQuery<TagsResponse, unknown>({
     queryKey: QUERY_KEYS.serviceTags(search),
-    queryFn: async ({ pageParam = 1 }) =>
+    queryFn: async ({ pageParam = 0 }) =>
       fetchServiceTags(search, pageParam as number, 10),
     enabled: search.length > 0,
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (lastPage.hasNextPage) {
         return lastPage.pageNum + 1;
@@ -297,7 +297,7 @@ export const useServicesInfinite = ({
   return useInfiniteQuery<Services, unknown>({
     queryKey: [...QUERY_KEYS.services, search, categoryId],
 
-    queryFn: async ({ pageParam = 1 }) => {
+    queryFn: async ({ pageParam = 0 }) => {
       const parsedCategoryId =
         categoryId === "all" ? undefined : (categoryId as number);
 
@@ -309,7 +309,7 @@ export const useServicesInfinite = ({
       });
     },
 
-    initialPageParam: 1,
+    initialPageParam: 0,
 
     getNextPageParam: (lastPage) => {
       if (lastPage.hasNextPage) {

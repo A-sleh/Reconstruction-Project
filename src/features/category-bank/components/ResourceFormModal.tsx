@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import PopuupLayout from "@/components/layouts/Popup-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/Label";
@@ -10,13 +9,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import PopuupLayout from "@/components/layouts/Popup-layout";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useBankCategories } from "../api/quertes";
 
 interface ResourceFormModalProps {
   openButton: React.ReactNode;
   initialValues?: { name: string; description: string; categoryId: number };
-  onConfirm: (data: { name: string; description: string; categoryId: number }) => void;
+  onConfirm: (data: {
+    name: string;
+    description: string;
+    categoryId: number;
+  }) => void;
 }
 
 export function ResourceFormModal({
@@ -30,7 +34,9 @@ export function ResourceFormModal({
   const categories = categoriesData?.categories ?? [];
 
   const [name, setName] = useState(initialValues?.name ?? "");
-  const [description, setDescription] = useState(initialValues?.description ?? "");
+  const [description, setDescription] = useState(
+    initialValues?.description ?? "",
+  );
   const [categoryId, setCategoryId] = useState(initialValues?.categoryId ?? 0);
 
   useEffect(() => {
@@ -43,7 +49,11 @@ export function ResourceFormModal({
 
   const handleSubmit = (closeModal: () => void) => {
     if (!name.trim() || !description.trim() || !categoryId) return;
-    onConfirm({ name: name.trim(), description: description.trim(), categoryId });
+    onConfirm({
+      name: name.trim(),
+      description: description.trim(),
+      categoryId,
+    });
     closeModal();
   };
 
@@ -51,7 +61,9 @@ export function ResourceFormModal({
     <PopuupLayout
       openKey={isUpdate ? "edit-resource-modal" : "create-resource-modal"}
       title={t(
-        isUpdate ? "categoryBank.editModal.title" : "categoryBank.addModal.title",
+        isUpdate
+          ? "categoryBank.editModal.title"
+          : "categoryBank.addModal.title",
         { defaultValue: isUpdate ? "Edit Resource" : "Create Resource" },
       )}
       openButton={openButton}
@@ -93,10 +105,15 @@ export function ResourceFormModal({
               value={categoryId ? String(categoryId) : ""}
               onValueChange={(v) => setCategoryId(Number(v))}
             >
-              <SelectTrigger className="mt-1">
-                <SelectValue placeholder={t("categoryBank.systemResources.filterByCategory", "Select category")} />
+              <SelectTrigger className="mt-1 z-100">
+                <SelectValue
+                  placeholder={t(
+                    "categoryBank.systemResources.filterByCategory",
+                    "Select category",
+                  )}
+                />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="z-[100000]">
                 {categories.map((cat) => (
                   <SelectItem key={cat.id} value={String(cat.id)}>
                     {cat.name}
@@ -113,7 +130,9 @@ export function ResourceFormModal({
               onClick={() => handleSubmit(closeModal)}
             >
               {t(
-                isUpdate ? "categoryBank.editModal.actions.confirm" : "categoryBank.addModal.actions.confirm",
+                isUpdate
+                  ? "categoryBank.editModal.actions.confirm"
+                  : "categoryBank.addModal.actions.confirm",
                 { defaultValue: isUpdate ? "Update" : "Create" },
               )}
             </Button>
