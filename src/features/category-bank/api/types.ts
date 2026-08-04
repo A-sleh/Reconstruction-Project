@@ -10,6 +10,8 @@ export type BankItemStatus =
   | "Accepted"
   | "All";
 
+export type BankItemType = "Resource" | "Service";
+
 // ============================================================================
 // Core Entities
 // ============================================================================
@@ -73,6 +75,12 @@ export interface AddRequestParams {
 export interface Category {
   id: number;
   name: string;
+  categoryType: BankItemType;
+}
+
+export interface CategoryFilters {
+  search?: string;
+  type?: BankItemType;
 }
 
 export interface CategoryPayload extends Category {}
@@ -87,7 +95,7 @@ export interface PureResource {
   imageURL: string;
   description: string;
   category: Category;
-  tags: Tag[];
+  tags: string[];
   price: number;
   isAvailable: boolean;
   unit: string;
@@ -96,7 +104,7 @@ export interface PureResource {
 export interface Service {
   id: number;
   name: string;
-  tags: Tag[];
+  tags: string[];
   description: string;
   serviceType: Category;
 }
@@ -122,12 +130,12 @@ export interface TagsResponse extends Paginated<Tag> {}
 
 export interface AddResourceTagsParams {
   resourceBankId: number;
-  tags: { name: string }[];
+  tags: string[];
 }
 
 export interface AddServiceTagsParams {
   serviceBankId: number;
-  tags: { name: string }[];
+  tags: string[];
 }
 
 export interface RemoveResourceTagsParams {

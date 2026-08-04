@@ -2,7 +2,15 @@ import EmptyState from "@/components/common/EmptyState";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { useDebounce } from "@/hooks/useDebounce";
 import { Inbox, Pencil, Plus, Search, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,38 +28,67 @@ const SystemCategories = () => {
   const { t } = useTranslation();
 
   const [search, setSearch] = useState("");
+  const [typeFilter, setTypeFilter] = useState<"all" | "resource" | "service">(
+    "all",
+  );
+  const debouncedSearch = useDebounce(search, 300);
 
-  const { data: categoriesData, isLoading } = useBankCategories();
+  const { data: categoriesData, isLoading } = useBankCategories({
+    search: debouncedSearch || undefined,
+    type:
+      typeFilter === "all"
+        ? undefined
+        : typeFilter === "resource"
+          ? "Resource"
+          : "Service",
+  });
   const categories = categoriesData?.categories ?? [];
 
   const { mutate: createCategory } = useCreateCategory();
   const { mutate: updateCategory } = useUpdateCategory();
   const { mutate: deleteCategory } = useDeleteCategory();
 
-  const filtered = search
-    ? categories.filter((cat) =>
-        cat.name.toLowerCase().includes(search.toLowerCase()),
-      )
-    : categories;
-
   return (
     <div className="space-y-6 w-full">
       <div className="flex items-center justify-between gap-4">
-        <div className="relative flex-1 max-w-xs">
-          <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-          <Input
-            placeholder={t(
-              "categoryBank.table.searchCategoriesPlaceholder",
-              "Search categories...",
-            )}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="pr-9 bg-white border-gray-200 text-sm"
-          />
-        </div>
+        <div className="flex gap-2">
+          <div className="relative flex-1 max-w-xs">
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Input
+              placeholder={t(
+                "categoryBank.table.searchCategoriesPlaceholder",
+                "Search categories...",
+              )}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pr-9 bg-white border-gray-200 text-sm"
+            />
+          </div>
 
+          <Select value={typeFilter} onValueChange={setTypeFilter}>
+            <SelectTrigger className="w-40 bg-white border-gray-200">
+              <SelectValue
+                placeholder={t(
+                  "categoryBank.table.filterByType",
+                  "Filter by type",
+                )}
+              />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">
+                {t("categoryBank.table.allTypes", "All Types")}
+              </SelectItem>
+              <SelectItem value="resource">
+                {t("categoryBank.table.resource", "Resource")}
+              </SelectItem>
+              <SelectItem value="service">
+                {t("categoryBank.table.service", "Service")}
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         <CategoryFormModal
-          onConfirm={(name) => createCategory({ name })}
+          onConfirm={(payload) => createCategory(payload)}
           openButton={
             <Button className="gap-2 border-0">
               <Plus className="h-4 w-4" />
@@ -76,14 +113,14 @@ const SystemCategories = () => {
             </div>
           ))}
         </div>
-      ) : filtered.length === 0 ? (
+      ) : categories.length === 0 ? (
         <EmptyState
           icon={Inbox}
           message={t("categoryBank.table.empty", "No categories found.")}
         />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {filtered.map((cat) => (
+          {categories.map((cat) => (
             <div
               key={cat.id}
               className="group border border-gray-200 rounded-lg p-4 bg-white hover:border-gray-300 transition-colors"
@@ -99,7 +136,9 @@ const SystemCategories = () => {
                 <div className="flex items-center gap-1 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
                   <CategoryFormModal
                     initialName={cat.name}
-                    onConfirm={(name) => updateCategory({ id: cat.id, name })}
+                    onConfirm={(payload) =>
+                      updateCategory({ id: cat.id, ...payload })
+                    }
                     openButton={
                       <button
                         title={t("categoryBank.table.edit", "Edit")}
@@ -129,10 +168,10 @@ const SystemCategories = () => {
         </div>
       )}
 
-      {!isLoading && filtered.length > 0 && (
+      {!isLoading && categories.length > 0 && (
         <p className="text-xs text-gray-400">
           {t("categoryBank.table.totalCategories", {
-            count: filtered.length,
+            count: categories.length,
             defaultValue: "{{count}} categories total",
           })}
         </p>
