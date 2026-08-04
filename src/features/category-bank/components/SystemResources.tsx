@@ -79,6 +79,7 @@ const SystemResources = () => {
             value={categoryId}
             onValueChange={setCategoryId}
             className="w-48"
+            bankType="Resource"
           />
         </div>
 
@@ -175,7 +176,7 @@ const SystemResources = () => {
                                   key={tag.id}
                                   className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-700"
                                 >
-                                  {tag.name}
+                                  {tag}
                                 </span>
                               ))
                             ) : (

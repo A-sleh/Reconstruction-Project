@@ -79,6 +79,7 @@ export default function SystemServices() {
             value={categoryId}
             onValueChange={setCategoryId}
             className="w-48"
+            bankType="Service"
           />
         </div>
 

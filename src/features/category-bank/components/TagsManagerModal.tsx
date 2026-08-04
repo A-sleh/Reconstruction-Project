@@ -9,14 +9,13 @@ import {
   useRemoveResourceTags,
   useRemoveServiceTags,
 } from "../api/actions";
-import { Tag as TagType } from "../api/types";
 import TagSearchInput from "./TagSearchInput";
 
 interface TagsManagerModalProps {
   type: "resource" | "service";
   itemId: number;
   itemName: string;
-  initialTags: TagType[];
+  initialTags: string[];
   openButton: React.ReactNode;
 }
 
@@ -28,7 +27,7 @@ export function TagsManagerModal({
   openButton,
 }: TagsManagerModalProps) {
   const { t } = useTranslation();
-  const [tags, setTags] = useState<TagType[]>(initialTags);
+  const [tags, setTags] = useState<string[]>(initialTags);
 
   const { mutate: addResourceTags } = useAddResourceTags();
   const { mutate: addServiceTags } = useAddServiceTags();
@@ -40,22 +39,22 @@ export function TagsManagerModal({
     type === "resource" ? removeResourceTags : removeServiceTags;
 
   const handleSave = (closeModal: () => void) => {
-    const originalIds = initialTags.map((t) => t.id);
-    const currentIds = tags.map((t) => t.id);
+    const originalIds = initialTags.map((t) => t);
+    const currentIds = tags.map((t) => t);
 
-    const toAdd = tags.filter((t) => !originalIds.includes(t.id));
-    const toRemove = initialTags.filter((t) => !currentIds.includes(t.id));
+    const toAdd = tags.filter((t) => !originalIds.includes(t));
+    const toRemove = initialTags.filter((t) => !currentIds.includes(t));
 
     if (toAdd.length > 0) {
       addTags(
         type === "resource"
           ? {
               resourceBankId: itemId,
-              tags: toAdd.map((t) => ({ name: t.name })),
+              tags: toAdd.map((t) => ({ name: t })),
             }
           : {
               serviceBankId: itemId,
-              tags: toAdd.map((t) => ({ name: t.name })),
+              tags: toAdd.map((t) => ({ name: t })),
             },
       );
     }
@@ -65,11 +64,11 @@ export function TagsManagerModal({
         type === "resource"
           ? {
               resourceBankId: itemId,
-              tags: toRemove.map((t) => ({ name: t.name })),
+              tags: toRemove.map((t) => ({ name: t })),
             }
           : {
               serviceBankId: itemId,
-              tags: toRemove.map((t) => ({ name: t.name })),
+              tags: toRemove.map((t) => ({ name: t })),
             },
       );
     }

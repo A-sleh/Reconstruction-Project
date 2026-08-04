@@ -4,12 +4,11 @@ import { X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useResourceTags, useServiceTags } from "../api/quertes";
-import { Tag } from "../api/types";
 
 interface TagSearchInputProps {
   type: "resource" | "service";
-  selectedTags: Tag[];
-  onTagsChange: (tags: Tag[]) => void;
+  selectedTags: string[];
+  onTagsChange: (tags: string[]) => void;
   placeholder?: string;
 }
 
@@ -49,7 +48,7 @@ export default function TagSearchInput({
 
   const tags = results?.pages.flatMap((page) => page.data) ?? [];
   const filtered = tags.filter(
-    (tag) => !selectedTags.some((st) => st.id === tag.id),
+    (tag) => !selectedTags.some((st) => st === tag.name),
   );
 
   const lastItemRef = useCallback(
@@ -81,14 +80,14 @@ export default function TagSearchInput({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const addTag = (tag: Tag) => {
+  const addTag = (tag: string) => {
     onTagsChange([...selectedTags, tag]);
     setQuery("");
     setOpen(false);
   };
 
   const removeTag = (tagId: number) => {
-    onTagsChange(selectedTags.filter((t) => t.id !== tagId));
+    onTagsChange(selectedTags.filter((t) => t !== tagId));
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
