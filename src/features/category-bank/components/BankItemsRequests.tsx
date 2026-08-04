@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-import { Search, Inbox, Plus } from "lucide-react";
 import EmptyState from "@/components/common/EmptyState";
+import LoadMoreButton from "@/components/shared/LoadMoreButton";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -11,26 +10,30 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useBankItemRequests } from "@/features/category-bank/api/quertes";
 import {
   useApproveBankItemRequest,
   useRejectBankItemRequest,
   useResolveBankItemRequest,
 } from "@/features/category-bank/api/actions";
 import {
+  useBankItemRequests,
+  useUserBankItemRequests,
+} from "@/features/category-bank/api/quertes";
+import {
   BankItemStatus,
   ResolveRequestParams,
 } from "@/features/category-bank/api/types";
-import useQueryStringState from "@/hooks/useQueryStringState";
 import { useDebounce } from "@/hooks/useDebounce";
-import LoadMoreButton from "@/components/shared/LoadMoreButton";
+import useQueryStringState from "@/hooks/useQueryStringState";
+import { motion } from "framer-motion";
+import { Inbox, Plus, Search } from "lucide-react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 import BankItemStatusBadge from "./BankItemStatusBadge";
 import RequestActionsMenu from "./RequestActionsMenu";
-import { toast } from "sonner";
 
-import { NewResorceRequestModel } from "@/features/work-site-items/components/NewResorceRequestModel";
+import Can from "@/components/shared/Can";
 import {
   Select,
   SelectContent,
@@ -38,13 +41,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Can from "@/components/shared/Can";
+import { NewResorceRequestModel } from "@/features/work-site-items/components/NewResorceRequestModel";
 import { Permissions } from "@/lib/permissions";
+import useAuthStore from "@/stores/useAuthStore";
 
 const SKELETON_ROWS = 7;
 
 export default function BankItemsRequests() {
   const { t, i18n } = useTranslation();
+  const user = useAuthStore((x) => x.user);
   const isArabic = i18n.language == "ar";
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useQueryStringState<
@@ -67,8 +72,11 @@ export default function BankItemsRequests() {
     { label: t("workSites.orders.status.resolved"), value: "Resolved" },
   ];
 
+  const useItemsRequests =
+    user?.role == "Investor" ? useBankItemRequests : useUserBankItemRequests;
+
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useBankItemRequests({
+    useItemsRequests({
       search: debouncedSearch || undefined,
       status:
         statusFilter == "All"

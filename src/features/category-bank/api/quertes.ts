@@ -28,6 +28,20 @@ const getBankItemRequests = async (
   return data;
 };
 
+const getUserBankItemRequests = async (
+  pageNumber: number,
+  pageSize: number,
+  filters?: { Search?: string; Status?: BankItemStatus },
+) => {
+  const { data } = await ApiInstance.get<BankItemRequestsResponse>(
+    `/${BankItemController.GetAllRequestsOfCurrentUser}`,
+    {
+      params: { PageNumber: pageNumber, PageSize: pageSize, ...filters },
+    },
+  );
+  return data;
+};
+
 // ==========================================
 // Bank Categories & Resources Fetchers
 // ==========================================
@@ -100,6 +114,41 @@ export const useBankItemRequests = ({
 
     queryFn: async ({ pageParam = 0 }) => {
       return await getBankItemRequests(pageParam as number, pageSize, {
+        Search: search || undefined,
+        Status: status || undefined,
+      });
+    },
+
+    initialPageParam: 0,
+
+    getNextPageParam: (lastPage) => {
+      if (lastPage.hasNextPage) {
+        return lastPage.pageNum + 1;
+      }
+      return undefined;
+    },
+  });
+};
+
+export const useUserBankItemRequests = ({
+  pageSize = 10,
+  search,
+  status,
+}: {
+  pageSize?: number;
+  search?: string;
+  status?: BankItemStatus;
+} = {}) => {
+  return useInfiniteQuery<BankItemRequestsResponse, Error>({
+    queryKey: [
+      ...QUERY_KEYS.bankItems.user,
+      pageSize,
+      search ?? "",
+      status ?? "",
+    ],
+
+    queryFn: async ({ pageParam = 0 }) => {
+      return await getUserBankItemRequests(pageParam as number, pageSize, {
         Search: search || undefined,
         Status: status || undefined,
       });
