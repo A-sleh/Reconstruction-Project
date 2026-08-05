@@ -25,22 +25,18 @@ import { CategoryFormModal } from "./CategoryFormModal";
 const SKELETON_COUNT = 6;
 
 const SystemCategories = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language == "ar";
 
   const [search, setSearch] = useState("");
-  const [typeFilter, setTypeFilter] = useState<"all" | "resource" | "service">(
-    "all",
+  const [typeFilter, setTypeFilter] = useState<"resource" | "service">(
+    "resource",
   );
   const debouncedSearch = useDebounce(search, 300);
 
   const { data: categoriesData, isLoading } = useBankCategories({
     search: debouncedSearch || undefined,
-    type:
-      typeFilter === "all"
-        ? undefined
-        : typeFilter === "resource"
-          ? "Resource"
-          : "Service",
+    type: typeFilter === "resource" ? "Resource" : "Service",
   });
   const categories = categoriesData?.categories ?? [];
 
@@ -66,7 +62,10 @@ const SystemCategories = () => {
           </div>
 
           <Select value={typeFilter} onValueChange={setTypeFilter}>
-            <SelectTrigger className="w-40 bg-white border-gray-200">
+            <SelectTrigger
+              className="w-40 bg-white border-gray-200"
+              dir={isArabic ? "rtl" : "ltr"}
+            >
               <SelectValue
                 placeholder={t(
                   "categoryBank.table.filterByType",
@@ -75,9 +74,6 @@ const SystemCategories = () => {
               />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">
-                {t("categoryBank.table.allTypes", "All Types")}
-              </SelectItem>
               <SelectItem value="resource">
                 {t("categoryBank.table.resource", "Resource")}
               </SelectItem>

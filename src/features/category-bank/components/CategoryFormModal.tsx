@@ -79,6 +79,7 @@ export function CategoryFormModal({
               onValueChange={(value) =>
                 setCategoryType(value as CategoryPayload["categoryType"])
               }
+              dir="rtl"
             >
               <SelectTrigger id="cat-type" className="w-full mt-1 z-100">
                 <SelectValue
