@@ -41,6 +41,7 @@ export default function CategoryFilter({
 
   const categories = categoriesData?.categories ?? [];
   const selectedCategory = categories.find((cat) => cat.id === value);
+  console.log(value);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -74,7 +75,7 @@ export default function CategoryFilter({
 
       <PopoverContent
         align="start"
-        className="w-72 p-2 space-y-2 bg-white border-gray-300"
+        className="w-72 p-2 space-y-2 bg-white border-gray-300 z-100"
         dir={isArabic ? "rtl" : "ltr"}
       >
         <div className="relative">

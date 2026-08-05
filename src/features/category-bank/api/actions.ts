@@ -193,7 +193,7 @@ const addServiceTagsApi = async (payload: AddServiceTagsParams) => {
 };
 
 const removeResourceTagsApi = async (payload: RemoveResourceTagsParams) => {
-  const { data } = await ApiInstance.delete(
+  const { data } = await ApiInstance.post(
     `/${BankItemController.RemoveResourceTags}`,
     { data: payload },
   );
@@ -201,7 +201,7 @@ const removeResourceTagsApi = async (payload: RemoveResourceTagsParams) => {
 };
 
 const removeServiceTagsApi = async (payload: RemoveServiceTagsParams) => {
-  const { data } = await ApiInstance.delete(
+  const { data } = await ApiInstance.post(
     `/${BankItemController.RemoveServiceTags}`,
     { data: payload },
   );

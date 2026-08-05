@@ -2,16 +2,9 @@ import PopuupLayout from "@/components/layouts/Popup-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/Label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useBankCategories } from "../api/quertes";
+import CategoryFilter from "./CategoryFilter";
 
 interface ServiceFormModalProps {
   openButton: React.ReactNode;
@@ -30,8 +23,6 @@ export function ServiceFormModal({
 }: ServiceFormModalProps) {
   const { t } = useTranslation();
   const isUpdate = !!initialValues;
-  const { data: categoriesData } = useBankCategories();
-  const categories = categoriesData?.categories ?? [];
 
   const [name, setName] = useState(initialValues?.name ?? "");
   const [description, setDescription] = useState(
@@ -99,31 +90,18 @@ export function ServiceFormModal({
             />
           </div>
 
-          <div>
-            <Label>
-              {t("categoryBank.systemServices.table.category", "Category")}
-            </Label>
-            <Select
-              value={serviceTypeId ? String(serviceTypeId) : ""}
-              onValueChange={(v) => setServiceTypeId(Number(v))}
-            >
-              <SelectTrigger className="mt-1 z-100">
-                <SelectValue
-                  placeholder={t(
-                    "categoryBank.systemServices.filterByCategory",
-                    "Select category",
-                  )}
-                />
-              </SelectTrigger>
-              <SelectContent className="z-100">
-                {categories.map((cat) => (
-                  <SelectItem key={cat.id} value={String(cat.id)}>
-                    {cat.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <Label className="mb-3">
+            {t("categoryBank.systemResources.table.category", "Category")}
+          </Label>
+          <CategoryFilter
+            bankType="Service"
+            onValueChange={(id: number | "all") => {
+              if (id === "all") {
+                setServiceTypeId(0);
+              } else setServiceTypeId(id);
+            }}
+            value={Number(serviceTypeId)}
+          />
 
           <div className="flex justify-end gap-2 mt-6">
             <Button

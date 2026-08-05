@@ -171,12 +171,12 @@ export default function SystemServices() {
                         <TableCell>
                           <div className="flex flex-wrap gap-1">
                             {item.tags && item.tags.length > 0 ? (
-                              item.tags.slice(0, 3).map((tag: any) => (
+                              item.tags.slice(0, 3).map((tag: string) => (
                                 <span
-                                  key={tag.id}
+                                  key={tag}
                                   className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-700"
                                 >
-                                  {tag.name}
+                                  {tag}
                                 </span>
                               ))
                             ) : (

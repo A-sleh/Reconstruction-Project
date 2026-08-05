@@ -2,36 +2,32 @@ import PopuupLayout from "@/components/layouts/Popup-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/Label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useBankCategories } from "../api/quertes";
+import CategoryFilter from "./CategoryFilter";
 
 interface ResourceFormModalProps {
   openButton: React.ReactNode;
   initialValues?: { name: string; description: string; categoryId: number };
-  onConfirm: (data: {
-    name: string;
-    description: string;
-    categoryId: number;
-  }) => void;
+  isLoading: boolean;
+  onConfirm: (
+    data: {
+      name: string;
+      description: string;
+      categoryId: number;
+    },
+    close?: () => void,
+  ) => void;
 }
 
 export function ResourceFormModal({
   openButton,
   initialValues,
+  isLoading,
   onConfirm,
 }: ResourceFormModalProps) {
   const { t } = useTranslation();
   const isUpdate = !!initialValues;
-  const { data: categoriesData } = useBankCategories();
-  const categories = categoriesData?.categories ?? [];
 
   const [name, setName] = useState(initialValues?.name ?? "");
   const [description, setDescription] = useState(
@@ -49,12 +45,14 @@ export function ResourceFormModal({
 
   const handleSubmit = (closeModal: () => void) => {
     if (!name.trim() || !description.trim() || !categoryId) return;
-    onConfirm({
-      name: name.trim(),
-      description: description.trim(),
-      categoryId,
-    });
-    closeModal();
+    onConfirm(
+      {
+        name: name.trim(),
+        description: description.trim(),
+        categoryId,
+      },
+      closeModal,
+    );
   };
 
   return (
@@ -97,36 +95,27 @@ export function ResourceFormModal({
             />
           </div>
 
-          <div>
-            <Label>
-              {t("categoryBank.systemResources.table.category", "Category")}
-            </Label>
-            <Select
-              value={categoryId ? String(categoryId) : ""}
-              onValueChange={(v) => setCategoryId(Number(v))}
-            >
-              <SelectTrigger className="mt-1 z-100">
-                <SelectValue
-                  placeholder={t(
-                    "categoryBank.systemResources.filterByCategory",
-                    "Select category",
-                  )}
-                />
-              </SelectTrigger>
-              <SelectContent className="z-[100000]">
-                {categories.map((cat) => (
-                  <SelectItem key={cat.id} value={String(cat.id)}>
-                    {cat.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <Label>
+            {t("categoryBank.systemResources.table.category", "Category")}
+          </Label>
+          <CategoryFilter
+            bankType="Resource"
+            onValueChange={(id: number | "all") => {
+              console.log(id);
+              if (id === "all") {
+                setCategoryId(0);
+              } else setCategoryId(id);
+            }}
+            value={Number(categoryId)}
+          />
 
           <div className="flex justify-end gap-2 mt-6">
             <Button
               variant="default"
-              disabled={!name.trim() || !description.trim() || !categoryId}
+              isLoading={isLoading}
+              disabled={
+                !name.trim() || !description.trim() || !categoryId || isLoading
+              }
               onClick={() => handleSubmit(closeModal)}
             >
               {t(

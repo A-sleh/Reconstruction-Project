@@ -48,7 +48,7 @@ export default function TagSearchInput({
 
   const tags = results?.pages.flatMap((page) => page.data) ?? [];
   const filtered = tags.filter(
-    (tag) => !selectedTags.some((st) => st === tag.name),
+    (tag) => !selectedTags.some((st) => st === tag?.name),
   );
 
   const lastItemRef = useCallback(
@@ -146,14 +146,14 @@ export default function TagSearchInput({
             <div>
               {filtered.map((tag) => (
                 <button
-                  key={tag.id}
+                  key={tag?.id}
                   type="button"
-                  onClick={() => addTag(tag.name)}
+                  onClick={() => addTag(tag?.name)}
                   className="w-full text-right px-3 py-2 text-sm hover:bg-gray-50 transition-colors flex items-center justify-between"
                 >
-                  <span>{tag.name}</span>
+                  <span>{tag?.name}</span>
                   <span className="text-xs text-muted-foreground">
-                    ID: {tag.id}
+                    ID: {tag?.id}
                   </span>
                 </button>
               ))}

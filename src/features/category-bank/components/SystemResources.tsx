@@ -50,9 +50,12 @@ const SystemResources = () => {
     categoryId: categoryId ?? "all",
   });
 
-  const { mutate: createResource } = useCreateResourceItem();
-  const { mutate: updateResource } = useUpdateResourceItem();
-  const { mutate: deleteResource } = useDeleteResourceItem();
+  const { mutate: createResource, isPending: isCreated } =
+    useCreateResourceItem();
+  const { mutate: updateResource, isPending: isUpdated } =
+    useUpdateResourceItem();
+  const { mutate: deleteResource, isPending: isDeleted } =
+    useDeleteResourceItem();
 
   const allItems = itemsData?.pages.flatMap((page) => page.data) ?? [];
 
@@ -84,7 +87,14 @@ const SystemResources = () => {
         </div>
 
         <ResourceFormModal
-          onConfirm={(data) => createResource(data)}
+          isLoading={isCreated || isUpdated}
+          onConfirm={(data, closeModel) =>
+            createResource(data, {
+              onSuccess: () => {
+                closeModel?.();
+              },
+            })
+          }
           openButton={
             <Button>
               <Plus className="h-4 w-4" />
@@ -145,7 +155,7 @@ const SystemResources = () => {
                     </TableRow>
                   ))
                 : allItems.map((item) => {
-                    const categoryName = (item as any).category?.name;
+                    const categoryName = item.category?.name;
 
                     return (
                       <TableRow
@@ -207,7 +217,7 @@ const SystemResources = () => {
                             />
 
                             <ResourceDetailsModal
-                              resource={item as any}
+                              resource={item}
                               openButton={
                                 <button
                                   title={t(
@@ -222,16 +232,22 @@ const SystemResources = () => {
                             />
 
                             <ResourceFormModal
+                              isLoading={isUpdated}
                               initialValues={{
                                 name: item.name,
                                 description: item.description,
-                                categoryId: (item as any).category?.id ?? 0,
+                                categoryId: item.category?.id ?? 0,
                               }}
-                              onConfirm={(data) =>
-                                updateResource({
-                                  resourceBankId: item.id,
-                                  ...data,
-                                })
+                              onConfirm={(data, close) =>
+                                updateResource(
+                                  {
+                                    resourceBankId: item.id,
+                                    ...data,
+                                  },
+                                  {
+                                    onSuccess: () => close?.(),
+                                  },
+                                )
                               }
                               openButton={
                                 <button
@@ -245,6 +261,7 @@ const SystemResources = () => {
 
                             <ConfirmDelete
                               item={item.name}
+                              isLoading={isDeleted}
                               onConfirm={() => deleteResource(item.id)}
                               openButton={
                                 <button
