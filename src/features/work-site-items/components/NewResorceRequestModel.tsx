@@ -1,19 +1,20 @@
-import { useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { errorToast, successToast } from "@/components/common/Toast";
+import Input from "@/components/inputs/Input";
 import Model from "@/components/model/Model";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/Label";
-import { X } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
 import { useAddBankItemRequest } from "@/features/category-bank/api/actions";
-import { useBankCategories } from "@/features/category-bank/api/quertes";
-import { successToast, errorToast } from "@/components/common/Toast";
-import Input from "@/components/inputs/Input";
-import Selector from "@/components/inputs/Selector";
+import CategoryFilter from "@/features/category-bank/components/CategoryFilter";
 import useAuthStore, { User } from "@/stores/useAuthStore";
+import { X } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function getRolePrefix(role: string) {
-  return role === "Service" ? "workSiteItems.serviceProvidor" : "workSiteItems.resourceProvidor";
+  return role === "Service"
+    ? "workSiteItems.serviceProvidor"
+    : "workSiteItems.resourceProvidor";
 }
 
 interface NewResorceRequestModelProps {
@@ -24,20 +25,19 @@ export function NewResorceRequestModel({
   openButton,
 }: NewResorceRequestModelProps) {
   const { t } = useTranslation();
-  const providerRole = useAuthStore((s) => (s.user as User)?.providerRole) ?? "Resource";
+  const providerRole =
+    useAuthStore((s) => (s.user as User)?.providerRole) ?? "Resource";
   const rolePrefix = getRolePrefix(providerRole);
   const { mutate: addRequest, isPending } = useAddBankItemRequest();
-  const { data: categoriesData, isLoading: categoriesLoading } =
-    useBankCategories();
+
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
   const [itemName, setItemName] = useState("");
   const [description, setDescription] = useState("");
-  const [categoryId, setCategoryId] = useState<number | "">("");
+  const [categoryId, setCategoryId] = useState<number | "all">("all");
   const [note, setNote] = useState("");
 
-  const categories = categoriesData?.categories ?? [];
-  const isValid = itemName.trim() && categoryId !== "";
+  const isValid = itemName.trim() && categoryId !== "all";
 
   const handleSubmit = () => {
     if (!isValid) return;
@@ -51,22 +51,17 @@ export function NewResorceRequestModel({
       },
       {
         onSuccess: () => {
-          successToast(
-            t(`${rolePrefix}.requestModal.success`),
-          );
+          successToast(t(`${rolePrefix}.requestModal.success`));
           setItemName("");
           setDescription("");
-          setCategoryId("");
+          setCategoryId("all");
           setNote("");
           closeBtnRef.current?.click();
         },
         onError: (error: any) => {
           const serverMessage =
             error?.response?.data?.message || error?.message;
-          errorToast(
-            serverMessage ||
-              t(`${rolePrefix}.requestModal.error`),
-          );
+          errorToast(serverMessage || t(`${rolePrefix}.requestModal.error`));
         },
       },
     );
@@ -105,7 +100,9 @@ export function NewResorceRequestModel({
                 id="item-name"
                 value={itemName}
                 onChange={(e) => setItemName(e.target.value)}
-                placeholder={t(`${rolePrefix}.requestModal.item_name_placeholder`)}
+                placeholder={t(
+                  `${rolePrefix}.requestModal.item_name_placeholder`,
+                )}
                 className="border-gray-200"
               />
             </div>
@@ -122,27 +119,19 @@ export function NewResorceRequestModel({
                 id="item-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder={t(`${rolePrefix}.requestModal.item_description_placeholder`)}
+                placeholder={t(
+                  `${rolePrefix}.requestModal.item_description_placeholder`,
+                )}
                 rows={3}
                 className="border-gray-200 resize-none"
               />
             </div>
 
             {/* Category */}
-            <Selector
-              label={t(`${rolePrefix}.requestModal.category`)}
+            <CategoryFilter
+              onValueChange={(id: number | "all") => setCategoryId(Number(id))}
               value={categoryId}
-              setValue={(value) => setCategoryId(value ? Number(value) : "")}
-            >
-              <option value="">
-                {t(`${rolePrefix}.requestModal.category_placeholder`)}
-              </option>
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
-            </Selector>
+            />
 
             {/* Note */}
             <div className="space-y-1.5">
