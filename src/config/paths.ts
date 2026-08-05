@@ -127,7 +127,12 @@ export const paths = {
           `/app/investor/create-building${landId ? `?landId=${landId}` : ""}`,
       },
     },
-    engineer: {},
+    engineer: {
+      profile: {
+        path: "/app/engineer/profile",
+        getHref: () => `/app/engineer/profile`,
+      },
+    },
     projects: {
       projectWorkSite: {
         path: "/app/project/work-site/:id",

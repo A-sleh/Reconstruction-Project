@@ -30,6 +30,13 @@ const Navbar = () => {
 
   const user = useAuthStore((s) => s.user);
   const isResourceProvidor = user?.providerRole == "Resource";
+  const isEngineer = user?.role == "Engineer";
+
+  const profileHref = isEngineer
+    ? paths.app.engineer.profile.path
+    : isResourceProvidor
+      ? paths.app.resourceProvidor.profile.path
+      : paths.app.serviceProvidor.profile.path;
 
   const links: Array<{
     label: string;
@@ -47,9 +54,7 @@ const Navbar = () => {
     },
     {
       label: t("navbar.profile"),
-      href: isResourceProvidor
-        ? paths.app.resourceProvidor.profile.path
-        : paths.app.serviceProvidor.profile.path,
+      href: profileHref,
       icon: <CgProfile size={18} />,
       permission: Permissions.PROFILE_VIEW,
     },

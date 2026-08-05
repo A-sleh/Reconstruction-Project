@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import PopuupLayout from "@/components/layouts/Popup-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/Label";
@@ -10,13 +9,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import PopuupLayout from "@/components/layouts/Popup-layout";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useBankCategories } from "../api/quertes";
 
 interface ServiceFormModalProps {
   openButton: React.ReactNode;
   initialValues?: { name: string; description: string; serviceTypeId: number };
-  onConfirm: (data: { name: string; description: string; serviceTypeId: number }) => void;
+  onConfirm: (data: {
+    name: string;
+    description: string;
+    serviceTypeId: number;
+  }) => void;
 }
 
 export function ServiceFormModal({
@@ -30,8 +34,12 @@ export function ServiceFormModal({
   const categories = categoriesData?.categories ?? [];
 
   const [name, setName] = useState(initialValues?.name ?? "");
-  const [description, setDescription] = useState(initialValues?.description ?? "");
-  const [serviceTypeId, setServiceTypeId] = useState(initialValues?.serviceTypeId ?? 0);
+  const [description, setDescription] = useState(
+    initialValues?.description ?? "",
+  );
+  const [serviceTypeId, setServiceTypeId] = useState(
+    initialValues?.serviceTypeId ?? 0,
+  );
 
   useEffect(() => {
     if (initialValues) {
@@ -43,7 +51,11 @@ export function ServiceFormModal({
 
   const handleSubmit = (closeModal: () => void) => {
     if (!name.trim() || !description.trim() || !serviceTypeId) return;
-    onConfirm({ name: name.trim(), description: description.trim(), serviceTypeId });
+    onConfirm({
+      name: name.trim(),
+      description: description.trim(),
+      serviceTypeId,
+    });
     closeModal();
   };
 
@@ -51,7 +63,9 @@ export function ServiceFormModal({
     <PopuupLayout
       openKey={isUpdate ? "edit-service-modal" : "create-service-modal"}
       title={t(
-        isUpdate ? "categoryBank.editModal.title" : "categoryBank.addModal.title",
+        isUpdate
+          ? "categoryBank.editModal.title"
+          : "categoryBank.addModal.title",
         { defaultValue: isUpdate ? "Edit Service" : "Create Service" },
       )}
       openButton={openButton}
@@ -93,10 +107,15 @@ export function ServiceFormModal({
               value={serviceTypeId ? String(serviceTypeId) : ""}
               onValueChange={(v) => setServiceTypeId(Number(v))}
             >
-              <SelectTrigger className="mt-1">
-                <SelectValue placeholder={t("categoryBank.systemServices.filterByCategory", "Select category")} />
+              <SelectTrigger className="mt-1 z-100">
+                <SelectValue
+                  placeholder={t(
+                    "categoryBank.systemServices.filterByCategory",
+                    "Select category",
+                  )}
+                />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="z-100">
                 {categories.map((cat) => (
                   <SelectItem key={cat.id} value={String(cat.id)}>
                     {cat.name}
@@ -113,7 +132,9 @@ export function ServiceFormModal({
               onClick={() => handleSubmit(closeModal)}
             >
               {t(
-                isUpdate ? "categoryBank.editModal.actions.confirm" : "categoryBank.addModal.actions.confirm",
+                isUpdate
+                  ? "categoryBank.editModal.actions.confirm"
+                  : "categoryBank.addModal.actions.confirm",
                 { defaultValue: isUpdate ? "Update" : "Create" },
               )}
             </Button>

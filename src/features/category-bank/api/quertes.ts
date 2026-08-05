@@ -46,15 +46,9 @@ const getUserBankItemRequests = async (
 // ==========================================
 // Bank Categories & Resources Fetchers
 // ==========================================
-const fetchResourceCategoriesAPI = async ({
-  search,
-  type,
-}: CategoryFilters): Promise<BankCategories> => {
+const fetchResourceCategoriesAPI = async (): Promise<BankCategories> => {
   const { data } = await ApiInstance.get<BankCategories>(
     `/${BankItemController.BankCategories}`,
-    {
-      params: { search, type },
-    },
   );
   return data;
 };
@@ -194,8 +188,8 @@ export const useBankStat = () => {
 // ==========================================
 export const useBankCategories = (filters: CategoryFilters) => {
   return useQuery<BankCategories, unknown>({
-    queryKey: [...QUERY_KEYS.bankCategories, filters],
-    queryFn: () => fetchResourceCategoriesAPI(filters),
+    queryKey: QUERY_KEYS.bankCategories,
+    queryFn: fetchResourceCategoriesAPI,
   });
 };
 

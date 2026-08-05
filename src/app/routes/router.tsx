@@ -4,6 +4,7 @@ import { sharedRoutes } from "./shared.routes";
 import { authRoutes } from "./auth.routes";
 import { resourceProviderRoutes } from "./resource-provider.routes";
 import { serviceProviderRoutes } from "./service-provider.routes";
+import { engineerRoutes } from "./engineer.routes";
 import { investorRoutes } from "./investor.routes";
 import { adminRoutes } from "./admin.routes";
 
@@ -15,6 +16,7 @@ if (appRouteIndex !== -1) {
     ...(appRoute.children ?? []),
     ...resourceProviderRoutes,
     ...serviceProviderRoutes,
+    ...engineerRoutes,
     ...investorRoutes,
     ...adminRoutes,
   ];

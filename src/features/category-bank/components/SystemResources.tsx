@@ -228,7 +228,10 @@ const SystemResources = () => {
                                 categoryId: (item as any).category?.id ?? 0,
                               }}
                               onConfirm={(data) =>
-                                updateResource({ id: item.id, ...data })
+                                updateResource({
+                                  resourceBankId: item.id,
+                                  ...data,
+                                })
                               }
                               openButton={
                                 <button

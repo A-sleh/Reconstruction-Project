@@ -83,7 +83,9 @@ export interface CategoryFilters {
   type?: BankItemType;
 }
 
-export interface CategoryPayload extends Category {}
+export interface CategoryPayload extends Category {
+  categoryType: categoryType;
+}
 
 export interface BankCategories {
   categories: Category[];
@@ -131,10 +133,12 @@ export interface TagsResponse extends Paginated<Tag> {}
 export interface AddResourceTagsParams {
   resourceBankId: number;
   tags: string[];
+  tags: string[];
 }
 
 export interface AddServiceTagsParams {
   serviceBankId: number;
+  tags: string[];
   tags: string[];
 }
 
