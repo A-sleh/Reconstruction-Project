@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/useDebounce";
 import { X } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useResourceTags, useServiceTags } from "../api/quertes";
 
@@ -86,17 +86,17 @@ export default function TagSearchInput({
     setOpen(false);
   };
 
-  const removeTag = (tagId: number) => {
-    onTagsChange(selectedTags.filter((t) => t !== tagId));
+  const removeTag = (tag: string) => {
+    onTagsChange(selectedTags.filter((t) => t !== tag));
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && query.trim()) {
       const existing = selectedTags.find(
-        (t) => t.name.toLowerCase() === query.trim().toLowerCase(),
+        (t) => t.toLowerCase() === query.trim().toLowerCase(),
       );
       if (!existing) {
-        addTag({ id: Date.now(), name: query.trim() });
+        addTag(query.trim());
       }
       e.preventDefault();
     }
@@ -107,13 +107,13 @@ export default function TagSearchInput({
       <div className="flex flex-wrap gap-1.5 p-2 border border-gray-200 rounded-lg bg-white min-h-[42px] focus-within:border-gray-400 transition-colors">
         {selectedTags.map((tag) => (
           <span
-            key={tag.id}
+            key={tag}
             className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
           >
-            {tag.name}
+            {tag}
             <button
               type="button"
-              onClick={() => removeTag(tag.id)}
+              onClick={() => removeTag(tag)}
               className="hover:text-red-600 transition-colors"
             >
               <X className="h-3 w-3" />
@@ -148,7 +148,7 @@ export default function TagSearchInput({
                 <button
                   key={tag.id}
                   type="button"
-                  onClick={() => addTag(tag)}
+                  onClick={() => addTag(tag.name)}
                   className="w-full text-right px-3 py-2 text-sm hover:bg-gray-50 transition-colors flex items-center justify-between"
                 >
                   <span>{tag.name}</span>

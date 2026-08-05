@@ -1,6 +1,7 @@
-import { useTranslation } from "react-i18next";
-import { Hash, Tag } from "lucide-react";
 import PopuupLayout from "@/components/layouts/Popup-layout";
+import { Hash, Tag } from "lucide-react";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { PureResource } from "../api/types";
 
 interface ResourceDetailsModalProps {
@@ -64,16 +65,18 @@ export function ResourceDetailsModal({
               <div className="flex items-center gap-2 mb-3">
                 <Tag className="h-3.5 w-3.5 text-muted-foreground" />
                 <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  {t("categoryBank.detailsModal.tags", { defaultValue: "Tags" })}
+                  {t("categoryBank.detailsModal.tags", {
+                    defaultValue: "Tags",
+                  })}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
                 {resource.tags.map((tag) => (
                   <span
-                    key={tag.id}
+                    key={tag}
                     className="inline-flex items-center px-2.5 py-1 rounded-full bg-muted text-foreground text-xs font-medium border border-border"
                   >
-                    {tag.name}
+                    {tag}
                   </span>
                 ))}
               </div>

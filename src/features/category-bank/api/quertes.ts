@@ -194,7 +194,7 @@ const fetchResourceCategoriesAPI = async ({
 
 export const useBankCategories = (filters: CategoryFilters) => {
   return useQuery<BankCategories, unknown>({
-    queryKey: [...QUERY_KEYS.bankCategories, filters.search, filters.type],
+    queryKey: [...QUERY_KEYS.bankCategories, filters?.search, filters?.type],
     queryFn: () => fetchResourceCategoriesAPI(filters),
   });
 };
@@ -203,7 +203,7 @@ export const useBankCategories = (filters: CategoryFilters) => {
 // Resources Infinite Queries
 // ==========================================
 export const useResourcesInfinite = ({
-  search,
+  search = "all",
   categoryId,
 }: {
   search: string;
@@ -215,9 +215,10 @@ export const useResourcesInfinite = ({
     queryFn: async ({ pageParam = 0 }) => {
       const parsedCategoryId =
         categoryId === "all" ? undefined : (categoryId as number);
+      const parsedSearch = search === "all" ? "" : search;
 
       return await fetchResourceApi({
-        Search: search,
+        Search: parsedSearch,
         CategoryId: parsedCategoryId as number,
         PageNumber: pageParam as number,
         PageSize: 10,

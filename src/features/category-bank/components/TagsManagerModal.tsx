@@ -1,7 +1,7 @@
 import PopuupLayout from "@/components/layouts/Popup-layout";
 import { Button } from "@/components/ui/button";
 import { Tag, X } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   useAddResourceTags,
@@ -34,27 +34,28 @@ export function TagsManagerModal({
   const { mutate: removeResourceTags } = useRemoveResourceTags();
   const { mutate: removeServiceTags } = useRemoveServiceTags();
 
-  const addTags: any = type === "resource" ? addResourceTags : addServiceTags;
-  const removeTags: any =
+  const addTags: unknown =
+    type === "resource" ? addResourceTags : addServiceTags;
+  const removeTags: unknown =
     type === "resource" ? removeResourceTags : removeServiceTags;
 
   const handleSave = (closeModal: () => void) => {
-    const originalIds = initialTags.map((t) => t);
-    const currentIds = tags.map((t) => t);
+    const original = initialTags.map((t) => t);
+    const current = tags.map((t) => t);
 
-    const toAdd = tags.filter((t) => !originalIds.includes(t));
-    const toRemove = initialTags.filter((t) => !currentIds.includes(t));
+    const toAdd = tags.filter((t) => !original.includes(t));
+    const toRemove = initialTags.filter((t) => !current.includes(t));
 
     if (toAdd.length > 0) {
       addTags(
         type === "resource"
           ? {
               resourceBankId: itemId,
-              tags: toAdd.map((t) => ({ name: t })),
+              tags: toAdd,
             }
           : {
               serviceBankId: itemId,
-              tags: toAdd.map((t) => ({ name: t })),
+              tags: toAdd,
             },
       );
     }
@@ -64,16 +65,15 @@ export function TagsManagerModal({
         type === "resource"
           ? {
               resourceBankId: itemId,
-              tags: toRemove.map((t) => ({ name: t })),
+              tags: toRemove,
             }
           : {
               serviceBankId: itemId,
-              tags: toRemove.map((t) => ({ name: t })),
+              tags: toRemove,
             },
       );
     }
 
-    setTags([]);
     closeModal();
   };
 
@@ -110,15 +110,13 @@ export function TagsManagerModal({
               <div className="flex flex-wrap gap-2">
                 {tags.map((tag) => (
                   <span
-                    key={tag.id}
+                    key={tag}
                     className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium"
                   >
-                    {tag.name}
+                    {tag}
                     <button
                       type="button"
-                      onClick={() =>
-                        setTags(tags.filter((t) => t.id !== tag.id))
-                      }
+                      onClick={() => setTags(tags.filter((t) => t !== tag))}
                       className="hover:text-primary/70 transition-colors"
                     >
                       <X className="h-3 w-3" />

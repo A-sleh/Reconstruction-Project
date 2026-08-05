@@ -133,12 +133,10 @@ export interface TagsResponse extends Paginated<Tag> {}
 export interface AddResourceTagsParams {
   resourceBankId: number;
   tags: string[];
-  tags: string[];
 }
 
 export interface AddServiceTagsParams {
   serviceBankId: number;
-  tags: string[];
   tags: string[];
 }
 
