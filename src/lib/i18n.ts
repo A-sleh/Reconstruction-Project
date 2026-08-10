@@ -2,37 +2,37 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 // Root / generic translations
-import enRoot from "@/lang/en.json";
 import arRoot from "@/lang/ar.json";
+import enRoot from "@/lang/en.json";
 
 // Feature translations
-import enAuth from "@/features/Auth/i18n/en.json";
 import arAuth from "@/features/Auth/i18n/ar.json";
-import enResourceProvidor from "@/features/resource-providor/i18n/en.json";
-import arResourceProvidor from "@/features/resource-providor/i18n/ar.json";
-import enLandingPage from "@/features/landing-page/i18n/en.json";
-import arLandingPage from "@/features/landing-page/i18n/ar.json";
-import enOrders from "@/features/orders/i18n/en.json";
-import arOrders from "@/features/orders/i18n/ar.json";
-import enHome from "@/features/home/i18n/en.json";
+import enAuth from "@/features/Auth/i18n/en.json";
 import arHome from "@/features/home/i18n/ar.json";
+import enHome from "@/features/home/i18n/en.json";
+import arLandingPage from "@/features/landing-page/i18n/ar.json";
+import enLandingPage from "@/features/landing-page/i18n/en.json";
+import arOrders from "@/features/orders/i18n/ar.json";
+import enOrders from "@/features/orders/i18n/en.json";
+import arResourceProvidor from "@/features/resource-providor/i18n/ar.json";
+import enResourceProvidor from "@/features/resource-providor/i18n/en.json";
 
-import enWorkSites from "@/features/work-sites/i18n/en.json";
-import arWorkSites from "@/features/work-sites/i18n/ar.json";
-import enProfile from "@/features/profile/i18n/en.json";
-import arProfile from "@/features/profile/i18n/ar.json";
-import enSystemUsers from "@/features/system-users/i18n/en.json";
-import arSystemUsers from "@/features/system-users/i18n/ar.json";
-import enCategoryBank from "@/features/category-bank/i18n/en.json";
 import arCategoryBank from "@/features/category-bank/i18n/ar.json";
-import enSupport from "@/features/support/i18n/en.json";
-import arSupport from "@/features/support/i18n/ar.json";
-import enInvestor from "@/features/investor/lands-buildings/i18n/en.json";
-import arInvestor from "@/features/investor/lands-buildings/i18n/ar.json";
-import enWorkSiteItems from "@/features/work-site-items/i18n/en.json";
-import arWorkSiteItems from "@/features/work-site-items/i18n/ar.json";
-import enEngineerProfile from "@/features/engineer/profile/i18n/en.json";
+import enCategoryBank from "@/features/category-bank/i18n/en.json";
 import arEngineerProfile from "@/features/engineer/profile/i18n/ar.json";
+import enEngineerProfile from "@/features/engineer/profile/i18n/en.json";
+import arInvestor from "@/features/investor/lands-buildings/i18n/ar.json";
+import enInvestor from "@/features/investor/lands-buildings/i18n/en.json";
+import arProfile from "@/features/profile/i18n/ar.json";
+import enProfile from "@/features/profile/i18n/en.json";
+import arSupport from "@/features/support/i18n/ar.json";
+import enSupport from "@/features/support/i18n/en.json";
+import arSystemUsers from "@/features/system-users/i18n/ar.json";
+import enSystemUsers from "@/features/system-users/i18n/en.json";
+import arWorkSiteItems from "@/features/work-site-items/i18n/ar.json";
+import enWorkSiteItems from "@/features/work-site-items/i18n/en.json";
+import arWorkSites from "@/features/work-sites/i18n/ar.json";
+import enWorkSites from "@/features/work-sites/i18n/en.json";
 
 function mergeTranslations(...objects: Record<string, unknown>[]) {
   return objects.reduce<Record<string, unknown>>((acc, obj) => {

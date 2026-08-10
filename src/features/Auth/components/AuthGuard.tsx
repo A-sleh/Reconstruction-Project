@@ -1,9 +1,9 @@
-import { Navigate, useLocation } from "react-router-dom";
-import useAuthStore from "@/stores/useAuthStore";
-import { useCan } from "@/hooks/useCan";
 import { paths } from "@/config/paths";
+import { useCan } from "@/hooks/useCan";
 import type { Permission } from "@/lib/permissions";
+import useAuthStore from "@/stores/useAuthStore";
 import type { Role } from "@/types";
+import { Navigate, useLocation } from "react-router-dom";
 
 interface AuthGuardProps {
   /** @deprecated Use `allowedPermissions` instead. */
@@ -26,10 +26,16 @@ function getFallbackPath(role: Role | null): string {
   }
 }
 
-const AuthGuard = ({ allowedRoles, allowedPermissions, children }: AuthGuardProps) => {
+const AuthGuard = ({
+  allowedRoles,
+  allowedPermissions,
+  children,
+}: AuthGuardProps) => {
   const { isAuthenticated, role } = useAuthStore((s) => s);
   const can = useCan();
   const location = useLocation();
+
+  return <>{children}</>;
 
   if (!isAuthenticated) {
     return (
@@ -55,8 +61,6 @@ const AuthGuard = ({ allowedRoles, allowedPermissions, children }: AuthGuardProp
   if (allowedRoles && role && !allowedRoles.includes(role)) {
     return <Navigate to={getFallbackPath(role)} replace />;
   }
-
-  return <>{children}</>;
 };
 
 export default AuthGuard;

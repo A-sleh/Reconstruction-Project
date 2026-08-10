@@ -1,0 +1,101 @@
+{
+  "engineerProfile": {
+    "title": "الملف التعريفي للمهندس",
+    "description": "نظرة عامة على بياناتك المهنية وحالة التحقق الخاصة بك.",
+    "identifier": "المعرف",
+    "verificationStatus": {
+      "VERIFIED": "موثق",
+      "PENDING": "قيد المراجعة",
+      "REJECTED": "مرفوض"
+    },
+    "contact": {
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "syndicateId": "رقم النقابة"
+    },
+    "professionalInfo": {
+      "specialization": "التخصص",
+      "licenseNumber": "رقم الترخيص",
+      "yearsOfExperience": "سنوات الخبرة",
+      "yearsOfExperienceValue_one": "{{count}} سنة",
+      "yearsOfExperienceValue_other": "{{count}} سنوات",
+      "bio": "نبذة تعريفية",
+      "employmentType": "نوع التوظيف"
+    },
+    "employmentType": {
+      "FIRM_EMPLOYEE": "موظف في شركة",
+      "FREELANCER": "مستقل",
+      "GOVERNMENT_EMPLOYEE": "موظف حكومي"
+    },
+    "speciality": {
+      "CIVIL": "مدني",
+      "ARCHITECTURE": "معماري",
+      "ELECTRICAL": "كهرباء",
+      "MECHANICAL": "ميكانيك"
+    },
+    "error": {
+      "title": "تعذر تحميل الملف الشخصي",
+      "message": "حدث خطأ أثناء جلب بياناتك. يرجى المحاولة مرة أخرى.",
+      "retry": "إعادة المحاولة"
+    },
+    "projects": {
+      "lastProjects": {
+        "title": "أحدث المشاريع",
+        "subtitle": "مشاريعك الأخيرة التي تعكس خبرتك المهنية.",
+        "empty": "لا توجد مشاريع بعد",
+        "emptyHint": "ابدأ بإضافة أول مشروع إلى محفظتك المهنية.",
+        "newProject": "مشروع جديد"
+      },
+      "portfolio": {
+        "title": "محفظة المشاريع",
+        "subtitle": "جميع مشاريعك المعتمدة وعينات الأعمال السابقة.",
+        "searchPlaceholder": "ابحث في المشاريع...",
+        "allStatuses": "كل الحالات",
+        "empty": "لا توجد مشاريع مطابقة"
+      },
+      "status": {
+        "COMPLETED": "مكتمل",
+        "IN_PROGRESS": "قيد التنفيذ",
+        "PLANNING": "قيد التخطيط"
+      },
+      "fields": {
+        "title": "عنوان المشروع",
+        "category": "التصنيف",
+        "client": "العميل",
+        "location": "الموقع",
+        "budget": "الميزانية",
+        "startDate": "تاريخ البداية",
+        "status": "حالة المشروع",
+        "description": "الوصف"
+      },
+      "placeholders": {
+        "title": "مثال: إعادة تأهيل مبنى سكني",
+        "category": "مثال: سكني",
+        "client": "اسم العميل",
+        "location": "المدينة أو الحي",
+        "budget": "قيمة الميزانية بالدولار",
+        "startDate": "اختر تاريخ البداية",
+        "description": "نبذة مختصرة عن المشروع ودورك فيه..."
+      },
+      "validation": {
+        "title": "عنوان المشروع مطلوب (3 أحرف على الأقل)",
+        "category": "التصنيف مطلوب",
+        "client": "اسم العميل مطلوب",
+        "location": "الموقع مطلوب",
+        "budget": "أدخل ميزانية صحيحة",
+        "startDate": "تاريخ البداية مطلوب",
+        "status": "حالة المشروع مطلوبة",
+        "description": "أدخل وصفاً لا يقل عن 10 أحرف"
+      },
+      "model": {
+        "title": "إضافة مشروع جديد",
+        "subtitle": "أضف مشروعاً جديداً إلى محفظتك المهنية.",
+        "submit": "إضافة المشروع",
+        "cancel": "إلغاء"
+      },
+      "toast": {
+        "created": "تمت إضافة المشروع بنجاح"
+      }
+    }
+  }
+}

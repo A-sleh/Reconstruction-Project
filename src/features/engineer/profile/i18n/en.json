@@ -1,0 +1,101 @@
+{
+  "engineerProfile": {
+    "title": "Engineer Profile",
+    "description": "An overview of your professional details and verification status.",
+    "identifier": "Identifier",
+    "verificationStatus": {
+      "VERIFIED": "Verified",
+      "PENDING": "Pending review",
+      "REJECTED": "Rejected"
+    },
+    "contact": {
+      "email": "Email",
+      "phone": "Phone",
+      "syndicateId": "Syndicate ID"
+    },
+    "professionalInfo": {
+      "specialization": "Specialization",
+      "licenseNumber": "License number",
+      "yearsOfExperience": "Years of experience",
+      "yearsOfExperienceValue_one": "{{count}} year",
+      "yearsOfExperienceValue_other": "{{count}} years",
+      "bio": "About",
+      "employmentType": "Employment type"
+    },
+    "employmentType": {
+      "FIRM_EMPLOYEE": "Firm employee",
+      "FREELANCER": "Freelancer",
+      "GOVERNMENT_EMPLOYEE": "Government employee"
+    },
+    "speciality": {
+      "CIVIL": "Civil",
+      "ARCHITECTURE": "Architecture",
+      "ELECTRICAL": "Electrical",
+      "MECHANICAL": "Mechanical"
+    },
+    "error": {
+      "title": "Failed to load profile",
+      "message": "Something went wrong while fetching your profile. Please try again.",
+      "retry": "Retry"
+    },
+    "projects": {
+      "lastProjects": {
+        "title": "Latest Projects",
+        "subtitle": "Your recent projects that reflect your professional expertise.",
+        "empty": "No projects yet",
+        "emptyHint": "Start by adding your first project to your professional portfolio.",
+        "newProject": "New Project"
+      },
+      "portfolio": {
+        "title": "Project Portfolio",
+        "subtitle": "All your approved projects and past work samples.",
+        "searchPlaceholder": "Search projects...",
+        "allStatuses": "All statuses",
+        "empty": "No matching projects found"
+      },
+      "status": {
+        "COMPLETED": "Completed",
+        "IN_PROGRESS": "In progress",
+        "PLANNING": "Planning"
+      },
+      "fields": {
+        "title": "Project title",
+        "category": "Category",
+        "client": "Client",
+        "location": "Location",
+        "budget": "Budget",
+        "startDate": "Start date",
+        "status": "Project status",
+        "description": "Description"
+      },
+      "placeholders": {
+        "title": "e.g. Residential building rehabilitation",
+        "category": "e.g. Residential",
+        "client": "Client name",
+        "location": "City or district",
+        "budget": "Budget amount in USD",
+        "startDate": "Pick a start date",
+        "description": "A short overview of the project and your role in it..."
+      },
+      "validation": {
+        "title": "Project title is required (at least 3 characters)",
+        "category": "Category is required",
+        "client": "Client name is required",
+        "location": "Location is required",
+        "budget": "Enter a valid budget",
+        "startDate": "Start date is required",
+        "status": "Project status is required",
+        "description": "Description must be at least 10 characters"
+      },
+      "model": {
+        "title": "Add New Project",
+        "subtitle": "Add a new project to your professional portfolio.",
+        "submit": "Add Project",
+        "cancel": "Cancel"
+      },
+      "toast": {
+        "created": "Project added successfully"
+      }
+    }
+  }
+}
