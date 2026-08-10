@@ -65,3 +65,37 @@ export interface EngineerProject {
   imageUrl: string | null;
   createdAt: string;
 }
+
+// ============================================================================
+// Quick Engineer Search
+// ============================================================================
+export type EngineerExperienceRange = "all" | "0-2" | "3-5" | "5+";
+
+export type EngineerSortOption = "experience" | "recent" | "name";
+
+export interface EngineerFilters {
+  query: string;
+  specializations: EngineerSpeciality[];
+  experienceRange: EngineerExperienceRange;
+  hasPhone: boolean;
+  hasEmail: boolean;
+  sort: EngineerSortOption;
+}
+
+export interface EngineerSearchResult {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  photoUrl: string | null;
+  phone: string;
+  email: string;
+  personalIdentifier: string;
+  role: string;
+  id: string;
+  engineerId: string;
+  specialization: EngineerSpeciality;
+  licenseNumber: string;
+  yearsOfExperience: number;
+  bio: string;
+  createdAt: string;
+}

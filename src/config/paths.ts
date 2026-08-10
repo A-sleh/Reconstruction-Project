@@ -132,6 +132,10 @@ export const paths = {
         path: "/app/engineer/profile",
         getHref: () => `/app/engineer/profile`,
       },
+      engineers: {
+        path: "/app/engineer/engineers",
+        getHref: () => `/app/engineer/engineers`,
+      },
     },
     projects: {
       projectWorkSite: {
