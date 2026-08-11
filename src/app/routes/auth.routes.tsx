@@ -1,7 +1,7 @@
-import { lazy, Suspense } from "react";
-import { paths } from "@/config/paths";
-import { RouteObject } from "react-router";
 import Loader from "@/components/shared/Loader";
+import { paths } from "@/config/paths";
+import { lazy, Suspense } from "react";
+import { RouteObject } from "react-router";
 
 const Login = lazy(() => import("@/pages/authentication/Login.view"));
 const ProvidorRegisteration = lazy(
@@ -17,8 +17,6 @@ const RegisterOptions = lazy(
   () => import("@/pages/authentication/RegisterOptions.view"),
 );
 
-const LoadingFallback = () => <Loader />;
-
 export const authRoutes: RouteObject[] = [
   {
     path: "auth",
@@ -26,7 +24,7 @@ export const authRoutes: RouteObject[] = [
       {
         path: paths.auth.login.path,
         element: (
-          <Suspense fallback={<LoadingFallback />}>
+          <Suspense fallback={<Loader />}>
             <Login />
           </Suspense>
         ),
@@ -34,7 +32,7 @@ export const authRoutes: RouteObject[] = [
       {
         path: paths.auth.register.path,
         element: (
-          <Suspense fallback={<LoadingFallback />}>
+          <Suspense fallback={<Loader />}>
             <RegisterOptions />
           </Suspense>
         ),
@@ -42,7 +40,7 @@ export const authRoutes: RouteObject[] = [
       {
         path: paths.auth.register.asProvider.path,
         element: (
-          <Suspense fallback={<LoadingFallback />}>
+          <Suspense fallback={<Loader />}>
             <ProvidorRegisteration />
           </Suspense>
         ),
@@ -50,7 +48,7 @@ export const authRoutes: RouteObject[] = [
       {
         path: paths.auth.register.asInvestor.path,
         element: (
-          <Suspense fallback={<LoadingFallback />}>
+          <Suspense fallback={<Loader />}>
             <InvestorRegisteration />
           </Suspense>
         ),
@@ -58,7 +56,7 @@ export const authRoutes: RouteObject[] = [
       {
         path: paths.auth.register.asEngineer.path,
         element: (
-          <Suspense fallback={<LoadingFallback />}>
+          <Suspense fallback={<Loader />}>
             <EngineerRegisteration />
           </Suspense>
         ),

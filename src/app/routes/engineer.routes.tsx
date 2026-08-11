@@ -1,23 +1,19 @@
-import { lazy, Suspense } from "react";
-import { paths } from "@/config/paths";
-import { RouteObject } from "react-router";
 import Loader from "@/components/shared/Loader";
+import { paths } from "@/config/paths";
 import AuthGuard from "@/features/Auth/components/AuthGuard";
 import { Permissions } from "@/lib/permissions";
+import { lazy, Suspense } from "react";
+import { RouteObject } from "react-router";
 
-const Engineer_Profile = lazy(
-  () => import("@/pages/engineer/Profile.view"),
-);
+const Engineer_Profile = lazy(() => import("@/pages/engineer/Profile.view"));
 
 const Engineers = lazy(() => import("@/pages/engineer/Engineers.view"));
-
-const LoadingFallback = () => <Loader />;
 
 export const engineerRoutes: RouteObject[] = [
   {
     path: paths.app.engineer.profile.path,
     element: (
-      <Suspense fallback={<LoadingFallback />}>
+      <Suspense fallback={<Loader />}>
         <AuthGuard allowedPermissions={Permissions.PROFILE_VIEW}>
           <Engineer_Profile />
         </AuthGuard>
@@ -27,7 +23,7 @@ export const engineerRoutes: RouteObject[] = [
   {
     path: paths.app.engineer.engineers.path,
     element: (
-      <Suspense fallback={<LoadingFallback />}>
+      <Suspense fallback={<Loader />}>
         <AuthGuard allowedPermissions={Permissions.PROFILE_VIEW}>
           <Engineers />
         </AuthGuard>

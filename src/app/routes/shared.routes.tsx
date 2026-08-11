@@ -1,21 +1,19 @@
-import { lazy, Suspense } from "react";
-import { paths } from "@/config/paths";
-import { RouteObject } from "react-router";
-import Loader from "@/components/shared/Loader";
 import ApplicationLayout from "@/components/layouts/Main-layout";
+import Loader from "@/components/shared/Loader";
+import { paths } from "@/config/paths";
+import { lazy, Suspense } from "react";
+import { RouteObject } from "react-router";
 
 const HomePage = lazy(() => import("@/features/home/Home.view"));
 const LandingPage = lazy(
   () => import("@/features/landing-page/LandingPage.view"),
 );
 
-const LoadingFallback = () => <Loader />;
-
 export const sharedRoutes: RouteObject[] = [
   {
     path: "/",
     element: (
-      <Suspense fallback={<LoadingFallback />}>
+      <Suspense fallback={<Loader />}>
         <LandingPage />
       </Suspense>
     ),
@@ -27,7 +25,7 @@ export const sharedRoutes: RouteObject[] = [
       {
         path: paths.app.home.path,
         element: (
-          <Suspense fallback={<LoadingFallback />}>
+          <Suspense fallback={<Loader />}>
             <HomePage />
           </Suspense>
         ),
