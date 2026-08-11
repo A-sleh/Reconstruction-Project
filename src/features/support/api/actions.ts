@@ -35,6 +35,18 @@ const updateTicketStatus = async (
 };
 
 // ==========================================
+// Error helpers
+// ==========================================
+function getErrorMessage(error: unknown): string {
+  if (error instanceof Error) return error.message;
+  if (typeof error === "object" && error !== null) {
+    const err = error as { response?: { data?: { message?: string } } };
+    return err.response?.data?.message ?? "";
+  }
+  return "";
+}
+
+// ==========================================
 // Custom Mutation Hooks
 // ==========================================
 export const useSendTicketMessage = (ticketId: string) => {
@@ -52,10 +64,10 @@ export const useSendTicketMessage = (ticketId: string) => {
         i18n.t("support.agent.messageSent", "Message sent successfully"),
       );
     },
-    onError: (error: any) => {
-      const serverMessage = error?.response?.data?.message || error?.message;
+    onError: (error) => {
       const message =
-        serverMessage || i18n.t("support.agent.messageSendError", "Failed to send message");
+        getErrorMessage(error) ||
+        i18n.t("support.agent.messageSendError", "Failed to send message");
       errorToast(message);
     },
   });
@@ -82,10 +94,10 @@ export const useUpdateTicketStatus = (ticketId: string) => {
         i18n.t("support.agent.statusUpdated", "Ticket status updated successfully"),
       );
     },
-    onError: (error: any) => {
-      const serverMessage = error?.response?.data?.message || error?.message;
+    onError: (error) => {
       const message =
-        serverMessage || i18n.t("support.agent.statusUpdateError", "Failed to update ticket status");
+        getErrorMessage(error) ||
+        i18n.t("support.agent.statusUpdateError", "Failed to update ticket status");
       errorToast(message);
     },
   });

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import EmojiPickerLib from "emoji-picker-react";
+import EmojiPickerLib, { Theme } from "emoji-picker-react";
 import { Smile } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -39,7 +39,7 @@ const EmojiPicker = ({ onEmojiSelect }: EmojiPickerProps) => {
             onEmojiSelect(emojiData.emoji);
             setIsOpen(false);
           }}
-          theme={"light" as any}
+          theme={Theme.LIGHT}
           width={320}
           height={400}
           lazyLoadEmojis
