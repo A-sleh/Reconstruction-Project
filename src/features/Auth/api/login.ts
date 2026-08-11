@@ -1,5 +1,4 @@
-import z from "zod";
-import i18n from "i18next";
+import { errorToast, successToast } from "@/components/common/Toast";
 import ApiInstance from "@/config/api-instance";
 import useAuthStore, {
   AuthState,
@@ -8,14 +7,15 @@ import useAuthStore, {
 } from "@/stores/useAuthStore";
 import type { Role } from "@/types";
 import { useMutation } from "@tanstack/react-query";
-import { errorToast, successToast } from "@/components/common/Toast";
+import i18n from "i18next";
+import z from "zod";
 
 //? Baisc schema for user information
 export const LoginSchema = z.object({
   email: z.string().email(i18n.t("auth.register.validation.invalid_email")),
   password: z
     .string()
-    .min(6, i18n.t("auth.register.validation.password_too_short", { min: 6 })),
+    .min(4, i18n.t("auth.register.validation.password_too_short", { min: 6 })),
   remember: z.boolean().optional(),
 });
 export type LoginValues = z.infer<typeof LoginSchema>;

@@ -1,5 +1,5 @@
-import type { Role } from "@/types";
 import { paths } from "@/config/paths";
+import type { Role } from "@/types";
 
 /**
  * All application permissions grouped by domain.
@@ -89,10 +89,6 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.USERS_MANAGE,
     Permissions.SUPPORT_MANAGE,
     Permissions.PROJECTS_VIEW,
-
-
-
-    Permissions.ORDERS_MANAGE,
   ],
   Engineer: [
     Permissions.HOME_VIEW,
@@ -103,29 +99,9 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.PROJECTS_VIEW,
   ],
   Admin: [
-    Permissions.HOME_VIEW,
-    Permissions.WORK_SITES_VIEW,
-    Permissions.WORK_SITES_CREATE,
-    Permissions.WORK_SITES_EDIT,
-    Permissions.WORK_SITES_DELETE,
-    Permissions.ORDERS_VIEW,
-    Permissions.ORDERS_CREATE,
-    Permissions.ORDERS_MANAGE,
-    Permissions.RESOURCES_VIEW,
-    Permissions.RESOURCES_ADD,
-    Permissions.LANDS_VIEW,
-    Permissions.LANDS_CREATE,
-    Permissions.BUILDINGS_VIEW,
-    Permissions.BUILDINGS_CREATE,
-    Permissions.MARKETPLACE_VIEW,
-    Permissions.PROPERTY_LIST,
     Permissions.CATEGORIES_MANAGE,
     Permissions.USERS_MANAGE,
     Permissions.SUPPORT_MANAGE,
-    Permissions.PROFILE_VIEW,
-    Permissions.PROFILE_EDIT,
-    Permissions.STATISTICS_VIEW,
-    Permissions.PROJECTS_VIEW,
   ],
 };
 

@@ -10,7 +10,10 @@
     "market": "السوق",
     "propertyVerification": "تحقق من الملكية",
     "listProperty": "إدراج العقار",
-    "projectWorkSite": "موقع عمل المشروع"
+    "projectWorkSite": "موقع عمل المشروع",
+    "manage-users": "إدارة المستخدمين",
+    "manage-system-bank": "إدارة بنك النظام",
+    "support": "الدعم"
   },
   "profile": {
     "sectionTitle": "الملف الشخصي",

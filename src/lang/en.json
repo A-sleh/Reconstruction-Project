@@ -10,7 +10,10 @@
     "market": "Market",
     "propertyVerification": "Property Verification",
     "listProperty": "List Property",
-    "projectWorkSite": "Project Work Site"
+    "projectWorkSite": "Project Work Site",
+    "manage-users": "Manage Users",
+    "manage-system-bank": "Manage System Bank",
+    "support": "Support"
   },
   "profile": {
     "sectionTitle": "Profile",

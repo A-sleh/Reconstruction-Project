@@ -1,27 +1,30 @@
 import { ReactNode, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import {
-  RiHome9Line,
-  RiShoppingBagLine,
-  RiBuilding2Line,
-  RiStore2Line,
-  RiListUnordered,
-} from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
-import { MdOutlineConstruction } from "react-icons/md";
 import { FiBarChart2 } from "react-icons/fi";
+import { MdOutlineConstruction } from "react-icons/md";
+import {
+  RiBuilding2Line,
+  RiCustomerService2Line,
+  RiFoldersLine,
+  RiHome9Line,
+  RiListUnordered,
+  RiShoppingBagLine,
+  RiStore2Line,
+  RiUserSettingsLine,
+} from "react-icons/ri";
 
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { paths } from "@/config/paths";
+import { useCan } from "@/hooks/useCan";
+import type { Permission } from "@/lib/permissions";
+import { Permissions } from "@/lib/permissions";
+import useAuthStore from "@/stores/useAuthStore";
+import { useTranslation } from "react-i18next";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import Avatar from "./Avatar";
 import NotificationBox from "./Notification-box";
 import ToggleLanguage from "./Toggle-language";
-import { useTranslation } from "react-i18next";
-import Avatar from "./Avatar";
-import { useCan } from "@/hooks/useCan";
-import { Permissions } from "@/lib/permissions";
-import type { Permission } from "@/lib/permissions";
-import useAuthStore from "@/stores/useAuthStore";
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -91,6 +94,24 @@ const Navbar = () => {
       href: paths.app.investor.propertyVerfication.path,
       icon: <RiListUnordered size={18} />,
       permission: Permissions.PROPERTY_LIST,
+    },
+    {
+      label: t("navbar.manage-users"),
+      href: paths.app.admin.manageUsers.path,
+      icon: <RiUserSettingsLine size={18} />,
+      permission: Permissions.USERS_MANAGE,
+    },
+    {
+      label: t("navbar.manage-system-bank"),
+      href: paths.app.admin.categories.path,
+      icon: <RiFoldersLine size={18} />,
+      permission: Permissions.CATEGORIES_MANAGE,
+    },
+    {
+      label: t("navbar.support"),
+      href: paths.app.admin.support.path,
+      icon: <RiCustomerService2Line size={18} />,
+      permission: Permissions.SUPPORT_MANAGE,
     },
   ];
 
