@@ -103,6 +103,14 @@
         "resolvedBadge": "تم الحل • {date}",
         "noMessages": "لا توجد رسائل بعد"
       }
+    },
+    "thread": {
+      "messageSent": "تم إرسال الرسالة بنجاح",
+      "messageSendError": "فشل إرسال الرسالة"
+    },
+    "csat": {
+      "submitSuccess": "شكراً لك! تم تسجيل تقييمك بنجاح.",
+      "submitError": "فشل إرسال التقييم"
     }
   }
 }

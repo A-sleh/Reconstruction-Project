@@ -117,3 +117,87 @@ export interface CustomerTicket {
 export interface CustomerTicketsResponse {
   data: CustomerTicket[];
 }
+
+// ============================================================================
+// 7. User Ticket Thread View (CSAT)
+// ============================================================================
+export interface UserTicketMessage {
+  id: number;
+  sender_type: SenderType;
+  sender_name: string;
+  avatar_initial: string;
+  content: string;
+  created_at: string;
+}
+
+export interface TicketThread {
+  ticket_id: string;
+  subject: string;
+  department: string;
+  priority: TicketPriority;
+  status: TicketStatus;
+  can_rate: boolean;
+  messages: UserTicketMessage[];
+}
+
+export interface SendUserMessagePayload {
+  content: string;
+}
+
+export interface CsatPayload {
+  rating: number;
+  feedback_comment?: string;
+}
+
+export interface CsatResponse {
+  status: string;
+  message: string;
+}
+
+// ============================================================================
+// 8. Knowledge Base & FAQ Portal
+// ============================================================================
+export interface KbSearchResult {
+  article_id: number;
+  title: string;
+  category: string;
+  snippet: string;
+}
+
+export interface KbSearchResponse {
+  results: KbSearchResult[];
+}
+
+export interface KbCategory {
+  id: string;
+  title: string;
+  description: string;
+  articles_count: number;
+  icon: string;
+}
+
+export interface KbCategoriesResponse {
+  categories: KbCategory[];
+}
+
+export interface KbFaq {
+  id: number;
+  question: string;
+  answer: string;
+}
+
+export interface KbPopularFaqsResponse {
+  faqs: KbFaq[];
+}
+
+export interface KbCategoryArticle {
+  id: number;
+  title: string;
+  views_count: number;
+}
+
+export interface KbCategoryArticlesResponse {
+  category_id: string;
+  category_title: string;
+  articles: KbCategoryArticle[];
+}

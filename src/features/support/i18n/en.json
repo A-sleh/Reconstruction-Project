@@ -103,6 +103,14 @@
         "resolvedBadge": "Resolved \u2022 {date}",
         "noMessages": "No messages yet"
       }
+    },
+    "thread": {
+      "messageSent": "Message sent successfully",
+      "messageSendError": "Failed to send message"
+    },
+    "csat": {
+      "submitSuccess": "Thanks! Your rating has been recorded successfully.",
+      "submitError": "Failed to submit your rating"
     }
   }
 }
