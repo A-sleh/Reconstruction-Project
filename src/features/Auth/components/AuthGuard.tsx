@@ -3,6 +3,7 @@ import { useCan } from "@/hooks/useCan";
 import type { Permission } from "@/lib/permissions";
 import useAuthStore from "@/stores/useAuthStore";
 import type { Role } from "@/types";
+import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 interface AuthGuardProps {
@@ -35,8 +36,6 @@ const AuthGuard = ({
   const can = useCan();
   const location = useLocation();
 
-  return <>{children}</>;
-
   if (!isAuthenticated) {
     return (
       <Navigate
@@ -61,6 +60,8 @@ const AuthGuard = ({
   if (allowedRoles && role && !allowedRoles.includes(role)) {
     return <Navigate to={getFallbackPath(role)} replace />;
   }
+
+  return <>{children}</>;
 };
 
 export default AuthGuard;
