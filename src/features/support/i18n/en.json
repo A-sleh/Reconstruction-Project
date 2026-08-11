@@ -24,6 +24,85 @@
     "emptyState": {
       "title": "No conversation selected",
       "description": "Choose a conversation from the list to start messaging"
+    },
+    "agent": {
+      "messageSent": "Message sent successfully",
+      "messageSendError": "Failed to send message",
+      "statusUpdated": "Ticket status updated successfully",
+      "statusUpdateError": "Failed to update ticket status",
+      "inbox": {
+        "badge": "Support Agent",
+        "title": "Your Assigned Tickets Inbox",
+        "online": "Online: {name}",
+        "searchPlaceholder": "Search by ticket number, customer name...",
+        "allStatuses": "All statuses",
+        "total": "Total active tickets: {count}",
+        "ticketId": "Ticket ID",
+        "customer": "Customer / Role",
+        "subject": "Subject",
+        "priority": "Priority",
+        "status": "Status",
+        "sla": "SLA Due",
+        "action": "Action",
+        "openTicket": "Open Ticket",
+        "empty": "No matching tickets",
+        "emptyHint": "Try changing the search or status filter"
+      },
+      "stats": {
+        "open": "Open Tickets",
+        "pendingCustomer": "Pending Customer Reply",
+        "urgent": "Urgent Tickets",
+        "resolvedToday": "Resolved Today",
+        "count": "{count} tickets",
+        "countOne": "{count} ticket"
+      },
+      "status": {
+        "open": "Open",
+        "in_progress": "In Progress",
+        "pending_customer": "Pending Customer",
+        "resolved": "Resolved",
+        "closed": "Closed"
+      },
+      "priority": {
+        "urgent": "Urgent",
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      },
+      "role": {
+        "Investor": "Investor",
+        "Provider": "Provider",
+        "Engineer": "Engineer",
+        "Admin": "Admin"
+      },
+      "sla": {
+        "minutes": "{count} minutes left",
+        "hour": "1 hour left",
+        "hours": "{count} hours left",
+        "overdue": "Overdue"
+      },
+      "workspace": {
+        "back": "Back to inbox",
+        "ticketTitle": "Ticket #{id}",
+        "updateStatus": "Update ticket status:",
+        "department": "Department: {department}",
+        "priorityLabel": "Priority: {priority}",
+        "internalNote": "Internal note ({name})",
+        "replyToCustomer": "Reply to customer",
+        "addInternalNote": "Add internal note",
+        "cannedResponses": "Canned responses:",
+        "cannedPlaceholder": "Choose a saved response...",
+        "replyPlaceholder": "Type your reply to the customer here...",
+        "internalPlaceholder": "Type an internal note (hidden from customer)...",
+        "send": "Send Reply",
+        "customerCard": "Customer Information",
+        "email": "Email:",
+        "accountId": "Account ID:",
+        "joinDate": "Join date:",
+        "previousTickets": "Customer previous tickets ({count})",
+        "resolvedBadge": "Resolved \u2022 {date}",
+        "noMessages": "No messages yet"
+      }
     }
   }
 }

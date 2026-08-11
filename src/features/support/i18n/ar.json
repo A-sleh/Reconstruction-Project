@@ -24,6 +24,85 @@
     "emptyState": {
       "title": "لم يتم اختيار محادثة",
       "description": "اختر محادثة من القائمة لبدء المراسلة"
+    },
+    "agent": {
+      "messageSent": "تم إرسال الرسالة بنجاح",
+      "messageSendError": "فشل إرسال الرسالة",
+      "statusUpdated": "تم تحديث حالة التذكرة بنجاح",
+      "statusUpdateError": "فشل تحديث حالة التذكرة",
+      "inbox": {
+        "badge": "موظف دعم",
+        "title": "صندوق التذاكر المسندة إليك",
+        "online": "متصل: {name}",
+        "searchPlaceholder": "بحث برقم التذكرة، اسم العميل...",
+        "allStatuses": "جميع الحالات",
+        "total": "إجمالي التذاكر النشطة: {count}",
+        "ticketId": "رقم التذكرة",
+        "customer": "العميل / نوع الدور",
+        "subject": "عنوان التذكرة",
+        "priority": "الأولوية",
+        "status": "الحالة",
+        "sla": "مهلة SLA",
+        "action": "إجراء",
+        "openTicket": "فتح التذكرة",
+        "empty": "لا توجد تذاكر مطابقة",
+        "emptyHint": "جرّب تعديل البحث أو الفلترة حسب الحالة"
+      },
+      "stats": {
+        "open": "التذاكر المفتوحة",
+        "pendingCustomer": "بانتظار رد العميل",
+        "urgent": "تذاكر عاجلة جداً",
+        "resolvedToday": "تم حلها اليوم",
+        "count": "{count} تذاكر",
+        "countOne": "{count} تذكرة"
+      },
+      "status": {
+        "open": "مفتوحة",
+        "in_progress": "قيد المعالجة",
+        "pending_customer": "بانتظار العميل",
+        "resolved": "تم الحل",
+        "closed": "مغلقة"
+      },
+      "priority": {
+        "urgent": "عاجل",
+        "high": "عالية",
+        "medium": "متوسطة",
+        "low": "عادية"
+      },
+      "role": {
+        "Investor": "مستثمر",
+        "Provider": "مزود",
+        "Engineer": "مهندس",
+        "Admin": "مدير"
+      },
+      "sla": {
+        "minutes": "باقي {count} دقيقة",
+        "hour": "باقي ساعة واحدة",
+        "hours": "باقي {count} ساعات",
+        "overdue": "متأخرة"
+      },
+      "workspace": {
+        "back": "العودة للصندوق",
+        "ticketTitle": "التذكرة #{id}",
+        "updateStatus": "تحديث حالة التذكرة:",
+        "department": "القسم: {department}",
+        "priorityLabel": "الأولوية: {priority}",
+        "internalNote": "ملاحظة داخلية ({name})",
+        "replyToCustomer": "إرسال رد للعميل",
+        "addInternalNote": "إضافة ملاحظة داخلية",
+        "cannedResponses": "ردود جاهزة:",
+        "cannedPlaceholder": "اختر إجابة مسجلة مسبقاً...",
+        "replyPlaceholder": "اكتب ردك للعميل هنا...",
+        "internalPlaceholder": "اكتب ملاحظة داخلية (لن تظهر للعميل)...",
+        "send": "إرسال الرد",
+        "customerCard": "بطاقة بيانات العميل",
+        "email": "البريد الإلكتروني:",
+        "accountId": "رقم الحساب:",
+        "joinDate": "تاريخ الانضمام:",
+        "previousTickets": "التذاكر السابقة للعميل ({count})",
+        "resolvedBadge": "تم الحل • {date}",
+        "noMessages": "لا توجد رسائل بعد"
+      }
     }
   }
 }
