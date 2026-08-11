@@ -52,7 +52,8 @@ export default function SystemServices() {
 
   const { mutate: createService } = useCreateService();
   const { mutate: updateService } = useUpdateService();
-  const { mutate: deleteService } = useDeleteService();
+  const { mutate: deleteService, isPending: isServiceDeleting } =
+    useDeleteService();
 
   const allItems = itemsData?.pages.flatMap((page) => page.data) ?? [];
 
@@ -243,6 +244,7 @@ export default function SystemServices() {
                             <ConfirmDelete
                               item={item.name}
                               onConfirm={() => deleteService(item.id)}
+                              isLoading={isServiceDeleting}
                               openButton={
                                 <button
                                   title={t(

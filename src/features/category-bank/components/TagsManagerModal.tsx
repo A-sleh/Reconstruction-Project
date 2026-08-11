@@ -29,10 +29,14 @@ export function TagsManagerModal({
   const { t } = useTranslation();
   const [tags, setTags] = useState<string[]>(initialTags);
 
-  const { mutate: addResourceTags } = useAddResourceTags();
-  const { mutate: addServiceTags } = useAddServiceTags();
+  const { mutate: addResourceTags, isPending: isResourceAdded } =
+    useAddResourceTags();
+  const { mutate: addServiceTags, isPending: isServiceAdded } =
+    useAddServiceTags();
   const { mutate: removeResourceTags } = useRemoveResourceTags();
   const { mutate: removeServiceTags } = useRemoveServiceTags();
+
+  const isLoading = isResourceAdded || isServiceAdded;
 
   const addTags: unknown =
     type === "resource" ? addResourceTags : addServiceTags;
@@ -57,8 +61,11 @@ export function TagsManagerModal({
               serviceBankId: itemId,
               tags: toAdd,
             },
+        {
+          onSettled: () => closeModal(),
+        },
       );
-    }
+    } else closeModal();
 
     if (toRemove.length > 0) {
       removeTags(
@@ -73,8 +80,6 @@ export function TagsManagerModal({
             },
       );
     }
-
-    closeModal();
   };
 
   const OPEN_KEY = `manage-tags-${type}-${itemId}`;
@@ -128,7 +133,12 @@ export function TagsManagerModal({
           )}
 
           <div className="flex justify-end gap-2 mt-6">
-            <Button variant="default" onClick={() => handleSave(closeModal)}>
+            <Button
+              variant="default"
+              onClick={() => handleSave(closeModal)}
+              disabled={isLoading}
+              isLoading={isLoading}
+            >
               {t("categoryBank.tagsModal.actions.confirm", "Save Tags")}
             </Button>
           </div>

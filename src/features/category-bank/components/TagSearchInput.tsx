@@ -48,7 +48,7 @@ export default function TagSearchInput({
 
   const tags = results?.pages.flatMap((page) => page.data) ?? [];
   const filtered = tags.filter(
-    (tag) => !selectedTags.some((st) => st === tag?.name),
+    (tag) => !selectedTags.some((st) => st.toString() === tag?.name.toString()),
   );
 
   const lastItemRef = useCallback(
