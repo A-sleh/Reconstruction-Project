@@ -10,6 +10,14 @@ export type ProjectStatus =
   | "Canceled"
   | "Done";
 
+export const PROJECT_STATUSES: ProjectStatus[] = [
+  "Initializing",
+  "InProgress",
+  "Suspended",
+  "Canceled",
+  "Done",
+];
+
 // ============================================================================
 // Core Entities
 // ============================================================================

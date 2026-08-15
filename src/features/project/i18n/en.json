@@ -7,6 +7,36 @@
       "updateProjectError": "Failed to update project",
       "deleteProjectSuccess": "Project deleted successfully",
       "deleteProjectError": "Failed to delete project"
+    },
+    "header": {
+      "badge": "Project Management",
+      "title": "Projects",
+      "description": "Track all construction projects and their statuses from one place"
+    },
+    "filters": {
+      "title": "Filters",
+      "resetButton": "Reset",
+      "search": {
+        "label": "Search",
+        "placeholder": "Search by project name..."
+      },
+      "status": {
+        "label": "Project Status"
+      }
+    },
+    "list": {
+      "empty": "No projects found",
+      "emptyHint": "Try adjusting the filters or add a new project",
+      "endOfList": "You have reached the end of the list",
+      "building": "Building",
+      "investor": "Investor"
+    },
+    "status": {
+      "Initializing": "Initializing",
+      "InProgress": "In Progress",
+      "Suspended": "Suspended",
+      "Canceled": "Canceled",
+      "Done": "Done"
     }
   }
 }

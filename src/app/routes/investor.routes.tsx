@@ -26,6 +26,7 @@ const Project_List_Property = lazy(
 const Project_Work_Site = lazy(
   () => import("@/pages/project/ProjectWorkSite.view"),
 );
+const Investor_Projecrts = lazy(() => import("@/pages/project/Pojects.view"));
 
 export const investorRoutes: RouteObject[] = [
   {
@@ -104,6 +105,16 @@ export const investorRoutes: RouteObject[] = [
       <Suspense fallback={<Loader />}>
         <AuthGuard allowedPermissions={Permissions.PROJECTS_VIEW}>
           <Project_Work_Site />
+        </AuthGuard>
+      </Suspense>
+    ),
+  },
+  {
+    path: paths.app.projects.path,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <AuthGuard allowedPermissions={Permissions.PROJECTS_VIEW}>
+          <Investor_Projecrts />
         </AuthGuard>
       </Suspense>
     ),

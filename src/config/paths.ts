@@ -1,5 +1,3 @@
-import ListProperty from "@/pages/project/ListProperty.view";
-
 export const paths = {
   auth: {
     register: {
@@ -138,6 +136,8 @@ export const paths = {
       },
     },
     projects: {
+      path: "/app/investor/projects",
+      getHref: () => `/app/investor/projects`,
       projectWorkSite: {
         path: "/app/project/work-site/:id",
         getHref: (id: number) => `/app/project/work-site/${id}`,

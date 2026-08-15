@@ -7,6 +7,36 @@
       "updateProjectError": "فشل في تحديث المشروع",
       "deleteProjectSuccess": "تم حذف المشروع بنجاح",
       "deleteProjectError": "فشل في حذف المشروع"
+    },
+    "header": {
+      "badge": "إدارة المشاريع",
+      "title": "المشاريع",
+      "description": "تابع جميع المشاريع الإنشائية وحالاتها من مكان واحد"
+    },
+    "filters": {
+      "title": "الفلاتر",
+      "resetButton": "إعادة تعيين",
+      "search": {
+        "label": "البحث",
+        "placeholder": "ابحث باسم المشروع..."
+      },
+      "status": {
+        "label": "حالة المشروع"
+      }
+    },
+    "list": {
+      "empty": "لا توجد مشاريع",
+      "emptyHint": "جرّب تعديل الفلاتر أو أضف مشروعاً جديداً",
+      "endOfList": "لقد وصلت إلى نهاية القائمة",
+      "building": "المبنى",
+      "investor": "المستثمر"
+    },
+    "status": {
+      "Initializing": "قيد التأسيس",
+      "InProgress": "قيد التنفيذ",
+      "Suspended": "موقوف",
+      "Canceled": "ملغى",
+      "Done": "مكتمل"
     }
   }
 }
