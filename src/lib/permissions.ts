@@ -85,9 +85,6 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.PROPERTY_LIST,
     Permissions.PROFILE_VIEW,
     Permissions.PROFILE_EDIT,
-    Permissions.CATEGORIES_MANAGE,
-    Permissions.USERS_MANAGE,
-    Permissions.SUPPORT_MANAGE,
     Permissions.PROJECTS_VIEW,
   ],
   Engineer: [

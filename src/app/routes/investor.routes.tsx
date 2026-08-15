@@ -26,7 +26,7 @@ const Project_List_Property = lazy(
 const Project_Work_Site = lazy(
   () => import("@/pages/project/ProjectWorkSite.view"),
 );
-const Investor_Projecrts = lazy(() => import("@/pages/project/Pojects.view"));
+const Investor_Projecrts = lazy(() => import("@/pages/project/Projects.view"));
 
 export const investorRoutes: RouteObject[] = [
   {
