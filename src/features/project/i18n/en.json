@@ -37,6 +37,35 @@
       "Suspended": "Suspended",
       "Canceled": "Canceled",
       "Done": "Done"
+    },
+    "newProject": {
+      "title": "New Project",
+      "button": "New Project",
+      "name": {
+        "label": "Project Name",
+        "placeholder": "Enter project name..."
+      },
+      "buildingId": {
+        "label": "Building",
+        "placeholder": "Select a building...",
+        "searchPlaceholder": "Search buildings...",
+        "noResults": "No matching buildings.",
+        "loadingMore": "Loading more..."
+      },
+      "date": {
+        "label": "Start Date"
+      },
+      "endDate": {
+        "label": "End Date"
+      },
+      "status": {
+        "label": "Project Status"
+      },
+      "confirm": "Create Project"
+    },
+    "updateProject": {
+      "title": "Update Project",
+      "confirm": "Save Changes"
     }
   }
 }

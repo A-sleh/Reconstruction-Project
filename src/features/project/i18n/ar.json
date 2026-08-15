@@ -37,6 +37,35 @@
       "Suspended": "موقوف",
       "Canceled": "ملغى",
       "Done": "مكتمل"
+    },
+    "newProject": {
+      "title": "مشروع جديد",
+      "button": "مشروع جديد",
+      "name": {
+        "label": "اسم المشروع",
+        "placeholder": "أدخل اسم المشروع..."
+      },
+      "buildingId": {
+        "label": "المبنى",
+        "placeholder": "اختر مبنى...",
+        "searchPlaceholder": "ابحث عن مبنى...",
+        "noResults": "لا توجد مباني مطابقة.",
+        "loadingMore": "جارٍ تحميل المزيد..."
+      },
+      "date": {
+        "label": "تاريخ البدء"
+      },
+      "endDate": {
+        "label": "تاريخ الانتهاء"
+      },
+      "status": {
+        "label": "حالة المشروع"
+      },
+      "confirm": "إنشاء المشروع"
+    },
+    "updateProject": {
+      "title": "تعديل المشروع",
+      "confirm": "حفظ التعديلات"
     }
   }
 }
