@@ -180,3 +180,33 @@ export interface ApproveOrderCancellationRequestBody {
   orderId: number;
   note: string;
 }
+
+// ============================================================================
+// POST /api/order/create-service-order
+// ============================================================================
+export interface CreateServiceOrderItem {
+  serviceId: number; // integer ($int64)
+  quantity: number; // integer ($int32)
+  discountDetailId: number; // integer ($int64)
+}
+
+export interface CreateServiceOrderRequestBody {
+  projectId: number; // integer ($int64)
+  discountDetailId: number; // integer ($int64)
+  items: CreateServiceOrderItem[];
+}
+
+// ============================================================================
+// POST /api/order/create-resource-order
+// ============================================================================
+export interface CreateResourceOrderItem {
+  resourceId: number; // integer ($int64)
+  quantity: number; // integer ($int32)
+  discountDetailId: number; // integer ($int64)
+}
+
+export interface CreateResourceOrderRequestBody {
+  projectId: number; // integer ($int64)
+  discountDetailId: number; // integer ($int64)
+  items: CreateResourceOrderItem[];
+}

@@ -153,7 +153,11 @@
       "cancelOrderItemSuccess": "Order item cancelled successfully",
       "cancelOrderItemError": "Failed to cancel order item",
       "approveOrderCancellationSuccess": "Order cancellation approved",
-      "approveOrderCancellationError": "Failed to approve order cancellation"
+      "approveOrderCancellationError": "Failed to approve order cancellation",
+      "createServiceOrderSuccess": "Service order created successfully",
+      "createServiceOrderError": "Failed to create service order",
+      "createResourceOrderSuccess": "Resource order created successfully",
+      "createResourceOrderError": "Failed to create resource order"
     }
   }
 }

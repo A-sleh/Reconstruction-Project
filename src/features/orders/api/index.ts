@@ -15,6 +15,8 @@ export enum InvestorRequestController {
   CancelOrder = `${BASE_ORDER_ROUTE}/cancel-order`,
   CancelOrderItem = `${BASE_ORDER_ROUTE}/cancel-order-item`,
   ApproveOrderCancellation = `${BASE_ORDER_ROUTE}/approve-order-cancellation`,
+  CreateServiceOrder = `${BASE_ORDER_ROUTE}/create-service-order`,
+  CreateResourceOrder = `${BASE_ORDER_ROUTE}/create-resource-order`,
   InvestorRequestDetails = "investo-request",
 }
 
@@ -44,5 +46,7 @@ export const MUTATION_KEYS = {
     cancelOrderItem: () => ["orders", "cancel-item"],
     approveOrderCancellation: () => ["orders", "approve-order-cancellation"],
     fullyDelivered: () => ["orders", "investor", "requests","full-delivered"],
+    createServiceOrder: () => ["orders", "create-service-order"],
+    createResourceOrder: () => ["orders", "create-resource-order"],
   },
 };

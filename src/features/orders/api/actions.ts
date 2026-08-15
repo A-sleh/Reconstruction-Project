@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { errorToast, successToast } from "@/components/common/Toast";
 import ApiInstance from "@/config/api-instance";
-import { successToast, errorToast } from "@/components/common/Toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import i18n from "i18next";
-import { InvestorRequestController, QUERY_KEYS, MUTATION_KEYS } from ".";
+import { InvestorRequestController, MUTATION_KEYS, QUERY_KEYS } from ".";
 import {
   AddPaymentRequestBody,
   AddReceiveInvoiceRequestBody,
@@ -10,14 +10,19 @@ import {
   ApproveOrderItemCancellationRequestBody,
   CancelOrderItemRequestBody,
   CancelOrderRequestBody,
+  CreateResourceOrderRequestBody,
+  CreateServiceOrderRequestBody,
   MarkAsReceivedRequestBody,
   OrderByIdParams,
 } from "./types";
 
 // ==========================================
-// 1. API Fetchers (Bringing in your original code)
+// 1. API Fetchers
 // ==========================================
 
+// ------------------------------------------
+// Order Approval
+// ------------------------------------------
 const approveOrder = async ({ OrderId }: OrderByIdParams) => {
   const { data } = await ApiInstance.post(
     `/${InvestorRequestController.AcceptOrder}`,
@@ -41,6 +46,28 @@ const rejectOrder = async ({
   return data;
 };
 
+// ------------------------------------------
+// Order Creation
+// ------------------------------------------
+const createServiceOrder = async (payload: CreateServiceOrderRequestBody) => {
+  const { data } = await ApiInstance.post(
+    `/${InvestorRequestController.CreateServiceOrder}`,
+    payload,
+  );
+  return data;
+};
+
+const createResourceOrder = async (payload: CreateResourceOrderRequestBody) => {
+  const { data } = await ApiInstance.post(
+    `/${InvestorRequestController.CreateResourceOrder}`,
+    payload,
+  );
+  return data;
+};
+
+// ------------------------------------------
+// Payments
+// ------------------------------------------
 const addAddPayment = async (payload: AddPaymentRequestBody) => {
   const { data } = await ApiInstance.post(
     `/${InvestorRequestController.AddPayment}`,
@@ -49,6 +76,9 @@ const addAddPayment = async (payload: AddPaymentRequestBody) => {
   return data;
 };
 
+// ------------------------------------------
+// Invoices
+// ------------------------------------------
 const addReceiveInvoice = async (payload: AddReceiveInvoiceRequestBody) => {
   const { data } = await ApiInstance.post(
     `/${InvestorRequestController.AddReceiveInvoice}`,
@@ -57,24 +87,9 @@ const addReceiveInvoice = async (payload: AddReceiveInvoiceRequestBody) => {
   return data;
 };
 
-const approveOrderItemCancellation = async (
-  payload: ApproveOrderItemCancellationRequestBody,
-) => {
-  const { data } = await ApiInstance.post(
-    `/${InvestorRequestController.ApproveOrderItemCancellation}`,
-    payload,
-  );
-  return data;
-};
-
-const markAsReceived = async (payload: MarkAsReceivedRequestBody) => {
-  const { data } = await ApiInstance.post(
-    `/${InvestorRequestController.MarkAsReceived}`,
-    payload,
-  );
-  return data;
-};
-
+// ------------------------------------------
+// Cancellations
+// ------------------------------------------
 const cancelOrder = async (payload: CancelOrderRequestBody) => {
   const { data } = await ApiInstance.post(
     `/${InvestorRequestController.CancelOrder}`,
@@ -101,6 +116,27 @@ const approveOrderCancellation = async (
   return data;
 };
 
+const approveOrderItemCancellation = async (
+  payload: ApproveOrderItemCancellationRequestBody,
+) => {
+  const { data } = await ApiInstance.post(
+    `/${InvestorRequestController.ApproveOrderItemCancellation}`,
+    payload,
+  );
+  return data;
+};
+
+// ------------------------------------------
+// Receiving & Delivery
+// ------------------------------------------
+const markAsReceived = async (payload: MarkAsReceivedRequestBody) => {
+  const { data } = await ApiInstance.post(
+    `/${InvestorRequestController.MarkAsReceived}`,
+    payload,
+  );
+  return data;
+};
+
 const markFullyDeliveredApi = async (id: string | number) => {
   const { data } = await ApiInstance.post(
     `/${InvestorRequestController.InvestorRequestDetails}/${id}/make-full-delivered`,
@@ -108,11 +144,13 @@ const markFullyDeliveredApi = async (id: string | number) => {
   return data;
 };
 
-
 // ==========================================
 // 2. Custom Mutation Hooks
 // ==========================================
 
+// ------------------------------------------
+// Order Approval
+// ------------------------------------------
 /**
  * Hook to approve an order. Automatically invalidates the order lists and details.
  */
@@ -122,7 +160,7 @@ export const useApproveOrder = () => {
   return useMutation({
     mutationKey: MUTATION_KEYS.orders.accept(),
     mutationFn: approveOrder,
-    onSuccess: (data, variables) => {
+    onSuccess: () => {
       // Invalidate the generic order list
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
 
@@ -159,6 +197,56 @@ export const useRejectOrder = () => {
   });
 };
 
+// ------------------------------------------
+// Order Creation
+// ------------------------------------------
+/**
+ * Hook to create a service order.
+ */
+export const useCreateServiceOrder = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.orders.createServiceOrder(),
+    mutationFn: createServiceOrder,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.createServiceOrderSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message =
+        serverMessage || i18n.t("orders.toast.createServiceOrderError");
+      errorToast(message);
+    },
+  });
+};
+
+/**
+ * Hook to create a resource order.
+ */
+export const useCreateResourceOrder = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.orders.createResourceOrder(),
+    mutationFn: createResourceOrder,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.createResourceOrderSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message =
+        serverMessage || i18n.t("orders.toast.createResourceOrderError");
+      errorToast(message);
+    },
+  });
+};
+
+// ------------------------------------------
+// Payments
+// ------------------------------------------
 /**
  * Hook to record a new payment.
  */
@@ -180,6 +268,9 @@ export const useAddPayment = () => {
   });
 };
 
+// ------------------------------------------
+// Invoices
+// ------------------------------------------
 /**
  * Hook to add a received invoice.
  */
@@ -195,48 +286,16 @@ export const useAddReceiveInvoice = () => {
     },
     onError: (error: any) => {
       const serverMessage = error?.response?.data?.message || error?.message;
-      const message = serverMessage || i18n.t("orders.toast.addReceiveInvoiceError");
+      const message =
+        serverMessage || i18n.t("orders.toast.addReceiveInvoiceError");
       errorToast(message);
     },
   });
 };
 
-export const useApproveOrderItemCancellation = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationKey: MUTATION_KEYS.orders.approveOrderItemCancellation(),
-    mutationFn: approveOrderItemCancellation,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
-      successToast(i18n.t("orders.toast.approveOrderItemCancellationSuccess"));
-    },
-    onError: (error: any) => {
-      const serverMessage = error?.response?.data?.message || error?.message;
-      const message = serverMessage || i18n.t("orders.toast.approveOrderItemCancellationError");
-      errorToast(message);
-    },
-  });
-};
-
-export const useMarkAsReceived = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationKey: MUTATION_KEYS.orders.markAsReceived(),
-    mutationFn: markAsReceived,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
-      successToast(i18n.t("orders.toast.markAsReceivedSuccess"));
-    },
-    onError: (error: any) => {
-      const serverMessage = error?.response?.data?.message || error?.message;
-      const message = serverMessage || i18n.t("orders.toast.markAsReceivedError");
-      errorToast(message);
-    },
-  });
-};
-
+// ------------------------------------------
+// Cancellations
+// ------------------------------------------
 export const useCancelOrder = () => {
   const queryClient = useQueryClient();
 
@@ -267,7 +326,8 @@ export const useCancelOrderItem = () => {
     },
     onError: (error: any) => {
       const serverMessage = error?.response?.data?.message || error?.message;
-      const message = serverMessage || i18n.t("orders.toast.cancelOrderItemError");
+      const message =
+        serverMessage || i18n.t("orders.toast.cancelOrderItemError");
       errorToast(message);
     },
   });
@@ -285,7 +345,50 @@ export const useApproveOrderCancellation = () => {
     },
     onError: (error: any) => {
       const serverMessage = error?.response?.data?.message || error?.message;
-      const message = serverMessage || i18n.t("orders.toast.approveOrderCancellationError");
+      const message =
+        serverMessage || i18n.t("orders.toast.approveOrderCancellationError");
+      errorToast(message);
+    },
+  });
+};
+
+export const useApproveOrderItemCancellation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.orders.approveOrderItemCancellation(),
+    mutationFn: approveOrderItemCancellation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.approveOrderItemCancellationSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message =
+        serverMessage ||
+        i18n.t("orders.toast.approveOrderItemCancellationError");
+      errorToast(message);
+    },
+  });
+};
+
+// ------------------------------------------
+// Receiving & Delivery
+// ------------------------------------------
+export const useMarkAsReceived = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.orders.markAsReceived(),
+    mutationFn: markAsReceived,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.orders.all });
+      successToast(i18n.t("orders.toast.markAsReceivedSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message =
+        serverMessage || i18n.t("orders.toast.markAsReceivedError");
       errorToast(message);
     },
   });
@@ -300,7 +403,7 @@ export const useMarkOrderFullyDelivered = () => {
         i18n.t("resourceProvidor.investor-request-details.delivered-success"),
       );
     },
-    onError: (error: any) => {
+    onError: (error: unkown) => {
       const serverMessage = error?.response?.data?.message || error?.message;
       const message =
         serverMessage ||

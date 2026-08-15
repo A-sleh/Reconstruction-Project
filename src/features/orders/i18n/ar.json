@@ -152,7 +152,11 @@
       "cancelOrderItemSuccess": "تم إلغاء عنصر الطلب بنجاح",
       "cancelOrderItemError": "فشل في إلغاء عنصر الطلب",
       "approveOrderCancellationSuccess": "تم اعتماد إلغاء الطلب",
-      "approveOrderCancellationError": "فشل في اعتماد إلغاء الطلب"
+      "approveOrderCancellationError": "فشل في اعتماد إلغاء الطلب",
+      "createServiceOrderSuccess": "تم إنشاء طلب الخدمة بنجاح",
+      "createServiceOrderError": "فشل في إنشاء طلب الخدمة",
+      "createResourceOrderSuccess": "تم إنشاء طلب الموارد بنجاح",
+      "createResourceOrderError": "فشل في إنشاء طلب الموارد"
     }
   }
 }
