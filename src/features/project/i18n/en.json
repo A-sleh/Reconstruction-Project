@@ -1,0 +1,12 @@
+{
+  "project": {
+    "toast": {
+      "createProjectSuccess": "Project created successfully",
+      "createProjectError": "Failed to create project",
+      "updateProjectSuccess": "Project updated successfully",
+      "updateProjectError": "Failed to update project",
+      "deleteProjectSuccess": "Project deleted successfully",
+      "deleteProjectError": "Failed to delete project"
+    }
+  }
+}
