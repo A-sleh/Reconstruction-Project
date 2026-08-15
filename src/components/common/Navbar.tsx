@@ -7,6 +7,7 @@ import { MdOutlineConstruction } from "react-icons/md";
 import {
   RiBuilding2Line,
   RiCustomerService2Line,
+  RiFolderShieldLine,
   RiFoldersLine,
   RiHome9Line,
   RiListUnordered,
@@ -112,6 +113,12 @@ const Navbar = () => {
       href: paths.app.admin.support.path,
       icon: <RiCustomerService2Line size={18} />,
       permission: Permissions.SUPPORT_MANAGE,
+    },
+    {
+      label: t("navbar.projects"),
+      href: paths.app.projects.path,
+      icon: <RiFolderShieldLine size={18} />,
+      permission: Permissions.PROJECTS_VIEW,
     },
   ];
 
