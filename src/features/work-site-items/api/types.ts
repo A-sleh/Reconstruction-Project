@@ -126,3 +126,37 @@ export interface Service {
 
 export interface Resources extends Paginated<PureResource> {}
 export interface Services extends Paginated<Service> {}
+
+// ============================================================================
+// Available Items (worksite/get-available-items)
+// ============================================================================
+export type AvailableItemType = "Resource" | "Service";
+
+export interface AvailableItem {
+  id: number;
+  bankId: number;
+  name: string;
+  description: string;
+  price: number;
+  unit: string;
+  isAvailable: boolean;
+  imageUrl: string;
+  itemType: AvailableItemType;
+  categoryId: number;
+  categoryName: string;
+  tags: string[];
+  workSiteId: number;
+  workSiteName: string;
+  providerId: number;
+  providerName: string;
+}
+
+export interface GetAvailableItemsParams {
+  SearchTerm?: string;
+  CategoryId?: number;
+  Type?: AvailableItemType;
+  PageNumber?: number;
+  PageSize?: number;
+}
+
+export interface AvailableItemsResponse extends Paginated<AvailableItem> {}

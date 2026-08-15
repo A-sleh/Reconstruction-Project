@@ -8,6 +8,7 @@ export enum WorkSiteItemsController {
   DelelteResource = `${BASE_WORKSITE_ROUTE}/delete-item`,
   WorkSiteResources = `${BASE_WORKSITE_ROUTE}/get-resource`,
   WorkSiteServices = `${BASE_WORKSITE_ROUTE}/get-services`,
+  GetAvailableItems = `${BASE_WORKSITE_ROUTE}/get-available-items`,
 }
 
 export const QUERY_KEYS = {
@@ -16,6 +17,12 @@ export const QUERY_KEYS = {
   services: ["Providor", "workSite", "services"],
   statistics: ["Providor", "items", "statistics"],
   deltee: ["Providor", "items", "delete"],
+  availableItems: (filters: unknown) => [
+    "Providor",
+    "workSite",
+    "availableItems",
+    filters,
+  ],
 };
 
 export const MUTATION_KEYS = {

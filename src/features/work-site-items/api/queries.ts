@@ -6,6 +6,8 @@ import {
   WorkSiteResourcesStatistics,
   Resources,
   Services,
+  AvailableItemsResponse,
+  GetAvailableItemsParams,
 } from "./types";
 
 // ==========================================
@@ -63,6 +65,31 @@ const fetchServiceApi = async ({
     `/${WorkSiteItemsController.WorkSiteServices}`,
     {
       params: { ResourceCategoryId: CategoryId, PageNumber, PageSize, Search },
+    },
+  );
+  return data;
+};
+
+// ==========================================
+// Available Items Fetcher
+// ==========================================
+const fetchAvailableItems = async ({
+  SearchTerm,
+  CategoryId,
+  Type,
+  PageNumber = 1,
+  PageSize = 10,
+}: GetAvailableItemsParams): Promise<AvailableItemsResponse> => {
+  const { data } = await ApiInstance.get<AvailableItemsResponse>(
+    `/${WorkSiteItemsController.GetAvailableItems}`,
+    {
+      params: {
+        SearchTerm,
+        CategoryId,
+        Type,
+        PageNumber,
+        PageSize,
+      },
     },
   );
   return data;
@@ -135,6 +162,40 @@ export const useServicesInfinite = ({
 
     initialPageParam: 1,
 
+    getNextPageParam: (lastPage) => {
+      if (lastPage.hasNextPage) {
+        return lastPage.pageNum + 1;
+      }
+      return undefined;
+    },
+  });
+};
+
+export const useAvailableItemsInfinite = ({
+  searchTerm,
+  categoryId,
+  type,
+}: {
+  searchTerm?: string;
+  categoryId?: number;
+  type?: GetAvailableItemsParams["Type"];
+}) => {
+  return useInfiniteQuery<AvailableItemsResponse, unknown>({
+    queryKey: QUERY_KEYS.availableItems({
+      searchTerm,
+      categoryId,
+      type,
+    }),
+    queryFn: async ({ pageParam = 1 }) => {
+      return await fetchAvailableItems({
+        SearchTerm: searchTerm || undefined,
+        CategoryId: categoryId,
+        Type: type,
+        PageNumber: pageParam as number,
+        PageSize: 10,
+      });
+    },
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (lastPage.hasNextPage) {
         return lastPage.pageNum + 1;
