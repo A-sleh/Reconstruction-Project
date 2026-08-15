@@ -66,6 +66,12 @@
     "updateProject": {
       "title": "تعديل المشروع",
       "confirm": "حفظ التعديلات"
+    },
+    "deleteConfirm": {
+      "title": "حذف هذا المشروع؟",
+      "descriptionPrefix": "سيتم حذف المشروع نهائياً:",
+      "confirm": "حذف",
+      "cancel": "إلغاء"
     }
   }
 }

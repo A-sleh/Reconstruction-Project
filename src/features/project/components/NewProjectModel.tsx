@@ -1,14 +1,8 @@
+import Selector from "@/components/inputs/Selector";
 import PopuupLayout from "@/components/layouts/Popup-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/Label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import type { BuildingListItem } from "@/features/investor/buildings/api/types";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -175,24 +169,17 @@ export function NewProjectModel({
           </div>
 
           <div>
-            <Label htmlFor="project-status">
-              {t("project.newProject.status.label")}
-            </Label>
-            <Select
+            <Selector
+              label={t("project.newProject.status.label")}
               value={status}
-              onValueChange={(v) => setStatus(v as ProjectStatus)}
+              setValue={(v) => setStatus(v as ProjectStatus)}
             >
-              <SelectTrigger id="project-status" className="w-full mt-1">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {PROJECT_STATUSES.map((s) => (
-                  <SelectItem key={s} value={s}>
-                    {t(`project.status.${s}`)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+              {PROJECT_STATUSES.map((s) => (
+                <option key={s} value={s}>
+                  {t(`project.status.${s}`)}
+                </option>
+              ))}
+            </Selector>
           </div>
 
           <div className="flex justify-end gap-2 mt-6">

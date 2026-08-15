@@ -66,6 +66,12 @@
     "updateProject": {
       "title": "Update Project",
       "confirm": "Save Changes"
+    },
+    "deleteConfirm": {
+      "title": "Delete this project?",
+      "descriptionPrefix": "This will permanently remove:",
+      "confirm": "Delete",
+      "cancel": "Cancel"
     }
   }
 }
