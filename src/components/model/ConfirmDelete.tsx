@@ -9,6 +9,13 @@ interface ConfirmDeleteProps {
   onConfirm: () => void;
   item?: string;
   isLoading?: boolean;
+  openKey?: string;
+  keys?: {
+    title?: string;
+    descriptionPrefix?: string;
+    confirm?: string;
+    cancel?: string;
+  };
 }
 
 const ConfirmDelete = ({
@@ -16,9 +23,11 @@ const ConfirmDelete = ({
   onConfirm,
   item,
   openButton,
+  openKey,
+  keys,
 }: ConfirmDeleteProps) => {
   const { t } = useTranslation();
-  const openKey = "delete-work-site" + item;
+  const modalKey = openKey ?? "delete-work-site" + item;
   const onSubmit = (e: any) => {
     e.preventDefault();
     onConfirm();
@@ -39,12 +48,12 @@ const ConfirmDelete = ({
           <div className="mb-4 flex items-start gap-4">
             <div className="min-w-0">
               <h3 className="text-lg font-semibold text-foreground">
-                {t("workSites.delete-title", {
+                {t(keys?.title ?? "workSites.delete-title", {
                   defaultValue: "Delete this work site?",
                 })}
               </h3>
               <p className="text-sm text-muted-foreground mt-1 truncate">
-                {t("workSites.delete-description-prefix", {
+                {t(keys?.descriptionPrefix ?? "workSites.delete-description-prefix", {
                   defaultValue: "This will permanently remove ",
                 })}
                 <span className="font-semibold text-foreground">
@@ -61,14 +70,14 @@ const ConfirmDelete = ({
               onClick={onSubmit}
               type="button"
               variant="destructive"
-              className="flex items-center gap-2 text-sm px-4 py-2 shadow-sm bg-red-500 text-white hover:opacity-75 transition-all cursor-pointer"
+              className="gap-2 text-sm"
             >
               {isLoading ? (
                 t("common.loading", "Saving...")
               ) : (
                 <>
                   <Trash2 className="h-4 w-4 opacity-90" />
-                  {t("workSites.btn-delete-confirm", {
+                  {t(keys?.confirm ?? "workSites.btn-delete-confirm", {
                     defaultValue: "Delete site",
                   })}
                 </>
@@ -76,12 +85,8 @@ const ConfirmDelete = ({
             </Button>
             {/* Model.Close intercepts the trigger to seamlessly clear the popup open state */}
             <Model.Close>
-              <Button
-                type="button"
-                variant="ghost"
-                className="text-sm px-4 py-2 border border-primary hover:bg-primary hover:text-white transition-all cursor-pointer"
-              >
-                {t("workSites.btn-cancel", {
+              <Button type="button" variant="outline" className="text-sm">
+                {t(keys?.cancel ?? "workSites.btn-cancel", {
                   defaultValue: "Cancel",
                 })}
               </Button>

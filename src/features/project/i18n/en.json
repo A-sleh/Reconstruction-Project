@@ -29,7 +29,9 @@
       "emptyHint": "Try adjusting the filters or add a new project",
       "endOfList": "You have reached the end of the list",
       "building": "Building",
-      "investor": "Investor"
+      "investor": "Investor",
+      "schedule": "Schedule",
+      "viewDetails": "View details"
     },
     "status": {
       "Initializing": "Initializing",
@@ -72,6 +74,39 @@
       "descriptionPrefix": "This will permanently remove:",
       "confirm": "Delete",
       "cancel": "Cancel"
+    },
+    "details": {
+      "back": "Back to Projects",
+      "error": "Failed to load project",
+      "sections": {
+        "overview": "Overview",
+        "building": "Building",
+        "investor": "Investor"
+      },
+      "overview": {
+        "title": "Project Overview",
+        "name": "Project Name",
+        "projectId": "Project ID",
+        "building": "Building",
+        "investor": "Investor",
+        "status": "Status",
+        "startDate": "Start Date",
+        "endDate": "End Date"
+      },
+      "building": {
+        "title": "Building Details",
+        "error": "Failed to load building details",
+        "name": "Building Name",
+        "city": "City",
+        "address": "Address",
+        "type": "Building Type",
+        "area": "Area"
+      },
+      "investor": {
+        "title": "Investor Details",
+        "id": "Investor ID",
+        "project": "Project"
+      }
     }
   }
 }
