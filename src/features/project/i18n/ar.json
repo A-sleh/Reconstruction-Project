@@ -81,7 +81,16 @@
       "sections": {
         "overview": "نظرة عامة",
         "building": "المبنى",
-        "investor": "المستثمر"
+        "investor": "المستثمر",
+        "settings": "الإعدادات"
+      },
+      "settings": {
+        "editTitle": "بيانات المشروع",
+        "editHint": "حدّث اسم المشروع ومواعيده وحالته",
+        "dangerTitle": "منطقة الخطر",
+        "dangerDescription": "إجراءات لا يمكن التراجع عنها على هذا المشروع",
+        "dangerHint": "حذف هذا المشروع نهائياً مع كافة بياناته.",
+        "dangerConfirm": "حذف المشروع"
       },
       "overview": {
         "title": "نظرة عامة على المشروع",

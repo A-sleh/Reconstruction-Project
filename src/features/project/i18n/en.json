@@ -81,7 +81,16 @@
       "sections": {
         "overview": "Overview",
         "building": "Building",
-        "investor": "Investor"
+        "investor": "Investor",
+        "settings": "Settings"
+      },
+      "settings": {
+        "editTitle": "Project Details",
+        "editHint": "Update the project name, dates and status",
+        "dangerTitle": "Danger Zone",
+        "dangerDescription": "Irreversible actions for this project",
+        "dangerHint": "Permanently delete this project and all of its data.",
+        "dangerConfirm": "Delete Project"
       },
       "overview": {
         "title": "Project Overview",
