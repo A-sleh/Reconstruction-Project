@@ -3,9 +3,10 @@ import { Button } from "../ui/button"; // Assuming you have your custom Button c
 import Model from "@/components/model/Model";
 import { useTranslation } from "react-i18next";
 import { Trash2 } from "lucide-react";
+import type { MouseEvent, ReactNode } from "react";
 
 interface ConfirmDeleteProps {
-  openButton: React.ReactNode;
+  openButton: ReactNode;
   onConfirm: () => void;
   item?: string;
   isLoading?: boolean;
@@ -28,15 +29,15 @@ const ConfirmDelete = ({
 }: ConfirmDeleteProps) => {
   const { t } = useTranslation();
   const modalKey = openKey ?? "delete-work-site" + item;
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: MouseEvent) => {
     e.preventDefault();
     onConfirm();
   };
 
   return (
     <Model>
-      <Model.Open opens={openKey}>{openButton}</Model.Open>
-      <Model.Window name={openKey} model_width="max-w-md">
+      <Model.Open opens={modalKey}>{openButton}</Model.Open>
+      <Model.Window name={modalKey} model_width="max-w-md">
         <motion.div
           initial={{ opacity: 0, scale: 0.98, y: 8 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
