@@ -82,7 +82,14 @@
         "overview": "Overview",
         "building": "Building",
         "investor": "Investor",
-        "settings": "Settings"
+        "settings": "Settings",
+        "statistics": "Statistics",
+        "workShop": "Work Shop",
+        "manageResources": "Manage Resources",
+        "manageServices": "Manage Services",
+        "manageEngineers": "Manage Engineers",
+        "invoices": "Invoices",
+        "reports": "Reports"
       },
       "settings": {
         "editTitle": "Project Details",

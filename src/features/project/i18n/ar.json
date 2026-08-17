@@ -82,7 +82,14 @@
         "overview": "نظرة عامة",
         "building": "المبنى",
         "investor": "المستثمر",
-        "settings": "الإعدادات"
+        "settings": "الإعدادات",
+        "statistics": "الإحصائيات",
+        "workShop": "ورشة العمل",
+        "manageResources": "إدارة الموارد",
+        "manageServices": "إدارة الخدمات",
+        "manageEngineers": "إدارة المهندسين",
+        "invoices": "الفواتير",
+        "reports": "التقارير"
       },
       "settings": {
         "editTitle": "بيانات المشروع",
