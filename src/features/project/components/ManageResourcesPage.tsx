@@ -1,8 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ProjectOrdersTracker from "./ProjectOrdersTracker";
 import AllProvidorItems from "@/features/work-site-items/components/AllProvidorItems";
 import { ClipboardList, PackagePlus } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import ProjectOrdersTracker from "./ProjectOrdersTracker";
 
 interface ManageResourcesPageProps {
   projectId: number;
@@ -37,7 +37,11 @@ const ManageResourcesPage = ({
         </TabsList>
 
         <TabsContent value="add-resource">
-          <AllProvidorItems projectId={projectId} projectName={projectName} />
+          <AllProvidorItems
+            projectId={projectId}
+            projectName={projectName}
+            providerType="Resource"
+          />
         </TabsContent>
 
         <TabsContent value="my-orders">
