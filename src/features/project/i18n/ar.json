@@ -86,6 +86,12 @@
           "myOrders": "طلباتي"
         }
       },
+      "manageServices": {
+        "tabs": {
+          "addService": "إضافة خدمة جديدة",
+          "myOrders": "طلباتي"
+        }
+      },
       "sections": {
         "overview": "نظرة عامة",
         "building": "المبنى",

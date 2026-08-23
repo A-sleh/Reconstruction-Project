@@ -86,6 +86,12 @@
           "myOrders": "My Orders"
         }
       },
+      "manageServices": {
+        "tabs": {
+          "addService": "Add New Service",
+          "myOrders": "My Orders"
+        }
+      },
       "sections": {
         "overview": "Overview",
         "building": "Building",

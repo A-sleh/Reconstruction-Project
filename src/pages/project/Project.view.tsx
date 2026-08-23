@@ -1,6 +1,7 @@
 import Loader from "@/components/shared/Loader";
 import { useProjectById } from "@/features/project/api/queries";
 import ManageResourcesPage from "@/features/project/components/ManageResourcesPage";
+import ManageServicesPage from "@/features/project/components/ManageServicesPage";
 import ProjectDetailsHeader from "@/features/project/components/ProjectDetailsHeader";
 import ProjectSettingsSection from "@/features/project/components/ProjectSettingsSection";
 import ProjectSideBar from "@/features/project/components/ProjectSideBar";
@@ -53,6 +54,12 @@ const Project = () => {
           {activeKey === "overview" && <OverviewSection project={project} />}
           {activeKey === "manage resources" && (
             <ManageResourcesPage
+              projectId={numericId}
+              projectName={project.name}
+            />
+          )}
+          {activeKey === "manage services" && (
+            <ManageServicesPage
               projectId={numericId}
               projectName={project.name}
             />
