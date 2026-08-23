@@ -51,7 +51,12 @@ const Project = () => {
 
         <section className="min-w-0 flex-1 space-y-4">
           {activeKey === "overview" && <OverviewSection project={project} />}
-          {activeKey === "manage resources" && <ManageResourcesPage />}
+          {activeKey === "manage resources" && (
+            <ManageResourcesPage
+              projectId={numericId}
+              projectName={project.name}
+            />
+          )}
           {activeKey === "settings" && (
             <ProjectSettingsSection project={project} />
           )}

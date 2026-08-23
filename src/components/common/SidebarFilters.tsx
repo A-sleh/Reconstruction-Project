@@ -13,7 +13,7 @@ const SidebarFilters: React.FC<Props> = ({ children, reset, activeCount }) => {
   const { t } = useTranslation();
 
   return (
-    <aside className="rounded-lg border border-gray-300 bg-white p-4 shadow-sm sticky top-16 self-start">
+    <aside className="rounded-lg border border-gray-300 bg-white p-4 shadow-sm sticky top-25 self-start">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 font-semibold text-sm">
           <Filter className="h-4 w-4" /> {t("project.filters.title")}

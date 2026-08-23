@@ -4,7 +4,12 @@ import AllProvidorItems from "@/features/work-site-items/components/AllProvidorI
 import { ClipboardList, PackagePlus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const ManageResourcesPage = () => {
+interface ManageResourcesPageProps {
+  projectId: number;
+  projectName: string;
+}
+
+const ManageResourcesPage = ({ projectId, projectName }: ManageResourcesPageProps) => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
 
@@ -43,7 +48,7 @@ const ManageResourcesPage = () => {
         </TabsList>
 
         <TabsContent value="add-resource">
-          <AllProvidorItems />
+          <AllProvidorItems projectId={projectId} projectName={projectName} />
         </TabsContent>
 
         <TabsContent value="my-orders">

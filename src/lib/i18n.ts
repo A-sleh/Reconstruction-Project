@@ -35,6 +35,8 @@ import arWorkSites from "@/features/work-sites/i18n/ar.json";
 import enWorkSites from "@/features/work-sites/i18n/en.json";
 import arProject from "@/features/project/i18n/ar.json";
 import enProject from "@/features/project/i18n/en.json";
+import arCart from "@/features/cart/i18n/ar.json";
+import enCart from "@/features/cart/i18n/en.json";
 
 function mergeTranslations(...objects: Record<string, unknown>[]) {
   return objects.reduce<Record<string, unknown>>((acc, obj) => {
@@ -68,6 +70,7 @@ const resources = {
       enWorkSiteItems,
       enEngineerProfile,
       enProject,
+      enCart,
     ),
   },
   ar: {
@@ -87,6 +90,7 @@ const resources = {
       arWorkSiteItems,
       arEngineerProfile,
       arProject,
+      arCart,
     ),
   },
 };
