@@ -1,0 +1,36 @@
+{
+  "cart": {
+    "popup": {
+      "title": "Add to Cart",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "totalPrice": "Total",
+      "addToCart": "Add to Cart",
+      "addedSuccess": "{{name}} × {{quantity}} added to cart",
+      "resource": "Resource",
+      "service": "Service"
+    },
+    "sheet": {
+      "description": "Items are grouped into one order per source when you buy."
+    },
+    "items": {
+      "tabs": { "resources": "Resources", "services": "Services" },
+      "empty": "Your cart is empty",
+      "emptyHint": "Browse resources and services to add them here.",
+      "remove": "Remove"
+    },
+    "footer": {
+      "total": "Total",
+      "buyNow": "Buy Now"
+    },
+    "buyNow": {
+      "title": "Confirm Your Orders",
+      "groupedHint": "Items from the same source are combined into one order per source.",
+      "orderLabel": "Order {{index}} · {{provider}}",
+      "orderMeta": "{{count}} items · {{total}}",
+      "confirm": "Place {{count}} Order(s)",
+      "success": "Orders placed successfully",
+      "error": "Failed to place some orders"
+    }
+  }
+}

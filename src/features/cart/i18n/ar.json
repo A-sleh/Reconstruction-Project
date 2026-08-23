@@ -1,0 +1,36 @@
+{
+  "cart": {
+    "popup": {
+      "title": "إضافة إلى السلة",
+      "quantity": "الكمية",
+      "unitPrice": "سعر الوحدة",
+      "totalPrice": "الإجمالي",
+      "addToCart": "إضافة إلى السلة",
+      "addedSuccess": "تمت إضافة {{name}} × {{quantity}} إلى السلة",
+      "resource": "مورد",
+      "service": "خدمة"
+    },
+    "sheet": {
+      "description": "سيتم تجميع العناصر في طلب واحد لكل مصدر عند الشراء."
+    },
+    "items": {
+      "tabs": { "resources": "الموارد", "services": "الخدمات" },
+      "empty": "سلتك فارغة",
+      "emptyHint": "تصفح الموارد والخدمات لإضافتها هنا.",
+      "remove": "إزالة"
+    },
+    "footer": {
+      "total": "الإجمالي",
+      "buyNow": "اشترِ الآن"
+    },
+    "buyNow": {
+      "title": "تأكيد طلباتك",
+      "groupedHint": "سيتم دمج العناصر من نفس المصدر في طلب واحد لكل مصدر.",
+      "orderLabel": "طلب {{index}} · {{provider}}",
+      "orderMeta": "{{count}} عنصر · {{total}}",
+      "confirm": "إرسال {{count}} طلب/طلبات",
+      "success": "تم إنشاء الطلبات بنجاح",
+      "error": "فشل إنشاء بعض الطلبات"
+    }
+  }
+}
