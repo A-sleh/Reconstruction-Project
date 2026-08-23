@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import OrderTables from "@/features/orders/components/OrderTables";
+import ProjectOrdersTracker from "./ProjectOrdersTracker";
 import AllProvidorItems from "@/features/work-site-items/components/AllProvidorItems";
 import { ClipboardList, PackagePlus } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -41,7 +41,7 @@ const ManageResourcesPage = ({
         </TabsContent>
 
         <TabsContent value="my-orders">
-          <OrderTables filters={{}} />
+          <ProjectOrdersTracker />
         </TabsContent>
       </Tabs>
     </div>

@@ -1,19 +1,19 @@
+import { Button } from "@/components/ui/button";
 import { Filter, RotateCcw, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
 
 import Input from "@/components/inputs/Input";
 import { Label } from "@/components/ui/Label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 
-import {
-  ORDER_STATUSES,
-  GetOrderAllFilters,
-} from "@/features/orders/api/types";
-import { cn } from "@/lib/utils";
 import Selector from "@/components/inputs/Selector";
+import {
+  GetOrderAllFilters,
+  ORDER_STATUSES,
+} from "@/features/orders/api/types";
 import { useWorkSites } from "@/features/work-sites/api/query";
+import { cn } from "@/lib/utils";
 
 interface Props {
   filters: GetOrderAllFilters;
@@ -41,12 +41,12 @@ export function OrdersFilterSidebar({
   return (
     <aside
       className={cn(
-        "shrink-0  border-gray-300 bg-white transition-all duration-300 ease-out overflow-hidden sticky top-16 self-start rounded-md",
-        open ? "w-72" : "w-0",
+        "shrink-0  border-gray-300 bg-white transition-all duration-300 ease-out overflow-hidden sticky top-25 self-start rounded-md",
+        open ? "w-60" : "w-0",
       )}
       style={{ maxHeight: "calc(100vh - 4rem)" }}
     >
-      <div className="w-72 h-full flex flex-col">
+      <div className="w-60 h-full flex flex-col">
         <div className="flex items-center justify-between p-4 border-b border-gray-300">
           <div className="flex items-center gap-2 font-semibold text-sm">
             <Filter className="h-4 w-4" /> {t("orders.filters.title")}

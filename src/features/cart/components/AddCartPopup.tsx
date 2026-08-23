@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
-import { Boxes, Minus, Plus, ShoppingCart, Wrench } from "lucide-react";
 import PopuupLayout from "@/components/layouts/Popup-layout";
+import type { CartItemInput } from "@/features/cart/types";
 import { fmtCurrency } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
-import type { CartItemInput } from "@/features/cart/types";
 import useCartStore from "@/stores/useCartStore";
+import { Boxes, Minus, Plus, ShoppingCart, Wrench } from "lucide-react";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 interface AddCartPopupProps<T extends CartItemInput> {
   item: T;
@@ -14,7 +14,11 @@ interface AddCartPopupProps<T extends CartItemInput> {
   openButton?: React.ReactNode;
 }
 
-function AddCartPopup<T extends CartItemInput>({ item, projectId, openButton }: AddCartPopupProps<T>) {
+function AddCartPopup<T extends CartItemInput>({
+  item,
+  projectId,
+  openButton,
+}: AddCartPopupProps<T>) {
   const { t } = useTranslation();
   const addItem = useCartStore((state) => state.addItem);
   const [quantity, setQuantity] = useState(1);
@@ -81,9 +85,13 @@ function AddCartPopup<T extends CartItemInput>({ item, projectId, openButton }: 
             )}
             <div className="min-w-0 flex-1">
               <div className="truncate font-medium">{item.name}</div>
-              <div className="text-sm text-muted-foreground">{item.providerName}</div>
+              <div className="text-sm text-muted-foreground">
+                {item.providerName}
+              </div>
               <span className="mt-1 inline-flex items-center rounded-full bg-muted px-2 py-0.5 text-xs">
-                {isResource ? t("cart.popup.resource") : t("cart.popup.service")}
+                {isResource
+                  ? t("cart.popup.resource")
+                  : t("cart.popup.service")}
                 <span className="mx-1 text-muted-foreground">·</span>
                 {item.categoryName}
               </span>
@@ -91,7 +99,9 @@ function AddCartPopup<T extends CartItemInput>({ item, projectId, openButton }: 
           </div>
 
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">{t("cart.popup.unitPrice")}</span>
+            <span className="text-muted-foreground">
+              {t("cart.popup.unitPrice")}
+            </span>
             <span>
               {fmtCurrency(item.price)}{" "}
               <span className="text-muted-foreground">/ {item.unit}</span>
@@ -99,7 +109,9 @@ function AddCartPopup<T extends CartItemInput>({ item, projectId, openButton }: 
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">{t("cart.popup.quantity")}</span>
+            <span className="text-sm text-muted-foreground">
+              {t("cart.popup.quantity")}
+            </span>
             <div className="flex items-center gap-2">
               <button
                 type="button"
@@ -113,7 +125,9 @@ function AddCartPopup<T extends CartItemInput>({ item, projectId, openButton }: 
               >
                 <Minus className="h-4 w-4" />
               </button>
-              <span className="w-10 text-center font-semibold tabular-nums">{quantity}</span>
+              <span className="w-10 text-center font-semibold tabular-nums">
+                {quantity}
+              </span>
               <button
                 type="button"
                 aria-label="increase quantity"
