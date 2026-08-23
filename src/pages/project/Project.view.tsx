@@ -1,10 +1,10 @@
 import Loader from "@/components/shared/Loader";
 import { useProjectById } from "@/features/project/api/queries";
+import ManageResourcesPage from "@/features/project/components/ManageResourcesPage";
 import ProjectDetailsHeader from "@/features/project/components/ProjectDetailsHeader";
 import ProjectSettingsSection from "@/features/project/components/ProjectSettingsSection";
 import ProjectSideBar from "@/features/project/components/ProjectSideBar";
 import { OverviewSection } from "@/features/project/components/ProjectSummeryCard";
-import AllProvidorItems from "@/features/work-site-items/components/AllProvidorItems";
 import { AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -51,7 +51,7 @@ const Project = () => {
 
         <section className="min-w-0 flex-1 space-y-4">
           {activeKey === "overview" && <OverviewSection project={project} />}
-          {activeKey === "manage resources" && <AllProvidorItems />}
+          {activeKey === "manage resources" && <ManageResourcesPage />}
           {activeKey === "settings" && (
             <ProjectSettingsSection project={project} />
           )}

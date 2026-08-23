@@ -78,6 +78,14 @@
     "details": {
       "back": "العودة إلى المشاريع",
       "error": "تعذر تحميل المشروع",
+      "manageResources": {
+        "title": "إدارة الموارد",
+        "subtitle": "أضف الموارد والخدمات إلى مشروعك وتابع طلباتك.",
+        "tabs": {
+          "addResource": "إضافة مورد جديد",
+          "myOrders": "طلباتي"
+        }
+      },
       "sections": {
         "overview": "نظرة عامة",
         "building": "المبنى",

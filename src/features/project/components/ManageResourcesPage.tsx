@@ -1,0 +1,57 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import OrderTables from "@/features/orders/components/OrderTables";
+import AllProvidorItems from "@/features/work-site-items/components/AllProvidorItems";
+import { ClipboardList, PackagePlus } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+const ManageResourcesPage = () => {
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language === "ar";
+
+  return (
+    <div dir={isArabic ? "rtl" : "ltr"} className="space-y-6">
+      <div className="flex items-start gap-3">
+        <div className="rounded-xl bg-primary/10 p-2.5">
+          <PackagePlus className="h-5 w-5 text-primary" />
+        </div>
+        <div>
+          <h1 className="text-xl font-semibold tracking-tight">
+            {t("project.details.manageResources.title")}
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            {t("project.details.manageResources.subtitle")}
+          </p>
+        </div>
+      </div>
+
+      <Tabs
+        defaultValue="add-resource"
+        className="mt-6"
+        dir={isArabic ? "rtl" : "ltr"}
+      >
+        <TabsList className="mb-1" dir={isArabic ? "rtl" : "ltr"}>
+          <TabsTrigger value="add-resource">
+            <PackagePlus className={`h-4 w-4 ${isArabic ? "ml-2" : "mr-2"}`} />
+            {t("project.details.manageResources.tabs.addResource")}
+          </TabsTrigger>
+          <TabsTrigger value="my-orders">
+            <ClipboardList
+              className={`h-4 w-4 ${isArabic ? "ml-2" : "mr-2"}`}
+            />
+            {t("project.details.manageResources.tabs.myOrders")}
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="add-resource">
+          <AllProvidorItems />
+        </TabsContent>
+
+        <TabsContent value="my-orders">
+          <OrderTables filters={{}} />
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+};
+
+export default ManageResourcesPage;

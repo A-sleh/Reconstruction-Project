@@ -67,18 +67,6 @@ const AllProvidorItems = () => {
 
   return (
     <div className="space-y-5">
-      <div>
-        <h2 className="text-xl font-semibold tracking-tight">
-          {t("workSiteItems.allProvidorItems.heading", "Available Items")}
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          {t(
-            "workSiteItems.allProvidorItems.subheading",
-            "Browse resources and services available from providers.",
-          )}
-        </p>
-      </div>
-
       <div className="grid gap-5 lg:grid-cols-[1fr_280px]">
         <div className="lg:sticky lg:top-6 lg:self-start">
           {totalRows !== undefined && (

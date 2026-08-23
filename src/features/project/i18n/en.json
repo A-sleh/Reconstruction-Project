@@ -78,6 +78,14 @@
     "details": {
       "back": "Back to Projects",
       "error": "Failed to load project",
+      "manageResources": {
+        "title": "Manage Resources",
+        "subtitle": "Add resources and services to your project and track your orders.",
+        "tabs": {
+          "addResource": "Add New Resource",
+          "myOrders": "My Orders"
+        }
+      },
       "sections": {
         "overview": "Overview",
         "building": "Building",
