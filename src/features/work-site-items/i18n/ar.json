@@ -59,6 +59,24 @@
         }
       }
     },
+    "allProvidorItems": {
+      "heading": "العناصر المتاحة",
+      "subheading": "تصفح الموارد والخدمات المتاحة من الموردين.",
+      "searchPlaceholder": "البحث بالاسم...",
+      "typeLabel": "النوع",
+      "categoryLabel": "الفئة",
+      "all": "الكل",
+      "resource": "مورد",
+      "service": "خدمة",
+      "available": "متاح",
+      "unavailable": "غير متاح",
+      "provider": "المورد",
+      "workSite": "موقع العمل",
+      "perUnit": "/ {{unit}}",
+      "empty": "لا توجد عناصر تطابق مرشحاتك.",
+      "reset": "إعادة تعيين",
+      "totalItems": "{{count}} عنصر"
+    },
     "serviceProvidor": {
       "add-new": "إضافة خدمة جديدة",
       "addResources": {

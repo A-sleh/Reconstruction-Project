@@ -1,8 +1,8 @@
-import { useState } from "react";
+import type { GetAllProjectsFilters } from "@/features/project/api/types";
+import ProjectFilters from "@/features/project/components/ProjectFilters";
 import ProjectHeaderPage from "@/features/project/components/ProjectHeaderPage";
 import ProjectsList from "@/features/project/components/ProjectsList";
-import ProjectFilters from "@/features/project/components/ProjectFilters";
-import type { GetAllProjectsFilters } from "@/features/project/api/types";
+import { useState } from "react";
 
 const Pojects = () => {
   const [filters, setFilters] = useState<GetAllProjectsFilters>({});
@@ -14,7 +14,7 @@ const Pojects = () => {
         <section className="min-w-0">
           <ProjectsList filters={filters} />
         </section>
-        <section>
+        <section className="sticky top-25">
           <ProjectFilters filters={filters} onChange={setFilters} />
         </section>
       </div>

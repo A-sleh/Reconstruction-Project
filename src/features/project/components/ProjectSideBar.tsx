@@ -30,14 +30,14 @@ interface ProjectSideBarProps {
 
 const sections: ProjectSectionItem[] = [
   {
-    key: "overview",
-    label: i18n.t("project.details.sections.overview"),
-    icon: ClipboardList,
-  },
-  {
     key: "statistics",
     label: i18n.t("project.details.sections.statistics"),
     icon: BarChart3,
+  },
+  {
+    key: "overview",
+    label: i18n.t("project.details.sections.overview"),
+    icon: ClipboardList,
   },
   {
     key: "work shop",

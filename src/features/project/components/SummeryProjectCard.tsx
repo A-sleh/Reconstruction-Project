@@ -1,63 +1,24 @@
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import ConfirmDelete from "@/components/model/ConfirmDelete";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { paths } from "@/config/paths";
+import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   Building2,
   CalendarDays,
-  CheckCircle2,
-  Construction,
-  PauseCircle,
   Pencil,
   Trash2,
   User,
-  XCircle,
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import ConfirmDelete from "@/components/model/ConfirmDelete";
-import { paths } from "@/config/paths";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { useDeleteProject } from "../api/actions";
-import type { ProjectListItem, ProjectStatus } from "../api/types";
+import type { ProjectListItem } from "../api/types";
 import { NewProjectModel } from "./NewProjectModel";
-
-const statusStyles: Record<
-  ProjectStatus,
-  { className: string; icon: typeof Construction; accent: string }
-> = {
-  Initializing: {
-    className: "bg-primary/10 text-primary",
-    icon: Construction,
-    accent: "bg-primary",
-  },
-  InProgress: {
-    className: "bg-emerald-soft text-emerald",
-    icon: Construction,
-    accent: "bg-emerald",
-  },
-  Suspended: {
-    className: "bg-warning/10 text-warning",
-    icon: PauseCircle,
-    accent: "bg-warning",
-  },
-  Canceled: {
-    className: "bg-destructive/10 text-destructive",
-    icon: XCircle,
-    accent: "bg-destructive",
-  },
-  Done: {
-    className: "bg-success/10 text-success",
-    icon: CheckCircle2,
-    accent: "bg-success",
-  },
-};
-
-const fallbackStatusStyle = {
-  className: "bg-muted text-muted-foreground",
-  icon: Construction,
-  accent: "bg-muted",
-};
+import { ProjectStatusBadge } from "./ProjectStatusBadge";
+import { getProjectStatusStyle } from "./ProjectStatusStyle";
 
 const DetailRow = ({
   icon: Icon,
@@ -85,8 +46,7 @@ const SummeryProjectCard = ({ project }: { project: ProjectListItem }) => {
   const isArabic = i18n.language === "ar";
   const locale = isArabic ? "ar-SY" : "en-US";
 
-  const statusStyle = statusStyles[project.status] ?? fallbackStatusStyle;
-  const StatusIcon = statusStyle.icon;
+  const statusAccent = getProjectStatusStyle(project.status).accent;
 
   const { mutate: deleteProject, isPending: isDeleting } = useDeleteProject();
 
@@ -95,8 +55,6 @@ const SummeryProjectCard = ({ project }: { project: ProjectListItem }) => {
     return new Date(date).toLocaleDateString(locale);
   };
 
-  const initial = project.name.trim().charAt(0);
-
   return (
     <motion.div
       className="h-full"
@@ -104,26 +62,19 @@ const SummeryProjectCard = ({ project }: { project: ProjectListItem }) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="group h-full rounded-2xl bg-muted p-1.5 transition-smooth hover:-translate-y-1 hover:shadow-lg">
+      <div className="group h-full rounded-2xl ">
         <Card className="relative h-full overflow-hidden rounded-xl border-gray-300 bg-white transition-smooth hover:border-primary/30">
           <span
             aria-hidden
             className={cn(
-              "absolute inset-y-0 start-0 w-1.5 rounded-e-full",
-              statusStyle.accent,
+              "absolute top-0 left-0 w-full h-1.5 rounded-e-full",
+              statusAccent,
             )}
           />
 
           <CardContent className="flex h-full flex-col gap-4 p-5">
             <div className="flex items-start justify-between gap-3 ps-1">
               <div className="flex min-w-0 items-center gap-3">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-lg font-bold text-primary transition-smooth group-hover:bg-primary group-hover:text-white">
-                  {initial ? (
-                    initial
-                  ) : (
-                    <Building2 className="h-5 w-5" />
-                  )}
-                </div>
                 <div className="min-w-0">
                   <h3 className="truncate text-base font-semibold text-foreground transition-smooth group-hover:text-primary">
                     {project.name}
@@ -134,15 +85,7 @@ const SummeryProjectCard = ({ project }: { project: ProjectListItem }) => {
                 </div>
               </div>
 
-              <span
-                className={cn(
-                  "inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium",
-                  statusStyle.className,
-                )}
-              >
-                <StatusIcon className="h-3.5 w-3.5" />
-                {t(`project.status.${project.status}`)}
-              </span>
+              <ProjectStatusBadge status={project.status} />
             </div>
 
             <div className="h-px bg-border" />
@@ -180,10 +123,7 @@ const SummeryProjectCard = ({ project }: { project: ProjectListItem }) => {
                     className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-primary group-hover:text-white"
                   >
                     <ArrowRight
-                      className={cn(
-                        "h-3.5 w-3.5",
-                        isArabic && "-scale-x-100",
-                      )}
+                      className={cn("h-3.5 w-3.5", isArabic && "-scale-x-100")}
                     />
                   </span>
                 </Link>
@@ -214,7 +154,8 @@ const SummeryProjectCard = ({ project }: { project: ProjectListItem }) => {
                   openKey={`delete-project-${project.id}`}
                   keys={{
                     title: "project.deleteConfirm.title",
-                    descriptionPrefix: "project.deleteConfirm.descriptionPrefix",
+                    descriptionPrefix:
+                      "project.deleteConfirm.descriptionPrefix",
                     confirm: "project.deleteConfirm.confirm",
                     cancel: "project.deleteConfirm.cancel",
                   }}

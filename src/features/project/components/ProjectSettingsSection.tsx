@@ -74,8 +74,7 @@ const ProjectSettingsSection = ({ project }: { project: ProjectListItem }) => {
                 deleteProject(
                   { id: project.id },
                   {
-                    onSuccess: () =>
-                      navigate(paths.app.projects.getHref()),
+                    onSuccess: () => navigate(paths.app.projects.getHref()),
                   },
                 )
               }

@@ -59,6 +59,24 @@
         }
       }
     },
+    "allProvidorItems": {
+      "heading": "Available Items",
+      "subheading": "Browse resources and services available from providers.",
+      "searchPlaceholder": "Search by name...",
+      "typeLabel": "Type",
+      "categoryLabel": "Category",
+      "all": "All",
+      "resource": "Resource",
+      "service": "Service",
+      "available": "Available",
+      "unavailable": "Unavailable",
+      "provider": "Provider",
+      "workSite": "Work Site",
+      "perUnit": "/ {{unit}}",
+      "empty": "No items match your filters.",
+      "reset": "Reset filters",
+      "totalItems": "{{count}} items"
+    },
     "serviceProvidor": {
       "add-new": "Add New Service",
       "addResources": {
