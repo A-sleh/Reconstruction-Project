@@ -9,26 +9,15 @@ interface ManageResourcesPageProps {
   projectName: string;
 }
 
-const ManageResourcesPage = ({ projectId, projectName }: ManageResourcesPageProps) => {
+const ManageResourcesPage = ({
+  projectId,
+  projectName,
+}: ManageResourcesPageProps) => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
 
   return (
-    <div dir={isArabic ? "rtl" : "ltr"} className="space-y-6">
-      <div className="flex items-start gap-3">
-        <div className="rounded-xl bg-primary/10 p-2.5">
-          <PackagePlus className="h-5 w-5 text-primary" />
-        </div>
-        <div>
-          <h1 className="text-xl font-semibold tracking-tight">
-            {t("project.details.manageResources.title")}
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            {t("project.details.manageResources.subtitle")}
-          </p>
-        </div>
-      </div>
-
+    <div dir={isArabic ? "rtl" : "ltr"}>
       <Tabs
         defaultValue="add-resource"
         className="mt-6"

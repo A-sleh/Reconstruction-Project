@@ -26,7 +26,7 @@ const CartSheet = ({ projectId, projectName }: CartSheetProps) => {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
+      <SheetTrigger asChild dir="ltr">
         <button
           type="button"
           aria-label={t("cart.popup.title")}
@@ -35,7 +35,7 @@ const CartSheet = ({ projectId, projectName }: CartSheetProps) => {
         >
           <ShoppingCart className="mx-auto h-4 w-4" />
           {count > 0 && (
-            <span className="absolute -top-1.5 -end-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-gold px-1 text-[10px] font-bold text-foreground">
+            <span className="absolute -top-1.5 -inset-e-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-gold px-1 text-[10px] font-bold text-foreground">
               {count}
             </span>
           )}
@@ -50,10 +50,7 @@ const CartSheet = ({ projectId, projectName }: CartSheetProps) => {
           <SheetDescription>{t("cart.sheet.description")}</SheetDescription>
         </div>
         <div className="flex-1 overflow-y-auto p-4">
-          <CartItems
-            projectId={projectId}
-            onOrdered={() => setOpen(false)}
-          />
+          <CartItems projectId={projectId} onOrdered={() => setOpen(false)} />
         </div>
       </SheetContent>
     </Sheet>

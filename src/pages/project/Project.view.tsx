@@ -43,13 +43,13 @@ const Project = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-2">
       <ProjectDetailsHeader projectId={numericId} />
 
       <div className="flex items-start gap-4">
         <ProjectSideBar activeKey={activeKey} onChange={setActiveKey} />
 
-        <section className="min-w-0 flex-1 space-y-4">
+        <section className="min-w-0 flex-1 " style={{ marginTop: "-22px" }}>
           {activeKey === "overview" && <OverviewSection project={project} />}
           {activeKey === "manage resources" && (
             <ManageResourcesPage

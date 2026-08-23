@@ -7,8 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/Label";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/Skeleton";
-import CategoryFilter from "@/features/category-bank/components/CategoryFilter";
 import CartSheet from "@/features/cart/components/CartSheet";
+import CategoryFilter from "@/features/category-bank/components/CategoryFilter";
 import { useDebounce } from "@/hooks/useDebounce";
 import useQueryStringState from "@/hooks/useQueryStringState";
 import { Inbox, Search } from "lucide-react";
@@ -75,7 +75,7 @@ const AllProvidorItems = ({
       <div className="grid gap-5 lg:grid-cols-[1fr_280px]">
         <div className="lg:sticky lg:top-6 lg:self-start">
           {totalRows !== undefined && (
-            <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
+            <div className="flex items-center justify-between text-sm text-muted-foreground mb-3 sticky top-25 z-10 bg-white p-2 rounded-md">
               <span>
                 {t(
                   "workSiteItems.allProvidorItems.totalItems",
