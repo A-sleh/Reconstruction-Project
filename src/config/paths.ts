@@ -138,6 +138,10 @@ export const paths = {
     projects: {
       path: "/app/investor/projects",
       getHref: () => `/app/investor/projects`,
+      projectDetails: {
+        path: "/app/investor/projects/:projectId",
+        getHref: (projectId: number) => `/app/investor/projects/${projectId}`,
+      },
       projectWorkSite: {
         path: "/app/project/work-site/:id",
         getHref: (id: number) => `/app/project/work-site/${id}`,

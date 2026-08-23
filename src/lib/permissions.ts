@@ -74,6 +74,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.PROFILE_EDIT,
     Permissions.STATISTICS_VIEW,
     Permissions.ORDERS_CANCEL,
+    Permissions.PROJECTS_VIEW,
   ],
   Investor: [
     Permissions.HOME_VIEW,
@@ -99,6 +100,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.CATEGORIES_MANAGE,
     Permissions.USERS_MANAGE,
     Permissions.SUPPORT_MANAGE,
+    Permissions.PROJECTS_VIEW,
   ],
 };
 

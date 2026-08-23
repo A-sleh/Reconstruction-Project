@@ -1,5 +1,5 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { ProjectController, QUERY_KEYS } from ".";
 import type {
   GetAllProjectsFilters,
