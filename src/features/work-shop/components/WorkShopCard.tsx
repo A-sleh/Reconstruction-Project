@@ -1,6 +1,7 @@
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { paths } from "@/config/paths";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
@@ -15,6 +16,7 @@ import {
   Users,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDeleteWorkShop } from "../api/actions";
 import type { WorkShop } from "../api/types";
 import InvoiceModel from "./InvoiceModel";
@@ -28,6 +30,8 @@ interface Props {
 
 export default function WorkShopCard({ workShop, index = 0 }: Props) {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const { projectId } = useParams<{ projectId?: string }>();
   const deleteMutation = useDeleteWorkShop();
 
   const percent =
@@ -50,9 +54,21 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="group relative h-full overflow-hidden rounded-2xl bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
+      onClick={() => {
+        if (projectId)
+          navigate(
+            paths.app.projects.projectWorkShopDetails.getHref(
+              Number(projectId),
+              workShop.id,
+            ),
+          );
+      }}
+      className="group relative h-full cursor-pointer overflow-hidden rounded-2xl bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
     >
-      <div className="absolute top-4 inset-e-4 z-10 flex gap-1 opacity-0 transition-smooth group-hover:opacity-100">
+      <div
+        className="absolute top-4 inset-e-4 z-10 flex gap-1 opacity-0 transition-smooth group-hover:opacity-100"
+        onClick={(e) => e.stopPropagation()}
+      >
         <WorkShopModel
           openKey={`edit-work-shop-${workShop.id}`}
           initial={workShop}
