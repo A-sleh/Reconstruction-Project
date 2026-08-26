@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
-import { Button } from "../ui/button"; // Assuming you have your custom Button component
 import Model from "@/components/model/Model";
-import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 import { Trash2 } from "lucide-react";
 import type { MouseEvent, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+import { Button } from "../ui/button"; // Assuming you have your custom Button component
 
 interface ConfirmDeleteProps {
   openButton: ReactNode;
@@ -33,6 +33,7 @@ const ConfirmDelete = ({
     e.preventDefault();
     onConfirm();
   };
+  console.log(keys);
 
   return (
     <Model>
@@ -54,9 +55,13 @@ const ConfirmDelete = ({
                 })}
               </h3>
               <p className="text-sm text-muted-foreground mt-1 truncate">
-                {t(keys?.descriptionPrefix ?? "workSites.delete-description-prefix", {
-                  defaultValue: "This will permanently remove ",
-                })}
+                {t(
+                  keys?.descriptionPrefix ??
+                    "workSites.delete-description-prefix",
+                  {
+                    defaultValue: "This will permanently remove ",
+                  },
+                )}
                 <span className="font-semibold text-foreground">
                   {item || ""}
                 </span>

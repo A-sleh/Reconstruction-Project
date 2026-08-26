@@ -23,6 +23,7 @@
     "card": {
       "edit": "Edit workshop",
       "delete": "Delete workshop",
+      "addInvoice": "Add invoice",
       "workers": "Workers",
       "paid": "Paid",
       "required": "Required",
@@ -47,6 +48,7 @@
     "form": {
       "createTitle": "New Workshop",
       "editTitle": "Edit Workshop",
+      "subTitle": "Fill in the details of the workshop.",
       "trigger": "New Workshop"
     },
     "fields": {
