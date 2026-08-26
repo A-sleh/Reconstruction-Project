@@ -35,6 +35,8 @@ import arWorkSites from "@/features/work-sites/i18n/ar.json";
 import enWorkSites from "@/features/work-sites/i18n/en.json";
 import arProject from "@/features/project/i18n/ar.json";
 import enProject from "@/features/project/i18n/en.json";
+import arWorkShop from "@/features/work-shop/i18n/ar.json";
+import enWorkShop from "@/features/work-shop/i18n/en.json";
 import arCart from "@/features/cart/i18n/ar.json";
 import enCart from "@/features/cart/i18n/en.json";
 
@@ -71,6 +73,7 @@ const resources = {
       enEngineerProfile,
       enProject,
       enCart,
+      enWorkShop,
     ),
   },
   ar: {
@@ -91,6 +94,7 @@ const resources = {
       arEngineerProfile,
       arProject,
       arCart,
+      arWorkShop,
     ),
   },
 };

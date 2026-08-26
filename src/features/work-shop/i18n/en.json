@@ -1,0 +1,111 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save Changes",
+    "create": "Create",
+    "remove": "Remove"
+  },
+  "workShops": {
+    "header": {
+      "title": "Workshops",
+      "subTitle": "Manage and monitor all active workshops."
+    },
+    "tabs": {
+      "workshops": "Workshops",
+      "invoices": "Invoices"
+    },
+    "empty": "No workshops match your filters.",
+    "status": {
+      "open": "Open",
+      "in-progress": "In Progress",
+      "closed": "Closed"
+    },
+    "card": {
+      "edit": "Edit workshop",
+      "delete": "Delete workshop",
+      "workers": "Workers",
+      "paid": "Paid",
+      "required": "Required",
+      "remaining": "Remaining"
+    },
+    "delete": {
+      "title": "Delete this workshop?",
+      "descriptionPrefix": "This will permanently remove ",
+      "confirm": "Delete workshop"
+    },
+    "filters": {
+      "search": {
+        "label": "Search",
+        "placeholder": "Search workshops..."
+      },
+      "dateRange": {
+        "label": "Date range"
+      },
+      "fromDate": "From",
+      "toDate": "To"
+    },
+    "form": {
+      "createTitle": "New Workshop",
+      "editTitle": "Edit Workshop",
+      "trigger": "New Workshop"
+    },
+    "fields": {
+      "title": "Workshop Title",
+      "phone": "Leader Phone Number",
+      "workerNumber": "Number of Workers",
+      "payedPrice": "Paid Amount",
+      "status": "Status",
+      "description": "Description",
+      "invoiceDate": "Date",
+      "payedAmount": "Paid Amount",
+      "invoiceDescription": "Description",
+      "attachments": "Attachments"
+    },
+    "placeholders": {
+      "title": "e.g. Al-Razi Tower Structural Works",
+      "phone": "+963 9XX XXX XXX",
+      "workerNumber": "10",
+      "payedPrice": "0",
+      "payedAmount": "0",
+      "status": "Select status",
+      "description": "Describe the scope of work...",
+      "invoiceDescription": "e.g. Second payment for concrete works"
+    },
+    "invoice": {
+      "title": "New Invoice",
+      "subTitle": "Record a payment made to this workshop.",
+      "trigger": "Add Invoice",
+      "uploading": "Uploading...",
+      "attachHint": "Click to attach receipts or documents"
+    },
+    "invoices": {
+      "columns": {
+        "workshop": "Workshop",
+        "date": "Date",
+        "amount": "Amount",
+        "modifiedBy": "Modified By"
+      },
+      "empty": "No invoices recorded yet."
+    },
+    "validation": {
+      "title": "Title is required",
+      "description": "Description is required",
+      "workerNumber": "At least one worker",
+      "phone": "Phone number is required",
+      "payedPrice": "Invalid amount",
+      "invoiceDate": "Date is required",
+      "invoiceDescription": "Description is required",
+      "payedAmount": "Amount must be greater than zero"
+    },
+    "toast": {
+      "createSuccess": "Workshop created",
+      "createError": "Failed to create workshop",
+      "updateSuccess": "Workshop updated",
+      "updateError": "Failed to update workshop",
+      "deleteSuccess": "Workshop deleted",
+      "deleteError": "Failed to delete workshop",
+      "invoiceSuccess": "Invoice added",
+      "invoiceError": "Failed to add invoice"
+    }
+  }
+}

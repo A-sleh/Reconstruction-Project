@@ -1,0 +1,111 @@
+{
+  "common": {
+    "cancel": "إلغاء",
+    "save": "حفظ التغييرات",
+    "create": "إنشاء",
+    "remove": "إزالة"
+  },
+  "workShops": {
+    "header": {
+      "title": "ورش العمل",
+      "subTitle": "إدارة ومتابعة جميع ورش العمل النشطة."
+    },
+    "tabs": {
+      "workshops": "ورش العمل",
+      "invoices": "الفواتير"
+    },
+    "empty": "لا توجد ورش عمل مطابقة للفلاتر.",
+    "status": {
+      "open": "مفتوحة",
+      "in-progress": "قيد التنفيذ",
+      "closed": "مغلقة"
+    },
+    "card": {
+      "edit": "تعديل ورشة العمل",
+      "delete": "حذف ورشة العمل",
+      "workers": "عامل",
+      "paid": "المدفوع",
+      "required": "المطلوب",
+      "remaining": "المتبقي"
+    },
+    "delete": {
+      "title": "حذف ورشة العمل هذه؟",
+      "descriptionPrefix": "سيتم حذف ",
+      "confirm": "حذف ورشة العمل"
+    },
+    "filters": {
+      "search": {
+        "label": "بحث",
+        "placeholder": "ابحث عن ورش عمل..."
+      },
+      "dateRange": {
+        "label": "نطاق التاريخ"
+      },
+      "fromDate": "من",
+      "toDate": "إلى"
+    },
+    "form": {
+      "createTitle": "ورشة عمل جديدة",
+      "editTitle": "تعديل ورشة العمل",
+      "trigger": "ورشة عمل جديدة"
+    },
+    "fields": {
+      "title": "عنوان الورشة",
+      "phone": "رقم هاتف المسؤول",
+      "workerNumber": "عدد العمال",
+      "payedPrice": "المبلغ المدفوع",
+      "status": "الحالة",
+      "description": "الوصف",
+      "invoiceDate": "التاريخ",
+      "payedAmount": "المبلغ المدفوع",
+      "invoiceDescription": "الوصف",
+      "attachments": "المرفقات"
+    },
+    "placeholders": {
+      "title": "مثال: أعمال الهيكل الخرساني لبرج الرازي",
+      "phone": "+963 9XX XXX XXX",
+      "workerNumber": "10",
+      "payedPrice": "0",
+      "payedAmount": "0",
+      "status": "اختر الحالة",
+      "description": "صف نطاق العمل...",
+      "invoiceDescription": "مثال: الدفعة الثانية لأعمال الخرسانة"
+    },
+    "invoice": {
+      "title": "فاتورة جديدة",
+      "subTitle": "تسجيل دفعة مدفوعة لهذه الورشة.",
+      "trigger": "إضافة فاتورة",
+      "uploading": "جاري الرفع...",
+      "attachHint": "انقر لإرفاق الإيصالات أو المستندات"
+    },
+    "invoices": {
+      "columns": {
+        "workshop": "ورشة العمل",
+        "date": "التاريخ",
+        "amount": "المبلغ",
+        "modifiedBy": "تم التعديل بواسطة"
+      },
+      "empty": "لا توجد فواتير مسجلة بعد."
+    },
+    "validation": {
+      "title": "العنوان مطلوب",
+      "description": "الوصف مطلوب",
+      "workerNumber": "يجب وجود عامل واحد على الأقل",
+      "phone": "رقم الهاتف مطلوب",
+      "payedPrice": "المبلغ غير صالح",
+      "invoiceDate": "التاريخ مطلوب",
+      "invoiceDescription": "الوصف مطلوب",
+      "payedAmount": "يجب أن يكون المبلغ أكبر من صفر"
+    },
+    "toast": {
+      "createSuccess": "تم إنشاء ورشة العمل",
+      "createError": "فشل إنشاء ورشة العمل",
+      "updateSuccess": "تم تحديث ورشة العمل",
+      "updateError": "فشل تحديث ورشة العمل",
+      "deleteSuccess": "تم حذف ورشة العمل",
+      "deleteError": "فشل حذف ورشة العمل",
+      "invoiceSuccess": "تمت إضافة الفاتورة",
+      "invoiceError": "فشلت إضافة الفاتورة"
+    }
+  }
+}
