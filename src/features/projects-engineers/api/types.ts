@@ -91,3 +91,26 @@ export interface EmploersActionsLogs {
 }
 
 export type EmploersActionsLogsPaginated = Paginated<EmploersActionsLogs>;
+
+export interface GetProjectEngineersPermissionsFilters extends IBaseFilters {
+  permissions?: Partial<Permissions>;
+}
+
+export interface Permissions {
+  canViewLogs: boolean;
+  canViewRequests: boolean;
+  canAddEngineer: boolean;
+  canRemoveEngineer: boolean;
+  canApproveRequest: boolean;
+  canRejectRequest: boolean;
+}
+
+export interface ProjectEngineersPermissions {
+  id: number;
+  projectId: number;
+  permissions: Permissions;
+  engineer: EngineerSummery;
+}
+
+export type ProjectEngineersPermissionsPaginated =
+  Paginated<ProjectEngineersPermissions>;

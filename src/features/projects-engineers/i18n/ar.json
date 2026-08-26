@@ -7,7 +7,8 @@
     "tabs": {
       "search": "البحث عن مهندسين",
       "emploingRequests": "طلبات التوظيف",
-      "logs": "السجلات"
+      "logs": "السجلات",
+      "permissions": "الصلاحيات"
     },
     "requests": {
       "header": {
@@ -85,6 +86,65 @@
         "task_completed": "إنجاز مهمة",
         "material_request": "طلب مواد",
         "invoice_added": "إضافة فاتورة"
+      }
+    },
+    "permissions": {
+      "header": {
+        "title": "صلاحيات المهندسين",
+        "subTitle": "إدارة ما يمكن لكل مهندس فعله في مشروعك."
+      },
+      "labels": {
+        "canViewLogs": "عرض السجلات",
+        "canViewRequests": "عرض الطلبات",
+        "canAddEngineer": "إضافة مهندس",
+        "canRemoveEngineer": "إزالة مهندس",
+        "canApproveRequest": "الموافقة على الطلبات",
+        "canRejectRequest": "رفض الطلبات"
+      },
+      "columns": {
+        "engineer": "المهندس",
+        "canViewLogs": "عرض السجلات",
+        "canViewRequests": "عرض الطلبات",
+        "canAddEngineer": "إضافة مهندس",
+        "canRemoveEngineer": "إزالة مهندس",
+        "canApproveRequest": "الموافقة",
+        "canRejectRequest": "رفض",
+        "actions": "الإجراءات"
+      },
+      "actions": {
+        "update": "تحديث الصلاحيات",
+        "deactivate": "تعطيل",
+        "remove": "إزالة المهندس"
+      },
+      "empty": "لا يوجد مهندسون.",
+      "filters": {
+        "search": {
+          "label": "بحث",
+          "placeholder": "ابحث باسم المهندس..."
+        },
+        "permissions": "الصلاحيات"
+      },
+      "modal": {
+        "createTitle": "تعيين الصلاحيات",
+        "editTitle": "تعديل الصلاحيات",
+        "subTitle": "{{name}}",
+        "label": "الصلاحيات",
+        "trigger": "تعيين الصلاحيات"
+      },
+      "validation": {
+        "atLeastOne": "اختر صلاحية واحدة على الأقل."
+      },
+      "deactivate": {
+        "title": "تعطيل حساب هذا المهندس؟",
+        "descriptionPrefix": "سيتم تعطيل ",
+        "confirm": "تعطيل",
+        "cancel": "إبقاء نشط"
+      },
+      "remove": {
+        "title": "إزالة هذا المهندس من المشروع؟",
+        "descriptionPrefix": "سيتم إزالة ",
+        "confirm": "إزالة المهندس",
+        "cancel": "إبقاء في المشروع"
       }
     },
     "empty": "لا يوجد مهندسون.",

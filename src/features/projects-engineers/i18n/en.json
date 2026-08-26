@@ -7,7 +7,8 @@
     "tabs": {
       "search": "Search Engineers",
       "emploingRequests": "Employing Requests",
-      "logs": "Logs"
+      "logs": "Logs",
+      "permissions": "Permissions"
     },
     "requests": {
       "header": {
@@ -85,6 +86,65 @@
         "task_completed": "Task completed",
         "material_request": "Material request",
         "invoice_added": "Invoice added"
+      }
+    },
+    "permissions": {
+      "header": {
+        "title": "Engineers Permissions",
+        "subTitle": "Manage what each engineer can do in your project."
+      },
+      "labels": {
+        "canViewLogs": "View logs",
+        "canViewRequests": "View requests",
+        "canAddEngineer": "Add engineer",
+        "canRemoveEngineer": "Remove engineer",
+        "canApproveRequest": "Approve requests",
+        "canRejectRequest": "Reject requests"
+      },
+      "columns": {
+        "engineer": "Engineer",
+        "canViewLogs": "View Logs",
+        "canViewRequests": "View Requests",
+        "canAddEngineer": "Add Engineer",
+        "canRemoveEngineer": "Remove Engineer",
+        "canApproveRequest": "Approve",
+        "canRejectRequest": "Reject",
+        "actions": "Actions"
+      },
+      "actions": {
+        "update": "Update permissions",
+        "deactivate": "Deactivate",
+        "remove": "Remove engineer"
+      },
+      "empty": "No engineers found.",
+      "filters": {
+        "search": {
+          "label": "Search",
+          "placeholder": "Search by engineer..."
+        },
+        "permissions": "Permissions"
+      },
+      "modal": {
+        "createTitle": "Assign Permissions",
+        "editTitle": "Edit Permissions",
+        "subTitle": "{{name}}",
+        "label": "Permissions",
+        "trigger": "Set Permissions"
+      },
+      "validation": {
+        "atLeastOne": "Select at least one permission."
+      },
+      "deactivate": {
+        "title": "Deactivate this engineer?",
+        "descriptionPrefix": "This will deactivate ",
+        "confirm": "Deactivate",
+        "cancel": "Keep Active"
+      },
+      "remove": {
+        "title": "Remove this engineer from the project?",
+        "descriptionPrefix": "This will permanently remove ",
+        "confirm": "Remove Engineer",
+        "cancel": "Keep in Project"
       }
     },
     "empty": "No engineers found.",
