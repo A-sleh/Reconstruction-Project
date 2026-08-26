@@ -106,17 +106,13 @@ const AllProvidorItems = ({
               ))}
             </div>
           ) : allItems.length === 0 ? (
-            <Card>
-              <CardContent>
-                <EmptyState
-                  icon={Inbox}
-                  message={t(
-                    "workSiteItems.allProvidorItems.empty",
-                    "No items match your filters.",
-                  )}
-                />
-              </CardContent>
-            </Card>
+            <EmptyState
+              icon={Inbox}
+              message={t(
+                "workSiteItems.allProvidorItems.empty",
+                "No items match your filters.",
+              )}
+            />
           ) : (
             <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {allItems.map((item) => (
