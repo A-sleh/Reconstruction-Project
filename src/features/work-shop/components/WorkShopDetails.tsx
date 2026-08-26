@@ -5,11 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { paths } from "@/config/paths";
 import { cn } from "@/lib/utils";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import {
   ArrowLeft,
   Banknote,
   CalendarDays,
   Clock,
+  FileDown,
   HardHat,
   Pencil,
   Phone,
@@ -22,9 +24,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDeleteWorkShop } from "../api/actions";
 import type { WorkShop } from "../api/types";
+import { MOCK_INVOICES_BY_WORK_SHOP } from "../mock/mockInvoices";
 import { MOCK_WORK_SHOPS } from "../mock/mockWorkShops";
 import InvoiceModel from "./InvoiceModel";
 import InvoicesTable from "./InvoicesTable";
+import WorkShopInvoicePdf from "./WorkShopInvoicePdf";
 import WorkShopModel from "./WorkShopModel";
 
 const statusStyles: Record<string, string> = {
@@ -65,6 +69,7 @@ const WorkShopDetails = () => {
         )
       : 0;
   const remaining = Math.max(0, workShop.requirePrice - workShop.payedPrice);
+  const invoices = MOCK_INVOICES_BY_WORK_SHOP[workShop.id] ?? [];
 
   const backHref = projectId
     ? paths.app.projects.projectDetails.getHref(Number(projectId))
@@ -292,11 +297,35 @@ const WorkShopDetails = () => {
             <h2 className="text-lg font-semibold text-foreground md:text-xl">
               {t("workShops.invoices.title", "Invoices")}
             </h2>
+            <span className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+              {invoices.length}
+            </span>
           </div>
-          <InvoiceModel
-            workShopId={workShop.id}
-            openKey={`add-invoice-work-shop-${workShop.id}`}
-          />
+          <div className="flex flex-wrap items-center gap-3">
+            <PDFDownloadLink
+              document={
+                <WorkShopInvoicePdf workShop={workShop} invoices={invoices} />
+              }
+              fileName={`invoice-ws-${workShop.id}.pdf`}
+            >
+              {({ loading }) => (
+                <Button
+                  variant="outline"
+                  disabled={loading}
+                  className="shrink-0"
+                >
+                  <FileDown className="h-4 w-4 rtl:-scale-x-100" />
+                  {loading
+                    ? t("common.loading", "Preparing...")
+                    : t("workShops.details.exportPdf", "Export PDF")}
+                </Button>
+              )}
+            </PDFDownloadLink>
+            <InvoiceModel
+              workShopId={workShop.id}
+              openKey={`add-invoice-work-shop-${workShop.id}`}
+            />
+          </div>
         </div>
         <InvoicesTable />
       </div>
