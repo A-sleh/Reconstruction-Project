@@ -92,6 +92,17 @@
           "myOrders": "طلباتي"
         }
       },
+      "manageReports": {
+        "tabs": {
+          "allReports": "جميع التقارير",
+          "orders": "الطلبات"
+        },
+        "orders": {
+          "title": "تقارير الطلبات",
+          "subTitle": "إدارة طلبات الخدمات والموارد.",
+          "empty": "لا توجد تقارير طلبات تطابق الفلاتر."
+        }
+      },
       "sections": {
         "overview": "نظرة عامة",
         "building": "المبنى",

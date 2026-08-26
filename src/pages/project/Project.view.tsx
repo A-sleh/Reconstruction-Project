@@ -9,6 +9,7 @@ import { useProjectById } from "@/features/project/api/queries";
 import ManageEngineersPage from "@/features/project/components/ManageEngineersPage";
 import ManageResourcesPage from "@/features/project/components/ManageResourcesPage";
 import ManageServicesPage from "@/features/project/components/ManageServicesPage";
+import ManageReportsPage from "@/features/project/components/ManageReportsPage";
 import ManageWorkShopPage from "@/features/project/components/ManageWorkShopPage";
 import ProjectDetailsHeader from "@/features/project/components/ProjectDetailsHeader";
 import ProjectSettingsSection from "@/features/project/components/ProjectSettingsSection";
@@ -69,6 +70,7 @@ const Project = () => {
               projectName={project.name}
             />
           )}
+          {activeKey === "reports" && <ManageReportsPage />}
           {activeKey === "work shop" && <ManageWorkShopPage />}
           {activeKey === "settings" && (
             <ProjectSettingsSection project={project} />

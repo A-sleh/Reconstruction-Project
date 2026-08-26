@@ -30,6 +30,7 @@ const Project_Details = lazy(() => import("@/pages/project/Project.view"));
 const Project_WorkShop_Details = lazy(
   () => import("@/pages/project/ProjectWorkShopDetails.view"),
 );
+const Report_Details = lazy(() => import("@/pages/project/ReportDetails.view"));
 const Investor_Projecrts = lazy(() => import("@/pages/project/Projects.view"));
 
 export const investorRoutes: RouteObject[] = [
@@ -109,6 +110,16 @@ export const investorRoutes: RouteObject[] = [
       <Suspense fallback={<Loader />}>
         <AuthGuard allowedPermissions={Permissions.PROJECTS_VIEW}>
           <Project_Details />
+        </AuthGuard>
+      </Suspense>
+    ),
+  },
+  {
+    path: paths.app.projects.projectReportDetails.path,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <AuthGuard allowedPermissions={Permissions.PROJECTS_VIEW}>
+          <Report_Details />
         </AuthGuard>
       </Suspense>
     ),

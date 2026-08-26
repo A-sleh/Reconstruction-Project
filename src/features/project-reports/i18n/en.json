@@ -1,0 +1,71 @@
+{
+  "projectReports": {
+    "header": {
+      "title": "Project Reports",
+      "subTitle": "View and manage all project reports."
+    },
+    "columns": {
+      "title": "Title",
+      "description": "Description",
+      "createdBy": "Created By",
+      "attachments": "Files",
+      "type": "Type",
+      "createdAt": "Date",
+      "actions": "Actions",
+      "itemCount": "{{count}} items"
+    },
+    "actions": {
+      "update": "Update",
+      "cancel": "Cancel report",
+      "attachments": "View attachments"
+    },
+    "attachments": {
+      "title": "Attachments",
+      "empty": "No attachments."
+    },
+    "empty": "No reports found.",
+    "details": {
+      "attachments": "Attachments",
+      "orderItems": "Order Items",
+      "sendAsIs": "Send Order as Is",
+      "columns": {
+        "item": "Item",
+        "unitPrice": "Unit Price",
+        "quantity": "Quantity",
+        "fulfilled": "Fulfilled",
+        "total": "Total",
+        "actions": "Actions"
+      },
+      "status": {
+        "completed": "Completed"
+      },
+      "actions": {
+        "reject": "Reject",
+        "restore": "Restore"
+      }
+    },
+    "filters": {
+      "search": {
+        "label": "Search",
+        "placeholder": "Search reports..."
+      },
+      "dateRange": {
+        "label": "Date range"
+      },
+      "fromDate": "From",
+      "toDate": "To",
+      "type": {
+        "label": "Report Type"
+      },
+      "reportTypes": {
+        "daily": "Daily Report",
+        "weekly": "Weekly Report",
+        "monthly": "Monthly Report",
+        "yearly": "Yearly Report",
+        "progress": "Progress Report",
+        "services-order": "Services Order",
+        "resources-order": "Resources Order"
+      }
+    }
+  }
+}

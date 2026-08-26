@@ -1,0 +1,71 @@
+{
+  "projectReports": {
+    "header": {
+      "title": "تقارير المشروع",
+      "subTitle": "عرض وإدارة جميع تقارير المشروع."
+    },
+    "columns": {
+      "title": "العنوان",
+      "description": "الوصف",
+      "createdBy": "أنشأه",
+      "attachments": "الملفات",
+      "type": "النوع",
+      "createdAt": "التاريخ",
+      "actions": "الإجراءات",
+      "itemCount": "{{count}} بنود"
+    },
+    "actions": {
+      "update": "تحديث",
+      "cancel": "إلغاء التقرير",
+      "attachments": "عرض المرفقات"
+    },
+    "attachments": {
+      "title": "المرفقات",
+      "empty": "لا توجد مرفقات."
+    },
+    "empty": "لا توجد تقارير.",
+    "details": {
+      "attachments": "المرفقات",
+      "orderItems": "عناصر الطلب",
+      "sendAsIs": "إرسال الطلب كما هو",
+      "columns": {
+        "item": "العنصر",
+        "unitPrice": "سعر الوحدة",
+        "quantity": "الكمية",
+        "fulfilled": "المُنجز",
+        "total": "الإجمالي",
+        "actions": "الإجراءات"
+      },
+      "status": {
+        "completed": "مكتمل"
+      },
+      "actions": {
+        "reject": "رفض",
+        "restore": "استعادة"
+      }
+    },
+    "filters": {
+      "search": {
+        "label": "بحث",
+        "placeholder": "ابحث في التقارير..."
+      },
+      "dateRange": {
+        "label": "نطاق التاريخ"
+      },
+      "fromDate": "من",
+      "toDate": "إلى",
+      "type": {
+        "label": "نوع التقرير"
+      },
+      "reportTypes": {
+        "daily": "تقرير يومي",
+        "weekly": "تقرير أسبوعي",
+        "monthly": "تقرير شهري",
+        "yearly": "تقرير سنوي",
+        "progress": "تقرير إنجاز",
+        "services-order": "طلب خدمات",
+        "resources-order": "طلب موارد"
+      }
+    }
+  }
+}

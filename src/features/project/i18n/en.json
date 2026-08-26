@@ -92,6 +92,17 @@
           "myOrders": "My Orders"
         }
       },
+      "manageReports": {
+        "tabs": {
+          "allReports": "All Reports",
+          "orders": "Orders"
+        },
+        "orders": {
+          "title": "Order Reports",
+          "subTitle": "Manage services and resources orders.",
+          "empty": "No order reports match your filters."
+        }
+      },
       "sections": {
         "overview": "Overview",
         "building": "Building",

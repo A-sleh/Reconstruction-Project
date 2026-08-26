@@ -39,6 +39,8 @@ import arWorkShop from "@/features/work-shop/i18n/ar.json";
 import enWorkShop from "@/features/work-shop/i18n/en.json";
 import arProjectsEngineers from "@/features/projects-engineers/i18n/ar.json";
 import enProjectsEngineers from "@/features/projects-engineers/i18n/en.json";
+import arProjectReports from "@/features/project-reports/i18n/ar.json";
+import enProjectReports from "@/features/project-reports/i18n/en.json";
 import arCart from "@/features/cart/i18n/ar.json";
 import enCart from "@/features/cart/i18n/en.json";
 
@@ -77,6 +79,7 @@ const resources = {
       enCart,
       enWorkShop,
       enProjectsEngineers,
+      enProjectReports,
     ),
   },
   ar: {
@@ -99,6 +102,7 @@ const resources = {
       arCart,
       arWorkShop,
       arProjectsEngineers,
+      arProjectReports,
     ),
   },
 };

@@ -147,6 +147,11 @@ export const paths = {
         getHref: (projectId: number, workShopId: number) =>
           `/app/investor/projects/${projectId}/workshops/${workShopId}`,
       },
+      projectReportDetails: {
+        path: "/app/investor/projects/:projectId/reports/:reportId",
+        getHref: (projectId: number, reportId: string) =>
+          `/app/investor/projects/${projectId}/reports/${reportId}`,
+      },
       projectWorkSite: {
         path: "/app/project/work-site/:id",
         getHref: (id: number) => `/app/project/work-site/${id}`,
