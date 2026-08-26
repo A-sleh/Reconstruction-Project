@@ -58,6 +58,8 @@
     "loading": "Loading...",
     "loadMore": "Load More",
     "totalItems": "{{count}} items total",
+    "starRating": "Star rating",
+    "starCount": "{{count}} stars",
     "banner": {
       "message": "You have unsaved changes to resource quantities.",
       "cancel": "Discard",
