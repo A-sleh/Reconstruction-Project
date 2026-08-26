@@ -1,19 +1,22 @@
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+
 import { MapPin, Pencil, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/button";
-import { paths } from "@/config/paths";
+import { Link, useNavigate } from "react-router-dom";
+
+import ConfirmDelete from "@/components/model/ConfirmDelete";
+import FitBoundsOnMount from "@/components/shared/LandMap/FitBoundsOnMount";
 import { injectLeafletOverrides } from "@/components/shared/LandMap/LandMapStyles";
 import LandMapViewer from "@/components/shared/LandMap/LandMapViewer";
-import ConfirmDelete from "@/components/model/ConfirmDelete";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { paths } from "@/config/paths";
+import { type LatLng as LatLngType, locationToString } from "@/lib/helpers";
+
 import { useDeleteLand } from "../api/actions";
 import type { LandListItem } from "../api/types";
-import { locationToString, type LatLng as LatLngType } from "@/lib/helpers";
-import FitBoundsOnMount from "@/components/shared/LandMap/FitBoundsOnMount";
 
 function PropertyCard({ p }: { p: LandListItem }) {
   const { t } = useTranslation();
@@ -90,13 +93,13 @@ function PropertyCard({ p }: { p: LandListItem }) {
           <LandMapViewer polygon={polygon} />
           <FitBoundsOnMount polygon={polygon} />
         </MapContainer>
-        {p.coverImageUrl && (
+        {/* {p.coverImageUrl && (
           <img
             src={p.coverImageUrl}
             alt={p.name}
             className="absolute inset-0 h-full w-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500"
           />
-        )}
+        )} */}
         <div className="absolute inset-0 bg-linear-to-t from-navy-deep/80 via-navy-deep/10 to-transparent" />
         <Badge
           className={`absolute top-3 left-3 border ${p.isValidated ? "bg-emerald/10 text-emerald border-emerald/20" : "bg-muted text-muted-foreground border-border"}`}

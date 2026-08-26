@@ -12,7 +12,7 @@ export enum EZoningType {
 }
 
 export interface GetAllLandsFilters {
-  HasBuilding: boolean;
+  HasBuilding?: boolean;
   PageNumber?: number;
   PageSize?: number;
 }

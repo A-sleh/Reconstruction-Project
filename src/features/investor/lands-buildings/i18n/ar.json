@@ -61,6 +61,11 @@
     "validated": "تم التحقق",
     "notValidated": "لم يتم التحقق",
     "withProjects": "عرض الأراضي التي بها مشاريع",
+    "landFilters": {
+      "all": "جميع الأراضي",
+      "withBuilding": "بمبنى",
+      "withoutBuilding": "بدون مبنى"
+    },
     "label-cover-image": "صورة عن العقار",
 
     "building-form-title": "إضافة مبنى جديد",

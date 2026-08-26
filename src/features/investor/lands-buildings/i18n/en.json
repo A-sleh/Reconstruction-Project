@@ -61,6 +61,11 @@
     "validated": "Validated",
     "notValidated": "Not Validated",
     "withProjects": "Show lands with projects",
+    "landFilters": {
+      "all": "All Lands",
+      "withBuilding": "With Building",
+      "withoutBuilding": "Without Building"
+    },
     "label-cover-image": "Property cover image",
 
     "building-form-title": "Add New Building",

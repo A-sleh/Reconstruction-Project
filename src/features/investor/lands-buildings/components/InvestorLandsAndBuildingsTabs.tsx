@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TrendingUp, AlertCircle, Plus } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useLandsInfinite } from "../api/query";
 import PropertyCard from "./PropertyCard";
 import CardSkeleton from "./PropertySkeleton";
@@ -11,16 +10,17 @@ import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import { paths } from "@/config/paths";
 
-type TabValue = "building" | "land";
+type LandFilterValue = "all" | "with_building" | "without_building";
 
 function InvestorLandsAndBuildingsTabs() {
-  const { t } = useTranslation();
-  const { i18n } = useTranslation();
-  const isArabic = i18n.language == "ar";
-  const [tab, setTab] = useState<TabValue>("land");
-  const [withProjects, setWithProjects] = useState(false);
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language === "ar";
+  const [mainTab, setMainTab] = useState<"land" | "building">("land");
+  const [landFilter, setLandFilter] = useState<LandFilterValue>("all");
 
-  // Land query
+  const hasBuilding =
+    landFilter === "all" ? undefined : landFilter === "with_building";
+
   const {
     data: landsData,
     isLoading: isLoadingLands,
@@ -28,14 +28,14 @@ function InvestorLandsAndBuildingsTabs() {
     fetchNextPage: fetchNextPageLands,
     hasNextPage: hasNextPageLands,
     isFetchingNextPage: isFetchingNextPageLands,
-  } = useLandsInfinite({ HasBuilding: withProjects });
+  } = useLandsInfinite({ HasBuilding: hasBuilding });
 
   const lands = landsData?.pages.flatMap((p) => p.data) ?? [];
 
   return (
     <Tabs
-      value={tab}
-      onValueChange={(v) => setTab(v as TabValue)}
+      value={mainTab}
+      onValueChange={(v) => setMainTab(v as "land" | "building")}
       className="w-full"
       dir={isArabic ? "rtl" : "ltr"}
     >
@@ -55,31 +55,33 @@ function InvestorLandsAndBuildingsTabs() {
       </div>
 
       <div className="my-5">
-        {tab === "land" && (
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3 mb-4 px-4 py-2.5 rounded-xl bg-muted/50 border border-border/50 w-fit">
-              <Switch
-                id="with-projects"
-                checked={withProjects}
-                onCheckedChange={setWithProjects}
-              />
-              <label
-                htmlFor="with-projects"
-                className="cursor-pointer text-sm font-medium text-foreground select-none"
-              >
-                {t("investor.withProjects")}
-              </label>
-            </div>
-            <Link to={paths.app.investor.basicLandInfo.getHref()}>
-              <Button className="bg-gradient-emerald hover:opacity-95 text-white shadow-elegant gap-2">
-                <Plus className="h-4 w-4" /> {t("investor.addProperty")}
-              </Button>
-            </Link>
-          </div>
-        )}
-
-        {tab === "land" && (
+        {mainTab === "land" && (
           <>
+            <div className="flex justify-between items-center mb-4">
+              <Tabs
+                value={landFilter}
+                onValueChange={(v) => setLandFilter(v as LandFilterValue)}
+                dir={isArabic ? "rtl" : "ltr"}
+              >
+                <TabsList>
+                  <TabsTrigger value="all">
+                    {t("investor.landFilters.all")}
+                  </TabsTrigger>
+                  <TabsTrigger value="with_building">
+                    {t("investor.landFilters.withBuilding")}
+                  </TabsTrigger>
+                  <TabsTrigger value="without_building">
+                    {t("investor.landFilters.withoutBuilding")}
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+              <Link to={paths.app.investor.basicLandInfo.getHref()}>
+                <Button className="bg-gradient-emerald hover:opacity-95 text-white shadow-elegant gap-2">
+                  <Plus className="h-4 w-4" /> {t("investor.addProperty")}
+                </Button>
+              </Link>
+            </div>
+
             {isLoadingLands && (
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {Array.from({ length: 6 }).map((_, i) => (
@@ -126,7 +128,9 @@ function InvestorLandsAndBuildingsTabs() {
           </>
         )}
 
-        {tab === "building" && <BuildingsList />}
+        <TabsContent value="building">
+          <BuildingsList />
+        </TabsContent>
       </div>
     </Tabs>
   );

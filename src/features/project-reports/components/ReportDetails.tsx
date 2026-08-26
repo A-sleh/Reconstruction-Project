@@ -1,18 +1,20 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
   CalendarDays,
+  CheckCircle,
   Download,
   Package,
   Pencil,
   Send,
   User,
   XCircle,
-  CheckCircle,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
+import ConfirmChanges from "@/components/common/ConfrimChanges";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -22,12 +24,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import type { OrderItem } from "@/features/orders/api/types";
 import { cn } from "@/lib/utils";
 
-import type { ProjectReportResponse } from "../api/types";
-import type { ProjectReportType } from "../api/types";
-import type { OrderItem } from "@/features/orders/api/types";
-import ConfirmChanges from "@/components/common/ConfrimChanges";
+import type { ProjectReportResponse, ProjectReportType } from "../api/types";
 
 interface Props {
   report: ProjectReportResponse;
@@ -56,11 +56,17 @@ const getFileIcon = (fileType: string) => {
   if (fileType.includes("pdf")) return "📄";
   if (fileType.includes("zip") || fileType.includes("compressed")) return "📦";
   if (fileType.includes("image")) return "🖼️";
-  if (fileType.includes("xlsx") || fileType.includes("spreadsheet")) return "📊";
+  if (fileType.includes("xlsx") || fileType.includes("spreadsheet"))
+    return "📊";
   return "📎";
 };
 
-const ReportDetails = ({ report, onBack, onSubmitOrder, onSendOrder }: Props) => {
+const ReportDetails = ({
+  report,
+  onBack,
+  onSubmitOrder,
+  onSendOrder,
+}: Props) => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
 
@@ -248,7 +254,10 @@ const ReportDetails = ({ report, onBack, onSubmitOrder, onSendOrder }: Props) =>
                     {t("projectReports.details.columns.item", "Item")}
                   </TableHead>
                   <TableHead className="text-center">
-                    {t("projectReports.details.columns.unitPrice", "Unit Price")}
+                    {t(
+                      "projectReports.details.columns.unitPrice",
+                      "Unit Price",
+                    )}
                   </TableHead>
                   <TableHead className="text-center">
                     {t("projectReports.details.columns.quantity", "Quantity")}
@@ -304,7 +313,8 @@ const ReportDetails = ({ report, onBack, onSubmitOrder, onSendOrder }: Props) =>
                           ${item.price.toFixed(2)}
                         </span>
                         <span className="text-[11px] text-muted-foreground">
-                          {" "}/ {item.unit}
+                          {" "}
+                          / {item.unit}
                         </span>
                       </TableCell>
 
@@ -354,7 +364,10 @@ const ReportDetails = ({ report, onBack, onSubmitOrder, onSendOrder }: Props) =>
                         {isCompleted ? (
                           <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald">
                             <CheckCircle className="h-4 w-4" />
-                            {t("projectReports.details.status.completed", "Completed")}
+                            {t(
+                              "projectReports.details.status.completed",
+                              "Completed",
+                            )}
                           </span>
                         ) : (
                           <button
@@ -370,12 +383,18 @@ const ReportDetails = ({ report, onBack, onSubmitOrder, onSendOrder }: Props) =>
                             {isRejected ? (
                               <>
                                 <CheckCircle className="h-4 w-4" />
-                                {t("projectReports.details.actions.restore", "Restore")}
+                                {t(
+                                  "projectReports.details.actions.restore",
+                                  "Restore",
+                                )}
                               </>
                             ) : (
                               <>
                                 <XCircle className="h-4 w-4" />
-                                {t("projectReports.details.actions.reject", "Reject")}
+                                {t(
+                                  "projectReports.details.actions.reject",
+                                  "Reject",
+                                )}
                               </>
                             )}
                           </button>

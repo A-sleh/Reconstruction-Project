@@ -1,7 +1,9 @@
 import { MapPin, Pencil, Trash2 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
 import type { BuildingListItem } from "../api/types";
 
 interface BuildingCardProps {
@@ -18,7 +20,7 @@ const BuildingCard: React.FC<BuildingCardProps> = ({
   return (
     <Card className="group overflow-hidden shadow-card border-border/60 hover:shadow-elegant transition-all duration-300 hover:-translate-y-1">
       <div className="relative h-44 overflow-hidden bg-muted">
-        {building.coverImageUrl ? (
+        {/* {building.coverImageUrl ? (
           <img
             src={building.coverImageUrl}
             alt={building.name}
@@ -28,7 +30,7 @@ const BuildingCard: React.FC<BuildingCardProps> = ({
           <div className="h-full w-full flex items-center justify-center text-muted-foreground text-sm">
             No image
           </div>
-        )}
+        )} */}
         <div className="absolute inset-0 bg-linear-to-t from-navy-deep/80 via-navy-deep/10 to-transparent" />
         <Badge
           className="absolute top-3 left-3 border bg-primary/10 text-primary border-primary/20"
@@ -52,7 +54,9 @@ const BuildingCard: React.FC<BuildingCardProps> = ({
           </div>
         )}
         <div className="absolute bottom-3 left-3 right-3 text-white">
-          <h3 className="font-semibold text-lg leading-tight">{building.name}</h3>
+          <h3 className="font-semibold text-lg leading-tight">
+            {building.name}
+          </h3>
           <div className="flex items-center gap-1 text-xs text-white/80 mt-1">
             <MapPin className="h-3 w-3" /> {building.address}
           </div>
@@ -78,13 +82,17 @@ const BuildingCard: React.FC<BuildingCardProps> = ({
             <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
               Orientation
             </p>
-            <p className="font-semibold text-foreground">{building.orientation}</p>
+            <p className="font-semibold text-foreground">
+              {building.orientation}
+            </p>
           </div>
           <div>
             <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
               Parts
             </p>
-            <p className="font-semibold text-foreground">{building.buildingParts.length}</p>
+            <p className="font-semibold text-foreground">
+              {building.buildingParts.length}
+            </p>
           </div>
         </div>
         {onEdit && (

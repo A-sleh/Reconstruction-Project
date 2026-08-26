@@ -1,7 +1,7 @@
 import { GetAllLandsFilters } from "./types";
 
 const BASE_LAND_ROUTE = "land";
-const BASE_INVESTOR_ROUTE = "inverstor";
+const BASE_INVESTOR_ROUTE = "investor";
 
 export enum LandController {
   CreateLand = `${BASE_LAND_ROUTE}/create-land`,
@@ -17,7 +17,7 @@ export const QUERY_KEYS = {
     all: ["lands"] as const,
     lists: () => [...QUERY_KEYS.lands.all, "list"] as const,
     list: (filters: GetAllLandsFilters) =>
-      [...QUERY_KEYS.lands.lists(), filters.HasBuilding] as const,
+      [...QUERY_KEYS.lands.lists(), filters.HasBuilding ?? "all"] as const,
     detail: (id: string | number) =>
       [...QUERY_KEYS.lands.all, "detail", id] as const,
     investorProperties: () =>
