@@ -1,5 +1,11 @@
 import { Paginated } from "@/types";
 
+interface IBaseFilters {
+  search?: string;
+  fromDate?: Date;
+  toDate?: Date;
+}
+
 export const ENGINEER_SPECS = [
   "Structural Engineering",
   "Civil Engineering",
@@ -9,8 +15,7 @@ export const ENGINEER_SPECS = [
   "Site Supervision",
 ] as const;
 
-export interface GetAllEngineersFilters {
-  search?: string;
+export interface GetAllEngineersFilters extends IBaseFilters {
   spec?: string;
   yearsOfExperiance?: number;
   rate?: number;
@@ -36,10 +41,7 @@ export interface EngineerSummery {
 
 export type Engineers = Paginated<EngineerSummery>;
 
-export interface GetEmploingRequestsFilters {
-  search?: string;
-  fromDate?: Date;
-  toDate?: Date;
+export interface GetEmploingRequestsFilters extends IBaseFilters {
   status?: EmploingRequestStatus;
 }
 
@@ -61,3 +63,31 @@ export interface EmploingRequests {
 }
 
 export type EmploingRequestsPaginated = Paginated<EmploingRequests>;
+
+export interface GetEmploersActionsLogsFilters extends IBaseFilters {
+  action?: string;
+}
+
+export const ENGINEERS_PROJECT_ACTIONS = [
+  "checked_in",
+  "checked_out",
+  "daily_report",
+  "progress_update",
+  "site_photos",
+  "task_completed",
+  "material_request",
+  "invoice_added",
+] as const;
+
+export type EngineersProjectAction = (typeof ENGINEERS_PROJECT_ACTIONS)[number];
+
+export interface EmploersActionsLogs {
+  id: number;
+  engineerId: EngineerSummery;
+  action: EngineersProjectAction;
+  description: string;
+  workSite: string;
+  createdAt: Date;
+}
+
+export type EmploersActionsLogsPaginated = Paginated<EmploersActionsLogs>;

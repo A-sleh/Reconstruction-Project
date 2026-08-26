@@ -6,7 +6,8 @@
     },
     "tabs": {
       "search": "البحث عن مهندسين",
-      "emploingRequests": "طلبات التوظيف"
+      "emploingRequests": "طلبات التوظيف",
+      "logs": "السجلات"
     },
     "requests": {
       "header": {
@@ -54,6 +55,36 @@
         "reject": "رفض",
         "cancel": "إلغاء",
         "permissions": "الصلاحيات"
+      }
+    },
+    "logs": {
+      "header": {
+        "title": "نشاط المهندسين",
+        "subTitle": "تابع ما يقوم به المهندسون داخل المشروع."
+      },
+      "columns": {
+        "engineer": "المهندس",
+        "activity": "النشاط",
+        "workSite": "موقع العمل",
+        "time": "الوقت"
+      },
+      "empty": "لا يوجد نشاط مسجل.",
+      "filters": {
+        "activity": "نوع النشاط"
+      },
+      "search": {
+        "label": "بحث",
+        "placeholder": "ابحث باسم المهندس أو النشاط..."
+      },
+      "actions": {
+        "checked_in": "تسجيل حضور",
+        "checked_out": "تسجيل انصراف",
+        "daily_report": "تقرير يومي",
+        "progress_update": "تحديث الإنجاز",
+        "site_photos": "صور الموقع",
+        "task_completed": "إنجاز مهمة",
+        "material_request": "طلب مواد",
+        "invoice_added": "إضافة فاتورة"
       }
     },
     "empty": "لا يوجد مهندسون.",

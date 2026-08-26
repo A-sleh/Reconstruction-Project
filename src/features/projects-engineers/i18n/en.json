@@ -6,7 +6,8 @@
     },
     "tabs": {
       "search": "Search Engineers",
-      "emploingRequests": "Employing Requests"
+      "emploingRequests": "Employing Requests",
+      "logs": "Logs"
     },
     "requests": {
       "header": {
@@ -54,6 +55,36 @@
         "reject": "Reject",
         "cancel": "Cancel",
         "permissions": "Permissions"
+      }
+    },
+    "logs": {
+      "header": {
+        "title": "Engineers Activity",
+        "subTitle": "Track what engineers do inside the project."
+      },
+      "columns": {
+        "engineer": "Engineer",
+        "activity": "Activity",
+        "workSite": "Work Site",
+        "time": "Time"
+      },
+      "empty": "No activity found.",
+      "filters": {
+        "activity": "Activity Type"
+      },
+      "search": {
+        "label": "Search",
+        "placeholder": "Search by engineer or activity..."
+      },
+      "actions": {
+        "checked_in": "Checked in",
+        "checked_out": "Checked out",
+        "daily_report": "Daily report",
+        "progress_update": "Progress update",
+        "site_photos": "Site photos",
+        "task_completed": "Task completed",
+        "material_request": "Material request",
+        "invoice_added": "Invoice added"
       }
     },
     "empty": "No engineers found.",

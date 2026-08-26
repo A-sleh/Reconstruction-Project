@@ -60,6 +60,11 @@
     "totalItems": "{{count}} items total",
     "starRating": "Star rating",
     "starCount": "{{count}} stars",
+    "table": {
+      "prev": "Prev",
+      "next": "Next"
+    },
+    "cancel": "Cancel",
     "banner": {
       "message": "You have unsaved changes to resource quantities.",
       "cancel": "Discard",
