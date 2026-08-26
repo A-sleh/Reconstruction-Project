@@ -7,13 +7,14 @@ import { useParams } from "react-router-dom";
 import Loader from "@/components/shared/Loader";
 import { useProjectById } from "@/features/project/api/queries";
 import ManageEngineersPage from "@/features/project/components/ManageEngineersPage";
+import ManageReportsPage from "@/features/project/components/ManageReportsPage";
 import ManageResourcesPage from "@/features/project/components/ManageResourcesPage";
 import ManageServicesPage from "@/features/project/components/ManageServicesPage";
-import ManageReportsPage from "@/features/project/components/ManageReportsPage";
 import ManageWorkShopPage from "@/features/project/components/ManageWorkShopPage";
 import ProjectDetailsHeader from "@/features/project/components/ProjectDetailsHeader";
 import ProjectSettingsSection from "@/features/project/components/ProjectSettingsSection";
 import ProjectSideBar from "@/features/project/components/ProjectSideBar";
+import ProjectStatPage from "@/features/project/components/ProjectStatPage";
 import { OverviewSection } from "@/features/project/components/ProjectSummeryCard";
 
 const Project = () => {
@@ -71,6 +72,7 @@ const Project = () => {
             />
           )}
           {activeKey === "reports" && <ManageReportsPage />}
+          {activeKey === "statistics" && <ProjectStatPage />}
           {activeKey === "work shop" && <ManageWorkShopPage />}
           {activeKey === "settings" && (
             <ProjectSettingsSection project={project} />

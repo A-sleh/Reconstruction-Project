@@ -1,23 +1,28 @@
 import { useEffect, useRef } from "react";
+
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
-import Select from "@/components/inputs/Selector";
-import Input from "@/components/inputs/Input";
+
+import { Message } from "@/components/common/Message";
 import ImageUploader from "@/components/inputs/ImageUploader";
+import Input from "@/components/inputs/Input";
+import Select from "@/components/inputs/Selector";
+import { Button } from "@/components/ui/button";
+import AttachmentList, {
+  type AttachmentListHandle,
+} from "@/features/attachment/components/AttachmentList";
+import { useFileUpload } from "@/hooks/useFileUpload";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
-  landFormSchema,
   initialLandValues,
+  landFormSchema,
   type LandFormSchema,
   useCreateLand,
   useUpdateLand,
 } from "../api/actions";
-import { ZONING_LABELS, EZoningType, type Land } from "../api/types";
-import { useFileUpload } from "@/hooks/useFileUpload";
+import { EZoningType, type Land, ZONING_LABELS } from "../api/types";
 import BorderField from "./BorderField";
-import AttachmentList, { type AttachmentListHandle } from "@/features/attachment/components/AttachmentList";
-import { Message } from "@/components/common/Message";
 
 interface Props {
   initial?: Land | null;
@@ -70,7 +75,7 @@ export default function BasicLandInfoForm({
         border: initial?.border ?? [],
         isValidated: initial?.isValidated ?? false,
         accessability: initial?.accessability ?? false,
-        coverImageId: initial?.coverImageUrl ?? "",
+        coverImageId: initial?.coverImageId ?? "",
       });
     }
   }, [initial, reset]);
@@ -82,7 +87,10 @@ export default function BasicLandInfoForm({
 
   const onSubmit = (data: LandFormSchema) => {
     const attachments = attachmentListRef.current?.getValues() ?? [];
-    const payload = { ...data, attachments: attachments.map((a) => ({ ...a, removed: false })) };
+    const payload = {
+      ...data,
+      attachments: attachments.map((a) => ({ ...a, removed: false })),
+    };
 
     if (initial) {
       updateLand(
@@ -208,10 +216,7 @@ export default function BasicLandInfoForm({
         )}
       />
 
-      <AttachmentList
-        ref={attachmentListRef}
-        mode="self-contained"
-      />
+      <AttachmentList ref={attachmentListRef} mode="self-contained" />
 
       <div className="flex justify-end gap-3 pt-2">
         <Button

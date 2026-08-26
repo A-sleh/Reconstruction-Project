@@ -148,6 +148,75 @@
         "id": "رقم المستثمر",
         "project": "المشروع"
       }
+    },
+    "statistics": {
+      "title": "إحصائيات المشروع",
+      "subtitle": "تحليلات بياناتية لاتخاذ قرارات مدروسة",
+      "kpi": {
+        "totalOrders": "إجمالي الطلبات",
+        "completed": "مكتملة",
+        "netRevenue": "صافي الإيرادات",
+        "discount": "الخصم",
+        "workers": "إجمالي العمال",
+        "workshops": "ورش عمل",
+        "engineers": "المهندسون",
+        "available": "متاحون",
+        "fulfillRate": "متوسط معدل الإنجاز",
+        "avgAcrossOrders": "متوسط عبر جميع الطلبات",
+        "budgetUtilization": "نسبة استخدام الميزانية",
+        "reports": "التقارير",
+        "attachments": "مرفقات",
+        "avgRating": "متوسط التقييم",
+        "totalProjects": "مشاريع مكتملة"
+      },
+      "status": {
+        "completed": "مكتمل",
+        "preparing": "قيد التجهيز",
+        "pending": "قيد الانتظار",
+        "cancelled": "ملغى",
+        "open": "مفتوح",
+        "inProgress": "قيد التنفيذ",
+        "closed": "مغلق"
+      },
+      "reportTypes": {
+        "daily": "يومي",
+        "weekly": "أسبوعي",
+        "monthly": "شهري",
+        "yearly": "سنوي",
+        "progress": "إنجاز",
+        "services-order": "طلب خدمات",
+        "resources-order": "طلب موارد"
+      },
+      "charts": {
+        "orderStatus": "توزيع حالة الطلبات",
+        "orderStatusDesc": "تفصيل جميع طلبات المشروع حسب حالتها الحالية",
+        "workshopBudget": "تتبع ميزانية ورش العمل",
+        "workshopBudgetDesc": "المدفوع مقابل المطلوب لكل ورشة عمل",
+        "paid": "المدفوع",
+        "required": "المطلوب",
+        "engineerSpecs": "المهندسون حسب التخصص",
+        "engineerSpecsDesc": "توزيع المهندسين عبر التخصصات المختلفة",
+        "reportTypes": "أنواع التقارير",
+        "reportTypesDesc": "أنواع التقارير المقدمة في هذا المشروع",
+        "orderTimeline": "الجدول الزمني للطلبات",
+        "orderTimelineDesc": "عدد الطلبات المنشأة عبر الزمن",
+        "orders": "الطلبات",
+        "workshopStatus": "حالة ورش العمل",
+        "workshopStatusDesc": "الحالة الحالية لجميع ورش عمل المشروع",
+        "orderValue": "الإيرادات الشهرية",
+        "orderValueDesc": "صافي الإيرادات المحققة من الطلبات كل شهر",
+        "revenue": "الإيرادات"
+      },
+      "quickInsights": {
+        "title": "رؤى سريعة",
+        "description": "مؤشرات رئيسية لاتخاذ قرارات أسرع",
+        "avgOrderValue": "متوسط قيمة الطلب",
+        "orderReports": "تقارير الطلبات",
+        "activeWorkshops": "ورش العمل النشطة",
+        "engineerAvailability": "توفر المهندسين",
+        "pendingOrders": "الطلبات المعلقة",
+        "budgetGap": "الفجوة المالية"
+      }
     }
   }
 }
