@@ -52,6 +52,11 @@ export interface GetAllWorkShopsFilters {
   PageSize?: number;
 }
 
+export interface GetAllInvoicesFilters {
+  fromDate?: string;
+  toDate?: string;
+}
+
 export type GetAllWorkShopsResponse = Paginated<WorkShop>;
 
 export interface AddInvoicePayload extends Omit<InvoicePayload, "id"> {

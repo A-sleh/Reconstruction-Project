@@ -1,20 +1,14 @@
-import { useEffect, type ReactNode } from "react";
-import { useForm } from "react-hook-form";
+import Input from "@/components/inputs/Input";
+import Selector from "@/components/inputs/Selector";
+import PopuupLayout from "@/components/layouts/Popup-layout";
+import Model from "@/components/model/Model";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
+import { useEffect, type ReactNode } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import Input from "@/components/inputs/Input";
-import Model from "@/components/model/Model";
-import PopuupLayout from "@/components/layouts/Popup-layout";
 import {
   initialWorkShopValues,
   useCreateWorkShop,
@@ -158,58 +152,46 @@ export function WorkShopModel({ initial = null, openButton, openKey }: Props) {
 
           <div className="flex flex-col gap-3 md:flex-row md:items-start">
             <div className="w-full space-y-1">
-              <label className="text-[11px] text-muted-foreground md:text-sm">
-                {t("workShops.fields.status", "Status")}
-              </label>
-              <Select
+              <label className="text-[11px] text-muted-foreground md:text-sm"></label>
+              <Selector
+                label={t("workShops.fields.status", "Status")}
                 value={status}
-                onValueChange={(value) =>
+                setValue={(value) =>
                   setValue("status", value as WorkShopFormValues["status"], {
                     shouldValidate: true,
                   })
                 }
               >
-                <SelectTrigger className="w-full">
-                  <SelectValue
-                    placeholder={t(
-                      "workShops.placeholders.status",
-                      "Select status",
-                    )}
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  {WORK_SHOP_STATUSES.map((s) => (
-                    <SelectItem key={s} value={s}>
-                      {t(`workShops.status.${s}`, s)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                {WORK_SHOP_STATUSES.map((s) => (
+                  <option key={s} value={s}>
+                    {t(`workShops.status.${s}`, s)}
+                  </option>
+                ))}
+              </Selector>
               {errors.status && (
                 <p className="text-xs text-destructive">
                   {errors.status.message}
                 </p>
               )}
             </div>
-
-            <div className="w-full space-y-1">
-              <label className="text-[11px] text-muted-foreground md:text-sm">
-                {t("workShops.fields.description", "Description")}
-              </label>
-              <Textarea
-                rows={2}
-                placeholder={t(
-                  "workShops.placeholders.description",
-                  "Describe the scope of work...",
-                )}
-                {...register("description")}
-              />
-              {errors.description && (
-                <p className="text-xs text-destructive">
-                  {errors.description.message}
-                </p>
+          </div>
+          <div className="w-full space-y-1">
+            <label className="text-[11px] text-muted-foreground md:text-sm">
+              {t("workShops.fields.description", "Description")}
+            </label>
+            <Textarea
+              rows={2}
+              placeholder={t(
+                "workShops.placeholders.description",
+                "Describe the scope of work...",
               )}
-            </div>
+              {...register("description")}
+            />
+            {errors.description && (
+              <p className="text-xs text-destructive">
+                {errors.description.message}
+              </p>
+            )}
           </div>
 
           <div className="flex justify-end gap-3 pt-2">

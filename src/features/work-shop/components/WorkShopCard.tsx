@@ -9,12 +9,14 @@ import {
   CalendarDays,
   Pencil,
   Phone,
+  ReceiptText,
   Trash2,
   Users,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useDeleteWorkShop } from "../api/actions";
 import type { WorkShop } from "../api/types";
+import InvoiceModel from "./InvoiceModel";
 import WorkShopModel from "./WorkShopModel";
 
 interface Props {
@@ -35,6 +37,12 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
       : 0;
   const remaining = Math.max(0, workShop.requirePrice - workShop.payedPrice);
 
+  const statusStyles: Record<string, string> = {
+    open: "bg-emerald/10 text-emerald",
+    "in-progress": "bg-gold/10 text-warning-foreground",
+    closed: "bg-muted text-muted-foreground",
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -53,6 +61,19 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
               aria-label={t("workShops.card.edit", "Edit workshop")}
             >
               <Pencil className="h-3.5 w-3.5" />
+            </Button>
+          }
+        />
+        <InvoiceModel
+          openKey={`add-invoice-work-shop-${workShop.id}`}
+          workShopId={workShop.id}
+          openButton={
+            <Button
+              size="icon"
+              className="h-8 w-8 rounded-full shadow-md hover:bg-gold hover:text-white"
+              aria-label={t("workShops.card.addInvoice", "Add invoice")}
+            >
+              <ReceiptText className="h-3.5 w-3.5" />
             </Button>
           }
         />
@@ -85,6 +106,14 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
 
       <div className="flex items-center gap-2">
         <div className="min-w-0 flex-1">
+          <span
+            className={cn(
+              "mb-2 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium",
+              statusStyles[workShop.status],
+            )}
+          >
+            {t(`workShops.status.${workShop.status}`, workShop.status)}
+          </span>
           <h3 className="truncate text-lg font-semibold text-foreground transition-smooth group-hover:text-primary">
             {workShop.title}
           </h3>
