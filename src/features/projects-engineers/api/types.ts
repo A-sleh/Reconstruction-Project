@@ -1,5 +1,14 @@
 import { Paginated } from "@/types";
 
+export const ENGINEER_SPECS = [
+  "Structural Engineering",
+  "Civil Engineering",
+  "Architectural Design",
+  "Electrical Engineering",
+  "Mechanical Engineering",
+  "Site Supervision",
+] as const;
+
 export interface GetAllEngineersFilters {
   search?: string;
   spec?: string;
@@ -14,6 +23,7 @@ export interface GetAllEngineersFilters {
 export interface EngineerSummery {
   id: number;
   fullName: string;
+  imageUrl: string;
   spec: string;
   yearsOfExperiance: number;
   contactNumber: string;

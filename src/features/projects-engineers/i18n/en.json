@@ -1,0 +1,54 @@
+{
+  "projectsEngineers": {
+    "header": {
+      "title": "Engineers",
+      "subTitle": "Browse engineers available for your projects."
+    },
+    "tabs": {
+      "search": "Search Engineers"
+    },
+    "empty": "No engineers found.",
+    "card": {
+      "years": "Years Exp.",
+      "projects": "Projects",
+      "rating": "Rating",
+      "available": "Available",
+      "unavailable": "Unavailable",
+      "contact": "Contact engineer",
+      "hire": "Send hiring request"
+    },
+    "filters": {
+      "search": {
+        "label": "Search",
+        "placeholder": "Search engineers..."
+      },
+      "experience": {
+        "label": "Years of Experience",
+        "value": "{{count}}+ yrs",
+        "any": "Any"
+      },
+      "rate": {
+        "label": "Minimum Rating",
+        "star": "{{count}} stars"
+      },
+      "projects": {
+        "label": "Min Completed Projects",
+        "placeholder": "e.g. 10"
+      },
+      "spec": {
+        "label": "Specialty"
+      },
+      "available": {
+        "label": "Available now"
+      }
+    },
+    "modal": {
+      "title": "Send hiring request to {{name}}",
+      "description": "Describe the job details, duration, and any requirements. The engineer will review your request.",
+      "placeholder": "e.g. We need a structural assessment for a 3-story building in Damascus, expected duration 2 weeks...",
+      "cancel": "Cancel",
+      "send": "Send Request",
+      "sending": "Sending..."
+    }
+  }
+}

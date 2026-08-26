@@ -1,5 +1,12 @@
+import { useState } from "react";
+
+import { AlertCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+
 import Loader from "@/components/shared/Loader";
 import { useProjectById } from "@/features/project/api/queries";
+import ManageEngineersPage from "@/features/project/components/ManageEngineersPage";
 import ManageResourcesPage from "@/features/project/components/ManageResourcesPage";
 import ManageServicesPage from "@/features/project/components/ManageServicesPage";
 import ManageWorkShopPage from "@/features/project/components/ManageWorkShopPage";
@@ -7,10 +14,6 @@ import ProjectDetailsHeader from "@/features/project/components/ProjectDetailsHe
 import ProjectSettingsSection from "@/features/project/components/ProjectSettingsSection";
 import ProjectSideBar from "@/features/project/components/ProjectSideBar";
 import { OverviewSection } from "@/features/project/components/ProjectSummeryCard";
-import { AlertCircle } from "lucide-react";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
 
 const Project = () => {
   const { t } = useTranslation();
@@ -59,6 +62,7 @@ const Project = () => {
               projectName={project.name}
             />
           )}
+          {activeKey === "manage engineers" && <ManageEngineersPage />}
           {activeKey === "manage services" && (
             <ManageServicesPage
               projectId={numericId}
