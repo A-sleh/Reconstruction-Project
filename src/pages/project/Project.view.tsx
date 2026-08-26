@@ -54,7 +54,7 @@ const Project = () => {
       <div className="flex items-start gap-4">
         <ProjectSideBar activeKey={activeKey} onChange={setActiveKey} />
 
-        <section className="min-w-0 flex-1 " style={{ marginTop: "-22px" }}>
+        <section className="min-w-0 flex-1 ">
           {activeKey === "overview" && <OverviewSection project={project} />}
           {activeKey === "manage resources" && (
             <ManageResourcesPage

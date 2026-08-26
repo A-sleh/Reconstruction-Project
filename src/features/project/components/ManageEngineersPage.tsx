@@ -13,11 +13,7 @@ const ManageEngineersPage = () => {
 
   return (
     <div dir={isArabic ? "rtl" : "ltr"}>
-      <Tabs
-        defaultValue="search-engineers"
-        className="mt-6"
-        dir={isArabic ? "rtl" : "ltr"}
-      >
+      <Tabs defaultValue="emploing-requests" dir={isArabic ? "rtl" : "ltr"}>
         <TabsList className="mb-1" dir={isArabic ? "rtl" : "ltr"}>
           <TabsTrigger value="emploing-requests">
             <ClipboardList
