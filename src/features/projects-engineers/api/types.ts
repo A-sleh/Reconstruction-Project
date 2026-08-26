@@ -35,3 +35,29 @@ export interface EngineerSummery {
 }
 
 export type Engineers = Paginated<EngineerSummery>;
+
+export interface GetEmploingRequestsFilters {
+  search?: string;
+  fromDate?: Date;
+  toDate?: Date;
+  status?: EmploingRequestStatus;
+}
+
+export enum EmploingRequestStatus {
+  PENDING,
+  REJECTED,
+  APPROVED,
+  CANCELED,
+}
+
+export interface EmploingRequests {
+  id: number;
+  requestNote: string;
+  engineer: EngineerSummery;
+  status: EmploingRequestStatus;
+  rejectedCause: string;
+  approvedDate: Date;
+  createdAt: Date;
+}
+
+export type EmploingRequestsPaginated = Paginated<EmploingRequests>;

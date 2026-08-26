@@ -5,7 +5,56 @@
       "subTitle": "Browse engineers available for your projects."
     },
     "tabs": {
-      "search": "Search Engineers"
+      "search": "Search Engineers",
+      "emploingRequests": "Employing Requests"
+    },
+    "requests": {
+      "header": {
+        "title": "Employing Requests",
+        "subTitle": "Review and manage engineers' employing requests."
+      },
+      "search": {
+        "label": "Search",
+        "placeholder": "Search requests..."
+      },
+      "filters": {
+        "status": "Status"
+      },
+      "status": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "canceled": "Canceled"
+      },
+      "columns": {
+        "engineer": "Engineer",
+        "note": "Request Note",
+        "date": "Requested On",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "empty": "No employing requests found.",
+      "emptyFiltered": "No employing requests match your filters.",
+      "noCause": "No rejection reason provided.",
+      "cancel": {
+        "title": "Cancel this request?",
+        "descriptionPrefix": "This will cancel the employing request of "
+      },
+      "common": {
+        "cancel": "Keep Request"
+      },
+      "reject": {
+        "title": "Reject Request",
+        "subTitle": "Let the engineer know why this request is rejected.",
+        "cause": "Rejection Cause",
+        "causePlaceholder": "Explain the reason for rejection...",
+        "validation": "Please provide a rejection cause."
+      },
+      "actions": {
+        "reject": "Reject",
+        "cancel": "Cancel",
+        "permissions": "Permissions"
+      }
     },
     "empty": "No engineers found.",
     "card": {
@@ -21,6 +70,18 @@
       "search": {
         "label": "Search",
         "placeholder": "Search engineers..."
+      },
+      "dateRange": {
+        "label": "Date range"
+      },
+      "fromDate": "From",
+      "toDate": "To",
+      "status": {
+        "label": "Status",
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "canceled": "Canceled"
       },
       "experience": {
         "label": "Years of Experience",
@@ -40,6 +101,18 @@
       },
       "available": {
         "label": "Available now"
+      },
+      "dateRange": {
+        "label": "Date range"
+      },
+      "fromDate": "From",
+      "toDate": "To",
+      "status": {
+        "label": "Status",
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "canceled": "Canceled"
       }
     },
     "modal": {

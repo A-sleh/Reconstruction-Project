@@ -5,7 +5,56 @@
       "subTitle": "تصفح المهندسين المتاحين لمشاريعك."
     },
     "tabs": {
-      "search": "البحث عن مهندسين"
+      "search": "البحث عن مهندسين",
+      "emploingRequests": "طلبات التوظيف"
+    },
+    "requests": {
+      "header": {
+        "title": "طلبات التوظيف",
+        "subTitle": "مراجعة وإدارة طلبات توظيف المهندسين."
+      },
+      "search": {
+        "label": "بحث",
+        "placeholder": "ابحث في الطلبات..."
+      },
+      "filters": {
+        "status": "الحالة"
+      },
+      "status": {
+        "pending": "قيد المراجعة",
+        "approved": "مقبول",
+        "rejected": "مرفوض",
+        "canceled": "ملغي"
+      },
+      "columns": {
+        "engineer": "المهندس",
+        "note": "ملاحظة الطلب",
+        "date": "تاريخ الطلب",
+        "status": "الحالة",
+        "actions": "الإجراءات"
+      },
+      "empty": "لا توجد طلبات توظيف.",
+      "emptyFiltered": "لا توجد طلبات توظيف مطابقة للفلاتر.",
+      "noCause": "لم يتم توفير سبب للرفض.",
+      "cancel": {
+        "title": "إلغاء هذا الطلب؟",
+        "descriptionPrefix": "سيتم إلغاء طلب توظيف "
+      },
+      "common": {
+        "cancel": "الاحتفاظ بالطلب"
+      },
+      "reject": {
+        "title": "رفض الطلب",
+        "subTitle": "أبلغ المهندس بسبب رفض هذا الطلب.",
+        "cause": "سبب الرفض",
+        "causePlaceholder": "اشرح سبب الرفض...",
+        "validation": "يرجى تقديم سبب للرفض."
+      },
+      "actions": {
+        "reject": "رفض",
+        "cancel": "إلغاء",
+        "permissions": "الصلاحيات"
+      }
     },
     "empty": "لا يوجد مهندسون.",
     "card": {
@@ -21,6 +70,18 @@
       "search": {
         "label": "بحث",
         "placeholder": "ابحث عن مهندسين..."
+      },
+      "dateRange": {
+        "label": "نطاق التاريخ"
+      },
+      "fromDate": "من",
+      "toDate": "إلى",
+      "status": {
+        "label": "الحالة",
+        "pending": "قيد المراجعة",
+        "approved": "مقبول",
+        "rejected": "مرفوض",
+        "canceled": "ملغي"
       },
       "experience": {
         "label": "سنوات الخبرة",
@@ -40,6 +101,18 @@
       },
       "available": {
         "label": "متاح الآن"
+      },
+      "dateRange": {
+        "label": "نطاق التاريخ"
+      },
+      "fromDate": "من",
+      "toDate": "إلى",
+      "status": {
+        "label": "الحالة",
+        "pending": "قيد الانتظار",
+        "approved": "تمت الموافقة",
+        "rejected": "مرفوض",
+        "canceled": "ملغي"
       }
     },
     "modal": {

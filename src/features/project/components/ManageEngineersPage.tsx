@@ -1,7 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { UserCog } from "lucide-react";
+import { ClipboardList, UserCog } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Engineers from "@/features/projects-engineers/components/Engineers";
+import EmploingRequests from "@/features/projects-engineers/components/EmploingRequests";
 
 const ManageEngineersPage = () => {
   const { t, i18n } = useTranslation();
@@ -19,10 +20,20 @@ const ManageEngineersPage = () => {
             <UserCog className={`h-4 w-4 ${isArabic ? "ml-2" : "mr-2"}`} />
             {t("projectsEngineers.tabs.search", "Search Engineers")}
           </TabsTrigger>
+          <TabsTrigger value="emploing-requests">
+            <ClipboardList
+              className={`h-4 w-4 ${isArabic ? "ml-2" : "mr-2"}`}
+            />
+            {t("projectsEngineers.tabs.emploingRequests", "Employing Requests")}
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="search-engineers">
           <Engineers />
+        </TabsContent>
+
+        <TabsContent value="emploing-requests">
+          <EmploingRequests />
         </TabsContent>
       </Tabs>
     </div>
