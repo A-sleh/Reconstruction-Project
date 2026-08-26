@@ -24,6 +24,7 @@
       "edit": "Edit workshop",
       "delete": "Delete workshop",
       "addInvoice": "Add invoice",
+      "viewInvoices": "View invoices",
       "workers": "Workers",
       "paid": "Paid",
       "required": "Required",
@@ -87,7 +88,12 @@
         "amount": "Amount",
         "modifiedBy": "Modified By"
       },
-      "empty": "No invoices recorded yet."
+      "empty": "No invoices recorded yet.",
+      "popup": {
+        "title": "Workshop Invoices",
+        "empty": "No invoices recorded for this workshop yet.",
+        "unnamed": "Invoice"
+      }
     },
     "validation": {
       "title": "Title is required",

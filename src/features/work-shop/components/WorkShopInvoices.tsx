@@ -22,12 +22,8 @@ const WorkShopInvoices = () => {
 
   return (
     <div className="grid gap-5 lg:grid-cols-[1fr_280px]">
-      <main className="">
-        <InvoicesTable invoices={invoices} />
-      </main>
-      <div className="">
-        <InvoiceFilters filters={filters} onChange={setFilters} />
-      </div>
+      <InvoicesTable invoices={invoices} />
+      <InvoiceFilters filters={filters} onChange={setFilters} />
     </div>
   );
 };

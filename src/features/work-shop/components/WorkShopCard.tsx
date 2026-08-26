@@ -7,6 +7,7 @@ import {
   ArrowUpRight,
   Banknote,
   CalendarDays,
+  FileStack,
   Pencil,
   Phone,
   ReceiptText,
@@ -17,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import { useDeleteWorkShop } from "../api/actions";
 import type { WorkShop } from "../api/types";
 import InvoiceModel from "./InvoiceModel";
+import WorkShopInvoicesPopup from "./WorkShopInvoicesPopup";
 import WorkShopModel from "./WorkShopModel";
 
 interface Props {
@@ -59,6 +61,7 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
               size="icon"
               className="h-8 w-8 rounded-full shadow-md hover:bg-primary hover:text-white"
               aria-label={t("workShops.card.edit", "Edit workshop")}
+              title={t("workShops.card.edit", "Edit workshop")}
             >
               <Pencil className="h-3.5 w-3.5" />
             </Button>
@@ -72,8 +75,23 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
               size="icon"
               className="h-8 w-8 rounded-full shadow-md hover:bg-gold hover:text-white"
               aria-label={t("workShops.card.addInvoice", "Add invoice")}
+              title={t("workShops.card.addInvoice", "Add invoice")}
             >
               <ReceiptText className="h-3.5 w-3.5" />
+            </Button>
+          }
+        />
+        <WorkShopInvoicesPopup
+          openKey={`invoices-work-shop-${workShop.id}`}
+          workShop={workShop}
+          openButton={
+            <Button
+              size="icon"
+              className="h-8 w-8 rounded-full shadow-md hover:bg-accent hover:text-white"
+              aria-label={t("workShops.card.viewInvoices", "View invoices")}
+              title={t("workShops.card.viewInvoices", "View invoices")}
+            >
+              <FileStack className="h-3.5 w-3.5" />
             </Button>
           }
         />
@@ -83,19 +101,17 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
           isLoading={deleteMutation.isPending}
           onConfirm={() => deleteMutation.mutate(workShop.id)}
           keys={{
-            title: t("workShops.delete.title", "Delete this workshop?"),
-            descriptionPrefix: t(
-              "workShops.delete.descriptionPrefix",
-              "This will permanently remove ",
-            ),
-            confirm: t("workShops.delete.confirm", "Delete workshop"),
-            cancel: t("common.cancel", "Cancel"),
+            title: "workShops.delete.title",
+            descriptionPrefix: "workShops.delete.descriptionPrefix",
+            confirm: "workShops.delete.confirm",
+            cancel: "common.cancel",
           }}
           openButton={
             <Button
               size="icon"
               className="h-8 w-8 rounded-full shadow-md hover:bg-destructive hover:text-destructive-foreground"
               aria-label={t("workShops.card.delete", "Delete workshop")}
+              title={t("workShops.card.delete", "Delete workshop")}
               disabled={deleteMutation.isPending}
             >
               <Trash2 className="h-3.5 w-3.5" />
