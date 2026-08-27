@@ -1,12 +1,20 @@
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Input from "@/components/inputs/Input";
-import Model from "@/components/model/Model";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+
+import ImageUploader from "@/components/inputs/ImageUploader";
+import Input from "@/components/inputs/Input";
+import PopuupLayout from "@/components/layouts/Popup-layout";
+import Model from "@/components/model/Model";
 import { PickCoordsFromMap } from "@/components/model/PickCoordsFromMap.model";
+import { Button } from "@/components/ui/button";
+import WorkSiteType from "@/features/work-sites/components/WorkSiteType";
+import { useFileUpload } from "@/hooks/useFileUpload";
+import { getDominImageURL } from "@/lib/helpers";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   initialSiteValues,
   siteFormSchema,
@@ -15,10 +23,6 @@ import {
   useUpdateWorkSite,
 } from "../api/actions";
 import { WorkSite } from "../api/types";
-import ImageUploader from "@/components/inputs/ImageUploader";
-import WorkSiteType from "@/features/work-sites/components/WorkSiteType";
-import PopuupLayout from "@/components/layouts/Popup-layout";
-import { useFileUpload } from "@/hooks/useFileUpload";
 
 interface Props {
   openKey: string;
@@ -50,7 +54,6 @@ export function WorkSiteFormModel({
 
   // Watch the status value to keep the Radix Select component in sync
   // const logoFile = watch("file");
-  const logoId = watch("logoId");
   const companyLocationValue = watch("location");
   const workSiteType = watch("workSiteType");
   const preventUpdateWorkSiteType = initial != null;
@@ -75,7 +78,7 @@ export function WorkSiteFormModel({
       reset({
         name: initial?.name ?? "",
         workSiteType: initial?.workSiteType ?? "",
-        logoURL: initial?.logoURL ?? "",
+        logoURL: initial?.logo.id.toString() ?? "",
         location: initial?.location ?? "",
         address: initial?.address ?? "",
       });
@@ -191,7 +194,10 @@ export function WorkSiteFormModel({
               label={t("auth.register.providor.companyLogo")}
               required={true}
               onFileChange={handleImageChange}
-              value={previewUrl || logoId}
+              value={
+                previewUrl ||
+                getDominImageURL(initial?.logo?.url.toString() ?? "")
+              }
               disabled={isPending}
               errors={errors ?? null}
               fieldName="logoURL"

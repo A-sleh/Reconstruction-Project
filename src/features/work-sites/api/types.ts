@@ -1,10 +1,12 @@
+import { IImage } from "@/types";
+
 export type SiteStatus = "active" | "on-hold";
 export interface WorkSite {
   id: number | string;
   name: string;
   location: string;
   address: string;
-  logoURL: string;
+  logo: IImage;
   workSiteType: string;
   status: string;
   isActive: boolean;
@@ -19,4 +21,3 @@ export type DeactivateWorkSite = {
   isActive: boolean;
   workSiteId: number;
 };
-

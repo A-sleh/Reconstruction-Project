@@ -1,11 +1,13 @@
-import z from "zod";
 import i18n from "i18next";
+import z from "zod";
+
+import { errorToast, successToast } from "@/components/common/Toast";
 import ApiInstance from "@/config/api-instance";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { successToast, errorToast } from "@/components/common/Toast";
-import { SiteController, QUERY_KEYS, MUTATION_KEYS } from "./index";
-import { WorkSite, DeactivateWorkSite } from "./types";
 import { workSiteTypes } from "@/features/work-sites/components/WorkSiteType";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { MUTATION_KEYS, QUERY_KEYS, SiteController } from "./index";
+import { DeactivateWorkSite, WorkSite } from "./types";
 
 // Define the validation schema with dynamic translation messages inside the component
 export const siteFormSchema = z.object({
@@ -114,6 +116,8 @@ export const useUpdateWorkSite = () => {
       try {
         //@ts-ignore
         queryClient.invalidateQueries(QUERY_KEYS.workSites);
+        //@ts-ignore
+        queryClient.invalidateQueries(QUERY_KEYS.statistics);
       } catch (e) {}
     },
     onError: (error: any) => {
@@ -137,6 +141,8 @@ export const useDeleteWorkSite = () => {
       try {
         //@ts-ignore
         queryClient.invalidateQueries(QUERY_KEYS.workSites);
+        //@ts-ignore
+        queryClient.invalidateQueries(QUERY_KEYS.statistics);
       } catch (e) {}
     },
     onError: (error: any) => {
@@ -160,6 +166,8 @@ export const useCreateWorkSite = () => {
       try {
         //@ts-ignore
         queryClient.invalidateQueries(QUERY_KEYS.workSites);
+        //@ts-ignore
+        queryClient.invalidateQueries(QUERY_KEYS.statistics);
       } catch (e) {}
     },
     onError: (error: any) => {
