@@ -1,13 +1,15 @@
 import { useEffect, useRef } from "react";
 
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import FormWizard, {
+  type FormWizardStep,
+} from "@/components/common/FormWizard";
 import { Message } from "@/components/common/Message";
 import ImageUploader from "@/components/inputs/ImageUploader";
 import Input from "@/components/inputs/Input";
 import Select from "@/components/inputs/Selector";
-import { Button } from "@/components/ui/button";
 import AttachmentList, {
   type AttachmentListHandle,
 } from "@/features/attachment/components/AttachmentList";
@@ -29,11 +31,28 @@ interface Props {
   onSuccess?: () => void;
 }
 
+const STEPS: FormWizardStep[] = [
+  { key: "basicInformation", label: "basicInformation", fields: ["name", "address", "accessability"] },
+  {
+    key: "locationArea",
+    label: "locationArea",
+    fields: ["location", "area", "zoning", "border"],
+  },
+  { key: "mediaAttachments", label: "mediaAttachments", fields: [] },
+];
+
 export default function BasicLandInfoForm({
   initial = null,
   onSuccess,
 }: Props) {
   const { t } = useTranslation();
+
+  const methods = useForm<LandFormSchema>({
+    resolver: zodResolver(landFormSchema),
+    defaultValues: initialLandValues,
+    criteriaMode: "all",
+    mode: "onSubmit",
+  });
 
   const {
     register,
@@ -42,12 +61,7 @@ export default function BasicLandInfoForm({
     setValue,
     watch,
     formState: { errors },
-  } = useForm<LandFormSchema>({
-    resolver: zodResolver(landFormSchema),
-    defaultValues: initialLandValues,
-    criteriaMode: "all",
-    mode: "onSubmit",
-  });
+  } = methods;
 
   const attachmentListRef = useRef<AttachmentListHandle>(null);
 
@@ -112,129 +126,147 @@ export default function BasicLandInfoForm({
     }
   };
 
+  const renderStep = (step: number) => {
+    switch (step) {
+      case 0:
+        return (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <Input
+                label={t("investor.label-name")}
+                id="land-name"
+                placeholder={t("investor.placeholder-name")}
+                fieldName="name"
+                errors={errors}
+                {...register("name")}
+              />
+              <Input
+                label={t("investor.label-address")}
+                id="land-address"
+                placeholder={t("investor.placeholder-address")}
+                fieldName="address"
+                errors={errors}
+                {...register("address")}
+              />
+            </div>
+
+            <label className="flex items-center gap-2 cursor-pointer w-fit">
+              <input
+                type="checkbox"
+                checked={accessabilityValue}
+                onChange={(e) => setValue("accessability", e.target.checked)}
+                className="h-4 w-4 rounded border-border accent-primary"
+              />
+              <span className="text-sm text-foreground">
+                {t("investor.label-accessibility")}
+              </span>
+            </label>
+          </>
+        );
+
+      case 1:
+        return (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <Input
+                label={t("investor.label-location")}
+                id="land-location"
+                placeholder={t("investor.placeholder-location")}
+                fieldName="location"
+                errors={errors}
+                {...register("location")}
+              />
+              <Input
+                type="number"
+                label={t("investor.label-area")}
+                id="land-area"
+                placeholder={t("investor.placeholder-area")}
+                fieldName="area"
+                errors={errors}
+                {...register("area", { valueAsNumber: true })}
+              />
+              <div className="w-full">
+                <label className="text-[11px] text-muted-foreground mb-1.5 md:text-sm block"></label>
+                <Select
+                  asInput={true}
+                  label={t("investor.label-zoning")}
+                  value={String(zoningValue)}
+                  setValue={(val) =>
+                    setValue("zoning", Number(val) as EZoningType)
+                  }
+                >
+                  {Object.entries(ZONING_LABELS).map(([key, label]) => (
+                    <option key={key} value={key}>
+                      {label}
+                    </option>
+                  ))}
+                </Select>
+                {errors.zoning && (
+                  <p className="text-xs text-destructive mt-1">
+                    {errors.zoning.message}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <BorderField
+              value={borderValue || []}
+              onChange={(val) => setValue("border", val)}
+              error={errors.border?.message}
+            />
+          </>
+        );
+
+      case 2:
+        return (
+          <>
+            <ImageUploader
+              label={t("investor.label-cover-image", "Cover Image")}
+              accept="image/*"
+              disabled={isPending || isUploading}
+              value={coverPreviewUrl ?? (coverFileId || null)}
+              onFileChange={onCoverChange}
+              errors={errors}
+              fieldName="coverImageId"
+            />
+
+            <Message
+              type="info"
+              message={t(
+                "investor.attachments-hint",
+                "Upload plans, designs, or any documents related to this land",
+              )}
+            />
+
+            <AttachmentList ref={attachmentListRef} mode="self-contained" />
+          </>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-5 p-6 bg-canvas-elevated rounded-md border border-gray-300 bg-white"
-    >
-      {/* Row 1: Name + Address */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <Input
-          label={t("investor.label-name")}
-          id="land-name"
-          placeholder={t("investor.placeholder-name")}
-          fieldName="name"
-          errors={errors}
-          {...register("name")}
-        />
-        <Input
-          label={t("investor.label-address")}
-          id="land-address"
-          placeholder={t("investor.placeholder-address")}
-          fieldName="address"
-          errors={errors}
-          {...register("address")}
-        />
-      </div>
-
-      {/* Row 2: Location + Area + Zoning */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <Input
-          label={t("investor.label-location")}
-          id="land-location"
-          placeholder={t("investor.placeholder-location")}
-          fieldName="location"
-          errors={errors}
-          {...register("location")}
-        />
-        <Input
-          type="number"
-          label={t("investor.label-area")}
-          id="land-area"
-          placeholder={t("investor.placeholder-area")}
-          fieldName="area"
-          errors={errors}
-          {...register("area", { valueAsNumber: true })}
-        />
-        <div className="w-full">
-          <label className="text-[11px] text-muted-foreground mb-1.5 md:text-sm block"></label>
-          <Select
-            asInput={true}
-            label={t("investor.label-zoning")}
-            value={String(zoningValue)}
-            setValue={(val) => setValue("zoning", Number(val) as EZoningType)}
-          >
-            {Object.entries(ZONING_LABELS).map(([key, label]) => (
-              <option key={key} value={key}>
-                {label}
-              </option>
-            ))}
-          </Select>
-          {errors.zoning && (
-            <p className="text-xs text-destructive mt-1">
-              {errors.zoning.message}
-            </p>
-          )}
-        </div>
-      </div>
-
-      {/* Row 3: Accessibility */}
-      <label className="flex items-center gap-2 cursor-pointer w-fit">
-        <input
-          type="checkbox"
-          checked={accessabilityValue}
-          onChange={(e) => setValue("accessability", e.target.checked)}
-          className="h-4 w-4 rounded border-border accent-primary"
-        />
-        <span className="text-sm text-foreground">
-          {t("investor.label-accessibility")}
-        </span>
-      </label>
-
-      {/* Cover Image */}
-      <ImageUploader
-        label={t("investor.label-cover-image", "Cover Image")}
-        accept="image/*"
-        disabled={isPending || isUploading}
-        value={coverPreviewUrl ?? (coverFileId || null)}
-        onFileChange={onCoverChange}
-        errors={errors}
-        fieldName="coverImageId"
-      />
-
-      <BorderField
-        value={borderValue || []}
-        onChange={(val) => setValue("border", val)}
-        error={errors.border?.message}
-      />
-
-      <Message
-        type="info"
-        message={t(
-          "investor.attachments-hint",
-          "Upload plans, designs, or any documents related to this land",
-        )}
-      />
-
-      <AttachmentList ref={attachmentListRef} mode="self-contained" />
-
-      <div className="flex justify-end gap-3 pt-2">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => reset()}
-          disabled={isPending}
-        >
-          {t("investor.btn-cancel")}
-        </Button>
-        <Button type="submit" disabled={isPending}>
-          {isPending
-            ? t("common.loading", "Saving...")
+    <FormProvider {...methods}>
+      <FormWizard
+        steps={STEPS.map((s) => ({ ...s, label: t(`investor.${s.label}`) }))}
+        onSubmit={handleSubmit(onSubmit)}
+        isPending={isPending}
+        submitLabel={
+          isPending
+            ? t("investor.loading")
             : initial
               ? t("investor.btn-save")
-              : t("investor.btn-create")}
-        </Button>
-      </div>
-    </form>
+              : t("investor.btn-create")
+        }
+        nextLabel={t("investor.next")}
+        backLabel={t("investor.back")}
+        cancelLabel={t("investor.btn-cancel")}
+        onCancel={() => reset()}
+      >
+        {renderStep}
+      </FormWizard>
+    </FormProvider>
   );
 }
