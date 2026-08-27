@@ -78,7 +78,7 @@ export function WorkSiteFormModel({
       reset({
         name: initial?.name ?? "",
         workSiteType: initial?.workSiteType ?? "",
-        logoURL: initial?.logo.id.toString() ?? "",
+        logoURL: initial?.logo?.id.toString() ?? "",
         location: initial?.location ?? "",
         address: initial?.address ?? "",
       });
