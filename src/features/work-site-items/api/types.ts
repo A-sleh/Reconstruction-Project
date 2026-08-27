@@ -61,7 +61,7 @@ export interface OrderRequest {
   siteId: string;
   name: string;
   description: string;
-  image: string;
+  image: IImage;
   unitType: UnitType;
   pricePerUnit: number;
   proposedCategory: string;
@@ -92,7 +92,7 @@ export interface ResourcesPayload {
 
 export interface ServiceItem {
   serviceBankId: number;
-  imageId: number;
+  image: IImage;
   price: number;
   description: string;
 }
@@ -141,7 +141,7 @@ export interface AvailableItem {
   price: number;
   unit: string;
   isAvailable: boolean;
-  imageUrl: string;
+  image: IImage;
   itemType: AvailableItemType;
   categoryId: number;
   categoryName: string;

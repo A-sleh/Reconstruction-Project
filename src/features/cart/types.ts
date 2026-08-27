@@ -1,3 +1,5 @@
+import { IImage } from "@/types";
+
 export type CartItemType = "Resource" | "Service";
 
 /** Shape accepted when adding an item to the cart (no quantity yet) */
@@ -8,6 +10,7 @@ export interface CartItemInput {
   price: number;
   unit: string;
   imageUrl?: string;
+  image?: IImage;
   itemType: CartItemType;
   categoryName: string;
   providerName: string;

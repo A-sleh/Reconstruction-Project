@@ -12,11 +12,10 @@ import CategoryFilter from "@/features/category-bank/components/CategoryFilter";
 import { useDebounce } from "@/hooks/useDebounce";
 import useQueryStringState from "@/hooks/useQueryStringState";
 import { Inbox, Search } from "lucide-react";
-import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import type { AvailableItem } from "../api/types";
+import type { GetAvailableItemsParams } from "../api/types";
 import { toPureResource } from "../DTOs/toPureResource";
-import { MOCK_AVAILABLE_ITEMS } from "../mock/mockAvailableItems";
+import { useAvailableItemsInfinite } from "../api/queries";
 
 const SKELETON_CARDS = 6;
 
@@ -44,26 +43,20 @@ const AllProvidorItems = ({
 
   const debouncedSearch = useDebounce(searchTerm, 300);
 
-  // Use mock data instead of API call
-  const isLoading = false;
-  const isFetchingNextPage = false;
-  const hasNextPage = false;
-  const fetchNextPage = () => {};
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useAvailableItemsInfinite({
+    searchTerm: debouncedSearch,
+    categoryId: categoryId === "all" ? undefined : Number(categoryId),
+    type: providerType as GetAvailableItemsParams["Type"],
+  });
 
-  const allItems: AvailableItem[] = useMemo(
-    () =>
-      MOCK_AVAILABLE_ITEMS.filter((item) => {
-        const matchesSearch =
-          !debouncedSearch ||
-          item.name.toLowerCase().includes(debouncedSearch.toLowerCase());
-        const matchesCategory =
-          categoryId === "all" || item.categoryId === Number(categoryId);
-        return matchesSearch && matchesCategory;
-      }),
-    [debouncedSearch, categoryId],
-  );
-
-  const totalRows = allItems.length;
+  const allItems = data?.pages.flatMap((page) => page.data) ?? [];
+  const totalRows = data?.pages[data.pages.length - 1]?.totalRows;
 
   const resetFilters = () => {
     setSearchTerm("");
@@ -74,20 +67,18 @@ const AllProvidorItems = ({
     <div className="space-y-5">
       <div className="grid gap-5 lg:grid-cols-[1fr_280px]">
         <div className="lg:sticky lg:top-6 lg:self-start">
-          {totalRows !== undefined && (
-            <div className="flex items-center justify-between text-sm text-muted-foreground mb-3 sticky top-25 z-10 bg-white p-2 rounded-md">
-              <span>
-                {t(
-                  "workSiteItems.allProvidorItems.totalItems",
-                  "{{count}} items",
-                  {
-                    count: totalRows,
-                  },
-                )}
-              </span>
-              <CartSheet projectId={projectId} projectName={projectName} />
-            </div>
-          )}
+          <div className="flex items-center justify-between text-sm text-muted-foreground mb-3 sticky top-25 z-10 bg-white p-2 rounded-md">
+            <span>
+              {t(
+                "workSiteItems.allProvidorItems.totalItems",
+                "{{count}} items",
+                {
+                  count: totalRows ?? allItems.length,
+                },
+              )}
+            </span>
+            <CartSheet projectId={projectId} projectName={projectName} />
+          </div>
 
           {isLoading ? (
             <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">

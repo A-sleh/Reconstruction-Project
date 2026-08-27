@@ -1,12 +1,14 @@
-import PopuupLayout from "@/components/layouts/Popup-layout";
-import type { CartItemInput } from "@/features/cart/types";
-import { fmtCurrency } from "@/lib/helpers";
-import { cn } from "@/lib/utils";
-import useCartStore from "@/stores/useCartStore";
-import { Boxes, Minus, Plus, ShoppingCart, Wrench } from "lucide-react";
 import React, { useState } from "react";
+
+import { Boxes, Minus, Plus, ShoppingCart, Wrench } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+
+import PopuupLayout from "@/components/layouts/Popup-layout";
+import type { CartItemInput } from "@/features/cart/types";
+import { fmtCurrency, getDominImageURL } from "@/lib/helpers";
+import { cn } from "@/lib/utils";
+import useCartStore from "@/stores/useCartStore";
 
 interface AddCartPopupProps<T extends CartItemInput> {
   item: T;
@@ -44,7 +46,8 @@ function AddCartPopup<T extends CartItemInput>({
         description: item.description,
         price: item.price,
         unit: item.unit,
-        imageUrl: item.imageUrl,
+        imageUrl: item.image?.url,
+        image: item.image,
         itemType: item.itemType,
         categoryName: item.categoryName,
         providerName: item.providerName,
@@ -67,9 +70,9 @@ function AddCartPopup<T extends CartItemInput>({
       {(closeModal) => (
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            {item.imageUrl ? (
+            {item?.image ? (
               <img
-                src={item.imageUrl}
+                src={getDominImageURL(item?.image.url)}
                 alt={item.name}
                 loading="lazy"
                 className="h-16 w-16 rounded-md object-cover bg-muted"

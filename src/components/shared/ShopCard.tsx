@@ -1,16 +1,12 @@
+import { Boxes, Eye, Layers, MapPin, User, Wrench } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 import { Card, CardContent } from "@/components/ui/card";
 import AddCartPopup from "@/features/cart/components/AddCartPopup";
-import { ResourceDetailsModal } from "@/features/category-bank/components/ResourceDetailsModal";
 import type { PureResource } from "@/features/category-bank/api/types";
-import {
-  Boxes,
-  Eye,
-  Layers,
-  MapPin,
-  User,
-  Wrench,
-} from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { ResourceDetailsModal } from "@/features/category-bank/components/ResourceDetailsModal";
+import { getDominImageURL } from "@/lib/helpers";
+import { IImage } from "@/types";
 
 /** Minimal fields ShopCard needs to render an item */
 export interface ShopItemFields {
@@ -20,7 +16,7 @@ export interface ShopItemFields {
   price: number;
   unit: string;
   isAvailable: boolean;
-  imageUrl?: string;
+  image: IImage;
   itemType: "Resource" | "Service";
   categoryName: string;
   providerName: string;
@@ -47,9 +43,9 @@ function ShopCard<T extends ShopItemFields>({
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant">
       <div className="relative h-44 overflow-hidden bg-muted">
-        {item.imageUrl ? (
+        {item?.image ? (
           <img
-            src={item.imageUrl}
+            src={getDominImageURL(item.image?.url)}
             alt={item.name}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -83,10 +79,7 @@ function ShopCard<T extends ShopItemFields>({
 
         <div className="absolute right-2 top-2 flex items-center gap-1.5">
           {projectId !== undefined && (
-            <AddCartPopup
-              item={{ ...item, projectId }}
-              projectId={projectId}
-            />
+            <AddCartPopup item={{ ...item, projectId }} projectId={projectId} />
           )}
           {detailsResource && (
             <ResourceDetailsModal

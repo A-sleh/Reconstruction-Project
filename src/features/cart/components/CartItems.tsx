@@ -1,11 +1,13 @@
+import { Boxes, Minus, Plus, ShoppingCart, Trash2, Wrench } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
-import { Boxes, Minus, Plus, ShoppingCart, Trash2, Wrench } from "lucide-react";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { CartItem } from "@/features/cart/types";
-import { fmtCurrency } from "@/lib/helpers";
+import { fmtCurrency, getDominImageURL } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
 import useCartStore, { selectProjectItems } from "@/stores/useCartStore";
+
 import BuyNowConfirmPopup from "./BuyNowConfirmPopup";
 
 interface CartItemsProps {
@@ -33,9 +35,9 @@ function CartItemRow({ projectId, item }: CartItemRowProps) {
 
   return (
     <div className="flex items-center gap-3 rounded-lg border border-gray-200 p-2.5">
-      {item.imageUrl ? (
+      {item?.image ? (
         <img
-          src={item.imageUrl}
+          src={getDominImageURL(item?.image?.url)}
           alt={item.name}
           loading="lazy"
           className="h-12 w-12 shrink-0 rounded-md object-cover bg-muted"
@@ -110,12 +112,17 @@ function CartItems({ projectId, onOrdered }: CartItemsProps) {
       <div className="flex h-full flex-col items-center justify-center gap-2 px-6 py-10 text-center">
         <ShoppingCart className="h-10 w-10 text-muted-foreground/40" />
         <p className="text-sm font-medium">{t("cart.items.empty")}</p>
-        <p className="text-xs text-muted-foreground">{t("cart.items.emptyHint")}</p>
+        <p className="text-xs text-muted-foreground">
+          {t("cart.items.emptyHint")}
+        </p>
       </div>
     );
   }
 
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
   const resourceItems = items.filter((item) => item.itemType === "Resource");
   const serviceItems = items.filter((item) => item.itemType === "Service");
 
@@ -132,17 +139,31 @@ function CartItems({ projectId, onOrdered }: CartItemsProps) {
             {t("cart.items.tabs.services")}
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="resources" className="min-h-0 flex-1 overflow-y-auto">
+        <TabsContent
+          value="resources"
+          className="min-h-0 flex-1 overflow-y-auto"
+        >
           <div className="space-y-2">
             {resourceItems.map((item) => (
-              <CartItemRow key={`${item.itemType}-${item.id}`} projectId={projectId} item={item} />
+              <CartItemRow
+                key={`${item.itemType}-${item.id}`}
+                projectId={projectId}
+                item={item}
+              />
             ))}
           </div>
         </TabsContent>
-        <TabsContent value="services" className="min-h-0 flex-1 overflow-y-auto">
+        <TabsContent
+          value="services"
+          className="min-h-0 flex-1 overflow-y-auto"
+        >
           <div className="space-y-2">
             {serviceItems.map((item) => (
-              <CartItemRow key={`${item.itemType}-${item.id}`} projectId={projectId} item={item} />
+              <CartItemRow
+                key={`${item.itemType}-${item.id}`}
+                projectId={projectId}
+                item={item}
+              />
             ))}
           </div>
         </TabsContent>
@@ -150,9 +171,15 @@ function CartItems({ projectId, onOrdered }: CartItemsProps) {
       <div className="mt-auto space-y-3 border-t border-gray-200 pt-3">
         <div className="flex items-center justify-between">
           <span className="font-medium">{t("cart.footer.total")}</span>
-          <span className="text-lg font-bold text-primary">{fmtCurrency(total)}</span>
+          <span className="text-lg font-bold text-primary">
+            {fmtCurrency(total)}
+          </span>
         </div>
-        <BuyNowConfirmPopup projectId={projectId} disabled={!items.length} onOrdered={onOrdered} />
+        <BuyNowConfirmPopup
+          projectId={projectId}
+          disabled={!items.length}
+          onOrdered={onOrdered}
+        />
       </div>
     </div>
   );
