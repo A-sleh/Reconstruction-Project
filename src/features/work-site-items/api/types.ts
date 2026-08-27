@@ -1,12 +1,13 @@
 import { WorkSite } from "@/data/resource-providor/mockData";
+import { IImage, Paginated } from "@/types";
+
 import { Resource } from "./actions";
-import { Paginated } from "@/types";
 import { Category } from "./types";
 
 // Re-export moved types from category-bank
 export type {
-  Category,
   BankCategories,
+  Category,
 } from "@/features/category-bank/api/types";
 
 export type OrderRequestStatus = "pending" | "approved" | "rejected";
@@ -109,7 +110,7 @@ export interface DeleteWorksiteItemParams {
 export interface PureResource {
   id: number;
   name: string;
-  imageURL: string;
+  image: IImage;
   description: string;
   category: Category;
   price: number;

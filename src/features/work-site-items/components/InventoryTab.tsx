@@ -1,19 +1,13 @@
-import { useTranslation } from "react-i18next";
 import { useMemo, useState } from "react";
-import { Search, Pencil, Trash2, MoreVertical, Filter } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/Skeleton";
+
+import { Filter, Pencil, Search, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
-import { useBankCategories } from "@/features/category-bank/api/quertes";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-} from "@/components/ui/table";
+
+import CollapsibleFilter from "@/components/common/CollapsibleFilter";
+import ConfirmDelete from "@/components/model/ConfirmDelete";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -21,23 +15,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
+import { Skeleton } from "@/components/ui/Skeleton";
 import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
-import ConfirmDelete from "@/components/model/ConfirmDelete";
-import ModifyResourceModel from "./ModifyResourceModel";
-import CollapsibleFilter from "@/components/common/CollapsibleFilter";
-import { useDeleteWorksiteItem } from "../api/actions";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useBankCategories } from "@/features/category-bank/api/quertes";
 import { StatusBadge } from "@/features/work-sites/components/StatusBadge";
+import { getDominImageURL } from "@/lib/helpers";
 import useAuthStore, { User } from "@/stores/useAuthStore";
-import { getRolePrefix } from "./NewResorceRequestModel";
+
+import { useDeleteWorksiteItem } from "../api/actions";
 import { useWorkSiteResourcesInfinite } from "../api/queries";
 import { PureResource } from "../api/types";
+import ModifyResourceModel from "./ModifyResourceModel";
+import { getRolePrefix } from "./NewResorceRequestModel";
 
 interface InventoryTabProps {
   siteId?: string;
@@ -256,9 +252,9 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                       className="border-b border-gray-100 hover:bg-gray-50"
                     >
                       <TableCell className="p-3">
-                        {resource.imageURL && (
+                        {resource.image?.url && (
                           <img
-                            src={resource.imageURL}
+                            src={getDominImageURL(resource.image?.url)}
                             alt={resource.description}
                             className="h-16 w-16 rounded-lg object-cover"
                           />
@@ -293,54 +289,40 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
                         </p>
                       </TableCell>
                       <TableCell className="p-3 text-center">
-                        <DropdownMenu modal={false}>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 text-muted-foreground hover:text-foreground"
-                            >
-                              <MoreVertical className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-
-                          <DropdownMenuContent className="bg-white border-gray-300">
-                            <ModifyResourceModel
-                              openButton={
-                                <DropdownMenuItem
-                                  onSelect={(e) => e.preventDefault()}
-                                  className="flex items-center gap-2"
-                                >
-                                  <Pencil className="h-4 w-4" />
-                                  {t("workSites.btn-edit", "Edit")}
-                                </DropdownMenuItem>
-                              }
-                              initial={resource}
-                              key={"update-resource" + resource.id}
-                            />
-
-                            <DropdownMenuSeparator />
-                            <ConfirmDelete
-                              item={resource?.name}
-                              isLoading={isDeleting}
-                              onConfirm={() =>
-                                deleteWorkSiteItem({
-                                  Id: resource.id,
-                                  ItemType: "Resource",
-                                })
-                              }
-                              openButton={
-                                <DropdownMenuItem
-                                  onSelect={(e) => e.preventDefault()}
-                                  className="flex items-center gap-2 text-destructive focus:text-destructive"
-                                >
-                                  <Trash2 className="h-4 w-4" />
-                                  {t("workSites.btn-delete", "Delete")}
-                                </DropdownMenuItem>
-                              }
-                            />
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                        <div className="flex items-center justify-center gap-1">
+                          <ModifyResourceModel
+                            initial={resource}
+                            key={"update-resource" + resource.id}
+                            openButton={
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8 text-muted-foreground hover:text-foreground"
+                              >
+                                <Pencil className="h-4 w-4" />
+                              </Button>
+                            }
+                          />
+                          <ConfirmDelete
+                            item={resource?.name}
+                            isLoading={isDeleting}
+                            onConfirm={() =>
+                              deleteWorkSiteItem({
+                                Id: resource.id,
+                                ItemType: "Resource",
+                              })
+                            }
+                            openButton={
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8 text-destructive hover:text-destructive"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            }
+                          />
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
