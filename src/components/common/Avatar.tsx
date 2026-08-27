@@ -1,9 +1,13 @@
-import useAuthStore, { clearTokens } from "@/stores/useAuthStore";
 import { useEffect, useRef, useState } from "react";
+
 import { useTranslation } from "react-i18next";
-import { errorToast, successToast } from "./Toast";
 import { useNavigate } from "react-router";
+
 import { paths } from "@/config/paths";
+import { getDominImageURL } from "@/lib/helpers";
+import useAuthStore, { clearTokens } from "@/stores/useAuthStore";
+
+import { errorToast, successToast } from "./Toast";
 
 const Avatar = () => {
   const goto = useNavigate();
@@ -36,8 +40,8 @@ const Avatar = () => {
     <div className="relative" ref={ref}>
       <img
         onClick={() => setIsOpen(true)}
-        className="w-10 h-10 rounded-full object-contain"
-        src={user?.photoURL || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"}
+        className="w-10 h-10 rounded-full object-contain "
+        src={getDominImageURL(user?.photoURL ?? "")}
         alt="user-avatar"
       />
       {isOpen && (
