@@ -1,4 +1,13 @@
+import { useState } from "react";
+
+import { motion } from "framer-motion";
+import { Inbox, Plus, Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
+
 import EmptyState from "@/components/common/EmptyState";
+import Selector from "@/components/inputs/Selector";
+import Can from "@/components/shared/Can";
 import LoadMoreButton from "@/components/shared/LoadMoreButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,27 +32,14 @@ import {
   BankItemStatus,
   ResolveRequestParams,
 } from "@/features/category-bank/api/types";
+import { NewResorceRequestModel } from "@/features/work-site-items/components/NewResorceRequestModel";
 import { useDebounce } from "@/hooks/useDebounce";
 import useQueryStringState from "@/hooks/useQueryStringState";
-import { motion } from "framer-motion";
-import { Inbox, Plus, Search } from "lucide-react";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
-import BankItemStatusBadge from "./BankItemStatusBadge";
-import RequestActionsMenu from "./RequestActionsMenu";
-
-import Can from "@/components/shared/Can";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { NewResorceRequestModel } from "@/features/work-site-items/components/NewResorceRequestModel";
 import { Permissions } from "@/lib/permissions";
 import useAuthStore from "@/stores/useAuthStore";
+
+import BankItemStatusBadge from "./BankItemStatusBadge";
+import RequestActionsMenu from "./RequestActionsMenu";
 
 const SKELETON_ROWS = 7;
 
@@ -191,26 +187,17 @@ export default function BankItemsRequests() {
           </div>
 
           <div className="relative w-full sm:w-auto">
-            <Select
+            <Selector
+              asInput={false}
               value={statusFilter}
-              onValueChange={(value: BankItemStatus) => setStatusFilter(value)}
+              setValue={(value: BankItemStatus) => setStatusFilter(value)}
             >
-              <SelectTrigger
-                className="w-full md:w-fit"
-                dir={isArabic ? "rtl" : "ltr"}
-              >
-                <SelectValue
-                  placeholder={t("workSites.orders.filters.status_placeholder")}
-                />
-              </SelectTrigger>
-              <SelectContent dir={isArabic ? "rtl" : "ltr"}>
-                {REQUESTS_STATUS_FILTERS.map((filter) => (
-                  <SelectItem key={filter.value} value={filter.value}>
-                    {filter.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+              {REQUESTS_STATUS_FILTERS.map((filter) => (
+                <option key={filter.value} value={filter.value}>
+                  {filter.label}
+                </option>
+              ))}
+            </Selector>
           </div>
         </div>
         <Can permission={Permissions.RESOURCES_ADD}>
