@@ -25,9 +25,7 @@ export const resourceSchema = z.object({
     .optional(),
   resourceBank: z.any().optional(),
   imageUrl: z.string().optional(),
-  imageId: z
-    .string()
-    .nonempty(i18n.t("workSites.resource.validation.image_required")),
+  imageId: z.string().optional(),
   price: z.coerce
     .number()
     .refine((value) => !Number.isNaN(value), {
@@ -105,10 +103,12 @@ const deleteWorksiteItem = async ({
 };
 
 export const useUpdateResource = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: ResourceFormValues) => updateResourceApi(payload),
     mutationKey: MUTATION_KEYS.resource.update(),
     onSuccess: (_: any) => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
       successToast(i18n.t("workSites.resource.resource-update"));
     },
     onError: (error: any) => {
@@ -170,7 +170,7 @@ export const useDeleteWorksiteItem = () => {
     mutationKey: MUTATION_KEYS.resource.delete(),
     mutationFn: deleteWorksiteItem,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.deltee });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
     },
   });
 };

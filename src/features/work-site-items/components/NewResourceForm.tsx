@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { UnitType } from "@/data/resource-providor/mockData";
 import { useFileUpload } from "@/hooks/useFileUpload";
+import { getDominImageURL } from "@/lib/helpers";
 import { useAuthStore, User } from "@/stores/useAuthStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -56,6 +57,7 @@ export function NewResourceForm({
     setValue,
     reset,
     register,
+    getValues,
   } = useForm<ResourceFormValues>({
     resolver: zodResolver(resourceSchema) as any,
     defaultValues: defaultResourceValues as ResourceFormValues,
@@ -63,14 +65,13 @@ export function NewResourceForm({
   });
   const { isPending, onChange, previewUrl } = useFileUpload({
     onSuccess: (id) => {
-      setValue("imageId", id ?? "");
+      setValue("imageId", id.toString() ?? "");
     },
   });
-
+  console.log(getValues());
   const watched = watch();
   const unitType = watched.unit;
   const isAvailable = watched.isAvailable;
-  const image = watched.imageUrl;
   const localImageFile = watched?.file;
 
   // Sync initial/incoming data with the form fields whenever the modal opens
@@ -79,7 +80,7 @@ export function NewResourceForm({
       isAvailable: initial?.isAvailable ?? true,
       description: initial?.description ?? "",
       file: initial?.file,
-      imageUrl: initial?.imageUrl ?? "",
+      imageUrl: initial?.imageId?.id ? initial?.imageId?.id.toString() : "",
       price: initial?.price ?? 0,
       unit: initial?.unit ?? "",
       resourceBank: updateable ? null : (initial?.resourceBank ?? null),
@@ -87,7 +88,7 @@ export function NewResourceForm({
       workSiteId: fromWorkSiteId ? fromWorkSiteId.toString() : null,
       id: initial?.id?.toString() ?? null,
     });
-  }, [initial, reset]);
+  }, [fromWorkSiteId, initial, reset, updateable]);
 
   const handleImageChange = (selectedFile: File | null) => {
     onChange(selectedFile);
@@ -196,7 +197,13 @@ export function NewResourceForm({
           label={t(`${rolePrefix}.form.label-image`)}
           required={true}
           fileName={"imageUrl"}
-          value={previewUrl || localImageFile || image}
+          value={
+            previewUrl
+              ? previewUrl
+              : initial && initial.image?.url
+                ? getDominImageURL(initial.image?.url)
+                : previewUrl || localImageFile
+          }
           disabled={isPending}
           onFileChange={handleImageChange}
           errors={errors ?? null}
