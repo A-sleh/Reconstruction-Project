@@ -1,11 +1,31 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
 import SectionHeader from "./SectionHeader";
-import { Trash2 } from "lucide-react";
 import ToggleRow from "./ToggleRow";
+import { useUpdateUserSettings } from "../api/actions";
 
 export default function SettingsTab() {
   const { t } = useTranslation();
+  const { mutate: updateSettings, isPending } = useUpdateUserSettings();
+
+  const [emailNotification, setEmailNotification] = useState(false);
+  const [systemNotification, setSystemNotification] = useState(false);
+
+  const handleEmailChange = (checked: boolean) => {
+    setEmailNotification(checked);
+    updateSettings({
+      allowedEmailNotification: checked,
+      allowedSystemNotification: systemNotification,
+    });
+  };
+
+  const handleSystemChange = (checked: boolean) => {
+    setSystemNotification(checked);
+    updateSettings({
+      allowedEmailNotification: emailNotification,
+      allowedSystemNotification: checked,
+    });
+  };
 
   return (
     <div>
@@ -17,35 +37,23 @@ export default function SettingsTab() {
         <ToggleRow
           title={t("profile.settings.notificationEmail.title")}
           desc={t("profile.settings.notificationEmail.description")}
-          defaultChecked
+          checked={emailNotification}
+          onChange={handleEmailChange}
         />
         <ToggleRow
           title={t("profile.settings.instantNotifications.title")}
           desc={t("profile.settings.instantNotifications.description")}
+          checked={systemNotification}
+          onChange={handleSystemChange}
         />
-        <ToggleRow
-          title={t("profile.settings.marketingMessages.title")}
-          desc={t("profile.settings.marketingMessages.description")}
-        />
-      </div>
-
-      <div className="mt-8 rounded-2xl border-2 border-destructive/30 bg-destructive/5 p-6">
-        <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-destructive/10 text-destructive shrink-0">
-            <Trash2 className="h-5 w-5" />
-          </div>
-          <div className="flex-1">
-            <h3 className="text-base font-bold text-destructive">
-              {t("profile.settings.dangerZone.title")}
-            </h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {t("profile.settings.dangerZone.description")}
-            </p>
-            <Button variant="destructive" className="mt-4">
-              {t("profile.settings.dangerZone.button")}
-            </Button>
-          </div>
-        </div>
+        <p className="text-xs text-muted-foreground">
+          {isPending
+            ? t("profile.settings.saving", "Saving...")
+            : t(
+                "profile.settings.savedHint",
+                "Changes are saved automatically.",
+              )}
+        </p>
       </div>
     </div>
   );

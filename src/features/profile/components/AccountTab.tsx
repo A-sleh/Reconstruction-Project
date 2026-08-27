@@ -1,42 +1,121 @@
-import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+
 import { useForm } from "react-hook-form";
-import SectionHeader from "./SectionHeader";
-import { Button } from "@/components/ui/button";
-import Input from "@/components/inputs/Input";
+import { useTranslation } from "react-i18next";
+import { BsShieldCheck } from "react-icons/bs";
+
 import ImageUploader from "@/components/inputs/ImageUploader";
+import Input from "@/components/inputs/Input";
+import { Button } from "@/components/ui/button";
+import { useFileUpload } from "@/hooks/useFileUpload";
+
+import { useUpdateUser } from "../api/actions";
+import { useProfile } from "../api/queries";
+import SectionHeader from "./SectionHeader";
 
 type AccountFormValues = {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
   personalIdentifier: string;
   phone: string;
-  photoUrl: string;
 };
 
 export default function AccountTab() {
   const { t } = useTranslation();
+  const { data: profile, isLoading } = useProfile();
+
+  const { isPending, onChange, previewUrl, fileId } = useFileUpload({
+    onSuccess: () => {},
+  });
+  const { mutate: updateUser, isPending: isUpdating } = useUpdateUser();
+
   const {
     register,
-    setValue,
     watch,
+    handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<AccountFormValues>();
 
-  const imageOfPhoto = watch("photoUrl");
+  const firstName = watch("firstName");
+  const lastName = watch("lastName");
+
+  useEffect(() => {
+    if (profile?.user) {
+      reset({
+        firstName: profile.user.firstName ?? "",
+        lastName: profile.user.lastName ?? "",
+        email: profile.user.email ?? "",
+        personalIdentifier: profile.user.personalIdentifier ?? "",
+        phone: profile.user.phone ?? "",
+      });
+    }
+  }, [profile, reset]);
 
   const handleImageChange = (file: File | null) => {
-    setValue("photoUrl", file?.name ?? "");
+    onChange(file);
+  };
+
+  const onSubmit = (values: AccountFormValues) => {
+    updateUser({
+      user: {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        personalIdentifier: values.personalIdentifier,
+        phone: values.phone,
+        photoId: fileId ? Number(fileId) : (profile?.user?.photo?.id ?? 0),
+      },
+    });
   };
 
   return (
-    <div>
+    <div className="space-y-6">
       <SectionHeader
         title={t("profile.account.title")}
         subtitle={t("profile.account.subtitle")}
       />
-      <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+
+      {/* Profile summary card */}
+      <div className="flex flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-white p-6 shadow-card sm:flex-row">
+        <div className="relative">
+          <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-primary to-emerald text-white shadow-md">
+            {previewUrl ? (
+              <img
+                src={previewUrl}
+                alt="profile"
+                className="h-full w-full object-cover"
+              />
+            ) : profile?.user?.photo?.url ? (
+              <img
+                src={profile.user.photo.url}
+                alt="profile"
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <span className="text-2xl font-bold">
+                {(firstName || "U").charAt(0)}
+                {(lastName || "").charAt(0)}
+              </span>
+            )}
+          </div>
+          <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-emerald text-white ring-2 ring-white">
+            <BsShieldCheck className="h-3.5 w-3.5" />
+          </span>
+        </div>
+        <div className="text-center sm:text-start">
+          <h3 className="text-lg font-bold text-foreground">
+            {firstName || profile?.user?.firstName}{" "}
+            {lastName || profile?.user?.lastName}
+          </h3>
+          <p className="text-sm text-muted-foreground">
+            {profile?.user?.email || "—"}
+          </p>
+        </div>
+      </div>
+
+      <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-5 md:grid-cols-2">
           <Input
             type="text"
@@ -44,6 +123,7 @@ export default function AccountTab() {
             placeholder={t("profile.account.firstNamePlaceholder")}
             fieldName="firstName"
             errors={errors ?? null}
+            loadInitialValue={isLoading}
             {...register("firstName")}
           />
           <Input
@@ -52,6 +132,7 @@ export default function AccountTab() {
             placeholder={t("profile.account.lastNamePlaceholder")}
             fieldName="lastName"
             errors={errors ?? null}
+            loadInitialValue={isLoading}
             {...register("lastName")}
           />
           <Input
@@ -61,16 +142,8 @@ export default function AccountTab() {
             fieldName="email"
             errors={errors ?? null}
             iconType="email"
+            loadInitialValue={isLoading}
             {...register("email")}
-          />
-          <Input
-            type="password"
-            label={t("profile.account.password")}
-            placeholder={t("profile.account.passwordPlaceholder")}
-            fieldName="password"
-            errors={errors ?? null}
-            iconType="password"
-            {...register("password")}
           />
           <Input
             type="text"
@@ -79,6 +152,7 @@ export default function AccountTab() {
             fieldName="personalIdentifier"
             errors={errors ?? null}
             iconType="personalIdentifier"
+            loadInitialValue={isLoading}
             {...register("personalIdentifier")}
           />
           <Input
@@ -87,6 +161,7 @@ export default function AccountTab() {
             placeholder={t("profile.account.phonePlaceholder")}
             fieldName="phone"
             errors={errors ?? null}
+            loadInitialValue={isLoading}
             {...register("phone")}
           />
         </div>
@@ -94,14 +169,19 @@ export default function AccountTab() {
         <ImageUploader
           label={t("profile.account.profilePhoto")}
           required={false}
-          fileName={imageOfPhoto}
+          value={previewUrl || profile?.user?.photo?.url || ""}
           onFileChange={handleImageChange}
+          disabled={isPending || isLoading}
           errors={errors ?? null}
           fieldName="photoUrl"
         />
 
         <div className="flex justify-start pt-2">
-          <Button type="submit" size="lg">
+          <Button
+            type="submit"
+            size="lg"
+            isLoading={isPending || isUpdating || isLoading}
+          >
             {t("profile.saveChanges")}
           </Button>
         </div>
