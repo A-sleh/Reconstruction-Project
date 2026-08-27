@@ -20,9 +20,9 @@ import {
 } from "@/components/ui/table";
 import {
   useApproveBankItemRequest,
+  useCancelBankItemRequest,
   useRejectBankItemRequest,
   useResolveBankItemRequest,
-  useCancelBankItemRequest,
 } from "@/features/category-bank/api/actions";
 import {
   useBankItemRequests,
@@ -50,7 +50,7 @@ export default function BankItemsRequests() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useQueryStringState<
     BankItemStatus | ""
-  >("status");
+  >("status-of-reqest");
   const [debouncedSearch, setDebouncedSearch] =
     useQueryStringState<string>("search");
 
@@ -94,10 +94,7 @@ export default function BankItemsRequests() {
 
   const [processingId, setProcessingId] = useState<number | null>(null);
 
-  const runAction = (
-    id: number,
-    execute: (onSettled: () => void) => void,
-  ) => {
+  const runAction = (id: number, execute: (onSettled: () => void) => void) => {
     setProcessingId(id);
     execute(() => setProcessingId(null));
   };
@@ -325,9 +322,7 @@ export default function BankItemsRequests() {
                     <RequestActionsMenu
                       requestId={item.id}
                       status={item.status}
-                      isProcessing={
-                        isAnyProcessing && processingId === item.id
-                      }
+                      isProcessing={isAnyProcessing && processingId === item.id}
                       onApprove={(id) => onApprove(id)}
                       onReject={(id, reason) => onReject(id, reason)}
                       onResolve={(payload) => onResolve(payload)}
