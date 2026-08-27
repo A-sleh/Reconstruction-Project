@@ -92,25 +92,46 @@ export default function BankItemsRequests() {
   const { mutate: cancelRequest, isPending: isCancelling } =
     useCancelBankItemRequest();
 
-  const onApprove = (id: number) => {
-    approveRequest({ RequestId: id });
-  };
-  const onReject = (id: number, reason: string) => {
-    rejectRequest({ requestId: id, adminNote: reason });
-  };
-  const onResolve = (payload: ResolveRequestParams) => {
-    resolveRequest(payload);
-  };
-  const onCancel = (id: number) => {
-    cancelRequest({
-      requestId: id,
-      adminNote: t("categoryBank.toast.cancelledByAdmin", {
-        defaultValue: "Cancelled by admin",
-      }),
-    });
+  const [processingId, setProcessingId] = useState<number | null>(null);
+
+  const runAction = (
+    id: number,
+    execute: (onSettled: () => void) => void,
+  ) => {
+    setProcessingId(id);
+    execute(() => setProcessingId(null));
   };
 
-  const isProcessing =
+  const onApprove = (id: number) => {
+    runAction(id, (onSettled) =>
+      approveRequest({ RequestId: id }, { onSettled }),
+    );
+  };
+  const onReject = (id: number, reason: string) => {
+    runAction(id, (onSettled) =>
+      rejectRequest({ requestId: id, adminNote: reason }, { onSettled }),
+    );
+  };
+  const onResolve = (payload: ResolveRequestParams) => {
+    runAction(payload.requestId, (onSettled) =>
+      resolveRequest(payload, { onSettled }),
+    );
+  };
+  const onCancel = (id: number) => {
+    runAction(id, (onSettled) =>
+      cancelRequest(
+        {
+          requestId: id,
+          adminNote: t("categoryBank.toast.cancelledByAdmin", {
+            defaultValue: "Cancelled by admin",
+          }),
+        },
+        { onSettled },
+      ),
+    );
+  };
+
+  const isAnyProcessing =
     isApproving || isRejecting || isResolving || isCancelling;
 
   return (
@@ -304,7 +325,9 @@ export default function BankItemsRequests() {
                     <RequestActionsMenu
                       requestId={item.id}
                       status={item.status}
-                      isProcessing={isProcessing}
+                      isProcessing={
+                        isAnyProcessing && processingId === item.id
+                      }
                       onApprove={(id) => onApprove(id)}
                       onReject={(id, reason) => onReject(id, reason)}
                       onResolve={(payload) => onResolve(payload)}

@@ -1,12 +1,15 @@
-import { useTranslation } from "react-i18next";
 import {
+  Ban,
+  CheckCircle,
   MoreVertical,
   ShieldCheck,
   XCircle,
-  CheckCircle,
-  Ban,
-  Loader2,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+import ConfirmDelete from "@/components/model/ConfirmDelete";
+import Can from "@/components/shared/Can";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,13 +17,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Permissions } from "@/lib/permissions";
+
+import { BankItemStatus, ResolveRequestParams } from "../api/types";
 import { RejectRequestModal } from "./RejectRequestModal";
 import { ResolveRequestModal } from "./ResolveRequestModal";
-import ConfirmDelete from "@/components/model/ConfirmDelete";
-import { BankItemStatus, ResolveRequestParams } from "../api/types";
-import Can from "@/components/shared/Can";
-import { Permissions } from "@/lib/permissions";
-import { Button } from "@/components/ui/button";
 
 interface RequestActionsMenuProps {
   requestId: number;
@@ -41,14 +42,16 @@ export default function RequestActionsMenu({
   onCancel,
   isProcessing = false,
 }: RequestActionsMenuProps) {
-
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language == "ar";
   const isPending = status === "Pending";
 
   if (!isPending) return "--";
 
-  if(isProcessing) return <Loader2 />
+  if (isProcessing)
+    return (
+      <span className="inline-flex h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+    );
 
   return (
     <DropdownMenu modal={false} dir={isArabic ? "rtl" : "ltr"}>

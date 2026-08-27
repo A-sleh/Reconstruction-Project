@@ -2,7 +2,8 @@ import { errorToast, successToast } from "@/components/common/Toast";
 import ApiInstance from "@/config/api-instance";
 import i18n from "@/lib/i18n";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { BankItemController, MUTATION_KEYS, QUERY_KEYS } from ".";
+
+import { BankItemController, MUTATION_KEYS, QUERY_KEYS } from "./";
 import {
   AddRequestParams,
   AddResourceTagsParams,
@@ -64,7 +65,12 @@ export const useResolveBankItemRequest = () => {
     mutationKey: MUTATION_KEYS.bankItems.resolve(),
     mutationFn: resolveRequest,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.bankItems.all,
+      });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.bankItems.user,
+      });
       successToast(
         i18n.t("categoryBank.toast.resolveSuccess", "Request resolved"),
       );
@@ -83,7 +89,12 @@ export const useRejectBankItemRequest = () => {
     mutationKey: MUTATION_KEYS.bankItems.reject(),
     mutationFn: rejectRequest,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.bankItems.all,
+      });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.bankItems.user,
+      });
       successToast(
         i18n.t("categoryBank.toast.rejectSuccess", "Request rejected"),
       );
@@ -99,10 +110,15 @@ export const useRejectBankItemRequest = () => {
 export const useCancelBankItemRequest = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationKey: MUTATION_KEYS.bankItems.reject(),
+    mutationKey: MUTATION_KEYS.bankItems.cancel(),
     mutationFn: rejectRequest,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.bankItems.all,
+      });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.bankItems.user,
+      });
       successToast(
         i18n.t("categoryBank.toast.cancelSuccess", "Request cancelled"),
       );
@@ -121,7 +137,12 @@ export const useApproveBankItemRequest = () => {
     mutationKey: MUTATION_KEYS.bankItems.approve(),
     mutationFn: approveRequest,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.bankItems.all,
+      });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.bankItems.user,
+      });
       successToast(
         i18n.t("categoryBank.toast.approveSuccess", "Request approved"),
       );
@@ -140,10 +161,13 @@ export const useAddBankItemRequest = () => {
     mutationKey: MUTATION_KEYS.bankItems.add(),
     mutationFn: addRequest,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
-      successToast(
-        i18n.t("categoryBank.toast.createSuccess", "Request added"),
-      );
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.bankItems.all,
+      });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.bankItems.user,
+      });
+      successToast(i18n.t("categoryBank.toast.createSuccess", "Request added"));
     },
     onError: () => {
       errorToast(

@@ -59,6 +59,7 @@ export const MUTATION_KEYS = {
     resolve: () => ["bankItems", "resolve"],
     reject: () => ["bankItems", "reject"],
     approve: () => ["bankItems", "approve"],
+    cancel: () => ["bankItems", "cancel"],
     add: () => ["bankItems", "add"],
   },
   category: {
