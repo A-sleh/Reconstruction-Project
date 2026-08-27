@@ -1,28 +1,30 @@
+import { useEffect } from "react";
+
+import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+
+import ImageUploader from "@/components/inputs/ImageUploader";
 import Input from "@/components/inputs/Input";
 import Select from "@/components/inputs/Selector";
-import { motion } from "framer-motion";
-import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { UnitType } from "@/data/resource-providor/mockData";
-import { useTranslation } from "react-i18next";
+import { useFileUpload } from "@/hooks/useFileUpload";
 import { useAuthStore, User } from "@/stores/useAuthStore";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   defaultResourceValues,
-  generateMockResourceValues,
   Resource,
   ResourceFormValues,
   resourceSchema,
   useUpdateResource,
 } from "../api/actions";
-import ImageUploader from "@/components/inputs/ImageUploader";
 import { unitTypes } from "../api/types";
-import { DynamicAsyncSelector } from "./SmartDataGrid";
-import { Switch } from "@/components/ui/switch";
-import { useFileUpload } from "@/hooks/useFileUpload";
 import { getRolePrefix } from "./NewResorceRequestModel";
+import { DynamicAsyncSelector } from "./SmartDataGrid";
 
 interface Props {
   openButton?: React.ReactNode;
@@ -96,10 +98,6 @@ export function NewResourceForm({
     } else {
       setValue("file", selectedFile);
     }
-  };
-
-  const handleGenerateMockData = () => {
-    reset(generateMockResourceValues());
   };
 
   const handleFormSubmit = (values: Resource) => {
@@ -207,14 +205,6 @@ export function NewResourceForm({
 
         {/* Controlers buttons  */}
         <div className="flex flex-col sm:flex-row justify-between gap-3 pt-2">
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={handleGenerateMockData}
-          >
-            {t(`${rolePrefix}.form.btn-generate-mock-data`)}
-          </Button>
-
           <Button
             isLoading={resouceIsUpdated || isPending}
             disabled={isPending || resouceIsUpdated}
