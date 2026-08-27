@@ -28,7 +28,8 @@
       "title": "بيانات العمل والترخيص",
       "subtitle": "أدخل معلومات الترخيص الخاصة بك",
       "license": "الرخصة",
-      "licensePlaceholder": "أدخل رخصة الخدمة"
+      "licensePlaceholder": "أدخل رخصة الخدمة",
+      "licenseUpdateHint": "لتحديث رخصتك، يرجى التواصل مع الدعم."
     },
     "settings": {
       "title": "إعدادات الحساب",

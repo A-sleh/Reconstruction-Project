@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import Input from "@/components/inputs/Input";
+import { Message } from "@/components/common/Message";
 
 import { useProfile } from "../api/queries";
 import SectionHeader from "./SectionHeader";
@@ -44,7 +45,15 @@ export default function WorkTab() {
           fieldName="license"
           errors={errors ?? null}
           loadInitialValue={isLoading}
+          disabled
           {...register("license", { required: true })}
+        />
+        <Message
+          message={t(
+            "profile.work.licenseUpdateHint",
+            "To update your license, please contact support.",
+          )}
+          type="warn"
         />
         {/* <Button type="submit" size="lg" disabled={isLoading}>
           {t("profile.saveChanges")}

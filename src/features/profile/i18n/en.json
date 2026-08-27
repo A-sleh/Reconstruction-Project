@@ -28,7 +28,8 @@
       "title": "Work and License Details",
       "subtitle": "Enter your license information",
       "license": "License",
-      "licensePlaceholder": "Enter service license"
+      "licensePlaceholder": "Enter service license",
+      "licenseUpdateHint": "To update your license, please contact support."
     },
     "settings": {
       "title": "Account Settings",
