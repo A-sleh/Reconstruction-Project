@@ -1,18 +1,19 @@
 import { useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+
 import { useTranslation } from "react-i18next";
-import { NewResourceForm } from "@/features/work-site-items/components/NewResourceForm";
+import { useNavigate, useParams } from "react-router-dom";
+
 import {
   Resource,
   useAddServices,
   useCreateResource,
 } from "@/features/work-site-items/api/actions";
-import { paths } from "@/config/paths";
-import { AddResourcesHeader } from "@/features/work-site-items/components/AddResourcesHeader";
-import { AddedResourcesList } from "@/features/work-site-items/components/AddedResourcesList";
-import useAuthStore, { User } from "@/stores/useAuthStore";
-import { getRolePrefix } from "@/features/work-site-items/components/NewResorceRequestModel";
 import { ServiceItem } from "@/features/work-site-items/api/types";
+import { AddedResourcesList } from "@/features/work-site-items/components/AddedResourcesList";
+import { AddResourcesHeader } from "@/features/work-site-items/components/AddResourcesHeader";
+import { getRolePrefix } from "@/features/work-site-items/components/NewResorceRequestModel";
+import { NewResourceForm } from "@/features/work-site-items/components/NewResourceForm";
+import useAuthStore, { User } from "@/stores/useAuthStore";
 
 type LocalResource = Resource & { id: string };
 
@@ -78,7 +79,7 @@ const AddWorkSiteResources = () => {
         { resources, workSiteId: siteId },
         {
           onSuccess: () => {
-            navigate(paths.app.resourceProvidor.workSite.getHref(siteId));
+            navigate(-1);
           },
         },
       );
@@ -98,7 +99,7 @@ const AddWorkSiteResources = () => {
         },
         {
           onSuccess: () => {
-            navigate(paths.app.resourceProvidor.workSite.getHref(siteId));
+            navigate(-1);
           },
         },
       );
