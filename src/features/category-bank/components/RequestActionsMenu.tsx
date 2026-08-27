@@ -116,6 +116,12 @@ export default function RequestActionsMenu({
             item={t("categoryBank.cancelModal.itemName", {
               defaultValue: "this request",
             })}
+            keys={{
+              title: "categoryBank.cancelModal.title",
+              descriptionPrefix: "categoryBank.cancelModal.descriptionPrefix",
+              confirm: "categoryBank.cancelModal.confirm",
+              cancel: "categoryBank.cancelModal.cancel",
+            }}
             onConfirm={() => onCancel(requestId)}
             openButton={
               <DropdownMenuItem

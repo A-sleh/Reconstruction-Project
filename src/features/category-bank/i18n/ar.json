@@ -80,7 +80,11 @@
       }
     },
     "cancelModal": {
-      "itemName": "هذا الطلب"
+      "itemName": "هذا الطلب",
+      "title": "إلغاء الطلب",
+      "descriptionPrefix": "سيتم إلغاء ",
+      "confirm": "تأكيد الإلغاء",
+      "cancel": "تراجع"
     },
     "approveModal": {
       "title": "موافقة وتعيين فئة",

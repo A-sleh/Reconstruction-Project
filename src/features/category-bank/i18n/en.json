@@ -80,7 +80,11 @@
       }
     },
     "cancelModal": {
-      "itemName": "this request"
+      "itemName": "this request",
+      "title": "Cancel Request",
+      "descriptionPrefix": "This will cancel ",
+      "confirm": "Cancel Request",
+      "cancel": "Go Back"
     },
     "approveModal": {
       "title": "Approve & Assign Category",
