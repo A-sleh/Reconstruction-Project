@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { OrdersFilterSidebar } from "@/features/orders/components/OrderFiltersSideBar";
+
 import { GetOrderAllFilters } from "@/features/orders/api/types";
+import { OrdersFilterSidebar } from "@/features/orders/components/OrderFiltersSideBar";
 import OrderHeader from "@/features/orders/components/OrderHeader";
 import OrderTable from "@/features/orders/components/OrderTables";
 
@@ -20,6 +21,7 @@ export default function Orders() {
         <main className="flex-1 min-w-0">
           <section className="container mx-4">
             <OrderHeader
+              selectedWorkSiteId={Number(filters.WorkSiteId)}
               setSidebarOpen={setSidebarOpen}
               sidebarOpen={sidebarOpen}
             />

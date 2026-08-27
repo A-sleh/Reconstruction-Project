@@ -1,13 +1,12 @@
-import { Button } from "@/components/ui/button";
 import { Filter, RotateCcw, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import Input from "@/components/inputs/Input";
-import { Label } from "@/components/ui/Label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Separator } from "@/components/ui/separator";
-
 import Selector from "@/components/inputs/Selector";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/Label";
+import { Separator } from "@/components/ui/separator";
 import {
   GetOrderAllFilters,
   ORDER_STATUSES,
@@ -81,10 +80,10 @@ export function OrdersFilterSidebar({
           <Selector
             label={t("orders.filters.workSite")}
             value={filters.WorkSiteId}
-            setValue={(e) =>
+            setValue={(value) =>
               onChange({
                 ...filters,
-                WorkSiteId: e.target.value || undefined,
+                WorkSiteId: value || undefined,
               })
             }
             className="w-full text-sm font-medium bg-white border-none focus:outline-none"

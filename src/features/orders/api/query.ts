@@ -4,9 +4,11 @@ import { InvestorRequestController } from ".";
 import { QUERY_KEYS } from "."; // Import from your keys file
 import {
   GetOrderAllFilters,
+  GetOrderStatusStatisticsParams,
   OrderByIdParams,
   OrderDetailsResponse,
   OrderItemsResponse,
+  OrderStatusStatisticsResponse,
   OrdersResponse,
 } from "./types";
 
@@ -39,6 +41,18 @@ const getOrderDetails = async ({ OrderId }: OrderByIdParams) => {
     `/${InvestorRequestController.GetOrderById}`,
     {
       params: { orderId: OrderId },
+    }
+  );
+  return data;
+};
+
+const getOrderStatusStatistics = async ({
+  WorkSiteId,
+}: GetOrderStatusStatisticsParams) => {
+  const { data } = await ApiInstance.get<OrderStatusStatisticsResponse>(
+    `/${InvestorRequestController.GetStatusStatistics}`,
+    {
+      params: { WorkSiteId },
     }
   );
   return data;
@@ -98,5 +112,18 @@ export const useOrderDetails = ({ OrderId }: OrderByIdParams) => {
     queryKey: [...QUERY_KEYS.orders.detail(), OrderId],
     queryFn: () => getOrderDetails({ OrderId }),
     enabled: !!OrderId,
+  });
+};
+
+/**
+ * 4. Fetch Order Status Statistics Hook
+ */
+export const useOrderStatusStatistics = ({
+  WorkSiteId,
+}: GetOrderStatusStatisticsParams) => {
+  return useQuery<OrderStatusStatisticsResponse, Error>({
+    queryKey: [...QUERY_KEYS.orders.stats(), WorkSiteId],
+    queryFn: () => getOrderStatusStatistics({ WorkSiteId }),
+    enabled: !!WorkSiteId,
   });
 };

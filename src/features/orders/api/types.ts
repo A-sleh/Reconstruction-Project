@@ -106,6 +106,22 @@ export interface OrderByIdParams {
 }
 
 // ============================================================================
+// GET /api/order/get-status-statistics
+// ============================================================================
+export interface GetOrderStatusStatisticsParams {
+  WorkSiteId: number; // integer ($int64)
+}
+
+export interface OrderStatusStatistic {
+  status: OrderStatus;
+  count: number;
+}
+
+export interface OrderStatusStatisticsResponse {
+  data: OrderStatusStatistic[];
+}
+
+// ============================================================================
 // GET /api/order/get-all
 // ============================================================================
 export interface GetOrderAllFilters {

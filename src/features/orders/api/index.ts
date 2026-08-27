@@ -6,6 +6,7 @@ export enum InvestorRequestController {
   GetAllOrders = `${BASE_ORDER_ROUTE}/get-all`,
   GetOrderById = `${BASE_ORDER_ROUTE}/get-by-id`,
   GetOrderItems = `${BASE_ORDER_ROUTE}/get-items`,
+  GetStatusStatistics = `${BASE_ORDER_ROUTE}/get-status-statistics`,
   AcceptOrder = `${BASE_ORDER_ROUTE}/accept`,
   RejectOrder = `${BASE_ORDER_ROUTE}/reject`,
   AddPayment = `${BASE_ORDER_ROUTE}/add-payment`,

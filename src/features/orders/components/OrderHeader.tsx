@@ -1,7 +1,11 @@
-import { Button } from "@/components/ui/button";
 import { Filter, Inbox } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
+
+import { Button } from "@/components/ui/button";
+
+import { useOrderStatusStatistics } from "../api/query";
+
 // import { useInvestoryRequestsStat } from "../api/query";
 
 const OrderHeader = ({
@@ -9,14 +13,20 @@ const OrderHeader = ({
   setSidebarOpen,
   description,
   title,
+  selectedWorkSiteId,
 }: {
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
   title?: string;
   description?: string;
+  selectedWorkSiteId: number;
 }) => {
   const { t } = useTranslation();
-  // const { data: stat, isPending } = useInvestoryRequestsStat();
+  const { data: stat, isPending } = useOrderStatusStatistics({
+    WorkSiteId: selectedWorkSiteId,
+  });
+
+  console.log(stat);
 
   // Prefix variable to keep keys clean and readable
   const prefix = "resourceProvidor.investor-request.investor-header";
