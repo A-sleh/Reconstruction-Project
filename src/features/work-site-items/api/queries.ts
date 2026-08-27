@@ -1,26 +1,28 @@
 import ApiInstance from "@/config/api-instance";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { QUERY_KEYS, WorkSiteItemsController } from ".";
+
+import { QUERY_KEYS, WorkSiteItemsController } from "./";
 import {
-  OrderRequest,
-  WorkSiteResourcesStatistics,
-  Resources,
-  Services,
   AvailableItemsResponse,
   GetAvailableItemsParams,
+  Resources,
+  Services,
+  WorkSiteResourcesStatistics,
 } from "./types";
 
 // ==========================================
 // Site-Specific Fetchers (NOT moved — belong to site-resources)
 // ==========================================
 
-const fetchWorkSiteResourcesStatisticsAPI =
-  async (): Promise<WorkSiteResourcesStatistics> => {
-    const { data } = await ApiInstance.get<WorkSiteResourcesStatistics>(
-      `/${WorkSiteItemsController.WorkSiteResourcesStatistics}`,
-    );
-    return data;
-  };
+const fetchWorkSiteResourcesStatisticsAPI = async (
+  WorkSiteId: number,
+): Promise<WorkSiteResourcesStatistics> => {
+  const { data } = await ApiInstance.get<WorkSiteResourcesStatistics>(
+    `/${WorkSiteItemsController.WorkSiteResourcesStatistics}`,
+    { params: { WorkSiteId } },
+  );
+  return data;
+};
 
 const fetchWorkSiteResourceApi = async ({
   CategoryId,
@@ -98,10 +100,10 @@ const fetchAvailableItems = async ({
 // ==========================================
 // Site-Specific Hooks
 // ==========================================
-export const useResourceStatistics = () => {
+export const useResourceStatistics = (WorkSiteId: number) => {
   return useQuery<WorkSiteResourcesStatistics, unknown>({
     queryKey: QUERY_KEYS.statistics,
-    queryFn: fetchWorkSiteResourcesStatisticsAPI,
+    queryFn: () => fetchWorkSiteResourcesStatisticsAPI(WorkSiteId),
   });
 };
 

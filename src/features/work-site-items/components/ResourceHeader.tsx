@@ -9,13 +9,15 @@ import {
   ReceiptText,
   ShoppingCart,
 } from "lucide-react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
+import { Link, useParams, useSearchParams } from "react-router-dom";
+
+import { Button } from "@/components/ui/button";
 import { paths } from "@/config/paths";
-import { useAuthStore } from "@/stores/useAuthStore";
 import { useResourceStatistics } from "@/features/work-site-items/api/queries";
 import { StatusBadge } from "@/features/work-sites/components/StatusBadge";
+import { useAuthStore } from "@/stores/useAuthStore";
+
 interface StatItem {
   label: string;
   value: number | string;
@@ -35,8 +37,8 @@ export default function ResourceHeader() {
   const user = useAuthStore((s) => s.user);
   const providerRole = user?.providerRole;
   const isResource = providerRole === "Resource";
-  
-  const { data, isLoading } = useResourceStatistics();
+
+  const { data, isLoading } = useResourceStatistics(Number(siteId));
 
   const stats: StatItem[] = [
     {
@@ -70,7 +72,7 @@ export default function ResourceHeader() {
       icon: DollarSign,
     },
   ];
-  
+
   return (
     <section className="border-b border-gray-300 gradient-hero text-primary-foreground rounded-lg p-6">
       <div className="container py-10">
@@ -99,8 +101,7 @@ export default function ResourceHeader() {
                 <StatusBadge status={status || "on-hold"} />
               </div>
               <span className="text-sm text-primary-foreground">
-                {t("workSites.label-manager")} ·{" "}
-                {manager || ""}
+                {t("workSites.label-manager")} · {manager || ""}
               </span>
             </div>
             <h1 className="mt-2 text-3xl lg:text-4xl font-bold">{siteName}</h1>
