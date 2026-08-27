@@ -1,12 +1,19 @@
+import { Dispatch, SetStateAction } from "react";
+
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+
+import ImageUploader from "@/components/inputs/ImageUploader";
 import Input from "@/components/inputs/Input";
 import { PickCoordsFromMap } from "@/components/model/PickCoordsFromMap.model";
-import ImageUploader from "@/components/inputs/ImageUploader";
 import WorkSiteType from "@/features/work-sites/components/WorkSiteType";
 import { useFileUpload } from "@/hooks/useFileUpload";
 
-const ServiceProviderForm = () => {
+const ServiceProviderForm = ({
+  setDisableFormSubmit,
+}: {
+  setDisableFormSubmit: Dispatch<SetStateAction<boolean>>;
+}) => {
   const { t } = useTranslation();
   const {
     register,
@@ -27,11 +34,16 @@ const ServiceProviderForm = () => {
   const { previewUrl, isPending, onChange } = useFileUpload({
     onSuccess: (id) => {
       setValue("logoId", id);
+      setDisableFormSubmit(false);
+    },
+    onError: () => {
+      setDisableFormSubmit(false);
     },
   });
 
   const handleImageChange = (selectedFile: File | null) => {
     onChange(selectedFile);
+    setDisableFormSubmit(true);
     if (!selectedFile) {
       setValue("logoId", "");
       setValue("logoFile", undefined);

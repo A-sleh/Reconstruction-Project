@@ -1,8 +1,10 @@
-import { useTranslation } from "react-i18next";
 import { useFormContext } from "react-hook-form";
-import type { InvestorFormValues } from "../api/create-account";
-import Input from "@/components/inputs/Input";
+import { useTranslation } from "react-i18next";
+
 import ImageUploader from "@/components/inputs/ImageUploader";
+import Input from "@/components/inputs/Input";
+
+import type { InvestorFormValues } from "../api/create-account";
 
 const InvestorForm = () => {
   const { t } = useTranslation();

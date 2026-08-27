@@ -54,6 +54,7 @@
     "btn-save": "Save Changes",
     "btn-create": "Create Land",
     "back": "Back",
+    "next": "Next",
     "loading": "Loading...",
     "error-loading": "Failed to load lands",
     "no-results": "No lands found",

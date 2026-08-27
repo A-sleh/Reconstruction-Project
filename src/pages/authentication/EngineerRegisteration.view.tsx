@@ -1,18 +1,22 @@
-import { AuthLayout } from "@/components/layouts/Auth-layout";
+import { useState } from "react";
+
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
+
 import { MultiStepForm } from "@/components/common/MultiStepForm";
+import { AuthLayout } from "@/components/layouts/Auth-layout";
+import { paths } from "@/config/paths";
 import {
   BaseRegistrationSchema,
   EngineerSchema,
+  useEngineerRegister,
 } from "@/features/Auth/api/create-account";
 import BaseRegisterInputs from "@/features/Auth/components/Base-register-inputs";
-import { useEngineerRegister } from "@/features/Auth/api/create-account";
 import EngineerForm from "@/features/Auth/components/Engineer-form";
-import { Link } from "react-router";
-import { paths } from "@/config/paths";
-import { useTranslation } from "react-i18next";
 
 const EngineerRegisteration = () => {
-  const { t, } = useTranslation();
+  const { t } = useTranslation();
+  const [disableFormSubmit, setDisableFormSubmit] = useState(false);
   const { mutate: registerEngineer, isPending } = useEngineerRegister();
 
   const handlSubmitForm = (data: any) => {
@@ -26,13 +30,16 @@ const EngineerRegisteration = () => {
     >
       <MultiStepForm
         schemas={[BaseRegistrationSchema, EngineerSchema]}
-        subForms={[<BaseRegisterInputs />, <EngineerForm />]}
+        subForms={[
+          <BaseRegisterInputs setDisableFormSubmit={setDisableFormSubmit} />,
+          <EngineerForm />,
+        ]}
         finalSubmitHandler={handlSubmitForm}
         stepsLabel={[
           t("auth.register.providor.personalInformationLabel"),
           t("auth.register.engineer.engineerInformationLabel"),
         ]}
-        disabled={isPending}
+        disabled={isPending || disableFormSubmit}
       />
       <p className="mt-8 mx-auto text-sm text-muted-foreground text-center">
         {t("auth.register.haveAccount")}

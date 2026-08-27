@@ -1,14 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+
 import { useUploadFile } from "@/features/attachment/api/actions";
 
 interface UseFileUploadOptions {
   initialFileId?: string | null;
   onSuccess?: (fileId: string) => void;
+  onError?: () => void;
 }
 
 export function useFileUpload({
   initialFileId = null,
   onSuccess,
+  onError,
 }: UseFileUploadOptions = {}) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -45,6 +48,7 @@ export function useFileUpload({
         onError: () => {
           setFile(null);
           setPreviewUrl(null);
+          onError?.();
           if (objectUrlRef.current) {
             URL.revokeObjectURL(objectUrlRef.current);
             objectUrlRef.current = null;

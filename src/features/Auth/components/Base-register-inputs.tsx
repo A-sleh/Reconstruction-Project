@@ -1,11 +1,19 @@
-import { useTranslation } from "react-i18next";
+import { Dispatch, SetStateAction } from "react";
+
 import { useFormContext } from "react-hook-form";
-import type { BaseRegistrationValues } from "../api/create-account";
-import Input from "@/components/inputs/Input";
+import { useTranslation } from "react-i18next";
+
 import ImageUploader from "@/components/inputs/ImageUploader";
+import Input from "@/components/inputs/Input";
 import { useFileUpload } from "@/hooks/useFileUpload";
 
-const BaseRegisterInputs = () => {
+import type { BaseRegistrationValues } from "../api/create-account";
+
+const BaseRegisterInputs = ({
+  setDisableFormSubmit,
+}: {
+  setDisableFormSubmit: Dispatch<SetStateAction<boolean>>;
+}) => {
   const { t } = useTranslation();
   const {
     register,
@@ -17,12 +25,17 @@ const BaseRegisterInputs = () => {
 
   const { previewUrl, isPending, onChange } = useFileUpload({
     onSuccess: (id) => {
+      setDisableFormSubmit(false);
       setValue("photoId", id);
+    },
+    onError: () => {
+      setDisableFormSubmit(false);
     },
   });
 
   const handleImageChange = (selectedFile: File | null) => {
     onChange(selectedFile);
+    setDisableFormSubmit(true);
     if (!selectedFile) {
       setValue("photoId", "");
       setValue("file", undefined);

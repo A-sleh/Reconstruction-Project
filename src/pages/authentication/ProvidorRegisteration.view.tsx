@@ -1,20 +1,24 @@
-import { AuthLayout } from "@/components/layouts/Auth-layout";
-import { MultiStepForm } from "@/components/common/MultiStepForm";
-import ServiceProviderForm from "@/features/Auth/components/Service-provider-form";
-import BaseRegisterInputs from "@/features/Auth/components/Base-register-inputs";
+import { useState } from "react";
+
 import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router";
+
+import { MultiStepForm } from "@/components/common/MultiStepForm";
+import { AuthLayout } from "@/components/layouts/Auth-layout";
+import { paths } from "@/config/paths";
 import {
   BaseRegistrationSchema,
   ResourceProviderSchema,
   useProviderRegister,
 } from "@/features/Auth/api/create-account";
-import { paths } from "@/config/paths";
-import { Link, useNavigate } from "react-router";
 import { providerDTO } from "@/features/Auth/api/dtos";
+import BaseRegisterInputs from "@/features/Auth/components/Base-register-inputs";
+import ServiceProviderForm from "@/features/Auth/components/Service-provider-form";
 
 const ProviderRegisteration = () => {
-  const { t } = useTranslation();
   const goto = useNavigate();
+  const { t } = useTranslation();
+  const [disableFormSubmit, setDisableFormSubmit] = useState(false);
   const { mutate: registerProvider, isPending } = useProviderRegister();
 
   const handlSubmitForm = (data: any) => {
@@ -25,7 +29,7 @@ const ProviderRegisteration = () => {
           state: {
             message: t("auth.register.providor.successRegisterModelInfo"),
             email: data.email,
-            password: data.password
+            password: data.password,
           },
         });
       },
@@ -39,13 +43,16 @@ const ProviderRegisteration = () => {
     >
       <MultiStepForm
         schemas={[BaseRegistrationSchema, ResourceProviderSchema]}
-        subForms={[<BaseRegisterInputs />, <ServiceProviderForm />]}
+        subForms={[
+          <BaseRegisterInputs setDisableFormSubmit={setDisableFormSubmit} />,
+          <ServiceProviderForm setDisableFormSubmit={setDisableFormSubmit} />,
+        ]}
         finalSubmitHandler={handlSubmitForm}
         stepsLabel={[
           t("auth.register.providor.personalInformationLabel"),
           t("auth.register.providor.companyInformationLabel"),
         ]}
-        disabled={isPending}
+        disabled={isPending || disableFormSubmit}
       />
       <p className="mt-8 mx-auto text-sm text-muted-foreground text-center">
         {t("auth.register.haveAccount")}

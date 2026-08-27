@@ -1,20 +1,24 @@
-import { AuthLayout } from "@/components/layouts/Auth-layout";
-import { MultiStepForm } from "@/components/common/MultiStepForm";
-import BaseRegisterInputs from "@/features/Auth/components/Base-register-inputs";
+import { useState } from "react";
+
 import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router";
+
+import { MultiStepForm } from "@/components/common/MultiStepForm";
+import { AuthLayout } from "@/components/layouts/Auth-layout";
+import { paths } from "@/config/paths";
 import {
   BaseRegistrationSchema,
   InvestorSchema,
   useInvestorRegister,
 } from "@/features/Auth/api/create-account";
-import InvestorForm from "@/features/Auth/components/Investor-form";
-import { Link, useNavigate } from "react-router";
-import { paths } from "@/config/paths";
 import { investorDTO } from "@/features/Auth/api/dtos";
+import BaseRegisterInputs from "@/features/Auth/components/Base-register-inputs";
+import InvestorForm from "@/features/Auth/components/Investor-form";
 
 const InvestorRegisteration = () => {
   const { t } = useTranslation();
   const goto = useNavigate();
+  const [disableFormSubmit, setDisableFormSubmit] = useState(false);
   const { mutate: registerInvestor, isPending } = useInvestorRegister();
 
   const handlSubmitForm = (data: any) => {
@@ -39,13 +43,16 @@ const InvestorRegisteration = () => {
     >
       <MultiStepForm
         schemas={[BaseRegistrationSchema, InvestorSchema]}
-        subForms={[<BaseRegisterInputs />, <InvestorForm />]}
+        subForms={[
+          <BaseRegisterInputs setDisableFormSubmit={setDisableFormSubmit} />,
+          <InvestorForm />,
+        ]}
         finalSubmitHandler={handlSubmitForm}
         stepsLabel={[
           t("auth.register.providor.personalInformationLabel"),
           t("auth.register.investor.investorInformationLabel"),
         ]}
-        disabled={isPending}
+        disabled={isPending || disableFormSubmit}
       />
       <p className="mt-8 mx-auto text-sm text-muted-foreground text-center">
         {t("auth.register.haveAccount")}
