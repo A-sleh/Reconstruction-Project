@@ -1,5 +1,6 @@
-import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
+
+import { ShoppingCart } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -25,7 +26,7 @@ const CartSheet = ({ projectId, projectName }: CartSheetProps) => {
   const count = useCartStore(selectProjectTotalQuantity(projectId));
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={open} onOpenChange={setOpen} modal={false}>
       <SheetTrigger asChild dir="ltr">
         <button
           type="button"
@@ -44,13 +45,19 @@ const CartSheet = ({ projectId, projectName }: CartSheetProps) => {
       <SheetContent
         side="left"
         className="flex h-full flex-col gap-0 p-0 sm:max-w-md"
+        onInteractOutside={(event) => {
+          const target = event.target as HTMLElement | null;
+          if (target?.closest?.("[data-model-window]")) {
+            event.preventDefault();
+          }
+        }}
       >
         <div className="border-b border-gray-200 p-4">
           <SheetTitle>{projectName}</SheetTitle>
           <SheetDescription>{t("cart.sheet.description")}</SheetDescription>
         </div>
         <div className="flex-1 overflow-y-auto p-4">
-          <CartItems projectId={projectId} onOrdered={() => setOpen(false)} />
+          <CartItems projectId={projectId} />
         </div>
       </SheetContent>
     </Sheet>

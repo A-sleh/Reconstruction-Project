@@ -1,14 +1,17 @@
 import { useMemo, useState } from "react";
+
+import { Info, ShoppingBag } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useShallow } from "zustand/react/shallow";
-import { toast } from "sonner";
-import { Info, ShoppingBag } from "lucide-react";
+
+import { errorToast, successToast } from "@/components/common/Toast";
 import PopuupLayout from "@/components/layouts/Popup-layout";
+import { Button } from "@/components/ui/button";
+import type { CartItem, CartItemType } from "@/features/cart/types";
 import {
   useCreateResourceOrder,
   useCreateServiceOrder,
 } from "@/features/orders/api/actions";
-import type { CartItem, CartItemType } from "@/features/cart/types";
 import { fmtCurrency } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
 import useCartStore, { selectProjectItems } from "@/stores/useCartStore";
@@ -32,7 +35,11 @@ const PRIMARY_BUTTON_CLASS =
 const getGroupTotal = (group: OrderGroup) =>
   group.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-function BuyNowConfirmPopup({ projectId, disabled, onOrdered }: BuyNowConfirmPopupProps) {
+function BuyNowConfirmPopup({
+  projectId,
+  disabled,
+  onOrdered,
+}: BuyNowConfirmPopupProps) {
   const { t } = useTranslation();
   const items = useCartStore(useShallow(selectProjectItems(projectId)));
   const clearProjectCart = useCartStore((s) => s.clearProjectCart);
@@ -88,12 +95,12 @@ function BuyNowConfirmPopup({ projectId, disabled, onOrdered }: BuyNowConfirmPop
               }),
         ),
       );
-      toast.success(t("cart.buyNow.success"));
+      successToast(t("cart.buyNow.success"));
       clearProjectCart(projectId);
       closeModal();
       onOrdered?.();
     } catch {
-      toast.error(t("cart.buyNow.error"));
+      errorToast(t("cart.buyNow.error"));
     } finally {
       setIsPlacing(false);
     }
@@ -115,7 +122,7 @@ function BuyNowConfirmPopup({ projectId, disabled, onOrdered }: BuyNowConfirmPop
       }
     >
       {(closeModal) => (
-        <div className="space-y-3">
+        <div className="space-y-3 ">
           <div className="flex items-start gap-2 rounded-md border-s-2 border-primary bg-muted p-3 text-xs text-muted-foreground">
             <Info className="mt-0.5 h-4 w-4 shrink-0" />
             <span>{t("cart.buyNow.groupedHint")}</span>
@@ -148,14 +155,15 @@ function BuyNowConfirmPopup({ projectId, disabled, onOrdered }: BuyNowConfirmPop
               </div>
             ))}
           </div>
-          <button
+          <Button
             type="button"
+            isLoading={isPlacing}
             disabled={isPlacing || !groups.length}
             onClick={() => handleConfirm(closeModal)}
             className={cn(PRIMARY_BUTTON_CLASS)}
           >
             {t("cart.buyNow.confirm", { count: groups.length })}
-          </button>
+          </Button>
         </div>
       )}
     </PopuupLayout>

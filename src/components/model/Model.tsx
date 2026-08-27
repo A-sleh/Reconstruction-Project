@@ -46,7 +46,10 @@ function Window({
   if (name !== openName) return null;
 
   return createPortal(
-    <div className="flex justify-center items-center fixed inset-0 bg-[rgba(0,0,0,.4)] z-100">
+    <div
+      className="flex justify-center items-center fixed inset-0 bg-[rgba(0,0,0,.4)] z-100"
+      data-model-window={name}
+    >
       <div className={`w-[90vw]  p-4 rounded-lg bg-white ${model_width}`}>
         {children}
       </div>
