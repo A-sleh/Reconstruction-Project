@@ -1,0 +1,8 @@
+{
+  "attachment": {
+    "upload-success": "تم رفع الملف بنجاح",
+    "upload-error": "فشل في رفع الملف",
+    "delete-success": "تم حذف الملف بنجاح",
+    "delete-error": "فشل في حذف الملف"
+  }
+}
