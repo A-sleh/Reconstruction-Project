@@ -3,7 +3,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Inbox, Plus, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
 import EmptyState from "@/components/common/EmptyState";
 import Selector from "@/components/inputs/Selector";
@@ -23,6 +22,7 @@ import {
   useApproveBankItemRequest,
   useRejectBankItemRequest,
   useResolveBankItemRequest,
+  useCancelBankItemRequest,
 } from "@/features/category-bank/api/actions";
 import {
   useBankItemRequests,
@@ -89,87 +89,29 @@ export default function BankItemsRequests() {
     useRejectBankItemRequest();
   const { mutate: resolveRequest, isPending: isResolving } =
     useResolveBankItemRequest();
+  const { mutate: cancelRequest, isPending: isCancelling } =
+    useCancelBankItemRequest();
 
   const onApprove = (id: number) => {
-    approveRequest(
-      { RequestId: id },
-      {
-        onSuccess: () =>
-          toast.success(
-            t("categoryBank.toast.approveSuccess", {
-              defaultValue: "Request approved",
-            }),
-          ),
-        onError: () =>
-          toast.error(
-            t("categoryBank.toast.approveError", {
-              defaultValue: "Failed to approve",
-            }),
-          ),
-      },
-    );
+    approveRequest({ RequestId: id });
   };
   const onReject = (id: number, reason: string) => {
-    rejectRequest(
-      { requestId: id, adminNote: reason },
-      {
-        onSuccess: () =>
-          toast.success(
-            t("categoryBank.toast.rejectSuccess", {
-              defaultValue: "Request rejected",
-            }),
-          ),
-        onError: () =>
-          toast.error(
-            t("categoryBank.toast.rejectError", {
-              defaultValue: "Failed to reject",
-            }),
-          ),
-      },
-    );
+    rejectRequest({ requestId: id, adminNote: reason });
   };
   const onResolve = (payload: ResolveRequestParams) => {
-    resolveRequest(payload, {
-      onSuccess: () =>
-        toast.success(
-          t("categoryBank.toast.resolveSuccess", {
-            defaultValue: "Request resolved",
-          }),
-        ),
-      onError: () =>
-        toast.error(
-          t("categoryBank.toast.resolveError", {
-            defaultValue: "Failed to resolve",
-          }),
-        ),
-    });
+    resolveRequest(payload);
   };
   const onCancel = (id: number) => {
-    rejectRequest(
-      {
-        requestId: id,
-        adminNote: t("categoryBank.toast.cancelledByAdmin", {
-          defaultValue: "Cancelled by admin",
-        }),
-      },
-      {
-        onSuccess: () =>
-          toast.success(
-            t("categoryBank.toast.cancelSuccess", {
-              defaultValue: "Request cancelled",
-            }),
-          ),
-        onError: () =>
-          toast.error(
-            t("categoryBank.toast.cancelError", {
-              defaultValue: "Failed to cancel",
-            }),
-          ),
-      },
-    );
+    cancelRequest({
+      requestId: id,
+      adminNote: t("categoryBank.toast.cancelledByAdmin", {
+        defaultValue: "Cancelled by admin",
+      }),
+    });
   };
 
-  const isProcessing = isApproving || isRejecting || isResolving;
+  const isProcessing =
+    isApproving || isRejecting || isResolving || isCancelling;
 
   return (
     <div className="space-y-4">

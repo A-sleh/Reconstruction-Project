@@ -65,6 +65,14 @@ export const useResolveBankItemRequest = () => {
     mutationFn: resolveRequest,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
+      successToast(
+        i18n.t("categoryBank.toast.resolveSuccess", "Request resolved"),
+      );
+    },
+    onError: () => {
+      errorToast(
+        i18n.t("categoryBank.toast.resolveError", "Failed to resolve request"),
+      );
     },
   });
 };
@@ -76,6 +84,33 @@ export const useRejectBankItemRequest = () => {
     mutationFn: rejectRequest,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
+      successToast(
+        i18n.t("categoryBank.toast.rejectSuccess", "Request rejected"),
+      );
+    },
+    onError: () => {
+      errorToast(
+        i18n.t("categoryBank.toast.rejectError", "Failed to reject request"),
+      );
+    },
+  });
+};
+
+export const useCancelBankItemRequest = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.bankItems.reject(),
+    mutationFn: rejectRequest,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
+      successToast(
+        i18n.t("categoryBank.toast.cancelSuccess", "Request cancelled"),
+      );
+    },
+    onError: () => {
+      errorToast(
+        i18n.t("categoryBank.toast.cancelError", "Failed to cancel request"),
+      );
     },
   });
 };
@@ -87,6 +122,14 @@ export const useApproveBankItemRequest = () => {
     mutationFn: approveRequest,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
+      successToast(
+        i18n.t("categoryBank.toast.approveSuccess", "Request approved"),
+      );
+    },
+    onError: () => {
+      errorToast(
+        i18n.t("categoryBank.toast.approveError", "Failed to approve request"),
+      );
     },
   });
 };
@@ -98,6 +141,14 @@ export const useAddBankItemRequest = () => {
     mutationFn: addRequest,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bankItems.all });
+      successToast(
+        i18n.t("categoryBank.toast.createSuccess", "Request added"),
+      );
+    },
+    onError: () => {
+      errorToast(
+        i18n.t("categoryBank.toast.createError", "Failed to add request"),
+      );
     },
   });
 };
