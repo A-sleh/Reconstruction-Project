@@ -1,4 +1,8 @@
-import { errorToast, successToast } from "@/components/common/Toast";
+import React, { useRef, useState } from "react";
+
+import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 import Input from "@/components/inputs/Input";
 import Model from "@/components/model/Model";
 import { Button } from "@/components/ui/button";
@@ -7,9 +11,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAddBankItemRequest } from "@/features/category-bank/api/actions";
 import CategoryFilter from "@/features/category-bank/components/CategoryFilter";
 import useAuthStore, { User } from "@/stores/useAuthStore";
-import { X } from "lucide-react";
-import React, { useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 export function getRolePrefix(role: string) {
   return role === "Service"
@@ -51,17 +52,11 @@ export function NewResorceRequestModel({
       },
       {
         onSuccess: () => {
-          successToast(t(`${rolePrefix}.requestModal.success`));
           setItemName("");
           setDescription("");
           setCategoryId("all");
           setNote("");
           closeBtnRef.current?.click();
-        },
-        onError: (error: any) => {
-          const serverMessage =
-            error?.response?.data?.message || error?.message;
-          errorToast(serverMessage || t(`${rolePrefix}.requestModal.error`));
         },
       },
     );
