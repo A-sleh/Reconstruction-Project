@@ -121,10 +121,12 @@ export const useUpdateResource = () => {
 };
 
 export const useCreateResource = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: ResourcesPayload) => createResourceApi(payload),
     mutationKey: MUTATION_KEYS.resource.create(),
     onSuccess: (_: any) => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.resources });
       successToast(
         i18n.t("workSites.resource.resource-created", "Site created"),
       );
@@ -143,10 +145,12 @@ export const useCreateResource = () => {
 };
 
 export const useAddServices = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: ServicesPayload) => addServicesApi(payload),
     mutationKey: MUTATION_KEYS.resource.create(),
     onSuccess: (_: any) => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.services });
       successToast(
         i18n.t("workSites.resource.resource-created", "Services added"),
       );
