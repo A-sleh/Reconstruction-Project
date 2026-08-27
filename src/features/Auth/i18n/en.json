@@ -65,6 +65,8 @@
         "companyAddressPlaceholder": "Enter your company address",
         "companyLocationModalDescription": "Pick your company location from the map to fill the GPS coordinates.",
         "openMapLocationButton": "Select location on map",
+        "goToLocation": "Go to my current location",
+        "selectCurrentLocation": "Select my current location",
         "companyInformationLabel": "Company information",
         "selectLocationButton": "Use selected location",
         "companyLogo": "Company logo",

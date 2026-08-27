@@ -67,6 +67,8 @@
         "companyAddressPlaceholder": "أدخل عنوان الشركة",
         "companyLocationModalDescription": "اختر موقع شركتك من الخريطة لملء إحداثيات GPS.",
         "openMapLocationButton": "حدد الموقع من الخريطة",
+        "goToLocation": "الانتقال إلى موقعي الحالي",
+        "selectCurrentLocation": "تحديد موقعي الحالي",
         "companyInformationLabel": "معلومات الشركة",
         "selectLocationButton": "استخدام الموقع المحدد",
         "serviceProviderBtn": "مزود خدمات",
