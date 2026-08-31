@@ -7,8 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
 import { useEffect, type ReactNode } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+
 import {
   initialWorkShopValues,
   useCreateWorkShop,
@@ -16,7 +18,7 @@ import {
   workShopFormSchema,
   type WorkShopFormValues,
 } from "../api/actions";
-import type { WorkShop } from "../api/types";
+import type { WorkShop, WorkShopPayload } from "../api/types";
 import { WORK_SHOP_STATUSES } from "../api/types";
 
 interface Props {
@@ -27,6 +29,8 @@ interface Props {
 
 export function WorkShopModel({ initial = null, openButton, openKey }: Props) {
   const { t } = useTranslation();
+  const { projectId } = useParams<{ projectId?: string }>();
+  const numericProjectId = Number(projectId);
 
   const {
     register,
@@ -36,7 +40,7 @@ export function WorkShopModel({ initial = null, openButton, openKey }: Props) {
     watch,
     formState: { errors },
   } = useForm<WorkShopFormValues>({
-    resolver: zodResolver(workShopFormSchema),
+    resolver: zodResolver(workShopFormSchema) as unknown as Resolver<WorkShopFormValues>,
     defaultValues: initialWorkShopValues,
     criteriaMode: "all",
     mode: "onSubmit",
@@ -47,12 +51,18 @@ export function WorkShopModel({ initial = null, openButton, openKey }: Props) {
   useEffect(() => {
     if (initial)
       reset({
-        title: initial.title ?? "",
+        jobTitle: initial.name ?? "",
         description: initial.description ?? "",
-        workerNumber: initial.workerNumber ?? 1,
-        leaderPhoneNumber: initial.leaderPhoneNumber ?? "",
-        status: initial.status ?? "open",
-        payedPrice: initial.payedPrice ?? 0,
+        memberNumber: initial.memberNumber ?? 1,
+        supervisorPhoneNumber: initial.supervisorPhoneNumber ?? "",
+        totalCost: initial.totalCost ?? 0,
+        startWorkDate: initial.startWorkDate
+          ? initial.startWorkDate.slice(0, 10)
+          : "",
+        endWorkDate: initial.endWorkDate
+          ? initial.endWorkDate.slice(0, 10)
+          : "",
+        status: initial.status ?? "Pending",
       });
   }, [initial, reset]);
 
@@ -61,10 +71,22 @@ export function WorkShopModel({ initial = null, openButton, openKey }: Props) {
 
   const isLoading = isCreating || isUpdating;
 
+  const buildPayload = (data: WorkShopFormValues): WorkShopPayload => ({
+    id: initial?.id ?? 0,
+    jobTitle: data.jobTitle,
+    memberNumber: data.memberNumber,
+    totalCost: data.totalCost,
+    startWorkDate: new Date(data.startWorkDate).toISOString(),
+    endWorkDate: new Date(data.endWorkDate).toISOString(),
+    supervisorPhoneNumber: data.supervisorPhoneNumber,
+    description: data.description,
+    status: data.status,
+  });
+
   const onSubmit = (data: WorkShopFormValues, close: () => void) => {
     if (initial) {
       updateWorkShop(
-        { ...data, id: initial.id },
+        { workshop: buildPayload(data) },
         {
           onSuccess: () => {
             reset();
@@ -73,12 +95,15 @@ export function WorkShopModel({ initial = null, openButton, openKey }: Props) {
         },
       );
     } else {
-      createWorkShop(data, {
-        onSuccess: () => {
-          reset();
-          close();
+      createWorkShop(
+        { projectId: numericProjectId, workShops: [buildPayload(data)] },
+        {
+          onSuccess: () => {
+            reset();
+            close();
+          },
         },
-      });
+      );
     }
   };
 
@@ -116,16 +141,16 @@ export function WorkShopModel({ initial = null, openButton, openKey }: Props) {
                 "workShops.placeholders.title",
                 "e.g. Al-Razi Tower Structural Works",
               )}
-              fieldName="title"
+              fieldName="jobTitle"
               errors={errors}
-              {...register("title")}
+              {...register("jobTitle")}
             />
             <Input
-              label={t("workShops.fields.phone", "Leader Phone Number")}
+              label={t("workShops.fields.phone", "Supervisor Phone Number")}
               placeholder="+963 9XX XXX XXX"
-              fieldName="leaderPhoneNumber"
+              fieldName="supervisorPhoneNumber"
               errors={errors}
-              {...register("leaderPhoneNumber")}
+              {...register("supervisorPhoneNumber")}
             />
           </div>
 
@@ -135,18 +160,35 @@ export function WorkShopModel({ initial = null, openButton, openKey }: Props) {
               min={1}
               label={t("workShops.fields.workerNumber", "Number of Workers")}
               placeholder="10"
-              fieldName="workerNumber"
+              fieldName="memberNumber"
               errors={errors}
-              {...register("workerNumber")}
+              {...register("memberNumber")}
             />
             <Input
               type="number"
               min={0}
-              label={t("workShops.fields.payedPrice", "Paid Amount")}
+              label={t("workShops.fields.totalCost", "Total Cost")}
               placeholder="0"
-              fieldName="payedPrice"
+              fieldName="totalCost"
               errors={errors}
-              {...register("payedPrice")}
+              {...register("totalCost")}
+            />
+          </div>
+
+          <div className="flex flex-col gap-3 md:flex-row">
+            <Input
+              type="date"
+              label={t("workShops.fields.startWorkDate", "Start Date")}
+              fieldName="startWorkDate"
+              errors={errors}
+              {...register("startWorkDate")}
+            />
+            <Input
+              type="date"
+              label={t("workShops.fields.endWorkDate", "End Date")}
+              fieldName="endWorkDate"
+              errors={errors}
+              {...register("endWorkDate")}
             />
           </div>
 

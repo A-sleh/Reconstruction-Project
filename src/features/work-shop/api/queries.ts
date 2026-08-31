@@ -1,6 +1,7 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
-import { WorkShopController, QUERY_KEYS } from ".";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+
+import { QUERY_KEYS, WorkShopController } from "./";
 import type {
   GetAllWorkShopsFilters,
   GetAllWorkShopsResponse,
@@ -10,9 +11,10 @@ import type {
 const getAllWorkShops = async (
   filters: GetAllWorkShopsFilters,
 ): Promise<GetAllWorkShopsResponse> => {
+  const { ProjectId, PageNumber, PageSize } = filters;
   const { data } = await ApiInstance.get<GetAllWorkShopsResponse>(
     `/${WorkShopController.GetAll}`,
-    { params: { ...filters } },
+    { params: { ProjectId, PageNumber, PageSize } },
   );
   return data;
 };
@@ -48,7 +50,7 @@ export const useWorkShopsInfinite = (
         PageSize: filters.PageSize ?? 10,
       });
     },
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (lastPage.hasNextPage) {
         return lastPage.pageNum + 1;

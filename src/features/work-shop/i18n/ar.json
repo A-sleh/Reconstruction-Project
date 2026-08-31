@@ -18,7 +18,11 @@
     "status": {
       "open": "مفتوحة",
       "in-progress": "قيد التنفيذ",
-      "closed": "مغلقة"
+      "closed": "مغلقة",
+      "Pending": "قيد الانتظار",
+      "InProgress": "قيد التنفيذ",
+      "Completed": "مكتملة",
+      "Canceled": "ملغاة"
     },
     "card": {
       "edit": "تعديل ورشة العمل",
@@ -56,6 +60,9 @@
       "title": "عنوان الورشة",
       "phone": "رقم هاتف المسؤول",
       "workerNumber": "عدد العمال",
+      "totalCost": "التكلفة الإجمالية",
+      "startWorkDate": "تاريخ البدء",
+      "endWorkDate": "تاريخ الانتهاء",
       "payedPrice": "المبلغ المدفوع",
       "status": "الحالة",
       "description": "الوصف",
@@ -68,6 +75,7 @@
       "title": "مثال: أعمال الهيكل الخرساني لبرج الرازي",
       "phone": "+963 9XX XXX XXX",
       "workerNumber": "10",
+      "totalCost": "0",
       "payedPrice": "0",
       "payedAmount": "0",
       "status": "اختر الحالة",
@@ -101,6 +109,9 @@
       "workerNumber": "يجب وجود عامل واحد على الأقل",
       "phone": "رقم الهاتف مطلوب",
       "payedPrice": "المبلغ غير صالح",
+      "totalCost": "المبلغ غير صالح",
+      "startWorkDate": "تاريخ البدء مطلوب",
+      "endWorkDate": "تاريخ الانتهاء مطلوب",
       "invoiceDate": "التاريخ مطلوب",
       "invoiceDescription": "الوصف مطلوب",
       "payedAmount": "يجب أن يكون المبلغ أكبر من صفر"
@@ -113,7 +124,9 @@
       "deleteSuccess": "تم حذف ورشة العمل",
       "deleteError": "فشل حذف ورشة العمل",
       "invoiceSuccess": "تمت إضافة الفاتورة",
-      "invoiceError": "فشلت إضافة الفاتورة"
+      "invoiceError": "فشلت إضافة الفاتورة",
+      "paymentSuccess": "تمت إضافة الدفعة",
+      "paymentError": "فشلت إضافة الدفعة"
     }
   }
 }

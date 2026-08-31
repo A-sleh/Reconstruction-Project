@@ -18,7 +18,11 @@
     "status": {
       "open": "Open",
       "in-progress": "In Progress",
-      "closed": "Closed"
+      "closed": "Closed",
+      "Pending": "Pending",
+      "InProgress": "In Progress",
+      "Completed": "Completed",
+      "Canceled": "Canceled"
     },
     "card": {
       "edit": "Edit workshop",
@@ -54,8 +58,11 @@
     },
     "fields": {
       "title": "Workshop Title",
-      "phone": "Leader Phone Number",
+      "phone": "Supervisor Phone Number",
       "workerNumber": "Number of Workers",
+      "totalCost": "Total Cost",
+      "startWorkDate": "Start Date",
+      "endWorkDate": "End Date",
       "payedPrice": "Paid Amount",
       "status": "Status",
       "description": "Description",
@@ -68,6 +75,7 @@
       "title": "e.g. Al-Razi Tower Structural Works",
       "phone": "+963 9XX XXX XXX",
       "workerNumber": "10",
+      "totalCost": "0",
       "payedPrice": "0",
       "payedAmount": "0",
       "status": "Select status",
@@ -101,6 +109,9 @@
       "workerNumber": "At least one worker",
       "phone": "Phone number is required",
       "payedPrice": "Invalid amount",
+      "totalCost": "Invalid amount",
+      "startWorkDate": "Start date is required",
+      "endWorkDate": "End date is required",
       "invoiceDate": "Date is required",
       "invoiceDescription": "Description is required",
       "payedAmount": "Amount must be greater than zero"
@@ -113,7 +124,9 @@
       "deleteSuccess": "Workshop deleted",
       "deleteError": "Failed to delete workshop",
       "invoiceSuccess": "Invoice added",
-      "invoiceError": "Failed to add invoice"
+      "invoiceError": "Failed to add invoice",
+      "paymentSuccess": "Payment added",
+      "paymentError": "Failed to add payment"
     }
   }
 }

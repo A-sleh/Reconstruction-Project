@@ -1,32 +1,89 @@
 import { Paginated } from "@/types";
 
-export const WORK_SHOP_STATUSES = ["open", "in-progress", "closed"] as const;
+export const WORK_SHOP_STATUSES = [
+  "Pending",
+  "InProgress",
+  "Completed",
+  "Canceled",
+] as const;
 
 export type WorkShopStatus = (typeof WORK_SHOP_STATUSES)[number];
 
+/** Shared shape used inside add/update workshop payloads. */
+export interface WorkShopPayload {
+  id: number;
+  jobTitle: string;
+  memberNumber: number;
+  totalCost: number;
+  startWorkDate: string;
+  endWorkDate: string;
+  supervisorPhoneNumber: string;
+  description: string;
+  status: WorkShopStatus;
+}
+
+/** Workshop returned by GET /api/project/get-project-workshops. */
 export interface WorkShop {
   id: number;
-  title: string;
+  name: string;
+  totalCost: number;
+  costPaid: number;
+  remaining: number;
+  memberNumber: number;
+  startWorkDate: string;
+  endWorkDate: string;
+  supervisorPhoneNumber: string;
   description: string;
-  workerNumber: number;
-  leaderPhoneNumber: string;
-  payedPrice: number;
-  requirePrice: number;
-  createdAt: Date;
   status: WorkShopStatus;
 }
 
-export interface WorkShopPayload {
-  title: string;
-  description: string;
-  workerNumber: number;
-  leaderPhoneNumber: string;
-  status: WorkShopStatus;
-  payedPrice: number;
+export interface WorkShopsTotals {
+  totalCost: number;
+  totalPaid: number;
+  totalRemaining: number;
 }
 
-export interface UpdateWorkShopPayload extends WorkShopPayload {
+export interface GetAllWorkShopsResponse extends Paginated<WorkShop> {
+  totals: WorkShopsTotals;
+}
+
+export interface GetAllWorkShopsFilters {
+  ProjectId?: number;
+  Search?: string;
+  fromDate?: string;
+  toDate?: string;
+  PageNumber?: number;
+  PageSize?: number;
+}
+
+// ============================================================================
+// Mutation payloads
+// ============================================================================
+export interface AddWorkShopsPayload {
+  projectId: number;
+  workShops: WorkShopPayload[];
+}
+
+export interface UpdateWorkShopPayload {
+  workshop: WorkShopPayload;
+}
+
+export interface DeleteWorkShopParams {
   id: number;
+}
+
+export interface AddWorkShopPaymentPayload {
+  projectId: number;
+  workshopId: number;
+  amount: number;
+  paymentDate: string;
+}
+
+// ============================================================================
+// Invoice types (payment-history endpoint is not available yet)
+// ============================================================================
+export interface WorkshopInvoices {
+  invoices: InvoicePayload[];
 }
 
 export interface WorkShopInvoice {
@@ -40,25 +97,6 @@ export interface InvoicePayload extends WorkShopInvoice {
   attachments: number[];
 }
 
-export interface WorkshopInvoices {
-  invoices: InvoicePayload[];
-}
-
-export interface GetAllWorkShopsFilters {
-  Search?: string;
-  fromDate?: string;
-  toDate?: string;
-  PageNumber?: number;
-  PageSize?: number;
-}
-
-export interface GetAllInvoicesFilters {
-  fromDate?: string;
-  toDate?: string;
-}
-
-export type GetAllWorkShopsResponse = Paginated<WorkShop>;
-
 export interface AddInvoicePayload extends Omit<InvoicePayload, "id"> {
   workShopId: number;
 }
@@ -70,4 +108,7 @@ export interface WorkShopInovcesHistory {
   modifyedBy: string;
 }
 
-export type GetAllWorkShopInvoicesResponse = Paginated<WorkShopInovcesHistory>;
+export interface GetAllInvoicesFilters {
+  fromDate?: string;
+  toDate?: string;
+}

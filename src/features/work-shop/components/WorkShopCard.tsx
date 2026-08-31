@@ -35,18 +35,19 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
   const deleteMutation = useDeleteWorkShop();
 
   const percent =
-    workShop.requirePrice > 0
+    workShop.totalCost > 0
       ? Math.min(
           100,
-          Math.round((workShop.payedPrice / workShop.requirePrice) * 100),
+          Math.round((workShop.costPaid / workShop.totalCost) * 100),
         )
       : 0;
-  const remaining = Math.max(0, workShop.requirePrice - workShop.payedPrice);
+  const remaining = Math.max(0, workShop.totalCost - workShop.costPaid);
 
   const statusStyles: Record<string, string> = {
-    open: "bg-emerald/10 text-emerald",
-    "in-progress": "bg-gold/10 text-warning-foreground",
-    closed: "bg-muted text-muted-foreground",
+    Pending: "bg-gold/10 text-warning-foreground",
+    InProgress: "bg-primary/10 text-primary",
+    Completed: "bg-success/10 text-success",
+    Canceled: "bg-destructive/10 text-destructive",
   };
 
   return (
@@ -113,7 +114,7 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
         />
         <ConfirmDelete
           openKey={`delete-work-shop-${workShop.id}`}
-          item={workShop.title}
+          item={workShop.name}
           isLoading={deleteMutation.isPending}
           onConfirm={() => deleteMutation.mutate(workShop.id)}
           keys={{
@@ -147,11 +148,11 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
             {t(`workShops.status.${workShop.status}`, workShop.status)}
           </span>
           <h3 className="truncate text-lg font-semibold text-foreground transition-smooth group-hover:text-primary">
-            {workShop.title}
+            {workShop.name}
           </h3>
           <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <CalendarDays className="h-3 w-3" />
-            {new Date(workShop.createdAt).toLocaleDateString(
+            {new Date(workShop.startWorkDate).toLocaleDateString(
               i18n.language === "ar" ? "ar" : "en",
               { year: "numeric", month: "short", day: "numeric" },
             )}
@@ -170,14 +171,14 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
         <div className="flex items-center gap-2 rounded-lg bg-muted/60 px-3 py-2 text-sm">
           <Users className="h-4 w-4 shrink-0 text-accent" />
           <span className="truncate text-muted-foreground">
-            {workShop.workerNumber.toLocaleString()}{" "}
+            {workShop.memberNumber.toLocaleString()}{" "}
             {t("workShops.card.workers", "Workers")}
           </span>
         </div>
         <div className="flex items-center gap-2 rounded-lg bg-muted/60 px-3 py-2 text-sm">
           <Phone className="h-4 w-4 shrink-0 text-accent" />
           <span dir="ltr" className="truncate text-muted-foreground">
-            {workShop.leaderPhoneNumber}
+            {workShop.supervisorPhoneNumber}
           </span>
         </div>
       </div>
@@ -190,7 +191,7 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
               {t("workShops.card.paid", "Paid")}
             </span>
             <span className="font-semibold text-foreground">
-              {workShop.payedPrice.toLocaleString()}
+              {workShop.costPaid.toLocaleString()}
             </span>
           </div>
           <span
@@ -210,7 +211,7 @@ export default function WorkShopCard({ workShop, index = 0 }: Props) {
             {t("workShops.card.required", "Required")}:
             <span className="font-medium text-foreground">
               {" "}
-              {workShop.requirePrice.toLocaleString()}
+              {workShop.totalCost.toLocaleString()}
             </span>
           </span>
           <span>
