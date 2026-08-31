@@ -4,6 +4,7 @@ import { adminRoutes } from "./admin.routes";
 import { authRoutes } from "./auth.routes";
 import { engineerRoutes } from "./engineer.routes";
 import { investorRoutes } from "./investor.routes";
+import { publicRoutes } from "./public.routes";
 import { resourceProviderRoutes } from "./resource-provider.routes";
 import { serviceProviderRoutes } from "./service-provider.routes";
 import { sharedRoutes } from "./shared.routes";
@@ -22,6 +23,10 @@ if (appRouteIndex !== -1) {
   ];
 }
 
-const router: RouteObject[] = [...sharedRoutes, ...authRoutes];
+const router: RouteObject[] = [
+  ...sharedRoutes,
+  ...authRoutes,
+  ...publicRoutes,
+];
 
 export default router;

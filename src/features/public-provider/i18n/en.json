@@ -1,0 +1,58 @@
+{
+  "publicProvider": {
+    "back": "Back",
+    "role": {
+      "resource": "Resource Provider",
+      "service": "Service Provider"
+    },
+    "license": "License No.",
+    "contat": "Contact Us",
+    "stats": {
+      "workSites": "Work Sites",
+      "inventory": "Inventory",
+      "fulfillment": "Fulfillment Rate",
+      "totalInvoiced": "Total Invoiced"
+    },
+    "workSites": {
+      "title": "Work Sites",
+      "empty": "No work sites to display.",
+      "mapsLink": "View on map"
+    },
+    "inventory": {
+      "title": "Available Inventory",
+      "subtitle": "Browse the materials and services this provider offers.",
+      "searchPlaceholder": "Search inventory...",
+      "allCategories": "All Categories",
+      "empty": "No items match your search.",
+      "pricePerUnit": "/ {{unit}}",
+      "available": "Available",
+      "unavailable": "Unavailable"
+    },
+    "reviews": {
+      "title": "Reviews",
+      "basedOn": "Based on {{count}} reviews",
+      "empty": "No reviews yet."
+    },
+    "contact": {
+      "title": "Send a Message",
+      "subtitle": "We will get back to you as soon as possible.",
+      "name": "Full Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Email",
+      "emailPlaceholder": "example@mail.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+963 9XX XXX XXX",
+      "message": "Message",
+      "messagePlaceholder": "Write your message...",
+      "send": "Send Message",
+      "success": "Your message was sent successfully",
+      "error": "Failed to send your message, please try again",
+      "validation": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email",
+        "messageRequired": "Message is required"
+      }
+    }
+  }
+}

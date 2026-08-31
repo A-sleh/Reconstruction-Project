@@ -36,6 +36,12 @@ export const paths = {
     path: "/",
     getHref: () => "/",
   },
+  public: {
+    providerProfile: {
+      path: "/public/provider/:id",
+      getHref: (id: number | string) => `/public/provider/${id}`,
+    },
+  },
   app: {
     // Shared pathes
     home: {

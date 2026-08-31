@@ -1,0 +1,58 @@
+{
+  "publicProvider": {
+    "back": "عودة",
+    "role": {
+      "resource": "مورد مواد",
+      "service": "مزوّد خدمات"
+    },
+    "license": "رخصة مزاولة",
+    "contat": "تواصل معنا",
+    "stats": {
+      "workSites": "مواقع العمل",
+      "inventory": "المخزون",
+      "fulfillment": "نسبة التنفيذ",
+      "totalInvoiced": "إجمالي الفواتير"
+    },
+    "workSites": {
+      "title": "مواقع العمل",
+      "empty": "لا توجد مواقع عمل لعرضها.",
+      "mapsLink": "عرض على الخريطة"
+    },
+    "inventory": {
+      "title": "المخزون المتاح",
+      "subtitle": "تصفح المواد والخدمات المتوفرة لدى المزوّد.",
+      "searchPlaceholder": "ابحث في المخزون...",
+      "allCategories": "جميع الفئات",
+      "empty": "لا توجد عناصر مطابقة لبحثك.",
+      "pricePerUnit": "/ {{unit}}",
+      "available": "متوفر",
+      "unavailable": "غير متوفر"
+    },
+    "reviews": {
+      "title": "التقييمات",
+      "basedOn": "بناءً على {{count}} تقييم",
+      "empty": "لا توجد تقييمات بعد."
+    },
+    "contact": {
+      "title": "أرسل رسالة",
+      "subtitle": "سنرد عليك في أقرب وقت ممكن.",
+      "name": "الاسم الكامل",
+      "namePlaceholder": "أدخل اسمك",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "example@mail.com",
+      "phone": "رقم الهاتف",
+      "phonePlaceholder": "+963 9XX XXX XXX",
+      "message": "الرسالة",
+      "messagePlaceholder": "اكتب رسالتك...",
+      "send": "إرسال الرسالة",
+      "success": "تم إرسال رسالتك بنجاح",
+      "error": "تعذّر إرسال الرسالة، حاول مرة أخرى",
+      "validation": {
+        "nameRequired": "الاسم مطلوب",
+        "emailRequired": "البريد الإلكتروني مطلوب",
+        "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+        "messageRequired": "الرسالة مطلوبة"
+      }
+    }
+  }
+}
