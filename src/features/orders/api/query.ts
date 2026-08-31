@@ -1,15 +1,15 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
-import { InvestorRequestController } from ".";
-import { QUERY_KEYS } from "."; // Import from your keys file
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+
+import { InvestorRequestController, QUERY_KEYS } from "./"; // Import from your keys file
 import {
   GetOrderAllFilters,
   GetOrderStatusStatisticsParams,
   OrderByIdParams,
   OrderDetailsResponse,
   OrderItemsResponse,
-  OrderStatusStatisticsResponse,
   OrdersResponse,
+  OrderStatusStatisticsResponse,
 } from "./types";
 
 // ==========================================
@@ -21,7 +21,7 @@ const getAllOrders = async (filters: GetOrderAllFilters) => {
     `/${InvestorRequestController.GetAllOrders}`,
     {
       params: { ...filters },
-    }
+    },
   );
   return data;
 };
@@ -31,7 +31,7 @@ const getOrderItems = async ({ OrderId }: OrderByIdParams) => {
     `/${InvestorRequestController.GetOrderItems}`,
     {
       params: { orderId: OrderId },
-    }
+    },
   );
   return data;
 };
@@ -41,7 +41,7 @@ const getOrderDetails = async ({ OrderId }: OrderByIdParams) => {
     `/${InvestorRequestController.GetOrderById}`,
     {
       params: { orderId: OrderId },
-    }
+    },
   );
   return data;
 };
@@ -53,7 +53,7 @@ const getOrderStatusStatistics = async ({
     `/${InvestorRequestController.GetStatusStatistics}`,
     {
       params: { WorkSiteId },
-    }
+    },
   );
   return data;
 };
@@ -67,7 +67,9 @@ const getOrderStatusStatistics = async ({
  * Assumes OrdersResponse includes fields like `hasNextPage` and `pageNum` (or adjust to match your actual API response metadata)
  */
 export const useOrdersInfinite = (
-  filters: Omit<GetOrderAllFilters, "PageNumber" | "PageSize"> & { PageSize?: number }
+  filters: Omit<GetOrderAllFilters, "PageNumber" | "PageSize"> & {
+    PageSize?: number;
+  },
 ) => {
   return useInfiniteQuery<OrdersResponse, Error>({
     // Leverages your factory pattern: QUERY_KEYS.orders.list(filters)
@@ -81,7 +83,7 @@ export const useOrdersInfinite = (
       });
     },
 
-    initialPageParam: 1,
+    initialPageParam: 0,
 
     getNextPageParam: (lastPage) => {
       // Adjust these properties if your API returns different naming conventions for pagination

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Filter, Inbox } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
@@ -5,8 +6,6 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
 import { useOrderStatusStatistics } from "../api/query";
-
-// import { useInvestoryRequestsStat } from "../api/query";
 
 const OrderHeader = ({
   sidebarOpen,
@@ -22,33 +21,37 @@ const OrderHeader = ({
   selectedWorkSiteId: number;
 }) => {
   const { t } = useTranslation();
-  const { data: stat, isPending } = useOrderStatusStatistics({
+  const { data: stat } = useOrderStatusStatistics({
     WorkSiteId: selectedWorkSiteId,
   });
 
-  console.log(stat);
-
-  // Prefix variable to keep keys clean and readable
   const prefix = "resourceProvidor.investor-request.investor-header";
 
-  const stats = [
-    {
-      label: t(`${prefix}.stats.pending`),
-      value: 10,
-    },
-    {
-      label: t(`${prefix}.stats.partial`),
-      value: 10,
-    },
-    {
-      label: t(`${prefix}.stats.completed`),
-      value: 10,
-    },
-    {
-      label: t(`${prefix}.stats.total`),
-      value: 10,
-    },
-  ];
+  const stats = useMemo(() => {
+    const data = stat?.data ?? [];
+    const find = (status: string) =>
+      data.find((s) => s.status === status)?.count ?? 0;
+    const total = data.reduce((sum, s) => sum + s.count, 0);
+
+    return [
+      {
+        label: t(`${prefix}.stats.pending`),
+        value: find("PendingApproval"),
+      },
+      {
+        label: t(`${prefix}.stats.partial`),
+        value: find("Preparing"),
+      },
+      {
+        label: t(`${prefix}.stats.completed`),
+        value: find("Completed"),
+      },
+      {
+        label: t(`${prefix}.stats.total`),
+        value: total,
+      },
+    ];
+  }, [stat, t, prefix]);
 
   return (
     <motion.div
