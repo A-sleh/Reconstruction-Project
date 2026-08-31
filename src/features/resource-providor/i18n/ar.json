@@ -220,10 +220,6 @@
       "avgProgress": "متوسط التقدم {{progress}}%",
       "inventoryValue": "قيمة المخزون",
       "inventoryHint": "{{count}} من الموارد · {{lowStock}} بحاجة لإعادة تغذية",
-      "investorRequests": "طلبات المستثمرين",
-      "fulfilled": "تم تلبية {{rate}}%",
-      "totalInvoiced": "إجمالي المفوتر",
-      "pendingOrders": "{{count}} طلبات طلب معلقة",
       "charts": {
         "title": "قيمة المخزون حسب الموقع",
         "description": "أعلى المواقع تصنيفاً بناءً على القيمة الإجمالية للموارد",
@@ -236,6 +232,45 @@
             "completed": "مكتمل",
             "rejected": "مرفوض"
           }
+        },
+        "orderVolume": {
+          "title": "حجم الطلبات",
+          "description": "عدد الطلبات والدخل عبر الزمن",
+          "orders": "الطلبات",
+          "revenue": "الدخل"
+        },
+        "revenueBySite": {
+          "title": "الدخل حسب موقع العمل",
+          "description": "صافي الدخل المحقق لكل موقع عمل"
+        },
+        "inventoryHealth": {
+          "title": "صحة المخزون",
+          "description": "توزيع مستويات المخزون عبر جميع الموارد",
+          "total": "إجمالي الأصناف",
+          "statuses": {
+            "in-stock": "متوفر",
+            "low-stock": "مخزون منخفض",
+            "out-of-stock": "نفذ من المخزون"
+          }
+        },
+        "deliveryPipeline": {
+          "title": "قناة التسليم",
+          "description": "تقدم تلبية الطلبات",
+          "pending": "قيد الانتظار",
+          "partial": "جزئي",
+          "completed": "مكتمل",
+          "completionRate": "نسبة إتمام التسليم",
+          "delivered": "تم التسليم",
+          "requests": "الطلبات"
+        },
+        "sitesByType": {
+          "title": "المواقع حسب النوع",
+          "description": "توزيع مواقع العمل حسب الفئة"
+        },
+        "fulfillmentBySite": {
+          "title": "تقدم الموقع",
+          "description": "نسبة الإنجاز لكل موقع عمل",
+          "noData": "لا توجد بيانات متاحة."
         }
       },
       "siteStatus": {
@@ -258,7 +293,15 @@
           "Infrastructure": "البنية التحتية",
           "Energy & Power": "الطاقة والكهرباء"
         }
-      }
+      },
+      "totalRevenue": "إجمالي الدخل",
+      "grossRevenue": " مقابل {{value}} إجمالي",
+      "fulfillmentRate": "نسبة الإنجاز",
+      "ofOrders": "عبر {{count}} طلبات",
+      "pendingOrders": "الطلبات المعلقة",
+      "pendingValue": "{{value}} قيمة معلقة",
+      "lowStockItems": "أصناف مخزونها منخفض",
+      "ofTotal": "من {{count}} إجمالي الأصناف"
     }
   }
 }

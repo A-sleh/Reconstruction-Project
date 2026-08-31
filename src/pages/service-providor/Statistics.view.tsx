@@ -5,33 +5,36 @@ import { useMemo } from "react";
 import Header from "@/features/resource-providor/statistics/components/Header";
 import KPISection from "@/features/resource-providor/statistics/components/KPISection";
 import {
-  useOrderRequestsStat,
-  useRequestsStat,
   useResourcesStat,
+  useRequestsStat,
   useSitesStat,
 } from "@/features/resource-providor/statistics/api/query";
 import SitesRankingBarChart from "@/features/resource-providor/statistics/components/SitesRankingBarChart";
 import InvestorRequestPieChart from "@/features/resource-providor/statistics/components/InvestorRequestPieChart";
 import SiteStatusProgressBar from "@/features/resource-providor/statistics/components/SiteStatusProgressBar";
 import SiteOperationalStatus from "@/features/resource-providor/statistics/components/SiteOperationalStatus";
+import { useOrdersInfinite } from "@/features/orders/api/query";
 import Loader from "@/components/shared/Loader";
 
 export default function Statistics() {
   const { data: sitesStat, isLoading: loadingSites } = useSitesStat();
   const { data: resourcesStat, isLoading: loadingResources } =
     useResourcesStat();
-  const { data: orderRequestsStat, isLoading: loadingOrders } =
-    useOrderRequestsStat();
   const { data: requestsStat, isLoading: loadingRequests } = useRequestsStat();
+  const { data: ordersRes, isLoading: loadingOrders } = useOrdersInfinite({
+    PageSize: 200,
+  });
 
-  // 2. Standardize fallback values for early calculations
   const sites = sitesStat ?? [];
   const resources = resourcesStat ?? [];
-  const orderRequests = orderRequestsStat ?? [];
   const requests = requestsStat ?? [];
+  const orders = useMemo(
+    () => ordersRes?.pages?.flatMap((p) => p.data) ?? [],
+    [ordersRes],
+  );
 
   const isLoading =
-    loadingSites || loadingResources || loadingOrders || loadingRequests;
+    loadingSites || loadingResources || loadingRequests || loadingOrders;
 
   const stats = useMemo(() => {
     const avgProgress = sites.length
@@ -44,13 +47,6 @@ export default function Statistics() {
         value: sites.filter((s) => s.status === k).length,
       }),
     );
-
-    const requestStatus = (
-      ["pending", "partial", "completed", "rejected"] as const
-    ).map((k) => ({
-      name: k,
-      value: requests.filter((r) => r.status === k).length,
-    }));
 
     const categoryMap = new Map<string, number>();
     resources.forEach((r) => {
@@ -66,13 +62,11 @@ export default function Statistics() {
     const siteValue = sites
       .map((s) => ({
         name: s.name.length > 16 ? s.name.slice(0, 14) + "…" : s.name,
-        value:
-          100 +
-          Math.round(
-            resources
-              .filter((r) => r.siteId === s.id)
-              .reduce((a, r) => a + r.pricePerUnit * r.quantity, 0),
-          ),
+        value: Math.round(
+          resources
+            .filter((r) => r.siteId === s.id)
+            .reduce((a, r) => a + r.pricePerUnit * r.quantity, 0),
+        ),
       }))
       .sort((a, b) => b.value - a.value)
       .slice(0, 6);
@@ -80,11 +74,10 @@ export default function Statistics() {
     return {
       avgProgress,
       siteStatus,
-      requestStatus,
       byCategory,
       siteValue,
     };
-  }, [sites, resources, orderRequests, requests]);
+  }, [sites, resources]);
 
   if (isLoading) return <Loader />;
 
@@ -93,14 +86,15 @@ export default function Statistics() {
       <main className="container space-y-8">
         <Header />
         <KPISection
-          requests={requests.length}
-          resources={resources.length}
           sites={sites.length}
+          avgProgress={stats.avgProgress}
+          orders={orders}
+          resources={resources}
         />
 
         {/* Charts row 1 */}
         <div className="grid gap-6 lg:grid-cols-2">
-          <InvestorRequestPieChart requestStatus={stats.requestStatus} />
+          <InvestorRequestPieChart requests={requests} />
           <SitesRankingBarChart siteValue={stats.siteValue} />
         </div>
 

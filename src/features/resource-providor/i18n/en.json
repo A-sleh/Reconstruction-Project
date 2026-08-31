@@ -217,10 +217,6 @@
       "avgProgress": "{{progress}}% avg. progress",
       "inventoryValue": "Inventory Value",
       "inventoryHint": "{{count}} resources · {{lowStock}} need restock",
-      "investorRequests": "Investor Requests",
-      "fulfilled": "{{rate}}% fulfilled",
-      "totalInvoiced": "Total Invoiced",
-      "pendingOrders": "{{count}} pending order requests",
       "charts": {
         "title": "Inventory Value by Site",
         "description": "Top sites ranked by total resource value",
@@ -233,6 +229,45 @@
             "completed": "Completed",
             "rejected": "Rejected"
           }
+        },
+        "orderVolume": {
+          "title": "Order Volume Trend",
+          "description": "Order count and revenue over time",
+          "orders": "Orders",
+          "revenue": "Revenue"
+        },
+        "revenueBySite": {
+          "title": "Revenue by Work Site",
+          "description": "Net revenue generated per work site"
+        },
+        "inventoryHealth": {
+          "title": "Inventory Health",
+          "description": "Stock level distribution across all resources",
+          "total": "Total Items",
+          "statuses": {
+            "in-stock": "In Stock",
+            "low-stock": "Low Stock",
+            "out-of-stock": "Out of Stock"
+          }
+        },
+        "deliveryPipeline": {
+          "title": "Delivery Pipeline",
+          "description": "Request fulfillment progress",
+          "pending": "Pending",
+          "partial": "Partial",
+          "completed": "Completed",
+          "completionRate": "Delivery Completion Rate",
+          "delivered": "Delivered",
+          "requests": "Requests"
+        },
+        "sitesByType": {
+          "title": "Sites by Type",
+          "description": "Distribution of work sites by category"
+        },
+        "fulfillmentBySite": {
+          "title": "Site Progress",
+          "description": "Completion progress per work site",
+          "noData": "No site data available."
         }
       },
       "siteStatus": {
@@ -255,7 +290,15 @@
           "Infrastructure": "Infrastructure",
           "Energy & Power": "Energy & Power"
         }
-      }
+      },
+      "totalRevenue": "Total Revenue",
+      "grossRevenue": "vs {{value}} gross",
+      "fulfillmentRate": "Fulfillment Rate",
+      "ofOrders": "across {{count}} orders",
+      "pendingOrders": "Pending Orders",
+      "pendingValue": "{{value}} pending value",
+      "lowStockItems": "Low Stock Items",
+      "ofTotal": "of {{count}} total items"
     }
   }
 }
