@@ -26,13 +26,13 @@ interface KPISectionProps {
   stat: ResourceProvidorStat;
 }
 
-const KPISection: React.FC<KPISectionProps> = ({
+const KPISection = ({
   sites,
   avgProgress,
   orders,
   resources,
   stat,
-}) => {
+}: KPISectionProps) => {
   const { t } = useTranslation();
 
   const orderStats = (() => {
