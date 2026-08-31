@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { Filter, RotateCcw, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -36,6 +38,20 @@ export function OrdersFilterSidebar({
     (filters.Status ? 1 : 0) +
     (filters.From ? 1 : 0) +
     (filters.To ? 1 : 0);
+
+  useEffect(() => {
+    if (
+      workSites &&
+      !workSitesPending &&
+      !filters.WorkSiteId &&
+      workSites.length > 0
+    ) {
+      onChange({
+        ...filters,
+        WorkSiteId: Number(workSites[0].id),
+      });
+    }
+  }, [workSites, filters]);
 
   return (
     <aside

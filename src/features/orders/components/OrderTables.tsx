@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+
 import { useTranslation } from "react-i18next";
-import { useOrdersInfinite } from "../api/query";
+
+import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/Skeleton";
 import {
   Table,
   TableBody,
@@ -9,14 +12,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Progress } from "@/components/ui/progress";
+
 import { useApproveOrder } from "../api/actions";
-import { GetOrderAllFilters, Order } from "../api/types";
+import { useOrdersInfinite } from "../api/query";
+import { GetOrderAllFilters } from "../api/types";
 import { OrderItemsDrawer } from "./OrderItemsDrawer";
-import { Skeleton } from "@/components/ui/Skeleton";
 import { OrderRowActions } from "./OrderRowActions";
 import { OrderStatusBadge } from "./OrderStatusBadge";
-import { MOCK_ORDERS } from "../data/mockOrders";
 
 const OrderTables = ({ filters }: { filters: GetOrderAllFilters }) => {
   const { t } = useTranslation();
@@ -24,18 +26,15 @@ const OrderTables = ({ filters }: { filters: GetOrderAllFilters }) => {
 
   const approve = useApproveOrder();
 
-  // Use mock data instead of API call
-  const isLoading = false;
-  const isFetchingNextPage = false;
-  const hasNextPage = false;
-  const fetchNextPage = () => {};
+  const { ...queryFilters } = filters;
 
-  const rows: Order[] = useMemo(
-    () => MOCK_ORDERS,
-    [],
+  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useOrdersInfinite(queryFilters);
+
+  const rows = useMemo(
+    () => data?.pages.flatMap((page) => page.data) ?? [],
+    [data],
   );
-
-  // const total = data?.pages[0]?.totalRows ?? 0;
 
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
