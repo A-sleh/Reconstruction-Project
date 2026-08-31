@@ -97,8 +97,11 @@ export interface InvoicePayload extends WorkShopInvoice {
   attachments: number[];
 }
 
-export interface AddInvoicePayload extends Omit<InvoicePayload, "id"> {
-  workShopId: number;
+export interface AddInvoicePayload {
+  projectId: number;
+  workshopId: number;
+  amount: number;
+  paymentDate: Date;
 }
 
 export interface WorkShopInovcesHistory {

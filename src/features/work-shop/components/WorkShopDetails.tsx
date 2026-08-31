@@ -3,6 +3,7 @@ import KpiCard from "@/components/shared/KpiCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { paths } from "@/config/paths";
 import { cn } from "@/lib/utils";
 import { PDFDownloadLink } from "@react-pdf/renderer";
@@ -12,7 +13,9 @@ import {
   CalendarDays,
   Clock,
   FileDown,
+  FileText,
   HardHat,
+  Paperclip,
   Pencil,
   Phone,
   ReceiptText,
@@ -23,18 +26,17 @@ import {
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDeleteWorkShop } from "../api/actions";
-import type { WorkShop } from "../api/types";
-import { MOCK_INVOICES_BY_WORK_SHOP } from "../mock/mockInvoices";
-import { MOCK_WORK_SHOPS } from "../mock/mockWorkShops";
+import { useWorkShops, useWorkShopInvoices } from "../api/queries";
+import type { InvoicePayload, WorkShop } from "../api/types";
 import InvoiceModel from "./InvoiceModel";
-import InvoicesTable from "./InvoicesTable";
 import WorkShopInvoicePdf from "./WorkShopInvoicePdf";
 import WorkShopModel from "./WorkShopModel";
 
 const statusStyles: Record<string, string> = {
-  open: "bg-emerald/10 text-emerald",
-  "in-progress": "bg-gold/10 text-warning-foreground",
-  closed: "bg-muted text-muted-foreground",
+  Pending: "bg-gold/10 text-warning-foreground",
+  InProgress: "bg-primary/10 text-primary",
+  Completed: "bg-success/10 text-success",
+  Canceled: "bg-destructive/10 text-destructive",
 };
 
 const WorkShopDetails = () => {
@@ -46,9 +48,34 @@ const WorkShopDetails = () => {
   const navigate = useNavigate();
   const deleteMutation = useDeleteWorkShop();
 
-  const workShop: WorkShop | undefined = MOCK_WORK_SHOPS.find(
-    (w) => w.id.toString() === workShopId,
+  const listQuery = useWorkShops({
+    ProjectId: projectId ? Number(projectId) : undefined,
+    PageNumber: 1,
+    PageSize: 100,
+  });
+
+  const workShop: WorkShop | undefined = listQuery.data?.data.find(
+    (w) => w.id === Number(workShopId),
   );
+
+  const invoicesQuery = useWorkShopInvoices(Number(workShopId));
+  const invoices: InvoicePayload[] = invoicesQuery.data?.invoices ?? [];
+  const isInvoicesLoading = invoicesQuery.isLoading;
+
+  const formatDate = (date: Date) =>
+    new Date(date).toLocaleDateString(i18n.language === "ar" ? "ar" : "en", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+  if (listQuery.isLoading && !workShop) {
+    return (
+      <div className="flex min-h-[400px] items-center justify-center">
+        <Skeleton className="h-8 w-64" />
+      </div>
+    );
+  }
 
   if (!workShop) {
     return (
@@ -62,14 +89,13 @@ const WorkShopDetails = () => {
   }
 
   const percent =
-    workShop.requirePrice > 0
+    workShop.totalCost > 0
       ? Math.min(
           100,
-          Math.round((workShop.payedPrice / workShop.requirePrice) * 100),
+          Math.round((workShop.costPaid / workShop.totalCost) * 100),
         )
       : 0;
-  const remaining = Math.max(0, workShop.requirePrice - workShop.payedPrice);
-  const invoices = MOCK_INVOICES_BY_WORK_SHOP[workShop.id] ?? [];
+  const remaining = Math.max(0, workShop.totalCost - workShop.costPaid);
 
   const backHref = projectId
     ? paths.app.projects.projectDetails.getHref(Number(projectId))
@@ -79,7 +105,7 @@ const WorkShopDetails = () => {
     {
       icon: Users,
       label: t("workShops.fields.workerNumber", "Number of Workers"),
-      value: `${workShop.workerNumber.toLocaleString()} ${t(
+      value: `${workShop.memberNumber.toLocaleString()} ${t(
         "workShops.card.workers",
         "Workers",
       )}`,
@@ -89,17 +115,19 @@ const WorkShopDetails = () => {
       label: t("workShops.fields.phone", "Leader Phone Number"),
       value: (
         <span dir="ltr" className="font-medium text-foreground">
-          {workShop.leaderPhoneNumber}
+          {workShop.supervisorPhoneNumber}
         </span>
       ),
     },
     {
       icon: CalendarDays,
-      label: t("workShops.card.createdAt", "Created At"),
-      value: new Date(workShop.createdAt).toLocaleDateString(
-        i18n.language === "ar" ? "ar" : "en",
-        { year: "numeric", month: "long", day: "numeric" },
-      ),
+      label: t("workShops.fields.startWorkDate", "Start Date"),
+      value: formatDate(new Date(workShop.startWorkDate)),
+    },
+    {
+      icon: CalendarDays,
+      label: t("workShops.fields.endWorkDate", "End Date"),
+      value: formatDate(new Date(workShop.endWorkDate)),
     },
     {
       icon: HardHat,
@@ -135,7 +163,7 @@ const WorkShopDetails = () => {
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="truncate text-xl font-semibold text-foreground md:text-2xl">
-                {workShop.title}
+                {workShop.name}
               </h1>
               <span
                 className={cn(
@@ -168,7 +196,7 @@ const WorkShopDetails = () => {
           />
           <ConfirmDelete
             openKey={`delete-work-shop-${workShop.id}`}
-            item={workShop.title}
+            item={workShop.name}
             isLoading={deleteMutation.isPending}
             onConfirm={() =>
               deleteMutation.mutate(workShop.id, {
@@ -200,7 +228,7 @@ const WorkShopDetails = () => {
         <KpiCard
           icon={Banknote}
           label={t("workShops.card.paid", "Paid")}
-          value={workShop.payedPrice.toLocaleString()}
+          value={workShop.costPaid.toLocaleString()}
           hint={`${percent.toLocaleString()}% ${t(
             "workShops.details.ofTotal",
             "of total",
@@ -210,7 +238,7 @@ const WorkShopDetails = () => {
         <KpiCard
           icon={Wallet}
           label={t("workShops.card.required", "Total Required")}
-          value={workShop.requirePrice.toLocaleString()}
+          value={workShop.totalCost.toLocaleString()}
           accent="bg-primary/10 text-primary"
         />
         <KpiCard
@@ -253,7 +281,7 @@ const WorkShopDetails = () => {
                   {t("workShops.card.paid", "Paid")}
                 </span>
                 <span className="font-semibold text-foreground">
-                  {workShop.payedPrice.toLocaleString()}
+                  {workShop.costPaid.toLocaleString()}
                 </span>
               </div>
               <span
@@ -273,7 +301,7 @@ const WorkShopDetails = () => {
                 {t("workShops.card.required", "Required")}:
                 <span className="font-medium text-foreground">
                   {" "}
-                  {workShop.requirePrice.toLocaleString()}
+                  {workShop.totalCost.toLocaleString()}
                 </span>
               </span>
               <span>
@@ -288,7 +316,7 @@ const WorkShopDetails = () => {
         </CardContent>
       </Card>
 
-      <div className="space-y-4">
+      <div className="space-y-4 rounded-xl border border-gray-300 bg-white p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -327,7 +355,60 @@ const WorkShopDetails = () => {
             />
           </div>
         </div>
-        <InvoicesTable />
+
+        <div className="space-y-3">
+          {isInvoicesLoading ? (
+            Array.from({ length: 3 }).map((_, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-3 rounded-lg border border-gray-300 bg-muted/30 p-3"
+              >
+                <Skeleton className="h-9 w-9 shrink-0 rounded-lg" />
+                <div className="min-w-0 flex-1 space-y-2">
+                  <Skeleton className="h-4 w-1/2" />
+                  <Skeleton className="h-3 w-1/3" />
+                </div>
+                <Skeleton className="h-4 w-16 shrink-0" />
+              </div>
+            ))
+          ) : invoices.length === 0 ? (
+            <p className="py-10 text-center text-sm text-muted-foreground">
+              {t("workShops.invoices.empty", "No invoices recorded yet.")}
+            </p>
+          ) : (
+            invoices.map((invoice) => (
+              <div
+                key={invoice.id}
+                className="flex items-center gap-3 rounded-lg border border-gray-300 bg-muted/30 p-3"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <FileText className="h-4 w-4" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium text-foreground">
+                    {invoice.description ||
+                      t("workShops.invoices.popup.unnamed", "Invoice")}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {new Date(invoice.data).toLocaleDateString(
+                      i18n.language === "ar" ? "ar" : "en",
+                      { year: "numeric", month: "short", day: "numeric" },
+                    )}
+                    {invoice.attachments.length > 0 && (
+                      <span className="ms-2 inline-flex items-center gap-1">
+                        <Paperclip className="h-3 w-3" />
+                        {invoice.attachments.length}
+                      </span>
+                    )}
+                  </p>
+                </div>
+                <span className="shrink-0 text-sm font-semibold tabular-nums text-foreground">
+                  {invoice.payedAmount.toLocaleString()}
+                </span>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

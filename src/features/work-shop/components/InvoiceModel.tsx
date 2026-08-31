@@ -1,20 +1,24 @@
-import { useRef, useState, type ReactNode } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { type ReactNode, useRef, useState } from "react";
+
 import { Plus } from "lucide-react";
+import { type Resolver, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
+import { useParams } from "react-router";
+
 import Input from "@/components/inputs/Input";
-import Model from "@/components/model/Model";
 import PopuupLayout from "@/components/layouts/Popup-layout";
+import Model from "@/components/model/Model";
+import { Button } from "@/components/ui/button";
 import AttachmentList, {
   type AttachmentListHandle,
 } from "@/features/attachment/components/AttachmentList";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   initialInvoiceValues,
   invoiceFormSchema,
-  useAddInvoice,
   type InvoiceFormValues,
+  useAddInvoice,
 } from "../api/actions";
 
 interface Props {
@@ -25,6 +29,7 @@ interface Props {
 
 export function InvoiceModel({ openKey, workShopId, openButton }: Props) {
   const { t } = useTranslation();
+  const { projectId } = useParams<{ projectId?: string }>();
   const [listKey, setListKey] = useState(0);
   const attachmentListRef = useRef<AttachmentListHandle>(null);
 
@@ -34,7 +39,9 @@ export function InvoiceModel({ openKey, workShopId, openButton }: Props) {
     reset,
     formState: { errors },
   } = useForm<InvoiceFormValues>({
-    resolver: zodResolver(invoiceFormSchema),
+    resolver: zodResolver(
+      invoiceFormSchema,
+    ) as unknown as Resolver<InvoiceFormValues>,
     defaultValues: initialInvoiceValues,
     criteriaMode: "all",
     mode: "onSubmit",
@@ -43,15 +50,14 @@ export function InvoiceModel({ openKey, workShopId, openButton }: Props) {
   const { mutate: addInvoice, isPending: isSaving } = useAddInvoice();
 
   const onSubmit = (values: InvoiceFormValues, close: () => void) => {
-    const attachments =
-      attachmentListRef.current?.getValues().map((a) => a.id) ?? [];
+    // const attachments =
+    //   attachmentListRef.current?.getValues().map((a) => a.id) ?? [];
     addInvoice(
       {
-        workShopId,
-        data: new Date(values.data),
-        description: values.description,
-        payedAmount: values.payedAmount,
-        attachments,
+        workshopId: Number(workShopId),
+        paymentDate: new Date(values.data),
+        amount: values.payedAmount,
+        projectId: Number(projectId),
       },
       {
         onSuccess: () => {
@@ -128,11 +134,7 @@ export function InvoiceModel({ openKey, workShopId, openButton }: Props) {
                 {t("common.cancel", "Cancel")}
               </Button>
             </Model.Close>
-            <Button
-              type="submit"
-              disabled={isSaving}
-              isLoading={isSaving}
-            >
+            <Button type="submit" disabled={isSaving} isLoading={isSaving}>
               {isSaving
                 ? t("common.loading", "Saving...")
                 : t("common.create", "Add Invoice")}

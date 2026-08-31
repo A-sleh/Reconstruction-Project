@@ -109,21 +109,21 @@ const ProjectStatPage = () => {
 
     const totalWorkshops = MOCK_WORK_SHOPS.length;
     const openWorkshops = MOCK_WORK_SHOPS.filter(
-      (w) => w.status === "open",
+      (w) => w.status === "Pending",
     ).length;
     const inProgressWorkshops = MOCK_WORK_SHOPS.filter(
-      (w) => w.status === "in-progress",
+      (w) => w.status === "InProgress",
     ).length;
     const totalWorkers = MOCK_WORK_SHOPS.reduce(
-      (sum, w) => sum + w.workerNumber,
+      (sum, w) => sum + w.memberNumber,
       0,
     );
     const totalBudgetRequired = MOCK_WORK_SHOPS.reduce(
-      (sum, w) => sum + w.requirePrice,
+      (sum, w) => sum + w.totalCost,
       0,
     );
     const totalBudgetPaid = MOCK_WORK_SHOPS.reduce(
-      (sum, w) => sum + w.payedPrice,
+      (sum, w) => sum + w.costPaid,
       0,
     );
     const budgetUtilization =
@@ -266,9 +266,9 @@ const ProjectStatPage = () => {
   const workshopBudgetData = useMemo(
     () =>
       MOCK_WORK_SHOPS.map((w) => ({
-        name: w.title.length > 20 ? w.title.slice(0, 20) + "..." : w.title,
-        paid: w.payedPrice,
-        required: w.requirePrice,
+        name: w.name.length > 20 ? w.name.slice(0, 20) + "..." : w.name,
+        paid: w.costPaid,
+        required: w.totalCost,
       })),
     [],
   );

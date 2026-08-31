@@ -2,7 +2,7 @@ import { FileText, Paperclip } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PopuupLayout from "@/components/layouts/Popup-layout";
 import type { InvoicePayload } from "../api/types";
-import { MOCK_INVOICES_BY_WORK_SHOP } from "../mock/mockInvoices";
+import { useWorkShopInvoices } from "../api/queries";
 import type { WorkShop } from "../api/types";
 
 interface Props {
@@ -20,7 +20,8 @@ export function WorkShopInvoicesPopup({
 }: Props) {
   const { t, i18n } = useTranslation();
 
-  const list = invoices ?? MOCK_INVOICES_BY_WORK_SHOP[workShop.id] ?? [];
+  const invoicesQuery = useWorkShopInvoices(workShop.id);
+  const list = invoices ?? invoicesQuery.data?.invoices ?? [];
 
   const formatDate = (date: Date) =>
     new Date(date).toLocaleDateString(i18n.language === "ar" ? "ar" : "en", {
@@ -33,11 +34,15 @@ export function WorkShopInvoicesPopup({
     <PopuupLayout
       openKey={openKey}
       title={t("workShops.invoices.popup.title", "Workshop Invoices")}
-      subTitle={workShop.title}
+      subTitle={workShop.name}
       openButton={openButton}
     >
       <div className="space-y-3 overflow-auto max-h-130">
-        {list.length === 0 ? (
+        {list.length === 0 && invoicesQuery.isLoading ? (
+          <p className="py-10 text-center text-sm text-muted-foreground">
+            Loading...
+          </p>
+        ) : list.length === 0 ? (
           <p className="py-10 text-center text-sm text-muted-foreground">
             {t(
               "workShops.invoices.popup.empty",

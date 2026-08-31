@@ -1,14 +1,16 @@
 import { GetAllWorkShopsFilters } from "./types";
 
+const BASE_PROJECT_ROUTE = "project";
 const BASE_WORK_SHOP_ROUTE = "work-shop";
 
 export enum WorkShopController {
-  GetAll = `${BASE_WORK_SHOP_ROUTE}/get-all`,
-  Create = `${BASE_WORK_SHOP_ROUTE}/create`,
-  Update = `${BASE_WORK_SHOP_ROUTE}/update`,
-  Delete = `${BASE_WORK_SHOP_ROUTE}/delete`,
+  GetAll = `${BASE_PROJECT_ROUTE}/get-project-workshops`,
+  Create = `${BASE_PROJECT_ROUTE}/add-work-shop`,
+  Update = `${BASE_PROJECT_ROUTE}/update-work-shop`,
+  Delete = `${BASE_PROJECT_ROUTE}/delete-work-shop`,
+  AddPayment = `${BASE_PROJECT_ROUTE}/add-workshop-payment`,
+  AddInvoice = `${BASE_PROJECT_ROUTE}/add-workshop-payment`,
   GetInvoices = `${BASE_WORK_SHOP_ROUTE}/get-invoices`,
-  AddInvoice = `${BASE_WORK_SHOP_ROUTE}/add-invoice`,
 }
 
 export const QUERY_KEYS = {
@@ -27,6 +29,7 @@ export const MUTATION_KEYS = {
     create: () => ["workShops", "create"],
     update: () => ["workShops", "update"],
     delete: () => ["workShops", "delete"],
+    addPayment: () => ["workShops", "addPayment"],
     addInvoice: () => ["workShops", "addInvoice"],
   },
 };

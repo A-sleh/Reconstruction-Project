@@ -7,14 +7,14 @@ import { z } from "zod";
 import { MUTATION_KEYS, QUERY_KEYS, WorkShopController } from ".";
 import type {
   AddInvoicePayload,
+  AddWorkShopsPayload,
+  AddWorkShopPaymentPayload,
   UpdateWorkShopPayload,
-  WorkShop,
-  WorkShopPayload,
 } from "./types";
 import { WORK_SHOP_STATUSES } from "./types";
 
 export const workShopFormSchema = z.object({
-  title: z
+  jobTitle: z
     .string()
     .min(1, i18n.t("workShops.validation.title", "Title is required"))
     .trim(),
@@ -22,26 +22,36 @@ export const workShopFormSchema = z.object({
     .string()
     .min(1, i18n.t("workShops.validation.description", "Description is required"))
     .trim(),
-  workerNumber: z.coerce
+  memberNumber: z.coerce
     .number()
     .int()
     .min(1, i18n.t("workShops.validation.workerNumber", "At least one worker")),
-  leaderPhoneNumber: z
+  supervisorPhoneNumber: z
     .string()
     .min(1, i18n.t("workShops.validation.phone", "Phone number is required")),
+  totalCost: z.coerce
+    .number()
+    .min(0, i18n.t("workShops.validation.totalCost", "Invalid amount")),
+  startWorkDate: z
+    .string()
+    .min(1, i18n.t("workShops.validation.startWorkDate", "Start date is required")),
+  endWorkDate: z
+    .string()
+    .min(1, i18n.t("workShops.validation.endWorkDate", "End date is required")),
   status: z.enum(WORK_SHOP_STATUSES),
-  payedPrice: z.coerce.number().min(0, i18n.t("workShops.validation.payedPrice", "Invalid amount")),
 });
 
 export type WorkShopFormValues = z.infer<typeof workShopFormSchema>;
 
 export const initialWorkShopValues: WorkShopFormValues = {
-  title: "",
+  jobTitle: "",
   description: "",
-  workerNumber: 1,
-  leaderPhoneNumber: "",
-  status: "open",
-  payedPrice: 0,
+  memberNumber: 1,
+  supervisorPhoneNumber: "",
+  totalCost: 0,
+  startWorkDate: "",
+  endWorkDate: "",
+  status: "Pending",
 };
 
 export const invoiceFormSchema = z.object({
@@ -82,29 +92,27 @@ const getErrorMessage = (error: unknown, fallback: string): string => {
 };
 
 const createWorkShopApi = async (
-  payload: WorkShopPayload,
-): Promise<WorkShop> => {
-  const { data } = await ApiInstance.post<WorkShop>(
-    `/${WorkShopController.Create}`,
-    payload,
-  );
-  return data;
+  payload: AddWorkShopsPayload,
+): Promise<void> => {
+  await ApiInstance.post(`/${WorkShopController.Create}`, payload);
 };
 
 const updateWorkShopApi = async (
   payload: UpdateWorkShopPayload,
-): Promise<WorkShop> => {
-  const { data } = await ApiInstance.put<WorkShop>(
-    `/${WorkShopController.Update}`,
-    payload,
-  );
-  return data;
+): Promise<void> => {
+  await ApiInstance.put(`/${WorkShopController.Update}`, payload);
 };
 
 const deleteWorkShopApi = async (id: number): Promise<void> => {
   await ApiInstance.delete(`/${WorkShopController.Delete}`, {
-    params: { WorkShopId: id },
+    params: { WorkshopId: id },
   });
+};
+
+const addWorkShopPaymentApi = async (
+  payload: AddWorkShopPaymentPayload,
+): Promise<void> => {
+  await ApiInstance.post(`/${WorkShopController.AddPayment}`, payload);
 };
 
 const addInvoiceApi = async (payload: AddInvoicePayload): Promise<void> => {
@@ -174,6 +182,31 @@ export const useDeleteWorkShop = () => {
         getErrorMessage(
           error,
           i18n.t("workShops.toast.deleteError", "Failed to delete workshop"),
+        ),
+      );
+    },
+  });
+};
+
+export const useAddWorkShopPayment = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.workShops.addPayment(),
+    mutationFn: addWorkShopPaymentApi,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.workShops.all,
+      });
+      successToast(
+        i18n.t("workShops.toast.paymentSuccess", "Payment added"),
+      );
+    },
+    onError: (error) => {
+      errorToast(
+        getErrorMessage(
+          error,
+          i18n.t("workShops.toast.paymentError", "Failed to add payment"),
         ),
       );
     },

@@ -21,9 +21,10 @@ const COLORS = {
 };
 
 const statusLabel: Record<string, string> = {
-  open: "OPEN",
-  "in-progress": "IN PROGRESS",
-  closed: "CLOSED",
+  Pending: "PENDING",
+  InProgress: "IN PROGRESS",
+  Completed: "COMPLETED",
+  Canceled: "CANCELED",
 };
 
 interface Props {
@@ -34,7 +35,7 @@ interface Props {
 
 const fmt = (n: number) => n.toLocaleString("en-US");
 
-const formatDate = (date: Date) =>
+const formatDate = (date: Date | string) =>
   new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
@@ -413,25 +414,26 @@ const styles = StyleSheet.create({
 
 const WorkShopInvoicePdf = ({ workShop, invoices = [], projectName }: Props) => {
   const percent =
-    workShop.requirePrice > 0
+    workShop.totalCost > 0
       ? Math.min(
           100,
-          Math.round((workShop.payedPrice / workShop.requirePrice) * 100),
+          Math.round((workShop.costPaid / workShop.totalCost) * 100),
         )
       : 0;
-  const remaining = Math.max(0, workShop.requirePrice - workShop.payedPrice);
+  const remaining = Math.max(0, workShop.totalCost - workShop.costPaid);
   const totalPayed = invoices.reduce((sum, i) => sum + i.payedAmount, 0);
 
   const details = [
-    { label: "Number of Workers", value: `${workShop.workerNumber}` },
-    { label: "Leader Phone", value: workShop.leaderPhoneNumber },
-    { label: "Created At", value: formatDate(workShop.createdAt) },
+    { label: "Number of Workers", value: `${workShop.memberNumber}` },
+    { label: "Supervisor Phone", value: workShop.supervisorPhoneNumber },
+    { label: "Start Date", value: formatDate(workShop.startWorkDate) },
+    { label: "End Date", value: formatDate(workShop.endWorkDate) },
     { label: "Status", value: statusLabel[workShop.status] ?? workShop.status },
   ];
 
   return (
     <Document
-      title={`Workshop Invoice - ${workShop.title}`}
+      title={`Workshop Invoice - ${workShop.name}`}
       author="Reconstruction Platform"
     >
       <Page size="A4" style={styles.page}>
@@ -458,7 +460,7 @@ const WorkShopInvoicePdf = ({ workShop, invoices = [], projectName }: Props) => 
             </View>
           </View>
 
-          <Text style={styles.workShopTitle}>{workShop.title}</Text>
+          <Text style={styles.workShopTitle}>{workShop.name}</Text>
           <Text style={styles.workShopDesc}>{workShop.description}</Text>
           <View style={styles.statusPill}>
             <Text style={styles.statusPillText}>
@@ -472,12 +474,12 @@ const WorkShopInvoicePdf = ({ workShop, invoices = [], projectName }: Props) => 
               <Text style={styles.metaValue}>{formatDate(new Date())}</Text>
             </View>
             <View style={styles.metaItem}>
-              <Text style={styles.metaLabel}>Leader Phone</Text>
-              <Text style={styles.metaValue}>{workShop.leaderPhoneNumber}</Text>
+              <Text style={styles.metaLabel}>Supervisor Phone</Text>
+              <Text style={styles.metaValue}>{workShop.supervisorPhoneNumber}</Text>
             </View>
             <View style={styles.metaItem}>
               <Text style={styles.metaLabel}>Workers</Text>
-              <Text style={styles.metaValue}>{workShop.workerNumber}</Text>
+              <Text style={styles.metaValue}>{workShop.memberNumber}</Text>
             </View>
           </View>
         </View>
@@ -501,7 +503,7 @@ const WorkShopInvoicePdf = ({ workShop, invoices = [], projectName }: Props) => 
                 </View>
               </View>
               <Text style={[styles.kpiValue, { color: COLORS.emerald }]}>
-                ${fmt(workShop.payedPrice)}
+                ${fmt(workShop.costPaid)}
               </Text>
               <Text style={styles.kpiHint}>Total received to date</Text>
             </View>
@@ -518,7 +520,7 @@ const WorkShopInvoicePdf = ({ workShop, invoices = [], projectName }: Props) => 
                 </View>
               </View>
               <Text style={[styles.kpiValue, { color: COLORS.blue }]}>
-                ${fmt(workShop.requirePrice)}
+                ${fmt(workShop.totalCost)}
               </Text>
               <Text style={styles.kpiHint}>Agreed contract value</Text>
             </View>
@@ -552,10 +554,10 @@ const WorkShopInvoicePdf = ({ workShop, invoices = [], projectName }: Props) => 
             </View>
             <View style={styles.progressLegend}>
               <Text style={styles.progressLegendText}>
-                Paid ${fmt(workShop.payedPrice)}
+                Paid ${fmt(workShop.costPaid)}
               </Text>
               <Text style={styles.progressLegendText}>
-                Required ${fmt(workShop.requirePrice)}
+                Required ${fmt(workShop.totalCost)}
               </Text>
             </View>
           </View>
@@ -599,7 +601,7 @@ const WorkShopInvoicePdf = ({ workShop, invoices = [], projectName }: Props) => 
                   key={invoice.id}
                   style={[
                     styles.tableRow,
-                    index % 2 === 1 && styles.tableRowAlt,
+                    ...(index % 2 === 1 ? [styles.tableRowAlt] : []),
                   ]}
                 >
                   <Text style={[styles.tableCell, styles.colNo]}>
