@@ -10,7 +10,7 @@ export type OrderStatus =
   | "PendingToApproveCancellation"
   | "Suspended"
   | "Completed";
-  
+
 export type OrderItemStatus =
   | "PendingApproval"
   | "Preparing"
@@ -156,7 +156,6 @@ export interface AddReceiveInvoiceRequestBody {
   orderItemReceives: OrderItemReceive[];
 }
 
-
 // ============================================================================
 // POST /api/order/approve-order-item-cancellation
 // ============================================================================
@@ -203,12 +202,12 @@ export interface ApproveOrderCancellationRequestBody {
 export interface CreateServiceOrderItem {
   serviceId: number; // integer ($int64)
   quantity: number; // integer ($int32)
-  discountDetailId: number; // integer ($int64)
 }
 
 export interface CreateServiceOrderRequestBody {
   projectId: number; // integer ($int64)
-  discountDetailId: number; // integer ($int64)
+  discountPercent: number;
+  discountValue: number;
   items: CreateServiceOrderItem[];
 }
 
@@ -218,11 +217,11 @@ export interface CreateServiceOrderRequestBody {
 export interface CreateResourceOrderItem {
   resourceId: number; // integer ($int64)
   quantity: number; // integer ($int32)
-  discountDetailId: number; // integer ($int64)
 }
 
 export interface CreateResourceOrderRequestBody {
   projectId: number; // integer ($int64)
-  discountDetailId: number; // integer ($int64)
+  discountPercent: number;
+  discountValue: number;
   items: CreateResourceOrderItem[];
 }
