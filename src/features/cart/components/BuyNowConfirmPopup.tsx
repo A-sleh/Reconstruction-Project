@@ -77,20 +77,20 @@ function BuyNowConfirmPopup({
           group.itemType === "Resource"
             ? createResource.mutateAsync({
                 projectId,
-                discountDetailId: 0,
+                discountPercent: 0,
+                discountValue: 0,
                 items: group.items.map((item) => ({
                   resourceId: item.id,
                   quantity: item.quantity,
-                  discountDetailId: 0,
                 })),
               })
             : createService.mutateAsync({
                 projectId,
-                discountDetailId: 0,
+                discountPercent: 0,
+                discountValue: 0,
                 items: group.items.map((item) => ({
                   serviceId: item.id,
                   quantity: item.quantity,
-                  discountDetailId: 0,
                 })),
               }),
         ),
