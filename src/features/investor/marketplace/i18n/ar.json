@@ -1,0 +1,71 @@
+{
+  "marketplace": {
+    "header": {
+      "title": "عقارات للبيع",
+      "subtitle": "تصفح صفقات الأراضي والعقارات الموثقة المدرجة من مستثمرين موثقين.",
+      "listings": "{{count}} إعلان",
+      "verified": "{{count}} موثق"
+    },
+    "filters": {
+      "search": "بحث",
+      "searchPlaceholder": "المدينة، العنوان، المنطقة…",
+      "propertyType": "نوع العقار",
+      "typeOptions": {
+        "all": "الكل",
+        "land": "أرض",
+        "building": "مبنى"
+      },
+      "priceRange": "نطاق السعر",
+      "areaRange": "المساحة (م²)",
+      "verifiedOnly": "الموثق فقط",
+      "verifiedHint": "مستندات الملكية معتمدة من الإدارة.",
+      "reset": "إعادة ضبط الفلاتر"
+    },
+    "grid": {
+      "showing": "عرض {{count}} صفقة",
+      "sort": {
+        "newest": "الأحدث أولاً",
+        "priceAsc": "السعر: من الأقل إلى الأعلى",
+        "priceDesc": "السعر: من الأعلى إلى الأقل",
+        "areaDesc": "الأكبر مساحة"
+      },
+      "empty": "لا توجد صفقات تطابق الفلاتر"
+    },
+    "card": {
+      "land": "أرض",
+      "building": "مبنى",
+      "verifiedOwner": "مالك موثق",
+      "asking": "السعر المطلوب",
+      "area": "المساحة",
+      "viewDetails": "عرض التفاصيل"
+    },
+    "detail": {
+      "askingPrice": "السعر المطلوب",
+      "dealArea": "مساحة الصفقة",
+      "ownerId": "معرف المالك",
+      "listed": "تاريخ الإدراج",
+      "landSpec": "مواصفات الأرض",
+      "buildingSpec": "مواصفات المبنى",
+      "location": "الموقع",
+      "area": "المساحة",
+      "zoning": "التنظيم العمراني",
+      "accessibility": "سهولة الوصول",
+      "borders": "الحدود",
+      "zoneType": "نوع المنطقة",
+      "readiness": "جاهزية البناء",
+      "orientation": "الاتجاه",
+      "buildingType": "نوع المبنى",
+      "builtArea": "المساحة المبنية",
+      "linkedLand": "الأرض المرتبطة",
+      "city": "المدينة",
+      "street": "الشارع",
+      "geolocation": "الموقع الجغرافي",
+      "dealTerms": "شروط الصفقة"
+    },
+    "drawer": {
+      "pendingVerification": "قيد التحقق",
+      "contactInvestor": "تواصل مع المستثمر",
+      "makeOffer": "قدّم عرضاً"
+    }
+  }
+}

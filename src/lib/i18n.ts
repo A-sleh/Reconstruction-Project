@@ -59,6 +59,8 @@ import arEngineerRequests from "@/features/engineer/projects/i18n/ar.json";
 import enEngineerRequests from "@/features/engineer/projects/i18n/en.json";
 import arEngineerStatistics from "@/features/engineer/statistics/i18n/ar.json";
 import enEngineerStatistics from "@/features/engineer/statistics/i18n/en.json";
+import arMarketplace from "@/features/investor/marketplace/i18n/ar.json";
+import enMarketplace from "@/features/investor/marketplace/i18n/en.json";
 
 function mergeTranslations(...objects: Record<string, unknown>[]) {
   return objects.reduce<Record<string, unknown>>((acc, obj) => {
@@ -104,6 +106,7 @@ const resources = {
       enBuildingVerification,
       enEngineerRequests,
       enEngineerStatistics,
+      enMarketplace,
     ),
   },
   ar: {
@@ -135,6 +138,7 @@ const resources = {
       arBuildingVerification,
       arEngineerRequests,
       arEngineerStatistics,
+      arMarketplace,
     ),
   },
 };

@@ -1,12 +1,13 @@
-import { useParams } from "react-router";
+import { AlertCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router";
+
+import Loader from "@/components/shared/Loader";
+import { useLandById } from "@/features/investor/lands-buildings/api/query";
+import LandBuildingsSection from "@/features/investor/lands-buildings/components/LandBuildingsSection";
+import LandDetailsGrid from "@/features/investor/lands-buildings/components/LandDetailsGrid";
 import LandHeroSection from "@/features/investor/lands-buildings/components/LandHeroSection";
 import LandKPICards from "@/features/investor/lands-buildings/components/LandKPICards";
-import LandDetailsGrid from "@/features/investor/lands-buildings/components/LandDetailsGrid";
-import LandBuildingsSection from "@/features/investor/lands-buildings/components/LandBuildingsSection";
-import { useLandById } from "@/features/investor/lands-buildings/api/query";
-import { AlertCircle, Loader2 } from "lucide-react";
-import Loader from "@/components/shared/Loader";
 
 export default function PropertyDetail() {
   const { t } = useTranslation();

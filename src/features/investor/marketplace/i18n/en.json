@@ -1,0 +1,71 @@
+{
+  "marketplace": {
+    "header": {
+      "title": "Properties for Sale",
+      "subtitle": "Browse vetted land and building deals listed by verified investors.",
+      "listings": "{{count}} listings",
+      "verified": "{{count}} verified"
+    },
+    "filters": {
+      "search": "Search",
+      "searchPlaceholder": "City, address, zone…",
+      "propertyType": "Property Type",
+      "typeOptions": {
+        "all": "all",
+        "land": "land",
+        "building": "building"
+      },
+      "priceRange": "Price range",
+      "areaRange": "Area (m²)",
+      "verifiedOnly": "Verified only",
+      "verifiedHint": "Ownership documents approved by admin.",
+      "reset": "Reset filters"
+    },
+    "grid": {
+      "showing": "Showing {{count}} deals",
+      "sort": {
+        "newest": "Newest first",
+        "priceAsc": "Price: Low to High",
+        "priceDesc": "Price: High to Low",
+        "areaDesc": "Largest area"
+      },
+      "empty": "No listings match your filters"
+    },
+    "card": {
+      "land": "LAND",
+      "building": "BUILDING",
+      "verifiedOwner": "Verified Owner",
+      "asking": "Asking",
+      "area": "Area",
+      "viewDetails": "View Details"
+    },
+    "detail": {
+      "askingPrice": "Asking Price",
+      "dealArea": "Deal Area",
+      "ownerId": "Owner ID",
+      "listed": "Listed",
+      "landSpec": "Land Specification",
+      "buildingSpec": "Building Specification",
+      "location": "Location",
+      "area": "Area",
+      "zoning": "Zoning",
+      "accessibility": "Accessibility",
+      "borders": "Borders",
+      "zoneType": "Zone Type",
+      "readiness": "Readiness",
+      "orientation": "Orientation",
+      "buildingType": "Building Type",
+      "builtArea": "Built Area",
+      "linkedLand": "Linked Land",
+      "city": "City",
+      "street": "Street",
+      "geolocation": "Geolocation",
+      "dealTerms": "Deal Terms"
+    },
+    "drawer": {
+      "pendingVerification": "Pending verification",
+      "contactInvestor": "Contact Investor",
+      "makeOffer": "Make Offer"
+    }
+  }
+}
