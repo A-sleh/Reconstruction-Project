@@ -12,6 +12,7 @@ import {
   RiFolderShieldLine,
   RiFoldersLine,
   RiHome9Line,
+  RiInboxLine,
   RiListUnordered,
   RiShoppingBagLine,
   RiStore2Line,
@@ -65,11 +66,23 @@ const Navbar = () => {
       icon: <CgProfile size={18} />,
       permission: Permissions.PROFILE_VIEW,
     },
+    ...(isEngineer
+      ? [
+          {
+            label: t("navbar.my-requests"),
+            href: paths.app.engineer.requests.path,
+            icon: <RiInboxLine size={18} />,
+            permission: Permissions.PROFILE_VIEW,
+          },
+        ]
+      : []),
     {
       label: t("navbar.statistics"),
-      href: isResourceProvidor
-        ? paths.app.resourceProvidor.statistics.path
-        : paths.app.serviceProvidor.statistics.path,
+      href: isEngineer
+        ? paths.app.engineer.statistics.path
+        : isResourceProvidor
+          ? paths.app.resourceProvidor.statistics.path
+          : paths.app.serviceProvidor.statistics.path,
       icon: <FiBarChart2 size={18} />,
       permission: Permissions.STATISTICS_VIEW,
     },

@@ -18,6 +18,8 @@ export const MOCK_ENGINEER_PROFILE: EngineerProfile = {
     employmentType: "FIRM_EMPLOYEE",
   },
   verificationStatus: "VERIFIED",
+  rating: 4.3,
+  reviewsCount: 12,
 };
 
 export const MOCK_ENGINEER_PROFILE_PENDING: EngineerProfile = {
@@ -36,6 +38,8 @@ export const MOCK_ENGINEER_PROFILE_PENDING: EngineerProfile = {
     employmentType: "FREELANCER",
   },
   verificationStatus: "PENDING",
+  rating: 0,
+  reviewsCount: 0,
 };
 
 export const MOCK_ENGINEER_PROFILE_REJECTED: EngineerProfile = {
@@ -54,4 +58,6 @@ export const MOCK_ENGINEER_PROFILE_REJECTED: EngineerProfile = {
     employmentType: "GOVERNMENT_EMPLOYEE",
   },
   verificationStatus: "REJECTED",
+  rating: 0,
+  reviewsCount: 0,
 };

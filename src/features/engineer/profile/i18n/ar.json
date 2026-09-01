@@ -126,6 +126,108 @@
       "toast": {
         "created": "تمت إضافة المشروع بنجاح"
       }
+    },
+    "stats": {
+      "totalProjects": "إجمالي المشاريع",
+      "completed": "مكتملة",
+      "inProgress": "قيد التنفيذ",
+      "yearsExperience": "سنوات الخبرة"
+    },
+    "skills": {
+      "title": "المهارات والشهادات",
+      "subtitle": "المهارات التقنية والشهادات المهنية",
+      "skillsLabel": "المهارات",
+      "certificationsLabel": "الشهادات",
+      "addSkill": "إضافة مهارة",
+      "addCertification": "إضافة شهادة",
+      "cancel": "إلغاء",
+      "removeSkill": "إزالة المهارة",
+      "removeCertification": "إزالة الشهادة",
+      "skillPlaceholder": "مثال: AutoCAD",
+      "emptySkills": "لا توجد مهارات مضافة بعد",
+      "certification": {
+        "fields": {
+          "name": "اسم الشهادة",
+          "issuer": "الجهة المانحة",
+          "year": "السنة"
+        },
+        "placeholders": {
+          "name": "مثال: شهادة PMP",
+          "issuer": "مثال: PMI",
+          "year": "مثال: 2020"
+        },
+        "validation": {
+          "name": "اسم الشهادة مطلوب",
+          "issuer": "الجهة المانحة مطلوبة",
+          "year": "أدخل سنة صحيحة"
+        },
+        "model": {
+          "title": "إضافة شهادة",
+          "subtitle": "أضف شهادة مهنية إلى محفظتك.",
+          "submit": "إضافة الشهادة",
+          "cancel": "إلغاء"
+        },
+        "toast": {
+          "created": "تمت إضافة الشهادة بنجاح",
+          "deleted": "تمت إزالة الشهادة"
+        }
+      },
+      "toast": {
+        "skillAdded": "تمت إضافة المهارة بنجاح",
+        "skillRemoved": "تمت إزالة المهارة"
+      }
+    },
+    "reviews": {
+      "title": "التقييمات والمراجعات",
+      "subtitle": "آراء أصحاب المشاريع الذين تعاملوا معك",
+      "averageLabel": "متوسط التقييم",
+      "totalReviews": "{{count}} مراجعة",
+      "distributionLabel": "توزيع التقييمات",
+      "noReviewsYet": "لا توجد مراجعات بعد",
+      "noReviewsHint": "أكمل مشروعك الأول لتبدأ بتلقي آراء العملاء."
+    },
+    "experience": {
+      "title": "الخبرات المهنية",
+      "subtitle": "سجل عملك السابق ووظائفك",
+      "add": "إضافة خبرة",
+      "empty": "لا توجد خبرات مضافة بعد",
+      "emptyHint": "أضف سجل عملك لبناء محفظة أقوى.",
+      "current": "حالية",
+      "present": "حتى الآن",
+      "fields": {
+        "jobTitle": "المسمى الوظيفي",
+        "company": "الشركة",
+        "location": "الموقع",
+        "startDate": "تاريخ البداية",
+        "endDate": "تاريخ النهاية",
+        "isCurrent": "أنا أعمل هنا حالياً",
+        "description": "الوصف"
+      },
+      "placeholders": {
+        "jobTitle": "مثال: مهندس إنشائي أول",
+        "company": "اسم الشركة",
+        "location": "المدينة أو الحي",
+        "startDate": "اختر تاريخ البداية",
+        "endDate": "اختر تاريخ النهاية",
+        "description": "ملخص مختصر عن دورك ومسؤولياتك..."
+      },
+      "validation": {
+        "jobTitle": "المسمى الوظيفي مطلوب (3 أحرف على الأقل)",
+        "company": "اسم الشركة مطلوب",
+        "location": "الموقع مطلوب",
+        "startDate": "تاريخ البداية مطلوب",
+        "endDate": "تاريخ النهاية مطلوب ما لم تكن تعمل هنا حالياً",
+        "description": "الوصف يجب أن يكون 10 أحرف على الأقل"
+      },
+      "model": {
+        "title": "إضافة خبرة",
+        "subtitle": "أضف وظيفة أو منصباً جديداً إلى سجل عملك.",
+        "submit": "إضافة الخبرة",
+        "cancel": "إلغاء"
+      },
+      "toast": {
+        "created": "تمت إضافة الخبرة بنجاح"
+      }
     }
   }
 }

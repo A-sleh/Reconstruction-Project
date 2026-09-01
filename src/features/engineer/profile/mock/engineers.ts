@@ -17,6 +17,8 @@ export const MOCK_ENGINEERS: EngineerSearchResult[] = [
     yearsOfExperience: 8,
     bio: "مهندس مدني متخصص في الإشراف على بناء المنشآت السكنية وإعادة تأهيل المباني المتضررة.",
     createdAt: "2024-03-12",
+    rating: 4.3,
+    reviewsCount: 12,
   },
   {
     userId: "u-1002",
@@ -34,6 +36,8 @@ export const MOCK_ENGINEERS: EngineerSearchResult[] = [
     yearsOfExperience: 4,
     bio: "معمارية متخصصة في تصميم الأبنية السكنية والتجارية بأسلوب حديث يحافظ على الطابع المحلي.",
     createdAt: "2025-01-20",
+    rating: 4.8,
+    reviewsCount: 9,
   },
   {
     userId: "u-1003",
@@ -51,6 +55,8 @@ export const MOCK_ENGINEERS: EngineerSearchResult[] = [
     yearsOfExperience: 11,
     bio: "مهندس كهرباء بخبرة واسعة في شبكات الطاقة والتغذية الكهربائية للمنشآت الصناعية.",
     createdAt: "2023-11-02",
+    rating: 4.1,
+    reviewsCount: 15,
   },
   {
     userId: "u-1004",
@@ -68,6 +74,8 @@ export const MOCK_ENGINEERS: EngineerSearchResult[] = [
     yearsOfExperience: 6,
     bio: "مهندسة ميكانيك متخصصة في أنظمة التدفئة والتهوية وتكييف الهواء للمباني الكبيرة.",
     createdAt: "2024-08-15",
+    rating: 4.6,
+    reviewsCount: 7,
   },
   {
     userId: "u-1005",
@@ -85,6 +93,8 @@ export const MOCK_ENGINEERS: EngineerSearchResult[] = [
     yearsOfExperience: 15,
     bio: "مهندس مدني أول بخبرة واسعة في الجسور والمنشآت الخرسانية المسلحة ومشاريع البنية التحتية.",
     createdAt: "2022-05-30",
+    rating: 4.9,
+    reviewsCount: 21,
   },
   {
     userId: "u-1006",
@@ -102,6 +112,8 @@ export const MOCK_ENGINEERS: EngineerSearchResult[] = [
     yearsOfExperience: 2,
     bio: "معمارية شابة متخصصة في إعادة تأهيل الأبنية التراثية والمحافظة على الطابع التاريخي.",
     createdAt: "2026-01-08",
+    rating: 4.2,
+    reviewsCount: 5,
   },
   {
     userId: "u-1007",
@@ -119,6 +131,8 @@ export const MOCK_ENGINEERS: EngineerSearchResult[] = [
     yearsOfExperience: 5,
     bio: "مهندس كهرباء متخصص في أنظمة الإنارة الذكية والشبكات الكهربائية للأبنية السكنية.",
     createdAt: "2025-06-19",
+    rating: 3.9,
+    reviewsCount: 6,
   },
   {
     userId: "u-1008",
@@ -136,6 +150,8 @@ export const MOCK_ENGINEERS: EngineerSearchResult[] = [
     yearsOfExperience: 9,
     bio: "مهندسة ميكانيك متخصصة في شبكات المياه والصرف الصحي ومشاريع إعادة التأهيل.",
     createdAt: "2024-11-27",
+    rating: 4.5,
+    reviewsCount: 11,
   },
   {
     userId: "u-1009",
@@ -153,6 +169,8 @@ export const MOCK_ENGINEERS: EngineerSearchResult[] = [
     yearsOfExperience: 3,
     bio: "مهندس مدني متخصص في إدارة المواقع والتنسيق بين المقاولين في مشاريع الإسكان.",
     createdAt: "2025-09-14",
+    rating: 4.0,
+    reviewsCount: 4,
   },
   {
     userId: "u-1010",
@@ -170,5 +188,7 @@ export const MOCK_ENGINEERS: EngineerSearchResult[] = [
     yearsOfExperience: 12,
     bio: "معمارية رئيسية بخبرة في تصميم المجمعات السكنية والمخططات العمرانية للمدن.",
     createdAt: "2023-07-03",
+    rating: 4.7,
+    reviewsCount: 18,
   },
 ];

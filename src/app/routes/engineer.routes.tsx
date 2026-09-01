@@ -9,6 +9,10 @@ const Engineer_Profile = lazy(() => import("@/pages/engineer/Profile.view"));
 
 const Engineers = lazy(() => import("@/pages/engineer/Engineers.view"));
 
+const Engineer_Requests = lazy(() => import("@/pages/engineer/Requests.view"));
+
+const Engineer_Statistics = lazy(() => import("@/pages/engineer/Statistics.view"));
+
 export const engineerRoutes: RouteObject[] = [
   {
     path: paths.app.engineer.profile.path,
@@ -26,6 +30,26 @@ export const engineerRoutes: RouteObject[] = [
       <Suspense fallback={<Loader />}>
         <AuthGuard allowedPermissions={Permissions.PROFILE_VIEW}>
           <Engineers />
+        </AuthGuard>
+      </Suspense>
+    ),
+  },
+  {
+    path: paths.app.engineer.requests.path,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <AuthGuard allowedPermissions={Permissions.PROFILE_VIEW}>
+          <Engineer_Requests />
+        </AuthGuard>
+      </Suspense>
+    ),
+  },
+  {
+    path: paths.app.engineer.statistics.path,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <AuthGuard allowedPermissions={Permissions.STATISTICS_VIEW}>
+          <Engineer_Statistics />
         </AuthGuard>
       </Suspense>
     ),

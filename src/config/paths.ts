@@ -148,6 +148,14 @@ export const paths = {
         path: "/app/engineer/engineers",
         getHref: () => `/app/engineer/engineers`,
       },
+      requests: {
+        path: "/app/engineer/requests",
+        getHref: () => `/app/engineer/requests`,
+      },
+      statistics: {
+        path: "/app/engineer/statistics",
+        getHref: () => `/app/engineer/statistics`,
+      },
     },
     projects: {
       path: "/app/investor/projects",

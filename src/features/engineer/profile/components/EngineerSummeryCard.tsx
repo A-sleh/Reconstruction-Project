@@ -106,7 +106,7 @@ const EngineerSummeryCard = ({
               </Button>
             )}
             <Button asChild className="flex-1">
-              <a href={paths.app.engineer.profile.getHref()}>
+              <a href={paths.public.engineerProfile.getHref(engineer.engineerId)}>
                 {t("engineerProfile.engineerSearch.viewProfile")}
               </a>
             </Button>

@@ -43,6 +43,8 @@ export interface EngineerProfile {
   syndicate_id: string;
   professionalInfo: EngineerProfessionalInfo;
   verificationStatus: EngineerVerificationStatus;
+  rating: number;
+  reviewsCount: number;
 }
 
 export type EngineerProjectStatus =
@@ -98,4 +100,52 @@ export interface EngineerSearchResult {
   yearsOfExperience: number;
   bio: string;
   createdAt: string;
+  rating: number;
+  reviewsCount: number;
+}
+
+// ============================================================================
+// Public Engineer Profile
+// ============================================================================
+export interface PublicEngineerReview {
+  id: number;
+  authorName: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+}
+
+export interface PublicEngineerProfile extends EngineerProfile {
+  recentProjects: EngineerProject[];
+  currentProject: EngineerProject | null;
+  reviews: PublicEngineerReview[];
+}
+
+// ============================================================================
+// Portfolio — Experience
+// ============================================================================
+export interface EngineerExperience {
+  id: string;
+  jobTitle: string;
+  company: string;
+  location: string;
+  startDate: string;
+  endDate: string | null;
+  description: string;
+  isCurrent: boolean;
+}
+
+// ============================================================================
+// Portfolio — Skills & Certifications
+// ============================================================================
+export interface EngineerCertification {
+  id: string;
+  name: string;
+  issuer: string;
+  year: number;
+}
+
+export interface EngineerPortfolioSkills {
+  skills: string[];
+  certifications: EngineerCertification[];
 }

@@ -126,6 +126,108 @@
       "toast": {
         "created": "Project added successfully"
       }
+    },
+    "stats": {
+      "totalProjects": "Total Projects",
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "yearsExperience": "Years Experience"
+    },
+    "skills": {
+      "title": "Skills & Certifications",
+      "subtitle": "Technical skills and professional certifications",
+      "skillsLabel": "Skills",
+      "certificationsLabel": "Certifications",
+      "addSkill": "Add Skill",
+      "addCertification": "Add Certification",
+      "cancel": "Cancel",
+      "removeSkill": "Remove skill",
+      "removeCertification": "Remove certification",
+      "skillPlaceholder": "e.g. AutoCAD",
+      "emptySkills": "No skills added yet",
+      "certification": {
+        "fields": {
+          "name": "Certification name",
+          "issuer": "Issuing organization",
+          "year": "Year"
+        },
+        "placeholders": {
+          "name": "e.g. PMP Certificate",
+          "issuer": "e.g. PMI",
+          "year": "e.g. 2020"
+        },
+        "validation": {
+          "name": "Certification name is required",
+          "issuer": "Issuing organization is required",
+          "year": "Enter a valid year"
+        },
+        "model": {
+          "title": "Add Certification",
+          "subtitle": "Add a professional certification to your portfolio.",
+          "submit": "Add Certification",
+          "cancel": "Cancel"
+        },
+        "toast": {
+          "created": "Certification added successfully",
+          "deleted": "Certification removed"
+        }
+      },
+      "toast": {
+        "skillAdded": "Skill added successfully",
+        "skillRemoved": "Skill removed"
+      }
+    },
+    "reviews": {
+      "title": "Ratings & Reviews",
+      "subtitle": "Feedback from project owners who worked with you",
+      "averageLabel": "Average Rating",
+      "totalReviews": "{{count}} reviews",
+      "distributionLabel": "Rating Breakdown",
+      "noReviewsYet": "No reviews yet",
+      "noReviewsHint": "Complete your first project to start receiving feedback from clients."
+    },
+    "experience": {
+      "title": "Professional Experience",
+      "subtitle": "Your work history and past jobs",
+      "add": "Add Experience",
+      "empty": "No experience added yet",
+      "emptyHint": "Add your work history to build a stronger portfolio.",
+      "current": "Current",
+      "present": "Present",
+      "fields": {
+        "jobTitle": "Job title",
+        "company": "Company",
+        "location": "Location",
+        "startDate": "Start date",
+        "endDate": "End date",
+        "isCurrent": "I currently work here",
+        "description": "Description"
+      },
+      "placeholders": {
+        "jobTitle": "e.g. Senior Structural Engineer",
+        "company": "Company name",
+        "location": "City or district",
+        "startDate": "Pick a start date",
+        "endDate": "Pick an end date",
+        "description": "A short summary of your role and responsibilities..."
+      },
+      "validation": {
+        "jobTitle": "Job title is required (at least 3 characters)",
+        "company": "Company name is required",
+        "location": "Location is required",
+        "startDate": "Start date is required",
+        "endDate": "End date is required unless you currently work here",
+        "description": "Description must be at least 10 characters"
+      },
+      "model": {
+        "title": "Add Experience",
+        "subtitle": "Add a new job or position to your work history.",
+        "submit": "Add Experience",
+        "cancel": "Cancel"
+      },
+      "toast": {
+        "created": "Experience added successfully"
+      }
     }
   }
 }
