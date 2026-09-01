@@ -1,0 +1,18 @@
+{
+  "projectMessages": {
+    "title": "Messages",
+    "subtitle": "Discuss and coordinate with all project members.",
+    "members": "Members",
+    "online": "Online",
+    "offline": "Offline",
+    "you": "You",
+    "composerPlaceholder": "Write a message...",
+    "send": "Send",
+    "empty": "No messages yet. Start the conversation!",
+    "noteBadge": "Note",
+    "toast": {
+      "sent": "Message sent"
+    },
+    "today": "Today"
+  }
+}

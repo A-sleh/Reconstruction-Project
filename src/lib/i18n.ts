@@ -59,6 +59,10 @@ import arEngineerRequests from "@/features/engineer/projects/i18n/ar.json";
 import enEngineerRequests from "@/features/engineer/projects/i18n/en.json";
 import arEngineerStatistics from "@/features/engineer/statistics/i18n/ar.json";
 import enEngineerStatistics from "@/features/engineer/statistics/i18n/en.json";
+import arProjectBoard from "@/features/project-board/i18n/ar.json";
+import enProjectBoard from "@/features/project-board/i18n/en.json";
+import arProjectMessages from "@/features/project-messages/i18n/ar.json";
+import enProjectMessages from "@/features/project-messages/i18n/en.json";
 import arMarketplace from "@/features/investor/marketplace/i18n/ar.json";
 import enMarketplace from "@/features/investor/marketplace/i18n/en.json";
 
@@ -104,9 +108,10 @@ const resources = {
       enAdminStatistics,
       enEngineerVerification,
       enBuildingVerification,
-      enEngineerRequests,
+enEngineerRequests,
       enEngineerStatistics,
-      enMarketplace,
+      enProjectBoard,
+      enProjectMessages,
     ),
   },
   ar: {
@@ -136,9 +141,10 @@ const resources = {
       arAdminStatistics,
       arEngineerVerification,
       arBuildingVerification,
-      arEngineerRequests,
+arEngineerRequests,
       arEngineerStatistics,
-      arMarketplace,
+      arProjectBoard,
+      arProjectMessages,
     ),
   },
 };
