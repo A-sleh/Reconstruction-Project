@@ -38,6 +38,10 @@ export const Permissions = {
   // ── System Users (Admin) ────────────────────────────────────
   USERS_MANAGE: "users.manage",
 
+  // ── Verification (Admin) ────────────────────────────────────
+  ENGINEERS_VERIFY: "engineers.verify",
+  BUILDINGS_VERIFY: "buildings.verify",
+
   // ── Support (Admin) ─────────────────────────────────────────
   SUPPORT_MANAGE: "support.manage",
 
@@ -106,7 +110,10 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.CATEGORIES_MANAGE,
     Permissions.USERS_MANAGE,
     Permissions.SUPPORT_MANAGE,
+    Permissions.ENGINEERS_VERIFY,
+    Permissions.BUILDINGS_VERIFY,
     Permissions.PROJECTS_VIEW,
+    Permissions.STATISTICS_VIEW,
   ],
 };
 

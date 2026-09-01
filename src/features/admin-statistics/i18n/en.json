@@ -1,0 +1,69 @@
+{
+  "adminStatistics": {
+    "header": {
+      "insights": "Platform Intelligence",
+      "title": "Statistics Dashboard",
+      "description": "Comprehensive analytics across the entire reconstruction platform",
+      "liveData": "Live Data"
+    },
+    "kpi": {
+      "totalUsers": "Total Users",
+      "totalUsersHint": "All registered accounts",
+      "totalResources": "Total Resources",
+      "totalResourcesHint": "In the resource bank",
+      "totalServices": "Total Services",
+      "totalServicesHint": "In the service bank",
+      "pendingRequests": "Pending Requests",
+      "pendingRequestsHint": "Awaiting admin review",
+      "openTickets": "Open Tickets",
+      "openTicketsHint": "Active support tickets",
+      "resolvedToday": "Resolved Today",
+      "resolvedTodayHint": "Tickets closed today"
+    },
+    "charts": {
+      "userRoles": {
+        "title": "User Distribution by Role",
+        "description": "Breakdown of platform users by account type"
+      },
+      "userGrowth": {
+        "title": "User Growth Trend",
+        "description": "Monthly new user registrations over time",
+        "newUsers": "New Users"
+      },
+      "categoryHealth": {
+        "title": "Category Health",
+        "description": "Resource and service category counts across the system bank",
+        "resources": "Resource Categories",
+        "services": "Service Categories"
+      },
+      "supportStatus": {
+        "title": "Support Ticket Status",
+        "description": "Current distribution of all support tickets",
+        "total": "Total Tickets"
+      },
+      "bankRequests": {
+        "title": "Bank Request Trend",
+        "description": "Monthly bank item request submissions",
+        "requests": "Requests"
+      },
+      "requestStatus": {
+        "title": "Request Resolution Breakdown",
+        "description": "How bank requests have been processed",
+        "accepted": "Accepted",
+        "pending": "Pending",
+        "rejected": "Rejected",
+        "resolved": "Resolved"
+      }
+    },
+    "recentActivity": {
+      "title": "Recent Pending Items",
+      "description": "Items requiring attention",
+      "bankRequests": "Pending Bank Requests",
+      "supportTickets": "Open Support Tickets",
+      "noItems": "No pending items",
+      "viewAll": "View All",
+      "bankRequestItem": "{{name}} — {{category}}",
+      "supportTicketItem": "{{subject}} — {{priority}}"
+    }
+  }
+}

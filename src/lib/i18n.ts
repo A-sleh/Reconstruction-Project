@@ -47,6 +47,12 @@ import arAttachment from "@/features/attachment/i18n/ar.json";
 import enAttachment from "@/features/attachment/i18n/en.json";
 import arPublicProvider from "@/features/public-provider/i18n/ar.json";
 import enPublicProvider from "@/features/public-provider/i18n/en.json";
+import arAdminStatistics from "@/features/admin-statistics/i18n/ar.json";
+import enAdminStatistics from "@/features/admin-statistics/i18n/en.json";
+import arEngineerVerification from "@/features/engineer-verification/i18n/ar.json";
+import enEngineerVerification from "@/features/engineer-verification/i18n/en.json";
+import arBuildingVerification from "@/features/building-verification/i18n/ar.json";
+import enBuildingVerification from "@/features/building-verification/i18n/en.json";
 
 function mergeTranslations(...objects: Record<string, unknown>[]) {
   return objects.reduce<Record<string, unknown>>((acc, obj) => {
@@ -86,6 +92,9 @@ const resources = {
       enProjectReports,
       enAttachment,
       enPublicProvider,
+      enAdminStatistics,
+      enEngineerVerification,
+      enBuildingVerification,
     ),
   },
   ar: {
@@ -111,6 +120,9 @@ const resources = {
       arProjectReports,
       arAttachment,
       arPublicProvider,
+      arAdminStatistics,
+      arEngineerVerification,
+      arBuildingVerification,
     ),
   },
 };

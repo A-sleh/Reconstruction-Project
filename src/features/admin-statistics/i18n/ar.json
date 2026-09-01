@@ -1,0 +1,69 @@
+{
+  "adminStatistics": {
+    "header": {
+      "insights": "معلومات المنصة",
+      "title": "لوحة الإحصائيات",
+      "description": "تحليلات شاملة عبر منصة إعادة الإعمار بالكامل",
+      "liveData": "بيانات مباشرة"
+    },
+    "kpi": {
+      "totalUsers": "إجمالي المستخدمين",
+      "totalUsersHint": "جميع الحسابات المسجلة",
+      "totalResources": "إجمالي الموارد",
+      "totalResourcesHint": "في بنك الموارد",
+      "totalServices": "إجمالي الخدمات",
+      "totalServicesHint": "في بنك الخدمات",
+      "pendingRequests": "الطلبات المعلقة",
+      "pendingRequestsHint": "بانتظار مراجعة المدير",
+      "openTickets": "التذاكر المفتوحة",
+      "openTicketsHint": "تذاكر الدعم النشطة",
+      "resolvedToday": "تم حلها اليوم",
+      "resolvedTodayHint": "تذاكر تم إغلاقها اليوم"
+    },
+    "charts": {
+      "userRoles": {
+        "title": "توزيع المستخدمين حسب الدور",
+        "description": "توزيع مستخدمي المنصة حسب نوع الحساب"
+      },
+      "userGrowth": {
+        "title": "اتجاه نمو المستخدمين",
+        "description": "التسجيلات الجديدة الشهرية عبر الزمن",
+        "newUsers": "مستخدمون جدد"
+      },
+      "categoryHealth": {
+        "title": "صحة التصنيفات",
+        "description": "عدد تصنيفات الموارد والخدمات في بنك النظام",
+        "resources": "تصنيفات الموارد",
+        "services": "تصنيفات الخدمات"
+      },
+      "supportStatus": {
+        "title": "حالة تذاكر الدعم",
+        "description": "التوزيع الحالي لجميع تذاكر الدعم",
+        "total": "إجمالي التذاكر"
+      },
+      "bankRequests": {
+        "title": "اتجاه طلبات البنك",
+        "description": "تقديمات طلبات عناصر البنك الشهرية",
+        "requests": "الطلبات"
+      },
+      "requestStatus": {
+        "title": "تفاصيل معالجة الطلبات",
+        "description": "كيفية معالجة طلبات البنك",
+        "accepted": "مقبولة",
+        "pending": "معلقة",
+        "rejected": "مرفوضة",
+        "resolved": "تم حلها"
+      }
+    },
+    "recentActivity": {
+      "title": "العناصر المعلقة الأخيرة",
+      "description": "عناصر تتطلب انتباه",
+      "bankRequests": "طلبات بنك معلقة",
+      "supportTickets": "تذاكر دعم مفتوحة",
+      "noItems": "لا توجد عناصر معلقة",
+      "viewAll": "عرض الكل",
+      "bankRequestItem": "{{name}} — {{category}}",
+      "supportTicketItem": "{{subject}} — {{priority}}"
+    }
+  }
+}
