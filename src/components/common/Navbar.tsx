@@ -6,6 +6,8 @@ import { FiBarChart2 } from "react-icons/fi";
 import { MdOutlineConstruction } from "react-icons/md";
 import {
   RiBuilding2Line,
+  RiBuilding4Line,
+  RiBarChartBoxLine,
   RiCustomerService2Line,
   RiFolderShieldLine,
   RiFoldersLine,
@@ -14,6 +16,7 @@ import {
   RiShoppingBagLine,
   RiStore2Line,
   RiUserSettingsLine,
+  RiUserStarLine,
 } from "react-icons/ri";
 
 import { paths } from "@/config/paths";
@@ -109,10 +112,28 @@ const Navbar = () => {
       permission: Permissions.CATEGORIES_MANAGE,
     },
     {
+      label: t("navbar.verify-engineers"),
+      href: paths.app.admin.engineerVerification.path,
+      icon: <RiUserStarLine size={18} />,
+      permission: Permissions.ENGINEERS_VERIFY,
+    },
+    {
+      label: t("navbar.verify-buildings"),
+      href: paths.app.admin.buildingVerification.path,
+      icon: <RiBuilding4Line size={18} />,
+      permission: Permissions.BUILDINGS_VERIFY,
+    },
+    {
       label: t("navbar.support"),
       href: paths.app.admin.support.path,
       icon: <RiCustomerService2Line size={18} />,
       permission: Permissions.SUPPORT_MANAGE,
+    },
+    {
+      label: t("navbar.statistics"),
+      href: paths.app.admin.statistics.path,
+      icon: <RiBarChartBoxLine size={18} />,
+      permission: Permissions.STATISTICS_VIEW,
     },
     {
       label: t("navbar.support-center"),

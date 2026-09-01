@@ -184,6 +184,18 @@ export const paths = {
         path: "/app/admin/support",
         getHref: () => `/app/admin/support`,
       },
+      engineerVerification: {
+        path: "/app/admin/verify-engineers",
+        getHref: () => `/app/admin/verify-engineers`,
+      },
+      buildingVerification: {
+        path: "/app/admin/verify-buildings",
+        getHref: () => `/app/admin/verify-buildings`,
+      },
+      statistics: {
+        path: "/app/admin/statistics",
+        getHref: () => `/app/admin/statistics`,
+      },
     },
   },
 } as const;

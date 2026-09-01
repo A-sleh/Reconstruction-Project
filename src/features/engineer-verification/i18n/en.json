@@ -1,0 +1,75 @@
+{
+  "engineerVerification": {
+    "title": "Engineer Accounts",
+    "subtitle": "Review and confirm engineer account verification requests.",
+    "badge": "Verification",
+    "kpi": {
+      "pending": "Pending",
+      "pendingHint": "Awaiting review",
+      "verified": "Verified",
+      "verifiedHint": "Approved engineers",
+      "rejected": "Rejected",
+      "rejectedHint": "Declined requests",
+      "total": "Total",
+      "totalHint": "All verification requests"
+    },
+    "table": {
+      "engineer": "Engineer",
+      "contact": "Contact",
+      "speciality": "Speciality",
+      "syndicate": "Syndicate ID",
+      "license": "License",
+      "experience": "Experience",
+      "status": "Status",
+      "submittedDocs": "Documents",
+      "requestedAt": "Requested At",
+      "actions": "Actions",
+      "empty": "No verification requests found.",
+      "emptyHint": "Try adjusting your search or filters",
+      "total": "{{count}} engineer(s) total",
+      "searchPlaceholder": "Search engineers...",
+      "filterStatus": "Filter by status",
+      "allStatuses": "All statuses"
+    },
+    "status": {
+      "PENDING": "Pending review",
+      "VERIFIED": "Verified",
+      "REJECTED": "Rejected"
+    },
+    "speciality": {
+      "CIVIL": "Civil",
+      "ARCHITECTURE": "Architecture",
+      "ELECTRICAL": "Electrical",
+      "MECHANICAL": "Mechanical"
+    },
+    "approveModal": {
+      "title": "Confirm Approval",
+      "description": "Are you sure you want to approve this engineer account? The engineer will immediately be able to access the platform.",
+      "confirm": "Confirm approve",
+      "cancelLabel": "Cancel"
+    },
+    "rejectModal": {
+      "title": "Reject Request",
+      "description": "Provide a reason for rejecting this engineer account. The engineer will be notified.",
+      "reasonLabel": "Reason",
+      "reasonPlaceholder": "Write the reason for rejection...",
+      "confirm": "Confirm rejection",
+      "cancelLabel": "Cancel",
+      "reasonRequired": "A reason is required before rejecting."
+    },
+    "toast": {
+      "approveSuccess": "Engineer account approved successfully",
+      "approveError": "Failed to approve engineer account",
+      "rejectSuccess": "Engineer account rejected successfully",
+      "rejectError": "Failed to reject engineer account"
+    },
+    "filters": {
+      "status": "Status",
+      "searchPlaceholder": "Search engineers...",
+      "allStatuses": "All statuses",
+      "pending": "Pending",
+      "verified": "Verified",
+      "rejected": "Rejected"
+    }
+  }
+}

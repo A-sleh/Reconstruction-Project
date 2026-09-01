@@ -1,0 +1,75 @@
+{
+  "engineerVerification": {
+    "title": "حسابات المهندسين",
+    "subtitle": "مراجعة طلبات توثيق حسابات المهندسين والموافقة عليها.",
+    "badge": "التوثيق",
+    "kpi": {
+      "pending": "قيد المراجعة",
+      "pendingHint": "في انتظار المراجعة",
+      "verified": "موثّق",
+      "verifiedHint": "المهندسون المعتمدون",
+      "rejected": "مرفوض",
+      "rejectedHint": "الطلبات المرفوضة",
+      "total": "الإجمالي",
+      "totalHint": "جميع طلبات التوثيق"
+    },
+    "table": {
+      "engineer": "المهندس",
+      "contact": "جهة الاتصال",
+      "speciality": "التخصص",
+      "syndicate": "رقم النقابة",
+      "license": "الترخيص",
+      "experience": "الخبرة",
+      "status": "الحالة",
+      "submittedDocs": "المستندات",
+      "requestedAt": "تاريخ الطلب",
+      "actions": "الإجراءات",
+      "empty": "لم يتم العثور على طلبات توثيق.",
+      "emptyHint": "حاول تعديل البحث أو الفلاتر",
+      "total": "{{count}} مهندس إجمالاً",
+      "searchPlaceholder": "البحث عن مهندسين...",
+      "filterStatus": "تصفية حسب الحالة",
+      "allStatuses": "جميع الحالات"
+    },
+    "status": {
+      "PENDING": "قيد المراجعة",
+      "VERIFIED": "موثّق",
+      "REJECTED": "مرفوض"
+    },
+    "speciality": {
+      "CIVIL": "مدني",
+      "ARCHITECTURE": "معماري",
+      "ELECTRICAL": "كهرباء",
+      "MECHANICAL": "ميكانيك"
+    },
+    "approveModal": {
+      "title": "تأكيد الموافقة",
+      "description": "هل أنت متأكد من رغبتك بالموافقة على توثيق حساب هذا المهندس؟ سيتمكن المهندس فوراً من الوصول إلى المنصة.",
+      "confirm": "تأكيد الموافقة",
+      "cancelLabel": "إلغاء"
+    },
+    "rejectModal": {
+      "title": "رفض الطلب",
+      "description": "يرجى تقديم سبب رفض توثيق حساب هذا المهندس. سيتم إشعار المهندس بسبب الرفض.",
+      "reasonLabel": "سبب الرفض",
+      "reasonPlaceholder": "اكتب سبب الرفض...",
+      "confirm": "تأكيد الرفض",
+      "cancelLabel": "إلغاء",
+      "reasonRequired": "يجب إدخال السبب قبل الرفض."
+    },
+    "toast": {
+      "approveSuccess": "تمت الموافقة على توثيق حساب المهندس بنجاح",
+      "approveError": "فشل الموافقة على توثيق حساب المهندس",
+      "rejectSuccess": "تم رفض توثيق حساب المهندس بنجاح",
+      "rejectError": "فشل رفض توثيق حساب المهندس"
+    },
+    "filters": {
+      "status": "الحالة",
+      "searchPlaceholder": "البحث عن مهندسين...",
+      "allStatuses": "جميع الحالات",
+      "pending": "قيد المراجعة",
+      "verified": "موثّق",
+      "rejected": "مرفوض"
+    }
+  }
+}
