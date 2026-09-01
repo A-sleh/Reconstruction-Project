@@ -16,6 +16,8 @@ import ProjectSettingsSection from "@/features/project/components/ProjectSetting
 import ProjectSideBar from "@/features/project/components/ProjectSideBar";
 import ProjectStatPage from "@/features/project/components/ProjectStatPage";
 import ProjectReferenceSection from "@/features/project/components/reference/ProjectReferenceSection";
+import BoardPage from "@/features/project-board/components/BoardPage";
+import RoomPage from "@/features/project-messages/components/RoomPage";
 
 const Project = () => {
   const { t } = useTranslation();
@@ -76,6 +78,8 @@ const Project = () => {
           {activeKey === "reports" && <ManageReportsPage />}
           {activeKey === "statistics" && <ProjectStatPage />}
           {activeKey === "work shop" && <ManageWorkShopPage />}
+          {activeKey === "board" && <BoardPage />}
+          {activeKey === "messages" && <RoomPage />}
           {activeKey === "settings" && (
             <ProjectSettingsSection project={project} />
           )}

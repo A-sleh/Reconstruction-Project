@@ -1,0 +1,52 @@
+{
+  "projectBoard": {
+    "title": "لوحة المهام",
+    "subtitle": "خطط وتابع مهام المشروع عبر المراحل.",
+    "addCard": "إضافة بطاقة",
+    "addColumn": "إضافة عمود",
+    "editColumn": "إعادة تسمية العمود",
+    "deleteColumn": "حذف العمود",
+    "dialogTitle": "بطاقة المهمة",
+    "dialogSubtitle": "أنشئ أو حدّث بطاقة على اللوحة.",
+    "titleColumn": "العمود",
+    "columnPlaceholder": "أدخل اسم العمود",
+    "card": {
+      "title": "العنوان",
+      "titlePlaceholder": "عنوان المهمة...",
+      "description": "الوصف",
+      "descriptionPlaceholder": "وصف مختصر...",
+      "priority": "الأولوية",
+      "assignee": "المسؤول",
+      "assigneePlaceholder": "غير معيّن",
+      "dueDate": "تاريخ التسليم",
+      "tags": "الوسوم",
+      "tagsPlaceholder": "وسوم مفصولة بفواصل",
+      "confirm": "حفظ البطاقة"
+    },
+    "priority": {
+      "low": "منخفض",
+      "medium": "متوسط",
+      "high": "عالي",
+      "urgent": "عاجل"
+    },
+    "empty": {
+      "title": "لا توجد مهام في هذا العمود",
+      "hint": "اسحب البطاقات هنا أو أضف بطاقة جديدة."
+    },
+    "toast": {
+      "create": "تم إنشاء البطاقة بنجاح",
+      "update": "تم تحديث البطاقة بنجاح",
+      "delete": "تم حذف البطاقة",
+      "columnCreated": "تم إنشاء العمود",
+      "columnUpdated": "تمت إعادة تسمية العمود",
+      "columnDeleted": "تم حذف العمود",
+      "moved": "تم نقل البطاقة"
+    },
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "confirmDeleteTitle": "حذف هذه البطاقة؟",
+    "confirmDeleteDescription": "لا يمكن التراجع عن هذا الإجراء.",
+    "confirmColumnDeleteTitle": "حذف هذا العمود؟",
+    "confirmColumnDeleteDescription": "سيتم حذف جميع البطاقات داخله."
+  }
+}

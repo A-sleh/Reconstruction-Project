@@ -1,0 +1,52 @@
+{
+  "projectBoard": {
+    "title": "Project Board",
+    "subtitle": "Plan and track the project tasks across stages.",
+    "addCard": "Add Card",
+    "addColumn": "Add Column",
+    "editColumn": "Rename Column",
+    "deleteColumn": "Delete Column",
+    "dialogTitle": "Task Card",
+    "dialogSubtitle": "Create or update a card on the board.",
+    "titleColumn": "Column",
+    "columnPlaceholder": "Enter column name",
+    "card": {
+      "title": "Title",
+      "titlePlaceholder": "Task title...",
+      "description": "Description",
+      "descriptionPlaceholder": "Brief description...",
+      "priority": "Priority",
+      "assignee": "Assignee",
+      "assigneePlaceholder": "Unassigned",
+      "dueDate": "Due Date",
+      "tags": "Tags",
+      "tagsPlaceholder": "Comma separated tags",
+      "confirm": "Save Card"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "empty": {
+      "title": "No tasks in this column",
+      "hint": "Drag cards here or add a new one."
+    },
+    "toast": {
+      "create": "Card created successfully",
+      "update": "Card updated successfully",
+      "delete": "Card deleted",
+      "columnCreated": "Column created",
+      "columnUpdated": "Column renamed",
+      "columnDeleted": "Column deleted",
+      "moved": "Card moved"
+    },
+    "cancel": "Cancel",
+    "save": "Save",
+    "confirmDeleteTitle": "Delete this card?",
+    "confirmDeleteDescription": "This action cannot be undone.",
+    "confirmColumnDeleteTitle": "Delete this column?",
+    "confirmColumnDeleteDescription": "All cards inside it will be removed."
+  }
+}

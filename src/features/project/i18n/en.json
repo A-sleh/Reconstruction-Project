@@ -110,6 +110,8 @@
         "settings": "Settings",
         "statistics": "Statistics",
         "workShop": "Work Shop",
+        "board": "Board",
+        "messages": "Messages",
         "manageResources": "Manage Resources",
         "manageServices": "Manage Services",
         "manageEngineers": "Manage Engineers",

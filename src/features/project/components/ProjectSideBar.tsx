@@ -5,6 +5,8 @@ import {
   ClipboardList,
   FileText,
   HardHat,
+  LayoutDashboard,
+  MessagesSquare,
   PanelLeftClose,
   PanelLeftOpen,
   Receipt,
@@ -43,6 +45,16 @@ const sections: ProjectSectionItem[] = [
     key: "work shop",
     label: i18n.t("project.details.sections.workShop"),
     icon: Wrench,
+  },
+  {
+    key: "board",
+    label: i18n.t("project.details.sections.board"),
+    icon: LayoutDashboard,
+  },
+  {
+    key: "messages",
+    label: i18n.t("project.details.sections.messages"),
+    icon: MessagesSquare,
   },
   {
     key: "manage resources",
