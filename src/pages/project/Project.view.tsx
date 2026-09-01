@@ -15,7 +15,7 @@ import ProjectDetailsHeader from "@/features/project/components/ProjectDetailsHe
 import ProjectSettingsSection from "@/features/project/components/ProjectSettingsSection";
 import ProjectSideBar from "@/features/project/components/ProjectSideBar";
 import ProjectStatPage from "@/features/project/components/ProjectStatPage";
-import { OverviewSection } from "@/features/project/components/ProjectSummeryCard";
+import ProjectReferenceSection from "@/features/project/components/reference/ProjectReferenceSection";
 
 const Project = () => {
   const { t } = useTranslation();
@@ -57,7 +57,9 @@ const Project = () => {
         <ProjectSideBar activeKey={activeKey} onChange={setActiveKey} />
 
         <section className="min-w-0 flex-1 ">
-          {activeKey === "overview" && <OverviewSection project={project} />}
+          {activeKey === "overview" && (
+            <ProjectReferenceSection project={project} />
+          )}
           {activeKey === "manage resources" && (
             <ManageResourcesPage
               projectId={numericId}

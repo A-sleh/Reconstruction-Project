@@ -3,7 +3,7 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { ProjectController, QUERY_KEYS } from ".";
 import type {
   GetAllProjectsFilters,
-  ProjectListItem,
+  ProjectDetails,
   ProjectsResponse,
 } from "./types";
 
@@ -16,7 +16,7 @@ const getAllProjects = async (filters: GetAllProjectsFilters) => {
 };
 
 const getProjectById = async (projectId: number) => {
-  const { data } = await ApiInstance.get<ProjectListItem>(
+  const { data } = await ApiInstance.get<ProjectDetails>(
     `/${ProjectController.GetById}`,
     { params: { ProjectId: projectId } },
   );
@@ -48,7 +48,7 @@ export const useProjectsInfinite = (
 };
 
 export const useProjectById = (projectId: number) => {
-  return useQuery<ProjectListItem, Error>({
+  return useQuery<ProjectDetails, Error>({
     queryKey: QUERY_KEYS.projects.detail(projectId),
     queryFn: () => getProjectById(projectId),
     enabled: !!projectId,

@@ -134,6 +134,52 @@
         "startDate": "Start Date",
         "endDate": "End Date"
       },
+      "reference": {
+        "investorHint": "Project Owner",
+        "statistics": {
+          "title": "Project Statistics",
+          "subtitle": "Live financial and operational snapshot",
+          "workshops": "Total Workshops",
+          "members": "Team Members",
+          "orders": "Total Orders",
+          "totalPayments": "Total Payments",
+          "paid": "Paid",
+          "remaining": "Remaining"
+        },
+        "building": {
+          "title": "Building Details",
+          "subtitle": "Full reference for the building under this project",
+          "name": "Building Name",
+          "type": "Building Type",
+          "city": "City",
+          "street": "Street",
+          "address": "Address",
+          "area": "Area",
+          "readiness": "Readiness Level",
+          "orientation": "Orientation",
+          "zoneType": "Zone Type",
+          "parts": "Building Parts",
+          "noImage": "No cover image"
+        },
+        "land": {
+          "title": "Land Details",
+          "subtitle": "Land information tied to this building",
+          "name": "Land Name",
+          "zoning": "Zoning",
+          "area": "Area",
+          "address": "Address",
+          "accessability": "Accessibility",
+          "validated": "Validated",
+          "location": "Location",
+          "notLoaded": "Unable to load land details."
+        },
+        "map": {
+          "title": "Project Map",
+          "subtitle": "Building location on the land parcel",
+          "openInGoogleMaps": "Open in Google Maps",
+          "noLocation": "Location unavailable for this project."
+        }
+      },
       "building": {
         "title": "Building Details",
         "error": "Failed to load building details",
