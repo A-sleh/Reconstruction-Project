@@ -1,0 +1,40 @@
+{
+  "publicEngineer": {
+    "back": "رجوع",
+    "verifiedBadge": "مهندس موثّق",
+    "license": "رقم الرخصة",
+    "identifier": "المعرّف",
+    "syndicateId": "رقم النقابة",
+    "employmentType": "نوع التوظيف",
+    "stats": {
+      "experience": "سنوات الخبرة",
+      "projectsCompleted": "المشاريع المنجزة",
+      "rating": "التقييم",
+      "reviewsCount": "التقييمات"
+    },
+    "projects": {
+      "currentTitle": "المشروع الحالي",
+      "recentTitle": "المشاريع الأخيرة",
+      "recentSubtitle": "مشاريع مختارة تعكس خبرة المهندس.",
+      "empty": "لا توجد مشاريع بعد",
+      "status": {
+        "COMPLETED": "مكتمل",
+        "IN_PROGRESS": "قيد التنفيذ",
+        "PLANNING": "قيد التخطيط"
+      }
+    },
+    "reviews": {
+      "title": "التقييمات",
+      "basedOn_one": "استناداً إلى {{count}} تقييم",
+      "basedOn_other": "استناداً إلى {{count}} تقييمات",
+      "empty": "لا توجد تقييمات بعد."
+    },
+    "contact": {
+      "title": "تواصل مع المهندس",
+      "subtitle": "تواصل مع المهندس مباشرة عبر الهاتف أو البريد الإلكتروني.",
+      "phone": "اتصال",
+      "email": "بريد إلكتروني",
+      "profile": "عرض الملف الشخصي"
+    }
+  }
+}

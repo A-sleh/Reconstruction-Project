@@ -47,6 +47,8 @@ import arAttachment from "@/features/attachment/i18n/ar.json";
 import enAttachment from "@/features/attachment/i18n/en.json";
 import arPublicProvider from "@/features/public-provider/i18n/ar.json";
 import enPublicProvider from "@/features/public-provider/i18n/en.json";
+import arPublicEngineer from "@/features/public-engineer/i18n/ar.json";
+import enPublicEngineer from "@/features/public-engineer/i18n/en.json";
 import arAdminStatistics from "@/features/admin-statistics/i18n/ar.json";
 import enAdminStatistics from "@/features/admin-statistics/i18n/en.json";
 import arEngineerVerification from "@/features/engineer-verification/i18n/ar.json";
@@ -92,6 +94,7 @@ const resources = {
       enProjectReports,
       enAttachment,
       enPublicProvider,
+      enPublicEngineer,
       enAdminStatistics,
       enEngineerVerification,
       enBuildingVerification,
@@ -120,6 +123,7 @@ const resources = {
       arProjectReports,
       arAttachment,
       arPublicProvider,
+      arPublicEngineer,
       arAdminStatistics,
       arEngineerVerification,
       arBuildingVerification,

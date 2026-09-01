@@ -1,0 +1,40 @@
+{
+  "publicEngineer": {
+    "back": "Back",
+    "verifiedBadge": "Verified Engineer",
+    "license": "License No.",
+    "identifier": "ID",
+    "syndicateId": "Syndicate ID",
+    "employmentType": "Employment",
+    "stats": {
+      "experience": "Years of Experience",
+      "projectsCompleted": "Projects Completed",
+      "rating": "Rating",
+      "reviewsCount": "Reviews"
+    },
+    "projects": {
+      "currentTitle": "Current Project",
+      "recentTitle": "Recent Projects",
+      "recentSubtitle": "Selected projects that reflect the engineer's expertise.",
+      "empty": "No projects yet",
+      "status": {
+        "COMPLETED": "Completed",
+        "IN_PROGRESS": "In progress",
+        "PLANNING": "Planning"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "basedOn_one": "Based on {{count}} review",
+      "basedOn_other": "Based on {{count}} reviews",
+      "empty": "No reviews yet."
+    },
+    "contact": {
+      "title": "Contact Engineer",
+      "subtitle": "Reach the engineer directly by phone or email.",
+      "phone": "Call",
+      "email": "Email",
+      "profile": "View Profile"
+    }
+  }
+}

@@ -41,6 +41,10 @@ export const paths = {
       path: "/public/provider/:id",
       getHref: (id: number | string) => `/public/provider/${id}`,
     },
+    engineerProfile: {
+      path: "/public/engineer/:id",
+      getHref: (id: number | string) => `/public/engineer/${id}`,
+    },
   },
   app: {
     // Shared pathes
