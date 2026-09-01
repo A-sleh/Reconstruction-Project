@@ -12,6 +12,21 @@ export type TicketStatus =
 export type SenderType = "customer" | "agent";
 
 // ============================================================================
+// Support Center (shared, non-admin) — user-facing ticket list
+// ============================================================================
+export interface SupportTicket {
+  id: string;
+  subject: string;
+  category: string;
+  priority: TicketPriority;
+  status: TicketStatus;
+  createdAt: string;
+  updatedAt: string;
+  lastMessage: string;
+  unread: boolean;
+}
+
+// ============================================================================
 // 1. Agent Dashboard / Stats
 // ============================================================================
 export interface AgentStats {

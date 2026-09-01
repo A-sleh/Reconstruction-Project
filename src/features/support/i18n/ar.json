@@ -111,6 +111,344 @@
     "csat": {
       "submitSuccess": "شكراً لك! تم تسجيل تقييمك بنجاح.",
       "submitError": "فشل إرسال التقييم"
+    },
+    "supportCenter": {
+      "hero": {
+        "title": "كيف يمكننا مساعدتك؟",
+        "subtitle": "تصفح قاعدة المعرفة، اطرح سؤالاً، أو أدر تذاكر الدعم الخاصة بك.",
+        "searchPlaceholder": "ابحث عن مقالات المساعدة...",
+        "searchButton": "بحث",
+        "noResults": "لا توجد مقالات مطابقة لهذا البحث."
+      },
+      "kb": {
+        "title": "قاعدة المعرفة",
+        "description": "تصفح مقالات المساعدة حسب الفئة",
+        "popularTitle": "الأسئلة الشائعة",
+        "popularSubtitle": "الأسئلة المتكررة",
+        "viewAll": "عرض المقالات"
+      },
+      "myTickets": {
+        "title": "تذاكري",
+        "description": "تتبع حالة طلبات الدعم الخاصة بك",
+        "create": "إنشاء تذكرة",
+        "empty": "لا توجد لديك تذاكر دعم بعد.",
+        "emptyHint": "أنشئ أول تذكرة وسيعود إليك فريقنا في أقرب وقت."
+      },
+      "createTicket": {
+        "title": "إنشاء تذكرة دعم",
+        "description": "أخبرنا كيف يمكننا المساعدة وسنرد في أقرب وقت ممكن.",
+        "category": "الفئة",
+        "categoryPlaceholder": "اختر فئة",
+        "subject": "الموضوع",
+        "subjectPlaceholder": "ملخص قصير لمشكلتك",
+        "message": "الرسالة",
+        "messagePlaceholder": "صف مشكلتك بالتفصيل...",
+        "priority": "الأولوية",
+        "submit": "إرسال التذكرة",
+        "cancel": "إلغاء",
+        "success": "تم إنشاء تذكرتك بنجاح."
+      },
+      "thread": {
+        "back": "العودة إلى التذاكر",
+        "department": "القسم: {department}",
+        "emptyMessages": "لا توجد رسائل بعد. أرسل الرسالة الأولى لبدء المحادثة.",
+        "replyPlaceholder": "اكتب رسالتك...",
+        "send": "إرسال",
+        "sendSuccess": "تم إرسال الرسالة",
+        "sendError": "فشل إرسال الرسالة"
+      },
+      "csat": {
+        "title": "كيف كانت تجربتك؟",
+        "description": "ملاحظاتك تساعدنا على تحسين دعمنا.",
+        "ratingLabel": "التقييم",
+        "submit": "إرسال التقييم",
+        "thanks": "شكراً لملاحظاتك!",
+        "feedbackPlaceholder": "أضف تعليقاً (اختياري)"
+      },
+      "ticketMeta": {
+        "created": "أُنشئت في {date}",
+        "updated": "آخر تحديث {date}",
+        "lastMessage": "آخر رسالة"
+      },
+      "data": {
+        "youName": "أنت",
+        "youInitial": "أ",
+        "kb": {
+          "categories": [
+            {
+              "id": "kb-account",
+              "icon": "account",
+              "title": "الحساب والفواتير",
+              "description": "مشاكل تسجيل الدخول، التحقق من الهوية، الفواتير والمدفوعات.",
+              "articles_count": 24
+            },
+            {
+              "id": "kb-projects",
+              "icon": "project",
+              "title": "المشاريع والبناء",
+              "description": "إنشاء المشاريع، تعيين ورش العمل ومتابعة التقدم.",
+              "articles_count": 31
+            },
+            {
+              "id": "kb-orders",
+              "icon": "order",
+              "title": "الطلبات والاستفسارات",
+              "description": "تقديم الطلبات، إدارة الموارد ومواعيد التسليم.",
+              "articles_count": 18
+            },
+            {
+              "id": "kb-work-sites",
+              "icon": "site",
+              "title": "مواقع العمل",
+              "description": "إدارة مواقع العمل والمعدات وحالة الموقع.",
+              "articles_count": 15
+            },
+            {
+              "id": "kb-marketplace",
+              "icon": "market",
+              "title": "السوق",
+              "description": "إدراج الأراضي والمباني والاستثمار فيها.",
+              "articles_count": 12
+            },
+            {
+              "id": "kb-notifications",
+              "icon": "notify",
+              "title": "الإشعارات والتنبيهات",
+              "description": "فهم الإشعارات والتنبيهات والتحديثات المباشرة.",
+              "articles_count": 8
+            }
+          ],
+          "searchResults": [
+            {
+              "article_id": 1001,
+              "category": "المشاريع والبناء",
+              "title": "كيف يمكنني إنشاء مشروع جديد؟",
+              "snippet": "انتقل إلى قسم المشاريع، انقر على 'مشروع جديد'، املأ الحقول المطلوبة وعيّن مشرفاً."
+            },
+            {
+              "article_id": 1002,
+              "category": "المشاريع والبناء",
+              "title": "كيف يمكنني إضافة ورشة عمل إلى مشروع؟",
+              "snippet": "افتح تفاصيل المشروع، انتقل إلى ورش العمل واستخدم زر 'إضافة ورشة' لربط المقاولين."
+            },
+            {
+              "article_id": 1003,
+              "category": "الطلبات والاستفسارات",
+              "title": "ما هي عملية أمر عمل إعادة الإعمار؟",
+              "snippet": "تتحرك الطلبات من قيد الطلب إلى معتمد، قيد المعالجة، ثم مكتمل. تابع الحالة المباشرة على بطاقة الطلب."
+            },
+            {
+              "article_id": 1004,
+              "category": "مواقع العمل",
+              "title": "كيف أدعو مهندساً إلى موقع عملي؟",
+              "snippet": "من لوحة موقع العمل، اختر 'الأعضاء' وأرسل دعوة عبر البريد الإلكتروني إلى المهندس."
+            }
+          ],
+          "faqs": [
+            {
+              "id": 1,
+              "question": "كيف يمكنني تغيير كلمة المرور؟",
+              "answer": "انتقل إلى ملفك الشخصي، اختر الأمان، أدخل كلمة مرورك الحالية وعيّن كلمة جديدة. ستتلقى بريداً إلكترونياً للتأكيد."
+            },
+            {
+              "id": 2,
+              "question": "لماذا لا يزال طلبي قيد الانتظار؟",
+              "answer": "تبقى الطلبات معلقة حتى يؤكد المزود المكلف توفر الموارد. يمكنك مراسلته مباشرة من صفحة الطلب."
+            },
+            {
+              "id": 3,
+              "question": "كيف يتم تحديد أولوية طلبي؟",
+              "answer": "تُحدد الأولوية عند إنشاء الطلب (منخفضة، متوسطة، عالية، عاجلة). يتم تصعيد الطلبات العاجلة إلى فريق الدعم تلقائياً."
+            },
+            {
+              "id": 4,
+              "question": "هل يمكنني إلغاء طلب تم إرساله؟",
+              "answer": "نعم. افتح الطلب واختر 'إلغاء'. يسمح بالإلغاء فقط قبل أن يبدأ المزود العمل عليه."
+            },
+            {
+              "id": 5,
+              "question": "كيف أتواصل مع وكيل الدعم؟",
+              "answer": "افتح مركز الدعم، انقر على 'إنشاء تذكرة'، اختر فئة وصف فيها مشكلتك. يرد فريقنا ضمن تذكرة المحادثة."
+            }
+          ]
+        },
+        "tickets": [
+          {
+            "id": "TCK-8421",
+            "subject": "تعذّر التحقق من مستندات ملكيتي",
+            "category": "السوق",
+            "priority": "high",
+            "status": "in_progress",
+            "createdAt": "2026-08-27",
+            "updatedAt": "2026-08-30",
+            "lastMessage": "فريقنا يراجع مستنداتك.",
+            "unread": true
+          },
+          {
+            "id": "TCK-8307",
+            "subject": "استفسار حول آخر فاتورة",
+            "category": "الحساب والفواتير",
+            "priority": "medium",
+            "status": "pending_customer",
+            "createdAt": "2026-08-19",
+            "updatedAt": "2026-08-21",
+            "lastMessage": "هل يمكنك تأكيد طريقة الدفع التي استخدمتها؟",
+            "unread": false
+          },
+          {
+            "id": "TCK-8155",
+            "subject": "طلب معدات إضافية في الموقع",
+            "category": "مواقع العمل",
+            "priority": "low",
+            "status": "resolved",
+            "createdAt": "2026-07-30",
+            "updatedAt": "2026-08-02",
+            "lastMessage": "تم تلبية طلبك. شكراً لك!",
+            "unread": false
+          },
+          {
+            "id": "TCK-7982",
+            "subject": "تأخر في توصيل الطلب",
+            "category": "الطلبات والاستفسارات",
+            "priority": "urgent",
+            "status": "open",
+            "createdAt": "2026-07-12",
+            "updatedAt": "2026-07-12",
+            "lastMessage": "نحن نبحث في سبب تأخر التوصيل فوراً.",
+            "unread": true
+          }
+        ],
+        "threads": {
+          "TCK-8421": {
+            "ticket_id": "TCK-8421",
+            "subject": "تعذّر التحقق من مستندات ملكيتي",
+            "department": "السوق",
+            "priority": "high",
+            "status": "in_progress",
+            "can_rate": false,
+            "messages": [
+              {
+                "id": 1,
+                "sender_type": "customer",
+                "sender_name": "أنت",
+                "avatar_initial": "أ",
+                "content": "مرحباً، رفعت أوراق الملكية لكن التحقق ما زال معلقاً.",
+                "created_at": "2026-08-27"
+              },
+              {
+                "id": 2,
+                "sender_type": "agent",
+                "sender_name": "وكيل الدعم",
+                "avatar_initial": "د",
+                "content": "مرحباً! شكراً لتواصلك معنا. هل يمكنك تأكيد نوع المستند الذي رفعته؟",
+                "created_at": "2026-08-28"
+              },
+              {
+                "id": 3,
+                "sender_type": "customer",
+                "sender_name": "أنت",
+                "avatar_initial": "أ",
+                "content": "إنها شهادة سند الملكية.",
+                "created_at": "2026-08-28"
+              },
+              {
+                "id": 4,
+                "sender_type": "agent",
+                "sender_name": "وكيل الدعم",
+                "avatar_initial": "د",
+                "content": "تمام. فريقنا يراجع مستنداتك الآن وسنخبرك قريباً.",
+                "created_at": "2026-08-30"
+              }
+            ]
+          },
+          "TCK-8307": {
+            "ticket_id": "TCK-8307",
+            "subject": "استفسار حول آخر فاتورة",
+            "department": "الحساب والفواتير",
+            "priority": "medium",
+            "status": "pending_customer",
+            "can_rate": false,
+            "messages": [
+              {
+                "id": 1,
+                "sender_type": "customer",
+                "sender_name": "أنت",
+                "avatar_initial": "أ",
+                "content": "مرحباً، لدي استفسار حول الفاتورة رقم 8449.",
+                "created_at": "2026-08-19"
+              },
+              {
+                "id": 2,
+                "sender_type": "agent",
+                "sender_name": "وكيل الدعم",
+                "avatar_initial": "د",
+                "content": "هل يمكنك تأكيد طريقة الدفع التي استخدمتها لهذه الفاتورة؟",
+                "created_at": "2026-08-21"
+              }
+            ]
+          },
+          "TCK-8155": {
+            "ticket_id": "TCK-8155",
+            "subject": "طلب معدات إضافية في الموقع",
+            "department": "مواقع العمل",
+            "priority": "low",
+            "status": "resolved",
+            "can_rate": true,
+            "messages": [
+              {
+                "id": 1,
+                "sender_type": "customer",
+                "sender_name": "أنت",
+                "avatar_initial": "أ",
+                "content": "أحتاج رافعة إضافية لورشة العمل 2.",
+                "created_at": "2026-07-30"
+              },
+              {
+                "id": 2,
+                "sender_type": "agent",
+                "sender_name": "وكيل الدعم",
+                "avatar_initial": "د",
+                "content": "تم تسجيل الملاحظة. سننسق المعدات مع مدير الموقع.",
+                "created_at": "2026-08-01"
+              },
+              {
+                "id": 3,
+                "sender_type": "agent",
+                "sender_name": "وكيل الدعم",
+                "avatar_initial": "د",
+                "content": "تم تلبية طلبك. شكراً لك!",
+                "created_at": "2026-08-02"
+              }
+            ]
+          },
+          "TCK-7982": {
+            "ticket_id": "TCK-7982",
+            "subject": "تأخر في توصيل الطلب",
+            "department": "الطلبات والاستفسارات",
+            "priority": "urgent",
+            "status": "open",
+            "can_rate": false,
+            "messages": [
+              {
+                "id": 1,
+                "sender_type": "customer",
+                "sender_name": "أنت",
+                "avatar_initial": "أ",
+                "content": "تأخر طلبي ثلاثة أيام. هل يمكنك المساعدة؟",
+                "created_at": "2026-07-12"
+              },
+              {
+                "id": 2,
+                "sender_type": "agent",
+                "sender_name": "وكيل الدعم",
+                "avatar_initial": "د",
+                "content": "نحن نبحث في سبب تأخر التوصيل فوراً.",
+                "created_at": "2026-07-12"
+              }
+            ]
+          }
+        }
+      }
     }
   }
 }

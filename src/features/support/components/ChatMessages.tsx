@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -49,6 +50,18 @@ const mockMessages: Message[] = [
 ];
 
 const ChatMessages = ({ messages = mockMessages }: Partial<ChatMessagesProps>) => {
+  const { t } = useTranslation();
+
+  if (messages.length === 0) {
+    return (
+      <div className="flex-1 flex items-center justify-center px-4 py-3 max-h-120 bg-white">
+        <p className="text-sm text-muted-foreground">
+          {t("support.chatMessages.noMessages")}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1 overflow-y-auto px-4 py-3 max-h-120 bg-white">
       <div className="flex flex-col gap-3">

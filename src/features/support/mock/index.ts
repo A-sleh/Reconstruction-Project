@@ -8,7 +8,11 @@ export {
   mockCannedResponses,
   mockCannedResponsesResponse,
 } from "./cannedResponses";
+export { mockCustomerTickets, mockCustomerTicketsResponse } from "./customerTickets";
 export {
-  mockCustomerTickets,
-  mockCustomerTicketsResponse,
-} from "./customerTickets";
+  mockKbCategories,
+  mockKbPopularFaqs,
+  mockKbSearchResults,
+  mockMyTickets,
+  mockTicketThreads,
+} from "./supportCenter";

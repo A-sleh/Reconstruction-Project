@@ -48,6 +48,10 @@ export const paths = {
       path: "/app/home",
       getHref: () => `/app/home`,
     },
+    support: {
+      path: "/app/support",
+      getHref: () => `/app/support`,
+    },
     resourceProvidor: {
       profile: {
         path: "/app/resource-providor/profile",

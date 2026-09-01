@@ -115,6 +115,12 @@ const Navbar = () => {
       permission: Permissions.SUPPORT_MANAGE,
     },
     {
+      label: t("navbar.support-center"),
+      href: paths.app.support.path,
+      icon: <RiCustomerService2Line size={18} />,
+      permission: Permissions.SUPPORT_VIEW,
+    },
+    {
       label: t("navbar.projects"),
       href: paths.app.projects.path,
       icon: <RiFolderShieldLine size={18} />,

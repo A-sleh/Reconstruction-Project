@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/Badge";
 import { cn } from "@/lib/utils";
@@ -81,6 +82,18 @@ const ListUsersMessages = ({
   users = mockUsers,
   onSelectUser,
 }: Partial<ListUsersMessagesProps>) => {
+  const { t } = useTranslation();
+
+  if (users.length === 0) {
+    return (
+      <div className="flex-1 flex items-center justify-center min-h-full">
+        <p className="text-sm text-muted-foreground">
+          {t("support.listUsers.noUsers")}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1 overflow-y-auto min-h-full">
       <div className="flex flex-col">
