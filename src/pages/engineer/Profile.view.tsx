@@ -17,6 +17,11 @@ import { MOCK_EXPERIENCE } from "@/features/engineer/profile/mock/experience";
 import { MOCK_ENGINEER_PROFILE } from "@/features/engineer/profile/mock/profile";
 import { MOCK_ENGINEER_PROJECTS } from "@/features/engineer/profile/mock/projects";
 import { MOCK_PORTFOLIO_SKILLS } from "@/features/engineer/profile/mock/skills";
+import ReviewsSection from "@/features/engineer/profile/components/ReviewsSection";
+import {
+  MOCK_ENGINEER_REVIEWS,
+  MOCK_REVIEW_STATS,
+} from "@/features/engineer/profile/mock/reviews";
 
 const EngineerProfile = () => {
   const { t } = useTranslation();
@@ -91,6 +96,12 @@ const EngineerProfile = () => {
         onRemoveCertification={handleRemoveCertification}
       />
       <PortfolioList projects={projects} />
+      <ReviewsSection
+        averageRating={MOCK_ENGINEER_PROFILE.rating}
+        totalReviews={MOCK_ENGINEER_PROFILE.reviewsCount}
+        reviews={MOCK_ENGINEER_REVIEWS}
+        distribution={MOCK_REVIEW_STATS.distribution}
+      />
     </div>
   );
 };

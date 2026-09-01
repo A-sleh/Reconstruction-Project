@@ -104,6 +104,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.PROFILE_VIEW,
     Permissions.PROFILE_EDIT,
     Permissions.PROJECTS_VIEW,
+    Permissions.STATISTICS_VIEW,
     Permissions.SUPPORT_VIEW,
   ],
   Admin: [

@@ -55,6 +55,10 @@ import arEngineerVerification from "@/features/engineer-verification/i18n/ar.jso
 import enEngineerVerification from "@/features/engineer-verification/i18n/en.json";
 import arBuildingVerification from "@/features/building-verification/i18n/ar.json";
 import enBuildingVerification from "@/features/building-verification/i18n/en.json";
+import arEngineerRequests from "@/features/engineer/projects/i18n/ar.json";
+import enEngineerRequests from "@/features/engineer/projects/i18n/en.json";
+import arEngineerStatistics from "@/features/engineer/statistics/i18n/ar.json";
+import enEngineerStatistics from "@/features/engineer/statistics/i18n/en.json";
 
 function mergeTranslations(...objects: Record<string, unknown>[]) {
   return objects.reduce<Record<string, unknown>>((acc, obj) => {
@@ -98,6 +102,8 @@ const resources = {
       enAdminStatistics,
       enEngineerVerification,
       enBuildingVerification,
+      enEngineerRequests,
+      enEngineerStatistics,
     ),
   },
   ar: {
@@ -127,6 +133,8 @@ const resources = {
       arAdminStatistics,
       arEngineerVerification,
       arBuildingVerification,
+      arEngineerRequests,
+      arEngineerStatistics,
     ),
   },
 };

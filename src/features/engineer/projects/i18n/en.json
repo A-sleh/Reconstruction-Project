@@ -1,0 +1,110 @@
+{
+  "engineerRequests": {
+    "page": {
+      "title": "Requests & Invitations",
+      "subtitle": "Manage incoming project invitations and track the status of your join requests."
+    },
+    "section": {
+      "invites": {
+        "title": "Incoming Invitations",
+        "subtitle": "Project owners who invited you to join their teams.",
+        "countLabel": "invitations"
+      },
+      "requests": {
+        "title": "Outgoing Join Requests",
+        "subtitle": "Projects you asked to join.",
+        "countLabel": "requests"
+      }
+    },
+    "kpi": {
+      "pendingInvites": "Pending Invites",
+      "pendingInvitesHint": "Awaiting your response",
+      "outgoingPending": "Outgoing Pending",
+      "outgoingPendingHint": "Awaiting owner approval",
+      "acceptedCount": "Accepted",
+      "acceptedCountHint": "Invites + approved requests",
+      "declinedCount": "Declined",
+      "declinedCountHint": "Declined invites + rejected requests"
+    },
+    "filters": {
+      "searchPlaceholder": "Search...",
+      "statusLabel": "Status",
+      "allStatuses": "All Statuses"
+    },
+    "invite": {
+      "status": {
+        "PENDING": "Pending",
+        "ACCEPTED": "Accepted",
+        "DECLINED": "Declined"
+      },
+      "fields": {
+        "from": "From",
+        "project": "Project",
+        "workSite": "Work Site",
+        "message": "Message",
+        "compensation": "Compensation",
+        "sentAt": "Sent",
+        "actions": "Actions"
+      },
+      "actions": {
+        "accept": "Accept",
+        "decline": "Decline"
+      }
+    },
+    "acceptModal": {
+      "title": "Accept Invitation",
+      "description": "Confirm your acceptance to join this project.",
+      "descriptionPrefix": "You are accepting the invitation to join",
+      "confirm": "Accept",
+      "cancel": "Cancel"
+    },
+    "declineModal": {
+      "title": "Decline Invitation",
+      "description": "Let the project owner know why you are declining this invitation.",
+      "reason": "Reason",
+      "reasonPlaceholder": "Enter the reason for declining...",
+      "confirm": "Decline",
+      "cancel": "Cancel",
+      "validation": "Please provide a reason."
+    },
+    "request": {
+      "status": {
+        "PENDING": "Pending",
+        "APPROVED": "Approved",
+        "REJECTED": "Rejected",
+        "CANCELED": "Canceled"
+      },
+      "columns": {
+        "project": "Project",
+        "workSite": "Work Site",
+        "note": "Note",
+        "sentAt": "Sent",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "actions": {
+        "cancel": "Cancel Request"
+      }
+    },
+    "cancelModal": {
+      "title": "Cancel Join Request",
+      "descriptionPrefix": "This will cancel your join request for ",
+      "confirm": "Cancel Request",
+      "cancel": "Close"
+    },
+    "empty": {
+      "invites": "No invitations yet.",
+      "invitesFiltered": "No invitations match your filters.",
+      "requests": "No join requests yet.",
+      "requestsFiltered": "No join requests match your filters."
+    },
+    "toast": {
+      "acceptSuccess": "Invitation accepted successfully.",
+      "acceptError": "Failed to accept invitation.",
+      "declineSuccess": "Invitation declined successfully.",
+      "declineError": "Failed to decline invitation.",
+      "cancelSuccess": "Join request canceled successfully.",
+      "cancelError": "Failed to cancel join request."
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "engineerRequests": {
+    "page": {
+      "title": "طلباتي ودعواتي",
+      "subtitle": "إدارة دعوات المشاريع الواردة ومتابعة حالة طلبات الانضمام الصادرة."
+    },
+    "section": {
+      "invites": {
+        "title": "الدعوات الواردة",
+        "subtitle": "أصحاب المشاريع الذين دعوك للانضمام إلى فرقهم.",
+        "countLabel": "دعوات"
+      },
+      "requests": {
+        "title": "طلبات الانضمام الصادرة",
+        "subtitle": "المشاريع التي طلبت الانضمام إليها.",
+        "countLabel": "طلبات"
+      }
+    },
+    "kpi": {
+      "pendingInvites": "دعوات قيد المراجعة",
+      "pendingInvitesHint": "بانتظار ردّك",
+      "outgoingPending": "طلبات صادرة قيد المراجعة",
+      "outgoingPendingHint": "بانتظار موافقة المالك",
+      "acceptedCount": "مقبولة",
+      "acceptedCountHint": "الدعوات المقبولة + الطلبات الموافق عليها",
+      "declinedCount": "مرفوضة",
+      "declinedCountHint": "الدعوات المرفوضة + الطلبات المرفوضة"
+    },
+    "filters": {
+      "searchPlaceholder": "بحث...",
+      "statusLabel": "الحالة",
+      "allStatuses": "جميع الحالات"
+    },
+    "invite": {
+      "status": {
+        "PENDING": "قيد المراجعة",
+        "ACCEPTED": "مقبولة",
+        "DECLINED": "مرفوضة"
+      },
+      "fields": {
+        "from": "من",
+        "project": "المشروع",
+        "workSite": "موقع العمل",
+        "message": "الرسالة",
+        "compensation": "التعويض",
+        "sentAt": "أُرسلت",
+        "actions": "إجراءات"
+      },
+      "actions": {
+        "accept": "قبول",
+        "decline": "رفض"
+      }
+    },
+    "acceptModal": {
+      "title": "قبول الدعوة",
+      "description": "تأكيد موافقتك على الانضمام إلى هذا المشروع.",
+      "descriptionPrefix": "أنت تقبل الدعوة للانضمام إلى",
+      "confirm": "قبول",
+      "cancel": "إلغاء"
+    },
+    "declineModal": {
+      "title": "رفض الدعوة",
+      "description": "أخبر صاحب المشروع بسبب رفضك لهذه الدعوة.",
+      "reason": "السبب",
+      "reasonPlaceholder": "أدخل سبب الرفض...",
+      "confirm": "رفض",
+      "cancel": "إلغاء",
+      "validation": "يرجى ذكر السبب."
+    },
+    "request": {
+      "status": {
+        "PENDING": "قيد المراجعة",
+        "APPROVED": "تمت الموافقة",
+        "REJECTED": "مرفوض",
+        "CANCELED": "ملغاة"
+      },
+      "columns": {
+        "project": "المشروع",
+        "workSite": "موقع العمل",
+        "note": "ملاحظة",
+        "sentAt": "أُرسل",
+        "status": "الحالة",
+        "actions": "إجراءات"
+      },
+      "actions": {
+        "cancel": "إلغاء الطلب"
+      }
+    },
+    "cancelModal": {
+      "title": "إلغاء طلب الانضمام",
+      "descriptionPrefix": "سيؤدي هذا إلى إلغاء طلب الانضمام إلى ",
+      "confirm": "إلغاء الطلب",
+      "cancel": "إغلاق"
+    },
+    "empty": {
+      "invites": "لا توجد دعوات بعد.",
+      "invitesFiltered": "لا توجد دعوات مطابقة لبحثك.",
+      "requests": "لا توجد طلبات انضمام بعد.",
+      "requestsFiltered": "لا توجد طلبات انضمام مطابقة لبحثك."
+    },
+    "toast": {
+      "acceptSuccess": "تم قبول الدعوة بنجاح.",
+      "acceptError": "فشل قبول الدعوة.",
+      "declineSuccess": "تم رفض الدعوة بنجاح.",
+      "declineError": "فشل رفض الدعوة.",
+      "cancelSuccess": "تم إلغاء طلب الانضمام بنجاح.",
+      "cancelError": "فشل إلغاء طلب الانضمام."
+    }
+  }
+}
