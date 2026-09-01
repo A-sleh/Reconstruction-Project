@@ -8,7 +8,43 @@
       "search": "Search Engineers",
       "emploingRequests": "Employing Requests",
       "logs": "Logs",
-      "permissions": "Permissions"
+      "permissions": "Permissions",
+      "dashboard": "Dashboard"
+    },
+    "dashboard": {
+      "header": {
+        "title": "Engineers Dashboard",
+        "subTitle": "Monitor and measure engineers' actions inside the project."
+      },
+      "filters": {
+        "fromDate": "From",
+        "toDate": "To"
+      },
+      "kpis": {
+        "totalActions": "Total Actions",
+        "totalActionsHint": "Across all engineer activity logs",
+        "activeEngineers": "Active Engineers",
+        "activeEngineersHint": "Engineers with recorded activity",
+        "avgActions": "Actions / Engineer",
+        "avgActionsHint": "Average per active engineer",
+        "topAction": "Most Frequent Action",
+        "topActionHint": "Top activity in the selected period"
+      },
+      "charts": {
+        "byType": "Actions by Type",
+        "byTypeDesc": "Distribution of engineer activities in the project.",
+        "timeline": "Activity Timeline",
+        "timelineDesc": "Number of engineer actions per day.",
+        "topEngineers": "Top Engineers",
+        "topEngineersDesc": "Engineers with the most recorded actions.",
+        "specBreakdown": "Engineers by Specialty",
+        "specBreakdownDesc": "Engineers roster grouped by specialization."
+      },
+      "table": {
+        "engineer": "Engineer",
+        "total": "Total",
+        "empty": "No engineer activity in the selected period."
+      }
     },
     "requests": {
       "header": {

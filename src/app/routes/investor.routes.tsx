@@ -8,6 +8,9 @@ import { RouteObject } from "react-router";
 const Invesort_Buildings_lands = lazy(
   () => import("@/pages/investor/InvestorLandsAndBuildings.view"),
 );
+const LandsBuildings_Map = lazy(
+  () => import("@/pages/investor/LandsBuildingsMap.view"),
+);
 const Invesort_Market_Place = lazy(
   () => import("@/pages/investor/MarketPlace.view"),
 );
@@ -40,6 +43,16 @@ export const investorRoutes: RouteObject[] = [
       <Suspense fallback={<Loader />}>
         <AuthGuard allowedPermissions={Permissions.LANDS_VIEW}>
           <Invesort_Buildings_lands />
+        </AuthGuard>
+      </Suspense>
+    ),
+  },
+  {
+    path: paths.app.investor.landsBuildingsMap.path,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <AuthGuard allowedPermissions={Permissions.LANDS_VIEW}>
+          <LandsBuildings_Map />
         </AuthGuard>
       </Suspense>
     ),

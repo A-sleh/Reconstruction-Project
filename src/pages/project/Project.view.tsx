@@ -16,6 +16,7 @@ import ProjectSettingsSection from "@/features/project/components/ProjectSetting
 import ProjectSideBar from "@/features/project/components/ProjectSideBar";
 import ProjectStatPage from "@/features/project/components/ProjectStatPage";
 import ProjectReferenceSection from "@/features/project/components/reference/ProjectReferenceSection";
+import ProjectFinancialSection from "@/features/project/financial/components/ProjectFinancialSection";
 import BoardPage from "@/features/project-board/components/BoardPage";
 import RoomPage from "@/features/project-messages/components/RoomPage";
 
@@ -77,6 +78,13 @@ const Project = () => {
           )}
           {activeKey === "reports" && <ManageReportsPage />}
           {activeKey === "statistics" && <ProjectStatPage />}
+          {activeKey === "financial" && (
+            <ProjectFinancialSection
+              projectId={numericId}
+              statistics={project?.statistics}
+              onNavigate={setActiveKey}
+            />
+          )}
           {activeKey === "work shop" && <ManageWorkShopPage />}
           {activeKey === "board" && <BoardPage />}
           {activeKey === "messages" && <RoomPage />}

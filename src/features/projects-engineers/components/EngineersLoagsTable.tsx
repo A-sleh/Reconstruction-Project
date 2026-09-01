@@ -2,17 +2,9 @@ import { useState } from "react";
 
 import {
   CalendarDays,
-  Camera,
   ChevronLeft,
   ChevronRight,
-  ClipboardCheck,
-  FileText,
   HardHat,
-  LogIn,
-  LogOut,
-  ReceiptText,
-  TrendingUp,
-  Truck,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -27,9 +19,10 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
-import type { EmploersActionsLogs, EngineersProjectAction } from "../api/types";
+import type { EmploersActionsLogs } from "../api/types";
 import { ENGINEERS_PROJECT_ACTIONS } from "../api/types";
 import { MOCK_EMPLOERS_ACTIONS_LOGS } from "../mock/mockEmploersLogs";
+import { actionIcons } from "./actionMeta";
 
 const PAGE_SIZE = 8;
 
@@ -37,52 +30,6 @@ interface Props {
   logs?: EmploersActionsLogs[];
   isLoading?: boolean;
 }
-
-const actionIcons: Record<
-  EngineersProjectAction,
-  { icon: typeof LogIn; className: string; chip: string }
-> = {
-  checked_in: {
-    icon: LogIn,
-    className: "text-emerald",
-    chip: "bg-emerald-soft",
-  },
-  checked_out: {
-    icon: LogOut,
-    className: "text-muted-foreground",
-    chip: "bg-muted",
-  },
-  daily_report: {
-    icon: FileText,
-    className: "text-primary",
-    chip: "bg-primary/10",
-  },
-  progress_update: {
-    icon: TrendingUp,
-    className: "text-gold",
-    chip: "bg-gold/15",
-  },
-  site_photos: {
-    icon: Camera,
-    className: "text-accent-foreground",
-    chip: "bg-accent",
-  },
-  task_completed: {
-    icon: ClipboardCheck,
-    className: "text-emerald",
-    chip: "bg-emerald-soft",
-  },
-  material_request: {
-    icon: Truck,
-    className: "text-warning-foreground",
-    chip: "bg-warning/15",
-  },
-  invoice_added: {
-    icon: ReceiptText,
-    className: "text-destructive",
-    chip: "bg-destructive/10",
-  },
-};
 
 const EngineersLoagsTable = ({
   logs = MOCK_EMPLOERS_ACTIONS_LOGS,

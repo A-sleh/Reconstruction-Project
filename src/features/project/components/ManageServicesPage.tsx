@@ -1,9 +1,10 @@
-import { ClipboardList, Wrench } from "lucide-react";
+import { BarChart3, ClipboardList, Wrench } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AllProvidorItems from "@/features/work-site-items/components/AllProvidorItems";
 
+import ProjectItemsDashboard from "../dashboard/components/ProjectItemsDashboard";
 import ProjectOrdersTracker from "./ProjectOrdersTracker";
 
 interface ManageServicesPageProps {
@@ -32,6 +33,10 @@ const ManageServicesPage = ({
             />
             {t("project.details.manageServices.tabs.myOrders")}
           </TabsTrigger>
+          <TabsTrigger value="statistics">
+            <BarChart3 className={`h-4 w-4 ${isArabic ? "ml-2" : "mr-2"}`} />
+            {t("project.details.manageServices.tabs.statistics")}
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="add-service">
@@ -44,6 +49,10 @@ const ManageServicesPage = ({
 
         <TabsContent value="my-orders">
           <ProjectOrdersTracker />
+        </TabsContent>
+
+        <TabsContent value="statistics">
+          <ProjectItemsDashboard providerType="Service" />
         </TabsContent>
       </Tabs>
     </div>

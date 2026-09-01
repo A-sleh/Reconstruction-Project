@@ -8,7 +8,43 @@
       "search": "البحث عن مهندسين",
       "emploingRequests": "طلبات التوظيف",
       "logs": "السجلات",
-      "permissions": "الصلاحيات"
+      "permissions": "الصلاحيات",
+      "dashboard": "لوحة المعلومات"
+    },
+    "dashboard": {
+      "header": {
+        "title": "لوحة معلومات المهندسين",
+        "subTitle": "راقب وقِس أنشطة المهندسين داخل المشروع."
+      },
+      "filters": {
+        "fromDate": "من",
+        "toDate": "إلى"
+      },
+      "kpis": {
+        "totalActions": "إجمالي الأنشطة",
+        "totalActionsHint": "عبر جميع سجلات نشاط المهندسين",
+        "activeEngineers": "المهندسون النشطون",
+        "activeEngineersHint": "مهندسون لديهم نشاط مسجل",
+        "avgActions": "أنشطة / مهندس",
+        "avgActionsHint": "المتوسط لكل مهندس نشط",
+        "topAction": "النشاط الأكثر تكراراً",
+        "topActionHint": "أعلى نشاط في الفترة المحددة"
+      },
+      "charts": {
+        "byType": "الأنشطة حسب النوع",
+        "byTypeDesc": "توزيع أنشطة المهندسين في المشروع.",
+        "timeline": "الخط الزمني للنشاط",
+        "timelineDesc": "عدد أنشطة المهندسين يومياً.",
+        "topEngineers": "أفضل المهندسين",
+        "topEngineersDesc": "المهندسون صاحبو النشاط الأكبر.",
+        "specBreakdown": "المهندسون حسب التخصص",
+        "specBreakdownDesc": "قائمة المهندسين مجمعة حسب التخصص."
+      },
+      "table": {
+        "engineer": "المهندس",
+        "total": "الإجمالي",
+        "empty": "لا يوجد نشاط مهندسين في الفترة المحددة."
+      }
     },
     "requests": {
       "header": {

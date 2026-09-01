@@ -54,6 +54,28 @@
       "move-all": "Drag anywhere to move the polygon"
     }
   },
+  "map": {
+    "title": "Lands & Buildings Map",
+    "subtitle": "Explore your lands and buildings on an interactive map. Hover over a marker to view details.",
+    "searchPlaceholder": "Search by property name, plot number, or building ID...",
+    "searchNoResults": "No matching results",
+    "loading": "Loading details...",
+    "type": "Type",
+    "land": "Land",
+    "building": "Building",
+    "area": "Area",
+    "squareMeters": "m²",
+    "status": "Status",
+    "validated": "Validated",
+    "notValidated": "Not validated",
+    "zoning": "Zoning",
+    "address": "Address",
+    "accessibility": "Accessibility",
+    "yes": "Yes",
+    "no": "No",
+    "clickForMore": "Click to view details",
+    "loadingError": "Failed to load details"
+  },
   "common": {
     "logout": "Logout",
     "error": "Some thing went wrong",

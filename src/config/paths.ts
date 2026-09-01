@@ -125,6 +125,10 @@ export const paths = {
         path: "/app/investor/market-buildings-lands",
         getHref: () => `/app/investor/market-buildings-lands`,
       },
+      landsBuildingsMap: {
+        path: "/app/investor/lands-buildings-map",
+        getHref: () => `/app/investor/lands-buildings-map`,
+      },
       landBuildingDetails: {
         path: "/app/investor/market-buildings-lands/:id",
         getHref: (id: string) => `/app/investor/market-buildings-lands/${id}`,

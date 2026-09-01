@@ -83,13 +83,15 @@
         "subtitle": "Add resources and services to your project and track your orders.",
         "tabs": {
           "addResource": "Add New Resource",
-          "myOrders": "My Orders"
+          "myOrders": "My Orders",
+          "statistics": "Statistics"
         }
       },
       "manageServices": {
         "tabs": {
           "addService": "Add New Service",
-          "myOrders": "My Orders"
+          "myOrders": "My Orders",
+          "statistics": "Statistics"
         }
       },
       "manageReports": {
@@ -115,7 +117,7 @@
         "manageResources": "Manage Resources",
         "manageServices": "Manage Services",
         "manageEngineers": "Manage Engineers",
-        "invoices": "Invoices",
+        "financial": "Financial",
         "reports": "Reports"
       },
       "settings": {
@@ -138,7 +140,60 @@
       },
       "reference": {
         "investorHint": "Project Owner",
-        "statistics": {
+"dashboard": {
+      "title": "Statistics & Overview",
+      "subtitle": "Live snapshot of this provider type across orders, categories and fulfillment",
+      "providerNames": {
+        "Service": "Services",
+        "Resource": "Resources"
+      },
+      "kpi": {
+        "totalOrders": "Total Orders",
+        "completed": "completed",
+        "netSpend": "Net Spend",
+        "discount": "discount",
+        "fulfillRate": "Avg Fulfill Rate",
+        "preparing": "preparing",
+        "availableItems": "Available Items",
+        "ofTotal": "of total"
+      },
+      "charts": {
+        "orderStatus": "Order Status Distribution",
+        "orderStatusDesc": "Breakdown of orders by current status",
+        "categories": "Spend by Category",
+        "categoriesDesc": "Orders and value distributed across categories",
+        "monthlyTimeline": "Monthly Activity Timeline",
+        "monthlyTimelineDesc": "Orders and spend over the last months",
+        "orders": "Orders",
+        "topItems": "Top Ordered Items",
+        "topItemsDesc": "Most frequently requested items",
+        "topItemsCols": {
+          "name": "Item",
+          "category": "Category",
+          "qty": "Qty",
+          "amount": "Amount"
+        },
+        "orderStatusLabels": {
+          "PendingApproval": "Pending",
+          "Preparing": "Preparing",
+          "Completed": "Completed",
+          "PendingToApproveCancellation": "Cancellation Approval",
+          "Cancelled": "Cancelled",
+          "Suspended": "Suspended"
+        }
+      },
+      "insights": {
+        "title": "Quick Insights",
+        "description": "Key takeaways from orders and availability",
+        "avgOrderValue": "Avg Order Value",
+        "topCategory": "Top Category",
+        "fulfillmentRate": "Fulfillment Rate",
+        "cancellationRate": "Cancellation Rate",
+        "highestSpendMonth": "Highest Spend Month",
+        "availableRatio": "Available Items Ratio"
+      }
+    },
+    "statistics": {
           "title": "Project Statistics",
           "subtitle": "Live financial and operational snapshot",
           "workshops": "Total Workshops",
@@ -195,75 +250,183 @@
         "title": "Investor Details",
         "id": "Investor ID",
         "project": "Project"
+      }
+    },
+    "financial": {
+      "badge": "Financial",
+      "title": "Project Financials",
+      "description": "Every money movement of this project - providers, workshops, engineers and more.",
+      "liveData": "Live",
+      "sampleData": "Sample",
+      "sampleHint": "Sections marked Sample are placeholders shown until the API provides this data.",
+      "kpi": {
+        "totalPayments": "Total Payments",
+        "totalPaid": "Paid",
+        "remainingPayments": "Remaining",
+        "workshopBudget": "Workshop Budget",
+        "workshopPaid": "Budget Paid",
+        "workshopRemaining": "Budget Remaining"
       },
-      "statistics": {
-        "title": "Project Statistics",
-        "subtitle": "Data-driven insights for informed decision making",
-        "kpi": {
-          "totalOrders": "Total Orders",
-          "completed": "completed",
-          "netRevenue": "Net Revenue",
-          "discount": "Discount",
-          "workers": "Total Workers",
-          "workshops": "workshops",
-          "engineers": "Engineers",
-          "available": "available",
-          "fulfillRate": "Avg Fulfill Rate",
-          "avgAcrossOrders": "Avg across all orders",
-          "budgetUtilization": "Budget Utilization",
-          "reports": "Reports",
-          "attachments": "attachments",
-          "avgRating": "Avg Rating",
-          "totalProjects": "projects completed"
-        },
-        "status": {
-          "completed": "Completed",
-          "preparing": "Preparing",
-          "pending": "Pending",
-          "cancelled": "Cancelled",
-          "open": "Open",
-          "inProgress": "In Progress",
-          "closed": "Closed"
-        },
-        "reportTypes": {
-          "daily": "Daily",
-          "weekly": "Weekly",
-          "monthly": "Monthly",
-          "yearly": "Yearly",
-          "progress": "Progress",
-          "services-order": "Services Order",
-          "resources-order": "Resources Order"
-        },
-        "charts": {
-          "orderStatus": "Order Status Distribution",
-          "orderStatusDesc": "Breakdown of all project orders by current status",
-          "workshopBudget": "Workshop Budget Tracking",
-          "workshopBudgetDesc": "Paid vs required budget for each workshop",
-          "paid": "Paid",
-          "required": "Required",
-          "engineerSpecs": "Engineers by Specialization",
-          "engineerSpecsDesc": "Distribution of engineers across specializations",
-          "reportTypes": "Report Type Distribution",
-          "reportTypesDesc": "Types of reports submitted in this project",
-          "orderTimeline": "Order Activity Timeline",
-          "orderTimelineDesc": "Number of orders created over time",
-          "orders": "Orders",
-          "workshopStatus": "Workshop Status",
-          "workshopStatusDesc": "Current status of all project workshops",
-          "orderValue": "Revenue by Month",
-          "orderValueDesc": "Net revenue generated from orders each month",
-          "revenue": "Revenue"
-        },
-        "quickInsights": {
-          "title": "Quick Insights",
-          "description": "Key metrics for faster decision making",
-          "avgOrderValue": "Avg Order Value",
-          "orderReports": "Order Reports",
-          "activeWorkshops": "Active Workshops",
-          "engineerAvailability": "Engineer Availability",
-          "pendingOrders": "Pending Orders",
-          "budgetGap": "Budget Gap"
+      "budgetUtilization": {
+        "title": "Budget Utilization",
+        "subtitle": "Workshop budget paid vs required",
+        "paid": "Paid",
+        "required": "Required"
+      },
+      "charts": {
+        "cashFlow": "Cash Flow",
+        "cashFlowDesc": "Monthly money in and out",
+        "income": "Income",
+        "expense": "Expenses",
+        "categoryShare": "Spending by Category",
+        "categoryShareDesc": "Expected distribution of the remaining budget",
+        "workshopBudget": "Workshop Budget Tracking",
+        "workshopBudgetDesc": "Paid vs required for each workshop"
+      },
+      "actions": {
+        "title": "Quick Actions",
+        "recordTransaction": "Record Transaction",
+        "recordTransactionHint": "Available soon",
+        "manageOrders": "Manage Provider Orders"
+      },
+      "ledger": {
+        "title": "Transaction Ledger",
+        "subtitle": "Every recorded movement of money for this project",
+        "search": "Search transactions...",
+        "allCategories": "All categories",
+        "allDirections": "All directions",
+        "allStatuses": "All statuses",
+        "income": "Income",
+        "expense": "Expense",
+        "empty": "No transactions match your filters",
+        "emptyHint": "Try adjusting the search or filters",
+        "sampleBadge": "Sample",
+        "columns": {
+          "date": "Date",
+          "counterParty": "Counterparty",
+          "category": "Category",
+          "direction": "Type",
+          "amount": "Amount",
+          "status": "Status"
         }
+      },
+      "categories": {
+        "workshop": "Workshop",
+        "provider-resource": "Resource Provider",
+        "provider-service": "Service Provider",
+        "engineer": "Engineer",
+        "other": "Other"
+      },
+      "statuses": {
+        "paid": "Paid",
+        "pending": "Pending",
+        "overdue": "Overdue"
+      },
+      "tabs": {
+        "overview": "Overview",
+        "providers": "Providers",
+        "workshops": "Workshops",
+        "engineers": "Engineers"
+      },
+      "providersPanel": {
+        "title": "Provider Transactions",
+        "subtitle": "Orders and payments from resource & service providers",
+        "intro": "Provider orders are linked to work sites in the API. Track them from the manage orders flows below.",
+        "manageResources": "Manage Resource Orders",
+        "manageServices": "Manage Service Orders",
+        "sampleNotice": "Showing sample rows until a project-scoped order feed is available."
+      },
+      "workshopsPanel": {
+        "title": "Workshop Finances",
+        "subtitle": "Budgets, paid invoices and remaining amounts per workshop",
+        "addInvoice": "Add Invoice",
+        "viewInvoices": "Invoices",
+        "noInvoices": "No invoices recorded for this workshop yet.",
+        "columns": {
+          "date": "Date",
+          "description": "Description",
+          "amount": "Amount"
+        }
+      },
+      "engineersPanel": {
+        "title": "Engineer Compensation",
+        "subtitle": "Assignments, rates and payments for engineers",
+        "pendingTitle": "Compensation data is not available yet",
+        "pendingDesc": "The API has no engineer salary or payment fields today. This section will be completed once compensation endpoints ship.",
+        "totalMembers": "Team Members"
+      },
+      "otherPanel": {
+        "title": "Other Transactions",
+        "subtitle": "Adjustments, transfers and miscellaneous movements"
+      }
+    },
+    "statistics": {
+      "title": "Project Statistics",
+      "subtitle": "Data-driven insights for informed decision making",
+      "kpi": {
+        "totalOrders": "Total Orders",
+        "completed": "completed",
+        "netRevenue": "Net Revenue",
+        "discount": "Discount",
+        "workers": "Total Workers",
+        "workshops": "workshops",
+        "engineers": "Engineers",
+        "available": "available",
+        "fulfillRate": "Avg Fulfill Rate",
+        "avgAcrossOrders": "Avg across all orders",
+        "budgetUtilization": "Budget Utilization",
+        "reports": "Reports",
+        "attachments": "attachments",
+        "avgRating": "Avg Rating",
+        "totalProjects": "projects completed"
+      },
+      "status": {
+        "completed": "Completed",
+        "preparing": "Preparing",
+        "pending": "Pending",
+        "cancelled": "Cancelled",
+        "open": "Open",
+        "inProgress": "In Progress",
+        "closed": "Closed"
+      },
+      "reportTypes": {
+        "daily": "Daily",
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "yearly": "Yearly",
+        "progress": "Progress",
+        "services-order": "Services Order",
+        "resources-order": "Resources Order"
+      },
+      "charts": {
+        "orderStatus": "Order Status Distribution",
+        "orderStatusDesc": "Breakdown of all project orders by current status",
+        "workshopBudget": "Workshop Budget Tracking",
+        "workshopBudgetDesc": "Paid vs required budget for each workshop",
+        "paid": "Paid",
+        "required": "Required",
+        "engineerSpecs": "Engineers by Specialization",
+        "engineerSpecsDesc": "Distribution of engineers across specializations",
+        "reportTypes": "Report Type Distribution",
+        "reportTypesDesc": "Types of reports submitted in this project",
+        "orderTimeline": "Order Activity Timeline",
+        "orderTimelineDesc": "Number of orders created over time",
+        "orders": "Orders",
+        "workshopStatus": "Workshop Status",
+        "workshopStatusDesc": "Current status of all project workshops",
+        "orderValue": "Revenue by Month",
+        "orderValueDesc": "Net revenue generated from orders each month",
+        "revenue": "Revenue"
+      },
+      "quickInsights": {
+        "title": "Quick Insights",
+        "description": "Key metrics for faster decision making",
+        "avgOrderValue": "Avg Order Value",
+        "orderReports": "Order Reports",
+        "activeWorkshops": "Active Workshops",
+        "engineerAvailability": "Engineer Availability",
+        "pendingOrders": "Pending Orders",
+        "budgetGap": "Budget Gap"
       }
     }
   }

@@ -72,8 +72,8 @@ const sections: ProjectSectionItem[] = [
     icon: Users,
   },
   {
-    key: "invoices",
-    label: i18n.t("project.details.sections.invoices"),
+    key: "financial",
+    label: i18n.t("project.details.sections.financial"),
     icon: Receipt,
   },
   {

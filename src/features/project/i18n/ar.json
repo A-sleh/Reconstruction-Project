@@ -83,13 +83,15 @@
         "subtitle": "أضف الموارد والخدمات إلى مشروعك وتابع طلباتك.",
         "tabs": {
           "addResource": "إضافة مورد جديد",
-          "myOrders": "طلباتي"
+          "myOrders": "طلباتي",
+          "statistics": "الإحصائيات"
         }
       },
       "manageServices": {
         "tabs": {
           "addService": "إضافة خدمة جديدة",
-          "myOrders": "طلباتي"
+          "myOrders": "طلباتي",
+          "statistics": "الإحصائيات"
         }
       },
       "manageReports": {
@@ -115,7 +117,7 @@
         "manageResources": "إدارة الموارد",
         "manageServices": "إدارة الخدمات",
         "manageEngineers": "إدارة المهندسين",
-        "invoices": "الفواتير",
+        "financial": "المالية",
         "reports": "التقارير"
       },
       "settings": {
@@ -138,7 +140,60 @@
       },
       "reference": {
         "investorHint": "مالك المشروع",
-        "statistics": {
+"dashboard": {
+      "title": "الإحصائيات والنظرة العامة",
+      "subtitle": "نظرة مباشرة على هذا النوع من الموردين عبر الطلبات والفئات ومعدل الإنجاز",
+      "providerNames": {
+        "Service": "الخدمات",
+        "Resource": "الموارد"
+      },
+      "kpi": {
+        "totalOrders": "إجمالي الطلبات",
+        "completed": "مكتملة",
+        "netSpend": "صافي الإنفاق",
+        "discount": "الخصم",
+        "fulfillRate": "متوسط نسبة التنفيذ",
+        "preparing": "قيد التحضير",
+        "availableItems": "البنود المتاحة",
+        "ofTotal": "من الإجمالي"
+      },
+      "charts": {
+        "orderStatus": "توزيع حالات الطلبات",
+        "orderStatusDesc": "تفصيل الطلبات حسب الحالة الحالية",
+        "categories": "الإنفاق حسب الفئة",
+        "categoriesDesc": "الطلبات والقيمة موزعة على الفئات",
+        "monthlyTimeline": "النشاط الشهري",
+        "monthlyTimelineDesc": "الطلبات والإنفاق خلال الأشهر الماضية",
+        "orders": "الطلبات",
+        "topItems": "أكثر البنود طلباً",
+        "topItemsDesc": "البنود الأكثر طلباً بشكل متكرر",
+        "topItemsCols": {
+          "name": "البند",
+          "category": "الفئة",
+          "qty": "الكمية",
+          "amount": "المبلغ"
+        },
+        "orderStatusLabels": {
+          "PendingApproval": "قيد الموافقة",
+          "Preparing": "قيد التحضير",
+          "Completed": "مكتملة",
+          "PendingToApproveCancellation": "بانتظار إلغاء",
+          "Cancelled": "ملغاة",
+          "Suspended": "موقوفة"
+        }
+      },
+      "insights": {
+        "title": "رؤى سريعة",
+        "description": "خلاصات رئيسية حول الطلبات والتوافر",
+        "avgOrderValue": "متوسط قيمة الطلب",
+        "topCategory": "الفئة الأعلى",
+        "fulfillmentRate": "نسبة التنفيذ",
+        "cancellationRate": "نسبة الإلغاء",
+        "highestSpendMonth": "أعلى شهر إنفاق",
+        "availableRatio": "نسبة البنود المتاحة"
+      }
+    },
+    "statistics": {
           "title": "إحصائيات المشروع",
           "subtitle": "ملخص مالي وتشغيلي مباشر",
           "workshops": "إجمالي ورش العمل",
@@ -264,6 +319,114 @@
         "engineerAvailability": "توفر المهندسين",
         "pendingOrders": "الطلبات المعلقة",
         "budgetGap": "الفجوة المالية"
+      }
+    },
+    "financial": {
+      "badge": "المالية",
+      "title": "الشؤون المالية للمشروع",
+      "description": "كل حركات الأموال لهذا المشروع - الموردون، ورش العمل، المهندسون والمزيد.",
+      "liveData": "مباشر",
+      "sampleData": "تجريبي",
+      "sampleHint": "الأقسام المميزة بـ تجريبي هي بيانات مؤقتة تُعرض حتى يوفر النظام هذه البيانات.",
+      "kpi": {
+        "totalPayments": "إجمالي المدفوعات",
+        "totalPaid": "المدفوع",
+        "remainingPayments": "المتبقي",
+        "workshopBudget": "ميزانية ورش العمل",
+        "workshopPaid": "مدفوع من الميزانية",
+        "workshopRemaining": "متبقي من الميزانية"
+      },
+      "budgetUtilization": {
+        "title": "نسبة استخدام الميزانية",
+        "subtitle": "المدفوع مقابل المطلوب من ميزانية ورش العمل",
+        "paid": "المدفوع",
+        "required": "المطلوب"
+      },
+      "charts": {
+        "cashFlow": "التدفق النقدي",
+        "cashFlowDesc": "الأموال الواردة والصادرة شهرياً",
+        "income": "الوارد",
+        "expense": "الصادر",
+        "categoryShare": "الإنفاق حسب الفئة",
+        "categoryShareDesc": "التوزيع المتوقع للميزانية المتبقية",
+        "workshopBudget": "تتبع ميزانية ورش العمل",
+        "workshopBudgetDesc": "المدفوع مقابل المطلوب لكل ورشة عمل"
+      },
+      "actions": {
+        "title": "إجراءات سريعة",
+        "recordTransaction": "تسجيل عملية",
+        "recordTransactionHint": "متاح قريباً",
+        "manageOrders": "إدارة طلبات الموردين"
+      },
+      "ledger": {
+        "title": "سجل العمليات",
+        "subtitle": "كل حركات الأموال المسجلة لهذا المشروع",
+        "search": "ابحث في العمليات...",
+        "allCategories": "كل الفئات",
+        "allDirections": "كل الأنواع",
+        "allStatuses": "كل الحالات",
+        "income": "وارد",
+        "expense": "صادر",
+        "empty": "لا توجد عمليات تطابق الفلاتر",
+        "emptyHint": "جرّب تعديل البحث أو الفلاتر",
+        "sampleBadge": "تجريبي",
+        "columns": {
+          "date": "التاريخ",
+          "counterParty": "الطرف الآخر",
+          "category": "الفئة",
+          "direction": "النوع",
+          "amount": "المبلغ",
+          "status": "الحالة"
+        }
+      },
+      "categories": {
+        "workshop": "ورشة عمل",
+        "provider-resource": "مورد موارد",
+        "provider-service": "مقدم خدمة",
+        "engineer": "مهندس",
+        "other": "أخرى"
+      },
+      "statuses": {
+        "paid": "مدفوع",
+        "pending": "قيد الانتظار",
+        "overdue": "متأخر"
+      },
+      "tabs": {
+        "overview": "نظرة عامة",
+        "providers": "الموردون",
+        "workshops": "ورش العمل",
+        "engineers": "المهندسون"
+      },
+      "providersPanel": {
+        "title": "عمليات الموردين",
+        "subtitle": "الطلبات والمدفوعات من موردي الموارد والخدمات",
+        "intro": "طلبات الموردين مرتبطة بمواقع العمل في النظام. تابعها من خلال شاشات إدارة الطلبات أدناه.",
+        "manageResources": "إدارة طلبات الموارد",
+        "manageServices": "إدارة طلبات الخدمات",
+        "sampleNotice": "عرض بيانات تجريبية حتى يتوفر مصدر طلبات مرتبط بالمشروع."
+      },
+      "workshopsPanel": {
+        "title": "مالية ورش العمل",
+        "subtitle": "الميزانيات والفواتير المدفوعة والمبالغ المتبقية لكل ورشة",
+        "addInvoice": "إضافة فاتورة",
+        "viewInvoices": "الفواتير",
+        "noInvoices": "لا توجد فواتير مسجلة لهذه الورشة بعد.",
+        "columns": {
+          "date": "التاريخ",
+          "description": "الوصف",
+          "amount": "المبلغ"
+        }
+      },
+      "engineersPanel": {
+        "title": "تعويضات المهندسين",
+        "subtitle": "المهام والمستحقات والمدفوعات للمهندسين",
+        "pendingTitle": "بيانات التعويضات غير متاحة بعد",
+        "pendingDesc": "لا يملك النظام حالياً حقول رواتب أو مدفوعات للمهندسين. سيتم إكمال هذا القسم عند توفر الواجهات البرمجية.",
+        "totalMembers": "أعضاء الفريق"
+      },
+      "otherPanel": {
+        "title": "عمليات أخرى",
+        "subtitle": "تسويات وتحويلات وحركات متنوعة"
       }
     }
   }
