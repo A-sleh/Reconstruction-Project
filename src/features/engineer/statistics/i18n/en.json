@@ -1,0 +1,72 @@
+{
+  "engineerStatistics": {
+    "header": {
+      "insights": "My Insights",
+      "title": "Statistics & Analytics",
+      "description": "A professional summary of your portfolio performance, workload, and growth.",
+      "liveData": "Live Data"
+    },
+    "kpi": {
+      "totalProjects": "Total Projects",
+      "totalProjectsHint": "Across all categories",
+      "completed": "Completed",
+      "completedHint": "Delivered successfully",
+      "inProgress": "In Progress",
+      "inProgressHint": "Current workload",
+      "planning": "Planning",
+      "planningHint": "Upcoming pipeline",
+      "yearsExperience": "Years Experience",
+      "yearsExperienceHint": "Seniority level",
+      "rating": "Average Rating",
+      "ratingHint_one": "Based on {{count}} review",
+      "ratingHint_other": "Based on {{count}} reviews",
+      "pendingInvites": "Pending Invites",
+      "pendingInvitesHint": "Waiting for your response",
+      "managedBudget": "Managed Budget",
+      "managedBudgetHint": "Total portfolio value"
+    },
+    "charts": {
+      "trend": {
+        "title": "Projects Trend",
+        "description": "Monthly started vs completed projects.",
+        "started": "Started",
+        "completed": "Completed"
+      },
+      "status": {
+        "title": "Projects by Status",
+        "description": "Distribution of your portfolio.",
+        "centerLabel": "Projects"
+      },
+      "budget": {
+        "title": "Budget by Category",
+        "description": "Total managed budget per category.",
+        "value": "Budget"
+      }
+    },
+    "deadlines": {
+      "title": "Upcoming Deadlines",
+      "subtitle": "Projects reaching completion within the next 90 days.",
+      "daysLeft_one": "{{count}} day left",
+      "daysLeft_other": "{{count}} days left",
+      "urgent": "Urgent",
+      "client": "Client",
+      "location": "Location"
+    },
+    "reviews": {
+      "title": "Reviews & Feedback",
+      "subtitle": "What clients say about your work.",
+      "basedOn_one": "Based on {{count}} review",
+      "basedOn_other": "Based on {{count}} reviews",
+      "empty": "No reviews yet."
+    },
+    "experience": {
+      "title": "Work Experience",
+      "subtitle": "Your professional timeline.",
+      "current": "Current"
+    },
+    "skills": {
+      "title": "Skills",
+      "subtitle": "Core competencies and certifications."
+    }
+  }
+}

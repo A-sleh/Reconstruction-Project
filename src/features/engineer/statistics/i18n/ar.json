@@ -1,0 +1,72 @@
+{
+  "engineerStatistics": {
+    "header": {
+      "insights": "رؤيتي المهنية",
+      "title": "الإحصائيات والتحليلات",
+      "description": "ملخص مهني لأداء أعمالك وعبء العمل ونمو مسيرتك.",
+      "liveData": "بيانات مباشرة"
+    },
+    "kpi": {
+      "totalProjects": "إجمالي المشاريع",
+      "totalProjectsHint": "في جميع التصنيفات",
+      "completed": "مكتملة",
+      "completedHint": "تم تسليمها بنجاح",
+      "inProgress": "قيد التنفيذ",
+      "inProgressHint": "عبء العمل الحالي",
+      "planning": "قيد التخطيط",
+      "planningHint": "مشاريع قادمة",
+      "yearsExperience": "سنوات الخبرة",
+      "yearsExperienceHint": "مستوى الأقدمية",
+      "rating": "متوسط التقييم",
+      "ratingHint_one": "استناداً إلى {{count}} تقييم",
+      "ratingHint_other": "استناداً إلى {{count}} تقييمات",
+      "pendingInvites": "دعوات معلّقة",
+      "pendingInvitesHint": "بانتظار ردّك",
+      "managedBudget": "قيمة المحفظة",
+      "managedBudgetHint": "إجمالي قيمة المشاريع"
+    },
+    "charts": {
+      "trend": {
+        "title": "اتجاه المشاريع",
+        "description": "المشاريع المبدوءة والمكتملة شهرياً.",
+        "started": "مبدوءة",
+        "completed": "مكتملة"
+      },
+      "status": {
+        "title": "المشاريع حسب الحالة",
+        "description": "توزيع محفظة أعمالك.",
+        "centerLabel": "مشاريع"
+      },
+      "budget": {
+        "title": "الميزانية حسب التصنيف",
+        "description": "إجمالي الميزانية المُدارة لكل تصنيف.",
+        "value": "الميزانية"
+      }
+    },
+    "deadlines": {
+      "title": "المواعيد النهائية القادمة",
+      "subtitle": "مشاريع تقترب من الانتهاء خلال 90 يوماً القادمة.",
+      "daysLeft_one": "متبقي {{count}} يوم",
+      "daysLeft_other": "متبقي {{count}} يوم",
+      "urgent": "عاجل",
+      "client": "الجهة",
+      "location": "الموقع"
+    },
+    "reviews": {
+      "title": "التقييمات والملاحظات",
+      "subtitle": "ماذا يقول العملاء عن عملك.",
+      "basedOn_one": "استناداً إلى {{count}} تقييم",
+      "basedOn_other": "استناداً إلى {{count}} تقييمات",
+      "empty": "لا توجد تقييمات بعد."
+    },
+    "experience": {
+      "title": "الخبرات العملية",
+      "subtitle": "مسيرتك المهنية.",
+      "current": "حالي"
+    },
+    "skills": {
+      "title": "المهارات",
+      "subtitle": "الكفاءات الأساسية والشهادات."
+    }
+  }
+}
