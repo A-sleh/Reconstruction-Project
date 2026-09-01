@@ -30,6 +30,11 @@
       "messageSendError": "Failed to send message",
       "statusUpdated": "Ticket status updated successfully",
       "statusUpdateError": "Failed to update ticket status",
+      "filters": {
+        "allStatuses": "All statuses",
+        "allPriorities": "All priorities",
+        "allRoles": "All roles"
+      },
       "inbox": {
         "badge": "Support Agent",
         "title": "Your Assigned Tickets Inbox",
@@ -45,6 +50,7 @@
         "sla": "SLA Due",
         "action": "Action",
         "openTicket": "Open Ticket",
+        "loading": "Loading tickets...",
         "empty": "No matching tickets",
         "emptyHint": "Try changing the search or status filter"
       },

@@ -1,394 +1,411 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Search, PanelLeftClose, PanelLeft, MessageSquare } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import {
+  BookOpen,
+  Inbox as InboxIcon,
+  PanelLeft,
+  PanelLeftClose,
+  Search,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ListUsersMessages from "@/features/support/components/ListUsersMessages";
-import ChatHeader from "@/features/support/components/ChatHeader";
-import ChatMessages from "@/features/support/components/ChatMessages";
-import ChatAction from "@/features/support/components/ChatAction";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
-
-interface UserMessage {
-  id: string;
-  avatar: string;
-  name: string;
-  phone: string;
-  lastMessage: string;
-  messageDate: string;
-  isActive?: boolean;
-  unreadCount?: number;
-}
-
-interface Message {
-  id: string;
-  text: string;
-  sender: "me" | "other";
-  timestamp: string;
-  senderName?: string;
-}
-
-const newUserMessages: UserMessage[] = [
-  {
-    id: "1",
-    avatar: "https://i.pravatar.cc/150?img=1",
-    name: "Ahmed Hassan",
-    phone: "+20 123 456 7890",
-    lastMessage: "Great, thank you for the quick response!",
-    messageDate: "10:34 AM",
-    isActive: true,
-    unreadCount: 2,
-  },
-  {
-    id: "2",
-    avatar: "https://i.pravatar.cc/150?img=2",
-    name: "Sara Mohamed",
-    phone: "+20 112 345 6789",
-    lastMessage: "Can you send me the invoice for the last order?",
-    messageDate: "Yesterday",
-    isActive: false,
-  },
-  {
-    id: "3",
-    avatar: "https://i.pravatar.cc/150?img=3",
-    name: "Omar Ali",
-    phone: "+20 109 876 5432",
-    lastMessage: "The order has been delivered successfully",
-    messageDate: "Yesterday",
-    isActive: true,
-    unreadCount: 5,
-  },
-];
-
-const repliedUserMessages: UserMessage[] = [
-  {
-    id: "4",
-    avatar: "https://i.pravatar.cc/150?img=4",
-    name: "Fatima Khalid",
-    phone: "+20 155 555 1234",
-    lastMessage: "I need help with my return request",
-    messageDate: "Mon",
-    isActive: false,
-  },
-  {
-    id: "5",
-    avatar: "https://i.pravatar.cc/150?img=5",
-    name: "Youssef Nabil",
-    phone: "+20 128 888 9999",
-    lastMessage: "When will my order arrive?",
-    messageDate: "Sun",
-    isActive: false,
-  },
-  {
-    id: "6",
-    avatar: "https://i.pravatar.cc/150?img=6",
-    name: "Mona Saeed",
-    phone: "+20 111 222 3333",
-    lastMessage: "Perfect, thanks!",
-    messageDate: "Jul 10",
-    isActive: true,
-  },
-];
-
-const mockConversations: Record<string, Message[]> = {
-  "1": [
-    {
-      id: "1",
-      text: "Hello, I need help with my order",
-      sender: "other",
-      timestamp: "10:30 AM",
-      senderName: "Ahmed",
-    },
-    {
-      id: "2",
-      text: "Sure! Can you provide your order number?",
-      sender: "me",
-      timestamp: "10:31 AM",
-    },
-    {
-      id: "3",
-      text: "It's #ORD-2024-1234",
-      sender: "other",
-      timestamp: "10:32 AM",
-      senderName: "Ahmed",
-    },
-    {
-      id: "4",
-      text: "I found your order. It's currently being processed and will ship within 24 hours.",
-      sender: "me",
-      timestamp: "10:33 AM",
-    },
-    {
-      id: "5",
-      text: "Great, thank you for the quick response!",
-      sender: "other",
-      timestamp: "10:34 AM",
-      senderName: "Ahmed",
-    },
-  ],
-  "2": [
-    {
-      id: "1",
-      text: "Hi, I'd like to request an invoice for my last purchase",
-      sender: "other",
-      timestamp: "2:15 PM",
-      senderName: "Sara",
-    },
-    {
-      id: "2",
-      text: "Of course! Could you share your order ID?",
-      sender: "me",
-      timestamp: "2:16 PM",
-    },
-    {
-      id: "3",
-      text: "Can you send me the invoice for the last order?",
-      sender: "other",
-      timestamp: "2:20 PM",
-      senderName: "Sara",
-    },
-  ],
-  "3": [
-    {
-      id: "1",
-      text: "Where is my order? It's been 5 days",
-      sender: "other",
-      timestamp: "9:00 AM",
-      senderName: "Omar",
-    },
-    {
-      id: "2",
-      text: "Let me check the status for you",
-      sender: "me",
-      timestamp: "9:02 AM",
-    },
-    {
-      id: "3",
-      text: "The order has been delivered successfully",
-      sender: "other",
-      timestamp: "11:30 AM",
-      senderName: "Omar",
-    },
-  ],
-  "4": [
-    {
-      id: "1",
-      text: "I received the wrong item in my order",
-      sender: "other",
-      timestamp: "3:00 PM",
-      senderName: "Fatima",
-    },
-    {
-      id: "2",
-      text: "I'm sorry to hear that. Can you send a photo of what you received?",
-      sender: "me",
-      timestamp: "3:05 PM",
-    },
-    {
-      id: "3",
-      text: "I need help with my return request",
-      sender: "other",
-      timestamp: "3:10 PM",
-      senderName: "Fatima",
-    },
-  ],
-  "5": [
-    {
-      id: "1",
-      text: "Hi, I placed an order 3 days ago",
-      sender: "other",
-      timestamp: "11:00 AM",
-      senderName: "Youssef",
-    },
-    {
-      id: "2",
-      text: "When will my order arrive?",
-      sender: "other",
-      timestamp: "11:01 AM",
-      senderName: "Youssef",
-    },
-  ],
-  "6": [
-    {
-      id: "1",
-      text: "Thank you for resolving my issue!",
-      sender: "other",
-      timestamp: "4:00 PM",
-      senderName: "Mona",
-    },
-    {
-      id: "2",
-      text: "You're welcome! Let us know if you need anything else.",
-      sender: "me",
-      timestamp: "4:02 PM",
-    },
-    {
-      id: "3",
-      text: "Perfect, thanks!",
-      sender: "other",
-      timestamp: "4:03 PM",
-      senderName: "Mona",
-    },
-  ],
-};
+import AdminStatsBar from "@/features/support/components/AdminStatsBar";
+import TicketInboxPanel from "@/features/support/components/TicketInboxPanel";
+import TicketWorkspacePanel from "@/features/support/components/TicketWorkspacePanel";
+import CustomerInfoPanel from "@/features/support/components/CustomerInfoPanel";
+import {
+  mockAgentStats,
+  mockAgentTickets,
+  mockCannedResponses,
+  mockTicketDetails,
+} from "@/features/support/mock";
+import type {
+  AgentTicket,
+  TicketDetails,
+  TicketMessage,
+} from "@/features/support/api/types";
+import TicketStatusBadge from "@/features/support/components/TicketStatusBadge";
+import TicketPriorityBadge from "@/features/support/components/TicketPriorityBadge";
 
 const Support = () => {
-  const { t } = useTranslation();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedUser, setSelectedUser] = useState<UserMessage | null>(null);
-  const [conversations, setConversations] =
-    useState<Record<string, Message[]>>(mockConversations);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const { t, i18n } = useTranslation();
+  const isArabic = i18n.language === "ar";
 
-  const filteredNewUsers = useMemo(
-    () =>
-      newUserMessages.filter(
-        (u) =>
-          u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          u.phone.includes(searchQuery),
-      ),
-    [searchQuery],
-  );
+  const [activeView, setActiveView] = useState<"inbox" | "kb">("inbox");
+  const [selectedTicketId, setSelectedTicketId] = useState<string | null>(null);
+  const [workTickets, setWorkTickets] =
+    useState<Record<string, TicketDetails>>(buildTicketDetails);
+  const [isRailOpen, setIsRailOpen] = useState(true);
+  const [kbQuery, setKbQuery] = useState("");
 
-  const filteredRepliedUsers = useMemo(
-    () =>
-      repliedUserMessages.filter(
-        (u) =>
-          u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          u.phone.includes(searchQuery),
-      ),
-    [searchQuery],
-  );
+  const detailMap = workTickets;
 
-  const currentMessages = selectedUser
-    ? conversations[selectedUser.id] || []
-    : [];
+  const selectedTicket = detailMap[selectedTicketId ?? ""] ?? null;
 
-  const handleSend = (text: string) => {
-    if (!selectedUser) return;
-    const newMsg: Message = {
-      id: String(Date.now()),
-      text,
-      sender: "me",
-      timestamp: new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    };
-    setConversations((prev) => ({
-      ...prev,
-      [selectedUser.id]: [...(prev[selectedUser.id] || []), newMsg],
-    }));
+  const handleSelectTicket = (ticketId: string) => {
+    setSelectedTicketId(ticketId);
+    setActiveView("inbox");
   };
 
-  const handleSelectUser = (user: UserMessage) => {
-    setSelectedUser(user);
+  const handleSendMessage = (content: string, isInternal: boolean) => {
+    if (!selectedTicket) return;
+    setWorkTickets((prev) => {
+      const ticket = prev[selectedTicket.ticket_id];
+      const nextId = ticket.messages.length + 1;
+      const message: TicketMessage = {
+        id: nextId,
+        sender_type: "agent",
+        sender_name: "أحمد علي",
+        content,
+        is_internal_note: isInternal,
+        created_at: new Date().toISOString(),
+      };
+      return {
+        ...prev,
+        [selectedTicket.ticket_id]: {
+          ...ticket,
+          messages: [...ticket.messages, message],
+        },
+      };
+    });
   };
+
+  const cannedResponses = mockCannedResponses.map((c) => ({
+    id: c.id,
+    title: c.title,
+    content: c.content,
+  }));
 
   return (
-    <div className="flex h-full gap-3 bg-background">
-      <div
-        className={cn(
-          `flex flex-col max-w-sm  bg-card duration-300 ease-in-out overflow-hidden transition-all rounded-lg`,
-          isSidebarOpen ? "w-full" : "w-0",
-        )}
-      >
-        <div className="p-3 border-b border-border">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <Input
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t(
-                "support.listUsers.searchPlaceholder",
-                "Search conversations...",
-              )}
-              className="pl-9"
-            />
+    <div
+      className="min-h-screen bg-background"
+      dir={isArabic ? "rtl" : "ltr"}
+    >
+      <div className="container py-6 space-y-6">
+        <header className="flex items-center justify-between gap-3 rounded-xl border border-gray-300 bg-white px-6 py-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <span className="rounded-lg bg-primary px-2.5 py-1 text-xs font-bold text-primary-foreground">
+              {t("support.agent.inbox.badge")}
+            </span>
+            <h1 className="text-sm font-bold text-foreground">
+              {t("support.agent.inbox.title")}
+            </h1>
           </div>
-        </div>
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+            <span>
+              {t("support.agent.inbox.online", { name: "أحمد علي" })}
+            </span>
+          </div>
+        </header>
 
-        <Tabs defaultValue="new" className="flex flex-col flex-1 min-h-0">
-          <TabsList className="mx-3 mt-2">
-            <TabsTrigger value="new" className="flex-1">
-              {t("support.tabs.new", "New")}
-              {filteredNewUsers.some((u) => u.unreadCount) && (
-                <span className="ml-1.5 size-1.5 rounded-full bg-success" />
-              )}
+        <Tabs
+          value={activeView}
+          onValueChange={(v) => setActiveView(v as "inbox" | "kb")}
+          className="space-y-6"
+        >
+          <TabsList className="w-fit">
+            <TabsTrigger value="inbox" className="gap-2">
+              <InboxIcon className="size-4" />
+              {t("support.agent.inbox.title")}
             </TabsTrigger>
-            <TabsTrigger value="replied" className="flex-1">
-              {t("support.tabs.replied", "Replied")}
+            <TabsTrigger value="kb" className="gap-2">
+              <BookOpen className="size-4" />
+              {t("support.supportCenter.kb.title")}
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="new" className="flex-1 mt-0 overflow-hidden">
-            <ListUsersMessages
-              users={filteredNewUsers}
-              onSelectUser={handleSelectUser}
-            />
+          <TabsContent value="inbox" className="mt-0 space-y-6">
+            {selectedTicket ? (
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-stretch">
+                <div
+                  className={cn(
+                    "flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white shadow-card transition-all",
+                    isRailOpen ? "w-full lg:w-72" : "w-12",
+                  )}
+                >
+                  <div className="flex items-center justify-between border-b border-gray-300 p-2">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setIsRailOpen((o) => !o)}
+                      className="size-8"
+                    >
+                      {isRailOpen ? (
+                        <PanelLeftClose className="size-4" />
+                      ) : (
+                        <PanelLeft className="size-4" />
+                      )}
+                    </Button>
+                    {isRailOpen && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setSelectedTicketId(null)}
+                      >
+                        {t("support.agent.workspace.back", "Back to inbox")}
+                      </Button>
+                    )}
+                  </div>
+                  {isRailOpen && (
+                    <div className="flex-1 overflow-y-auto">
+                      {mockAgentTickets.map((ticket) => (
+                        <button
+                          key={ticket.ticket_id}
+                          type="button"
+                          onClick={() => setSelectedTicketId(ticket.ticket_id)}
+                          className={cn(
+                            "flex w-full flex-col gap-1 border-b border-gray-300 px-3 py-3 text-start transition-colors hover:bg-muted/50",
+                            selectedTicketId === ticket.ticket_id &&
+                              "bg-primary/5",
+                          )}
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="font-mono text-xs font-bold text-foreground">
+                              #{ticket.ticket_id}
+                            </span>
+                            <TicketPriorityBadge priority={ticket.priority} />
+                          </div>
+                          <span className="truncate text-sm font-semibold text-foreground">
+                            {ticket.subject}
+                          </span>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="truncate text-xs text-muted-foreground">
+                              {ticket.customer_name}
+                            </span>
+                            <TicketStatusBadge status={ticket.status} />
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <TicketWorkspacePanel
+                  details={selectedTicket}
+                  cannedResponses={cannedResponses}
+                  onSendMessage={handleSendMessage}
+                />
+
+                {selectedTicket.customer && (
+                  <CustomerInfoPanel customer={selectedTicket.customer} />
+                )}
+              </div>
+            ) : (
+              <div className="space-y-6">
+                <AdminStatsBar stats={mockAgentStats} />
+                <TicketInboxPanel
+                  tickets={mockAgentTickets}
+                  total={mockAgentTickets.length}
+                  onOpenTicket={handleSelectTicket}
+                />
+              </div>
+            )}
           </TabsContent>
 
-          <TabsContent value="replied" className="flex-1 mt-0 overflow-hidden">
-            <ListUsersMessages
-              users={filteredRepliedUsers}
-              onSelectUser={handleSelectUser}
+          <TabsContent value="kb" className="mt-0 space-y-6">
+            <KnowledgeBaseContent
+              query={kbQuery}
+              onQueryChange={setKbQuery}
             />
           </TabsContent>
         </Tabs>
       </div>
+    </div>
+  );
+};
 
-      <div className="flex flex-col flex-1 min-w-0 min-h-150 rounded-lg overflow-hidden">
-        <div className="flex items-center gap-2 px-4 py-3 bg-card border-b border-border">
-          <Button
-            variant="ghost"
-            className="hover:bg-gray-300/30 transition-all cursor-pointer "
-            size="icon"
-            onClick={() => setIsSidebarOpen((prev) => !prev)}
-            data-icon="inline-start"
-          >
-            {isSidebarOpen ? <PanelLeftClose /> : <PanelLeft />}
-          </Button>
+const buildTicketDetails = (): Record<string, TicketDetails> => {
+  return mockAgentTickets.reduce<Record<string, TicketDetails>>(
+    (acc, ticket) => {
+      acc[ticket.ticket_id] = toDetails(ticket);
+      return acc;
+    },
+    {},
+  );
+};
 
-          {selectedUser && (
-            <div className="flex-1 min-w-0">
-              <ChatHeader
-                user={{
-                  avatar: selectedUser.avatar,
-                  name: selectedUser.name,
-                  isActive: selectedUser.isActive ?? false,
-                  phone: selectedUser.phone,
-                }}
-              />
-            </div>
+const toDetails = (ticket: AgentTicket): TicketDetails => {
+  const base =
+    ticket.ticket_id === mockTicketDetails.ticket_id
+      ? mockTicketDetails
+      : null;
+
+  return {
+    ticket_id: ticket.ticket_id,
+    subject: ticket.subject,
+    department: ticket.customer_role,
+    status: ticket.status,
+    priority: ticket.priority,
+    customer: base?.customer ?? {
+      id: ticket.ticket_id,
+      name: ticket.customer_name,
+      role: ticket.customer_role,
+      email: `${ticket.ticket_id.toLowerCase()}@example.com`,
+      join_date: "2025-01-01",
+      previous_tickets_count: 0,
+    },
+    messages:
+      base?.messages ?? [
+        {
+          id: 1,
+          sender_type: "customer",
+          sender_name: ticket.customer_name,
+          content: ticket.subject,
+          is_internal_note: false,
+          created_at: "2026-08-11T10:30:00Z",
+        },
+      ],
+  };
+};
+
+const KnowledgeBaseContent = ({
+  query,
+  onQueryChange,
+}: {
+  query: string;
+  onQueryChange: (value: string) => void;
+}) => {
+  const { t } = useTranslation();
+  const categories = t("support.supportCenter.data.kb.categories", {
+    returnObjects: true,
+  }) as Array<{
+    id: string;
+    icon: string;
+    title: string;
+    description: string;
+    articles_count: number;
+  }>;
+  const faqs = t("support.supportCenter.data.kb.faqs", {
+    returnObjects: true,
+  }) as Array<{ id: number; question: string; answer: string }>;
+  const searchResults = t("support.supportCenter.data.kb.searchResults", {
+    returnObjects: true,
+  }) as Array<{
+    article_id: number;
+    category: string;
+    title: string;
+    snippet: string;
+  }>;
+
+  const results = searchResults.filter(
+    (r) =>
+      r.title.toLowerCase().includes(query.trim().toLowerCase()) ||
+      r.snippet.toLowerCase().includes(query.trim().toLowerCase()),
+  );
+
+  return (
+    <section className="space-y-6">
+      <div className="rounded-xl border border-gray-300 bg-white p-4 shadow-card">
+        <h2 className="text-lg font-bold text-foreground">
+          {t("support.supportCenter.kb.title")}
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          {t("support.supportCenter.kb.description")}
+        </p>
+      </div>
+
+      <div className="relative">
+        <Search className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          type="search"
+          value={query}
+          onChange={(e) => onQueryChange(e.target.value)}
+          placeholder={t("support.supportCenter.hero.searchPlaceholder")}
+          className="ps-9"
+        />
+      </div>
+
+      {query.trim() ? (
+        <div className="rounded-lg border border-gray-300 bg-white shadow-card">
+          {results.length === 0 ? (
+            <p className="px-4 py-6 text-sm text-muted-foreground">
+              {t("support.supportCenter.hero.noResults")}
+            </p>
+          ) : (
+            <ul className="divide-y divide-gray-300">
+              {results.map((result) => (
+                <li key={result.article_id} className="px-4 py-3">
+                  <span className="text-xs font-medium uppercase text-primary">
+                    {result.category}
+                  </span>
+                  <h4 className="mt-1 text-sm font-semibold text-foreground">
+                    {result.title}
+                  </h4>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {result.snippet}
+                  </p>
+                </li>
+              ))}
+            </ul>
           )}
         </div>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              className="rounded-lg border border-gray-300 bg-white p-4 shadow-card transition-smooth hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              <h3 className="text-sm font-semibold text-foreground">
+                {category.title}
+              </h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {category.description}
+              </p>
+              <span className="mt-3 inline-block text-xs font-medium text-primary">
+                {category.articles_count}{" "}
+                {t("support.supportCenter.kb.viewAll")}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
 
-        {selectedUser ? (
-          <>
-            <ChatMessages messages={currentMessages} />
-            <ChatAction onSend={handleSend} />
-          </>
-        ) : (
-          <div className="flex-1 flex flex-col items-center justify-center gap-3">
-            <div className="flex items-center justify-center size-12 rounded-full bg-muted">
-              <MessageSquare className="size-6 text-muted-foreground" />
-            </div>
-            <div className="text-center">
-              <p className="text-sm font-medium text-foreground">
-                {t("support.emptyState.title", "No conversation selected")}
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                {t(
-                  "support.emptyState.description",
-                  "Choose a conversation from the list to start messaging",
-                )}
-              </p>
-            </div>
+      <div className="overflow-hidden rounded-lg border border-gray-300 bg-white shadow-card">
+        <div className="flex items-center justify-between border-b border-gray-300 px-4 py-3">
+          <div>
+            <h3 className="text-sm font-semibold text-foreground">
+              {t("support.supportCenter.kb.popularTitle")}
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              {t("support.supportCenter.kb.popularSubtitle")}
+            </p>
           </div>
-        )}
+        </div>
+        <Accordion type="single" collapsible className="px-0">
+          {faqs.map((faq) => (
+            <AccordionItem
+              key={faq.id}
+              value={`faq-${faq.id}`}
+              className="not-last:border-b not-last:border-gray-200"
+            >
+              <AccordionTrigger className="gap-3 px-4 py-3.5 text-sm font-semibold text-foreground hover:bg-muted/40 hover:no-underline data-[state=open]:bg-primary/5">
+                <span className="flex min-w-0 items-center gap-3 text-start">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-primary/10 text-xs font-bold text-primary transition-colors group-data-[state=open]/accordion-trigger:bg-primary group-data-[state=open]/accordion-trigger:text-primary-foreground">
+                    {faq.id}
+                  </span>
+                  <span className="leading-snug">{faq.question}</span>
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="px-4">
+                <div className="ms-10 border-s-2 border-primary/20 ps-4 text-sm leading-relaxed text-muted-foreground">
+                  {faq.answer}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
-    </div>
+    </section>
   );
 };
 
