@@ -1,0 +1,66 @@
+{
+  "buildingVerification": {
+    "title": "Building Verification",
+    "subtitle": "Review and verify property ownership requests submitted by users.",
+    "badge": "Admin",
+    "kpi": {
+      "pending": "Pending",
+      "pendingHint": "Awaiting verification",
+      "approved": "Approved",
+      "approvedHint": "Successfully verified",
+      "rejected": "Rejected",
+      "rejectedHint": "Verification denied",
+      "total": "Total",
+      "totalHint": "All properties submitted"
+    },
+    "table": {
+      "property": "Property",
+      "kind": "Kind",
+      "address": "Address",
+      "owner": "Owner",
+      "area": "Area",
+      "status": "Status",
+      "requestedAt": "Requested",
+      "attachments": "Attachments",
+      "actions": "Actions",
+      "empty": "No properties found.",
+      "emptyHint": "Try adjusting your search or filters.",
+      "total": "{{count}} properties total",
+      "searchPlaceholder": "Search properties...",
+      "filterKind": "Kind",
+      "filterStatus": "Status",
+      "allKinds": "All Kinds",
+      "allStatuses": "All Statuses"
+    },
+    "kind": {
+      "land": "Land",
+      "building": "Building"
+    },
+    "status": {
+      "PENDING": "Pending validation",
+      "APPROVED": "Approved",
+      "REJECTED": "Rejected"
+    },
+    "approveModal": {
+      "title": "Approve Property",
+      "description": "Are you sure you want to approve this property verification? This action confirms the ownership details are valid.",
+      "confirm": "Approve",
+      "cancelLabel": "Cancel"
+    },
+    "rejectModal": {
+      "title": "Reject Property",
+      "description": "Please provide a reason for rejecting this property verification. The owner will be notified.",
+      "reasonLabel": "Rejection Reason",
+      "reasonPlaceholder": "Enter the reason for rejection...",
+      "confirm": "Reject",
+      "cancelLabel": "Cancel",
+      "reasonRequired": "Rejection reason is required."
+    },
+    "toast": {
+      "approveSuccess": "Property approved successfully.",
+      "approveError": "Failed to approve property.",
+      "rejectSuccess": "Property rejected successfully.",
+      "rejectError": "Failed to reject property."
+    }
+  }
+}

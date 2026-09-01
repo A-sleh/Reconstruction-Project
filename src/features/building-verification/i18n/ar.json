@@ -1,0 +1,66 @@
+{
+  "buildingVerification": {
+    "title": "توثيق المباني",
+    "subtitle": "مراجعة وتوثيق طلبات ملكية العقارات المقدمة من المستخدمين.",
+    "badge": "مشرف",
+    "kpi": {
+      "pending": "قيد التحقق",
+      "pendingHint": "بانتظار التوثيق",
+      "approved": "تمت الموافقة",
+      "approvedHint": "تم التوثيق بنجاح",
+      "rejected": "مرفوض",
+      "rejectedHint": "تم رفض التوثيق",
+      "total": "الإجمالي",
+      "totalHint": "جميع العقارات المقدمة"
+    },
+    "table": {
+      "property": "العقار",
+      "kind": "النوع",
+      "address": "العنوان",
+      "owner": "المالك",
+      "area": "المساحة",
+      "status": "الحالة",
+      "requestedAt": "تاريخ الطلب",
+      "attachments": "المرفقات",
+      "actions": "الإجراءات",
+      "empty": "لم يتم العثور على عقارات.",
+      "emptyHint": "حاول تعديل البحث أو الفلاتر.",
+      "total": "{{count}} عقارات إجمالاً",
+      "searchPlaceholder": "بحث عن عقارات...",
+      "filterKind": "النوع",
+      "filterStatus": "الحالة",
+      "allKinds": "جميع الأنواع",
+      "allStatuses": "جميع الحالات"
+    },
+    "kind": {
+      "land": "أرض",
+      "building": "مبنى"
+    },
+    "status": {
+      "PENDING": "قيد التحقق",
+      "APPROVED": "تمت الموافقة",
+      "REJECTED": "مرفوض"
+    },
+    "approveModal": {
+      "title": "الموافقة على العقار",
+      "description": "هل أنت متأكد من الموافقة على توثيق هذا العقار؟ يؤكد هذا الإجراء صحة تفاصيل الملكية.",
+      "confirm": "موافقة",
+      "cancelLabel": "إلغاء"
+    },
+    "rejectModal": {
+      "title": "رفض العقار",
+      "description": "يرجى ذكر سبب رفض توثيق هذا العقار. سيتم إشعار المالك.",
+      "reasonLabel": "سبب الرفض",
+      "reasonPlaceholder": "أدخل سبب الرفض...",
+      "confirm": "رفض",
+      "cancelLabel": "إلغاء",
+      "reasonRequired": "سبب الرفض مطلوب."
+    },
+    "toast": {
+      "approveSuccess": "تمت الموافقة على العقار بنجاح.",
+      "approveError": "فشلت الموافقة على العقار.",
+      "rejectSuccess": "تم رفض العقار بنجاح.",
+      "rejectError": "فشل رفض العقار."
+    }
+  }
+}
