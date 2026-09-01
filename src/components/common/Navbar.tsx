@@ -69,6 +69,12 @@ const Navbar = () => {
     ...(isEngineer
       ? [
           {
+            label: t("navbar.open-projects"),
+            href: paths.app.engineer.openProjects.path,
+            icon: <RiFolderShieldLine size={18} />,
+            permission: Permissions.PROJECTS_VIEW,
+          },
+          {
             label: t("navbar.my-requests"),
             href: paths.app.engineer.requests.path,
             icon: <RiInboxLine size={18} />,

@@ -65,6 +65,8 @@ import arProjectMessages from "@/features/project-messages/i18n/ar.json";
 import enProjectMessages from "@/features/project-messages/i18n/en.json";
 import arMarketplace from "@/features/investor/marketplace/i18n/ar.json";
 import enMarketplace from "@/features/investor/marketplace/i18n/en.json";
+import arOpenProjects from "@/features/engineer/open-projects/i18n/ar.json";
+import enOpenProjects from "@/features/engineer/open-projects/i18n/en.json";
 
 function mergeTranslations(...objects: Record<string, unknown>[]) {
   return objects.reduce<Record<string, unknown>>((acc, obj) => {
@@ -112,6 +114,7 @@ enEngineerRequests,
       enEngineerStatistics,
       enProjectBoard,
       enProjectMessages,
+      enOpenProjects,
     ),
   },
   ar: {
@@ -145,6 +148,7 @@ arEngineerRequests,
       arEngineerStatistics,
       arProjectBoard,
       arProjectMessages,
+      arOpenProjects,
     ),
   },
 };

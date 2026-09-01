@@ -144,6 +144,10 @@ export const paths = {
       },
     },
     engineer: {
+      openProjects: {
+        path: "/app/engineer/projects",
+        getHref: () => `/app/engineer/projects`,
+      },
       profile: {
         path: "/app/engineer/profile",
         getHref: () => `/app/engineer/profile`,
