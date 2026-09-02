@@ -3,6 +3,35 @@
     "title": "Engineer Profile",
     "description": "An overview of your professional details and verification status.",
     "identifier": "Identifier",
+    "specialityTitle": "Role",
+    "editProfile": "Edit Profile",
+    "tabs": {
+      "bio": "Bio",
+      "portfolio": "Portfolio",
+      "projects": "Participated Projects",
+      "rating": "Rating"
+    },
+    "edit": {
+      "title": "Edit Profile",
+      "subtitle": "Update your professional information.",
+      "fields": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone",
+        "speciality": "Role",
+        "specialization": "Specialization",
+        "licenseNumber": "License Number",
+        "yearsOfExperience": "Years of Experience",
+        "bio": "Bio"
+      },
+      "validation": {
+        "license": "License number is required.",
+        "bio": "Bio is required."
+      },
+      "cancel": "Cancel",
+      "submit": "Save Changes"
+    },
     "verificationStatus": {
       "VERIFIED": "Verified",
       "PENDING": "Pending review",
@@ -20,18 +49,46 @@
       "yearsOfExperienceValue_one": "{{count}} year",
       "yearsOfExperienceValue_other": "{{count}} years",
       "bio": "About",
-      "employmentType": "Employment type"
+      "employmentType": "Employment type",
+      "contributedProjects": "Projects contributed"
+    },
+    "about": {
+      "title": "About & Professional Info",
+      "subtitle": "Professional details and background",
+      "bio": "Bio"
+    },
+    "speciality": {
+      "Architect": "Architect",
+      "StructuralEngineer": "Structural Engineer",
+      "CivilEngineer": "Civil Engineer",
+      "MechanicalEngineer": "Mechanical Engineer",
+      "ElectricalEngineer": "Electrical Engineer",
+      "GeotechnicalEngineer": "Geotechnical Engineer",
+      "SanitaryEngineer": "Sanitary Engineer",
+      "FireSafetyEngineer": "Fire Safety Engineer",
+      "QuantitySurveyor": "Quantity Surveyor",
+      "ConstructionProjectManager": "Construction Project Manager",
+      "RestorationArchitect": "Restoration Architect",
+      "StructuralRemediationEngineer": "Structural Remediation Engineer",
+      "ForensicEngineer": "Forensic Engineer",
+      "EnvironmentalHazmatSpecialist": "Environmental Hazmat Specialist",
+      "UrbanPlanner": "Urban Planner"
+    },
+    "specialization": {
+      "ArchitecturalEngineer": "Architectural Engineer",
+      "StructuralEngineer": "Structural Engineer",
+      "CivilEngineer": "Civil Engineer",
+      "MechanicalEngineer": "Mechanical Engineer",
+      "ElectricalEngineer": "Electrical Engineer",
+      "GeotechnicalEngineer": "Geotechnical Engineer",
+      "SanitaryEngineer": "Sanitary Engineer",
+      "FireSafetyEngineer": "Fire Safety Engineer",
+      "QuantitySurveyor": "Quantity Surveyor"
     },
     "employmentType": {
       "FIRM_EMPLOYEE": "Firm employee",
       "FREELANCER": "Freelancer",
       "GOVERNMENT_EMPLOYEE": "Government employee"
-    },
-    "speciality": {
-      "CIVIL": "Civil",
-      "ARCHITECTURE": "Architecture",
-      "ELECTRICAL": "Electrical",
-      "MECHANICAL": "Mechanical"
     },
     "error": {
       "title": "Failed to load profile",
@@ -70,18 +127,20 @@
     },
     "projects": {
       "lastProjects": {
-        "title": "Latest Projects",
-        "subtitle": "Your recent projects that reflect your professional expertise.",
+        "title": "Projects",
+        "subtitle": "Projects you have contributed to.",
         "empty": "No projects yet",
         "emptyHint": "Start by adding your first project to your professional portfolio.",
-        "newProject": "New Project"
+        "newProject": "New Project",
+        "projectIdLabel": "Project"
       },
       "portfolio": {
         "title": "Project Portfolio",
         "subtitle": "All your approved projects and past work samples.",
         "searchPlaceholder": "Search projects...",
         "allStatuses": "All statuses",
-        "empty": "No matching projects found"
+        "empty": "No matching projects found",
+        "noAttachments": "No attachments yet"
       },
       "status": {
         "COMPLETED": "Completed",
@@ -131,7 +190,9 @@
       "totalProjects": "Total Projects",
       "completed": "Completed",
       "inProgress": "In Progress",
-      "yearsExperience": "Years Experience"
+      "yearsExperience": "Years Experience",
+      "contributedProjects": "Contributed",
+      "portfolios": "Portfolio Items"
     },
     "skills": {
       "title": "Skills & Certifications",

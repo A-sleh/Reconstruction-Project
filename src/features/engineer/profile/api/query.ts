@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ApiInstance from "@/config/api-instance";
 import { EngineerProfileController, QUERY_KEYS } from ".";
-import type { EngineerProfile } from "./types";
+import type { EngineerProfile } from "./engineer-profile";
 
 // ==========================================
 // 1. API Fetchers

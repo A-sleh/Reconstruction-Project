@@ -3,6 +3,35 @@
     "title": "الملف التعريفي للمهندس",
     "description": "نظرة عامة على بياناتك المهنية وحالة التحقق الخاصة بك.",
     "identifier": "المعرف",
+    "specialityTitle": "الدور",
+    "editProfile": "تعديل الملف",
+    "tabs": {
+      "bio": "النبذة",
+      "portfolio": "المحفظة",
+      "projects": "المشاريع المساهم بها",
+      "rating": "التقييم"
+    },
+    "edit": {
+      "title": "تعديل الملف",
+      "subtitle": "حدّث معلوماتك المهنية.",
+      "fields": {
+        "firstName": "الاسم الأول",
+        "lastName": "الاسم الأخير",
+        "email": "البريد الإلكتروني",
+        "phone": "الهاتف",
+        "speciality": "الدور",
+        "specialization": "التخصص",
+        "licenseNumber": "رقم الرخصة",
+        "yearsOfExperience": "سنوات الخبرة",
+        "bio": "النبذة"
+      },
+      "validation": {
+        "license": "رقم الرخصة مطلوب.",
+        "bio": "النبذة مطلوبة."
+      },
+      "cancel": "إلغاء",
+      "submit": "حفظ التعديلات"
+    },
     "verificationStatus": {
       "VERIFIED": "موثق",
       "PENDING": "قيد المراجعة",
@@ -20,18 +49,41 @@
       "yearsOfExperienceValue_one": "{{count}} سنة",
       "yearsOfExperienceValue_other": "{{count}} سنوات",
       "bio": "نبذة تعريفية",
-      "employmentType": "نوع التوظيف"
+      "employmentType": "نوع التوظيف",
+      "contributedProjects": "المشاريع المساهم بها"
     },
-    "employmentType": {
-      "FIRM_EMPLOYEE": "موظف في شركة",
-      "FREELANCER": "مستقل",
-      "GOVERNMENT_EMPLOYEE": "موظف حكومي"
+    "about": {
+      "title": "نبذة والمعلومات المهنية",
+      "subtitle": "التفاصيل المهنية والخلفية المهنية",
+      "bio": "نبذة"
     },
     "speciality": {
-      "CIVIL": "مدني",
-      "ARCHITECTURE": "معماري",
-      "ELECTRICAL": "كهرباء",
-      "MECHANICAL": "ميكانيك"
+      "Architect": "مهندس معماري",
+      "StructuralEngineer": "مهندس إنشائي",
+      "CivilEngineer": "مهندس مدني",
+      "MechanicalEngineer": "مهندس ميكانيكي",
+      "ElectricalEngineer": "مهندس كهربائي",
+      "GeotechnicalEngineer": "مهندس جيوتقني",
+      "SanitaryEngineer": "مهندس صحي",
+      "FireSafetyEngineer": "مهندس سلامة الحرائق",
+      "QuantitySurveyor": "مساح كميات",
+      "ConstructionProjectManager": "مدير مشاريع إنشائية",
+      "RestorationArchitect": "مهندس معماري للترميم",
+      "StructuralRemediationEngineer": "مهندس معالجة إنشائية",
+      "ForensicEngineer": "مهندس خبير",
+      "EnvironmentalHazmatSpecialist": "متخصص بيئي للمواد الخطرة",
+      "UrbanPlanner": "مخطط عمراني"
+    },
+    "specialization": {
+      "ArchitecturalEngineer": "مهندس معماري",
+      "StructuralEngineer": "مهندس إنشائي",
+      "CivilEngineer": "مهندس مدني",
+      "MechanicalEngineer": "مهندس ميكانيكي",
+      "ElectricalEngineer": "مهندس كهربائي",
+      "GeotechnicalEngineer": "مهندس جيوتقني",
+      "SanitaryEngineer": "مهندس صحي",
+      "FireSafetyEngineer": "مهندس سلامة الحرائق",
+      "QuantitySurveyor": "مساح كميات"
     },
     "error": {
       "title": "تعذر تحميل الملف الشخصي",
@@ -70,18 +122,20 @@
     },
     "projects": {
       "lastProjects": {
-        "title": "أحدث المشاريع",
-        "subtitle": "مشاريعك الأخيرة التي تعكس خبرتك المهنية.",
+        "title": "المشاريع",
+        "subtitle": "المشاريع التي ساهمت فيها.",
         "empty": "لا توجد مشاريع بعد",
         "emptyHint": "ابدأ بإضافة أول مشروع إلى محفظتك المهنية.",
-        "newProject": "مشروع جديد"
+        "newProject": "مشروع جديد",
+        "projectIdLabel": "مشروع"
       },
       "portfolio": {
         "title": "محفظة المشاريع",
         "subtitle": "جميع مشاريعك المعتمدة وعينات الأعمال السابقة.",
         "searchPlaceholder": "ابحث في المشاريع...",
         "allStatuses": "كل الحالات",
-        "empty": "لا توجد مشاريع مطابقة"
+        "empty": "لا توجد مشاريع مطابقة",
+        "noAttachments": "لا توجد مرفقات بعد"
       },
       "status": {
         "COMPLETED": "مكتمل",
@@ -131,7 +185,9 @@
       "totalProjects": "إجمالي المشاريع",
       "completed": "مكتملة",
       "inProgress": "قيد التنفيذ",
-      "yearsExperience": "سنوات الخبرة"
+      "yearsExperience": "سنوات الخبرة",
+      "contributedProjects": "مساهم بها",
+      "portfolios": "عناصر المحفظة"
     },
     "skills": {
       "title": "المهارات والشهادات",
