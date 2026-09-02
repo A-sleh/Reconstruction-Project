@@ -194,6 +194,43 @@
       "contributedProjects": "Contributed",
       "portfolios": "Portfolio Items"
     },
+    "portfolio": {
+      "title": "Project Portfolio",
+      "subtitle": "Showcase your past work samples and approved projects.",
+      "add": "Add Portfolio",
+      "empty": "No portfolio items yet",
+      "cancel": "Cancel",
+      "actions": {
+        "edit": "Edit"
+      },
+      "fields": {
+        "title": "Title",
+        "description": "Description",
+        "year": "Year",
+        "projectId": "Project ID",
+        "attachments": "Attachments"
+      },
+      "placeholders": {
+        "title": "e.g. Residential building rehabilitation",
+        "description": "A short overview of the work and your role in it...",
+        "dropzone": "Click to upload images"
+      },
+      "validation": {
+        "title": "Title is required (at least 3 characters)",
+        "description": "Description must be at least 10 characters",
+        "year": "Enter a valid year"
+      },
+      "addModal": {
+        "title": "Add Portfolio",
+        "subtitle": "Add a new work sample to your portfolio.",
+        "submit": "Add Portfolio"
+      },
+      "editModal": {
+        "title": "Edit Portfolio",
+        "subtitle": "Update your portfolio item.",
+        "submit": "Save Changes"
+      }
+    },
     "skills": {
       "title": "Skills & Certifications",
       "subtitle": "Technical skills and professional certifications",

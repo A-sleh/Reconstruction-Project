@@ -5,9 +5,12 @@ import { useEngineerProfile } from "@/features/engineer/profile/api/query";
 import ProfileHeader from "@/features/engineer/profile/components/ProfileHeader";
 import ProfileTabs from "@/features/engineer/profile/components/ProfileTabs";
 import { MOCK_ENGINEER_PROFILE } from "@/features/engineer/profile/mock/profile";
+import useAuthStore from "@/stores/useAuthStore";
 
 const EngineerProfilePage = () => {
   const { data, isLoading } = useEngineerProfile();
+  const role = useAuthStore((s) => s.role);
+  const canEdit = role === "Engineer";
 
   const [profile, setProfile] = useState<EngineerProfile>(
     data ?? MOCK_ENGINEER_PROFILE,
@@ -21,6 +24,28 @@ const EngineerProfilePage = () => {
     setProfile((prev) => ({ ...prev, ...updates }));
   };
 
+  const handleAddPortfolio = (portfolio: EngineerProfile["portfolios"][number]) => {
+    setProfile((prev) => ({ ...prev, portfolios: [...prev.portfolios, portfolio] }));
+  };
+
+  const handleUpdatePortfolio = (
+    portfolio: EngineerProfile["portfolios"][number],
+  ) => {
+    setProfile((prev) => ({
+      ...prev,
+      portfolios: prev.portfolios.map((p) =>
+        p.id === portfolio.id ? portfolio : p,
+      ),
+    }));
+  };
+
+  const handleDeletePortfolio = (id: number | string) => {
+    setProfile((prev) => ({
+      ...prev,
+      portfolios: prev.portfolios.filter((p) => p.id !== id),
+    }));
+  };
+
   return (
     <div className="space-y-6">
       <ProfileHeader
@@ -28,7 +53,13 @@ const EngineerProfilePage = () => {
         isLoading={isLoading}
         onUpdate={handleUpdate}
       />
-      <ProfileTabs profile={profile} />
+      <ProfileTabs
+        profile={profile}
+        canEdit={canEdit}
+        onAddPortfolio={handleAddPortfolio}
+        onUpdatePortfolio={handleUpdatePortfolio}
+        onDeletePortfolio={handleDeletePortfolio}
+      />
     </div>
   );
 };

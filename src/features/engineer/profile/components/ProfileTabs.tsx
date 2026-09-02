@@ -2,14 +2,29 @@ import { Award, FolderOpen, Layers, UserRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { EngineerProfile } from "../api/engineer-profile";
+
+import type {
+  EngineerPortfolio,
+  EngineerProfile,
+} from "../api/engineer-profile";
 import BioSection from "./BioSection";
+import PortfolioSection from "./PortfolioSection";
 
 interface Props {
   profile: EngineerProfile;
+  canEdit?: boolean;
+  onAddPortfolio?: (portfolio: EngineerPortfolio) => void;
+  onUpdatePortfolio?: (portfolio: EngineerPortfolio) => void;
+  onDeletePortfolio?: (id: number | string) => void;
 }
 
-const ProfileTabs = ({ profile }: Props) => {
+const ProfileTabs = ({
+  profile,
+  canEdit = false,
+  onAddPortfolio,
+  onUpdatePortfolio,
+  onDeletePortfolio,
+}: Props) => {
   const { t } = useTranslation();
 
   const tabs = [
@@ -47,6 +62,16 @@ const ProfileTabs = ({ profile }: Props) => {
 
       <TabsContent value="bio" className="mt-6">
         <BioSection profile={profile} />
+      </TabsContent>
+
+      <TabsContent value="portfolio" className="mt-6">
+        <PortfolioSection
+          profile={profile}
+          canEdit={canEdit}
+          onAdd={onAddPortfolio ?? (() => {})}
+          onUpdate={onUpdatePortfolio ?? (() => {})}
+          onDelete={onDeletePortfolio ?? (() => {})}
+        />
       </TabsContent>
     </Tabs>
   );
