@@ -130,21 +130,25 @@
         "subTitle": "إدارة ما يمكن لكل مهندس فعله في مشروعك."
       },
       "labels": {
-        "canViewLogs": "عرض السجلات",
-        "canViewRequests": "عرض الطلبات",
-        "canAddEngineer": "إضافة مهندس",
-        "canRemoveEngineer": "إزالة مهندس",
-        "canApproveRequest": "الموافقة على الطلبات",
-        "canRejectRequest": "رفض الطلبات"
+        "canOrderResources": "طلب موارد",
+        "canOrderServices": "طلب خدمات",
+        "canAddWorkshopRegistry": "إضافة سجل ورشة",
+        "canAddOrderPayments": "إضافة مدفوعات طلبات",
+        "canAddWorkshopPayments": "إضافة مدفوعات ورشة",
+        "canManageMembers": "إدارة الأعضاء",
+        "canCreateReports": "إنشاء تقارير",
+        "canInteractWithOrderStatus": "التعامل مع حالة الطلب"
       },
       "columns": {
         "engineer": "المهندس",
-        "canViewLogs": "عرض السجلات",
-        "canViewRequests": "عرض الطلبات",
-        "canAddEngineer": "إضافة مهندس",
-        "canRemoveEngineer": "إزالة مهندس",
-        "canApproveRequest": "الموافقة",
-        "canRejectRequest": "رفض",
+        "canOrderResources": "طلب موارد",
+        "canOrderServices": "طلب خدمات",
+        "canAddWorkshopRegistry": "السجل",
+        "canAddOrderPayments": "مدفوعات الطلبات",
+        "canAddWorkshopPayments": "مدفوعات الورشة",
+        "canManageMembers": "إدارة الأعضاء",
+        "canCreateReports": "التقارير",
+        "canInteractWithOrderStatus": "حالة الطلب",
         "actions": "الإجراءات"
       },
       "actions": {
@@ -159,6 +163,10 @@
           "placeholder": "ابحث باسم المهندس..."
         },
         "permissions": "الصلاحيات"
+      },
+      "toast": {
+        "updateSuccess": "تم تحديث صلاحيات المهندس بنجاح",
+        "updateError": "فشل في تحديث صلاحيات المهندس"
       },
       "modal": {
         "createTitle": "تعيين الصلاحيات",

@@ -130,21 +130,25 @@
         "subTitle": "Manage what each engineer can do in your project."
       },
       "labels": {
-        "canViewLogs": "View logs",
-        "canViewRequests": "View requests",
-        "canAddEngineer": "Add engineer",
-        "canRemoveEngineer": "Remove engineer",
-        "canApproveRequest": "Approve requests",
-        "canRejectRequest": "Reject requests"
+        "canOrderResources": "Order resources",
+        "canOrderServices": "Order services",
+        "canAddWorkshopRegistry": "Add workshop registry",
+        "canAddOrderPayments": "Add order payments",
+        "canAddWorkshopPayments": "Add workshop payments",
+        "canManageMembers": "Manage members",
+        "canCreateReports": "Create reports",
+        "canInteractWithOrderStatus": "Interact with order status"
       },
       "columns": {
         "engineer": "Engineer",
-        "canViewLogs": "View Logs",
-        "canViewRequests": "View Requests",
-        "canAddEngineer": "Add Engineer",
-        "canRemoveEngineer": "Remove Engineer",
-        "canApproveRequest": "Approve",
-        "canRejectRequest": "Reject",
+        "canOrderResources": "Order Resources",
+        "canOrderServices": "Order Services",
+        "canAddWorkshopRegistry": "Registry",
+        "canAddOrderPayments": "Order Payments",
+        "canAddWorkshopPayments": "Workshop Payments",
+        "canManageMembers": "Manage Members",
+        "canCreateReports": "Reports",
+        "canInteractWithOrderStatus": "Order Status",
         "actions": "Actions"
       },
       "actions": {
@@ -159,6 +163,10 @@
           "placeholder": "Search by engineer..."
         },
         "permissions": "Permissions"
+      },
+      "toast": {
+        "updateSuccess": "Engineer permissions updated successfully",
+        "updateError": "Failed to update engineer permissions"
       },
       "modal": {
         "createTitle": "Assign Permissions",

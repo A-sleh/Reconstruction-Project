@@ -2,7 +2,7 @@ import { useEffect, type ReactNode } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
-import { ShieldCheck } from "lucide-react";
+import { HardHat, ShieldCheck } from "lucide-react";
 import { z } from "zod";
 
 import PopuupLayout from "@/components/layouts/Popup-layout";
@@ -11,40 +11,37 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/Label";
 
-import type { EngineerSummery, Permissions } from "../api/types";
+import {
+  PROJECT_ENGINEER_PERMISSION_KEYS,
+  type ProjectEngineerPermissionFlags,
+} from "../api/types";
 
 interface Props {
   openKey: string;
-  engineer: EngineerSummery;
-  initial?: Partial<Permissions>;
-  onSubmit?: (permissions: Permissions) => void;
+  engineerId: number;
+  engineerName: string;
+  initial?: Partial<ProjectEngineerPermissionFlags>;
+  onSubmit?: (permissions: ProjectEngineerPermissionFlags) => void;
   openButton?: ReactNode | null;
 }
 
-const PERMISSION_I18N_KEYS = [
-  "canViewLogs",
-  "canViewRequests",
-  "canAddEngineer",
-  "canRemoveEngineer",
-  "canApproveRequest",
-  "canRejectRequest",
-] as const satisfies readonly (keyof Permissions)[];
-
 const buildDefaults = (
-  initial?: Partial<Permissions>,
-): Record<keyof Permissions, boolean> =>
+  initial?: Partial<ProjectEngineerPermissionFlags>,
+): Record<keyof ProjectEngineerPermissionFlags, boolean> =>
   Object.fromEntries(
-    PERMISSION_I18N_KEYS.map((k) => [k, initial?.[k] === true]),
-  ) as Record<keyof Permissions, boolean>;
+    PROJECT_ENGINEER_PERMISSION_KEYS.map((k) => [k, initial?.[k] === true]),
+  ) as Record<keyof ProjectEngineerPermissionFlags, boolean>;
 
 const permissionSchema = z
   .object({
-    canViewLogs: z.boolean(),
-    canViewRequests: z.boolean(),
-    canAddEngineer: z.boolean(),
-    canRemoveEngineer: z.boolean(),
-    canApproveRequest: z.boolean(),
-    canRejectRequest: z.boolean(),
+    canOrderResources: z.boolean(),
+    canOrderServices: z.boolean(),
+    canAddWorkshopRegistry: z.boolean(),
+    canAddOrderPayments: z.boolean(),
+    canAddWorkshopPayments: z.boolean(),
+    canManageMembers: z.boolean(),
+    canCreateReports: z.boolean(),
+    canInteractWithOrderStatus: z.boolean(),
   })
   .refine((data) => Object.values(data).some(Boolean), {
     message: "projectsEngineers.permissions.validation.atLeastOne",
@@ -54,7 +51,8 @@ type PermissionFormValues = z.infer<typeof permissionSchema>;
 
 const PermissionModel = ({
   openKey,
-  engineer,
+  engineerId,
+  engineerName,
   initial,
   onSubmit,
   openButton,
@@ -66,7 +64,7 @@ const PermissionModel = ({
     control,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<PermissionFormValues>({
     resolver: zodResolver(permissionSchema),
     defaultValues: buildDefaults(initial),
@@ -79,8 +77,8 @@ const PermissionModel = ({
 
   const onFormSubmit = (data: PermissionFormValues, close: () => void) => {
     const permissions = Object.fromEntries(
-      PERMISSION_I18N_KEYS.map((k) => [k, data[k]]),
-    ) as Permissions;
+      PROJECT_ENGINEER_PERMISSION_KEYS.map((k) => [k, data[k]]),
+    ) as ProjectEngineerPermissionFlags;
     onSubmit?.(permissions);
     reset();
     close();
@@ -97,11 +95,9 @@ const PermissionModel = ({
               "Assign Permissions",
             )
       }
-      subTitle={t(
-        "projectsEngineers.permissions.modal.subTitle",
-        "{{name}}",
-        { name: engineer.fullName },
-      )}
+      subTitle={t("projectsEngineers.permissions.modal.subTitle", "{{name}}", {
+        name: engineerName,
+      })}
       openButton={
         openButton ?? (
           <Button className="shrink-0">
@@ -120,24 +116,12 @@ const PermissionModel = ({
           className="space-y-5 pt-2"
         >
           <div className="flex items-center gap-3 rounded-xl bg-muted/50 p-3">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary/10">
-              {engineer.imageUrl ? (
-                <img
-                  src={engineer.imageUrl}
-                  alt={engineer.fullName}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <ShieldCheck className="h-5 w-5 text-primary" />
-              )}
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <HardHat className="h-5 w-5" />
             </span>
             <div className="min-w-0">
-              <p className="truncate font-medium text-foreground">
-                {engineer.fullName}
-              </p>
-              <p className="truncate text-xs text-muted-foreground">
-                {engineer.spec}
-              </p>
+              <p className="truncate font-medium text-foreground">{engineerName}</p>
+              <p className="truncate text-xs text-muted-foreground">#{engineerId}</p>
             </div>
           </div>
 
@@ -147,7 +131,7 @@ const PermissionModel = ({
             </Label>
 
             <div className="space-y-3">
-              {PERMISSION_I18N_KEYS.map((key) => (
+              {PROJECT_ENGINEER_PERMISSION_KEYS.map((key) => (
                 <Controller
                   key={key}
                   name={key}
@@ -183,7 +167,7 @@ const PermissionModel = ({
                 {t("common.cancel", "Cancel")}
               </Button>
             </Model.Close>
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit">
               {isEditing
                 ? t("common.save", "Save Changes")
                 : t("common.create", "Assign")}

@@ -93,7 +93,7 @@ export interface EmploersActionsLogs {
 export type EmploersActionsLogsPaginated = Paginated<EmploersActionsLogs>;
 
 export interface GetProjectEngineersPermissionsFilters extends IBaseFilters {
-  permissions?: Partial<Permissions>;
+  permissions?: Partial<ProjectEngineerPermissionFlags>;
 }
 
 export interface Permissions {
@@ -114,3 +114,54 @@ export interface ProjectEngineersPermissions {
 
 export type ProjectEngineersPermissionsPaginated =
   Paginated<ProjectEngineersPermissions>;
+
+// ============================================================================
+// Project Engineer Permissions (module-level, per project)
+// GET /api/project/get-project-members-permissions
+// PUT /api/project/update-project-engineer-permissions
+// ============================================================================
+
+export interface ProjectEngineerPermissionFlags {
+  canOrderResources: boolean;
+  canOrderServices: boolean;
+  canAddWorkshopRegistry: boolean;
+  canAddOrderPayments: boolean;
+  canAddWorkshopPayments: boolean;
+  canManageMembers: boolean;
+  canCreateReports: boolean;
+  canInteractWithOrderStatus: boolean;
+}
+
+export const PROJECT_ENGINEER_PERMISSION_KEYS: (keyof ProjectEngineerPermissionFlags)[] =
+  [
+    "canOrderResources",
+    "canOrderServices",
+    "canAddWorkshopRegistry",
+    "canAddOrderPayments",
+    "canAddWorkshopPayments",
+    "canManageMembers",
+    "canCreateReports",
+    "canInteractWithOrderStatus",
+  ];
+
+export interface ProjectEngineerPermissions
+  extends ProjectEngineerPermissionFlags {
+  projectId: number;
+  engineerId: number;
+}
+
+export interface ProjectMemberPermission {
+  engineerId: number;
+  engineerName: string;
+  permissions: ProjectEngineerPermissions;
+}
+
+export interface GetProjectMembersPermissionsParams {
+  ProjectId: number;
+}
+
+export type UpdateProjectEngineerPermissionsPayload =
+  ProjectEngineerPermissionFlags & {
+    projectId: number;
+    engineerId: number;
+  };

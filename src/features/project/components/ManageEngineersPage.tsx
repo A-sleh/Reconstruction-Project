@@ -14,7 +14,7 @@ import Engineers from "@/features/projects-engineers/components/Engineers";
 import EngineersLogs from "@/features/projects-engineers/components/EngineersLogs";
 import EngineersPermissions from "@/features/projects-engineers/components/EngineersPermissions";
 
-const ManageEngineersPage = () => {
+const ManageEngineersPage = ({ projectId }: { projectId: number }) => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
 
@@ -63,7 +63,7 @@ const ManageEngineersPage = () => {
         </TabsContent>
 
         <TabsContent value="engineers-permissions">
-          <EngineersPermissions />
+          <EngineersPermissions projectId={projectId} />
         </TabsContent>
       </Tabs>
     </div>

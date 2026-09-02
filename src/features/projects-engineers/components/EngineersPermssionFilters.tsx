@@ -5,9 +5,10 @@ import { Label } from "@/components/ui/Label";
 import { Separator } from "@/components/ui/separator";
 import { useTranslation } from "react-i18next";
 
-import type {
-  GetProjectEngineersPermissionsFilters,
-  Permissions,
+import {
+  PROJECT_ENGINEER_PERMISSION_KEYS,
+  type GetProjectEngineersPermissionsFilters,
+  type ProjectEngineerPermissionFlags,
 } from "../api/types";
 
 interface Props {
@@ -15,14 +16,8 @@ interface Props {
   onChange: (next: GetProjectEngineersPermissionsFilters) => void;
 }
 
-const PERMISSION_KEYS = [
-  "canViewLogs",
-  "canViewRequests",
-  "canAddEngineer",
-  "canRemoveEngineer",
-  "canApproveRequest",
-  "canRejectRequest",
-] as const satisfies readonly (keyof Permissions)[];
+const PERMISSION_KEYS =
+  PROJECT_ENGINEER_PERMISSION_KEYS satisfies readonly (keyof ProjectEngineerPermissionFlags)[];
 
 const EngineersPermssionFilters = ({ filters, onChange }: Props) => {
   const { t } = useTranslation();
@@ -32,7 +27,7 @@ const EngineersPermssionFilters = ({ filters, onChange }: Props) => {
     (filters.search ? 1 : 0) +
     PERMISSION_KEYS.filter((k) => filters.permissions?.[k] !== undefined).length;
 
-  const togglePermission = (key: keyof Permissions) => {
+  const togglePermission = (key: keyof ProjectEngineerPermissionFlags) => {
     const current = filters.permissions?.[key];
     const nextPermissions = { ...filters.permissions };
     if (current === true) {

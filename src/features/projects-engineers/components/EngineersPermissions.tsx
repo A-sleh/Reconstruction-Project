@@ -5,37 +5,58 @@ import { useTranslation } from "react-i18next";
 
 import EmptyState from "@/components/common/EmptyState";
 
-import type { GetProjectEngineersPermissionsFilters } from "../api/types";
-import { MOCK_PROJECT_ENGINEERS_PERMISSIONS } from "../mock/mockPermissions";
+import { useProjectMembersPermissions, useUpdateProjectEngineerPermissions } from "../api/actions";
+import type {
+  GetProjectEngineersPermissionsFilters,
+  ProjectEngineerPermissionFlags,
+} from "../api/types";
 import EngineersPermssionFilters from "./EngineersPermssionFilters";
 import EngineersPersmssionTable from "./EngineersPersmssionTable";
 
-const EngineersPermissions = () => {
+interface Props {
+  projectId: number;
+}
+
+const EngineersPermissions = ({ projectId }: Props) => {
   const { t } = useTranslation();
   const [filters, setFilters] = useState<GetProjectEngineersPermissionsFilters>(
     {},
   );
 
-  const data = useMemo(() => {
-    return MOCK_PROJECT_ENGINEERS_PERMISSIONS.filter((row) => {
+  const { data = [], isLoading } = useProjectMembersPermissions(projectId);
+  const updatePermissions = useUpdateProjectEngineerPermissions();
+
+  const filtered = useMemo(() => {
+    return data.filter((row) => {
       const matchesSearch =
         !filters.search ||
-        row.engineer.fullName
+        row.engineerName
           .toLowerCase()
-          .includes(filters.search.toLowerCase()) ||
-        row.engineer.spec.toLowerCase().includes(filters.search.toLowerCase());
+          .includes(filters.search.toLowerCase());
 
       const matchesPermissions =
         !filters.permissions ||
         Object.entries(filters.permissions).every(
           ([key, value]) =>
             value === true &&
-            row.permissions[key as keyof typeof row.permissions] === true,
+            row.permissions[key as keyof ProjectEngineerPermissionFlags] ===
+              true,
         );
 
       return matchesSearch && matchesPermissions;
     });
-  }, [filters]);
+  }, [data, filters]);
+
+  const handleUpdate = (
+    engineerId: number,
+    permissions: ProjectEngineerPermissionFlags,
+  ) => {
+    updatePermissions.mutate({
+      projectId,
+      engineerId,
+      ...permissions,
+    });
+  };
 
   return (
     <div className="space-y-5">
@@ -67,7 +88,7 @@ const EngineersPermissions = () => {
         </div>
 
         <div className="lg:order-1">
-          {data.length === 0 ? (
+          {filtered.length === 0 && !isLoading ? (
             <EmptyState
               icon={ShieldCheck}
               message={t(
@@ -76,7 +97,11 @@ const EngineersPermissions = () => {
               )}
             />
           ) : (
-            <EngineersPersmssionTable data={data} />
+            <EngineersPersmssionTable
+              data={filtered}
+              isLoading={isLoading}
+              onUpdate={handleUpdate}
+            />
           )}
         </div>
       </div>

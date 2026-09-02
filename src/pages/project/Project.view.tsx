@@ -69,7 +69,9 @@ const Project = () => {
               projectName={project.name}
             />
           )}
-          {activeKey === "manage engineers" && <ManageEngineersPage />}
+          {activeKey === "manage engineers" && (
+            <ManageEngineersPage projectId={numericId} />
+          )}
           {activeKey === "manage services" && (
             <ManageServicesPage
               projectId={numericId}
