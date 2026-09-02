@@ -6,7 +6,9 @@ import { MUTATION_KEYS, ProjectController, QUERY_KEYS } from ".";
 import type {
   CreateProjectPayload,
   DeleteProjectParams,
+  RespondToProjectApplicationPayload,
   UpdateProjectPayload,
+  UpdateProjectSettingPayload,
 } from "./types";
 
 // ==========================================
@@ -31,6 +33,26 @@ const updateProject = async (payload: UpdateProjectPayload) => {
 const createProject = async (payload: CreateProjectPayload) => {
   const { data } = await ApiInstance.post(
     `/${ProjectController.Create}`,
+    payload,
+  );
+  return data;
+};
+
+const updateProjectSetting = async (
+  payload: UpdateProjectSettingPayload,
+) => {
+  const { data } = await ApiInstance.put(
+    `/${ProjectController.UpdateProjectSetting}`,
+    payload,
+  );
+  return data;
+};
+
+const respondToProjectApplication = async (
+  payload: RespondToProjectApplicationPayload,
+) => {
+  const { data } = await ApiInstance.post(
+    `/${ProjectController.RespondToProjectApplication}`,
     payload,
   );
   return data;
@@ -89,6 +111,43 @@ export const useCreateProject = () => {
       const serverMessage = error?.response?.data?.message || error?.message;
       const message =
         serverMessage || i18n.t("project.toast.createProjectError");
+      errorToast(message);
+    },
+  });
+};
+
+export const useUpdateProjectSetting = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.projects.updateSetting(),
+    mutationFn: updateProjectSetting,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.projects.all });
+      successToast(i18n.t("project.toast.updateProjectSettingSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message =
+        serverMessage || i18n.t("project.toast.updateProjectSettingError");
+      errorToast(message);
+    },
+  });
+};
+
+export const useRespondToProjectApplication = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: MUTATION_KEYS.projects.respondToProjectApplication(),
+    mutationFn: respondToProjectApplication,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.projects.all });
+      successToast(i18n.t("project.toast.respondToProjectApplicationSuccess"));
+    },
+    onError: (error: any) => {
+      const serverMessage = error?.response?.data?.message || error?.message;
+      const message =
+        serverMessage ||
+        i18n.t("project.toast.respondToProjectApplicationError");
       errorToast(message);
     },
   });

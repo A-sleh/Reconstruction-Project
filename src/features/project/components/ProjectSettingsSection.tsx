@@ -7,11 +7,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
 import { paths } from "@/config/paths";
-import { AlertTriangle, Settings, Trash2 } from "lucide-react";
+import { AlertTriangle, Settings, Trash2, Users } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useDeleteProject } from "../api/actions";
+import { useDeleteProject, useUpdateProjectSetting } from "../api/actions";
 import type { ProjectListItem } from "../api/types";
 import { ProjectFormFields } from "./ProjectFormFields";
 
@@ -19,6 +21,18 @@ const ProjectSettingsSection = ({ project }: { project: ProjectListItem }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { mutate: deleteProject, isPending: isDeleting } = useDeleteProject();
+  const { mutate: updateProjectSetting, isPending: isUpdatingSetting } =
+    useUpdateProjectSetting();
+
+  const [openApplication, setOpenApplication] = useState(false);
+
+  const handleToggleMembership = (checked: boolean) => {
+    setOpenApplication(checked);
+    updateProjectSetting({
+      projectId: project.id,
+      openApplicationForMembership: checked,
+    });
+  };
 
   return (
     <div className="space-y-4">
@@ -42,6 +56,36 @@ const ProjectSettingsSection = ({ project }: { project: ProjectListItem }) => {
               status: project.status,
             }}
           />
+        </CardContent>
+      </Card>
+
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <Users className="h-5 w-5 text-primary" />
+            {t("project.details.settings.membershipTitle")}
+          </CardTitle>
+          <CardDescription>
+            {t("project.details.settings.membershipHint")}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-medium text-foreground">
+                {t("project.details.settings.membershipLabel")}
+              </p>
+              <p className="mt-0.5 text-sm text-muted-foreground">
+                {t("project.details.settings.membershipDescription")}
+              </p>
+            </div>
+            <Switch
+              checked={openApplication}
+              onCheckedChange={handleToggleMembership}
+              disabled={isUpdatingSetting}
+              aria-label={t("project.details.settings.membershipLabel")}
+            />
+          </div>
         </CardContent>
       </Card>
 

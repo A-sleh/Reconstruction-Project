@@ -59,6 +59,16 @@ export interface CreateProjectPayload {
   status: ProjectStatus;
 }
 
+export interface UpdateProjectSettingPayload {
+  projectId: number;
+  openApplicationForMembership: boolean;
+}
+
+export interface RespondToProjectApplicationPayload {
+  applicationId: number;
+  accept: boolean;
+}
+
 // ============================================================================
 // Query Filters
 // ============================================================================

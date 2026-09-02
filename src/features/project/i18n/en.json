@@ -6,7 +6,11 @@
       "updateProjectSuccess": "Project updated successfully",
       "updateProjectError": "Failed to update project",
       "deleteProjectSuccess": "Project deleted successfully",
-      "deleteProjectError": "Failed to delete project"
+      "deleteProjectError": "Failed to delete project",
+      "updateProjectSettingSuccess": "Project settings updated",
+      "updateProjectSettingError": "Failed to update project settings",
+      "respondToProjectApplicationSuccess": "Application updated successfully",
+      "respondToProjectApplicationError": "Failed to update application"
     },
     "header": {
       "badge": "Project Management",
@@ -126,7 +130,11 @@
         "dangerTitle": "Danger Zone",
         "dangerDescription": "Irreversible actions for this project",
         "dangerHint": "Permanently delete this project and all of its data.",
-        "dangerConfirm": "Delete Project"
+        "dangerConfirm": "Delete Project",
+        "membershipTitle": "Membership",
+        "membershipHint": "Control whether new members can apply to join this project",
+        "membershipLabel": "Open application for membership",
+        "membershipDescription": "When enabled, engineers and providers can request to join this project."
       },
       "overview": {
         "title": "Project Overview",

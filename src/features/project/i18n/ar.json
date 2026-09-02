@@ -6,7 +6,11 @@
       "updateProjectSuccess": "تم تحديث المشروع بنجاح",
       "updateProjectError": "فشل في تحديث المشروع",
       "deleteProjectSuccess": "تم حذف المشروع بنجاح",
-      "deleteProjectError": "فشل في حذف المشروع"
+      "deleteProjectError": "فشل في حذف المشروع",
+      "updateProjectSettingSuccess": "تم تحديث إعدادات المشروع",
+      "updateProjectSettingError": "فشل في تحديث إعدادات المشروع",
+      "respondToProjectApplicationSuccess": "تم تحديث الطلب بنجاح",
+      "respondToProjectApplicationError": "فشل في تحديث الطلب"
     },
     "header": {
       "badge": "إدارة المشاريع",
@@ -126,7 +130,11 @@
         "dangerTitle": "منطقة الخطر",
         "dangerDescription": "إجراءات لا يمكن التراجع عنها على هذا المشروع",
         "dangerHint": "حذف هذا المشروع نهائياً مع كافة بياناته.",
-        "dangerConfirm": "حذف المشروع"
+        "dangerConfirm": "حذف المشروع",
+        "membershipTitle": "العضوية",
+        "membershipHint": "تحكّم في إمكانية تقدّم أعضاء جدد للانضمام إلى هذا المشروع",
+        "membershipLabel": "فتح باب التقدّم للعضوية",
+        "membershipDescription": "عند التفعيل، يمكن للمهندسين ومقدمي الخدمات طلب الانضمام إلى هذا المشروع."
       },
       "overview": {
         "title": "نظرة عامة على المشروع",

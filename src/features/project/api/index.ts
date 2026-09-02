@@ -8,6 +8,8 @@ export enum ProjectController {
   Delete = `${BASE_PROJECT_ROUTE}/delete-project`,
   Update = `${BASE_PROJECT_ROUTE}/update-project`,
   Create = `${BASE_PROJECT_ROUTE}/create-project`,
+  UpdateProjectSetting = `${BASE_PROJECT_ROUTE}/update-project-setting`,
+  RespondToProjectApplication = `${BASE_PROJECT_ROUTE}/respond-to-project-application`,
 }
 
 export const QUERY_KEYS = {
@@ -26,5 +28,10 @@ export const MUTATION_KEYS = {
     create: () => ["projects", "create"],
     update: () => ["projects", "update"],
     delete: () => ["projects", "delete"],
+    updateSetting: () => ["projects", "update-setting"],
+    respondToProjectApplication: () => [
+      "projects",
+      "respond-to-project-application",
+    ],
   },
 };
