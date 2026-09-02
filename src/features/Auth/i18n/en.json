@@ -96,10 +96,28 @@
         "engineerInformationLabel": "Engineer information",
         "specialtiyLabel": "Specialty",
         "specialtiyPlaceholder": "Enter your engineering specialty",
+        "engineeringRoleLabel": "Engineering Role",
         "syndicateIdLabel": "Syndicate ID",
         "syndicateIdPlaceholder": "Enter your syndicate ID",
+        "roles": {
+          "architect": "Architect",
+          "structuralEngineer": "Structural Engineer",
+          "civilEngineer": "Civil Engineer",
+          "mechanicalEngineer": "Mechanical Engineer",
+          "electricalEngineer": "Electrical Engineer",
+          "geotechnicalEngineer": "Geotechnical Engineer",
+          "sanitaryEngineer": "Sanitary Engineer",
+          "fireSafetyEngineer": "Fire Safety Engineer",
+          "quantitySurveyor": "Quantity Surveyor",
+          "constructionProjectManager": "Construction Project Manager",
+          "restorationArchitect": "Restoration Architect",
+          "structuralRemediationEngineer": "Structural Remediation Engineer",
+          "forensicEngineer": "Forensic Engineer",
+          "environmentalHazmatSpecialist": "Environmental Hazmat Specialist",
+          "urbanPlanner": "Urban Planner"
+        },
         "validation": {
-          "specialtiy": "Specialty must be at least 10 characters",
+          "specialtiy": "Specialty is required",
           "syndicate_id": "Syndicate ID must be at least 12 characters"
         }
       },

@@ -1,9 +1,10 @@
-import z from "zod";
 import i18n from "i18next";
+import z from "zod";
+
+import { errorToast, successToast } from "@/components/common/Toast";
 import ApiInstance from "@/config/api-instance";
 import useAuthStore from "@/stores/useAuthStore";
 import { useMutation } from "@tanstack/react-query";
-import { errorToast, successToast } from "@/components/common/Toast";
 
 //? Baisc schema for user information
 export const BaseRegistrationSchema = z.object({
@@ -112,19 +113,82 @@ export const intialInvestoreValues: InvestorFormValues = {
   imageRecord: "",
 };
 
+//? Engineering roles enum
+export enum EEngineeringRole {
+  Architect = 0,
+  StructuralEngineer = 1,
+  CivilEngineer = 2,
+  MechanicalEngineer = 3,
+  ElectricalEngineer = 4,
+  GeotechnicalEngineer = 5,
+  SanitaryEngineer = 6,
+  FireSafetyEngineer = 7,
+  QuantitySurveyor = 8,
+  ConstructionProjectManager = 9,
+  RestorationArchitect = 10,
+  StructuralRemediationEngineer = 11,
+  ForensicEngineer = 12,
+  EnvironmentalHazmatSpecialist = 13,
+  UrbanPlanner = 14,
+}
+
+export const engineeringRoleLabels: Record<EEngineeringRole, string> = {
+  [EEngineeringRole.Architect]: i18n.t(
+    "auth.register.engineer.roles.architect",
+  ),
+  [EEngineeringRole.StructuralEngineer]: i18n.t(
+    "auth.register.engineer.roles.structuralEngineer",
+  ),
+  [EEngineeringRole.CivilEngineer]: i18n.t(
+    "auth.register.engineer.roles.civilEngineer",
+  ),
+  [EEngineeringRole.MechanicalEngineer]: i18n.t(
+    "auth.register.engineer.roles.mechanicalEngineer",
+  ),
+  [EEngineeringRole.ElectricalEngineer]: i18n.t(
+    "auth.register.engineer.roles.electricalEngineer",
+  ),
+  [EEngineeringRole.GeotechnicalEngineer]: i18n.t(
+    "auth.register.engineer.roles.geotechnicalEngineer",
+  ),
+  [EEngineeringRole.SanitaryEngineer]: i18n.t(
+    "auth.register.engineer.roles.sanitaryEngineer",
+  ),
+  [EEngineeringRole.FireSafetyEngineer]: i18n.t(
+    "auth.register.engineer.roles.fireSafetyEngineer",
+  ),
+  [EEngineeringRole.QuantitySurveyor]: i18n.t(
+    "auth.register.engineer.roles.quantitySurveyor",
+  ),
+  [EEngineeringRole.ConstructionProjectManager]: i18n.t(
+    "auth.register.engineer.roles.constructionProjectManager",
+  ),
+  [EEngineeringRole.RestorationArchitect]: i18n.t(
+    "auth.register.engineer.roles.restorationArchitect",
+  ),
+  [EEngineeringRole.StructuralRemediationEngineer]: i18n.t(
+    "auth.register.engineer.roles.structuralRemediationEngineer",
+  ),
+  [EEngineeringRole.ForensicEngineer]: i18n.t(
+    "auth.register.engineer.roles.forensicEngineer",
+  ),
+  [EEngineeringRole.EnvironmentalHazmatSpecialist]: i18n.t(
+    "auth.register.engineer.roles.environmentalHazmatSpecialist",
+  ),
+  [EEngineeringRole.UrbanPlanner]: i18n.t(
+    "auth.register.engineer.roles.urbanPlanner",
+  ),
+};
+
 //? Basic shcema for engineer
 export const EngineerSchema = BaseRegistrationSchema.extend({
-  specialtiy: z
-    .string()
-    .min(10, i18n.t("auth.register.engineer.validation.specialtiy")),
-  syndicateId: z
-    .string()
-    .min(12, i18n.t("auth.register.engineer.validation.syndicate_id")),
+  specialty: z.nativeEnum(EEngineeringRole),
+  syndicateId: z.string(),
 });
 export type EngineerFormValues = z.infer<typeof EngineerSchema>;
 export const intialEngineerValues: EngineerFormValues = {
   ...intialBasicRegisterationValues,
-  specialtiy: "",
+  specialty: EEngineeringRole.Architect,
   syndicateId: "",
 };
 
@@ -132,7 +196,7 @@ export const intialEngineerValues: EngineerFormValues = {
 enum AuthController {
   ProviderRegister = "/auth/provider-sign-up",
   InvestorRegister = "/auth/investor-sign-up",
-  EngineerRegister = "/auth/engineer-signUp",
+  EngineerRegister = "/auth/engineer-sign-up",
 }
 
 const registerProviderApi = async (payload: ResourceProviderFormValues) => {

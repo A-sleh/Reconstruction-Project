@@ -98,8 +98,26 @@
         "engineerInformationLabel": "معلومات المهندس",
         "specialtiyLabel": "التخصص",
         "specialtiyPlaceholder": "أدخل تخصصك الهندسي",
+        "engineeringRoleLabel": "الدور الهندسي",
         "syndicateIdLabel": "معرف النقابة",
         "syndicateIdPlaceholder": "أدخل معرف النقابة الخاص بك",
+        "roles": {
+          "architect": "مهندس معماري",
+          "structuralEngineer": "مهندس هيكلي",
+          "civilEngineer": "مهندس مدني",
+          "mechanicalEngineer": "مهندس ميكانيكي",
+          "electricalEngineer": "مهندس كهربائي",
+          "geotechnicalEngineer": "مهندس جيوتقني",
+          "sanitaryEngineer": "مهندس صححي",
+          "fireSafetyEngineer": "مهندس أمان من الحرائق",
+          "quantitySurveyor": "مساح كميات",
+          "constructionProjectManager": "مدير مشاريع الإنشاءات",
+          "restorationArchitect": "مهندس معماري للتراث",
+          "structuralRemediationEngineer": "مهندس إصلاح هيكلي",
+          "forensicEngineer": "مهندس خبير",
+          "environmentalHazmatSpecialist": "متخصص المواد الخطرة البيئية",
+          "urbanPlanner": "مخطط عمراني"
+        },
         "validation": {
           "specialtiy": "يجب أن يكون التخصص 10 أحرف على الأقل",
           "syndicate_id": "يجب أن يكون رقم النقابة 12 حرفًا على الأقل"

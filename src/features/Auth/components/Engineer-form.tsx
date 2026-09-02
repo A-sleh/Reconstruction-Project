@@ -1,52 +1,69 @@
-import { useTranslation } from "react-i18next";
-import { useFormContext } from "react-hook-form";
-import type { EngineerFormValues } from "../api/create-account";
-import Input from "@/components/inputs/Input";
-import Selector from "@/components/inputs/Selector";
+import { Dispatch, SetStateAction } from "react";
 
-const EngineerForm = () => {
+import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+
+import ImageUploader from "@/components/inputs/ImageUploader";
+import { useFileUpload } from "@/hooks/useFileUpload";
+
+import type { EngineerFormValues } from "../api/create-account";
+import { EEngineeringRole } from "../api/create-account";
+import EngineeringRoleSelector from "./EngineeringRoleSelector";
+
+const EngineerForm = ({
+  setDisableFormSubmit,
+}: {
+  setDisableFormSubmit: Dispatch<SetStateAction<boolean>>;
+}) => {
   const { t } = useTranslation();
   const {
     setValue,
-    register,
     watch,
-    formState: {  errors },
+    formState: { errors },
   } = useFormContext<EngineerFormValues>();
-  const specialtiy = watch("specialtiy")
-  const setSpecialtiy = (value: string) => {
-    setValue("specialtiy", value);
+  const engineeringRole = watch("specialty");
+  const syndicateId = watch("syndicateId");
+
+  const setEngineeringRole = (value: EEngineeringRole) => {
+    setValue("specialty", value);
   };
 
-  // Should cames from database
-  const specialtiyList = [
-    { value: "civil" },
-    { value: "mechanical"},
-    { value: "electrical" },
-  ]
+  const { previewUrl, isPending, onChange } = useFileUpload({
+    onSuccess: (id) => {
+      setDisableFormSubmit(false);
+      setValue("syndicateId", id);
+    },
+    onError: () => {
+      setDisableFormSubmit(false);
+    },
+  });
+
+  const handleImageChange = (selectedFile: File | null) => {
+    onChange(selectedFile);
+    setDisableFormSubmit(true);
+    if (!selectedFile) {
+      setValue("syndicateId", "");
+      setValue("file", undefined);
+    }
+  };
 
   return (
     <div className="space-y-3 mt-3">
-      <Input
-        type="text"
+      <EngineeringRoleSelector
+        value={engineeringRole || EEngineeringRole.Architect}
+        setValue={setEngineeringRole}
         required={true}
-        label={t("auth.register.engineer.syndicateIdLabel")}
-        placeholder={t("auth.register.engineer.syndicateIdPlaceholder")}
-        fieldName="syndicateId"
-        errors={errors ?? null}
-        {...register("syndicateId")}
       />
-      <Selector
-        label={t("auth.register.engineer.specialtiyLabel")}
+      <ImageUploader
+        label={t("auth.register.generalInformation.profilePhoto")}
         required={true}
-        value={specialtiy}
-        setValue={setSpecialtiy}
-      >
-        {specialtiyList.map((item) => (
-          <option key={item.value} value={item.value}>
-            {item.value}
-          </option>
-        ))}
-      </Selector>
+        fileName={"syndicateId"}
+        value={previewUrl || syndicateId}
+        disabled={isPending}
+        onFileChange={handleImageChange}
+        errors={errors ?? null}
+        fieldName="syndicateId"
+      />
     </div>
   );
 };

@@ -11,6 +11,7 @@ import {
   EngineerSchema,
   useEngineerRegister,
 } from "@/features/Auth/api/create-account";
+import { engineerDTO } from "@/features/Auth/api/dtos";
 import BaseRegisterInputs from "@/features/Auth/components/Base-register-inputs";
 import EngineerForm from "@/features/Auth/components/Engineer-form";
 
@@ -20,7 +21,8 @@ const EngineerRegisteration = () => {
   const { mutate: registerEngineer, isPending } = useEngineerRegister();
 
   const handlSubmitForm = (data: any) => {
-    registerEngineer(data as any);
+    console.log(data);
+    registerEngineer(engineerDTO(data) as any);
   };
 
   return (
@@ -32,7 +34,7 @@ const EngineerRegisteration = () => {
         schemas={[BaseRegistrationSchema, EngineerSchema]}
         subForms={[
           <BaseRegisterInputs setDisableFormSubmit={setDisableFormSubmit} />,
-          <EngineerForm />,
+          <EngineerForm setDisableFormSubmit={setDisableFormSubmit} />,
         ]}
         finalSubmitHandler={handlSubmitForm}
         stepsLabel={[

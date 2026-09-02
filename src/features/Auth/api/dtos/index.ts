@@ -1,5 +1,6 @@
 import {
   BaseRegistrationValues,
+  EngineerFormValues,
   InvestorFormValues,
   ResourceProviderFormValues,
 } from "../create-account";
@@ -61,6 +62,18 @@ export const investorDTO = (
     user: destructTheUser(investor),
     investor: {
       commercialRegisterId: commercialRegistration,
+    },
+  };
+};
+
+export const engineerDTO = (
+  engineer: BaseRegistrationValues & EngineerFormValues,
+) => {
+  const { syndicateId } = engineer;
+  return {
+    user: destructTheUser(engineer),
+    engineer: {
+      syndicateId: syndicateId,
     },
   };
 };
