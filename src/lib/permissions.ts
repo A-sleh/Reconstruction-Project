@@ -104,11 +104,8 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
   ],
   Engineer: [
     Permissions.HOME_VIEW,
-    Permissions.WORK_SITES_VIEW,
-    Permissions.ORDERS_VIEW,
     Permissions.PROFILE_VIEW,
     Permissions.PROFILE_EDIT,
-    Permissions.PROJECTS_VIEW,
     Permissions.STATISTICS_VIEW,
     Permissions.SUPPORT_VIEW,
     Permissions.CONVERSATIONS_VIEW,
@@ -117,6 +114,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.CATEGORIES_MANAGE,
     Permissions.USERS_MANAGE,
     Permissions.SUPPORT_MANAGE,
+    Permissions.PROFILE_VIEW,
     Permissions.ENGINEERS_VERIFY,
     Permissions.BUILDINGS_VERIFY,
     Permissions.PROJECTS_VIEW,
@@ -129,6 +127,6 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
 export const ROLE_DEFAULT_PATH: Record<Role, string> = {
   Provider: paths.app.resourceProvidor.profile.path,
   Investor: paths.app.investor.hisLandsAndBuildings.path,
-  Engineer: paths.app.home.path,
+  Engineer: paths.app.engineer.profile.path,
   Admin: paths.app.admin.manageUsers.path,
 };

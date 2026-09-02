@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { MultiStepForm } from "@/components/common/MultiStepForm";
 import { AuthLayout } from "@/components/layouts/Auth-layout";
@@ -17,12 +17,24 @@ import EngineerForm from "@/features/Auth/components/Engineer-form";
 
 const EngineerRegisteration = () => {
   const { t } = useTranslation();
+  const goto = useNavigate();
   const [disableFormSubmit, setDisableFormSubmit] = useState(false);
   const { mutate: registerEngineer, isPending } = useEngineerRegister();
 
   const handlSubmitForm = (data: any) => {
     console.log(data);
-    registerEngineer(engineerDTO(data) as any);
+    registerEngineer(engineerDTO(data) as any, {
+      onSuccess: (_) => {
+        goto(paths.auth.login.path, {
+          replace: true,
+          state: {
+            message: t("auth.register.providor.successRegisterModelInfo"),
+            email: data.email,
+            password: data.password,
+          },
+        });
+      },
+    });
   };
 
   return (
