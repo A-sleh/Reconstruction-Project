@@ -1,0 +1,46 @@
+{
+  "conversations": {
+    "header": {
+      "title": "Conversations",
+      "subtitle": "Chat with all system users easily",
+      "count": "{{count}} conversations"
+    },
+    "roles": {
+      "provider": "Provider",
+      "investor": "Investor",
+      "engineer": "Engineer",
+      "admin": "Admin"
+    },
+    "list": {
+      "searchPlaceholder": "Search conversations...",
+      "newConversation": "New Conversation",
+      "empty": "No conversations yet",
+      "you": "You"
+    },
+    "time": {
+      "justNow": "Now",
+      "minutes": "{{count}}m",
+      "hours": "{{count}}h",
+      "days": "{{count}}d"
+    },
+    "thread": {
+      "empty": "No messages yet. Start the conversation!",
+      "noSelectionTitle": "No conversation selected",
+      "noSelectionDescription": "Choose a conversation from the list to start messaging",
+      "composerPlaceholder": "Write a message...",
+      "send": "Send",
+      "online": "Online",
+      "offline": "Offline"
+    },
+    "new": {
+      "title": "New Conversation",
+      "subtitle": "Pick a user to start chatting",
+      "searchPlaceholder": "Search users...",
+      "noUsers": "No matching users",
+      "start": "Start Conversation"
+    },
+    "toast": {
+      "sent": "Message sent"
+    }
+  }
+}

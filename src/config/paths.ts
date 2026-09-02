@@ -56,6 +56,10 @@ export const paths = {
       path: "/app/support",
       getHref: () => `/app/support`,
     },
+    conversations: {
+      path: "/app/conversations",
+      getHref: () => `/app/conversations`,
+    },
     resourceProvidor: {
       profile: {
         path: "/app/resource-providor/profile",

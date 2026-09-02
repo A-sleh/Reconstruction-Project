@@ -13,6 +13,9 @@ const LandingPage = lazy(
 const SupportCenterPage = lazy(
   () => import("@/pages/shared/SupportCenter.view"),
 );
+const ConversationsPage = lazy(
+  () => import("@/pages/shared/Conversations.view"),
+);
 
 export const sharedRoutes: RouteObject[] = [
   {
@@ -41,6 +44,16 @@ export const sharedRoutes: RouteObject[] = [
           <Suspense fallback={<Loader />}>
             <AuthGuard allowedPermissions={Permissions.SUPPORT_VIEW}>
               <SupportCenterPage />
+            </AuthGuard>
+          </Suspense>
+        ),
+      },
+      {
+        path: paths.app.conversations.path,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <AuthGuard allowedPermissions={Permissions.CONVERSATIONS_VIEW}>
+              <ConversationsPage />
             </AuthGuard>
           </Suspense>
         ),

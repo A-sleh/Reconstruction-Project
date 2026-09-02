@@ -1,8 +1,3 @@
-import ConfirmDelete from "@/components/model/ConfirmDelete";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { paths } from "@/config/paths";
-import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -14,6 +9,13 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+
+import ConfirmDelete from "@/components/model/ConfirmDelete";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { paths } from "@/config/paths";
+import { cn } from "@/lib/utils";
+
 import { useDeleteProject } from "../api/actions";
 import type { ProjectListItem } from "../api/types";
 import { NewProjectModel } from "./NewProjectModel";
@@ -94,12 +96,12 @@ const SummeryProjectCard = ({ project }: { project: ProjectListItem }) => {
               <DetailRow
                 icon={Building2}
                 label={t("project.list.building")}
-                value={`#${project.buildingId}`}
+                value={`#${project.building.name}`}
               />
               <DetailRow
                 icon={User}
                 label={t("project.list.investor")}
-                value={`#${project.investorId}`}
+                value={`#${project.investor.name}`}
               />
               <DetailRow
                 icon={CalendarDays}

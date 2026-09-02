@@ -48,6 +48,9 @@ export const Permissions = {
   // ── Support Center (shared, non-admin) ──────────────────────
   SUPPORT_VIEW: "support.view",
 
+  // ── Conversations (shared) ──────────────────────────────────
+  CONVERSATIONS_VIEW: "conversations.view",
+
   // ── Profile (shared) ────────────────────────────────────────
   PROFILE_VIEW: "profile.view",
   PROFILE_EDIT: "profile.edit",
@@ -83,6 +86,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.ORDERS_CANCEL,
     Permissions.PROJECTS_VIEW,
     Permissions.SUPPORT_VIEW,
+    Permissions.CONVERSATIONS_VIEW,
   ],
   Investor: [
     Permissions.HOME_VIEW,
@@ -96,6 +100,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.PROFILE_EDIT,
     Permissions.PROJECTS_VIEW,
     Permissions.SUPPORT_VIEW,
+    Permissions.CONVERSATIONS_VIEW,
   ],
   Engineer: [
     Permissions.HOME_VIEW,
@@ -106,6 +111,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.PROJECTS_VIEW,
     Permissions.STATISTICS_VIEW,
     Permissions.SUPPORT_VIEW,
+    Permissions.CONVERSATIONS_VIEW,
   ],
   Admin: [
     Permissions.CATEGORIES_MANAGE,
@@ -115,6 +121,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.BUILDINGS_VERIFY,
     Permissions.PROJECTS_VIEW,
     Permissions.STATISTICS_VIEW,
+    Permissions.CONVERSATIONS_VIEW,
   ],
 };
 

@@ -14,6 +14,7 @@ import {
   RiHome9Line,
   RiInboxLine,
   RiListUnordered,
+  RiMessage2Line,
   RiShoppingBagLine,
   RiStore2Line,
   RiUserSettingsLine,
@@ -159,6 +160,12 @@ const Navbar = () => {
       href: paths.app.support.path,
       icon: <RiCustomerService2Line size={18} />,
       permission: Permissions.SUPPORT_VIEW,
+    },
+    {
+      label: t("navbar.conversations"),
+      href: paths.app.conversations.path,
+      icon: <RiMessage2Line size={18} />,
+      permission: Permissions.CONVERSATIONS_VIEW,
     },
     {
       label: t("navbar.projects"),

@@ -1,0 +1,46 @@
+{
+  "conversations": {
+    "header": {
+      "title": "المحادثات",
+      "subtitle": "تواصل مع جميع مستخدمي النظام بسهولة",
+      "count": "{{count}} محادثة"
+    },
+    "roles": {
+      "provider": "مورد",
+      "investor": "مستثمر",
+      "engineer": "مهندس",
+      "admin": "إدارة"
+    },
+    "list": {
+      "searchPlaceholder": "ابحث في المحادثات...",
+      "newConversation": "محادثة جديدة",
+      "empty": "لا توجد محادثات بعد",
+      "you": "أنت"
+    },
+    "time": {
+      "justNow": "الآن",
+      "minutes": "قبل {{count}} دقيقة",
+      "hours": "قبل {{count}} ساعة",
+      "days": "قبل {{count}} يوم"
+    },
+    "thread": {
+      "empty": "لا توجد رسائل بعد. ابدأ المحادثة!",
+      "noSelectionTitle": "لا توجد محادثة محددة",
+      "noSelectionDescription": "اختر محادثة من القائمة لبدء المراسلة",
+      "composerPlaceholder": "اكتب رسالتك...",
+      "send": "إرسال",
+      "online": "متصل",
+      "offline": "غير متصل"
+    },
+    "new": {
+      "title": "محادثة جديدة",
+      "subtitle": "اختر مستخدماً لبدء المحادثة",
+      "searchPlaceholder": "ابحث عن مستخدم...",
+      "noUsers": "لا يوجد مستخدمون مطابقون",
+      "start": "بدء محادثة"
+    },
+    "toast": {
+      "sent": "تم إرسال الرسالة"
+    }
+  }
+}
