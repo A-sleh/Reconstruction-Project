@@ -25,6 +25,7 @@ export interface ProjectListItem {
   id: number;
   name: string;
   buildingId: number;
+  openApplicationForMembership: boolean;
   investorId: number;
   date: string;
   endDate: string;

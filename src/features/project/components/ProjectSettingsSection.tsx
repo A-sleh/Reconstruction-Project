@@ -1,3 +1,9 @@
+import { useState } from "react";
+
+import { AlertTriangle, Settings, Trash2, Users } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,10 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { paths } from "@/config/paths";
-import { AlertTriangle, Settings, Trash2, Users } from "lucide-react";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
 import { useDeleteProject, useUpdateProjectSetting } from "../api/actions";
 import type { ProjectListItem } from "../api/types";
 import { ProjectFormFields } from "./ProjectFormFields";
@@ -24,7 +27,9 @@ const ProjectSettingsSection = ({ project }: { project: ProjectListItem }) => {
   const { mutate: updateProjectSetting, isPending: isUpdatingSetting } =
     useUpdateProjectSetting();
 
-  const [openApplication, setOpenApplication] = useState(false);
+  const [openApplication, setOpenApplication] = useState(
+    project?.openApplicationForMembership || false,
+  );
 
   const handleToggleMembership = (checked: boolean) => {
     setOpenApplication(checked);
