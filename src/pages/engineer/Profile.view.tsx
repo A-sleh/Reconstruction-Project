@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { useEngineerProfile } from "@/features/engineer/profile/api/query";
 import type { EngineerProfile } from "@/features/engineer/profile/api/engineer-profile";
+import { useEngineerProfile } from "@/features/engineer/profile/api/query";
 import ProfileHeader from "@/features/engineer/profile/components/ProfileHeader";
 import ProfileTabs from "@/features/engineer/profile/components/ProfileTabs";
 import { MOCK_ENGINEER_PROFILE } from "@/features/engineer/profile/mock/profile";
@@ -9,7 +9,9 @@ import { MOCK_ENGINEER_PROFILE } from "@/features/engineer/profile/mock/profile"
 const EngineerProfilePage = () => {
   const { data, isLoading } = useEngineerProfile();
 
-  const [profile, setProfile] = useState<EngineerProfile>(data ?? MOCK_ENGINEER_PROFILE);
+  const [profile, setProfile] = useState<EngineerProfile>(
+    data ?? MOCK_ENGINEER_PROFILE,
+  );
 
   useEffect(() => {
     if (data) setProfile(data);
@@ -26,7 +28,7 @@ const EngineerProfilePage = () => {
         isLoading={isLoading}
         onUpdate={handleUpdate}
       />
-      <ProfileTabs />
+      <ProfileTabs profile={profile} />
     </div>
   );
 };

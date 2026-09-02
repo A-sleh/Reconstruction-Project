@@ -1,9 +1,15 @@
 import { Award, FolderOpen, Layers, UserRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { EngineerProfile } from "../api/engineer-profile";
+import BioSection from "./BioSection";
 
-const ProfileTabs = () => {
+interface Props {
+  profile: EngineerProfile;
+}
+
+const ProfileTabs = ({ profile }: Props) => {
   const { t } = useTranslation();
 
   const tabs = [
@@ -38,6 +44,10 @@ const ProfileTabs = () => {
           );
         })}
       </TabsList>
+
+      <TabsContent value="bio" className="mt-6">
+        <BioSection profile={profile} />
+      </TabsContent>
     </Tabs>
   );
 };
