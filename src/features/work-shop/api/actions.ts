@@ -1,14 +1,16 @@
-import { errorToast, successToast } from "@/components/common/Toast";
-import ApiInstance from "@/config/api-instance";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import i18n from "i18next";
 import { z } from "zod";
-import { MUTATION_KEYS, QUERY_KEYS, WorkShopController } from ".";
+
+import { errorToast, successToast } from "@/components/common/Toast";
+import ApiInstance from "@/config/api-instance";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { MUTATION_KEYS, QUERY_KEYS, WorkShopController } from "./";
 import type {
   AddInvoicePayload,
-  AddWorkShopsPayload,
   AddWorkShopPaymentPayload,
+  AddWorkShopsPayload,
   UpdateWorkShopPayload,
 } from "./types";
 import { WORK_SHOP_STATUSES } from "./types";
@@ -20,7 +22,10 @@ export const workShopFormSchema = z.object({
     .trim(),
   description: z
     .string()
-    .min(1, i18n.t("workShops.validation.description", "Description is required"))
+    .min(
+      1,
+      i18n.t("workShops.validation.description", "Description is required"),
+    )
     .trim(),
   memberNumber: z.coerce
     .number()
@@ -34,7 +39,10 @@ export const workShopFormSchema = z.object({
     .min(0, i18n.t("workShops.validation.totalCost", "Invalid amount")),
   startWorkDate: z
     .string()
-    .min(1, i18n.t("workShops.validation.startWorkDate", "Start date is required")),
+    .min(
+      1,
+      i18n.t("workShops.validation.startWorkDate", "Start date is required"),
+    ),
   endWorkDate: z
     .string()
     .min(1, i18n.t("workShops.validation.endWorkDate", "End date is required")),
@@ -62,12 +70,20 @@ export const invoiceFormSchema = z.object({
     .string()
     .min(
       1,
-      i18n.t("workShops.validation.invoiceDescription", "Description is required"),
+      i18n.t(
+        "workShops.validation.invoiceDescription",
+        "Description is required",
+      ),
     )
     .trim(),
   payedAmount: z.coerce
     .number()
-    .positive(i18n.t("workShops.validation.payedAmount", "Amount must be greater than zero")),
+    .positive(
+      i18n.t(
+        "workShops.validation.payedAmount",
+        "Amount must be greater than zero",
+      ),
+    ),
 });
 
 export type InvoiceFormValues = z.infer<typeof invoiceFormSchema>;
@@ -198,9 +214,7 @@ export const useAddWorkShopPayment = () => {
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.workShops.all,
       });
-      successToast(
-        i18n.t("workShops.toast.paymentSuccess", "Payment added"),
-      );
+      successToast(i18n.t("workShops.toast.paymentSuccess", "Payment added"));
     },
     onError: (error) => {
       errorToast(
@@ -222,6 +236,9 @@ export const useAddInvoice = () => {
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.workShops.invoices(variables.workShopId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.workShops.all,
       });
       successToast(i18n.t("workShops.toast.invoiceSuccess", "Invoice added"));
     },
