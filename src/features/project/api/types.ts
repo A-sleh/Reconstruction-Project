@@ -69,6 +69,21 @@ export interface RespondToProjectApplicationPayload {
   accept: boolean;
 }
 
+export interface ApplyForProjectPayload {
+  projectId: number;
+  title: string;
+  body: string;
+  attachmentIds: number[];
+}
+
+export interface InviteEngineerPayload {
+  projectId: number;
+  engineerId: number;
+  title: string;
+  body: string;
+  attachmentIds: number[];
+}
+
 // ============================================================================
 // Query Filters
 // ============================================================================

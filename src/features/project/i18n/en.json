@@ -10,7 +10,11 @@
       "updateProjectSettingSuccess": "Project settings updated",
       "updateProjectSettingError": "Failed to update project settings",
       "respondToProjectApplicationSuccess": "Application updated successfully",
-      "respondToProjectApplicationError": "Failed to update application"
+      "respondToProjectApplicationError": "Failed to update application",
+      "applyForProjectSuccess": "Application submitted successfully",
+      "applyForProjectError": "Failed to submit application",
+      "inviteEngineerSuccess": "Engineer invited successfully",
+      "inviteEngineerError": "Failed to invite engineer"
     },
     "header": {
       "badge": "Project Management",

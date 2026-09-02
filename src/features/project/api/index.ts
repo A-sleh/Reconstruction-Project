@@ -10,6 +10,8 @@ export enum ProjectController {
   Create = `${BASE_PROJECT_ROUTE}/create-project`,
   UpdateProjectSetting = `${BASE_PROJECT_ROUTE}/update-project-setting`,
   RespondToProjectApplication = `${BASE_PROJECT_ROUTE}/respond-to-project-application`,
+  ApplyForProject = `${BASE_PROJECT_ROUTE}/apply-for-project`,
+  InviteEngineer = `${BASE_PROJECT_ROUTE}/invite-engineer`,
 }
 
 export const QUERY_KEYS = {
@@ -33,5 +35,7 @@ export const MUTATION_KEYS = {
       "projects",
       "respond-to-project-application",
     ],
+    applyForProject: () => ["projects", "apply-for-project"],
+    inviteEngineer: () => ["projects", "invite-engineer"],
   },
 };

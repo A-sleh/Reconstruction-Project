@@ -10,7 +10,11 @@
       "updateProjectSettingSuccess": "تم تحديث إعدادات المشروع",
       "updateProjectSettingError": "فشل في تحديث إعدادات المشروع",
       "respondToProjectApplicationSuccess": "تم تحديث الطلب بنجاح",
-      "respondToProjectApplicationError": "فشل في تحديث الطلب"
+      "respondToProjectApplicationError": "فشل في تحديث الطلب",
+      "applyForProjectSuccess": "تم إرسال الطلب بنجاح",
+      "applyForProjectError": "فشل في إرسال الطلب",
+      "inviteEngineerSuccess": "تم دعوة المهندس بنجاح",
+      "inviteEngineerError": "فشل في دعوة المهندس"
     },
     "header": {
       "badge": "إدارة المشاريع",
