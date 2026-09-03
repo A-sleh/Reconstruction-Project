@@ -1,5 +1,9 @@
-import { OrderItem } from "@/features/orders/api/types";
+import { BuildingPartType } from "@/features/investor/buildings/api/types";
 import { Paginated } from "@/types";
+
+// ============================================================================
+// Legacy Types (used by existing components)
+// ============================================================================
 
 export interface GetAllReportProjectFilters {
   search?: string;
@@ -22,7 +26,6 @@ export interface ProjectReportPayload {
   description: string;
   attachments: number[];
   type: ProjectReportType;
-  order?: OrderItem[];
 }
 
 export interface ProjectReportResponse {
@@ -34,7 +37,6 @@ export interface ProjectReportResponse {
   type: ProjectReportType;
   createdAt: string;
   updatedAt: string;
-  order?: OrderItem[];
 }
 
 export interface ProjectAttachment {
@@ -56,7 +58,7 @@ export interface ProjectReportUpdatePayload {
 export type ProjectReports = Paginated<ProjectReportResponse>;
 
 // ============================================================================
-// Backend report contract
+// Backend Report Types
 // POST /api/report/create-progress
 // POST /api/report/create-achievement
 // POST /api/report/create-needs-and-requests
@@ -64,15 +66,6 @@ export type ProjectReports = Paginated<ProjectReportResponse>;
 // ============================================================================
 
 export type ReportType = "Progress" | "Achievement" | "NeedsAndRequests";
-
-export type BuildingPartType =
-  | "Foundation"
-  | "Column"
-  | "Floor"
-  | "Wall"
-  | "Roof"
-  | "Stairway"
-  | "Other";
 
 export interface ReportAttachmentInput {
   id: number;
@@ -89,8 +82,10 @@ export interface CreateReportBase {
   type: ReportType;
 }
 
+/** POST /api/report/create-progress */
 export type CreateProgressReportPayload = CreateReportBase;
 
+/** POST /api/report/create-achievement */
 export interface BuildingPartInput {
   area: number;
   buildingPartType: BuildingPartType;
@@ -101,6 +96,7 @@ export interface CreateAchievementReportPayload extends CreateReportBase {
   buildingParts: BuildingPartInput[];
 }
 
+/** POST /api/report/create-needs-and-requests */
 export interface ResourceNeed {
   resourceId: number;
   totalQuantity: number;
@@ -117,6 +113,10 @@ export interface CreateNeedsAndRequestsReportPayload extends CreateReportBase {
   resourceNeeds: ResourceNeed[];
   serviceNeeds: ServiceNeed[];
 }
+
+// ============================================================================
+// Response Types
+// ============================================================================
 
 export interface ReportFile {
   id: number;

@@ -15,7 +15,14 @@ export type BuildingType =
   | "Infrastructure"
   | "Other";
 
-export type BuildingPartType = "Floor" | "Unit" | "Section";
+export type BuildingPartType =
+  | "Floor"
+  | "Room"
+  | "Bathroom"
+  | "Office"
+  | "Kitchen"
+  | "Roof"
+  | "Hall";
 
 // ============================================================================
 // Core Entities
@@ -99,6 +106,10 @@ export interface UpdateBuildingRequest {
   area: number;
   location: string;
   coverImageId: number;
-  buildingParts: { id: number; area: number; buildingPartType: BuildingPartType }[];
+  buildingParts: {
+    id: number;
+    area: number;
+    buildingPartType: BuildingPartType;
+  }[];
   attachments: { id: number; description: string }[];
 }

@@ -2,9 +2,8 @@ import { ClipboardList, FileText, PlusCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ProjectReports from "@/features/project-reports/components/ProjectReports";
 import OrderReports from "@/features/project-reports/components/OrderReports";
-import CreateReportForm from "@/features/project-reports/components/CreateReportForm";
+import ProjectReports from "@/features/project-reports/components/ProjectReports";
 
 const ManageReportsPage = () => {
   const { t, i18n } = useTranslation();
@@ -25,9 +24,7 @@ const ManageReportsPage = () => {
             {t("project.details.manageReports.tabs.orders")}
           </TabsTrigger>
           <TabsTrigger value="create-report">
-            <PlusCircle
-              className={`h-4 w-4 ${isArabic ? "ml-2" : "mr-2"}`}
-            />
+            <PlusCircle className={`h-4 w-4 ${isArabic ? "ml-2" : "mr-2"}`} />
             {t("project.details.manageReports.tabs.createReport")}
           </TabsTrigger>
         </TabsList>
@@ -40,9 +37,7 @@ const ManageReportsPage = () => {
           <OrderReports />
         </TabsContent>
 
-        <TabsContent value="create-report">
-          <CreateReportForm />
-        </TabsContent>
+        <TabsContent value="create-report"></TabsContent>
       </Tabs>
     </div>
   );
