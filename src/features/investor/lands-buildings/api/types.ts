@@ -1,4 +1,4 @@
-import { Paginated } from "@/types";
+import { IImage, Paginated } from "@/types";
 
 export enum EZoningType {
   Residential = 0,
@@ -136,7 +136,7 @@ export interface LandDetail {
   longitude: number;
   latitude: number;
   location: ILoncation;
-  coverImageUrl: string;
+  coverImage: IImage;
   border: ILoncation[];
   attachments: Attachment[];
   buildings: Building[];

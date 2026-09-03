@@ -1,10 +1,12 @@
-import { MapPin, ArrowLeft } from "lucide-react";
+import { ArrowLeft, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
 import LandMap from "@/components/shared/LandMap/LandMap";
 import { Button } from "@/components/ui/button";
+import { getDominImageURL, type LatLng } from "@/lib/helpers";
+
 import type { LandDetail } from "../api/types";
-import { type LatLng } from "@/lib/helpers";
 
 interface LandHeroSectionProps {
   land: LandDetail;
@@ -30,12 +32,12 @@ export default function LandHeroSection({ land }: LandHeroSectionProps) {
       : [34.8021, 38.9968];
 
   return (
-    <div className="relative w-full h-[320px] md:h-[380px] rounded-lg overflow-hidden border border-border">
-      {land.coverImageUrl && (
+    <div className="relative w-full h-80 md:h-95 rounded-lg overflow-hidden border border-border">
+      {land.coverImage.url && (
         <img
-          src={land.coverImageUrl}
+          src={getDominImageURL(land.coverImage.url)}
           alt={land.name}
-          className="absolute inset-0 h-full w-full object-cover opacity-40 z-10"
+          className="absolute  h-50 w-70 object-cover opacity-90 z-20 left-0 bottom-0 rounded-tr-lg"
         />
       )}
       <div className="absolute inset-0 z-10">

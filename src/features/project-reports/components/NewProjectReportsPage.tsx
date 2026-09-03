@@ -153,6 +153,11 @@ const NewProjectReportsPage = ({ projectId }: { projectId: number }) => {
     ];
   }, [reportType, t]);
 
+  const resetForm = () => {
+    reset();
+    setWizardStep(0);
+  };
+
   const handleTypeChange = (type: ReportType) => {
     setReportType(type);
     setWizardStep(0);
@@ -181,13 +186,20 @@ const NewProjectReportsPage = ({ projectId }: { projectId: number }) => {
     };
 
     if (data.type === "Progress") {
-      createProgress(base);
+      createProgress(base, {
+        onSuccess: () => resetForm,
+      });
       return;
     }
 
     if (data.type === "Achievement") {
       const buildingParts = flattenBuildingParts(data.buildingParts ?? []);
-      createAchievement({ ...base, buildingParts });
+      createAchievement(
+        { ...base, buildingParts },
+        {
+          onSuccess: () => resetForm,
+        },
+      );
       return;
     }
 
@@ -205,7 +217,12 @@ const NewProjectReportsPage = ({ projectId }: { projectId: number }) => {
         totalQuantity: n.quantity,
         status: "pending",
       }));
-    createNeeds({ ...base, resourceNeeds: resources, serviceNeeds: services });
+    createNeeds(
+      { ...base, resourceNeeds: resources, serviceNeeds: services },
+      {
+        onSuccess: () => resetForm,
+      },
+    );
   };
 
   const renderStep = (step: number) => {
