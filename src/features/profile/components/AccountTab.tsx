@@ -9,6 +9,7 @@ import ImageUploader from "@/components/inputs/ImageUploader";
 import Input from "@/components/inputs/Input";
 import { useFileUpload } from "@/hooks/useFileUpload";
 import { getDominImageURL } from "@/lib/helpers";
+import useAuthStore from "@/stores/useAuthStore";
 
 import { useUpdateUser } from "../api/actions";
 import { useProfile } from "../api/queries";
@@ -24,6 +25,7 @@ type AccountFormValues = {
 
 export default function AccountTab() {
   const { t } = useTranslation();
+  const { updateUserImage } = useAuthStore((s) => s);
   const [updateImage, setUpdateImage] = useState(false);
   const { data: profile, isLoading } = useProfile();
 
@@ -61,6 +63,12 @@ export default function AccountTab() {
     onChange(file);
   };
 
+  useEffect(() => {
+    if (profile?.user.photo.url) {
+      updateUserImage(profile?.user.photo.url);
+    }
+  }, [profile?.user.photo.url]);
+
   const onSubmit = (values: AccountFormValues) => {
     updateUser(
       {
@@ -74,7 +82,9 @@ export default function AccountTab() {
         },
       },
       {
-        onSuccess: () => setUpdateImage(false),
+        onSuccess: () => {
+          setUpdateImage(false);
+        },
       },
     );
   };

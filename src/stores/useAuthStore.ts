@@ -1,8 +1,9 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import type { ProviderRole, Role } from "@/types";
+
 import type { Permission } from "@/lib/permissions";
 import { ROLE_PERMISSIONS } from "@/lib/permissions";
+import type { ProviderRole, Role } from "@/types";
 
 enum STORAGE_KEYS {
   accessToken = "access-token",
@@ -24,6 +25,7 @@ export interface User {
 export interface AuthState {
   role: null | Role;
   user: User | null;
+  updateUserImage: (photoURL: string) => void;
   permissions: Permission[];
   accessToken: string;
   refreshToken: string;
@@ -77,6 +79,12 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       permissions: [],
       isAuthenticated: false,
+      updateUserImage: (photoURL: string) => {
+        const user = get().user;
+        if (user) {
+          set({ user: { ...user, photoURL } });
+        }
+      },
       setAuth: ({ isAuthenticated, role }) => {
         const permissions = role ? (ROLE_PERMISSIONS[role] ?? []) : [];
         set({ isAuthenticated, role, permissions });
