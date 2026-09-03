@@ -105,7 +105,8 @@
       "manageReports": {
         "tabs": {
           "allReports": "All Reports",
-          "orders": "Orders"
+          "orders": "Orders",
+          "createReport": "Create Report"
         },
         "orders": {
           "title": "Order Reports",

@@ -105,7 +105,8 @@
       "manageReports": {
         "tabs": {
           "allReports": "جميع التقارير",
-          "orders": "الطلبات"
+          "orders": "الطلبات",
+          "createReport": "إنشاء تقرير"
         },
         "orders": {
           "title": "تقارير الطلبات",
