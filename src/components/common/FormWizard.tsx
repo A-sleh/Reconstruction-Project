@@ -1,10 +1,10 @@
-import { useState, type ReactNode } from "react";
-
-import { useFormContext } from "react-hook-form";
+import { type ReactNode, useState } from "react";
 
 import { Check } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useFormContext } from "react-hook-form";
+
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 /**
  * Reusable multi-step wizard backed by a react-hook-form context.
@@ -50,6 +50,10 @@ interface FormWizardProps {
   onCancel?: () => void;
   /** Optional class names applied to the outer card. */
   className?: string;
+  /** Controlled current step index (optional). */
+  step?: number;
+  /** Called whenever the current step changes. */
+  onStepChange?: (step: number) => void;
 }
 
 export default function FormWizard({
@@ -63,19 +67,33 @@ export default function FormWizard({
   cancelLabel,
   onCancel,
   className,
+  step: controlledStep,
+  onStepChange,
 }: FormWizardProps) {
   const { trigger, handleSubmit } = useFormContext();
-  const [step, setStep] = useState(0);
+  const isControlled = controlledStep !== undefined;
+  const [internalStep, setInternalStep] = useState(0);
+
+  const step = isControlled ? controlledStep : internalStep;
+
+  const goTo = (next: number) => {
+    const clamped = Math.max(0, Math.min(steps.length - 1, next));
+    if (isControlled) {
+      onStepChange?.(clamped);
+    } else {
+      setInternalStep(clamped);
+    }
+  };
 
   const isLastStep = step === steps.length - 1;
 
   const handleNext = async () => {
     const fields = steps[step]?.fields ?? [];
     const isValid = fields.length > 0 ? await trigger(fields as never[]) : true;
-    if (isValid) setStep((s) => Math.min(steps.length - 1, s + 1));
+    if (isValid) goTo(step + 1);
   };
 
-  const handleBack = () => setStep((s) => Math.max(0, s - 1));
+  const handleBack = () => goTo(step - 1);
 
   return (
     <form
@@ -87,7 +105,12 @@ export default function FormWizard({
     >
       {/* Stepper */}
       <div className="mb-2 rounded-lg border border-gray-300 bg-white p-4">
-        <div className="relative grid gap-2" style={{ gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))` }}>
+        <div
+          className="relative grid gap-2"
+          style={{
+            gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))`,
+          }}
+        >
           <div className="absolute inset-inline-start-4 inset-inline-end-4 top-5 h-0.5 bg-border" />
           <div
             className="absolute inset-inline-start-4 top-5 h-0.5 bg-primary transition-all duration-500"
