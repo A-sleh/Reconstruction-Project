@@ -66,6 +66,105 @@
         "services-order": "Services Order",
         "resources-order": "Resources Order"
       }
+    },
+    "create": {
+      "title": "Create New Report",
+      "subTitle": "Document progress, achievements, or needs and requests for this project.",
+      "submit": "Create Report",
+      "next": "Next",
+      "back": "Back",
+      "cancel": "Cancel",
+      "validation": {
+        "title_required": "Title is required",
+        "title_too_long": "Title must be 200 characters or less",
+        "description_required": "Description is required",
+        "content_required": "Content is required",
+        "date_required": "Report date is required"
+      },
+      "reportType": {
+        "label": "Report Type",
+        "progress": "Progress",
+        "progressHint": "Record the general progress of the project without detailing specific parts.",
+        "achievement": "Achievement",
+        "achievementHint": "Record the building parts that have been achieved or completed.",
+        "needsAndRequests": "Needs & Requests",
+        "needsAndRequestsHint": "List the resources and services the project currently needs."
+      },
+      "steps": {
+        "baseInfo": "Base Information",
+        "achievement": "Achievement Parts",
+        "needs": "Needs & Requests",
+        "summary": "Summary"
+      },
+      "base": {
+        "title": "Base Information",
+        "titleLabel": "Title",
+        "titlePlaceholder": "Enter a descriptive title for the report...",
+        "descriptionLabel": "Description",
+        "descriptionPlaceholder": "Briefly describe what this report covers...",
+        "contentLabel": "Content",
+        "contentPlaceholder": "Write the full report content...",
+        "dateLabel": "Report Date",
+        "attachmentsLabel": "Attachments"
+      },
+      "achievement": {
+        "title": "Achieved Building Parts",
+        "subTitle": "Add the building parts that were completed or achieved.",
+        "empty": "No building parts added yet.",
+        "add": "Add Building Part",
+        "name": "Name",
+        "namePlaceholder": "e.g. Second Floor",
+        "type": "Part Type",
+        "area": "Area (m²)",
+        "areaPlaceholder": "e.g. 120",
+        "cancel": "Cancel",
+        "confirmAdd": "Add Part",
+        "summaryCount": "{{count}} building part(s)",
+        "types": {
+          "Floor": "Floor",
+          "Room": "Room",
+          "Bathroom": "Bathroom",
+          "Kitchen": "Kitchen",
+          "Office": "Office",
+          "Hall": "Hall",
+          "Roof": "Roof"
+        }
+      },
+      "needs": {
+        "title": "Needs & Requests",
+        "subTitle": "Select the resources and services this project needs and set their quantities.",
+        "tabs": {
+          "resources": "Resources",
+          "services": "Services"
+        },
+        "searchPlaceholder": "Search items...",
+        "category": "Category",
+        "quantity": "Quantity",
+        "add": "Add to report",
+        "remove": "Remove",
+        "empty": "No items match your search.",
+        "selected": "Selected Items",
+        "selectedEmpty": "No items selected. Choose resources or services and add them with a quantity.",
+        "totalResources": "{{count}} resource(s)",
+        "totalServices": "{{count}} service(s)"
+      },
+      "summary": {
+        "title": "Report Summary",
+        "subTitle": "Review your report before submitting.",
+        "modify": "Modify",
+        "reportType": "Report Type",
+        "baseInfo": "Base Information",
+        "titleValue": "Title",
+        "descriptionValue": "Description",
+        "dateValue": "Date",
+        "attachments": "Attachments",
+        "noAttachments": "No attachments",
+        "buildingParts": "Building Parts",
+        "noBuildingParts": "No building parts",
+        "resourceNeeds": "Resource Needs",
+        "serviceNeeds": "Service Needs",
+        "noNeeds": "No resource or service needs"
+      }
     }
   }
 }

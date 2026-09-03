@@ -66,6 +66,105 @@
         "services-order": "طلب خدمات",
         "resources-order": "طلب موارد"
       }
+    },
+    "create": {
+      "title": "إنشاء تقرير جديد",
+      "subTitle": "توثيق التقدم أو الإنجازات أو الاحتياجات والطلبات لهذا المشروع.",
+      "submit": "إنشاء التقرير",
+      "next": "التالي",
+      "back": "السابق",
+      "cancel": "إلغاء",
+      "validation": {
+        "title_required": "العنوان مطلوب",
+        "title_too_long": "يجب ألا يتجاوز العنوان 200 حرف",
+        "description_required": "الوصف مطلوب",
+        "content_required": "المحتوى مطلوب",
+        "date_required": "تاريخ التقرير مطلوب"
+      },
+      "reportType": {
+        "label": "نوع التقرير",
+        "progress": "تقرير تقدم",
+        "progressHint": "سجّل التقدم العام للمشروع دون تفصيل أجزاء محددة.",
+        "achievement": "تقرير إنجاز",
+        "achievementHint": "سجّل أجزاء المبنى التي تم إنجازها أو استكمالها.",
+        "needsAndRequests": "الاحتياجات والطلبات",
+        "needsAndRequestsHint": "أدرج الموارد والخدمات التي يحتاجها المشروع حالياً."
+      },
+      "steps": {
+        "baseInfo": "المعلومات الأساسية",
+        "achievement": "أجزاء الإنجاز",
+        "needs": "الاحتياجات والطلبات",
+        "summary": "الملخص"
+      },
+      "base": {
+        "title": "المعلومات الأساسية",
+        "titleLabel": "العنوان",
+        "titlePlaceholder": "أدخل عنواناً وصفياً للتقرير...",
+        "descriptionLabel": "الوصف",
+        "descriptionPlaceholder": "صف بإيجاز ما يغطيه هذا التقرير...",
+        "contentLabel": "المحتوى",
+        "contentPlaceholder": "اكتب المحتوى الكامل للتقرير...",
+        "dateLabel": "تاريخ التقرير",
+        "attachmentsLabel": "المرفقات"
+      },
+      "achievement": {
+        "title": "أجزاء المبنى المُنجزة",
+        "subTitle": "أضف أجزاء المبنى التي تم إنجازها أو استكمالها.",
+        "empty": "لم تتم إضافة أي أجزاء بعد.",
+        "add": "إضافة جزء مبنى",
+        "name": "الاسم",
+        "namePlaceholder": "مثال: الطابق الثاني",
+        "type": "نوع الجزء",
+        "area": "المساحة (م²)",
+        "areaPlaceholder": "مثال: 120",
+        "cancel": "إلغاء",
+        "confirmAdd": "إضافة الجزء",
+        "summaryCount": "{{count}} جزء",
+        "types": {
+          "Floor": "طابق",
+          "Room": "غرفة",
+          "Bathroom": "حمام",
+          "Kitchen": "مطبخ",
+          "Office": "مكتب",
+          "Hall": "قاعة",
+          "Roof": "سطح"
+        }
+      },
+      "needs": {
+        "title": "الاحتياجات والطلبات",
+        "subTitle": "اختر الموارد والخدمات التي يحتاجها المشروع وحدّد كمياتها.",
+        "tabs": {
+          "resources": "الموارد",
+          "services": "الخدمات"
+        },
+        "searchPlaceholder": "ابحث في العناصر...",
+        "category": "الفئة",
+        "quantity": "الكمية",
+        "add": "إضافة إلى التقرير",
+        "remove": "إزالة",
+        "empty": "لا توجد عناصر تطابق بحثك.",
+        "selected": "العناصر المحددة",
+        "selectedEmpty": "لم يتم تحديد أي عناصر. اختر موارد أو خدمات وأضفها مع الكمية.",
+        "totalResources": "{{count}} مورد",
+        "totalServices": "{{count}} خدمة"
+      },
+      "summary": {
+        "title": "ملخص التقرير",
+        "subTitle": "راجع تقريرك قبل الإرسال.",
+        "modify": "تعديل",
+        "reportType": "نوع التقرير",
+        "baseInfo": "المعلومات الأساسية",
+        "titleValue": "العنوان",
+        "descriptionValue": "الوصف",
+        "dateValue": "التاريخ",
+        "attachments": "المرفقات",
+        "noAttachments": "لا توجد مرفقات",
+        "buildingParts": "أجزاء المبنى",
+        "noBuildingParts": "لا توجد أجزاء مبنى",
+        "resourceNeeds": "الاحتياجات من الموارد",
+        "serviceNeeds": "الاحتياجات من الخدمات",
+        "noNeeds": "لا توجد احتياجات من الموارد أو الخدمات"
+      }
     }
   }
 }
