@@ -124,6 +124,7 @@ export function NewResorceRequestModel({
 
             {/* Category */}
             <CategoryFilter
+              bankType={providerRole == "Service" ? "Service" : "Resource"}
               onValueChange={(id: number | "all") => setCategoryId(Number(id))}
               value={categoryId}
             />

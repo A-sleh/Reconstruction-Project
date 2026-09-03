@@ -69,7 +69,7 @@ export default function BankItemsRequests() {
   ];
 
   const useItemsRequests =
-    user?.role == "Investor" ? useBankItemRequests : useUserBankItemRequests;
+    user?.role == "Admin" ? useBankItemRequests : useUserBankItemRequests;
 
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useItemsRequests({

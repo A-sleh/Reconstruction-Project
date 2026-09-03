@@ -111,6 +111,7 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permissions.CONVERSATIONS_VIEW,
   ],
   Admin: [
+    Permissions.ORDERS_MANAGE,
     Permissions.CATEGORIES_MANAGE,
     Permissions.USERS_MANAGE,
     Permissions.SUPPORT_MANAGE,
