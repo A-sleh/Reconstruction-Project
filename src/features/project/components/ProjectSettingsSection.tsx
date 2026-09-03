@@ -4,6 +4,7 @@ import { AlertTriangle, Settings, Trash2, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import RichTextBoard from "@/components/inputs/RichTextBoard";
 import ConfirmDelete from "@/components/model/ConfirmDelete";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +24,7 @@ import { ProjectFormFields } from "./ProjectFormFields";
 const ProjectSettingsSection = ({ project }: { project: ProjectListItem }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [richTextValue, setRichTextValue] = useState<string>("");
   const { mutate: deleteProject, isPending: isDeleting } = useDeleteProject();
   const { mutate: updateProjectSetting, isPending: isUpdatingSetting } =
     useUpdateProjectSetting();
@@ -104,6 +106,11 @@ const ProjectSettingsSection = ({ project }: { project: ProjectListItem }) => {
             {t("project.details.settings.dangerDescription")}
           </CardDescription>
         </CardHeader>
+        <RichTextBoard
+          label="abdo"
+          value={richTextValue}
+          onChange={setRichTextValue}
+        />
         <CardContent>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
