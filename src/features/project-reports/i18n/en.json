@@ -159,6 +159,7 @@
       "needs": {
         "title": "Needs & Requests",
         "subTitle": "Select the resources and services this project needs and set their quantities.",
+        "badge": "Materials & Services",
         "tabs": {
           "resources": "Resources",
           "services": "Services"
@@ -172,7 +173,17 @@
         "selected": "Selected Items",
         "selectedEmpty": "No items selected. Choose resources or services and add them with a quantity.",
         "totalResources": "{{count}} resource(s)",
-        "totalServices": "{{count}} service(s)"
+        "totalServices": "{{count}} service(s)",
+        "loadMore": "Load more",
+        "loading": "Loading...",
+        "itemsFound": "{{count}} item(s)",
+        "selectedCount": "{{count}} selected",
+        "clearAll": "Clear all",
+        "subtotal": "Estimated total",
+        "totalItems": "{{count}} item(s)",
+        "per": "per",
+        "added": "Added",
+        "currency": "SYP"
       },
       "summary": {
         "title": "Report Summary",

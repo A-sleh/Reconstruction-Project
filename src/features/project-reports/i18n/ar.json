@@ -158,6 +158,7 @@
       "needs": {
         "title": "الاحتياجات والطلبات",
         "subTitle": "اختر الموارد والخدمات التي يحتاجها المشروع وحدّد كمياتها.",
+        "badge": "الموارد والخدمات",
         "tabs": {
           "resources": "الموارد",
           "services": "الخدمات"
@@ -171,7 +172,17 @@
         "selected": "العناصر المحددة",
         "selectedEmpty": "لم يتم تحديد أي عناصر. اختر موارد أو خدمات وأضفها مع الكمية.",
         "totalResources": "{{count}} مورد",
-        "totalServices": "{{count}} خدمة"
+        "totalServices": "{{count}} خدمة",
+        "loadMore": "تحميل المزيد",
+        "loading": "جارٍ التحميل...",
+        "itemsFound": "{{count}} عنصر",
+        "selectedCount": "{{count}} محدد",
+        "clearAll": "مسح الكل",
+        "subtotal": "الإجمالي التقديري",
+        "totalItems": "{{count}} عنصر",
+        "per": "لكل",
+        "added": "تمت الإضافة",
+        "currency": "ل.س"
       },
       "summary": {
         "title": "ملخص التقرير",
