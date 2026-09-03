@@ -37,7 +37,9 @@ export interface BuildingAttachment {
 export interface BuildingPart {
   id: number;
   area: number;
+  name: string;
   buildingPartType: BuildingPartType;
+  subParts: BuildingPart[];
 }
 
 export interface ILoncation {

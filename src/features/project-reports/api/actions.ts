@@ -13,6 +13,39 @@ import type {
   CreateProgressReportPayload,
 } from "./types";
 
+type BuildingPartNode = {
+  id: string;
+  name: string;
+  area: number;
+  buildingPartType:
+    | "Floor"
+    | "Room"
+    | "Bathroom"
+    | "Office"
+    | "Kitchen"
+    | "Hall"
+    | "Roof";
+  subParts: BuildingPartNode[];
+};
+
+const buildingPartSchema: z.ZodType<BuildingPartNode> = z.lazy(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    area: z.number(),
+    buildingPartType: z.enum([
+      "Floor",
+      "Room",
+      "Bathroom",
+      "Office",
+      "Kitchen",
+      "Hall",
+      "Roof",
+    ]),
+    subParts: z.array(buildingPartSchema).default([]),
+  }),
+);
+
 export const reportFormSchema = z.object({
   projectId: z.number(),
   title: z
@@ -29,30 +62,24 @@ export const reportFormSchema = z.object({
         "Title must be 200 characters or less",
       ),
     }),
-  description: z
-    .string()
-    .min(1, {
-      message: i18n.t(
-        "projectReports.create.validation.description_required",
-        "Description is required",
-      ),
-    }),
-  content: z
-    .string()
-    .min(1, {
-      message: i18n.t(
-        "projectReports.create.validation.content_required",
-        "Content is required",
-      ),
-    }),
-  reportDate: z
-    .string()
-    .min(1, {
-      message: i18n.t(
-        "projectReports.create.validation.date_required",
-        "Report date is required",
-      ),
-    }),
+  description: z.string().min(1, {
+    message: i18n.t(
+      "projectReports.create.validation.description_required",
+      "Description is required",
+    ),
+  }),
+  content: z.string().min(1, {
+    message: i18n.t(
+      "projectReports.create.validation.content_required",
+      "Content is required",
+    ),
+  }),
+  reportDate: z.string().min(1, {
+    message: i18n.t(
+      "projectReports.create.validation.date_required",
+      "Report date is required",
+    ),
+  }),
   type: z.enum(["Progress", "Achievement", "NeedsAndRequests"]),
   attachments: z
     .array(
@@ -64,16 +91,7 @@ export const reportFormSchema = z.object({
       }),
     )
     .default([]),
-  buildingParts: z
-    .array(
-      z.object({
-        name: z.string(),
-        area: z.number(),
-        buildingPartType: z.string(),
-        parentBuildingPartId: z.number().optional(),
-      }),
-    )
-    .default([]),
+  buildingParts: z.array(buildingPartSchema).default([]),
   needsItems: z
     .array(
       z.object({
@@ -94,9 +112,7 @@ export const REPORT_TYPE_I18N_KEY: Record<ReportType, string> = {
   Progress: "progress",
   Achievement: "achievement",
   NeedsAndRequests: "needsAndRequests",
-};
-
-// ==========================================
+}; // ==========================================
 // 1. API Fetchers (private)
 // ==========================================
 

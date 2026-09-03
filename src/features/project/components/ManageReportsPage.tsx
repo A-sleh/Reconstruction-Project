@@ -2,10 +2,11 @@ import { ClipboardList, FileText, PlusCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import NewProjectReportsPage from "@/features/project-reports/components/NewProjectReportsPage";
 import OrderReports from "@/features/project-reports/components/OrderReports";
 import ProjectReports from "@/features/project-reports/components/ProjectReports";
 
-const ManageReportsPage = () => {
+const ManageReportsPage = ({ projectId }: { projectId: number }) => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === "ar";
 
@@ -37,7 +38,9 @@ const ManageReportsPage = () => {
           <OrderReports />
         </TabsContent>
 
-        <TabsContent value="create-report"></TabsContent>
+        <TabsContent value="create-report">
+          <NewProjectReportsPage projectId={projectId} />
+        </TabsContent>
       </Tabs>
     </div>
   );
