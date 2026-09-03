@@ -16,6 +16,7 @@ import AttachmentList, {
 import { useFileUpload } from "@/hooks/useFileUpload";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import LocationPickerField from "../../buildings/components/LocationPickerField";
 import {
   initialLandValues,
   landFormSchema,
@@ -32,7 +33,11 @@ interface Props {
 }
 
 const STEPS: FormWizardStep[] = [
-  { key: "basicInformation", label: "basicInformation", fields: ["name", "address", "accessability"] },
+  {
+    key: "basicInformation",
+    label: "basicInformation",
+    fields: ["name", "address", "accessability"],
+  },
   {
     key: "locationArea",
     label: "locationArea",
@@ -67,6 +72,7 @@ export default function BasicLandInfoForm({
 
   const borderValue = watch("border");
   const zoningValue = watch("zoning");
+  const locationValue = watch("location");
   const accessabilityValue = watch("accessability");
 
   const {
@@ -168,13 +174,12 @@ export default function BasicLandInfoForm({
         return (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <Input
-                label={t("investor.label-location")}
-                id="land-location"
-                placeholder={t("investor.placeholder-location")}
-                fieldName="location"
-                errors={errors}
-                {...register("location")}
+              <LocationPickerField
+                value={locationValue ?? ""}
+                onChange={(val) =>
+                  setValue("location", val, { shouldValidate: true })
+                }
+                error={errors.location?.message}
               />
               <Input
                 type="number"

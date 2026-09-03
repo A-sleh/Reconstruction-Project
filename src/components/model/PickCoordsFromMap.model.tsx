@@ -25,19 +25,15 @@ const parseCoordinates = (value: string): LatLng | null => {
   if (!value) return null;
   const parts = value.split(",").map((part) => part.trim());
   if (parts.length !== 2) return null;
-  const lat = Number(parts[0]);
-  const lng = Number(parts[1]);
+  const lat = Number(parts[1]);
+  const lng = Number(parts[0]);
   if (Number.isFinite(lat) && Number.isFinite(lng)) {
     return { lat, lng };
   }
   return null;
 };
 
-function MapEvents({
-  onClick,
-}: {
-  onClick: (e: LeafletMouseEvent) => void;
-}) {
+function MapEvents({ onClick }: { onClick: (e: LeafletMouseEvent) => void }) {
   const map = useMap();
   useEffect(() => {
     if (!map) return;
@@ -50,11 +46,7 @@ function MapEvents({
   return null;
 }
 
-function FlyToButton({
-  onLocated,
-}: {
-  onLocated: (pos: LatLng) => void;
-}) {
+function FlyToButton({ onLocated }: { onLocated: (pos: LatLng) => void }) {
   const map = useMap();
   const { t } = useTranslation();
   const [locating, setLocating] = useState(false);
@@ -239,11 +231,7 @@ export const PickCoordsFromMap = ({ value, setValue }: IPickCoordsFromMap) => {
               {t("auth.register.providor.selectLocationButton")}
             </button>
             <Model.Close>
-              <button
-                ref={closeRef}
-                type="button"
-                className="hidden"
-              />
+              <button ref={closeRef} type="button" className="hidden" />
             </Model.Close>
             <Model.Close>
               <button

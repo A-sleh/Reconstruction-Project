@@ -91,7 +91,7 @@ function PropertyCard({ p }: { p: LandListItem }) {
   };
 
   const polygon: LatLngType[] =
-    p.border?.map((pt) => ({ lat: pt.latitude, lng: pt.longitude })) ?? [];
+    p.border?.map((pt) => ({ lat: pt.longitude, lng: pt.latitude })) ?? [];
 
   const center: [number, number] =
     polygon.length > 0

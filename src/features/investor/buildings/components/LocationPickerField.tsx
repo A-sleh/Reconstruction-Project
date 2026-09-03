@@ -1,32 +1,34 @@
-import { useCallback, useEffect, useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Polygon,
-  useMapEvents,
-} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+
+import { useCallback, useEffect, useState } from "react";
+
+import { AlertTriangle, MapPin, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import {
+  MapContainer,
+  Marker,
+  Polygon,
+  TileLayer,
+  useMapEvents,
+} from "react-leaflet";
+
+import FitBoundsOnMount from "@/components/shared/LandMap/FitBoundsOnMount";
+import {
+  createMarkerIcon,
   DEFAULT_CENTER,
   injectLeafletOverrides,
-  createMarkerIcon,
   polygonStyle,
 } from "@/components/shared/LandMap/LandMapStyles";
-import FitBoundsOnMount from "@/components/shared/LandMap/FitBoundsOnMount";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { MapPin, X, AlertTriangle } from "lucide-react";
-import { type LatLng, isPointInPolygon } from "@/lib/helpers";
 import type { ILoncation } from "@/features/investor/lands-buildings/api/types";
-import { createPortal } from "react-dom";
+import { isPointInPolygon, type LatLng } from "@/lib/helpers";
 
 interface LocationPickerFieldProps {
   value: string;
@@ -163,107 +165,104 @@ export default function LocationPickerField({
       </button>
 
       {error && <p className="text-xs text-destructive">{error}</p>}
-      {createPortal(
-        <Dialog open={open} onOpenChange={setOpen} > 
-          <DialogContent className="max-w-2xl p-0 gap-0 overflow-hidden ">
-            <DialogHeader className="p-4 pb-2">
-              <DialogTitle>{t("investor.label-location")}</DialogTitle>
-            </DialogHeader>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-2xl p-0 gap-0 overflow-hidden z-[3000]">
+          <DialogHeader className="p-4 pb-2">
+            <DialogTitle>{t("investor.label-location")}</DialogTitle>
+          </DialogHeader>
 
-            <div className="relative w-full h-96">
-              <MapContainer
-                center={
-                  draft
-                    ? [draft.lat, draft.lng]
-                    : pos
-                      ? [pos.lat, pos.lng]
-                      : DEFAULT_CENTER
-                }
-                zoom={draft || pos ? 15 : 12}
-                className="w-full h-full landmap-container"
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {hasBorder && borderLatLng && (
-                  <>
-                    <FitBoundsOnMount polygon={borderLatLng} />
-                    <Polygon
-                      positions={borderLatLng.map((p) => [p.lat, p.lng])}
-                      pathOptions={polygonStyle()}
-                    />
-                  </>
-                )}
-                <LocationMarker
-                  position={draft}
-                  onPick={handlePick}
-                  landBorder={borderLatLng}
-                  onOutsideClick={handleOutsideClick}
-                />
-              </MapContainer>
+          <div className="relative w-full h-96">
+            <MapContainer
+              center={
+                draft
+                  ? [draft.lat, draft.lng]
+                  : pos
+                    ? [pos.lat, pos.lng]
+                    : DEFAULT_CENTER
+              }
+              zoom={draft || pos ? 15 : 12}
+              className="w-full h-full landmap-container"
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {hasBorder && borderLatLng && (
+                <>
+                  <FitBoundsOnMount polygon={borderLatLng} />
+                  <Polygon
+                    positions={borderLatLng.map((p) => [p.lat, p.lng])}
+                    pathOptions={polygonStyle()}
+                  />
+                </>
+              )}
+              <LocationMarker
+                position={draft}
+                onPick={handlePick}
+                landBorder={borderLatLng}
+                onOutsideClick={handleOutsideClick}
+              />
+            </MapContainer>
+          </div>
+
+          <div className="flex items-center justify-between p-4 pt-2 border-t">
+            <div className="flex items-center gap-2 min-w-0">
+              {outsideError && (
+                <div className="flex items-center gap-1.5 text-xs text-destructive">
+                  <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
+                  <span>
+                    {t(
+                      "investor.clickOutsideLand",
+                      "Point must be inside the land boundary",
+                    )}
+                  </span>
+                </div>
+              )}
+              {!outsideError && draft && (
+                <p className="text-xs text-muted-foreground">
+                  {t("investor.selectedLocation", "Selected")}:{" "}
+                  {draft.lat.toFixed(6)}, {draft.lng.toFixed(6)}
+                </p>
+              )}
+              {!outsideError && !draft && (
+                <p className="text-xs text-muted-foreground">
+                  {hasBorder
+                    ? t(
+                        "investor.clickInsideLand",
+                        "Click inside the land boundary to select a location",
+                      )
+                    : t(
+                        "investor.clickToPickLocation",
+                        "Click on the map to select a location",
+                      )}
+                </p>
+              )}
             </div>
 
-            <div className="flex items-center justify-between p-4 pt-2 border-t">
-              <div className="flex items-center gap-2 min-w-0">
-                {outsideError && (
-                  <div className="flex items-center gap-1.5 text-xs text-destructive">
-                    <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
-                    <span>
-                      {t(
-                        "investor.clickOutsideLand",
-                        "Point must be inside the land boundary",
-                      )}
-                    </span>
-                  </div>
-                )}
-                {!outsideError && draft && (
-                  <p className="text-xs text-muted-foreground">
-                    {t("investor.selectedLocation", "Selected")}:{" "}
-                    {draft.lat.toFixed(6)}, {draft.lng.toFixed(6)}
-                  </p>
-                )}
-                {!outsideError && !draft && (
-                  <p className="text-xs text-muted-foreground">
-                    {hasBorder
-                      ? t(
-                          "investor.clickInsideLand",
-                          "Click inside the land boundary to select a location",
-                        )
-                      : t(
-                          "investor.clickToPickLocation",
-                          "Click on the map to select a location",
-                        )}
-                  </p>
-                )}
-              </div>
-
-              <DialogFooter className="sm:justify-end gap-2 p-0 border-0">
-                {draft && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={handleClear}
-                  >
-                    <X className="h-4 w-4 mr-1" />
-                    {t("investor.clear", "Clear")}
-                  </Button>
-                )}
+            <DialogFooter className="sm:justify-end gap-2 p-0 border-0">
+              {draft && (
                 <Button
                   type="button"
+                  variant="ghost"
                   size="sm"
-                  onClick={handleConfirm}
-                  disabled={!draft}
+                  onClick={handleClear}
                 >
-                  {t("investor.confirm", "Confirm")}
+                  <X className="h-4 w-4 mr-1" />
+                  {t("investor.clear", "Clear")}
                 </Button>
-              </DialogFooter>
-            </div>
-          </DialogContent>
-        </Dialog>,
-        document.body,
-      )}
+              )}
+              <Button
+                type="button"
+                size="sm"
+                onClick={handleConfirm}
+                disabled={!draft}
+              >
+                {t("investor.confirm", "Confirm")}
+              </Button>
+            </DialogFooter>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

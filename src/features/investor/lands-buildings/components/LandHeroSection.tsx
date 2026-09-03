@@ -18,8 +18,8 @@ export default function LandHeroSection({ land }: LandHeroSectionProps) {
 
   const polygon: LatLng[] =
     land.border?.map((pt) => ({
-      lat: pt.latitude,
-      lng: pt.longitude,
+      lat: pt.longitude,
+      lng: pt.latitude,
     })) ?? [];
 
   const center: [number, number] = land.location
