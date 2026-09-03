@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from "react";
+import React, { type ReactNode, useState } from "react";
 
 import { Check } from "lucide-react";
 import { useFormContext } from "react-hook-form";
@@ -87,7 +87,9 @@ export default function FormWizard({
 
   const isLastStep = step === steps.length - 1;
 
-  const handleNext = async () => {
+  const handleNext = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
     const fields = steps[step]?.fields ?? [];
     const isValid = fields.length > 0 ? await trigger(fields as never[]) : true;
     if (isValid) goTo(step + 1);
