@@ -24,13 +24,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useBankCategories } from "@/features/category-bank/api/quertes";
+import CategoryFilter from "@/features/category-bank/components/CategoryFilter";
 import { StatusBadge } from "@/features/work-sites/components/StatusBadge";
 import { getDominImageURL } from "@/lib/helpers";
 import useAuthStore, { User } from "@/stores/useAuthStore";
 
 import { useDeleteWorksiteItem } from "../api/actions";
-import { useWorkSiteResourcesInfinite } from "../api/queries";
+import {
+  useServicesInfinite,
+  useWorkSiteResourcesInfinite,
+} from "../api/queries";
 import { PureResource } from "../api/types";
 import ModifyResourceModel from "./ModifyResourceModel";
 import { getRolePrefix } from "./NewResorceRequestModel";
@@ -56,30 +59,25 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
   const [statusFilter, setStatusFilter] = useState<"all" | "active" | "hold">(
     "all",
   );
-
-  const { data: categoriesData } = useBankCategories();
-  const categories = useMemo(
-    () =>
-      Array.isArray(categoriesData)
-        ? categoriesData
-        : categoriesData?.categories || [],
-    [categoriesData],
-  );
+  const worksiteItemsInfinite =
+    providerRole == "Service"
+      ? useServicesInfinite
+      : useWorkSiteResourcesInfinite;
 
   const {
-    data: resourcesData,
+    data: worksiteItems,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     isPending,
-  } = useWorkSiteResourcesInfinite({
+  } = worksiteItemsInfinite({
     categoryId,
     search,
     workSiteId: Number(effectiveSiteId),
   });
 
   const allItems: PureResource[] =
-    resourcesData?.pages.flatMap((page) => page.data) || [];
+    worksiteItems?.pages.flatMap((page) => page.data) || [];
 
   const items = useMemo(() => {
     if (statusFilter === "all") return allItems;
@@ -113,31 +111,11 @@ export default function InventoryTab({ siteId }: InventoryTabProps) {
           }
         >
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2">
-            <Select
-              value={categoryId === "all" ? "all" : String(categoryId)}
-              onValueChange={(value) =>
-                setCategoryId(value === "all" ? "all" : Number(value))
-              }
-            >
-              <SelectTrigger
-                className="w-full md:w-fit"
-                dir={isArabic ? "rtl" : "ltr"}
-              >
-                <SelectValue
-                  placeholder={t(`${rolePrefix}.inventory.filterByCategory`)}
-                />
-              </SelectTrigger>
-              <SelectContent dir={isArabic ? "rtl" : "ltr"}>
-                <SelectItem value="all">
-                  {t(`${rolePrefix}.inventory.allCategories`)}
-                </SelectItem>
-                {categories.map((category) => (
-                  <SelectItem key={category.id} value={String(category.id)}>
-                    {category.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <CategoryFilter
+              value={categoryId}
+              onValueChange={setCategoryId}
+              bankType={providerRole as "Resource" | "Service"}
+            />
             <Select
               value={statusFilter}
               onValueChange={(v) =>

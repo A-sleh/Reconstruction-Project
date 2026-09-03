@@ -1,5 +1,6 @@
 import { Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
 import { Resource } from "../api/actions";
 
 type LocalResource = Resource & { id: string };
@@ -59,7 +60,8 @@ export function AddedResourcesList({
                     <p className="flex flex-col font-semibold truncate items-start">
                       {resource.resourceBank.name}
                       <span className="text-[10px] text-gray-600 p-1 px-2 rounded-full bg-gray-600/20">
-                        {resource.resourceBank.category.name}
+                        {resource.resourceBank.category?.name ??
+                          resource.resourceBank["serviceType"]?.name}
                       </span>
                     </p>
                     <p className="font-semibold text-gray-500 text-sm w-60 truncate">
