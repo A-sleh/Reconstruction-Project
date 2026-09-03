@@ -40,4 +40,5 @@ export interface UpdateUserPayload {
 export interface UpdateUserSettingsPayload {
   allowedEmailNotification: boolean;
   allowedSystemNotification: boolean;
+  openToWork: boolean;
 }

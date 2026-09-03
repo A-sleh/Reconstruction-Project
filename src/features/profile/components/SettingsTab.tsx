@@ -10,12 +10,14 @@ export default function SettingsTab() {
 
   const [emailNotification, setEmailNotification] = useState(false);
   const [systemNotification, setSystemNotification] = useState(false);
+  const [openToWork, setOpenToWork] = useState(false);
 
   const handleEmailChange = (checked: boolean) => {
     setEmailNotification(checked);
     updateSettings({
       allowedEmailNotification: checked,
       allowedSystemNotification: systemNotification,
+      openToWork,
     });
   };
 
@@ -24,6 +26,16 @@ export default function SettingsTab() {
     updateSettings({
       allowedEmailNotification: emailNotification,
       allowedSystemNotification: checked,
+      openToWork,
+    });
+  };
+
+  const handleAvailabilityChange = (checked: boolean) => {
+    setOpenToWork(checked);
+    updateSettings({
+      allowedEmailNotification: emailNotification,
+      allowedSystemNotification: systemNotification,
+      openToWork: checked,
     });
   };
 
@@ -34,6 +46,13 @@ export default function SettingsTab() {
         subtitle={t("profile.settings.subtitle")}
       />
       <div className="space-y-4">
+        <ToggleRow
+          title={t("profile.settings.availability.title")}
+          desc={t("profile.settings.availability.description")}
+          checked={openToWork}
+          onChange={handleAvailabilityChange}
+        />
+        <div className="border-t border-gray-200 pt-1" />
         <ToggleRow
           title={t("profile.settings.notificationEmail.title")}
           desc={t("profile.settings.notificationEmail.description")}

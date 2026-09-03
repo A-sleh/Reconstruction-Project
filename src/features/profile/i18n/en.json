@@ -42,6 +42,10 @@
         "title": "Instant notifications",
         "description": "Receive alerts inside the app"
       },
+      "availability": {
+        "title": "Open to work",
+        "description": "Show your availability for new work opportunities"
+      },
       "saving": "Saving...",
       "savedHint": "Changes are saved automatically."
     },
