@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { BsShieldCheck } from "react-icons/bs";
 
+import ConfrimChanges from "@/components/common/ConfrimChanges";
 import ImageUploader from "@/components/inputs/ImageUploader";
 import Input from "@/components/inputs/Input";
-import { Button } from "@/components/ui/button";
 import { useFileUpload } from "@/hooks/useFileUpload";
+import { getDominImageURL } from "@/lib/helpers";
 
 import { useUpdateUser } from "../api/actions";
 import { useProfile } from "../api/queries";
@@ -23,10 +24,13 @@ type AccountFormValues = {
 
 export default function AccountTab() {
   const { t } = useTranslation();
+  const [updateImage, setUpdateImage] = useState(false);
   const { data: profile, isLoading } = useProfile();
 
   const { isPending, onChange, previewUrl, fileId } = useFileUpload({
-    onSuccess: () => {},
+    onSuccess: () => {
+      setUpdateImage(true);
+    },
   });
   const { mutate: updateUser, isPending: isUpdating } = useUpdateUser();
 
@@ -35,7 +39,7 @@ export default function AccountTab() {
     watch,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<AccountFormValues>();
 
   const firstName = watch("firstName");
@@ -58,16 +62,21 @@ export default function AccountTab() {
   };
 
   const onSubmit = (values: AccountFormValues) => {
-    updateUser({
-      user: {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        personalIdentifier: values.personalIdentifier,
-        phone: values.phone,
-        photoId: fileId ? Number(fileId) : (profile?.user?.photo?.id ?? 0),
+    updateUser(
+      {
+        user: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          personalIdentifier: values.personalIdentifier,
+          phone: values.phone,
+          photoId: fileId ? Number(fileId) : (profile?.user?.photo?.id ?? 0),
+        },
       },
-    });
+      {
+        onSuccess: () => setUpdateImage(false),
+      },
+    );
   };
 
   return (
@@ -89,7 +98,7 @@ export default function AccountTab() {
               />
             ) : profile?.user?.photo?.url ? (
               <img
-                src={profile.user.photo.url}
+                src={getDominImageURL(profile.user.photo.url)}
                 alt="profile"
                 className="h-full w-full object-cover"
               />
@@ -169,23 +178,23 @@ export default function AccountTab() {
         <ImageUploader
           label={t("profile.account.profilePhoto")}
           required={false}
-          value={previewUrl || profile?.user?.photo?.url || ""}
+          value={
+            previewUrl || getDominImageURL(profile?.user?.photo?.url || "")
+          }
           onFileChange={handleImageChange}
           disabled={isPending || isLoading}
           errors={errors ?? null}
           fieldName="photoUrl"
         />
-
-        <div className="flex justify-start pt-2">
-          <Button
-            type="submit"
-            size="lg"
-            isLoading={isPending || isUpdating || isLoading}
-          >
-            {t("profile.saveChanges")}
-          </Button>
-        </div>
       </form>
+
+      {(isDirty || updateImage) && (
+        <ConfrimChanges
+          isSaving={isPending || isUpdating}
+          handleSave={handleSubmit(onSubmit)}
+          handleDiscard={() => reset()}
+        />
+      )}
     </div>
   );
 }
